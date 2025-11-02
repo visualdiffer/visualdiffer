@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Xcode 7.0">
+    <entity name="HistoryEntity" representedClassName="HistoryEntity" syncable="YES">
+        <attribute name="allowedPackages" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comparatorFlags" optional="YES" attributeType="Integer 32" defaultValueString="1" syncable="YES"/>
+        <attribute name="differType" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="displayFilters" optional="YES" attributeType="Integer 32" defaultValueString="1" syncable="YES"/>
+        <attribute name="exclusionFileFilters" optional="YES" attributeType="String" defaultValueString="fileName == &quot;.DS_Store&quot; OR fileName LIKE &quot;CVS&quot; OR fileName LIKE &quot;.svn&quot; OR fileName LIKE &quot;.git&quot; OR fileName LIKE &quot;.hg&quot; OR fileName LIKE &quot;.bzr&quot; OR fileName LIKE &quot;*~&quot;" syncable="YES"/>
+        <attribute name="expandAllFolders" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="expandOnlyWithDiffs" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="fileInfoFlags" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="fileNameAlignmentsData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="followSymLinks" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="ignoreDST" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="ignoreTimeZone" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="leftPath" attributeType="String" syncable="YES"/>
+        <attribute name="leftReadOnly" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="rightPath" attributeType="String" syncable="YES"/>
+        <attribute name="rightReadOnly" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="skipPackages" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sortAscending" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="sortColumn" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="sortSide" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="starred" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="timestampToleranceSeconds" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="traverseFilteredFolders" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="updateTime" attributeType="Date" syncable="YES"/>
+        <attribute name="visibleColumns" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <compoundIndexes>
+            <compoundIndex>
+                <index value="leftPath"/>
+                <index value="rightPath"/>
+            </compoundIndex>
+        </compoundIndexes>
+    </entity>
+    <elements>
+        <element name="HistoryEntity" positionX="-45" positionY="0" width="128" height="420"/>
+    </elements>
+</model>

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>%ld %lu orphans</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>one</key>
+                <string>%ld %#@direction@ orphan</string>
+                <key>other</key>
+                <string>%ld %#@direction@ orphans</string>
+            </dict>
+
+            <key>direction</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>lu</string>
+                <key>zero</key>
+                <string>left</string>
+                <key>one</key>
+                <string>right</string>
+            </dict>
+        </dict>
+
+        <key>%ld %lu newer</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>one</key>
+                <string>%ld %#@direction@ newer</string>
+                <key>other</key>
+                <string>%ld %#@direction@ newer</string>
+            </dict>
+
+            <key>direction</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>lu</string>
+                <key>zero</key>
+                <string>left</string>
+                <key>one</key>
+                <string>right</string>
+            </dict>
+        </dict>
+
+        <key>%ld different</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>zero</key>
+                <string>No differences</string>
+                <key>one</key>
+                <string>%ld different</string>
+                <key>other</key>
+                <string>%ld different</string>
+            </dict>
+        </dict>
+
+        <key>%ld changed</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>zero</key>
+                <string>%ld changed</string>
+                <key>one</key>
+                <string>%ld changed</string>
+                <key>other</key>
+                <string>%ld changed</string>
+            </dict>
+        </dict>
+
+        <key>%ld same</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>zero</key>
+                <string>%ld same</string>
+                <key>one</key>
+                <string>%ld same</string>
+                <key>other</key>
+                <string>%ld same</string>
+            </dict>
+        </dict>
+
+        <key>%ld different sections</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>zero</key>
+                <string>No differences found</string>
+                <key>one</key>
+                <string>%ld different section</string>
+                <key>other</key>
+                <string>%ld different sections</string>
+            </dict>
+        </dict>
+
+        <key>Copy %ld files (%@) to %lu</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>Copy %#@value@ (%@) to %#@direction@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>one</key>
+                <string>%ld file</string>
+                <key>other</key>
+                <string>%ld files</string>
+            </dict>
+
+            <key>direction</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>lu</string>
+                <key>zero</key>
+                <string>left</string>
+                <key>one</key>
+                <string>right</string>
+            </dict>
+        </dict>
+
+        <key>Create %ld empty folders on %lu</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>Create %#@value@ on %#@direction@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>one</key>
+                <string>%ld empty folder</string>
+                <key>other</key>
+                <string>%ld empty folders</string>
+            </dict>
+
+            <key>direction</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>lu</string>
+                <key>zero</key>
+                <string>left</string>
+                <key>one</key>
+                <string>right</string>
+            </dict>
+        </dict>
+
+        <key>%ld files</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>zero</key>
+                <string>No files</string>
+                <key>one</key>
+                <string>%ld file</string>
+                <key>other</key>
+                <string>%ld files</string>
+            </dict>
+        </dict>
+
+        <key>%ld folders</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>zero</key>
+                <string>No folders</string>
+                <key>one</key>
+                <string>%ld folder</string>
+                <key>other</key>
+                <string>%ld folders</string>
+            </dict>
+        </dict>
+
+        <key>%ld files, %@</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@, %@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>one</key>
+                <string>%ld file</string>
+                <key>other</key>
+                <string>%ld files</string>
+            </dict>
+        </dict>
+
+        <key>Selected %ld files, %@</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>Selected %#@value@, %@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>one</key>
+                <string>%ld file</string>
+                <key>other</key>
+                <string>%ld files</string>
+            </dict>
+        </dict>
+
+        <key>%ld hours</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>one</key>
+                <string>%ld hour</string>
+                <key>other</key>
+                <string>%ld hours</string>
+            </dict>
+        </dict>
+
+        <key>%ld minutes</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>one</key>
+                <string>%ld minute</string>
+                <key>other</key>
+                <string>%ld minutes</string>
+            </dict>
+        </dict>
+
+        <key>%ld seconds</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>one</key>
+                <string>%ld second</string>
+                <key>other</key>
+                <string>%ld seconds</string>
+            </dict>
+        </dict>
+
+        <key>%ld mismatching labels</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>zero</key>
+                <string>No label</string>
+                <key>one</key>
+                <string>%ld mismatching label</string>
+                <key>other</key>
+                <string>%ld mismatching labels</string>
+            </dict>
+        </dict>
+
+        <key>%ld mismatching tags</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@value@</string>
+            <key>value</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>ld</string>
+                <key>zero</key>
+                <string>No tag</string>
+                <key>one</key>
+                <string>%ld mismatching tag</string>
+                <key>other</key>
+                <string>%ld mismatching tags</string>
+            </dict>
+        </dict>
+
+    </dict>
+</plist>

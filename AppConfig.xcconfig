@@ -1,0 +1,24 @@
+//
+//  Versions.xcconfig
+//  VisualDiffer
+//
+//  Created by davide ficano on 01/02/22.
+//  Copyright (c) 2022 visualdiffer.com
+//
+
+PRODUCT_BUNDLE_IDENTIFIER = com.visualdiffer
+
+ENABLE_HARDENED_RUNTIME = YES
+
+ENABLE_USER_SELECTED_FILES = readwrite
+ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES
+
+REGISTER_APP_GROUPS = YES
+
+ENABLE_APP_SANDBOX[config=Debug] = YES
+ENABLE_APP_SANDBOX[config=Release] = YES
+ENABLE_APP_SANDBOX[config=DebugNoSandbox] = NO
+
+#include "Signing.local.xcconfig"
+#include "Versions.local.xcconfig"
+#include "Warnings.xcconfig"

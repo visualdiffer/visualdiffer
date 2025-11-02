@@ -1,0 +1,463 @@
+/*******************************************************************************
+Slate Theme for Github Pages
+by Jason Costello, @jsncostello
+*******************************************************************************/
+
+@import url(pygment_trac.css);
+
+/*******************************************************************************
+MeyerWeb Reset
+*******************************************************************************/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a:focus {
+  outline: none;
+}
+
+/*******************************************************************************
+Theme Styles
+*******************************************************************************/
+
+body {
+  box-sizing: border-box;
+  color:#373737;
+  background: #212121;
+  font-size: 16px;
+  font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body#small {
+  background: #F2F2F2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 10px 0;
+  font-weight: 700;
+  color:#222222;
+  font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+  letter-spacing: -1px;
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+h2 {
+  padding-bottom: 10px;
+  font-size: 16px;
+  background: url('../images/bg_hr.png') repeat-x bottom;
+}
+
+h3 {
+  font-size: 12px;
+}
+
+h4 {
+  font-size: 10px;
+}
+
+h5 {
+  font-size: 9px;
+}
+
+h6 {
+  font-size: 8px;
+}
+
+p {
+  margin: 10px 0 15px 0;
+}
+
+footer p {
+  color: #f2f2f2;
+  text-align: right;
+}
+
+a {
+  text-decoration: none;
+  color: #007edf;
+  text-shadow: none;
+
+  transition: color 0.5s ease;
+  transition: text-shadow 0.5s ease;
+  -webkit-transition: color 0.5s ease;
+  -webkit-transition: text-shadow 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -moz-transition: text-shadow 0.5s ease;
+  -o-transition: color 0.5s ease;
+  -o-transition: text-shadow 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -ms-transition: text-shadow 0.5s ease;
+}
+
+#main_content a:hover {
+  color: #0069ba;
+  text-shadow: #0090ff 0px 0px 2px;
+}
+
+footer a:hover {
+  color: #43adff;
+  text-shadow: #0090ff 0px 0px 2px;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+img {
+  position: relative;
+  margin: 0 auto;
+  max-width: 739px;
+  padding: 5px;
+  margin: 10px 0 10px 0;
+  border: 1px solid #ebebeb;
+
+  box-shadow: 0 0 5px #ebebeb;
+  -webkit-box-shadow: 0 0 5px #ebebeb;
+  -moz-box-shadow: 0 0 5px #ebebeb;
+  -o-box-shadow: 0 0 5px #ebebeb;
+  -ms-box-shadow: 0 0 5px #ebebeb;
+}
+
+pre, code {
+  width: 100%;
+  color: #222;
+  background-color: #fff;
+
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  font-size: 14px;
+
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+
+
+
+}
+
+pre {
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  overflow: auto;
+}
+
+code {
+  padding: 3px;
+  margin: 0 3px;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+pre code {
+  display: block;
+  box-shadow: none;
+}
+
+blockquote {
+  color: #666;
+  margin-bottom: 20px;
+  padding: 0 0 0 20px;
+  border-left: 3px solid #bbb;
+}
+
+ul, ol, dl {
+  margin-bottom: 15px
+}
+
+ul li {
+  list-style: inside;
+  padding-left: 20px;
+}
+
+ol li {
+  list-style: decimal inside;
+  padding-left: 20px;
+}
+
+dl dt {
+  font-weight: bold;
+}
+
+dl dd {
+  padding-left: 20px;
+  font-style: italic;
+}
+
+dl p {
+  padding-left: 20px;
+  font-style: italic;
+}
+
+hr {
+  height: 1px;
+  margin-bottom: 5px;
+  border: none;
+  background: url('../images/bg_hr.png') repeat-x center;
+}
+
+table {
+  border: 1px solid #373737;
+  margin-bottom: 20px;
+  text-align: left;
+ }
+
+th {
+  font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 10px;
+  background: #373737;
+  color: #fff;
+  text-align: center;;
+ }
+
+td {
+  padding: 10px;
+  border: 1px solid #373737;
+ }
+
+form {
+  background: #f2f2f2;
+  padding: 20px;
+}
+
+/*******************************************************************************
+Full-Width Styles
+*******************************************************************************/
+
+.outer {
+  width: 100%;
+}
+
+.inner {
+  position: relative;
+  max-width: 960px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+#header_wrap {
+  background: #212121;
+  background: -moz-linear-gradient(top, #373737, #212121);
+  background: -webkit-linear-gradient(top, #373737, #212121);
+  background: -ms-linear-gradient(top, #373737, #212121);
+  background: -o-linear-gradient(top, #373737, #212121);
+  background: linear-gradient(top, #373737, #212121);
+}
+
+#header_wrap .inner {
+  padding: 10px 0 0 0;
+}
+
+#project_title {
+  margin: 0;
+  color: #fff;
+  font-size: 42px;
+  font-weight: 700;
+  text-shadow: #111 0px 0px 10px;
+  background: url("../images/logo.png") no-repeat scroll 0 0 transparent;
+  background-size: 64px 64px;
+}
+
+#project_title > a {
+  color: #FFF;
+  margin-left: 70px;
+}
+
+#project_tagline {
+  color: #FFB90F;
+  font-size: 24px;
+  font-weight: 300;
+  background: none;
+  text-shadow: #111 0px 0px 10px;
+  margin: 0;
+  padding-bottom: 4px;
+}
+
+#main_content_wrap {
+  background: #f2f2f2;
+  border-bottom: 1px solid #111;
+  padding-bottom: 5px;
+}
+
+#main_content_wrap {
+  border-bottom: 0;
+}
+
+#main_content {
+  padding-top: 10px;
+}
+
+#footer_wrap {
+  background: #212121;
+}
+
+
+#project_title_small {
+  margin: 0 0 0 10px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  text-shadow: #111 0px 0px 10px;
+  background: url("../images/logo.png") no-repeat scroll 0 0 transparent;
+  background-size: 32px 32px;
+}
+
+#project_title_small > span {
+  color: #FFF;
+  margin-left: 40px;
+}
+
+#project_tagline_small {
+  color: #FFB90F;
+  font-size: 18px;
+  font-weight: 300;
+  background: none;
+  text-shadow: #111 0px 0px 10px;
+  margin: 0 0 0 10px;
+  padding: 0 0 10px;
+}
+
+acronym {
+  border: 1px dotted;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #007EDF;
+  padding: 1px;
+}
+
+/*******************************************************************************
+* Topics using in Apple Help index page
+*******************************************************************************/
+
+.topics-logo {
+    text-align: center;
+    float: left;
+    margin-right: 40px;
+}
+
+.topics-container {
+    margin: 30px auto 50px;
+    width: 450px;
+}
+
+.topics {
+    border-left: 1px solid silver;
+    float: left;
+    padding-left: 10px;
+    width: 250px;
+}
+
+.topics-list {
+    list-style-type: none;
+}
+
+.topics-appname {
+    color: #475461;
+    background-color: #F9F9F9;
+    border: 1px solid #BFBFBF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/*******************************************************************************
+Small Device Styles
+*******************************************************************************/
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size:14px;
+  }
+
+  #downloads {
+    display: none;
+  }
+
+  .inner {
+    min-width: 320px;
+    max-width: 480px;
+  }
+
+  #project_title {
+  font-size: 32px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 21px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  h5 {
+    font-size: 14px;
+  }
+
+  h6 {
+    font-size: 12px;
+  }
+
+  code, pre {
+    min-width: 320px;
+    max-width: 480px;
+    font-size: 11px;
+  }
+
+}

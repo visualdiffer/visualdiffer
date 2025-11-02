@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "2600"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D15AC270486D014006FF6A4"
+               BuildableName = "VisualDiffer.app"
+               BlueprintName = "VisualDiffer"
+               ReferencedContainer = "container:VisualDiffer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "DebugNoSandbox"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8D15AC270486D014006FF6A4"
+            BuildableName = "VisualDiffer.app"
+            BlueprintName = "VisualDiffer"
+            ReferencedContainer = "container:VisualDiffer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:VisualDiffer.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "55944CC62E5C8D9F00FB1F8C"
+               BuildableName = "VisualDifferTests.xctest"
+               BlueprintName = "VisualDifferTests"
+               ReferencedContainer = "container:VisualDiffer.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AlignmentTests">
+               </Test>
+               <Test
+                  Identifier = "AlignmentTests/testLeftMatchCaseRightIgnoreCase()">
+               </Test>
+               <Test
+                  Identifier = "PathTests">
+               </Test>
+               <Test
+                  Identifier = "PathTests/testClosestPath()">
+               </Test>
+               <Test
+                  Identifier = "PathTests/testFindLeafPaths1()">
+               </Test>
+               <Test
+                  Identifier = "PathTests/testFindLeafPaths2()">
+               </Test>
+               <Test
+                  Identifier = "PathTests/testFindLeafPaths3()">
+               </Test>
+               <Test
+                  Identifier = "PathTests/testFindLeafPaths4()">
+               </Test>
+               <Test
+                  Identifier = "VisualDifferTests">
+               </Test>
+               <Test
+                  Identifier = "VisualDifferTests/example()">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8D15AC270486D014006FF6A4"
+            BuildableName = "VisualDiffer.app"
+            BlueprintName = "VisualDiffer"
+            ReferencedContainer = "container:VisualDiffer.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "CA_DEBUG_TRANSACTIONS"
+            value = "1"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
+      <AdditionalOptions>
+         <AdditionalOption
+            key = "NSZombieEnabled"
+            value = "YES"
+            isEnabled = "YES">
+         </AdditionalOption>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8D15AC270486D014006FF6A4"
+            BuildableName = "VisualDiffer.app"
+            BlueprintName = "VisualDiffer"
+            ReferencedContainer = "container:VisualDiffer.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

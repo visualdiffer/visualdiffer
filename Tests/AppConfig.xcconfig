@@ -1,0 +1,14 @@
+//
+//  Versions.xcconfig
+//  VisualDiffer
+//
+//  Created by davide ficano on 01/02/22.
+//  Copyright (c) 2022 visualdiffer.com
+//
+
+PRODUCT_BUNDLE_IDENTIFIER = com.visualdiffer.tests
+
+ENABLE_APP_SANDBOX = NO
+
+#include "Signing.local.xcconfig"
+#include "Versions.local.xcconfig"

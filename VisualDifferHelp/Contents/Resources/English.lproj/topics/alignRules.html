@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>File Names Alignment Rules</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="robots" content="anchors"/>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/stylesheet.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/vd.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/toc.css"/>
+
+  </head>
+  <body id="small">
+    <a name="alignRules"></a>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title_small"><span>File Names Alignment Rules</span></h1>
+          <h2 id="project_tagline_small">Change the default file names alignment method</h2>
+        </header>
+    </div>
+
+    <div id="main_content_wrap_small" class="outer">
+      <section id="main_content" class="inner">
+        <div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <div id="toctitle">
+                  <h2>Contents</h2>
+               </div>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#tocAnchor-1-1"><span class="tocnumber">1</span> <span class="toctext">Align by Name Case Sensitivity</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-2">
+                     <a href="#tocAnchor-1-2"><span class="tocnumber">2</span> <span class="toctext">Align by HFS+ Filesystem Case</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-3">
+                     <a href="#tocAnchor-1-3"><span class="tocnumber">3</span> <span class="toctext">Align by User Defined Rules (required OSX Lion or above)</span></a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-4">
+                           <a href="#tocAnchor-1-3-1"><span class="tocnumber">3.1</span> <span class="toctext">Managing Alignment Rules</span></a>
+                        </li>
+                        <li class="toc_level-2 toc_section-5">
+                           <a href="#tocAnchor-1-3-2"><span class="tocnumber">3.2</span> <span class="toctext">Creating a Rule</span></a>
+                        </li>
+                        <li class="toc_level-2 toc_section-6">
+                           <a href="#tocAnchor-1-3-3"><span class="tocnumber">3.3</span> <span class="toctext">Left Regular Expression</span></a>
+                        </li>
+                        <li class="toc_level-2 toc_section-7">
+                           <a href="#tocAnchor-1-3-4"><span class="tocnumber">3.4</span> <span class="toctext">Right Pattern Expression</span></a>
+                        </li>
+                        <li class="toc_level-2 toc_section-8">
+                           <a href="#tocAnchor-1-3-5"><span class="tocnumber">3.5</span> <span class="toctext">Test Rule</span></a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div><p>Before being compared two files they must be aligned, the alignment rule can be configured</p>
+
+<h1 id="tocAnchor-1-1">Align by Name Case Sensitivity</h1>
+
+<p>The default alignment method compares file name strings, if they are match case then they will be aligned.<br />
+Suppose you have the scenario shown below</p>
+
+<table class="bordered">
+   <tr><th>Left</th>
+<th>Right</th>
+</tr>
+   <tr><td>winter.jpg</td>
+<td>&#xA0;</td>
+</tr>
+   <tr><td>&#xA0;</td>
+<td>WINTER.JPG</td>
+</tr>
+   <tr><td>summer.jpg</td>
+<td>summer.jpg</td>
+</tr>
+</table><p>By default winter.jpg and WINTER.JPG will be not aligned because their strings don't match uppercase and lowercase characters.</p>
+
+<p>This result sometimes isn't what you expect, maybe you want to ignore uppercase/lowercase differences.<br />
+This can be achieved selecting 'Ignore File Name Case' from popup menu.</p>
+
+<table class="bordered">
+   <tr><th>Left</th>
+<th>Right</th>
+</tr>
+   <tr><td>winter.jpg</td>
+<td>WINTER.JPG</td>
+</tr>
+   <tr><td>summer.jpg</td>
+<td>summer.jpg</td>
+</tr>
+</table><h1 id="tocAnchor-1-2">Align by HFS+ Filesystem Case</h1>
+
+<p>Normally the <acronym title="Hierarchical File System">HFS+</acronym> disks are formatted ignoring the file name case, so if we have winter.jpg and WINTER.JPG they cannot be created on same directory (because they have the same name).</p>
+
+<p>When the HFS+ partitions are formatted with case sensitive support the file names winter.jpg and WINTER.JPG are two different file names and can be created on same directory.</p>
+
+<p>It is possible to let VisualDiffer determine the file name alignment case algorithm looking at HFS partition case, so three scenarios are possible</p>
+
+<ol><li>left and right are both case insensitive</li>
+<li>left and right are both case sensitive</li>
+<li>left/right is case sensitive and right/left is case insensitive</li>
+</ol><p>If the last scenario is true, the alignment will try to be smart, first it searches if a match case is available (winter.jpg with winter.jpg) then it tries to align with the most similar name.</p>
+
+<h1 id="tocAnchor-1-3">Align by User Defined Rules (required OSX Lion or above)</h1>
+
+<p>There are scenarios where it is necessary to align files having different names.</p>
+
+<p>The most simple scenario has files with same name but different extension as shown below</p>
+
+<table class="bordered">
+   <tr><th>Left</th>
+<th>Right</th>
+</tr>
+   <tr><td>001.jpg</td>
+<td>&#xA0;</td>
+</tr>
+   <tr><td>&#xA0;</td>
+<td>001.raw</td>
+</tr>
+   <tr><td>002.jpg</td>
+<td>&#xA0;</td>
+</tr>
+   <tr><td>&#xA0;</td>
+<td>002.RAW</td>
+</tr>
+</table><p>Suppose you want to align ignoring the file extension to produce the result shown below</p>
+
+<table class="bordered"><tr><th>Left</th>
+<th>Right</th>
+</tr><tr><td>001.jpg</td>
+<td>001.raw</td>
+</tr><td>002.jpg</td>
+<td>002.RAW</td>
+
+</table><p>This can be achieved using VisualDiffer 'user defined alignment rules'.</p>
+
+<h2 id="tocAnchor-1-3-1">Managing Alignment Rules</h2>
+
+<p>You can create, edit or delete rules from Session Preferences Dialog</p>
+
+<p>
+   <img src="../../common/images/screenshots/sessionPrefAlignment.png" alt="image" />
+</p>
+
+<p>More rules can be assigned to a VisualDiffer session comparison, they are evaluated from top to bottom.</p>
+
+<h2 id="tocAnchor-1-3-2">Creating a Rule</h2>
+
+<p>When you add a new rule (or edit an existing one) you access to the dialog shown below</p>
+
+<p>
+   <img src="../../common/images/screenshots/alignRule.png" alt="image" />
+</p>
+
+<p>A rule has</p>
+
+<ul><li>a left <strong>regular</strong> expression</li>
+<li>a right <strong>pattern</strong> expression</li>
+</ul><p>
+   <em>If you are not familiar with regular expressions please refer to <a href="http://userguide.icu-project.org/strings/regexp">ICU</a> documentation.</em>
+</p>
+
+<h2 id="tocAnchor-1-3-3">Left Regular Expression</h2>
+
+<p>The left regexp is used to match a filename on the left side of VisualDiffer Folder View, we want to find all jpg files so we create a group <code>(.*)</code> followed by <code>.jpg</code> extension.</p>
+
+<h2 id="tocAnchor-1-3-4">Right Pattern Expression</h2>
+
+<p>Notice the right expression <strong>isn't</strong> a regular expression, it should contain some special patterns used to access to regular expression groups (if any).</p>
+
+<p>The right expression is used to match a file name on right side of VisualDiffer Folder View, we want to match <code>.raw</code> files having the <strong>same name</strong> of file on left side.<br />
+So we use the <code>$1</code> to get the first group present on regexp (in this example there is only one group but you can have nine groups).</p>
+
+<p>Now if you save the rule and then run the comparison you obtain the result shown below</p>
+
+<table class="bordered">
+   <tr><th>Left</th>
+<th>Right</th>
+</tr>
+   <tr><td>001.jpg</td>
+<td>001.raw</td>
+</tr>
+   <tr><td>002.jpg</td>
+<td>&#xA0;</td>
+</tr>
+   <tr><td>&#xA0;</td>
+<td>002.RAW</td>
+</tr>
+</table><p>But <code>002.jpg</code> and <code>002.RAW</code> files are not aligned because <code>002.RAW</code> extension is uppercase, this can be easily fixed ignoring the case on right expression as shown in figure shown below</p>
+
+<p>
+   <img src="../../common/images/screenshots/alignRuleIgnoreCase.png" alt="image" />
+</p>
+
+<h2 id="tocAnchor-1-3-5">Test Rule</h2>
+
+<p>It is possible to verify immediately if the expressions work as expected using the 'Test Rule', just type a file name and the 'Result' field will be filled accordingly.</p>
+      </section>
+    </div>
+
+  </body>
+</html>

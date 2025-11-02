@@ -1,0 +1,141 @@
+{
+    "menuColorsMap": {
+        "openWithDefaultAppContext": {
+            "textColor":"#0000ff"
+        }
+    },
+    "consoleLogColorsMap":
+    {
+        "info": {
+            "textColor":"textForeground",
+            "backgroundColor":"textBackground"
+        },
+        "warning": {
+            "textColor":"#967e35",
+            "backgroundColor":"textBackground"
+        },
+        "error": {
+            "textColor":"#FF0000",
+            "backgroundColor":"textBackground"
+        }
+    },
+    "folderColorsMap":
+    {
+        "old": {
+            "textColor":"#000",
+            "backgroundColor":"#edeeed"
+        },
+
+        "newer": {
+            "textColor":"#da0000",
+            "backgroundColor":"#ead8f6"
+        },
+
+        "orphan": {
+            "textColor": "#002a90",
+            "backgroundColor":"#dde7f7"
+        },
+
+        "changed": {
+            "textColor": "#da0000",
+            "backgroundColor":"#ffd3cc"
+            },
+
+        "same": {
+            "textColor": "#190000",
+            "backgroundColor":"#00000000"
+            },
+
+        "folder": {
+            "textColor": "#190000",
+            "backgroundColor":"#00000000"
+            },
+
+        "subFoldersSize": {
+            "textColor": "#9A9A9A",
+            "backgroundColor":"#00000000"
+            },
+
+        "filtered": {
+            "textColor": "#4a7c59",
+            "backgroundColor":"#e4f1d5"
+        },
+
+        "mismatchingTags": {
+            "textColor":"#AA0D91",
+            "backgroundColor":"#00000000"
+        },
+
+        "mismatchingLabels": {
+            "textColor":"#AA0D91",
+            "backgroundColor":"#00000000"
+        },
+
+        "selectedRow": {
+            "textColor": "#00000000",
+            "backgroundColor":"#CCFFCC"
+        }
+    },
+    "fileColorsMap":
+    {
+        "changed": {
+            "textColor": "#4a7c59",
+            "backgroundColor":"#e4f1d5"
+            },
+
+        "added": {
+            "textColor": "#0000FF",
+            "backgroundColor":"#DCE5F5"
+            },
+
+        "deleted": {
+            "textColor": "#da0000",
+            "backgroundColor":"#ffd3cc"
+            },
+
+        "same": {
+            "textColor":"textForeground",
+            "backgroundColor":"textBackground"
+        },
+
+        "missing": {
+            "textColor": "#FFFFFFFF",
+            "backgroundColor":"#FFFFFFFF"
+        },
+
+        "merged": {
+            "textColor": "#000000",
+            "backgroundColor":"#FFCC00"
+        },
+
+        "thumbnail": {
+            "textColor": "#00000000",
+            "backgroundColor":"#FFFFFFFF"
+        },
+
+        "positionBox": {
+            "textColor": "#00000000",
+            "backgroundColor":"#FF9900"
+        },
+
+        "selectedRow": {
+            "textColor": "#00000000",
+            "backgroundColor":"#CCFFCC"
+        },
+
+        "sectionSeparatorLine": {
+            "textColor": "#000000",
+            "backgroundColor":"#00000000"
+        },
+
+        "lineNumber": {
+            "textColor": "#444444",
+            "backgroundColor":"#00000000"
+        },
+        
+        "lineNumberSeparator": {
+            "textColor": "#aaaaaa",
+            "backgroundColor":"#00000000"
+        }
+    }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>File Filters</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="robots" content="anchors"/>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/stylesheet.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/vd.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/toc.css"/>
+
+  </head>
+  <body id="small">
+    <a name="fileFilters"></a>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title_small"><span>File Filters</span></h1>
+          <h2 id="project_tagline_small">Filters can be used to exclude files from comparison, copy and delete actions</h2>
+        </header>
+    </div>
+
+    <div id="main_content_wrap_small" class="outer">
+      <section id="main_content" class="inner">
+        <div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <div id="toctitle">
+                  <h2>Contents</h2>
+               </div>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#tocAnchor-1-1"><span class="tocnumber">1</span> <span class="toctext">Filename Filters</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-2">
+                     <a href="#tocAnchor-1-2"><span class="tocnumber">2</span> <span class="toctext">Path Filters</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-3">
+                     <a href="#tocAnchor-1-3"><span class="tocnumber">3</span> <span class="toctext">File Size Filters</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-4">
+                     <a href="#tocAnchor-1-4"><span class="tocnumber">4</span> <span class="toctext">File Modification Date Filters</span></a>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div><p>Files can be excluded from comparison specifying filenames, relative paths, file sizes and file modification dates.</p>
+
+<h1 id="tocAnchor-1-1">Filename Filters</h1>
+
+<p>Available filters for filenames are shown below</p>
+
+<table class="bordered">
+   <tr><th>Comparator Filter</th>
+<th>Description</th>
+</tr>
+   <tr><td>Contains</td>
+<td>Filename contains the specified string</td>
+</tr>
+   <tr><td>Begins with</td>
+<td>Filename begins with the specified string</td>
+</tr>
+   <tr><td>Ends with</td>
+<td>Filename ends with the specified string</td>
+</tr>
+   <tr><td>Is</td>
+<td>Filename is equal to the specified string</td>
+</tr>
+   <tr><td>Is not</td>
+<td>Filename is not equal to the specified string</td>
+</tr>
+   <tr><td>Is like</td>
+<td>Filename equals the specified string
+<br />? and * are allowed as wildcard characters, where ? matches 1 character and * matches 0 or more characters</td>
+</tr>
+</table><h1 id="tocAnchor-1-2">Path Filters</h1>
+
+<p>It is possible to filter by specifying a path relative to root, this allows to exclude specific paths<br />
+Example</p>
+
+<p>Left root path: <strong>/Users/dave/sources/</strong><br />
+Folder content</p>
+
+<pre>
+/Users/dave/sources/
+&#xA0;&#xA0;project_1
+&#xA0;&#xA0;&#xA0;&#xA0;src/
+&#xA0;&#xA0;project_2
+&#xA0;&#xA0;&#xA0;&#xA0;src/
+&#xA0;&#xA0;&#xA0;&#xA0;index.txt
+</pre>
+
+
+<p>To exclude only the folder <strong>src</strong> under <strong>project_1</strong> you can specify <strong>project_1/src</strong> as path filter.<br />
+The path is relative to root <strong>/Users/dave/sources/</strong>, you can use both folders and files as path filter.<br />
+The context menu item 'Exclude' automatically excludes folders as path.</p>
+
+<p>Pay attention to not add extra characters, the following paths will never found<br /><strong>project_1//src</strong>&#xA0;&#xA0;&#xA0;invalid, double slash<br /><strong>project_1/src/</strong>&#xA0;&#xA0;&#xA0;invalid, trailing slash</p>
+
+<h1 id="tocAnchor-1-3">File Size Filters</h1>
+
+<p>It is possible to specify files (not folders) to exclude based on their size expressed in bytes, KB, MB and GB</p>
+
+<h1 id="tocAnchor-1-4">File Modification Date Filters</h1>
+
+<p>It is possible to specify files (not folders) to exclude based on their last modification date and time</p>
+      </section>
+    </div>
+
+  </body>
+</html>

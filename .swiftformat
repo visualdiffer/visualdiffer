@@ -1,0 +1,18 @@
+# version
+
+--swiftversion 6.2
+--disable sortImports
+--disable wrapMultilineStatementBraces
+
+# format options
+
+# rules
+
+--enable redundantProperty
+--enable wrapConditionalBodies
+--enable wrapEnumCases
+
+--wrap-arguments before-first
+--wrap-collections before-first
+
+--trailing-commas collections-only

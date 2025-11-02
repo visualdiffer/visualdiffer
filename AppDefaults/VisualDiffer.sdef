@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+
+<dictionary title="VisualDiffer Terminology">
+
+    <suite name="Compare Suite" code="vdif" description="A set of basic classes for documents comparison.">
+
+        <access-group identifier="com.visualdiffer.core" access="rw"/>
+
+        <command name="open diff" code="opendiff" description="Open file/folder diff.">
+            <cocoa class="OpenDiffCommand"/>
+            <parameter name="leftPath" code="lpat" type="text" description="The left file path to compare.">
+                <cocoa key="LeftPath"/>
+            </parameter>
+            <parameter name="rightPath" code="rpat" type="text" description="The right file path to compare.">
+                <cocoa key="RightPath"/>
+            </parameter>
+            <result type="text" description="The document UUID."/>
+        </command>
+
+    </suite>
+</dictionary>

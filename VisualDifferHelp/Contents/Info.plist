@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en-US</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.visualdiffer.help</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>VisualDifferHelp</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>hbwr</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>HPDBookAccessPath</key>
+	<string>VisualDiffer.html</string>
+	<key>HPDBookIconPath</key>
+	<string>common/images/appicon16.png</string>
+	<key>HPDBookKBProduct</key>
+	<string>visualdiffer1</string>
+	<key>HPDBookIndexPath</key>
+	<string>VisualDiffer.helpindex</string>
+	<key>HPDBookKBURL</key>
+	<string>https://wiki.visualdiffer.com</string>
+	<key>HPDBookTitle</key>
+	<string>VisualDiffer Help</string>
+	<key>HPDBookType</key>
+	<string>3</string>
+</dict>
+</plist>

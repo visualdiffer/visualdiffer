@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Trusted Paths</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="robots" content="anchors"/>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/stylesheet.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/vd.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/toc.css"/>
+
+  </head>
+  <body id="small">
+    <a name="trustedPaths"></a>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title_small"><span>Trusted Paths</span></h1>
+          <h2 id="project_tagline_small">How to handle paths with Apple sandbox</h2>
+        </header>
+    </div>
+
+    <div id="main_content_wrap_small" class="outer">
+      <section id="main_content" class="inner">
+        <div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <div id="toctitle">
+                  <h2>Contents</h2>
+               </div>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#tocAnchor-1-1"><span class="tocnumber">1</span> <span class="toctext">Why we need trusted paths</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-2">
+                     <a href="#tocAnchor-1-2"><span class="tocnumber">2</span> <span class="toctext">Using VisualDiffer as external diff tool with sandbox</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-3">
+                     <a href="#tocAnchor-1-3"><span class="tocnumber">3</span> <span class="toctext">Use Trusted Paths</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-4">
+                     <a href="#tocAnchor-1-4"><span class="tocnumber">4</span> <span class="toctext">Where configure Trusted Paths</span></a>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div><h1 id="tocAnchor-1-1">Why we need trusted paths</h1>
+
+<p>Starting from OSX Lion applications run in the so called <a href="http://developer.apple.com/library/mac/#documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html">sandbox</a> that is an isolated and secure environment.<br />
+Applications accessing to file system (reading file, listing a folder) need explicitly that user gives permission to application.<br />
+User gives his permission to access to a file (or folder) selecting it from a file panel or dragging path to application.<br />
+VisualDiffer prompts a file panel when it can't access to a file due to permission error, after user selection the path is stored as trusted so next time it isn't necessary to re-prompt.</p>
+
+<h1 id="tocAnchor-1-2">Using VisualDiffer as external diff tool with sandbox</h1>
+
+<p>VisualDiffer can be used to compare files using other applications (<a href="http://www.adobe.com/products/dreamweaver.html">Dreamweaver</a>, <a href="http://www.sourcetreeapp.com/">SourceTree</a> and so on), for example to compare a remote file version with the local one.</p>
+
+<p>Applications like Dreamweaver save to temporary file the remote version and then pass the generated full path to VisualDiffer but this path isn't trusted so VisualDiffer shows the file panel every time.</p>
+
+<p>This behaviour generates a very frustrating user experience because the user must select the file from the panel again and again.</p>
+
+<h1 id="tocAnchor-1-3">Use Trusted Paths</h1>
+
+<p>Trusted paths resolve this problem, applications save files always on their own specific temporary folders, for example SourceTree can generate the following path</p>
+
+<pre>
+   <code>/var/folders/mr/5dfd6w717cj5j374q24fdxsh0000gn/T/2PhpDQ_UnifiedDiff.m
+</code>
+</pre>
+
+<p>but trusting it works only once because the path component <strong>5dfd6w717cj5j374q24fdxsh0000gn/T/</strong> is randomly generated and changes every time.</p>
+
+<p>We can trust <strong>/var/folders</strong> that is the root used by SourceTree to saves temporary files.</p>
+
+<p>Trusting <strong>/var/folders</strong> ensures every path generated inside it (at any deeper subfolder level) doesn't require any additional user permission and the file panel prompts no longer appears</p>
+
+<h1 id="tocAnchor-1-4">Where configure Trusted Paths</h1>
+
+<p>You can add (drag&amp;drop is supported) and/or remove paths manually from the VisualDiffer Preference panel.</p>
+
+<p>The paths colored in red no longer exist.</p>
+      </section>
+    </div>
+
+  </body>
+</html>

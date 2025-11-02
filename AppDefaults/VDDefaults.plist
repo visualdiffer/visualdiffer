@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>alwaysResolveSymlinks</key>
+	<true/>
+	<key>confirmCopy</key>
+	<true/>
+	<key>confirmMove</key>
+	<true/>
+	<key>confirmDelete</key>
+	<true/>
+	<key>includeFilteredItems</key>
+	<false/>
+	<key>stopLongOperation</key>
+	<true/>
+	<key>showInFinderNotVisibleFiles</key>
+	<true/>
+	<key>followSymLinks</key>
+	<true/>
+	<key>folderViewDateFormat</key>
+	<string>ddMMyyHHmmss</string>
+	<key>timestampToleranceSeconds</key>
+	<integer>0</integer>
+	<key>skipPackages</key>
+	<false/>
+	<key>hideEmptyFolders</key>
+	<true/>
+	<key>comparatorFlags</key>
+	<integer>129</integer>
+	<key>traverseFilteredFolders</key>
+	<true/>
+	<key>fileInfoFlags</key>
+	<integer>0</integer>
+	<key>expandAllFolders</key>
+	<false/>
+	<key>showWhitespaces</key>
+	<false/>
+	<key>showLineFilterType</key>
+	<integer>0</integer>
+	<key>showRecentDocumentsList</key>
+	<false/>
+	<key>foldersDifferenceNavigatorTraverseFolders</key>
+	<true/>
+	<key>foldersDifferenceNavigatorWrap</key>
+	<true/>
+	<key>foldersDifferenceNavigatorCenterInWindow</key>
+	<true/>
+	<key>comparatorBinaryBufferSize</key>
+	<integer>131072</integer>
+    <key>filesStatusBarShowMessageTimeout</key>
+    <integer>3</integer>
+	<key>tabWidth</key>
+	<integer>4</integer>
+</dict>
+</plist>

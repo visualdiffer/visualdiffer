@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Unix Shell Scripting Support</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="robots" content="anchors"/>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/stylesheet.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/vd.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/toc.css"/>
+
+  </head>
+  <body id="small">
+    <a name="unixShell"></a>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title_small"><span>Unix Shell Scripting Support</span></h1>
+          <h2 id="project_tagline_small">Launching the UI from the Unix command line</h2>
+        </header>
+    </div>
+
+    <div id="main_content_wrap_small" class="outer">
+      <section id="main_content" class="inner">
+        <div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <div id="toctitle">
+                  <h2>Contents</h2>
+               </div>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#tocAnchor-1-1"><span class="tocnumber">1</span> <span class="toctext">Using visdiff</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-2">
+                     <a href="#tocAnchor-1-2"><span class="tocnumber">2</span> <span class="toctext">Wait for document close</span></a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-3">
+                           <a href="#tocAnchor-1-2-1"><span class="tocnumber">2.1</span> <span class="toctext">Creating a symbolic link</span></a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="toc_level-1 toc_section-4">
+                     <a href="#tocAnchor-1-4"><span class="tocnumber">3</span> <span class="toctext">OSX sandbox, temporary files and annoying file open panel prompts</span></a>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div><h1 id="tocAnchor-1-1">Using visdiff</h1>
+
+<p>Inside /Applications/VisualDiffer.app/<strong>Contents/Resources</strong> folder it is present the executable file visdiff that integrates with VisualDiffer.app</p>
+
+<p>You can launch visdiff to visually show files or folders comparison using the following syntax</p>
+
+<pre>
+   <code>visdiff &lt;left file or folder&gt; &lt;right file or folder&gt;
+</code>
+</pre>
+
+<h1 id="tocAnchor-1-2">Wait for document close</h1>
+
+<p>If you need to wait the user closes the diff document window (not necessary to quit application) associated to visdiff command you can pass the switch <strong>--wait</strong></p>
+
+<p>For example</p>
+
+<div class="highlight">
+   <pre>
+      <code class="bash"><span class="nv">$ </span>visdiff ~/original.txt ~/modified.txt --wait
+</code>
+   </pre>
+</div>
+
+
+<h2 id="tocAnchor-1-2-1">Creating a symbolic link</h2>
+
+<p>VisualDiffer.app doesn't install the terminal application but manually it is possible to create the link to the shell command.</p>
+
+<p>It requires root access, from a terminal prompt type the command shown below</p>
+
+<div class="highlight">
+   <pre>
+      <code class="bash"><span class="nv">$ </span>sudo ln -s /Applications/VisualDiffer.app/Contents/Resources/visdiff /usr/bin/visdiff
+</code>
+   </pre>
+</div>
+
+
+<p><span style="color:red; font-weight:bold">Note:</span> <strong>VisualDiffer can't install command line tool from its User Interface to comply with Apple's submission guidelines</strong></p>
+
+<h1 id="tocAnchor-1-4">OSX sandbox, temporary files and annoying file open panel prompts</h1>
+
+<p>VisualDiffer was sandboxed starting from version 1.4.2 and many users found using it very annoying because any comparison prompts to pick folders/files.</p>
+
+<p>This problem was fixed on version 1.4.3 introducing the so called "Trusted Paths", please refer to <a href="trustedPaths.html">Trusted Paths</a> for further details</p>
+      </section>
+    </div>
+
+  </body>
+</html>

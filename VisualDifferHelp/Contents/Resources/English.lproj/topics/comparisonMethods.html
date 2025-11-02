@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Comparison Method</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="robots" content="anchors"/>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/stylesheet.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/vd.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../common/css/toc.css"/>
+
+  </head>
+  <body id="small">
+    <a name="comparisonMethod"></a>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title_small"><span>Comparison Method</span></h1>
+          <h2 id="project_tagline_small">The folders comparison method, special files and metadata</h2>
+        </header>
+    </div>
+
+    <div id="main_content_wrap_small" class="outer">
+      <section id="main_content" class="inner">
+        <div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <div id="toctitle">
+                  <h2>Contents</h2>
+               </div>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#tocAnchor-1-1"><span class="tocnumber">1</span> <span class="toctext">Comparison Method</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-2">
+                     <a href="#tocAnchor-1-2"><span class="tocnumber">2</span> <span class="toctext">Compare Finder Metadata</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-3">
+                     <a href="#tocAnchor-1-3"><span class="tocnumber">3</span> <span class="toctext">Folders Traversal</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-4">
+                     <a href="#tocAnchor-1-4"><span class="tocnumber">4</span> <span class="toctext">Timestamp Tolerance</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-5">
+                     <a href="#tocAnchor-1-5"><span class="tocnumber">5</span> <span class="toctext">Choose Files to View according to differences found</span></a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-6">
+                           <a href="#tocAnchor-1-5-1"><span class="tocnumber">5.1</span> <span class="toctext">Choose Folders to View</span></a>
+                        </li>
+                        <li class="toc_level-2 toc_section-7">
+                           <a href="#tocAnchor-1-5-2"><span class="tocnumber">5.2</span> <span class="toctext">Show Filtered Files</span></a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div><h1 id="tocAnchor-1-1">Comparison Method</h1>
+
+<p>It is possible to choose which method to use to compare two folders.<br />
+The method to use is strictly related to user needs, comparing source code (files large only few kilobytes) should use a content comparison but to find which movies (files larger than a gigabytes) are not present on right side is faster compare by file size or file timestamp.</p>
+
+<p>Every file is treated as binary and it is compared byte by byte, only 'Compare file content ignoring line ending differences' compares text.</p>
+
+<p>The complete list of supported comparison methods</p>
+
+<table class="bordered">
+   <tr><th>Method</th>
+<th>Description</th>
+</tr>
+   <tr><td>Compare file sizes
+<br />Very quick</td>
+<td>Two file are identical if they have the same file size</td>
+</tr>
+   <tr><td>Compare file timestamps
+<br />Very quick</td>
+<td>Two file are identical if they have the same timestamp.
+<br />It is used the Unix <strong>last modified date</strong> for comparison.
+<br />If file A timestamp is less than file B it is marked as <strong>older</strong> and it will be shown with different color. 
+<br />It is possible to set a span in seconds to consider two files with same timestamp, see below</td>
+</tr>
+   <tr><td>Compare file timestamps and sizes
+<br />Very quick</td>
+<td>Compare the files timestamp, only if it is different then compare the size.</td>
+</tr>
+   <tr><td>Compare file content only
+<br />Slow on large files</td>
+<td>Compare files as binary, byte by byte</td>
+</tr>
+   <tr><td>Compare file timestamp, size and content
+<br />Slow on large files</td>
+<td>Compare the file content, only if content is different compare the timestamp and only if timestamp differs compare size</td>
+</tr>
+   <tr><td>Compare file content ignoring line ending differences
+<br />Slow on large files</td>
+<td>Compare file as plain text, read line by line and compare lines.
+<br />The line ending character is ignored so a DOS file (with lines separated by CR+LF) matches an Unix file (with lines separated by LF) if, ignoring the newlines, the content is identical</td>
+</tr>
+</table><h1 id="tocAnchor-1-2">Compare Finder Metadata</h1>
+
+<p>It is possible to compare OSX Finder Metadata.</p>
+
+<p>When the metadata comparison mismatches, for example left file's label is red and right file's label is blue, the other comparison methods (size, timestamp, content) are not evaluated.</p>
+
+<p>The complete list of supported metadata</p>
+
+<table class="bordered">
+   <tr><th>Metadata</th>
+<th>Description</th>
+</tr>
+   <tr><td>Label</td>
+<td>Compare all labels assigned to a file</td>
+</tr>
+   <tr><td>Tags
+<br /><strong>Available in OSX 10.9 or above</strong></td>
+<td>Compare all tags assigned to a file</td>
+</tr>
+</table><h1 id="tocAnchor-1-3">Folders Traversal</h1>
+
+<p>User can choose to not traverse special files like symbolic links and packages</p>
+
+<table class="bordered">
+   <tr><th>File</th>
+<th>Description</th>
+</tr>
+   <tr><td>Follow Symbolic Links</td>
+<td>If checked the symbolic links will be traversed</td>
+</tr>
+   <tr><td>Skip Packages</td>
+<td>If checked special OSX files (so called bundle or packages)
+<br />like Applications and Frameworks will not be traversed</td>
+</tr>
+   <tr><td>Check Resource Forks</td>
+<td>Check if files are <a href="http://en.wikipedia.org/wiki/Resource_fork">resource forks</a>, this can slow down the comparison.<br />
+When this option is on if the file is a resource fork its size is determined from its structured data.
+</td>
+</tr>
+</table><h1 id="tocAnchor-1-4">Timestamp Tolerance</h1>
+
+<p>The timestamp comparison considers two files matching when the time (including the seconds) is identical but sometime it would be useful to have a range of tolerance for example when the difference is between 5 seconds.</p>
+
+<p>You can set this tolerance entering a positive integer number into the text field</p>
+
+<p>Ignore differences of X seconds or less</p>
+
+<h1 id="tocAnchor-1-5">Choose Files to View according to differences found</h1>
+
+<p>After the comparison complete you can choose which files to view</p>
+
+<p>Definition: <strong>Orphan</strong> indicates a file present only on one side</p>
+
+<p>The complete list of show options</p>
+
+<table class="bordered">
+   <tr><th>Choice</th>
+<th>Description</th>
+</tr>
+   <tr><td>Show All</td>
+<td>No matters which comparison result, show files</td>
+</tr>
+   <tr><td>Only Mismatches</td>
+<td>Show only files with some mismatch (size, timestamp or content)</td>
+</tr>
+   <tr><td>Only Matches</td>
+<td>Show only identical files</td>
+</tr>
+   <tr><td>No Orphans</td>
+<td>Show files present both on left and right side</td>
+</tr>
+   <tr><td>Only Orphans</td>
+<td>Show files present only on left or only on right</td>
+</tr>
+</table><h2 id="tocAnchor-1-5-1">Choose Folders to View</h2>
+
+<p>It is possible to hide empty and orphans folders.
+Folders can be empty because they don't contains any file on disk or because all files/folders inside them are filtered.<br />
+Orphans folders are present only on one side (left or right)</p>
+
+<h2 id="tocAnchor-1-5-2">Show Filtered Files</h2>
+
+<p>When a filter founds matches the elements are not visible but in case it's necessary to shown them you can click on the <code>Filtered</code> button</p>
+
+<p>Some files are excluded by defaults, the complete list is shown below.<br />
+Default filters can be changed or totally deleted from <code>Session Preferences</code> window</p>
+
+<table class="bordered">
+   <tr><th>Description</th>
+<th>File</th>
+</tr>
+   <tr><td>Backup and system files</td>
+<td>.DS_Store, *~</td>
+</tr>
+   <tr><td>Control Version System files </td>
+<td>CVS, .svn, .git, .hg", .bzr</td>
+</tr>
+</table>
+      </section>
+    </div>
+
+  </body>
+</html>

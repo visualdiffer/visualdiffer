@@ -1,0 +1,33 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+# https://github.com/github/gitignore/blob/master/Global/Xcode.gitignore
+
+# Mac OS X
+*.DS_Store
+
+## Build generated
+build/
+DerivedData/
+*.swp
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+# Files containing "*.local*" will not be committed
+*.local*
+
+notes.txt

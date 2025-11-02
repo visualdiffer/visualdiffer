@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "A77105F3-FD86-46B3-BF25-87D6010789C8",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:VisualDiffer.xcodeproj",
+        "identifier" : "55944CC62E5C8D9F00FB1F8C",
+        "name" : "VisualDifferTests"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -1,0 +1,20 @@
+//
+//  Signing.xcconfig
+//  VisualDiffer
+//
+//  Created by davide ficano on 19/09/25.
+//  Copyright (c) 2025 visualdiffer.com
+//
+
+// Copy this file to Signing-local.xcconfig and edit the values
+// The `*-local*` file will not be committed
+
+DEVELOPMENT_TEAM = 
+
+PROVISIONING_PROFILE_SPECIFIER =
+
+CODE_SIGN_STYLE = Automatic
+
+CODE_SIGN_ENTITLEMENTS[config=Debug] = VisualDiffer.entitlements
+CODE_SIGN_ENTITLEMENTS[config=Release] = VisualDiffer.entitlements
+CODE_SIGN_ENTITLEMENTS[config=DebugNoSandbox] = ./VisualDifferTests/NoSandbox.entitlements

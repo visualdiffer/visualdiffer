@@ -1,0 +1,735 @@
+/* 
+  Localizable.strings
+  VisualDiffer
+
+  Created by davide ficano on 24/04/15.
+  Copyright (c) 2015 visualdiffer.com
+*/
+/* No comment provided by engineer. */
+"$ : end of line" = "$ : end of line";
+
+/* No comment provided by engineer. */
+"%.2f seconds" = "%.2f seconds";
+
+/* No comment provided by engineer. */
+"%@    %@ bytes" = "%1$@    %2$@ bytes";
+
+/* No comment provided by engineer. */
+"%@ for '%@'" = "%@ for '%@'";
+
+/* No comment provided by engineer. */
+"%@%ld minutes" = "%1$@%2$ld minutes";
+
+/* No comment provided by engineer. */
+"%@%ld seconds" = "%1$@%2$ld seconds";
+
+/* 4 left/right newer */
+"%ld %lu newer" = "%1$ld %2$lu newer";
+
+/* 4 left/right orphans */
+"%ld %lu orphans" = "%1$ld %2$lu orphans";
+
+/* No comment provided by engineer. */
+"%ld changed" = "%ld changed";
+
+"%ld deleted" = "%ld deleted";
+"%ld added" = "%ld added";
+"%ld identical" = "%ld identical";
+
+/* No comment provided by engineer. */
+"%ld different" = "%ld different";
+
+/* No comment provided by engineer. */
+"%ld different sections" = "%ld different sections";
+
+/* No comment provided by engineer. */
+"%ld files" = "%ld files";
+
+/* 3 files, 4.1GB */
+"%ld files, %@" = "%1$ld files, %2$@";
+
+/* No comment provided by engineer. */
+"%ld folders" = "%ld folders";
+
+/* No comment provided by engineer. */
+"%ld hours" = "%ld hours";
+
+"%ld minutes" = "%ld minutes";
+
+"%ld seconds" = "%ld seconds";
+
+/* No comment provided by engineer. */
+"%ld same" = "%ld same";
+
+/* No comment provided by engineer. */
+"'%@' completed in %@" = "'%1$@' completed in %2$@";
+
+/* No comment provided by engineer. */
+"(...) : group" = "(...) : group";
+
+/* No comment provided by engineer. */
+"(Multiple)" = "(Multiple)";
+
+/* No comment provided by engineer. */
+"(None)" = "(None)";
+
+/* No comment provided by engineer. */
+"(Reverting will lose any unsaved changes.)" = "(Reverting will lose any unsaved changes.)";
+
+/* No comment provided by engineer. */
+"* : zero or more of the preceding block" = "* : zero or more of the preceding block";
+
+/* No comment provided by engineer. */
+"*? : zero or more of the preceding block (non-greedy)" = "*? : zero or more of the preceding block (non-greedy)";
+
+/* No comment provided by engineer. */
+"+ : one or more of the preceding block" = "+ : one or more of the preceding block";
+
+/* No comment provided by engineer. */
+"+? : one or more of the preceding block (non-greedy)" = "+? : one or more of the preceding block (non-greedy)";
+
+/* No comment provided by engineer. */
+". : any character except a newline" = ". : any character except a newline";
+
+/* No comment provided by engineer. */
+"<None>" = "<None>";
+
+/* No comment provided by engineer. */
+"? : zero or one of the preceding block" = "? : zero or one of the preceding block";
+
+/* No comment provided by engineer. */
+"?? : zero or one of the preceding block (non-greedy)" = "?? : zero or one of the preceding block (non-greedy)";
+
+/* No comment provided by engineer. */
+"\\A : beginning of the string" = "\\A : beginning of the string";
+
+/* No comment provided by engineer. */
+"\\B : anything BUT the beginning or end of a word" = "\\B : anything BUT the beginning or end of a word";
+
+/* No comment provided by engineer. */
+"\\b : the beginning or end of a word" = "\\b : the beginning or end of a word";
+
+/* No comment provided by engineer. */
+"\\d : any decimal digit" = "\\d : any decimal digit";
+
+/* No comment provided by engineer. */
+"\\D : any non-digit" = "\\D : any non-digit";
+
+/* No comment provided by engineer. */
+"\\S : any non-whitespace character" = "\\S : any non-whitespace character";
+
+/* No comment provided by engineer. */
+"\\s : any whitespace character" = "\\s : any whitespace character";
+
+/* No comment provided by engineer. */
+"\\w : any alphanumeric character" = "\\w : any alphanumeric character";
+
+/* No comment provided by engineer. */
+"\\W : any non-alphanumeric character" = "\\W : any non-alphanumeric character";
+
+/* No comment provided by engineer. */
+"^ : beginning of line" = "^ : beginning of line";
+
+/* No comment provided by engineer. */
+"Add" = "Add";
+
+/* No comment provided by engineer. */
+"All" = "All";
+
+/* No comment provided by engineer. */
+"An identical rule already exists" = "An identical rule already exists";
+
+/* No comment provided by engineer. */
+"Another application has made changes to the file for this document." = "Another application has made changes to the file for this document.";
+
+/* No comment provided by engineer. */
+"Are you sure to open %lu Finder windows?" = "Are you sure to open %lu Finder windows?";
+
+/* No comment provided by engineer. */
+"Are you sure to stop the operation?" = "Are you sure to stop the operation?";
+
+/* Encoding popup entry indicating automatic choice of encoding */
+"Automatic" = "Automatic";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancel";
+
+/* No comment provided by engineer. */
+"Capture Group $%ld" = "Capture Group $%ld";
+
+/* No comment provided by engineer. */
+"Change Fonts" = "Change Fonts";
+
+/* No comment provided by engineer. */
+"Choose..." = "Choose...";
+
+/* No comment provided by engineer. */
+"Close" = "Close";
+
+/* No comment provided by engineer. */
+"Close Quick Look" = "Close Quick Look";
+
+/* No comment provided by engineer. */
+"Collapse Path" = "Collapse Path";
+
+/* No comment provided by engineer. */
+"Compare file names only" = "Compare file names only";
+
+/* No comment provided by engineer. */
+"Compare file content ignoring line ending differences" = "Compare file content ignoring line ending differences";
+
+/* No comment provided by engineer. */
+"Compare file content only" = "Compare file content only";
+
+/* No comment provided by engineer. */
+"Compare file sizes" = "Compare file sizes";
+
+/* No comment provided by engineer. */
+"Compare file timestamp, size and content" = "Compare file timestamp, size and content";
+
+/* No comment provided by engineer. */
+"Compare file timestamps" = "Compare file timestamps";
+
+/* No comment provided by engineer. */
+"Compare file timestamps and sizes" = "Compare file timestamps and sizes";
+
+/* No comment provided by engineer. */
+"Compare Files" = "Compare Files";
+
+/* No comment provided by engineer. */
+"Compare Folders" = "Compare Folders";
+
+/* No comment provided by engineer. */
+"Comparison completed in %@" = "Comparison completed in %@";
+
+/* No comment provided by engineer. */
+"Confirmations" = "Confirmations";
+
+/* No comment provided by engineer. */
+"Confirmations and Warnings" = "Confirmations and Warnings";
+
+/* No comment provided by engineer. */
+"Copied %@ of %@" = "Copied %1$@ of %2$@";
+
+/* No comment provided by engineer. */
+"Copied %@ of %@ at %@/s" = "Copied %1$@ of %2$@ at %3$@/s";
+
+/* No comment provided by engineer. */
+"Copy" = "Copy";
+
+/* Copy 3 files (10.4MB) to left/right */
+"Copy %ld files (%@) to %lu" = "Copy %1$ld files (%2$@) to %3$lu";
+
+/* No comment provided by engineer. */
+"Copy File Name" = "Copy File Name";
+
+/* No comment provided by engineer. */
+"Copy File Names" = "Copy File Names";
+
+/* No comment provided by engineer. */
+"Copy Lines" = "Copy Lines";
+
+/* No comment provided by engineer. */
+"Copy newer and orphan files to left" = "Copy newer and orphan files to left";
+
+/* No comment provided by engineer. */
+"Copy newer and orphan files to other side" = "Copy newer and orphan files to other side";
+
+/* No comment provided by engineer. */
+"Copy newer and orphan files to right" = "Copy newer and orphan files to right";
+
+/* No comment provided by engineer. */
+"Copy Path" = "Copy Path";
+
+/* No comment provided by engineer. */
+"Copy Paths" = "Copy Paths";
+
+/* No comment provided by engineer. */
+"Copy selected files and folders" = "Copy selected files and folders";
+
+/* No comment provided by engineer. */
+"Copy to Left..." = "Copy to Left...";
+
+/* No comment provided by engineer. */
+"Copy to Right..." = "Copy to Right...";
+
+/* No comment provided by engineer. */
+"Copy URL" = "Copy URL";
+
+/* No comment provided by engineer. */
+"Copy..." = "Copy...";
+
+/* No comment provided by engineer. */
+"Copying" = "Copying";
+
+/* Create 1 empty folder on left/right */
+"Create %ld empty folders on %lu" = "Create %1$ld empty folders on %2$lu";
+
+/* No comment provided by engineer. */
+"Creating empty folders" = "Creating empty folders";
+
+/* The key equivalent for No */
+"d" = "d";
+
+/* No comment provided by engineer. */
+"Delete" = "Delete";
+
+/* No comment provided by engineer. */
+"Delete Lines" = "Delete Lines";
+
+/* No comment provided by engineer. */
+"Delete Lines from Left" = "Delete Lines from Left";
+
+/* No comment provided by engineer. */
+"Delete Lines from Right" = "Delete Lines from Right";
+
+/* No comment provided by engineer. */
+"Delete selected files and folders" = "Delete selected files and folders";
+
+/* No comment provided by engineer. */
+"Delete..." = "Delete...";
+
+/* No comment provided by engineer. */
+"Deleting" = "Deleting";
+
+/* No comment provided by engineer. */
+"Discard Change" = "Discard Change";
+
+/* No comment provided by engineer. */
+"Do you want to replace the current custom defaults?" = "Do you want to replace the current custom defaults?";
+
+/* No comment provided by engineer. */
+"Document Migration" = "Document Migration";
+
+/* No comment provided by engineer. */
+"Don't Save" = "Don't Save";
+
+/* No comment provided by engineer. */
+"Empty" = "Empty";
+
+/* No comment provided by engineer. */
+"Exclude '%@'" = "Exclude '%@'";
+
+/* No comment provided by engineer. */
+"Exclude all '*.%@'" = "Exclude all '*.%@'";
+
+/* No comment provided by engineer. */
+"Exclude by Ext" = "Exclude by Ext";
+
+/* No comment provided by engineer. */
+"Exclude Items" = "Exclude Items";
+
+/* No comment provided by engineer. */
+"Expand all Subfolders" = "Expand all Subfolders";
+
+/* No comment provided by engineer. */
+"Expand Path" = "Expand Path";
+
+/* No comment provided by engineer. */
+"File filter expression contains errors" = "File filter expression contains errors";
+
+/* No comment provided by engineer. */
+"Filtered" = "Filtered";
+
+/* No comment provided by engineer. */
+"Finder doesn't show files starting with . (period) character" = "Finder doesn't show files starting with . (period) character";
+
+/* No comment provided by engineer. */
+"Folder" = "Folder";
+
+/* No comment provided by engineer. */
+"Folder View" = "Folder View";
+
+/* No comment provided by engineer. */
+"Folders comparison completed" = "Folders comparison completed";
+
+/* No comment provided by engineer. */
+"Folders:" = "Folders:";
+
+/* No comment provided by engineer. */
+"Fonts" = "Fonts";
+
+/* No comment provided by engineer. */
+"From Root" = "From Root";
+
+/* No comment provided by engineer. */
+"General" = "General";
+
+/* No comment provided by engineer. */
+"General Settings" = "General Settings";
+
+/* No comment provided by engineer. */
+"Hide Empty Folders" = "Hide Empty Folders";
+
+/* No comment provided by engineer. */
+"Hide Filtered Files" = "Hide Filtered Files";
+
+/* No comment provided by engineer. */
+"Hide Log Console" = "Hide Log Console";
+
+/* No comment provided by engineer. */
+"Hide Whitespaces" = "Hide Whitespaces";
+
+/* No comment provided by engineer. */
+"If operation takes long time to run you can stop it but the results could be inaccurate" = "If operation takes long time to run you can stop it but the results could be inaccurate";
+
+/* No comment provided by engineer. */
+"Ignore Case" = "Ignore Case";
+
+/* No comment provided by engineer. */
+"Ignore File Name Case" = "Ignore File Name Case";
+
+/* No comment provided by engineer. */
+"Invalid differ type, maybe file is corrupted" = "Invalid differ type, maybe file is corrupted";
+
+/* No comment provided by engineer. */
+"Just Differences" = "Just Differences";
+
+/* No comment provided by engineer. */
+"Just Matches" = "Just Matches";
+
+/* No comment provided by engineer. */
+"Keep" = "Keep";
+
+/* No comment provided by engineer. */
+"Keyboard" = "Keyboard";
+
+/* No comment provided by engineer. */
+"Keyboard shortcuts" = "Keyboard shortcuts";
+
+/* No comment provided by engineer. */
+"Left and Right paths must be both folders or files" = "Left and Right paths must be both folders or files";
+
+/* No comment provided by engineer. */
+"Left expression can't be empty" = "Left expression can't be empty";
+
+/* No comment provided by engineer. */
+"Left file '%@' no longer exists" = "Left file '%@' no longer exists";
+
+/* No comment provided by engineer. */
+"Left File Not Accessible (Maybe required by sandbox)" = "Left File Not Accessible (Maybe required by sandbox)";
+
+/* No comment provided by engineer. */
+"Left Folder Not Accessible (Maybe required by sandbox)" = "Left Folder Not Accessible (Maybe required by sandbox)";
+
+/* No comment provided by engineer. */
+"Match File Name Case" = "Match File Name Case";
+
+/* No comment provided by engineer. */
+"Matched Range $0" = "Matched Range $0";
+
+/* No comment provided by engineer. */
+"Maybe it was located in a temporary directory and another process deleted it" = "Maybe it was located in a temporary directory and another process deleted it";
+
+/* No comment provided by engineer. */
+"Move" = "Move";
+
+/* No comment provided by engineer. */
+"Move selected files and folders" = "Move selected files and folders";
+
+/* No comment provided by engineer. */
+"Move to Left..." = "Move to Left...";
+
+/* No comment provided by engineer. */
+"Move to Right..." = "Move to Right...";
+
+/* No comment provided by engineer. */
+"Move..." = "Move...";
+
+/* No comment provided by engineer. */
+"Moving" = "Moving";
+
+/* No comment provided by engineer. */
+"No" = "No";
+
+/* No comment provided by engineer. */
+"No actions for current selection" = "No actions for current selection";
+
+/* No comment provided by engineer. */
+"No Orphans" = "No Orphans";
+
+/* No comment provided by engineer. */
+"No to All" = "No to All";
+
+/* No comment provided by engineer. */
+"Not found" = "Not found";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"Only Matches" = "Only Matches";
+
+/* No comment provided by engineer. */
+"Only Mismatches" = "Only Mismatches";
+
+/* No comment provided by engineer. */
+"Only Orphans" = "Only Orphans";
+
+/* No comment provided by engineer. */
+"Open With" = "Open With";
+
+/* No comment provided by engineer. */
+"Other..." = "Other...";
+
+/* No comment provided by engineer. */
+"Path no longer exists" = "Path no longer exists";
+
+/* No comment provided by engineer. */
+"Paths granted to access to VisualDiffer" = "Paths granted to access to VisualDiffer";
+
+/* No comment provided by engineer. */
+"Please provide a valid value" = "Please provide a valid value";
+
+/* No comment provided by engineer. */
+"Problems (%lu)" = "Problems (%lu)";
+
+/* No comment provided by engineer. */
+"Quick Look" = "Quick Look";
+
+/* No comment provided by engineer. */
+"Regexp error: %@" = "Regexp error: %@";
+
+/* No comment provided by engineer. */
+"Regular expression doesn't compile: %@" = "Regular expression doesn't compile: %@";
+
+/* No comment provided by engineer. */
+"Regular Expression Special Characters" = "Regular Expression Special Characters";
+
+/* No comment provided by engineer. */
+"Reload" = "Reload";
+
+/* No comment provided by engineer. */
+"Reloaded left and right files" = "Reloaded left and right files";
+
+/* No comment provided by engineer. */
+"Reloaded left file" = "Reloaded left file";
+
+/* No comment provided by engineer. */
+"Reloaded right file" = "Reloaded right file";
+
+/* No comment provided by engineer. */
+"Replace Custom Defaults" = "Replace Custom Defaults";
+
+/* No comment provided by engineer. */
+"Replace existing file?" = "Replace existing file?";
+
+/* No comment provided by engineer. */
+"Restore Defaults" = "Restore Defaults";
+
+/* No comment provided by engineer. */
+"Right expression can't be empty" = "Right expression can't be empty";
+
+/* No comment provided by engineer. */
+"Right file '%@' no longer exists" = "Right file '%@' no longer exists";
+
+/* No comment provided by engineer. */
+"Right File Not Accessible (Maybe required by sandbox)" = "Right File Not Accessible (Maybe required by sandbox)";
+
+/* No comment provided by engineer. */
+"Right Folder Not Accessible (Maybe required by sandbox)" = "Right Folder Not Accessible (Maybe required by sandbox)";
+
+/* No comment provided by engineer. */
+"Rule cannot be saved" = "Rule cannot be saved";
+
+/* No comment provided by engineer. */
+"Save" = "Save";
+
+/* No comment provided by engineer. */
+"Save Checked" = "Save Checked";
+
+/* No comment provided by engineer. */
+"Save Left File" = "Save Left File";
+
+/* No comment provided by engineer. */
+"Save Left File?" = "Save Left File?";
+
+/* No comment provided by engineer. */
+"Save Modified Files?" = "Save Modified Files?";
+
+/* No comment provided by engineer. */
+"Save Right File" = "Save Right File";
+
+/* No comment provided by engineer. */
+"Save Right File?" = "Save Right File?";
+
+/* No comment provided by engineer. */
+"Select Application" = "Select Application";
+
+/* No comment provided by engineer. */
+"Select File or Folder" = "Select File or Folder";
+
+/* No comment provided by engineer. */
+"Select Preferred Editor" = "Select Preferred Editor";
+
+/* No comment provided by engineer. */
+"Select Section" = "Select Section";
+
+/* No comment provided by engineer. */
+"Select Trusted Paths" = "Select Trusted Paths";
+
+/* Selected 3 files, 4.1GB */
+"Selected %ld files, %@" = "Selected %1$ld files, %2$@";
+
+/* No comment provided by engineer. */
+"Set as Base Folder" = "Set as Base Folder";
+
+/* No comment provided by engineer. */
+"Set as Base Folder on Other Side" = "Set as Base Folder on Other Side";
+
+/* No comment provided by engineer. */
+"Set as Base Folders Both Sides" = "Set as Base Folders Both Sides";
+
+/* No comment provided by engineer. */
+"Set Modification Date" = "Set Modification Date";
+
+/* No comment provided by engineer. */
+"Set Modification Date for files and folders" = "Set Modification Date for files and folders";
+
+/* No comment provided by engineer. */
+"Setting modification date" = "Setting modification date";
+
+/* No comment provided by engineer. */
+"Show All" = "Show All";
+
+/* No comment provided by engineer. */
+"Show Empty Folders" = "Show Empty Folders";
+
+/* No comment provided by engineer. */
+"Show Filtered Files" = "Show Filtered Files";
+
+/* No comment provided by engineer. */
+"Show in Finder" = "Show in Finder";
+
+/* No comment provided by engineer. */
+"Show Log Console" = "Show Log Console";
+
+/* No comment provided by engineer. */
+"Show Whitespaces" = "Show Whitespaces";
+
+/* No comment provided by engineer. */
+"Some selected file(s) may not be visible in Finder" = "Some selected file(s) may not be visible in Finder";
+
+/* No comment provided by engineer. */
+"Stopped comparison" = "Stopped comparison";
+
+/* No comment provided by engineer. */
+"Stopping comparison can take a while, please wait..." = "Stopping comparison can take a while, please wait...";
+
+/* No comment provided by engineer. */
+"Sync" = "Sync";
+
+/* No comment provided by engineer. */
+"Sync to Left..." = "Sync to Left...";
+
+/* No comment provided by engineer. */
+"Sync to Right..." = "Sync to Right...";
+
+/* No comment provided by engineer. */
+"Syncing" = "Syncing";
+
+/* No comment provided by engineer. */
+"Tab Width: %ld" = "Tab Width: %ld";
+
+/* No comment provided by engineer. */
+"Text" = "Text";
+
+/* No comment provided by engineer. */
+"Text Differences" = "Text Differences";
+
+/* No comment provided by engineer. */
+"The custom defined defaults will be replaced with application defaults, are you sure?" = "The custom defined defaults will be replaced with application defaults, are you sure?";
+
+/* No comment provided by engineer. */
+"The file(s) has been changed on the file system, do you want to reload all modified files?" = "The file(s) has been changed on the file system, do you want to reload all modified files?";
+
+/* No comment provided by engineer. */
+"The path %@ no longer exists or isn't a valid file" = "The path %@ no longer exists or isn't a valid file";
+
+/* No comment provided by engineer. */
+"The path %@ no longer exists or isn't a valid folder" = "The path %@ no longer exists or isn't a valid folder";
+
+/* No comment provided by engineer. */
+"The specified paths no longer exist or aren't both files" = "The specified paths no longer exist or aren't both files";
+
+/* No comment provided by engineer. */
+"The specified paths no longer exists on aren't both folders" = "The specified paths no longer exists on aren't both folders";
+
+/* No comment provided by engineer. */
+"The value %ld is too small" = "The value %ld is too small";
+
+/* No comment provided by engineer. */
+"This folder contains a newer file named %@" = "This folder contains a newer file named %@";
+
+/* No comment provided by engineer. */
+"Trusted Paths" = "Trusted Paths";
+
+/* No comment provided by engineer. */
+"Unable to create symbolic link to destination '%@' because existing file isn't a symbolic link" = "Unable to create symbolic link to destination '%@' because existing file isn't a symbolic link";
+
+/* No comment provided by engineer. */
+"Unable to parse filter expression" = "Unable to parse filter expression";
+
+/* No comment provided by engineer. */
+"Unknown error while reading file %@" = "Unknown error while reading file %@";
+
+/* No comment provided by engineer. */
+"Update" = "Update";
+
+/* No comment provided by engineer. */
+"Use Filesystem Case" = "Use Filesystem Case";
+
+/* No comment provided by engineer. */
+"Yes" = "Yes";
+
+/* No comment provided by engineer. */
+"Yes to All" = "Yes to All";
+
+/* No comment provided by engineer. */
+"You can choose to compare using the modified version on file system, or keep existing one" = "You can choose to compare using the modified version on file system, or keep existing one";
+
+/* No comment provided by engineer. */
+"You have chosen to open a large number of windows, this can take a long time" = "You have chosen to open a large number of windows, this can take a long time";
+
+/* No comment provided by engineer. */
+"Your document needs to be upgraded. This manual step is required by Apple Sandbox rules" = "Your document needs to be upgraded. This manual step is required by Apple Sandbox rules";
+
+/* No comment provided by engineer. */
+"{m,n} : 'm' to 'n' copies of the preceding block" = "{m,n} : 'm' to 'n' copies of the preceding block";
+
+/* No comment provided by engineer. */
+"{m,n}? : 'm' to 'n' copies of the preceding block (non-greedy)" = "{m,n}? : 'm' to 'n' copies of the preceding block (non-greedy)";
+
+/* No comment provided by engineer. */
+"{m} : exactly 'm' copies of the preceding block" = "{m} : exactly 'm' copies of the preceding block";
+
+
+"Contextual Menu" = "Contextual Menu";
+"Go to Previous Difference" = "Go to Previous Difference";
+"Go to Next Difference" = "Go to Next Difference";
+"Go to Previous File" = "Go to Previous File";
+"Go to Next File" = "Go to Next File";
+"Show Details" = "Show Details";
+"Hide Details" = "Hide Details";
+"Save File As" = "Save File As";
+"No Previous File" = "No Previous File";
+"No Next File" = "No Next File";
+"Copy Files" = "Copy Files";
+"Copy newer and orphan files" = "Copy newer and orphan files";
+"Move Files" = "Move Files";
+"Change date/time" = "Change date/time";
+"Edit Exclusion File Filters" = "Edit Exclusion File Filters";
+"Refresh" = "Refresh";
+"Expand All Folders" = "Expand All Folders";
+"Collapse All Folders" = "Collapse All Folders";
+"Edit Session Preferences" = "Edit Session Preferences";
+"Folders reading and comparison" = "Folders reading and comparison";
+"Remove" = "Remove";
+"Select Invalid Paths" = "Select Invalid Paths";
+"The document could not be opened." = "The document could not be opened.";
+"Left path doesn't exist" = "Left path doesn't exist";
+"Right path doesn't exist" = "Right path doesn't exist";
+"Left path is a folder but right is a file, both must be folders or files" = "Left path is a folder but right is a file, both must be folders or files";
+"Left path is a file but right is a folder, both must be folders or files" = "Left path is a file but right is a folder, both must be folders or files";
+"Unable to get application info" = "Unable to get application info";
+"The unix task '%@' must have the execute flag set (eg chmod +x)" = "The unix task '%@' must have the execute flag set (eg chmod +x)";
