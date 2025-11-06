@@ -27,6 +27,7 @@ class ProgressBarView: NSView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.stringValue = NSLocalizedString("Waiting...", comment: "")
         view.isBordered = false
+        view.isEditable = false
         view.isBezeled = false
         view.drawsBackground = false
         view.textColor = NSColor.controlTextColor
