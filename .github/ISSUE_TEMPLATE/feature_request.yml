@@ -1,0 +1,65 @@
+name: ✨ Feature Request
+description: Request a new feature or improvement
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature description
+      description: Explain what you would like to add
+      placeholder: I would like to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why is this useful?
+      description: Explain the problem this feature solves or the benefit it provides
+      placeholder: This feature would help because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Mention if you tried other solutions
+      placeholder: I tried...
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment (if relevant)
+      description: Provide system info if the feature is OS/version dependent
+      placeholder: |
+        - OS:
+        - App Version:
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature for you?
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or mockups (optional)
+      description: Add any images that help explain the feature
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes (optional)
+      description: Anything else you'd like to add
