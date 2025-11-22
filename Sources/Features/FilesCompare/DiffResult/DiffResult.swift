@@ -230,49 +230,56 @@ class DiffResult {
         at startIndex: Int,
         side: DisplaySide
     ) {
-        var src: [DiffLine]
-        var dest: [DiffLine]
-        var type: DiffChangeType
-
         switch side {
         case .left:
-            src = leftSide.lines
-            dest = rightSide.lines
-            type = .deleted
+            insertLines(
+                text: text,
+                destination: leftSide,
+                otherSide: rightSide,
+                at: startIndex,
+                type: .deleted
+            )
         case .right:
-            src = rightSide.lines
-            dest = leftSide.lines
-            type = .added
+            insertLines(
+                text: text,
+                destination: rightSide,
+                otherSide: leftSide,
+                at: startIndex,
+                type: .added
+            )
         }
+    }
 
+    private func insertLines(
+        text: String,
+        destination: DiffSide,
+        otherSide: DiffSide,
+        at startIndex: Int,
+        type: DiffChangeType
+    ) {
         var index = startIndex
 
         text.enumerateLines { line, _ in
-            let srcLS = src[index]
-            if srcLS.type == .missing {
-                srcLS.text = line
-                let destLS = dest[index]
+            let destLine = destination.lines[index]
+            if destLine.type == .missing {
+                destLine.text = line
+                let otherLine = otherSide.lines[index]
                 // simple comparison
-                if destLS.text == line {
-                    destLS.type = .matching
-                    srcLS.type = .matching
+                if otherLine.text == line {
+                    otherLine.type = .matching
+                    destLine.type = .matching
                 } else {
-                    destLS.type = .changed
-                    srcLS.type = .changed
+                    otherLine.type = .changed
+                    destLine.type = .changed
                 }
             } else {
                 // line numbers will be set correctly below
-                src.insert(DiffLine(with: type, number: 0, text: line), at: index)
-                dest.insert(DiffLine.missingLine(), at: index)
+                destination.insert(DiffLine(with: type, number: 0, text: line), at: index)
+                otherSide.insert(DiffLine.missingLine(), at: index)
             }
             index += 1
         }
-        switch side {
-        case .left:
-            leftSide.renumberLines()
-        case .right:
-            rightSide.renumberLines()
-        }
+        destination.renumberLines()
     }
 
     func removeLine(at index: Int) {

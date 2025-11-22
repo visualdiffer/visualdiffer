@@ -451,6 +451,114 @@ final class DiffResultTests: DiffResultBaseTests {
             #expect(line.number == lineNumbers[index])
         }
     }
+
+    @Test func insertLinesLeftDestination() throws {
+        let leftText = "line1\n\nline2\nline3"
+        let rightText = "line1\nline2\nline4"
+
+        let diffResult = DiffResult()
+        diffResult.diff(leftText: leftText, rightText: rightText)
+
+        let newLines = "line2.1\nline2.2\n"
+        diffResult.insert(text: newLines, at: 3, side: .left)
+
+        let leftChangeType: [DiffChangeType] = [.matching, .deleted, .matching, .deleted, .deleted, .changed]
+        assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
+        let rightChangeType: [DiffChangeType] = [.matching, .missing, .matching, .missing, .missing, .changed]
+        assert(lines: diffResult.rightSide.lines, expectedValue: rightChangeType)
+
+        assert(sectionSeparators: diffResult.leftSide.lines, isSeparator: false)
+        assert(sectionSeparators: diffResult.rightSide.lines, isSeparator: false)
+
+        #expect(diffResult.summary == DiffSummary(matching: 2, added: 0, deleted: 1, changed: 1))
+
+        assertArrayCount(diffResult.sections, 2)
+        #expect(diffResult.sections[0] == DiffSection(start: 1, end: 1))
+        #expect(diffResult.sections[1] == DiffSection(start: 3, end: 3))
+
+        let expectedLeftLines = [
+            (1, "line1"),
+            (2, ""),
+            (3, "line2"),
+            (4, "line2.1"),
+            (5, "line2.2"),
+            (6, "line3"),
+        ]
+
+        let expectedRightLines = [
+            (1, "line1"),
+            (-1, ""),
+            (2, "line2"),
+            (-1, ""),
+            (-1, ""),
+            (3, "line4"),
+        ]
+
+        for (index, (leftNumber, leftLine)) in expectedLeftLines.enumerated() {
+            let (rightNumber, rightLine) = expectedRightLines[index]
+            let diffLeftLine = diffResult.leftSide.lines[index]
+            let diffRightLine = diffResult.rightSide.lines[index]
+
+            #expect(leftNumber == diffLeftLine.number)
+            #expect(leftLine == diffLeftLine.text)
+
+            #expect(rightNumber == diffRightLine.number)
+            #expect(rightLine == diffRightLine.text)
+        }
+    }
+
+    @Test func insertLinesRightDestination() throws {
+        let leftText = "line1\n\nline2\nline3"
+        let rightText = "line1\nline2\nline4"
+
+        let diffResult = DiffResult()
+        diffResult.diff(leftText: leftText, rightText: rightText)
+
+        let newLines = "line1.1\nline1.2\n"
+        diffResult.insert(text: newLines, at: 1, side: .right)
+
+        let leftChangeType: [DiffChangeType] = [.matching, .changed, .missing, .matching, .changed]
+        assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
+        let rightChangeType: [DiffChangeType] = [.matching, .changed, .added, .matching, .changed]
+        assert(lines: diffResult.rightSide.lines, expectedValue: rightChangeType)
+
+        assert(sectionSeparators: diffResult.leftSide.lines, isSeparator: false)
+        assert(sectionSeparators: diffResult.rightSide.lines, isSeparator: false)
+
+        #expect(diffResult.summary == DiffSummary(matching: 2, added: 0, deleted: 1, changed: 1))
+
+        assertArrayCount(diffResult.sections, 2)
+        #expect(diffResult.sections[0] == DiffSection(start: 1, end: 1))
+        #expect(diffResult.sections[1] == DiffSection(start: 3, end: 3))
+
+        let expectedLeftLines = [
+            (1, "line1"),
+            (2, ""),
+            (-1, ""),
+            (3, "line2"),
+            (4, "line3"),
+        ]
+
+        let expectedRightLines = [
+            (1, "line1"),
+            (2, "line1.1"),
+            (3, "line1.2"),
+            (4, "line2"),
+            (5, "line4"),
+        ]
+
+        for (index, (leftNumber, leftLine)) in expectedLeftLines.enumerated() {
+            let (rightNumber, rightLine) = expectedRightLines[index]
+            let diffLeftLine = diffResult.leftSide.lines[index]
+            let diffRightLine = diffResult.rightSide.lines[index]
+
+            #expect(leftNumber == diffLeftLine.number)
+            #expect(leftLine == diffLeftLine.text)
+
+            #expect(rightNumber == diffRightLine.number)
+            #expect(rightLine == diffRightLine.text)
+        }
+    }
 }
 
 // swiftlint:enable file_length

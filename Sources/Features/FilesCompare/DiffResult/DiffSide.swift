@@ -31,6 +31,10 @@ class DiffSide {
         lines.firstIndex { $0 === line }
     }
 
+    func insert(_ line: DiffLine, at index: Int) {
+        lines.insert(line, at: index)
+    }
+
     func write(
         path: URL,
         encoding: String.Encoding
