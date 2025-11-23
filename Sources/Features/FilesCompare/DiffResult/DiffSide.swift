@@ -9,7 +9,6 @@
 class DiffSide {
     private(set) var lines: [DiffLine] = []
     var eol: EndOfLine = .unix
-    var hasTrailingEOL: Bool = false
 
     var linesCount: Int {
         lines.reversed().first { $0.number > 0 }?.number ?? 0
@@ -50,24 +49,8 @@ class DiffSide {
         defer { fileHandle.closeFile() }
         fileHandle.truncateFile(atOffset: 0)
 
-        var linesToWrite = lines.count
-        if !hasTrailingEOL {
-            linesToWrite -= 1
-        }
-
-        let newLineData = eol.stringValue.data(using: encoding)
-        for line in lines[0 ..< linesToWrite] where line.type != .missing {
-            if let data = line.text.data(using: encoding),
-               let newLineData {
-                fileHandle.write(data)
-                fileHandle.write(newLineData)
-            }
-        }
-        if !hasTrailingEOL {
-            // don't append newline
-            if let line = lines.last,
-               line.type != .missing,
-               let data = line.text.data(using: encoding) {
+        for line in lines where line.type != .missing {
+            if let data = line.component.withEol.data(using: encoding) {
                 fileHandle.write(data)
             }
         }
@@ -79,16 +62,6 @@ class DiffSide {
         for line in lines where line.type != .missing {
             line.number = lineNumber
             lineNumber += 1
-        }
-    }
-
-    func setupEOL(text: String) {
-        if text.isEmpty {
-            hasTrailingEOL = false
-            eol = .unix
-        } else {
-            hasTrailingEOL = text.last == "\n"
-            eol = EndOfLine.detectEOL(from: text)
         }
     }
 }

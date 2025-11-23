@@ -18,7 +18,7 @@ protocol FileInfoBarDelegate: AnyObject {
 class FileInfoBar: NSView {
     private lazy var labelText: NSTextField = createLabelText()
     private lazy var encodingPopup: NSPopUpButton = createEncodingPopup()
-    private lazy var eolPopup: NSPopUpButton = createEolPopup()
+    private lazy var eolText: NSTextField = createEolText()
 
     var delegate: FileInfoBarDelegate?
 
@@ -41,13 +41,9 @@ class FileInfoBar: NSView {
         }
     }
 
-    var eol: EndOfLine {
-        get {
-            EndOfLine(rawValue: eolPopup.selectedTag()) ?? .unix
-        }
-
-        set {
-            eolPopup.selectItem(withTag: newValue.rawValue)
+    var eol: EndOfLine = .missing {
+        didSet {
+            eolText.stringValue = eol.description
         }
     }
 
@@ -74,7 +70,7 @@ class FileInfoBar: NSView {
             createSeparator(),
             encodingPopup,
             createSeparator(),
-            eolPopup,
+            eolText,
         ])
 
         stackView.orientation = .horizontal
@@ -125,21 +121,21 @@ class FileInfoBar: NSView {
         return view
     }
 
-    private func createEolPopup() -> NSPopUpButton {
-        let view = NSPopUpButton(frame: .zero)
+    private func createEolText() -> NSTextField {
+        let view = NSTextField(frame: .zero)
 
+        view.isEditable = false
         view.isBordered = false
-        view.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+        view.drawsBackground = false
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.addItem(withTitle: EndOfLine.unix.description)
-        view.lastItem?.tag = EndOfLine.unix.rawValue
+        let cell = TextFieldVerticalCentered()
+        cell.lineBreakMode = .byClipping
 
-        view.addItem(withTitle: EndOfLine.pc.description)
-        view.lastItem?.tag = EndOfLine.pc.rawValue
+        view.cell = cell
 
-        view.target = self
-        view.action = #selector(eolAction)
+        // set the font after the cell otherwise it is lost
+        view.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
 
         return view
     }
@@ -161,12 +157,6 @@ class FileInfoBar: NSView {
         if let delegate,
            let encoding {
             delegate.fileInfoBar(self, changedEncoding: encoding)
-        }
-    }
-
-    @objc func eolAction(_: AnyObject) {
-        if let delegate {
-            delegate.fileInfoBar(self, changedEOL: eol)
         }
     }
 

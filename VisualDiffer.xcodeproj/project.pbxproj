@@ -412,6 +412,7 @@
 		557315B12551307800CF4372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 557315B02551307800CF4372 /* Images.xcassets */; };
 		55740BF512D710EC004BF6CC /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55740BF412D710EC004BF6CC /* IOKit.framework */; };
 		55740BF912D71103004BF6CC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55740BF812D71103004BF6CC /* Security.framework */; };
+		557BBB0E2ED1BBB00016CBD4 /* DiffLineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */; };
 		557C18182E7E6E0100381A3A /* big_file_5000_lines.txt in Resources */ = {isa = PBXBuildFile; fileRef = 557C18162E7E6E0100381A3A /* big_file_5000_lines.txt */; };
 		557C18232E7E8C0D00381A3A /* Signing.local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 557C18212E7E8C0D00381A3A /* Signing.local.xcconfig */; };
 		557C18242E7E8C0D00381A3A /* Versions.local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 557C18222E7E8C0D00381A3A /* Versions.local.xcconfig */; };
@@ -959,6 +960,7 @@
 		557315B02551307800CF4372 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = assets/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		55740BF412D710EC004BF6CC /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		55740BF812D71103004BF6CC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffLineComponent.swift; sourceTree = "<group>"; };
 		557C18162E7E6E0100381A3A /* big_file_5000_lines.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = big_file_5000_lines.txt; sourceTree = "<group>"; };
 		557C181B2E7E8BDD00381A3A /* Signing.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.local.xcconfig; sourceTree = "<group>"; };
 		557C181C2E7E8BDD00381A3A /* Versions.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Versions.local.xcconfig; sourceTree = "<group>"; };
@@ -2642,6 +2644,7 @@
 			children = (
 				55373FDE2E9372DF00AB56D0 /* DiffChangeType.swift */,
 				554B4A432E9B7B8F0023AAF0 /* DiffLine.swift */,
+				557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */,
 				554B4A3B2E9B7B8F0023AAF0 /* DiffResult.swift */,
 				554B4A3D2E9B7B8F0023AAF0 /* DiffResult+Dump.swift */,
 				554B4A3E2E9B7B8F0023AAF0 /* DiffResult+Lines.swift */,
@@ -3210,6 +3213,7 @@
 				553741C92E9372DF00AB56D0 /* FoldersWindowController+BaseFolder.swift in Sources */,
 				553741CB2E9372DF00AB56D0 /* FoldersWindowController+UICreation.swift in Sources */,
 				553741CC2E9372DF00AB56D0 /* FilesWindowController+UICreation.swift in Sources */,
+				557BBB0E2ED1BBB00016CBD4 /* DiffLineComponent.swift in Sources */,
 				553741CD2E9372DF00AB56D0 /* NSTableView+Row.swift in Sources */,
 				553741CE2E9372DF00AB56D0 /* FindText.swift in Sources */,
 				553741CF2E9372DF00AB56D0 /* FoldersTraversalBox.swift in Sources */,

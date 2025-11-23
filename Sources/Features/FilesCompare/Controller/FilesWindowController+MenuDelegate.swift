@@ -107,6 +107,9 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
         } else if action == #selector(previousDifferenceFiles)
             || action == #selector(nextDifferenceFiles) {
             return (document as? VDDocument)?.parentSession != nil
+        } else if action == #selector(compareLineEndings) {
+            item.state = diffResultOptions.contains(.compareLineEndings) ? .on : .off
+            return true
         }
         return true
     }

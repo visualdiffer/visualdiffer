@@ -45,7 +45,7 @@ extension DiffResult {
 
                 destLine.mode = .merged
                 destLine.type = .matching
-                destLine.text = srcLine.text
+                destLine.component = srcLine.component
 
                 // now lines match so remove them from view
                 if visibility == .differences {

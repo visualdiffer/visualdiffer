@@ -27,11 +27,13 @@ static UDiffScriptBuilder* reverseScript;
 
 @implementation UDiffFileData
 
-+ (instancetype)fileData:(NSArray*)data h:(NSMutableDictionary*)h equivMax:(int*)ppequiv_max noDiscards:(BOOL*)ppno_discards {
-    return [[self alloc] initWithData:data h:h equivMax:ppequiv_max noDiscards:ppno_discards];
++ (instancetype)fileData:(NSArray*)data h:(NSMutableDictionary*)h equivMax:(int*)ppequiv_max noDiscards:(BOOL*)ppno_discards
+             stringifier:(NSString* (^)(id obj))block {
+    return [[self alloc] initWithData:data h:h equivMax:ppequiv_max noDiscards:ppno_discards stringifier:block];
 }
 
-- (instancetype)initWithData:(NSArray*)data h:(NSMutableDictionary*)h equivMax:(int*)ppequiv_max noDiscards:(BOOL*)ppno_discards {
+- (instancetype)initWithData:(NSArray*)data h:(NSMutableDictionary*)h equivMax:(int*)ppequiv_max noDiscards:(BOOL*)ppno_discards
+                 stringifier:(NSString* (^)(id obj))block {
     self = [super init];
     
     if (self) {
@@ -45,10 +47,11 @@ static UDiffScriptBuilder* reverseScript;
         _changed_flag = NULL;
 
         int i = 0;
-        for (NSString* o in data) {
-            NSNumber* ir = h[o];
+        for (id o in data) {
+            NSString* str = block(o);
+            NSNumber* ir = h[str];
             if (ir == nil) {
-                h[o] = @(equivs[i] = *pequiv_max);
+                h[str] = @(equivs[i] = *pequiv_max);
                 (*pequiv_max)++;
             } else {
                 equivs[i] = [ir intValue];
@@ -386,7 +389,7 @@ static UDiffScriptBuilder* reverseScript;
  be needed again later to print the results of the comparison as
  an edit script, if desired.
  */
-- (instancetype)initWithOriginalLines:(NSArray*)a revisedLines:(NSArray*)b {
+- (instancetype)initWithOriginalLines:(NSArray*)a revisedLines:(NSArray*)b stringifier:(NSString* (^)(id obj))block {
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         forwardScript = [[UDiffForwardScript alloc] init];
@@ -400,8 +403,8 @@ static UDiffScriptBuilder* reverseScript;
         no_discards = NO;
         inhibit = NO;
         NSMutableDictionary* h = [NSMutableDictionary dictionaryWithCapacity:a.count + b.count];
-        _filevec0 = [UDiffFileData fileData:a h:h equivMax:&equiv_max noDiscards:&no_discards];
-        _filevec1 = [UDiffFileData fileData:b h:h equivMax:&equiv_max noDiscards:&no_discards];
+        _filevec0 = [UDiffFileData fileData:a h:h equivMax:&equiv_max noDiscards:&no_discards stringifier:block];
+        _filevec1 = [UDiffFileData fileData:b h:h equivMax:&equiv_max noDiscards:&no_discards stringifier:block];
     }
 
     return self;

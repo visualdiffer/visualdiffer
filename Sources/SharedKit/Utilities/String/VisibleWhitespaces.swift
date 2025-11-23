@@ -19,11 +19,11 @@ class VisibleWhitespaces: NSObject {
         return String(ch)
     }
 
-    @objc func getString(_ str: String, isWhitespacesVisible: Bool) -> String {
+    func getString(_ component: DiffLineComponent, isWhitespacesVisible: Bool) -> String {
         if isWhitespacesVisible {
-            return showWhitespaces(str)
+            return showWhitespaces(component.text + component.eol.visibleSymbol)
         }
-        return Self.tabs2space(str, tabWidth: tabWidth)
+        return Self.tabs2space(component.text, tabWidth: tabWidth)
     }
 
     static func tabs2space(_ line: String, tabWidth: Int) -> String {

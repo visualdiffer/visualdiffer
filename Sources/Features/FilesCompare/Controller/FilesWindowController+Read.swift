@@ -55,7 +55,7 @@
         diffResult = newDiffResult
         currentDiffResult = nil
 
-        newDiffResult.diff(leftText: leftContent, rightText: rightContent)
+        newDiffResult.diff(leftText: leftContent, rightText: rightContent, options: diffResultOptions)
         setSliderMaxValue()
         differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: newDiffResult))
         refreshLinesStatus()

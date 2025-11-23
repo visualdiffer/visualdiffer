@@ -61,6 +61,8 @@
         rightPanelView.treeView
     }
 
+    var diffResultOptions: DiffResult.Options = []
+
     init() {
         let window = WindowCancelOperation.createWindow()
 
@@ -131,5 +133,10 @@
 
     @objc func zoomResetFont(_: AnyObject) {
         fontZoomFactor = 0
+    }
+
+    @objc func compareLineEndings(_: AnyObject) {
+        diffResultOptions.formSymmetricDifference(.compareLineEndings)
+        startComparison()
     }
 }

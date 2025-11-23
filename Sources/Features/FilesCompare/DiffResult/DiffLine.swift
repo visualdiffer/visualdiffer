@@ -24,31 +24,35 @@ class DiffLine {
     var number: Int
     // mode is used by UI to determine how to draw line
     var mode: DisplayMode = .normal
-    var text: String
+    var component: DiffLineComponent
     var isSectionSeparator = false
     var filteredIndex = 0
+
+    var text: String {
+        component.text
+    }
 
     init(
         with type: DiffChangeType,
         number: Int,
-        text: String
+        component: DiffLineComponent
     ) {
         self.type = type
         self.number = number
-        self.text = text
+        self.component = component
     }
 
     static func missingLine() -> DiffLine {
         DiffLine(
             with: .missing,
             number: invalidLineNumber,
-            text: ""
+            component: DiffLineComponent(text: "", eol: .missing)
         )
     }
 
     func makeMissing() {
         type = .missing
-        text = ""
+        component = DiffLineComponent(text: "", eol: .missing)
         number = Self.invalidLineNumber
     }
 }

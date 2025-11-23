@@ -73,7 +73,7 @@ extension FilesWindowController {
             lineView.string = ""
             return
         }
-        lineView.string = getLine(diffLine)
+        lineView.string = getLine(diffLine) + (scopeBar.showWhitespaces ? "" : diffLine.component.eol.visibleSymbol)
 
         if let colors = diffLine.colors {
             lineView.setTextColor(colors.text, backgroundColor: colors.background)
@@ -87,7 +87,7 @@ extension FilesWindowController {
             return line as String
         }
         let line = visibleWhitespaces.getString(
-            diffLine.text,
+            diffLine.component,
             isWhitespacesVisible: scopeBar.showWhitespaces
         )
         cachedLineTextMap.setObject(line as NSString, forKey: diffLine)

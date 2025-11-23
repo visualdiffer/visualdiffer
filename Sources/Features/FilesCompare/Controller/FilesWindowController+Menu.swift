@@ -152,6 +152,14 @@ extension FilesWindowController {
         viewMenu.addItem(NSMenuItem.separator())
 
         viewMenu.addItem(
+            withTitle: NSLocalizedString("Compare Line Endings (DOS/Mac)", comment: ""),
+            action: #selector(compareLineEndings),
+            keyEquivalent: ""
+        )
+
+        viewMenu.addItem(NSMenuItem.separator())
+
+        viewMenu.addItem(
             withTitle: NSLocalizedString("Swap Sides", comment: ""),
             action: #selector(swapSides),
             keyEquivalent: ""

@@ -7,6 +7,12 @@
 //
 
 class DiffResult {
+    struct Options: OptionSet {
+        let rawValue: Int
+
+        static let compareLineEndings = Options(rawValue: 1 << 0)
+    }
+
     private(set) var leftSide = DiffSide()
     private(set) var rightSide = DiffSide()
     private(set) var sections = [DiffSection]()
@@ -20,18 +26,27 @@ class DiffResult {
 
     func diff(
         leftText: String,
-        rightText: String
+        rightText: String,
+        options: Options = []
     ) {
-        leftSide.setupEOL(text: leftText)
-        rightSide.setupEOL(text: rightText)
-
         sections = []
         summary.reset()
 
-        let leftLines = splitLines(leftText)
-        let rightLines = splitLines(rightText)
+        let leftLines = DiffLineComponent.splitLines(leftText)
+        let rightLines = DiffLineComponent.splitLines(rightText)
 
-        let udiff = UnifiedDiff(originalLines: leftLines, revisedLines: rightLines)
+        leftSide.eol = leftLines.detectEOL()
+        rightSide.eol = rightLines.detectEOL()
+
+        // swiftlint:disable force_cast
+        let stringifier: (Any) -> String = options.contains(.compareLineEndings) ? {
+            ($0 as! DiffLineComponent).withEol
+        } : {
+            ($0 as! DiffLineComponent).text
+        }
+        // swiftlint:enable force_cast
+
+        let udiff = UnifiedDiff(originalLines: leftLines, revisedLines: rightLines, stringifier: stringifier)
         var script = udiff.diff_2(false)
 
         var leftIndex = 0
@@ -110,8 +125,8 @@ class DiffResult {
     private func updateMatchingLines(
         leftCount: Int,
         rightCount: Int,
-        leftLines: [String],
-        rightLines: [String],
+        leftLines: [DiffLineComponent],
+        rightLines: [DiffLineComponent],
         leftIndex: inout Int,
         rightIndex: inout Int
     ) {
@@ -121,7 +136,7 @@ class DiffResult {
             let line = DiffLine(
                 with: .matching,
                 number: leftIndex + 1,
-                text: leftLines[leftIndex]
+                component: leftLines[leftIndex]
             )
             leftSide.add(line: line)
             leftIndex += 1
@@ -131,7 +146,7 @@ class DiffResult {
             let line = DiffLine(
                 with: .matching,
                 number: rightIndex + 1,
-                text: rightLines[rightIndex]
+                component: rightLines[rightIndex]
             )
             rightSide.add(line: line)
             rightIndex += 1
@@ -140,8 +155,8 @@ class DiffResult {
 
     private func updateChangedLines(
         lineCount: Int,
-        leftLines: [String],
-        rightLines: [String],
+        leftLines: [DiffLineComponent],
+        rightLines: [DiffLineComponent],
         leftIndex: inout Int,
         rightIndex: inout Int
     ) {
@@ -152,14 +167,14 @@ class DiffResult {
             let leftLine = DiffLine(
                 with: .changed,
                 number: leftIndex + 1,
-                text: leftLines[leftIndex]
+                component: leftLines[leftIndex]
             )
             leftSide.add(line: leftLine)
 
             let rightLine = DiffLine(
                 with: .changed,
                 number: rightIndex + 1,
-                text: rightLines[rightIndex]
+                component: rightLines[rightIndex]
             )
             rightSide.add(line: rightLine)
             leftIndex += 1
@@ -169,8 +184,8 @@ class DiffResult {
 
     private func updateDeletedLines(
         lineCount: Int,
-        leftLines: [String],
-        rightLines _: [String],
+        leftLines: [DiffLineComponent],
+        rightLines _: [DiffLineComponent],
         leftIndex: inout Int,
         rightIndex _: inout Int
     ) {
@@ -180,7 +195,7 @@ class DiffResult {
             let line = DiffLine(
                 with: .deleted,
                 number: leftIndex + 1,
-                text: leftLines[leftIndex]
+                component: leftLines[leftIndex]
             )
             leftSide.add(line: line)
             leftIndex += 1
@@ -193,8 +208,8 @@ class DiffResult {
 
     private func updateAddedLines(
         lineCount: Int,
-        leftLines _: [String],
-        rightLines: [String],
+        leftLines _: [DiffLineComponent],
+        rightLines: [DiffLineComponent],
         leftIndex _: inout Int,
         rightIndex: inout Int
     ) {
@@ -209,20 +224,11 @@ class DiffResult {
             let line = DiffLine(
                 with: .added,
                 number: rightIndex + 1,
-                text: rightLines[rightIndex]
+                component: rightLines[rightIndex]
             )
             rightSide.add(line: line)
             rightIndex += 1
         }
-    }
-
-    private func splitLines(_ text: String) -> [String] {
-        var lines: [String] = []
-        text.enumerateLines { line, _ in
-            lines.append(line)
-        }
-
-        return lines
     }
 
     func insert(
@@ -259,13 +265,13 @@ class DiffResult {
     ) {
         var index = startIndex
 
-        text.enumerateLines { line, _ in
+        DiffLineComponent.enumerateLines(text: text) { component in
             let destLine = destination.lines[index]
             if destLine.type == .missing {
-                destLine.text = line
+                destLine.component = component
                 let otherLine = otherSide.lines[index]
                 // simple comparison
-                if otherLine.text == line {
+                if otherLine.text == component.text {
                     otherLine.type = .matching
                     destLine.type = .matching
                 } else {
@@ -274,7 +280,7 @@ class DiffResult {
                 }
             } else {
                 // line numbers will be set correctly below
-                destination.insert(DiffLine(with: type, number: 0, text: line), at: index)
+                destination.insert(DiffLine(with: type, number: 0, component: component), at: index)
                 otherSide.insert(DiffLine.missingLine(), at: index)
             }
             index += 1

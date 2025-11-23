@@ -68,7 +68,7 @@
 
     extension DiffSide {
         func dump(_ fileHandle: FileHandle) {
-            DiffResult.writeLine(fileHandle, line: "eof = \(eol) hasTrailingEOL = \(hasTrailingEOL)")
+            DiffResult.writeLine(fileHandle, line: "eof = \(eol)")
 
             for line in lines {
                 line.dump(fileHandle)

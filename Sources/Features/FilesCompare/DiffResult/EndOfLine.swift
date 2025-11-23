@@ -7,45 +7,65 @@
 //
 
 enum EndOfLine: Int {
-    case unix = 0
-    // swiftlint:disable:next identifier_name
-    case pc
-}
+    case unix
+    case pcCR
+    case pcCRLF
+    case missing
+    case mixed
 
-extension EndOfLine {
-    ///
-    /// Detect the eol used inside text, only the first line is used to determine the type
-    ///
-    static func detectEOL(from text: String, defaultEOL: EndOfLine = .unix) -> EndOfLine {
-        let wholeRange = text.startIndex ..< text.endIndex
-        var eol = defaultEOL
-
-        text.enumerateSubstrings(
-            in: wholeRange,
-            options: [.byLines, .substringNotRequired]
-        ) { _, substringRange, _, stop in
-            if substringRange.upperBound < wholeRange.upperBound {
-                let ch = text[substringRange.upperBound]
-                eol = (ch == "\r" || ch == "\r\n") ? .pc : .unix
-            }
-            stop = true
+    static func from(character ch: Character) -> EndOfLine {
+        switch ch {
+        case "\r":
+            .pcCR
+        case "\r\n":
+            .pcCRLF
+        case "\n":
+            .unix
+        default:
+            .missing
         }
-
-        return eol
     }
 }
 
 extension EndOfLine: CustomStringConvertible {
     var stringValue: String {
-        self == .unix ? "\n" : "\r\n"
+        switch self {
+        case .unix:
+            "\n"
+        case .pcCR:
+            "\r"
+        case .pcCRLF:
+            "\r\n"
+        case .missing:
+            ""
+        case .mixed:
+            ""
+        }
     }
 
     var description: String {
         switch self {
         case .unix:
             "Unix (LF)"
-        case .pc:
+        case .pcCR:
+            "DOS (CR)"
+        case .pcCRLF:
             "DOS (CR+LF)"
+        case .missing:
+            "None"
+        case .mixed:
+            "MIXED"
+        }
+    }
+
+    var visibleSymbol: String {
+        switch self {
+        case .unix:
+            "\u{00B6}"
+        case .pcCR, .pcCRLF:
+            "\u{00A4}"
+        default:
+            ""
         }
     }
 }

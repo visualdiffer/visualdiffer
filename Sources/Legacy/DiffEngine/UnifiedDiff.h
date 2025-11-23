@@ -34,8 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 /** Total number of nondiscarded lines. */
 @property (assign) int nondiscarded_lines;
 
-+ (instancetype)fileData:(NSArray*)data h:(NSMutableDictionary*)h equivMax:(int*)ppequiv_max noDiscards:(BOOL*)ppnoDiscards;
-- (instancetype)initWithData:(NSArray*)data h:(NSMutableDictionary*)h equivMax:(int*)ppequiv_max noDiscards:(BOOL*)ppnoDiscards;
++ (instancetype)fileData:(NSArray*)data h:(NSMutableDictionary*)h equivMax:(int*)ppequiv_max noDiscards:(BOOL*)ppnoDiscards
+             stringifier:(NSString* (^)(id obj))block;
+- (instancetype)initWithData:(NSArray*)data h:(NSMutableDictionary*)h equivMax:(int*)ppequiv_max noDiscards:(BOOL*)ppnoDiscards
+                 stringifier:(NSString* (^)(id obj))block;
 
 @end
 
@@ -69,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
     BOOL inhibit;
 }
 
-- (instancetype)initWithOriginalLines:(NSArray*)a revisedLines:(NSArray*)b;
+- (instancetype)initWithOriginalLines:(NSArray*)a revisedLines:(NSArray*)b stringifier:(NSString* (^)(id obj))block;
 - (nullable UDiffChange*)diff_2:(BOOL)reverse;
 
 @end
