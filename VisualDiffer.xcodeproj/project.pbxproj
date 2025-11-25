@@ -42,6 +42,12 @@
 		551BF0E91643B91B009CC9D1 /* folder-111@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 551BF0D71643B91B009CC9D1 /* folder-111@2x.png */; };
 		551BF0EA1643B91B009CC9D1 /* folder-999-open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 551BF0D81643B91B009CC9D1 /* folder-999-open@2x.png */; };
 		551BF0EB1643B91B009CC9D1 /* folder-999@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 551BF0D91643B91B009CC9D1 /* folder-999@2x.png */; };
+		551DE39F2ED422820067AB18 /* FilesWindowController+SessionPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE39E2ED422820067AB18 /* FilesWindowController+SessionPreferences.swift */; };
+		551DE3A62ED4237B0067AB18 /* FileSessionPreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3A42ED4237B0067AB18 /* FileSessionPreferencesWindow.swift */; };
+		551DE3AA2ED428B40067AB18 /* FilePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3A92ED428A50067AB18 /* FilePreferences.swift */; };
+		551DE3B42ED42AD90067AB18 /* FilePreferencesComparisonPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3B32ED42AD00067AB18 /* FilePreferencesComparisonPanel.swift */; };
+		551DE3B62ED42B4E0067AB18 /* FileComparisonBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3B52ED42B4E0067AB18 /* FileComparisonBox.swift */; };
+		551DE3B82ED439AF0067AB18 /* PreferencesBoxDataSource+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3B72ED4399B0067AB18 /* PreferencesBoxDataSource+Default.swift */; };
 		551DEDE1160477CA0014DF88 /* prefs_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 551DEDE0160477CA0014DF88 /* prefs_folder.png */; };
 		5532516C2765F06B0092D65F /* mask-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 553251672765F06B0092D65F /* mask-back.png */; };
 		5532516D2765F06B0092D65F /* mask-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 553251682765F06B0092D65F /* mask-full.png */; };
@@ -390,6 +396,8 @@
 		553743512E937B7F00AB56D0 /* VisualDiffer.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 5537434D2E937B7F00AB56D0 /* VisualDiffer.sdef */; };
 		553D10D9163BD0BC008D3F65 /* prefs_confirmations.png in Resources */ = {isa = PBXBuildFile; fileRef = 553D10D8163BD0BC008D3F65 /* prefs_confirmations.png */; };
 		5542D19616317DAC00F801AA /* vd.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 5542D19516317DAC00F801AA /* vd.iconset */; };
+		55450B172ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */; };
+		55450B192ED47B700048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55450B182ED47B680048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift */; };
 		554B4A452E9B7B8F0023AAF0 /* EndOfLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */; };
 		554B4A462E9B7B8F0023AAF0 /* DiffSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4A402E9B7B8F0023AAF0 /* DiffSide.swift */; };
 		554B4A472E9B7B8F0023AAF0 /* DiffSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4A412E9B7B8F0023AAF0 /* DiffSection.swift */; };
@@ -575,6 +583,12 @@
 		551BF0D71643B91B009CC9D1 /* folder-111@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-111@2x.png"; sourceTree = "<group>"; };
 		551BF0D81643B91B009CC9D1 /* folder-999-open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-999-open@2x.png"; sourceTree = "<group>"; };
 		551BF0D91643B91B009CC9D1 /* folder-999@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-999@2x.png"; sourceTree = "<group>"; };
+		551DE39E2ED422820067AB18 /* FilesWindowController+SessionPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesWindowController+SessionPreferences.swift"; sourceTree = "<group>"; };
+		551DE3A42ED4237B0067AB18 /* FileSessionPreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSessionPreferencesWindow.swift; sourceTree = "<group>"; };
+		551DE3A92ED428A50067AB18 /* FilePreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePreferences.swift; sourceTree = "<group>"; };
+		551DE3B32ED42AD00067AB18 /* FilePreferencesComparisonPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePreferencesComparisonPanel.swift; sourceTree = "<group>"; };
+		551DE3B52ED42B4E0067AB18 /* FileComparisonBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileComparisonBox.swift; sourceTree = "<group>"; };
+		551DE3B72ED4399B0067AB18 /* PreferencesBoxDataSource+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreferencesBoxDataSource+Default.swift"; sourceTree = "<group>"; };
 		551DEDE0160477CA0014DF88 /* prefs_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_folder.png; sourceTree = "<group>"; };
 		553033AC2E5DBABF0016F101 /* VisualDiffer.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = VisualDiffer.xctestplan; sourceTree = SOURCE_ROOT; };
 		553251672765F06B0092D65F /* mask-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask-back.png"; sourceTree = "<group>"; };
@@ -936,6 +950,8 @@
 		5537434D2E937B7F00AB56D0 /* VisualDiffer.sdef */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = VisualDiffer.sdef; path = AppDefaults/VisualDiffer.sdef; sourceTree = "<group>"; };
 		553D10D8163BD0BC008D3F65 /* prefs_confirmations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_confirmations.png; sourceTree = "<group>"; };
 		5542D19516317DAC00F801AA /* vd.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = vd.iconset; path = images/vd.iconset; sourceTree = "<group>"; };
+		55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextPreferencesPanel+PreferencesBoxDataSource.swift"; sourceTree = "<group>"; };
+		55450B182ED47B680048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileSessionPreferencesWindow+PreferencesBoxDataSource.swift"; sourceTree = "<group>"; };
 		554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfLine.swift; sourceTree = "<group>"; };
 		554B4A3B2E9B7B8F0023AAF0 /* DiffResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResult.swift; sourceTree = "<group>"; };
 		554B4A3D2E9B7B8F0023AAF0 /* DiffResult+Dump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiffResult+Dump.swift"; sourceTree = "<group>"; };
@@ -1262,6 +1278,33 @@
 			path = folder;
 			sourceTree = "<group>";
 		};
+		551DE3A52ED4237B0067AB18 /* SessionPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				551DE3A92ED428A50067AB18 /* FilePreferences.swift */,
+				551DE3A42ED4237B0067AB18 /* FileSessionPreferencesWindow.swift */,
+				55450B182ED47B680048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift */,
+				551DE3B12ED42AB20067AB18 /* Panels */,
+			);
+			path = SessionPreferences;
+			sourceTree = "<group>";
+		};
+		551DE3B02ED42AB20067AB18 /* Comparison */ = {
+			isa = PBXGroup;
+			children = (
+				551DE3B32ED42AD00067AB18 /* FilePreferencesComparisonPanel.swift */,
+			);
+			path = Comparison;
+			sourceTree = "<group>";
+		};
+		551DE3B12ED42AB20067AB18 /* Panels */ = {
+			isa = PBXGroup;
+			children = (
+				551DE3B02ED42AB20067AB18 /* Comparison */,
+			);
+			path = Panels;
+			sourceTree = "<group>";
+		};
 		552D7032129AC0050013D012 /* toolbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1425,6 +1468,7 @@
 				55373FD32E9372DF00AB56D0 /* FilesWindowController+PathControlDelegate.swift */,
 				55373FD42E9372DF00AB56D0 /* FilesWindowController+Read.swift */,
 				55373FD52E9372DF00AB56D0 /* FilesWindowController+Save.swift */,
+				551DE39E2ED422820067AB18 /* FilesWindowController+SessionPreferences.swift */,
 				55373FD62E9372DF00AB56D0 /* FilesWindowController+Slider.swift */,
 				55373FD72E9372DF00AB56D0 /* FilesWindowController+TableView.swift */,
 				55373FD82E9372DF00AB56D0 /* FilesWindowController+UICreation.swift */,
@@ -1455,6 +1499,7 @@
 		55373FE42E9372DF00AB56D0 /* Windows */ = {
 			isa = PBXGroup;
 			children = (
+				551DE3A52ED4237B0067AB18 /* SessionPreferences */,
 				55373FE32E9372DF00AB56D0 /* JumpToLineWindow.swift */,
 			);
 			path = Windows;
@@ -1815,6 +1860,7 @@
 		553740852E9372DF00AB56D0 /* Box */ = {
 			isa = PBXGroup;
 			children = (
+				551DE3B72ED4399B0067AB18 /* PreferencesBoxDataSource+Default.swift */,
 				553740802E9372DF00AB56D0 /* ComparisonStandardUserDataSource.swift */,
 				553740812E9372DF00AB56D0 /* PreferencesBox.swift */,
 				553740822E9372DF00AB56D0 /* PreferencesBoxDataSource.swift */,
@@ -1887,7 +1933,9 @@
 		553740A02E9372DF00AB56D0 /* Text */ = {
 			isa = PBXGroup;
 			children = (
+				551DE3B52ED42B4E0067AB18 /* FileComparisonBox.swift */,
 				5537409E2E9372DF00AB56D0 /* TextPreferencesPanel.swift */,
+				55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */,
 				5537409F2E9372DF00AB56D0 /* VisualizationBox.swift */,
 			);
 			path = Text;
@@ -3163,6 +3211,7 @@
 				553741962E9372DF00AB56D0 /* URL+Finder.swift in Sources */,
 				553741982E9372DF00AB56D0 /* CommonPrefs+FolderCompare.swift in Sources */,
 				553741992E9372DF00AB56D0 /* FoldersWindowController+PathControlDelegate.swift in Sources */,
+				551DE3B82ED439AF0067AB18 /* PreferencesBoxDataSource+Default.swift in Sources */,
 				5537419A2E9372DF00AB56D0 /* FontBox.swift in Sources */,
 				5537419B2E9372DF00AB56D0 /* FilesTableViewFindTextDelegate.swift in Sources */,
 				5537419C2E9372DF00AB56D0 /* DeleteFileOperationExecutor.swift in Sources */,
@@ -3218,10 +3267,13 @@
 				553741CE2E9372DF00AB56D0 /* FindText.swift in Sources */,
 				553741CF2E9372DF00AB56D0 /* FoldersTraversalBox.swift in Sources */,
 				553741D02E9372DF00AB56D0 /* FileError.swift in Sources */,
+				55450B192ED47B700048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift in Sources */,
 				553741D12E9372DF00AB56D0 /* OpenEditorError.swift in Sources */,
+				551DE39F2ED422820067AB18 /* FilesWindowController+SessionPreferences.swift in Sources */,
 				553741D22E9372DF00AB56D0 /* GeneralPreferencesPanel.swift in Sources */,
 				553741D32E9372DF00AB56D0 /* CompareItem+DifferenceNavigator.swift in Sources */,
 				558DEAD22EA26C5B00F05A10 /* Logger+App.swift in Sources */,
+				551DE3AA2ED428B40067AB18 /* FilePreferences.swift in Sources */,
 				553741D42E9372DF00AB56D0 /* PreferencesBox.swift in Sources */,
 				553741D52E9372DF00AB56D0 /* NSAlert+ReplaceFile.swift in Sources */,
 				553741D72E9372DF00AB56D0 /* URL+SymLink.swift in Sources */,
@@ -3240,6 +3292,7 @@
 				553741E32E9372DF00AB56D0 /* LineNumberTableRowView.swift in Sources */,
 				553741E42E9372DF00AB56D0 /* FolderReader.swift in Sources */,
 				553741E52E9372DF00AB56D0 /* DateFormatter+Helper.swift in Sources */,
+				551DE3A62ED4237B0067AB18 /* FileSessionPreferencesWindow.swift in Sources */,
 				553741E62E9372DF00AB56D0 /* FoldersWindowController+Navigation.swift in Sources */,
 				553741E72E9372DF00AB56D0 /* HistoryEntity.swift in Sources */,
 				553741E82E9372DF00AB56D0 /* CompareItem+Clone.swift in Sources */,
@@ -3317,6 +3370,7 @@
 				553742292E9372DF00AB56D0 /* FilesWindowController+Read.swift in Sources */,
 				5537422A2E9372DF00AB56D0 /* PowerAssertion.swift in Sources */,
 				5537422C2E9372DF00AB56D0 /* FilesWindowController+UISetup.swift in Sources */,
+				551DE3B42ED42AD90067AB18 /* FilePreferencesComparisonPanel.swift in Sources */,
 				5537422D2E9372DF00AB56D0 /* CompareUtil.swift in Sources */,
 				5537422E2E9372DF00AB56D0 /* DisplayFiltersScopeBar.swift in Sources */,
 				5537422F2E9372DF00AB56D0 /* HistorySessionManager.swift in Sources */,
@@ -3338,6 +3392,8 @@
 				5537423F2E9372DF00AB56D0 /* URL+Metadata.swift in Sources */,
 				553742402E9372DF00AB56D0 /* FoldersWindowController+Menu.swift in Sources */,
 				553742412E9372DF00AB56D0 /* OperationSummaryView.swift in Sources */,
+				55450B172ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift in Sources */,
+				551DE3B62ED42B4E0067AB18 /* FileComparisonBox.swift in Sources */,
 				553742422E9372DF00AB56D0 /* AppDelegate.swift in Sources */,
 				559590262EABB06100B5AB0B /* ItemComparator+AlignRegularExpression.swift in Sources */,
 				559590272EABB06100B5AB0B /* ItemComparator+Align.swift in Sources */,

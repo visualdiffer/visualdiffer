@@ -15,6 +15,7 @@ extension NSToolbarItem.Identifier {
         static let nextDifferenceFiles = NSToolbarItem.Identifier("NextDifferenceFiles")
         static let openWith = NSToolbarItem.Identifier("OpenWith")
         static let showInFinder = NSToolbarItem.Identifier("ShowInFinder")
+        static let sessionPreferences = NSToolbarItem.Identifier("SessionPreferences")
     }
 }
 
@@ -34,6 +35,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             .space,
             .Files.nextDifferenceFiles,
             .Files.prevDifferenceFiles,
+            .Files.sessionPreferences,
         ]
     }
 
@@ -48,6 +50,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             .Files.prevDifferenceFiles,
             .Files.openWith,
             .Files.showInFinder,
+            .Files.sessionPreferences,
         ]
     }
 
@@ -137,6 +140,15 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 image: NSImage(named: VDImageNameFinder),
                 target: self,
                 action: #selector(showInFinder)
+            )
+        } else if itemIdentifier == .Files.sessionPreferences {
+            return NSToolbarItem(
+                identifier: itemIdentifier,
+                label: NSLocalizedString("Session Preferences", comment: ""),
+                tooltip: NSLocalizedString("Edit Session Preferences", comment: ""),
+                image: NSImage(named: VDImageNamePreferences),
+                target: self,
+                action: #selector(openSessionSettingsSheet)
             )
         }
 

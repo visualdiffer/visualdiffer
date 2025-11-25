@@ -6,7 +6,7 @@
 //  Copyright (c) 2010 visualdiffer.com
 //
 
-@objc class FilesWindowController: NSWindowController {
+class FilesWindowController: NSWindowController {
     // swiftlint:disable:next implicitly_unwrapped_optional
     @objc var sessionDiff: SessionDiff!
 
@@ -61,7 +61,9 @@
         rightPanelView.treeView
     }
 
-    var diffResultOptions: DiffResult.Options = []
+    var preferences = FilePreferences()
+
+    lazy var sessionPreferencesSheet: FileSessionPreferencesWindow = .init()
 
     init() {
         let window = WindowCancelOperation.createWindow()
@@ -101,6 +103,8 @@
             sliderAction: #selector(sliderMoved)
         )
 
+        setupPreferences()
+
         shouldCascadeWindows = false
 
         initAllViews()
@@ -114,6 +118,10 @@
     ) {
         filePanel.setDelegate(delegate)
         filePanel.setSliderChangeAction(target, action: action)
+    }
+
+    func setupPreferences() {
+        preferences.compareLineEndings = CommonPrefs.shared.bool(forKey: .compareLineEndings)
     }
 
     @available(*, unavailable)
@@ -133,10 +141,5 @@
 
     @objc func zoomResetFont(_: AnyObject) {
         fontZoomFactor = 0
-    }
-
-    @objc func compareLineEndings(_: AnyObject) {
-        diffResultOptions.formSymmetricDifference(.compareLineEndings)
-        startComparison()
     }
 }
