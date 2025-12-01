@@ -100,7 +100,7 @@
 
         "missing": {
             "textColor": "#FFFFFFFF",
-            "backgroundColor":"#FFFFFFFF"
+            "backgroundColor":"#000000"
         },
 
         "merged": {

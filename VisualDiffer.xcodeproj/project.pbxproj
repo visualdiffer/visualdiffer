@@ -454,6 +454,10 @@
 		55B1CE322E9934F800426FEC /* DiffResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1CE2C2E9934F800426FEC /* DiffResultTests.swift */; };
 		55B6760018956D90000D5A0D /* prefs_keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B675FE18956D90000D5A0D /* prefs_keyboard.png */; };
 		55B6760118956D90000D5A0D /* prefs_keyboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B675FF18956D90000D5A0D /* prefs_keyboard@2x.png */; };
+		55BC333E2EDAC69C004035A0 /* RowHeightCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC333D2EDAC69C004035A0 /* RowHeightCalculator.swift */; };
+		55BC33402EDAC96F004035A0 /* TiledImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC333F2EDAC96F004035A0 /* TiledImageView.swift */; };
+		55BC33432EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC33412EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift */; };
+		55BC33442EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC33422EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift */; };
 		55C1CBFD2E8BB6AD004FE322 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1CBF42E8BB6AD004FE322 /* main.swift */; };
 		55C1CC012E8BB755004FE322 /* visdiff in Copy Visdiff to Helpers */ = {isa = PBXBuildFile; fileRef = 55C1CBE22E8BB6A2004FE322 /* visdiff */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55C1CC072E8BBD85004FE322 /* DocumentWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1CC062E8BBAD1004FE322 /* DocumentWaiter.swift */; };
@@ -1022,6 +1026,10 @@
 		55B2120C2490AB3B001717DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		55B675FE18956D90000D5A0D /* prefs_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_keyboard.png; sourceTree = "<group>"; };
 		55B675FF18956D90000D5A0D /* prefs_keyboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prefs_keyboard@2x.png"; sourceTree = "<group>"; };
+		55BC333D2EDAC69C004035A0 /* RowHeightCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowHeightCalculator.swift; sourceTree = "<group>"; };
+		55BC333F2EDAC96F004035A0 /* TiledImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiledImageView.swift; sourceTree = "<group>"; };
+		55BC33412EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesWindowController+RowHeightDataSource.swift"; sourceTree = "<group>"; };
+		55BC33422EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesWindowController+SplitViewDelegate.swift"; sourceTree = "<group>"; };
 		55C1CBE22E8BB6A2004FE322 /* visdiff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = visdiff; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C1CBF32E8BB6AD004FE322 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
 		55C1CBF42E8BB6AD004FE322 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -1433,15 +1441,16 @@
 		55373FC42E9372DF00AB56D0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				55373FB92E9372DF00AB56D0 /* FilesTableView */,
 				55373FBA2E9372DF00AB56D0 /* FileInfoBar.swift */,
 				55373FBB2E9372DF00AB56D0 /* FilePanelView.swift */,
 				55373FBC2E9372DF00AB56D0 /* FilePanelView+File.swift */,
 				55373FBD2E9372DF00AB56D0 /* FilesScopeBar.swift */,
+				55373FB92E9372DF00AB56D0 /* FilesTableView */,
 				55373FBE2E9372DF00AB56D0 /* FileThumbnailView.swift */,
 				55373FBF2E9372DF00AB56D0 /* LineNumberTableCellView.swift */,
 				55373FC02E9372DF00AB56D0 /* LineNumberTableRowView.swift */,
 				55373FC12E9372DF00AB56D0 /* NSAlert+DirtyFiles.swift */,
+				55BC333D2EDAC69C004035A0 /* RowHeightCalculator.swift */,
 				55373FC22E9372DF00AB56D0 /* SaveFileAccessoryView.swift */,
 				55373FC32E9372DF00AB56D0 /* TextFieldVerticalCentered.swift */,
 			);
@@ -1467,9 +1476,11 @@
 				55373FD22E9372DF00AB56D0 /* FilesWindowController+NSWindowDelegate.swift */,
 				55373FD32E9372DF00AB56D0 /* FilesWindowController+PathControlDelegate.swift */,
 				55373FD42E9372DF00AB56D0 /* FilesWindowController+Read.swift */,
+				55BC33412EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift */,
 				55373FD52E9372DF00AB56D0 /* FilesWindowController+Save.swift */,
 				551DE39E2ED422820067AB18 /* FilesWindowController+SessionPreferences.swift */,
 				55373FD62E9372DF00AB56D0 /* FilesWindowController+Slider.swift */,
+				55BC33422EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift */,
 				55373FD72E9372DF00AB56D0 /* FilesWindowController+TableView.swift */,
 				55373FD82E9372DF00AB56D0 /* FilesWindowController+UICreation.swift */,
 				55373FD92E9372DF00AB56D0 /* FilesWindowController+UISetup.swift */,
@@ -2427,6 +2438,7 @@
 			children = (
 				5537412F2E9372DF00AB56D0 /* IconUtils.swift */,
 				553741302E9372DF00AB56D0 /* NoodleCustomImageRep.swift */,
+				55BC333F2EDAC96F004035A0 /* TiledImageView.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -3219,6 +3231,7 @@
 				5537419E2E9372DF00AB56D0 /* StandardButtons.swift in Sources */,
 				5537419F2E9372DF00AB56D0 /* ConfirmationsFoldersBox.swift in Sources */,
 				553741A02E9372DF00AB56D0 /* DifferenceNavigatorBox.swift in Sources */,
+				55BC33402EDAC96F004035A0 /* TiledImageView.swift in Sources */,
 				553741A12E9372DF00AB56D0 /* FolderReaderDelegate.swift in Sources */,
 				553741A22E9372DF00AB56D0 /* UDiffScriptBuilder.m in Sources */,
 				553741A32E9372DF00AB56D0 /* String+RegularExpression.swift in Sources */,
@@ -3297,6 +3310,9 @@
 				553741E72E9372DF00AB56D0 /* HistoryEntity.swift in Sources */,
 				553741E82E9372DF00AB56D0 /* CompareItem+Clone.swift in Sources */,
 				553741E92E9372DF00AB56D0 /* URL+Path.swift in Sources */,
+				55BC33432EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift in Sources */,
+				55BC33442EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift in Sources */,
+				55BC333E2EDAC69C004035A0 /* RowHeightCalculator.swift in Sources */,
 				553741EA2E9372DF00AB56D0 /* PathChooser.swift in Sources */,
 				553741EB2E9372DF00AB56D0 /* VDDocumentController.swift in Sources */,
 				553741EC2E9372DF00AB56D0 /* CopyFileOperationExecutor.swift in Sources */,

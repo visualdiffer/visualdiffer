@@ -114,4 +114,27 @@ class FilePanelView: TablePanelView<FilesTableView, FileInfoBar> {
 
         fileInfoBar.delegate = delegate
     }
+
+    /**
+     * If word wrap is enabled calling reloadData() can cause the rows to be not visible
+     * until table is resized or mouse is dragged, calling this method the rows are updated correctly
+     */
+    func reloadTreeData() {
+        guard let scrollView = treeView.enclosingScrollView else {
+            treeView.reloadData()
+            return
+        }
+
+        let savedOrigin = scrollView.documentVisibleRect.origin
+
+        let all = IndexSet(integersIn: 0 ..< treeView.numberOfRows)
+        treeView.noteHeightOfRows(withIndexesChanged: all)
+
+        treeView.reloadData()
+        treeView.layoutSubtreeIfNeeded()
+
+        treeView.scroll(savedOrigin)
+
+        treeView.setNeedsDisplay(treeView.bounds)
+    }
 }

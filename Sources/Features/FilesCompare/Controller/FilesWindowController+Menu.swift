@@ -157,6 +157,11 @@ extension FilesWindowController {
             keyEquivalent: ""
         )
         viewMenu.addItem(
+            withTitle: NSLocalizedString("Word Wrap", comment: ""),
+            action: #selector(toggleWordWrap),
+            keyEquivalent: "W"
+        )
+        viewMenu.addItem(
             withTitle: NSLocalizedString("Refresh", comment: ""),
             action: #selector(refresh),
             keyEquivalent: "r"

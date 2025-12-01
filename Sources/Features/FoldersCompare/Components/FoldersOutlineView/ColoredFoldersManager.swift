@@ -73,71 +73,71 @@ class ColoredFoldersManager: NSObject, @unchecked Sendable {
         let useSoftwareRenderer = false
 
         return [
-            "folder-000-open": maskedWithFront(maskFront.tintImage(sameColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
-            "folder-000": maskedWithFront(nil, middle: nil, back: maskFull.tintImage(sameColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-000-open": maskedWithFront(maskFront.monochromaticTint(sameColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
+            "folder-000": maskedWithFront(nil, middle: nil, back: maskFull.monochromaticTint(sameColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-001-open": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
-            "folder-001": maskedWithFront(nil, middle: nil, back: maskFull.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-001-open": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
+            "folder-001": maskedWithFront(nil, middle: nil, back: maskFull.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-010-open": maskedWithFront(maskFront.tintImage(changedColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
-            "folder-010": maskedWithFront(nil, middle: nil, back: maskFull.tintImage(changedColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-010-open": maskedWithFront(maskFront.monochromaticTint(changedColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
+            "folder-010": maskedWithFront(nil, middle: nil, back: maskFull.monochromaticTint(changedColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-080-open": maskedWithFront(maskFront.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
-            "folder-080": maskedWithFront(nil, middle: nil, back: maskFull.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-080-open": maskedWithFront(maskFront.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
+            "folder-080": maskedWithFront(nil, middle: nil, back: maskFull.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-100-open": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
-            "folder-100": maskedWithFront(nil, middle: nil, back: maskFull.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-100-open": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
+            "folder-100": maskedWithFront(nil, middle: nil, back: maskFull.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-101-open": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-101": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-101-open": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-101": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-011-open": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(changedColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-011": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(changedColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-011-open": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(changedColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-011": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(changedColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-110-open": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(changedColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-110": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(changedColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-110-open": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(changedColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-110": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(changedColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-111-open": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(changedColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-111": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(changedColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-111-open": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(changedColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-111": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(changedColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-180-open": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-180": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-180-open": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-180": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-999-open": maskedWithFront(maskFront.tintImage(filteredColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
-            "folder-999": maskedWithFront(nil, middle: nil, back: maskFull.tintImage(filteredColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-999-open": maskedWithFront(maskFront.monochromaticTint(filteredColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
+            "folder-999": maskedWithFront(nil, middle: nil, back: maskFull.monochromaticTint(filteredColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-888-open": maskedWithFront(maskFront.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
-            "folder-888": maskedWithFront(nil, middle: nil, back: maskFull.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-888-open": maskedWithFront(maskFront.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
+            "folder-888": maskedWithFront(nil, middle: nil, back: maskFull.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-020-open": maskedWithFront(maskFront.tintImage(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
-            "folder-020": maskedWithFront(nil, middle: nil, back: maskFull.tintImage(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-020-open": maskedWithFront(maskFront.monochromaticTint(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
+            "folder-020": maskedWithFront(nil, middle: nil, back: maskFull.monochromaticTint(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-030-open": maskedWithFront(maskFront.tintImage(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
-            "folder-030": maskedWithFront(nil, middle: nil, back: maskFull.tintImage(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-030-open": maskedWithFront(maskFront.monochromaticTint(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBackWhite, size: size),
+            "folder-030": maskedWithFront(nil, middle: nil, back: maskFull.monochromaticTint(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-021-open": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-021": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-021-open": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-021": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-031-open": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-031": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-031-open": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-031": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-081-open": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-081": maskedWithFront(maskFront.tintImage(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-081-open": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-081": maskedWithFront(maskFront.monochromaticTint(olderColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-120-open": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-120": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-120-open": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-120": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-130-open": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-130": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-130-open": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-130": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-121-open": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-121": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-121-open": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-121": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(mismatchingTagsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-131-open": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-131": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-131-open": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-131": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(mismatchingLabelsColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
 
-            "folder-181-open": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
-            "folder-181": maskedWithFront(maskFront.tintImage(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.tintImage(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
+            "folder-181-open": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: maskMiddle.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), back: maskBackWhite, size: size),
+            "folder-181": maskedWithFront(maskFront.monochromaticTint(orphanColor, useSoftwareRenderer: useSoftwareRenderer), middle: nil, back: maskBack.monochromaticTint(newerColor, useSoftwareRenderer: useSoftwareRenderer), size: size),
         ]
     }
 

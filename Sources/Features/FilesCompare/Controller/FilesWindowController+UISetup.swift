@@ -101,8 +101,7 @@ extension FilesWindowController {
         // invalidate the line text cache
         cachedLineTextMap.removeAllObjects()
 
-        leftView.reloadData()
-        rightView.reloadData()
+        reloadRowHeights()
 
         updateTabWidth()
 

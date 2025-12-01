@@ -121,9 +121,12 @@ extension FilesWindowController {
         swap(&leftPanelView.fileInfoBar.encoding, &rightPanelView.fileInfoBar.encoding)
         swap(&leftPanelView.fileInfoBar.eol, &rightPanelView.fileInfoBar.eol)
 
-        leftView.reloadData()
-        rightView.reloadData()
+        reloadRowHeights()
         fileThumbnail.needsDisplay = true
+    }
+
+    @objc func toggleWordWrap(_: AnyObject) {
+        setWordWrap(enabled: !rowHeightCalculator.isWordWrapEnabled)
     }
 
     // MARK: Find Methods
