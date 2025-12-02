@@ -67,8 +67,7 @@ extension FilesWindowController: @preconcurrency FilesScopeBarDelegate {
         fileThumbnail.view = leftView
         fileThumbnail.needsDisplay = true
 
-        leftView.reloadData()
-        rightView.reloadData()
+        reloadRowHeights()
 
         leftView.scrollTo(row: visibleRow, center: true)
     }

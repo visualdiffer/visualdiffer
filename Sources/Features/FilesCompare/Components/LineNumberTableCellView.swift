@@ -6,36 +6,121 @@
 //  Copyright (c) 2011 visualdiffer.com
 //
 
-private let separatorWidth: CGFloat = 1.0
-private let leftWidth: CGFloat = 10.0
-private let rightWidth: CGFloat = 10.0
-private let sectionSeparatorHeight: CGFloat = 2.0
-private let leadingTextPadding: CGFloat = 2.0
+struct LineNumberCellData {
+    let separatorWidth: CGFloat = 1.0
+    let leftWidth: CGFloat = 10.0
+    let rightWidth: CGFloat = 10.0
+    let sectionSeparatorHeight: CGFloat = 2.0
+    let leadingTextPadding: CGFloat = 2.0
+}
 
 class LineNumberTableCellView: NSTableCellView {
-    private var minLineNumberBoxWidth: CGFloat = 0.0
+    var lineNumberWidth: CGFloat = 0.0 {
+        didSet {
+            lineNumberWidthConstraint?.constant = lineNumberWidth
+        }
+    }
 
-    var diffLine: DiffLine?
+    var cellData = LineNumberCellData()
 
-    /**
-     * If present is used to print the line text instead of line.text
-     */
-    @objc var formattedText: String?
-    @objc var font: NSFont?
+    private let lineNumberTextField: NSTextField = {
+        let view = NSTextField()
+        view.isBezeled = false
+        view.drawsBackground = false
+        view.isEditable = false
+        view.isSelectable = false
+        view.alignment = .right
+        view.lineBreakMode = .byClipping
+        view.translatesAutoresizingMaskIntoConstraints = false
 
-    // Determine if the view has focus
-    var isHighlighted = false
+        return view
+    }()
 
-    @objc dynamic var isSelected: Bool = false {
+    private let contentTextField: NSTextField = {
+        let view = NSTextField(wrappingLabelWithString: "")
+        view.isBezeled = false
+        view.drawsBackground = false
+        view.isEditable = false
+        view.isSelectable = false
+        view.alignment = .left
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
+
+    private let separatorView: NSView = {
+        let view = NSView()
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let missingLineImageView: TiledImageView = {
+        let view = TiledImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+
+        return view
+    }()
+
+    private let sectionSeparatorView: NSView = {
+        let view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+
+        return view
+    }()
+
+    private var lineNumberWidthConstraint: NSLayoutConstraint?
+    private var lineNumberCenterYConstraint: NSLayoutConstraint?
+    private var lineNumberTopConstraint: NSLayoutConstraint?
+
+    var diffLine: DiffLine? {
+        didSet {
+            updateContent()
+        }
+    }
+
+    var formattedText: String? {
+        didSet {
+            updateContent()
+        }
+    }
+
+    var font: NSFont? {
+        didSet {
+            lineNumberTextField.font = font
+            contentTextField.font = font
+            updateContent()
+        }
+    }
+
+    var isWordWrapEnabled: Bool = false {
+        didSet {
+            updateWordWrapSettings()
+            updateContent()
+        }
+    }
+
+    var isHighlighted = false {
+        didSet {
+            updateColors()
+        }
+    }
+
+    dynamic var isSelected: Bool = false {
         didSet {
             if oldValue != isSelected {
-                needsDisplay = true
+                updateColors()
             }
         }
     }
 
     init() {
         super.init(frame: .zero)
+
+        setupViews()
+        setupConstraints()
     }
 
     @available(*, unavailable)
@@ -43,190 +128,152 @@ class LineNumberTableCellView: NSTableCellView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Draw status, line number
+    // MARK: - Setup
 
-    override func draw(_ dirtyRect: NSRect) {
-        guard let lineSeparatorColor = CommonPrefs.shared.fileColor(.lineNumberSeparator)?.text else {
-            super.draw(dirtyRect)
-            return
-        }
-        // use bounds instead of the possible smaller dirtyRect
-        var cellFrame = bounds
-        cellFrame = drawLineNumberSeparator(withFrame: cellFrame, lineColor: lineSeparatorColor)
-        cellFrame = drawContent(withFrame: cellFrame)
-
-        cellFrame.origin.x += minLineNumberBoxWidth + leftWidth + rightWidth
-
-        drawText(withFrame: cellFrame)
-        super.draw(dirtyRect)
-
-        if let sectionSeparatorLine = CommonPrefs.shared.fileColor(.sectionSeparatorLine)?.text {
-            drawSectionSeparatorLine(withFrame: cellFrame, sectionColor: sectionSeparatorLine)
-        }
+    private func setupViews() {
+        addSubview(lineNumberTextField)
+        addSubview(separatorView)
+        addSubview(contentTextField)
+        addSubview(missingLineImageView)
+        addSubview(sectionSeparatorView)
     }
 
-    private func drawLineNumber(_ cellFrame: NSRect) -> NSRect {
-        guard let diffLine else {
-            return cellFrame
-        }
+    private func setupConstraints() {
+        // align tyoe: center (no wrap) or top (wrap)
+        lineNumberCenterYConstraint = lineNumberTextField.centerYAnchor.constraint(equalTo: centerYAnchor)
+        lineNumberTopConstraint = lineNumberTextField.topAnchor.constraint(equalTo: topAnchor)
+        lineNumberCenterYConstraint?.isActive = true
 
-        var rect = NSRect(
-            x: cellFrame.origin.x + leftWidth,
-            y: cellFrame.origin.y,
-            width: minLineNumberBoxWidth,
-            height: cellFrame.size.height
-        )
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .right
-        paragraphStyle.lineBreakMode = .byClipping
+        lineNumberWidthConstraint = lineNumberTextField.widthAnchor.constraint(equalToConstant: lineNumberWidth)
+        lineNumberWidthConstraint?.isActive = true
 
-        var attrs: [NSAttributedString.Key: Any] = [
-            .paragraphStyle: paragraphStyle,
-            .foregroundColor: lineNumberTextColor() ?? NSColor.white,
-        ]
-        if let font {
-            attrs[.font] = font
-        }
+        NSLayoutConstraint.activate([
+            lineNumberTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: cellData.leftWidth),
+            lineNumberTextField.heightAnchor.constraint(equalTo: heightAnchor),
 
-        let lineText = String(format: "%ld", diffLine.number) as NSString
-        lineText.draw(in: rect, withAttributes: attrs)
+            separatorView.leadingAnchor.constraint(equalTo: lineNumberTextField.trailingAnchor, constant: cellData.rightWidth),
+            separatorView.topAnchor.constraint(equalTo: topAnchor),
+            separatorView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            separatorView.widthAnchor.constraint(equalToConstant: cellData.separatorWidth),
 
-        rect.origin.x += minLineNumberBoxWidth + rightWidth
+            contentTextField.leadingAnchor.constraint(equalTo: separatorView.trailingAnchor, constant: cellData.leadingTextPadding),
+            contentTextField.trailingAnchor.constraint(equalTo: trailingAnchor),
+            contentTextField.topAnchor.constraint(equalTo: topAnchor),
+            contentTextField.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-        return cellFrame
+            missingLineImageView.leadingAnchor.constraint(equalTo: separatorView.trailingAnchor),
+            missingLineImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            missingLineImageView.topAnchor.constraint(equalTo: topAnchor),
+            missingLineImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            sectionSeparatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            sectionSeparatorView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            sectionSeparatorView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            sectionSeparatorView.heightAnchor.constraint(equalToConstant: cellData.sectionSeparatorHeight),
+        ])
     }
 
-    private func highlightColor() -> NSColor? {
-        diffLine?.color(
-            for: .background,
-            isSelected: isHighlighted
-        )
-    }
+    private func updateWordWrapSettings() {
+        if isWordWrapEnabled {
+            contentTextField.cell?.wraps = true
+            contentTextField.cell?.isScrollable = false
+            contentTextField.maximumNumberOfLines = 0
+            contentTextField.lineBreakMode = .byWordWrapping
 
-    private func drawText(withFrame frame: NSRect) {
-        guard let diffLine, diffLine.number > 0 else {
-            return
-        }
-        let textColor = diffLine.color(
-            for: .text,
-            isSelected: isSelected
-        )
-        // the background of the selected row has been drawn inside LineNumberTableRowView
-        let backgroundColor = isSelected
-            ? NSColor.clear
-            : diffLine.color(
-                for: .background,
-                isSelected: false
-            )
-
-        backgroundColor.setFill()
-        frame.fill()
-
-        var textRect = frame
-        textRect.origin.x += leadingTextPadding
-
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineBreakMode = .byClipping
-
-        var attrs: [NSAttributedString.Key: Any] = [
-            .foregroundColor: textColor,
-            .backgroundColor: backgroundColor,
-            .paragraphStyle: paragraphStyle,
-        ]
-        if let font {
-            attrs[.font] = font
-        }
-
-        let lineText = (formattedText ?? diffLine.text) as NSString
-        lineText.draw(in: textRect, withAttributes: attrs)
-    }
-
-    private func drawContent(withFrame frame: NSRect) -> NSRect {
-        var cellFrame = frame
-
-        if let diffLine,
-           diffLine.number > 0 {
-            cellFrame = drawLineNumber(cellFrame)
+            lineNumberCenterYConstraint?.isActive = false
+            lineNumberTopConstraint?.isActive = true
         } else {
-            cellFrame = drawMissingLine(withFrame: cellFrame)
-        }
+            contentTextField.cell?.wraps = false
+            contentTextField.cell?.isScrollable = true
+            contentTextField.maximumNumberOfLines = 1
+            contentTextField.lineBreakMode = .byClipping
 
-        return cellFrame
+            lineNumberTopConstraint?.isActive = false
+            lineNumberCenterYConstraint?.isActive = true
+        }
     }
 
-    private func drawLineNumberSeparator(withFrame cellFrame: NSRect, lineColor: NSColor) -> NSRect {
-        // Draw line number separator vertical line
-        let rectBorder = NSRect(
-            x: cellFrame.origin.x + minLineNumberBoxWidth + leftWidth + rightWidth - separatorWidth,
-            y: cellFrame.origin.y,
-            width: separatorWidth,
-            height: cellFrame.size.height
-        )
-        lineColor.setFill()
-        rectBorder.fill()
+    // MARK: - Update Content
 
-        return cellFrame
-    }
-
-    @discardableResult
-    private func drawSectionSeparatorLine(withFrame frame: NSRect, sectionColor: NSColor) -> NSRect {
-        var cellFrame = frame
-
-        if let diffLine,
-           diffLine.isSectionSeparator {
-            cellFrame.origin.y += cellFrame.size.height - sectionSeparatorHeight
-            cellFrame.size.height = sectionSeparatorHeight
-
-            sectionColor.set()
-            cellFrame.fill()
-        }
-        return cellFrame
-    }
-
-    private func drawMissingLine(withFrame frame: NSRect) -> NSRect {
-        guard let emptyImage = NSImage(named: VDImageNameEmpty) else {
-            return frame
+    private func updateContent() {
+        guard let diffLine else {
+            hideAllContent()
+            return
         }
 
-        var rect = frame
-
-        rect.origin.x += minLineNumberBoxWidth + leftWidth + rightWidth
-
-        emptyImage.size = NSSize(width: rect.height, height: rect.height)
-        let imageWidth = emptyImage.size.width
-        let width = rect.width + rect.width / imageWidth
-
-        rect.size = emptyImage.size
-
-        while rect.origin.x < width {
-            emptyImage.draw(in: rect, from: .zero, operation: .sourceOver, fraction: 1.0)
-            rect.origin.x += imageWidth
+        if diffLine.number > 0 {
+            showLineNumberAndText()
+            lineNumberTextField.stringValue = String(format: "%ld", diffLine.number)
+            contentTextField.stringValue = formattedText ?? diffLine.text
+            updateColors()
+            updateSectionSeparator()
+        } else {
+            showMissingLineImage()
         }
-
-        return frame
     }
 
-    // MARK: - Size, font
+    private func showLineNumberAndText() {
+        lineNumberTextField.isHidden = false
+        contentTextField.isHidden = false
+        missingLineImageView.isHidden = true
+    }
 
-    private func lineNumberTextColor() -> NSColor? {
+    private func showMissingLineImage() {
+        lineNumberTextField.isHidden = true
+        contentTextField.isHidden = true
+        missingLineImageView.isHidden = false
+
+        if let emptyImage = NSImage(named: VDImageNameEmpty) {
+            let color = CommonPrefs.shared.fileColor(.missing)?.background ?? NSColor.labelColor
+            missingLineImageView.image = emptyImage.tinted(with: color)
+        }
+    }
+
+    private func hideAllContent() {
+        lineNumberTextField.isHidden = true
+        contentTextField.isHidden = true
+        missingLineImageView.isHidden = true
+        sectionSeparatorView.isHidden = true
+    }
+
+    private func updateColors() {
+        guard let diffLine else {
+            return
+        }
+
         if isSelected {
-            return diffLine?.color(
-                for: .text,
-                isSelected: isHighlighted
-            )
+            lineNumberTextField.textColor = diffLine.color(for: .text, isSelected: isHighlighted)
+        } else {
+            lineNumberTextField.textColor = CommonPrefs.shared.fileColor(.lineNumber)?.text
         }
-        return CommonPrefs.shared.fileColor(.lineNumber)?.text
+
+        let textColor = diffLine.color(for: .text, isSelected: isSelected)
+        let backgroundColor = diffLine.color(for: .background, isSelected: isSelected)
+
+        contentTextField.wantsLayer = true
+        contentTextField.textColor = textColor
+        contentTextField.layer?.backgroundColor = backgroundColor.cgColor
+
+        if let separatorColor = CommonPrefs.shared.fileColor(.lineNumberSeparator)?.text {
+            separatorView.wantsLayer = true
+            separatorView.layer?.backgroundColor = separatorColor.cgColor
+        }
     }
 
-    @objc func setMinBoxWidthByLineCount(_ count: Int) {
-        var attributes = [NSAttributedString.Key: Any]()
-
-        if let font {
-            attributes[.font] = font
+    private func updateSectionSeparator() {
+        guard let diffLine else {
+            sectionSeparatorView.isHidden = true
+            return
         }
 
-        let str = String(format: "%lld", max(count, 100)) as NSString
-        minLineNumberBoxWidth = str.size(withAttributes: attributes).width
+        if diffLine.isSectionSeparator,
+           let sectionColor = CommonPrefs.shared.fileColor(.sectionSeparatorLine)?.text {
+            sectionSeparatorView.isHidden = false
+            sectionSeparatorView.wantsLayer = true
+            sectionSeparatorView.layer?.backgroundColor = sectionColor.cgColor
+        } else {
+            sectionSeparatorView.isHidden = true
+        }
     }
 
     /**

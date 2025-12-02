@@ -16,6 +16,7 @@ extension NSToolbarItem.Identifier {
         static let openWith = NSToolbarItem.Identifier("OpenWith")
         static let showInFinder = NSToolbarItem.Identifier("ShowInFinder")
         static let sessionPreferences = NSToolbarItem.Identifier("SessionPreferences")
+        static let wordWrap = NSToolbarItem.Identifier("WordWrap")
     }
 }
 
@@ -50,6 +51,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             .Files.prevDifferenceFiles,
             .Files.openWith,
             .Files.showInFinder,
+            .Files.wordWrap,
             .Files.sessionPreferences,
         ]
     }
@@ -150,6 +152,15 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 target: self,
                 action: #selector(openSessionSettingsSheet)
             )
+        } else if itemIdentifier == .Files.wordWrap {
+            return NSToolbarItem(
+                identifier: itemIdentifier,
+                label: NSLocalizedString("Word Wrap", comment: ""),
+                tooltip: NSLocalizedString("Word Wrap", comment: ""),
+                image: NSImage(named: VDImageNameWordWrapOff),
+                target: self,
+                action: #selector(toggleWordWrap)
+            )
         }
 
         return nil
@@ -196,6 +207,10 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
     }
 
     @MainActor func updateToolbarButton(_ item: NSToolbarItem) {
+        if item.itemIdentifier == .Files.wordWrap {
+            item.image = NSImage(named: rowHeightCalculator.isWordWrapEnabled ? VDImageNameWordWrapOn : VDImageNameWordWrapOff)
+            return
+        }
         switch lastUsedView.side {
         case .left:
             if item.itemIdentifier == .Files.copyLines {
@@ -205,6 +220,15 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             if item.itemIdentifier == .Files.copyLines {
                 item.image = NSImage(named: VDImageNameCopyLinesLeft)
             }
+        }
+    }
+
+    @MainActor func updateToolbar() {
+        guard let items = window?.toolbar?.visibleItems else {
+            return
+        }
+        for item in items {
+            updateToolbarButton(item)
         }
     }
 }

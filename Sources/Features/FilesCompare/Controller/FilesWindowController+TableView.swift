@@ -14,6 +14,10 @@
         (tableView as? FilesTableView)?.diffSide?.lines.count ?? 0
     }
 
+    func tableView(_: NSTableView, heightOfRow row: Int) -> CGFloat {
+        rowHeightCalculator.height(for: row)
+    }
+
     public func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let filesTableView = tableView as? FilesTableView,
               let identifier = tableColumn?.identifier,
@@ -29,7 +33,8 @@
         view.font = treeViewFont()
         view.isSelected = tableView.isRowSelected(row)
         view.formattedText = formattedText(diffLine)
-        view.setMinBoxWidthByLineCount(diffSide.lines.count)
+        view.isWordWrapEnabled = rowHeightCalculator.isWordWrapEnabled
+        view.lineNumberWidth = lineNumberWidth
 
         return view
     }
@@ -163,12 +168,7 @@
     func setLastUsedViewResponder(_ view: FilesTableView) {
         lastUsedView = view
 
-        guard let items = window?.toolbar?.visibleItems else {
-            return
-        }
-        for item in items {
-            updateToolbarButton(item)
-        }
+        updateToolbar()
     }
 
     func filesTableView(_: FilesTableView, doubleClick _: Int) {
@@ -181,6 +181,9 @@
     }
 
     func filesTableView(_: FilesTableView, scrollHorizontally leftScroll: Bool) {
+        if rowHeightCalculator.isWordWrapEnabled {
+            return
+        }
         let columnSlider = leftPanelView.columnSlider
 
         columnSlider.doubleValue += leftScroll ? -1 : 1

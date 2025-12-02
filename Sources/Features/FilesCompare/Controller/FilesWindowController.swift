@@ -7,6 +7,10 @@
 //
 
 class FilesWindowController: NSWindowController {
+    var lineNumberWidth: CGFloat = 0
+
+    var rowHeightCalculator = RowHeightCalculator()
+
     // swiftlint:disable:next implicitly_unwrapped_optional
     @objc var sessionDiff: SessionDiff!
 
@@ -108,6 +112,11 @@ class FilesWindowController: NSWindowController {
         shouldCascadeWindows = false
 
         initAllViews()
+
+        filePanels.delegate = self
+
+        setupHeightSynchronizer()
+        setWordWrap(enabled: false)
     }
 
     func setup(

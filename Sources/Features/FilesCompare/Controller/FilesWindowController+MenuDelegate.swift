@@ -107,6 +107,9 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
         } else if action == #selector(previousDifferenceFiles)
             || action == #selector(nextDifferenceFiles) {
             return (document as? VDDocument)?.parentSession != nil
+        } else if action == #selector(toggleWordWrap) {
+            item.state = rowHeightCalculator.isWordWrapEnabled ? .on : .off
+            return true
         }
         return true
     }

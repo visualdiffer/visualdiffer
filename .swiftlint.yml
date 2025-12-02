@@ -62,11 +62,14 @@ disabled_rules:
   - orphaned_doc_comment
 
 identifier_name:
+  allowed_symbols: [_]
   excluded:
     - i
     - l
     - r
     - p
+    - x
+    - y
     - ch
     - fm
     - li

@@ -51,6 +51,10 @@ class FilesTableView: NSTableView, @preconcurrency DisplayPositionable, ViewLink
     }
 
     private func setupViews() {
+        style = .plain
+        rowSizeStyle = .custom
+        usesAutomaticRowHeights = false
+
         allowsEmptySelection = true
         allowsColumnReordering = false
         allowsColumnResizing = true
@@ -60,7 +64,6 @@ class FilesTableView: NSTableView, @preconcurrency DisplayPositionable, ViewLink
 
         focusRingType = .none
         allowsExpansionToolTips = true
-        columnAutoresizingStyle = .lastColumnOnlyAutoresizingStyle
         autosaveTableColumns = false
         intercellSpacing = .zero
 
@@ -70,6 +73,7 @@ class FilesTableView: NSTableView, @preconcurrency DisplayPositionable, ViewLink
         setDraggingSourceOperationMask(.every, forLocal: false)
 
         let column = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("cellLineText"))
+        column.resizingMask = .autoresizingMask
 
         addTableColumn(column)
         headerView = nil

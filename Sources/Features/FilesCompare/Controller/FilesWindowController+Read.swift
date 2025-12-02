@@ -75,6 +75,8 @@
         if moveToFirstDifference {
             moveToDifference(true, showAnim: false)
         }
+
+        reloadRowHeights()
     }
 
     func showError(_ error: NSError) {

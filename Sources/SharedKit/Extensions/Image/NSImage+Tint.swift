@@ -16,9 +16,9 @@ public extension NSImage {
     // https://developer.apple.com/devcenter/download.action?path=/videos/wwdc_2011__hd/session_422__using_core_image_on_ios_and_mac_os_x.m4v
     // https://docs.huihoo.com/apple/wwdc/2011/session_422__using_core_image_on_ios_and_mac_os_x.pdf
     /**
-     * Apply the tint color to image
+     * Apply the tint color to image using monochrome filter
      */
-    func tintImage(
+    func monochromaticTint(
         _ tint: NSColor?,
         useSoftwareRenderer: Bool
     ) -> NSImage {
@@ -104,5 +104,20 @@ public extension NSImage {
         compositingFilter.setValue(monochromeFilter.value(forKey: kCIOutputImageKey), forKey: kCIInputBackgroundImageKey)
 
         return compositingFilter
+    }
+
+    /**
+     * Apply the tint color to image
+     */
+    func tinted(with color: NSColor) -> NSImage {
+        guard let image = copy() as? NSImage else {
+            return self
+        }
+        image.lockFocus()
+        color.set()
+        let imageRect = NSRect(origin: .zero, size: image.size)
+        imageRect.fill(using: .sourceAtop)
+        image.unlockFocus()
+        return image
     }
 }

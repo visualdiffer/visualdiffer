@@ -94,13 +94,13 @@
             },
 
         "same": {
-            "textColor":"textForeground",
-            "backgroundColor":"textBackground"
+            "textColor":"#FFFFFF",
+            "backgroundColor":"#00000000"
         },
 
         "missing": {
             "textColor": "#555555",
-            "backgroundColor":"#555555"
+            "backgroundColor":"#FFFFFF"
         },
 
         "merged": {
