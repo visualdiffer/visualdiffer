@@ -11,6 +11,9 @@ class DiffResult {
         let rawValue: Int
 
         static let compareLineEndings = Options(rawValue: 1 << 0)
+        static let ignoreLeadingWhitespaces = Options(rawValue: 1 << 1)
+        static let ignoreTrailingWhitespaces = Options(rawValue: 1 << 2)
+        static let ignoreInternalWhitespaces = Options(rawValue: 1 << 3)
     }
 
     private(set) var leftSide = DiffSide()
@@ -39,10 +42,8 @@ class DiffResult {
         rightSide.eol = rightLines.detectEOL()
 
         // swiftlint:disable force_cast
-        let stringifier: (Any) -> String = options.contains(.compareLineEndings) ? {
-            ($0 as! DiffLineComponent).withEol
-        } : {
-            ($0 as! DiffLineComponent).text
+        let stringifier: (Any) -> String = {
+            options.applyTransformations(component: $0 as! DiffLineComponent)
         }
         // swiftlint:enable force_cast
 

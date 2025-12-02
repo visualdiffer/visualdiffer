@@ -9,7 +9,10 @@
 extension TextPreferencesPanel: @preconcurrency PreferencesBoxDataSource {
     func preferenceBox(_: PreferencesBox, boolForKey key: CommonPrefs.Name) -> Bool {
         switch key {
-        case .compareLineEndings:
+        case .compareLineEndings,
+             .ignoreLeadingWhitespaces,
+             .ignoreTrailingWhitespaces,
+             .ignoreInternalWhitespaces:
             CommonPrefs.shared.bool(forKey: key)
         default:
             fatalError("key \(key) not handled")
@@ -18,7 +21,10 @@ extension TextPreferencesPanel: @preconcurrency PreferencesBoxDataSource {
 
     func preferenceBox(_: PreferencesBox, setBool value: Bool, forKey key: CommonPrefs.Name) {
         switch key {
-        case .compareLineEndings:
+        case .compareLineEndings,
+             .ignoreLeadingWhitespaces,
+             .ignoreTrailingWhitespaces,
+             .ignoreInternalWhitespaces:
             CommonPrefs.shared.set(value, forKey: key)
         default:
             fatalError("key \(key) not handled")

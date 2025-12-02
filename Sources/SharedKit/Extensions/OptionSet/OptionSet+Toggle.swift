@@ -15,4 +15,12 @@ extension OptionSet {
     mutating func toggle(_ member: Self) {
         formSymmetricDifference(member)
     }
+
+    mutating func setValue(_ newValue: Bool, element: Self.Element) {
+        if newValue {
+            insert(element)
+        } else {
+            remove(element)
+        }
+    }
 }

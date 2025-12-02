@@ -11,21 +11,23 @@ struct FilePreferences {
 }
 
 extension FilePreferences {
-    var compareLineEndings: Bool {
-        get {
-            diffResultOptions.contains(.compareLineEndings)
-        }
+    mutating func fromUserDefaults() {
+        let options: [(CommonPrefs.Name, DiffResult.Options)] = [
+            (.compareLineEndings, .compareLineEndings),
+            (.ignoreLeadingWhitespaces, .ignoreLeadingWhitespaces),
+            (.ignoreTrailingWhitespaces, .ignoreTrailingWhitespaces),
+            (.ignoreInternalWhitespaces, .ignoreInternalWhitespaces),
+        ]
 
-        set {
-            if newValue {
-                diffResultOptions.insert(.compareLineEndings)
-            } else {
-                diffResultOptions.remove(.compareLineEndings)
-            }
+        for (prefName, option) in options {
+            diffResultOptions.setValue(CommonPrefs.shared.bool(forKey: prefName), element: option)
         }
     }
 }
 
 extension CommonPrefs.Name {
     static let compareLineEndings = CommonPrefs.Name(rawValue: "compareLineEndings")
+    static let ignoreLeadingWhitespaces = CommonPrefs.Name(rawValue: "ignoreLeadingWhitespaces")
+    static let ignoreTrailingWhitespaces = CommonPrefs.Name(rawValue: "ignoreTrailingWhitespaces")
+    static let ignoreInternalWhitespaces = CommonPrefs.Name(rawValue: "ignoreInternalWhitespaces")
 }

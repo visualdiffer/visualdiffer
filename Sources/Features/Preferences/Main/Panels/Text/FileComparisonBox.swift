@@ -7,28 +7,32 @@
 //
 
 class FileComparisonBox: PreferencesBox {
-    private lazy var compareLineEndingsCheckButton: PreferencesCheckbox = {
-        let view = PreferencesCheckbox(
-            title: NSLocalizedString("Compare Line Endings (DOS/Mac)", comment: ""),
-            prefName: .compareLineEndings
-        )
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        return view
-    }()
-
-    private lazy var stackView: NSStackView = .preferences(with: [
-        compareLineEndingsCheckButton,
-    ])
+    private let stackView: NSStackView
 
     override init(title: String) {
+        stackView = NSStackView.preferencesStackView()
+
         super.init(title: title)
 
         setupViews()
     }
 
     private func setupViews() {
-        setupCheckBox(compareLineEndingsCheckButton)
+        let checkboxes: [(String, CommonPrefs.Name)] = [
+            (NSLocalizedString("Compare Line Endings (DOS/Mac)", comment: ""), .compareLineEndings),
+            (NSLocalizedString("Ignore Leading white space", comment: ""), .ignoreLeadingWhitespaces),
+            (NSLocalizedString("Ignore Trailing white space", comment: ""), .ignoreTrailingWhitespaces),
+            (NSLocalizedString("Ignore Internal white space", comment: ""), .ignoreInternalWhitespaces),
+        ]
+
+        for (title, prefName) in checkboxes {
+            let view = PreferencesCheckbox(title: title, prefName: prefName)
+            view.translatesAutoresizingMaskIntoConstraints = false
+
+            setupCheckBox(view)
+
+            stackView.addArrangedSubview(view)
+        }
 
         contentView?.addSubview(stackView)
 

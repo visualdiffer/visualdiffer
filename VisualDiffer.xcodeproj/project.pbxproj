@@ -497,6 +497,8 @@
 		55ECD8621476B03400D8BEB4 /* prefs_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 55ECD8611476B03400D8BEB4 /* prefs_text.png */; };
 		55F6B0631AEA93E30096E55E /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0611AEA93E30096E55E /* Localizable.stringsdict */; };
 		55F6B0661AEA99680096E55E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0641AEA99680096E55E /* Localizable.strings */; };
+		55F9E79A2EDD5DBD001218C7 /* DiffResult.Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */; };
+		55F9E79C2EDD6221001218C7 /* WhitespacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */; };
 		55FD7E28180C484500CF473C /* prefs_folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FD7E25180C484500CF473C /* prefs_folder@2x.png */; };
 		775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
@@ -1074,6 +1076,8 @@
 		55ECD8611476B03400D8BEB4 /* prefs_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_text.png; sourceTree = "<group>"; };
 		55ECD8671476B34600D8BEB4 /* VisualDiffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VisualDiffer.entitlements; sourceTree = "<group>"; };
 		55F013FC27A90C46003EA2D4 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
+		55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResult.Options.swift; sourceTree = "<group>"; };
+		55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhitespacesTests.swift; sourceTree = "<group>"; };
 		55FC15F22557CD000075E30D /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		55FD7E25180C484500CF473C /* prefs_folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prefs_folder@2x.png"; sourceTree = "<group>"; };
 		7788DA0506752A1600599AAD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -2694,6 +2698,7 @@
 				554B4A432E9B7B8F0023AAF0 /* DiffLine.swift */,
 				557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */,
 				554B4A3B2E9B7B8F0023AAF0 /* DiffResult.swift */,
+				55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */,
 				554B4A3D2E9B7B8F0023AAF0 /* DiffResult+Dump.swift */,
 				554B4A3E2E9B7B8F0023AAF0 /* DiffResult+Lines.swift */,
 				554B4A3F2E9B7B8F0023AAF0 /* DiffResult+Section.swift */,
@@ -2766,6 +2771,7 @@
 			isa = PBXGroup;
 			children = (
 				55A4DF312E9A49A700ED11BB /* EndOfLineTests.swift */,
+				55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */,
 				55B1CE2C2E9934F800426FEC /* DiffResultTests.swift */,
 			);
 			path = Tests;
@@ -3157,6 +3163,7 @@
 				55DF3DEA2E924BB10044CC0C /* MockFileOperationManagerDelegate.swift in Sources */,
 				55DF3DEB2E924BB10044CC0C /* LabelsMoveTests.swift in Sources */,
 				5595902B2EABB15F00B5AB0B /* MockItemComparatorDelegate.swift in Sources */,
+				55F9E79C2EDD6221001218C7 /* WhitespacesTests.swift in Sources */,
 				55DF3DEC2E924BB10044CC0C /* MoveFilesTests.swift in Sources */,
 				55DF3DED2E924BB10044CC0C /* TagsCreateTests.swift in Sources */,
 				55DF3DEE2E924BB10044CC0C /* LabelsCopyTests.swift in Sources */,
@@ -3244,6 +3251,7 @@
 				553741B72E9372DF00AB56D0 /* PreferencesCheckbox.swift in Sources */,
 				553741B82E9372DF00AB56D0 /* FileManager+Attributes.swift in Sources */,
 				553741B92E9372DF00AB56D0 /* MainThreadFolderReaderDelegateBridge.swift in Sources */,
+				55F9E79A2EDD5DBD001218C7 /* DiffResult.Options.swift in Sources */,
 				553741BA2E9372DF00AB56D0 /* VisibleWhitespaces.swift in Sources */,
 				553741BB2E9372DF00AB56D0 /* DisplayPositionable.swift in Sources */,
 				553741BC2E9372DF00AB56D0 /* AlignRuleWindow.swift in Sources */,

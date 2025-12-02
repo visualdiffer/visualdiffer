@@ -10,7 +10,13 @@ extension FileSessionPreferencesWindow: @preconcurrency PreferencesBoxDataSource
     func preferenceBox(_: PreferencesBox, boolForKey key: CommonPrefs.Name) -> Bool {
         switch key {
         case .compareLineEndings:
-            preferences.compareLineEndings
+            preferences.diffResultOptions.contains(.compareLineEndings)
+        case .ignoreLeadingWhitespaces:
+            preferences.diffResultOptions.contains(.ignoreLeadingWhitespaces)
+        case .ignoreTrailingWhitespaces:
+            preferences.diffResultOptions.contains(.ignoreTrailingWhitespaces)
+        case .ignoreInternalWhitespaces:
+            preferences.diffResultOptions.contains(.ignoreInternalWhitespaces)
         default:
             false
         }
@@ -19,7 +25,13 @@ extension FileSessionPreferencesWindow: @preconcurrency PreferencesBoxDataSource
     func preferenceBox(_: PreferencesBox, setBool value: Bool, forKey key: CommonPrefs.Name) {
         switch key {
         case .compareLineEndings:
-            preferences.compareLineEndings = value
+            preferences.diffResultOptions.setValue(value, element: .compareLineEndings)
+        case .ignoreLeadingWhitespaces:
+            preferences.diffResultOptions.setValue(value, element: .ignoreLeadingWhitespaces)
+        case .ignoreTrailingWhitespaces:
+            preferences.diffResultOptions.setValue(value, element: .ignoreTrailingWhitespaces)
+        case .ignoreInternalWhitespaces:
+            preferences.diffResultOptions.setValue(value, element: .ignoreInternalWhitespaces)
         default:
             fatalError("key \(key) not handled")
         }

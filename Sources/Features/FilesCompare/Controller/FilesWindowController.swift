@@ -121,7 +121,7 @@ class FilesWindowController: NSWindowController {
     }
 
     func setupPreferences() {
-        preferences.compareLineEndings = CommonPrefs.shared.bool(forKey: .compareLineEndings)
+        preferences.fromUserDefaults()
     }
 
     @available(*, unavailable)
