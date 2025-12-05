@@ -72,8 +72,12 @@ extension FilesWindowController: RowHeightDataSource {
     func setWordWrap(enabled: Bool) {
         rowHeightCalculator.isWordWrapEnabled = enabled
 
+        let row = lastUsedView.firstVisibleRow
+
         leftPanelView.reloadTreeData()
         rightPanelView.reloadTreeData()
+
+        lastUsedView.scrollTo(row: row, center: false)
 
         leftPanelView.columnSlider.isHidden = enabled
         leftPanelView.columnSlider.doubleValue = 0

@@ -80,9 +80,14 @@ private let verticalPadding: CGFloat = 4.0
             options: [.usesLineFragmentOrigin, .usesFontLeading]
         )
 
-        let calculatedHeight = ceil(rect.height) + verticalPadding + font.pointSize
+        let textHeight = ceil(rect.height)
 
-        return max(calculatedHeight, minimumHeight(of: font))
+        // do not add extra height to non-wrapped text
+        if textHeight < minHeight {
+            return minimumHeight(of: font)
+        }
+
+        return textHeight + verticalPadding + font.pointSize
     }
 
     private func calculateRowHeight(_ row: Int) -> CGFloat {
