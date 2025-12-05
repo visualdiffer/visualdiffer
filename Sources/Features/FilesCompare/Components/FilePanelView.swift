@@ -130,7 +130,7 @@ class FilePanelView: TablePanelView<FilesTableView, FileInfoBar> {
         let all = IndexSet(integersIn: 0 ..< treeView.numberOfRows)
         treeView.noteHeightOfRows(withIndexesChanged: all)
 
-        treeView.reloadData()
+        treeView.reloadData(restoreSelection: true)
         treeView.layoutSubtreeIfNeeded()
 
         treeView.scroll(savedOrigin)
