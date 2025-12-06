@@ -22,6 +22,8 @@ class FontPreferencesPanel: NSView, NSFontChanging, PreferencesPanelDataSource {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
+        NSFontManager.shared.target = self
+
         setupViews()
     }
 
