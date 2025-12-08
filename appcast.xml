@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+    <channel>
+        <title>VisualDiffer</title>
+        <description>VisualDiffer</description>
+        <language>en</language>
+        <item>
+            <title>Version 2.0.1-alpha.5</title>
+            <description>
+                <![CDATA[
+                <h1 id="v201-alpha5">v2.0.1-alpha.5</h1>
+
+<h3 id="features">🚀 Features</h3>
+
+<ul>
+  <li>Allow to wrap text in File Comparison (added toolbar button and menu item)
+    <ul>
+      <li>restore selection</li>
+      <li>preserve view position</li>
+    </ul>
+  </li>
+  <li>
+    <p>Ignore white space differences in file comparison</p>
+  </li>
+  <li>File Compare: <a href="https://bugs.visualdiffer.com/view.php?id=377">0000377: Line ending differences are not detected</a>
+    <ul>
+      <li>Added flag to set “compare line endings” at application and session UI level from Preferences and Session Preferences</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="bug-fixes">🐛 Bug Fixes</h3>
+
+<ul>
+  <li>The fonts are not updated</li>
+</ul>
+
+                ]]>
+            </description>
+            <pubDate>Sun, 7 December 2025 00:00:00 +0100</pubDate>
+            <sparkle:version>2.0.1-alpha.5</sparkle:version>
+            <sparkle:shortVersionString>2.0.1-alpha.5</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
+            <enclosure 
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.0.1-alpha.5/VisualDiffer-2.0.1-alpha.5.zip"
+                type="application/octet-stream"
+                sparkle:edSignature="b1SVx6rS91842cWElqrIMsYjuyuKS4EBGaN++YMjqFECijrMbySjAb5heM/SSG9NR8Z6byf7Ww9OuRhbslUkCw==" length="5474035"
+
+            />
+        </item>
+    </channel>
+</rss>
