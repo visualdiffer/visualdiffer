@@ -45,11 +45,11 @@ For more information, visit the [VisualDiffer Wiki](https://wiki.visualdiffer.co
 
 > [!NOTE]
 > The installed application:
-> - is not notarized
+> 
+> - is notarized
 > - is sandboxed
 > 
-> **Notarization** is Apple's automated security check for macOS apps. When the application is launched the warning "unidentified developer" may appear.
-> To bypass this block, please following the steps described [here](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac)
+> **Notarization** is Apple's automated security check for macOS apps.
 > 
 > **Sandboxing** restricts what an app can access on your Mac, for example the application can only access files/folders the user explicitly grants access to.
 
