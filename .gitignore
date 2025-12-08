@@ -30,4 +30,11 @@ xcuserdata/
 # Files containing "*.local*" will not be committed
 *.local*
 
+# Fastlane
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+fastlane/report.xml
+fastlane/README.md
+
 notes.txt

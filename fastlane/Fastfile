@@ -1,0 +1,160 @@
+fastlane_version "2.229.0"
+
+default_platform(:mac)
+
+require 'kramdown'
+require 'time'
+require 'tmpdir'
+
+platform :mac do
+  before_all do
+
+    ENV["LC_ALL"] = "en_US.UTF-8"
+    ENV["LANG"] = "en_US.UTF-8"
+    ENV["PROJECT_ROOT"] = File.expand_path("..", __dir__)
+
+    # derived variables
+    ENV["APP_PATH"] = File.join(ENV["PROJECT_ROOT"], ENV['EXPORT_PATH'], "#{ENV['APP_NAME']}.app")
+    ENV["APP_VERSION"] = get_version_number(xcodeproj: ENV["PROJECT_PATH"], target: ENV["TARGET"])
+    ENV["ZIP_NAME"] = "#{ENV['APP_NAME']}-#{ENV["APP_VERSION"]}.zip"
+    ENV["ZIP_PATH"] = File.join(ENV["PROJECT_ROOT"], ENV["EXPORT_PATH"], ENV['ZIP_NAME'])
+
+    UI.message("🏗️ Environment loaded: #{ENV['FASTLANE_ENVIRONMENT'] || 'default'}")
+  end
+
+  desc "Create release, build project and create the zip file"
+  lane :release do
+    build_archive_app
+    verify_codesign
+
+    notarize_app if ENV["NOTARIZE_ENABLED"] == "true"
+    zip_app
+    mk_github_rel if ENV["GITHUB_ENABLED"] == "true"
+    UI.success("🎉 Release completed")
+  end
+
+
+  lane :sparkle do
+    sign_update_signature = sh("#{ENV["SPARKLE_BIN_HOME"]}/sign_update #{ENV["ZIP_PATH"]} -f #{ENV["SPARKLE_PRIVATE_KEY_PATH"]}")
+    zip_url = ENV["SPARKLE_ZIP_ROOT_URL"]
+      .gsub("$app_version$", ENV["APP_VERSION"])
+      .gsub("$zip_name$", ENV["ZIP_NAME"])
+    note_file_name = File.join(ENV["BUILD_PATH"], ENV["RELEASE_NOTE_PATH"], ENV["APP_VERSION"])
+    notes_full_path = File.join(ENV["PROJECT_ROOT"], "#{note_file_name}.md")
+    relnotes_html = Kramdown::Document.new(File.read(notes_full_path)).to_html
+
+    properties = {
+      'app_version' => ENV["APP_VERSION"],
+      'relnotes_html' => relnotes_html,
+      'pub_date' => Time.now.strftime("%a, %-d %B %Y 00:00:00 %z"),
+      'zip_url' => zip_url,
+      'sign_update_signature' => sign_update_signature,
+    }
+    appcast_text = File.read(File.expand_path(ENV['SPARKLE_APPCAST_TEMPLATE_PATH']))
+
+    properties.each_pair { |k, v| appcast_text.gsub!("$#{k}$", v) }
+
+    output_appcast_path = File.expand_path(ENV["SPARKLE_APPCAST_UPDATED_PATH"])
+    File.write(output_appcast_path, appcast_text)
+
+    upload_appcast
+  end
+
+  private_lane :build_archive_app do
+    UI.header("🧱 Build & Archive")
+    clean_build_artifacts
+    gym(
+      project: ENV["PROJECT_PATH"],
+      scheme: ENV["SCHEME"],
+      archive_path: ENV["ARCHIVE_PATH"],
+      export_method: "developer-id",
+      export_options: {
+        signingStyle: "manual",
+        signingCertificate: "Developer ID Application",
+        teamID: ENV["TEAM_ID"]
+      },
+      output_directory: ENV["EXPORT_PATH"]
+    )
+  end
+
+  private_lane :verify_codesign do
+    UI.header("🔏 Verify sign")
+    result = sh("codesign --verify --deep --strict --verbose=2 '#{ENV["APP_PATH"]}'", log: true)
+    if result.include?('satisfies its Designated Requirement')
+      UI.success("✅ Sign is valid")
+    else
+      UI.user_error!("Cosign output does not contain 'satisfies its Designated Requirement'")
+    end
+  end
+
+  private_lane :zip_app do
+    UI.header("📦 Build ZIP")
+    sh("ditto -c -k --sequesterRsrc --keepParent #{ENV["APP_PATH"]} #{ENV["ZIP_PATH"]}")
+    UI.message("✅ ZIP created: #{ENV["ZIP_PATH"]}")
+  end
+
+  private_lane :notarize_app do
+    UI.header("🧾 Notarization")
+
+    key_filepath = File.expand_path(ENV['NOTARIZE_API_KEY_PATH'])
+
+    api_key = app_store_connect_api_key(
+      key_id: ENV['NOTARIZE_API_KEY_ID'],
+      issuer_id: ENV['NOTARIZE_API_ISSUER_ID'],
+      key_filepath: key_filepath
+    )
+    
+    notarize(
+      package: ENV["APP_PATH"],
+      api_key: api_key,
+      use_notarytool: true,
+      try_early_stapling: true
+    )
+    UI.success("✅ App notarized and stapled")
+  end
+
+  private_lane :upload_appcast do
+    output_appcast_path = File.expand_path(ENV["SPARKLE_APPCAST_UPDATED_PATH"])
+
+    Dir.mktmpdir do |temp_dir|
+      sh("git worktree add -B gh-pages #{temp_dir} origin/gh-pages")
+      sh("cp #{output_appcast_path} #{temp_dir}/")
+
+      Dir.chdir(temp_dir) do
+        repo_clean = sh("git status --porcelain").empty?
+    
+        if repo_clean
+          UI.success("✅ No appcast modified, working tree clean.")
+        else
+          sh("git add appcast.xml")
+          sh("git commit -m 'Update appcast for #{ENV["APP_VERSION"]}'")
+          sh("git push origin gh-pages")
+        end
+      end
+    end
+    # use prune because git worktree remove <<dir>> deletes the directory
+    # and Dir.mktmpdir fails removing it itself
+    sh("git worktree prune")
+  end  
+
+  desc "Create and upload release to GitHub"
+  lane :github do
+    UI.header("🚀 GitHub distribution")
+    note_file_name = File.join(ENV["BUILD_PATH"], ENV["RELEASE_NOTE_PATH"], ENV["APP_VERSION"])
+    notes_full_path = File.join(ENV["PROJECT_ROOT"], "#{note_file_name}.md")
+    UI.user_error!("Unable to find #{note_file_name}") unless File.exist?(notes_full_path)
+    notes = File.read(notes_full_path)
+
+    result = set_github_release(
+      repository_name: ENV["GITHUB_REPO"],
+      api_token: ENV["GITHUB_API_TOKEN"],
+      tag_name: "v#{ENV["APP_VERSION"]}",
+      name: "#{ENV['APP_NAME']} v#{ENV["APP_VERSION"]}",
+      description: notes,
+      is_prerelease: (ENV["APP_VERSION"] =~ /(alpha|beta|rc)/i).to_i > 0,
+      upload_assets: [ENV["ZIP_PATH"]]
+    )
+
+    UI.success("✅ GitHub release completed")
+  end
+end
