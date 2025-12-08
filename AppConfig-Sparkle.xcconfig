@@ -1,0 +1,15 @@
+//
+//  AppConfig-Sparkle.xcconfig
+//  VisualDiffer
+//
+//  Created by davide ficano on 04/12/25.
+//  Copyright (c) 2025 visualdiffer.com
+//
+
+#include "AppConfig.xcconfig"
+
+SWIFT_ACTIVE_COMPILATION_CONDITIONS[config=Sparkle] = SPARKLE_ENABLED
+
+INFOPLIST_FILE[config=Sparkle] = ./VisualDiffer-Sparkle-Info.plist
+CODE_SIGN_ENTITLEMENTS[config=Sparkle] = ./VisualDiffer-Sparkle.entitlements
+

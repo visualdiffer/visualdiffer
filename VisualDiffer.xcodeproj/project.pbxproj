@@ -458,10 +458,12 @@
 		55BC33402EDAC96F004035A0 /* TiledImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC333F2EDAC96F004035A0 /* TiledImageView.swift */; };
 		55BC33432EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC33412EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift */; };
 		55BC33442EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC33422EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift */; };
+		55C165622EE444050082A24C /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 55C165612EE444050082A24C /* Sparkle */; };
 		55C1CBFD2E8BB6AD004FE322 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1CBF42E8BB6AD004FE322 /* main.swift */; };
 		55C1CC012E8BB755004FE322 /* visdiff in Copy Visdiff to Helpers */ = {isa = PBXBuildFile; fileRef = 55C1CBE22E8BB6A2004FE322 /* visdiff */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55C1CC072E8BBD85004FE322 /* DocumentWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1CC062E8BBAD1004FE322 /* DocumentWaiter.swift */; };
 		55C84A712DA93ADB00BA39DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C84A702DA93ADB00BA39DA /* UserNotifications.framework */; };
+		55D71FD62EE584B7007E0FA0 /* AppUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D71FD52EE584B7007E0FA0 /* AppUpdater.swift */; };
 		55DF3DD22E924BB10044CC0C /* BaseTests+FileSystemOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DF3DC52E924BB10044CC0C /* BaseTests+FileSystemOperations.swift */; };
 		55DF3DD32E924BB10044CC0C /* FiltersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DF3DBF2E924BB10044CC0C /* FiltersTests.swift */; };
 		55DF3DD42E924BB10044CC0C /* LeafPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DF3DC82E924BB10044CC0C /* LeafPathTests.swift */; };
@@ -536,6 +538,16 @@
 				55C1CC012E8BB755004FE322 /* visdiff in Copy Visdiff to Helpers */,
 			);
 			name = "Copy Visdiff to Helpers";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55943C852EE43E3800DE513B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		55C1CBE02E8BB6A2004FE322 /* CopyFiles */ = {
@@ -1043,6 +1055,10 @@
 		55C1CC062E8BBAD1004FE322 /* DocumentWaiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentWaiter.swift; sourceTree = "<group>"; };
 		55C84A702DA93ADB00BA39DA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		55D26E84140E2EAD00646F50 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		55D71FD52EE584B7007E0FA0 /* AppUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdater.swift; sourceTree = "<group>"; };
+		55D71FD72EE584FF007E0FA0 /* AppConfig-Sparkle.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AppConfig-Sparkle.xcconfig"; sourceTree = "<group>"; };
+		55D71FD82EE584FF007E0FA0 /* VisualDiffer-Sparkle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "VisualDiffer-Sparkle.entitlements"; sourceTree = "<group>"; };
+		55D71FD92EE584FF007E0FA0 /* VisualDiffer-Sparkle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VisualDiffer-Sparkle-Info.plist"; sourceTree = "<group>"; };
 		55DF3DA92E924BB10044CC0C /* BaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTests.swift; sourceTree = "<group>"; };
 		55DF3DAA2E924BB10044CC0C /* BaseTests+AssertCompareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseTests+AssertCompareItem.swift"; sourceTree = "<group>"; };
 		55DF3DAC2E924BB10044CC0C /* MockFileOperationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFileOperationManagerDelegate.swift; sourceTree = "<group>"; };
@@ -1115,6 +1131,7 @@
 				55C84A712DA93ADB00BA39DA /* UserNotifications.framework in Frameworks */,
 				55A027D4158242310004583F /* Quartz.framework in Frameworks */,
 				775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */,
+				55C165622EE444050082A24C /* Sparkle in Frameworks */,
 				55740BF512D710EC004BF6CC /* IOKit.framework in Frameworks */,
 				55740BF912D71103004BF6CC /* Security.framework in Frameworks */,
 			);
@@ -1154,6 +1171,9 @@
 		2A37F4AAFDCFA73011CA2CEA /* QuickDirtyDiff */ = {
 			isa = PBXGroup;
 			children = (
+				55D71FD72EE584FF007E0FA0 /* AppConfig-Sparkle.xcconfig */,
+				55D71FD82EE584FF007E0FA0 /* VisualDiffer-Sparkle.entitlements */,
+				55D71FD92EE584FF007E0FA0 /* VisualDiffer-Sparkle-Info.plist */,
 				55F013FC27A90C46003EA2D4 /* AppConfig.xcconfig */,
 				557C181B2E7E8BDD00381A3A /* Signing.local.xcconfig */,
 				557C181C2E7E8BDD00381A3A /* Versions.local.xcconfig */,
@@ -1339,8 +1359,9 @@
 		55373F8E2E9372DF00AB56D0 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				558DEAD12EA26C5800F05A10 /* Logger+App.swift */,
 				55373F8D2E9372DF00AB56D0 /* AppDelegate.swift */,
+				55D71FD52EE584B7007E0FA0 /* AppUpdater.swift */,
+				558DEAD12EA26C5800F05A10 /* Logger+App.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -2982,6 +3003,7 @@
 				5504B6FF255FCBBA00CDE04A /* Copy Visdiff to Helpers */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
+				55943C852EE43E3800DE513B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3031,6 +3053,9 @@
 				Base,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* QuickDirtyDiff */;
+			packageReferences = (
+				55C165602EE444050082A24C /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -3361,6 +3386,7 @@
 				553742072E9372DF00AB56D0 /* FolderReader+Detached.swift in Sources */,
 				553742082E9372DF00AB56D0 /* ViewLinkable.swift in Sources */,
 				553742092E9372DF00AB56D0 /* SessionPreferencesFiltersBox.swift in Sources */,
+				55D71FD62EE584B7007E0FA0 /* AppUpdater.swift in Sources */,
 				5537420A2E9372DF00AB56D0 /* FilesWindowController+Common.swift in Sources */,
 				5537420B2E9372DF00AB56D0 /* FilesWindowController+NSToolbarDelegate.swift in Sources */,
 				5537420C2E9372DF00AB56D0 /* FilesWindowController+TableView.swift in Sources */,
@@ -3647,6 +3673,10 @@
 				DEFINES_MODULE = YES;
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
@@ -3656,7 +3686,6 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				INFOPLIST_FILE = "VisualDiffer-Info.plist";
 				INSTALL_PATH = /Applications;
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
@@ -3686,6 +3715,10 @@
 				DEFINES_MODULE = YES;
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3696,7 +3729,6 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				INFOPLIST_FILE = "VisualDiffer-Info.plist";
 				INSTALL_PATH = /Applications;
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
@@ -3854,6 +3886,10 @@
 				DEFINES_MODULE = YES;
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
@@ -3863,7 +3899,6 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				INFOPLIST_FILE = "VisualDiffer-Info.plist";
 				INSTALL_PATH = /Applications;
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
@@ -4175,6 +4210,177 @@
 			};
 			name = Release;
 		};
+		55D71FDA2EE58630007E0FA0 /* Sparkle */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				OTHER_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+					"-Wno-missing-field-initializers",
+				);
+				PROVISIONING_PROFILE = "59d2fc6b-4fa7-4828-8895-d3d003484da9";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Sparkle;
+		};
+		55D71FDB2EE58630007E0FA0 /* Sparkle */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55D71FD72EE584FF007E0FA0 /* AppConfig-Sparkle.xcconfig */;
+			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = VisualDiffer_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					NS_BLOCK_ASSERTIONS,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INSTALL_PATH = /Applications;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = VisualDiffer;
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "VisualDiffer-Bridging-Header.h";
+				SWIFT_VERSION = 6.0;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Sparkle;
+		};
+		55D71FDC2EE58630007E0FA0 /* Sparkle */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55C1CBF32E8BB6AD004FE322 /* AppConfig.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Sparkle;
+		};
+		55D71FDD2EE58630007E0FA0 /* Sparkle */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 557C18202E7E8C0D00381A3A /* AppConfig.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VisualDiffer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VisualDiffer";
+			};
+			name = Sparkle;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4184,6 +4390,7 @@
 				26FC0AA60875C8B900E6366F /* Debug */,
 				558893672E7FF93B003B7117 /* DebugNoSandbox */,
 				26FC0AA70875C8B900E6366F /* Release */,
+				55D71FDB2EE58630007E0FA0 /* Sparkle */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4194,6 +4401,7 @@
 				26FC0AAA0875C8B900E6366F /* Debug */,
 				558893662E7FF93B003B7117 /* DebugNoSandbox */,
 				26FC0AAB0875C8B900E6366F /* Release */,
+				55D71FDA2EE58630007E0FA0 /* Sparkle */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4204,6 +4412,7 @@
 				55944CCE2E5C8D9F00FB1F8C /* Debug */,
 				558893692E7FF93B003B7117 /* DebugNoSandbox */,
 				55944CD02E5C8D9F00FB1F8C /* Release */,
+				55D71FDD2EE58630007E0FA0 /* Sparkle */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4214,11 +4423,31 @@
 				55C1CBE72E8BB6A2004FE322 /* Debug */,
 				55C1CBE82E8BB6A2004FE322 /* DebugNoSandbox */,
 				55C1CBE92E8BB6A2004FE322 /* Release */,
+				55D71FDC2EE58630007E0FA0 /* Sparkle */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		55C165602EE444050082A24C /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		55C165612EE444050082A24C /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55C165602EE444050082A24C /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		55916A082E8A814200ED6629 /* History.xcdatamodeld */ = {

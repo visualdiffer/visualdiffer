@@ -8,6 +8,9 @@
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+    #if SPARKLE_ENABLED
+        private var appUpdater = AppUpdater()
+    #endif
     private var appearanceObservation: NSKeyValueObservation?
 
     func applicationWillFinishLaunching(_: Notification) {
@@ -22,6 +25,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             CommonPrefs.shared.appearanceChanged(postNotification: true, app)
             ColoredFoldersManager.shared.refresh()
         }
+        #if SPARKLE_ENABLED
+            appUpdater.configure()
+        #endif
     }
 
     func applicationWillTerminate(_: Notification) {

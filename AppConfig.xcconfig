@@ -1,5 +1,5 @@
 //
-//  Versions.xcconfig
+//  AppConfig.xcconfig
 //  VisualDiffer
 //
 //  Created by davide ficano on 01/02/22.
@@ -9,15 +9,20 @@
 PRODUCT_BUNDLE_IDENTIFIER = com.visualdiffer
 
 ENABLE_HARDENED_RUNTIME = YES
+// Ensure Sparkle works on Debug
+ENABLE_HARDENED_RUNTIME[config=Debug] = NO
 
 ENABLE_USER_SELECTED_FILES = readwrite
 ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES
 
 REGISTER_APP_GROUPS = YES
 
-ENABLE_APP_SANDBOX[config=Debug] = YES
-ENABLE_APP_SANDBOX[config=Release] = YES
+ENABLE_APP_SANDBOX = YES
 ENABLE_APP_SANDBOX[config=DebugNoSandbox] = NO
+
+LD_RUNPATH_SEARCH_PATHS=@executable_path/../Frameworks
+
+INFOPLIST_FILE = ./VisualDiffer-Info.plist
 
 #include "Signing.local.xcconfig"
 #include "Versions.local.xcconfig"
