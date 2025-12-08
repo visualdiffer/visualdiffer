@@ -27,7 +27,7 @@
                 keyEquivalent: ""
             )
             checkForUpdatesItem.target = updaterController
-            applicationMenu.insertItem(checkForUpdatesItem, at: 4)
+            applicationMenu.insertItem(checkForUpdatesItem, at: 1)
         }
     }
 
