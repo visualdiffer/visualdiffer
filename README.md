@@ -7,6 +7,7 @@
         <img src="https://img.shields.io/badge/macOS-13.5+-orange?logo=apple&style=flat" />
         <img src="https://img.shields.io/badge/Swift-6.2-orange?logo=swift&logoColor=white&style=flat" />
         <img src="https://img.shields.io/github/downloads/Visualdiffer/visualdiffer/latest/total.svg" />
+        <img src="https://img.shields.io/github/downloads/visualdiffer/visualdiffer/total" />
 </p>
 
 # VisualDiffer
