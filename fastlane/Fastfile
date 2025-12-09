@@ -29,7 +29,8 @@ platform :mac do
 
     notarize_app if ENV["NOTARIZE_ENABLED"] == "true"
     zip_app
-    mk_github_rel if ENV["GITHUB_ENABLED"] == "true"
+    github if ENV["GITHUB_ENABLED"] == "true"
+    sparkle if ENV["SPARKLE_ENABLED"] == "true"
     UI.success("🎉 Release completed")
   end
 
