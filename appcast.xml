@@ -5,46 +5,37 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.0.1-alpha.5</title>
+            <title>Version 2.1.0</title>
             <description>
                 <![CDATA[
-                <h1 id="v201-alpha5">v2.0.1-alpha.5</h1>
+                <h1 id="v210">v2.1.0</h1>
 
 <h3 id="features">🚀 Features</h3>
 
 <ul>
-  <li>Allow to wrap text in File Comparison (added toolbar button and menu item)
-    <ul>
-      <li>restore selection</li>
-      <li>preserve view position</li>
-    </ul>
-  </li>
-  <li>
-    <p>Ignore white space differences in file comparison</p>
-  </li>
-  <li>File Compare: <a href="https://bugs.visualdiffer.com/view.php?id=377">0000377: Line ending differences are not detected</a>
-    <ul>
-      <li>Added flag to set “compare line endings” at application and session UI level from Preferences and Session Preferences</li>
-    </ul>
-  </li>
+  <li>General: Use Sparkle to update application</li>
+  <li>File Compare: Allow to wrap text</li>
+  <li>File Compare: Ignore white space differences</li>
+  <li>File Compare: Compare line endings (DOS/Unix)</li>
 </ul>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>The fonts are not updated</li>
+  <li>General: The fonts are not updated</li>
+  <li>File Compare: Copy Lines from clipboard does nothing</li>
 </ul>
 
                 ]]>
             </description>
-            <pubDate>Mon, 8 December 2025 00:00:00 +0100</pubDate>
-            <sparkle:version>2.0.1-alpha.5</sparkle:version>
-            <sparkle:shortVersionString>2.0.1-alpha.5</sparkle:shortVersionString>
+            <pubDate>Tue, 9 December 2025 00:00:00 +0100</pubDate>
+            <sparkle:version>2.1.0</sparkle:version>
+            <sparkle:shortVersionString>2.1.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.0.1-alpha.5/VisualDiffer-2.0.1-alpha.5.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.0/VisualDiffer-2.1.0.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="b1SVx6rS91842cWElqrIMsYjuyuKS4EBGaN++YMjqFECijrMbySjAb5heM/SSG9NR8Z6byf7Ww9OuRhbslUkCw==" length="5474035"
+                sparkle:edSignature="JhDiZ5DYelqYtfovk/uv4t7ZtVFEpOTqIMeKsaZ1UVsHUFiAvAx6fz5Y5iqFfIi6Fjh4T0uDy2RED1fn7KP+DA==" length="5473762"
 
             />
         </item>
