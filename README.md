@@ -3,7 +3,7 @@
         height="130">
 </p>
 <p align="center">
-        <img src="https://img.shields.io/badge/License-GPL3-blue?style=flat)" />
+        <img src="https://img.shields.io/badge/License-GPL3-blue?style=flat" />
         <img src="https://img.shields.io/badge/macOS-13.5+-orange?logo=apple&style=flat" />
         <img src="https://img.shields.io/badge/Swift-6.2-orange?logo=swift&logoColor=white&style=flat" />
         <img src="https://img.shields.io/github/downloads/Visualdiffer/visualdiffer/latest/total.svg" />
