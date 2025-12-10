@@ -295,11 +295,15 @@ extension FoldersWindowController: NSOutlineViewDelegate,
             return
         }
 
-        if let document = try? VDDocumentController.shared.openDifferDocument(
-            leftUrl: leftItem.toUrl(),
-            rightUrl: rightItem.toUrl()
-        ) {
-            addChildDocument(document)
+        do {
+            if let document = try VDDocumentController.shared.openDifferDocument(
+                leftUrl: leftItem.toUrl(),
+                rightUrl: rightItem.toUrl()
+            ) {
+                addChildDocument(document)
+            }
+        } catch {
+            NSAlert(error: error).runModal()
         }
     }
 

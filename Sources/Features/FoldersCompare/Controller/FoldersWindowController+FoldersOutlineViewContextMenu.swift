@@ -26,10 +26,14 @@ extension FoldersWindowController: FoldersOutlineViewContextMenu {
         default:
             return
         }
-        _ = try? VDDocumentController.shared.openDifferDocument(
-            leftUrl: leftItem?.toUrl(),
-            rightUrl: rightItem?.toUrl()
-        )
+        do {
+            _ = try VDDocumentController.shared.openDifferDocument(
+                leftUrl: leftItem?.toUrl(),
+                rightUrl: rightItem?.toUrl()
+            )
+        } catch {
+            NSAlert(error: error).runModal()
+        }
     }
 
     @objc func compareFolders(_ sender: AnyObject?) {

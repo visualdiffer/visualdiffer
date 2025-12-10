@@ -9,6 +9,7 @@
 enum SessionTypeError: Error {
     case invalidItem(path: String, isFolder: Bool)
     case invalidAllItems(isFolder: Bool)
+    case unknownError
 }
 
 extension SessionTypeError: LocalizedError {
@@ -29,6 +30,8 @@ extension SessionTypeError: LocalizedError {
                 // swiftlint:disable:next void_function_in_ternary
                 ? NSLocalizedString("The specified paths no longer exist or aren't both folders", comment: "")
                 : NSLocalizedString("The specified paths no longer exist or aren't both files", comment: "")
+        case .unknownError:
+            NSLocalizedString("An unknown error occurred", comment: "")
         }
     }
 }

@@ -109,24 +109,29 @@ class VDDocumentController: NSDocumentController {
             false
         }
 
-        if canOpenDocument {
-            // when comparing folders both paths must be set
-            if isFolder, hasMissingPath {
-                throw SessionTypeError.invalidAllItems(isFolder: true)
+        guard canOpenDocument else {
+            if !leftPathExists, let leftUrl {
+                throw SessionTypeError.invalidItem(path: leftUrl.osPath, isFolder: isFolder)
             }
-            return try openDocumentWithBlock { document in
-                if let sessionDiff = document.sessionDiff {
-                    sessionDiff.itemType = isFolder ? .folder : .file
-                    sessionDiff.leftPath = leftUrl?.standardizingPath ?? ""
-                    sessionDiff.leftReadOnly = false
-                    sessionDiff.rightPath = rightUrl?.standardizingPath ?? ""
-                    sessionDiff.rightReadOnly = false
-                    sessionDiff.expandAllFolders = CommonPrefs.shared.bool(forKey: .expandAllFolders)
-                }
+            if !rightPathExists, let rightUrl {
+                throw SessionTypeError.invalidItem(path: rightUrl.osPath, isFolder: isFolder)
+            }
+            throw SessionTypeError.unknownError
+        }
+        // when comparing folders both paths must be set
+        if isFolder, hasMissingPath {
+            throw SessionTypeError.invalidAllItems(isFolder: true)
+        }
+        return try openDocumentWithBlock { document in
+            if let sessionDiff = document.sessionDiff {
+                sessionDiff.itemType = isFolder ? .folder : .file
+                sessionDiff.leftPath = leftUrl?.standardizingPath ?? ""
+                sessionDiff.leftReadOnly = false
+                sessionDiff.rightPath = rightUrl?.standardizingPath ?? ""
+                sessionDiff.rightReadOnly = false
+                sessionDiff.expandAllFolders = CommonPrefs.shared.bool(forKey: .expandAllFolders)
             }
         }
-
-        return nil
     }
 
     /**
