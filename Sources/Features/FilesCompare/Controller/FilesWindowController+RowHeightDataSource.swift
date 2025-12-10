@@ -31,8 +31,8 @@ extension FilesWindowController: RowHeightDataSource {
     }
 
     func reloadTableData() {
-        leftView.reloadData()
-        rightView.reloadData()
+        leftView.reloadData(restoreSelection: true)
+        rightView.reloadData(restoreSelection: true)
     }
 
     func reloadRowHeights() {
