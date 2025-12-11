@@ -8,9 +8,19 @@
 
 extension NSError {
     func format(withPath path: String) -> String {
-        if domain == NSOSStatusErrorDomain {
+        switch domain {
+        case NSOSStatusErrorDomain:
             String(format: "%@: %@", path, self)
-        } else {
+        case NSCocoaErrorDomain:
+            if code == NSFileReadNoPermissionError,
+               let attrs = try? FileManager.default.attributesOfItem(atPath: path).fileAttributeType,
+               attrs == .typeSymbolicLink,
+               let destination = try? FileManager.default.destinationOfSymbolicLink(atPath: path) {
+                String.localizedStringWithFormat(NSLocalizedString("Permission denied for symbolic link destination %@ for path %@", comment: ""), destination, path)
+            } else {
+                String(format: "%@: %@", path, localizedDescription)
+            }
+        default:
             String(format: "%@: %@", path, localizedDescription)
         }
     }

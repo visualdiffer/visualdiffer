@@ -92,7 +92,7 @@ class CompareItemTableCellView: NSView {
         _ item: CompareItem,
         font: NSFont,
         isExpanded: Bool,
-        followSymLinks: Bool,
+        followSymLinks _: Bool,
         hideEmptyFolders: Bool
     ) {
         if let fileName = resolvedFileName(item) {
