@@ -52,15 +52,11 @@ class ErrorsView: NSStackView {
             NSAttributedString.Key.foregroundColor: errorsText.textColor ?? NSColor.white,
         ]
 
-        errorsText.append(text: errorMessage, attributes: attributes)
+        errorsText.append(text: errorMessage + "\n", attributes: attributes)
     }
 
     func addError(_ error: NSError, forPath path: String) {
-        let errorMessage = if error.domain == NSOSStatusErrorDomain {
-            String(format: "%@: %@\n", path, error)
-        } else {
-            String(format: "%@: %@\n", path, error.localizedDescription)
-        }
+        let errorMessage = error.format(withPath: path)
         performSelector(onMainThread: #selector(updateErrors), with: errorMessage, waitUntilDone: true)
 
         errors.append(error)
