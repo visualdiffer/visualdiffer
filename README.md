@@ -56,7 +56,7 @@ For more information, visit the [VisualDiffer Wiki](https://wiki.visualdiffer.co
 
 ### From GitHub Releases
 
-Download from [releases](https://github.com/Visualdiffer/visualdiffer/releases), unzip, and drag the app to Applications folder
+Download from [releases](https://github.com/visualdiffer/visualdiffer/releases/latest), unzip, and drag the app to Applications folder
 
 ## 🛠️ Build  
 
