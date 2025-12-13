@@ -163,7 +163,7 @@ final class TagsDeleteTests: BaseTests {
             assertMismatchingTags(child5, 1, "file2.txt")
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: true)
 
@@ -448,7 +448,7 @@ final class TagsDeleteTests: BaseTests {
             assertMismatchingTags(child7, 1, "anotherFile.txt")
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: true)
 

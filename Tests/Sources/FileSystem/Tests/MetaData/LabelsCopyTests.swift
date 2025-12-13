@@ -277,7 +277,7 @@ final class LabelsCopyTests: BaseTests {
             assertResourceFileLabels(child8.linkedItem, 0, appendFolder("r/line1.txt"))
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes

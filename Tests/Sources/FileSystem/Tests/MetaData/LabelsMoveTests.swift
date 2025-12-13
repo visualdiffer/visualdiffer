@@ -273,7 +273,7 @@ final class LabelsMoveTests: BaseTests {
             assertResourceFileLabels(child8.linkedItem, 0, appendFolder("r/line1.txt"))
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: true)
 

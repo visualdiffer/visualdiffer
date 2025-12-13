@@ -113,7 +113,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child5.linkedItem, 0, 1, 0, 0, 0, "second.txt", .changed, 9)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -306,7 +306,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child6.linkedItem, 0, 0, 1, 0, 0, "file_3.m", .orphan, 2)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -495,7 +495,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child4.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -725,7 +725,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child7.linkedItem, 0, 0, 1, 0, 0, "right_orphan.txt", .orphan, 7)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -940,7 +940,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child6.linkedItem, 0, 0, 1, 0, 0, "sample.txt", .orphan, 2)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: false)
 
@@ -1195,7 +1195,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child10.linkedItem, 0, 0, 1, 0, 0, "sample.txt", .orphan, 2)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: false)
         let fileOperationManager = FileOperationManager(
@@ -1397,7 +1397,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child4.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: false)
         let fileOperationManager = FileOperationManager(
@@ -1560,7 +1560,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child4.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: false)
         let fileOperationManager = FileOperationManager(

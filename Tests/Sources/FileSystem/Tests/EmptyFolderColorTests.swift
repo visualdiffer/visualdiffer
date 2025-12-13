@@ -503,7 +503,7 @@ final class EmptyFolderColorTests: BaseTests {
             assertItem(child14.linkedItem, 0, 0, 1, 0, 0, "file", .orphan, 4)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -814,7 +814,7 @@ final class EmptyFolderColorTests: BaseTests {
             assertItem(child4.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1009,7 +1009,7 @@ final class EmptyFolderColorTests: BaseTests {
             #expect(child4.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: true)
 

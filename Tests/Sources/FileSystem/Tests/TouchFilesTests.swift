@@ -118,7 +118,7 @@ final class TouchFilesTests: BaseTests {
             assertItem(child5.linkedItem, 1, 0, 0, 0, 0, "bb_file.txt", .old, 3)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -264,7 +264,7 @@ final class TouchFilesTests: BaseTests {
             assertItem(child2.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes

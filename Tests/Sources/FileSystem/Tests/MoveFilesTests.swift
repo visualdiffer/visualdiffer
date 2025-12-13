@@ -176,7 +176,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child10, 0, 0, 0, 0, 0, nil, .orphan, 0)
             assertItem(child10.linkedItem, 0, 0, 1, 0, 0, "right_orphan.txt", .orphan, 10)
         }
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate()
         let fileOperationManager = FileOperationManager(
@@ -409,7 +409,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child5, 1, 0, 0, 0, 0, "file_older.txt", .old, 5)
             assertItem(child5.linkedItem, 0, 1, 0, 0, 0, "file_older.txt", .changed, 1)
         }
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -638,7 +638,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child8.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -869,7 +869,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child7.linkedItem, 0, 0, 0, 1, 0, "CodiceFiscaleChecker.java", .same, 3)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1073,7 +1073,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child4.linkedItem, 0, 0, 0, 1, 0, "file_matched.m", .same, 5)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1242,7 +1242,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child4.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1449,7 +1449,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child7.linkedItem, 0, 0, 0, 0, 0, "symlink1", .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: false)
         let fileOperationManager = FileOperationManager(
@@ -1647,7 +1647,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child4.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1797,7 +1797,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child3.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1934,7 +1934,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child2.linkedItem, 0, 0, 0, 1, 0, "file1.html", .same, 11)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes

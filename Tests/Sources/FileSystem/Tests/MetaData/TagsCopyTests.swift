@@ -176,7 +176,7 @@ final class TagsCopyTests: BaseTests {
             assertItem(child7.linkedItem, 0, 0, 0, 1, 0, "line1.txt", .same, 5)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -462,7 +462,7 @@ final class TagsCopyTests: BaseTests {
             assertMismatchingTags(child6, 1, "file2.txt")
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes

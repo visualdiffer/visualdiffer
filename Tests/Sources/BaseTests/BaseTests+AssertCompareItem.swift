@@ -65,4 +65,15 @@ public extension BaseTests {
             sourceLocation: sourceLocation
         )
     }
+
+    /**
+     Create the test setup and then stop execution
+     */
+    func assertOnlySetup(
+        sourceLocation _: SourceLocation = #_sourceLocation
+    ) throws {
+        #if TEST_ONLY_SETUP
+            throw TestError.onlySetup
+        #endif
+    }
 }

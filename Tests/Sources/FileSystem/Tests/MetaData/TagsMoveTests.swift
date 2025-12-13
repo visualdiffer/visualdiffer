@@ -193,7 +193,7 @@ final class TagsMoveTests: BaseTests {
             assertMismatchingTags(child7, 1, "anotherFile.txt")
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate(replaceAll: true)
 

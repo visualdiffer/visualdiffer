@@ -63,7 +63,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child2, 0, 0, 1, 0, 0, "100.txt", .orphan, 2)
         assertItem(child2.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -179,7 +179,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child6, 0, 0, 1, 0, 0, "011.txt", .orphan, 6)
         assertItem(child6.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -333,7 +333,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child6, 0, 0, 1, 0, 0, "011.txt", .orphan, 6)
         assertItem(child6.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -478,7 +478,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child6, 0, 0, 1, 0, 0, "011.txt", .orphan, 6)
         assertItem(child6.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -641,7 +641,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child6, 0, 0, 1, 0, 0, "011.txt", .orphan, 6)
         assertItem(child6.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -796,7 +796,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child6, 0, 0, 1, 0, 0, "011.txt", .orphan, 6)
         assertItem(child6.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -933,7 +933,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child6, 0, 0, 1, 0, 0, "011.txt", .orphan, 6)
         assertItem(child6.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1172,7 +1172,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child16, 0, 0, 0, 0, 0, nil, .orphan, 0)
         assertItem(child16.linkedItem, 0, 0, 1, 0, 0, "file202.txt", .orphan, 3)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1493,7 +1493,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child18, 0, 0, 0, 0, 0, nil, .orphan, 0)
         assertItem(child18.linkedItem, 0, 0, 1, 0, 0, "file202.txt", .orphan, 3)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1763,7 +1763,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child10, 0, 0, 0, 1, 0, "050.txt", .same, 6)
         assertItem(child10.linkedItem, 0, 0, 0, 1, 0, "050.txt", .same, 6)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1980,7 +1980,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child16, 0, 0, 0, 0, 0, nil, .orphan, 0)
         assertItem(child16.linkedItem, 0, 0, 1, 0, 0, "file202.txt", .orphan, 3)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -2230,7 +2230,7 @@ final class RenameFilesTests: BaseTests {
         assertItem(child8, 0, 0, 1, 0, 0, "file003.txt", .orphan, 2)
         assertItem(child8.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes

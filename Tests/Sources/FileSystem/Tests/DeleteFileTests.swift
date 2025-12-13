@@ -115,7 +115,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child5.linkedItem, 0, 1, 0, 0, 0, "second.txt", .changed, 8)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperaionDelegate = MockFileOperationManagerDelegate()
         let fileOperationManager = FileOperationManager(
@@ -293,7 +293,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child6.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         let fileOperationDelegate = MockFileOperationManagerDelegate()
         let fileOperationManager = FileOperationManager(
@@ -454,7 +454,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child6.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -675,7 +675,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child7.linkedItem, 0, 0, 1, 0, 0, "right_orphan.txt", .orphan, 7)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -905,7 +905,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child4.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         }
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes
@@ -1003,7 +1003,7 @@ final class DeleteFileTests: BaseTests {
         assertItem(child4, 0, 0, 0, 1, 0, "file_2.txt", .same, 10)
         assertItem(child4.linkedItem, 0, 0, 0, 1, 0, "file_2.txt", .same, 10)
 
-        // VD_ASSERT_ONLY_SETUP()
+        try assertOnlySetup()
 
         // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
         // otherwise is released to early it the test crashes

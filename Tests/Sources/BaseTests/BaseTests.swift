@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum TestError: Error {
+    case onlySetup
+}
+
 open class BaseTests {
     public var rootDir: URL
     public var dateBuilder = DateBuilder()
@@ -23,8 +27,8 @@ open class BaseTests {
 
     public convenience init() {
         self.init(rootDir: URL
-            .temporaryDirectory
-            .appending(path: "trash/visualdiffer/test_suite_swift/", directoryHint: .isDirectory))
+            .desktopDirectory
+            .appending(path: "visualdiffer/test_suite_swift/", directoryHint: .isDirectory))
     }
 
     public func buildDate(_ strDate: String) throws -> Date {
