@@ -92,25 +92,15 @@ class CompareItemTableCellView: NSView {
         _ item: CompareItem,
         font: NSFont,
         isExpanded: Bool,
-        followSymLinks: Bool,
+        followSymLinks _: Bool,
         hideEmptyFolders: Bool
     ) {
-        if let fileName = item.fileName {
+        if let fileName = resolvedFileName(item) {
             text.stringValue = fileName
             text.lineBreakMode = .byTruncatingMiddle
         }
-        if item.isFolder, item.isSymbolicLink, !followSymLinks {
-            // pass an absolute fake path to obtain a icon for unknown file type
-            // If file is both locked and symlink then show the locked badge
-            if item.isLocked {
-                icon?.image = IconUtils.shared.icon(forLockedFile: Self.fakeImagePath, size: 16)
-            } else {
-                icon?.image = IconUtils.shared.icon(forSymbolicLink: Self.fakeImagePath, size: 16)
-            }
-        } else {
-            icon?.image = IconUtils.shared.icon(for: item, size: 16, isExpanded: isExpanded, hideEmptyFolders: hideEmptyFolders)
-        }
         text.font = font
+        icon?.image = IconUtils.shared.icon(for: item, size: 16, isExpanded: isExpanded, hideEmptyFolders: hideEmptyFolders)
     }
 
     func fileSize(
@@ -163,5 +153,19 @@ class CompareItemTableCellView: NSView {
             text.formatter = nil
             text.objectValue = nil
         }
+    }
+
+    private func resolvedFileName(
+        _ item: CompareItem
+    ) -> String? {
+        guard let fileName = item.fileName else {
+            return nil
+        }
+        if item.isSymbolicLink,
+           let path = item.path,
+           let destination = try? FileManager.default.destinationOfSymbolicLink(atPath: path) {
+            return "\(fileName) -> \(destination)"
+        }
+        return fileName
     }
 }
