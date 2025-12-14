@@ -59,7 +59,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
 
     private lazy var sessionPreferencesButton: NSButton = {
         let view = NSButton(
-            title: NSLocalizedString("Session Preferences", comment: ""),
+            title: NSLocalizedString("Session Settings", comment: ""),
             target: self,
             action: #selector(selectSessionPreferences)
         )

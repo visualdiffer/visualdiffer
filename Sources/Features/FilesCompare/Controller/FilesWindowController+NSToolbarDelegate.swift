@@ -146,8 +146,8 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         } else if itemIdentifier == .Files.sessionPreferences {
             return NSToolbarItem(
                 identifier: itemIdentifier,
-                label: NSLocalizedString("Session Preferences", comment: ""),
-                tooltip: NSLocalizedString("Edit Session Preferences", comment: ""),
+                label: NSLocalizedString("Session Settings", comment: ""),
+                tooltip: NSLocalizedString("Edit Session Settings", comment: ""),
                 image: NSImage(named: VDImageNamePreferences),
                 target: self,
                 action: #selector(openSessionSettingsSheet)

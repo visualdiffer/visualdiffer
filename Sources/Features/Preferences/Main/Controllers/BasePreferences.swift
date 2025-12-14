@@ -51,11 +51,11 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
             defer: false
         )
 
-        view.title = NSLocalizedString("Preferences", comment: "")
+        view.title = NSLocalizedString("Settings", comment: "")
         view.hasShadow = true
         view.isRestorable = true
         view.titlebarSeparatorStyle = .automatic
-        view.setFrameAutosaveName("Preferences")
+        view.setFrameAutosaveName("Settings")
         view.toolbarStyle = .automatic
 
         view.isFloatingPanel = false
