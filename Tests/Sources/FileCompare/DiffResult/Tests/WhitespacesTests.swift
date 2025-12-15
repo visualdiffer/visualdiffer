@@ -69,7 +69,7 @@ final class WhitespacesTests: DiffResultBaseTests {
             "    last line"
 
         let diffResult = DiffResult()
-        diffResult.diff(leftText: leftText, rightText: rightText, options: .allIgnoreWhitespaces)
+        diffResult.diff(leftText: leftText, rightText: rightText, options: [.allIgnoreWhitespaces, .ignoreLineEndings])
 
         let leftChangeType: [DiffChangeType] = [.matching, .matching, .matching]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
@@ -95,7 +95,7 @@ final class WhitespacesTests: DiffResultBaseTests {
             "    last line"
 
         let diffResult = DiffResult()
-        diffResult.diff(leftText: leftText, rightText: rightText, options: [.allIgnoreWhitespaces, .compareLineEndings])
+        diffResult.diff(leftText: leftText, rightText: rightText, options: [.allIgnoreWhitespaces])
 
         let leftChangeType: [DiffChangeType] = [.matching, .changed, .matching]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)

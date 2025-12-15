@@ -9,8 +9,8 @@
 extension FileSessionPreferencesWindow: @preconcurrency PreferencesBoxDataSource {
     func preferenceBox(_: PreferencesBox, boolForKey key: CommonPrefs.Name) -> Bool {
         switch key {
-        case .compareLineEndings:
-            preferences.diffResultOptions.contains(.compareLineEndings)
+        case .ignoreLineEndings:
+            preferences.diffResultOptions.contains(.ignoreLineEndings)
         case .ignoreLeadingWhitespaces:
             preferences.diffResultOptions.contains(.ignoreLeadingWhitespaces)
         case .ignoreTrailingWhitespaces:
@@ -24,8 +24,8 @@ extension FileSessionPreferencesWindow: @preconcurrency PreferencesBoxDataSource
 
     func preferenceBox(_: PreferencesBox, setBool value: Bool, forKey key: CommonPrefs.Name) {
         switch key {
-        case .compareLineEndings:
-            preferences.diffResultOptions.setValue(value, element: .compareLineEndings)
+        case .ignoreLineEndings:
+            preferences.diffResultOptions.setValue(value, element: .ignoreLineEndings)
         case .ignoreLeadingWhitespaces:
             preferences.diffResultOptions.setValue(value, element: .ignoreLeadingWhitespaces)
         case .ignoreTrailingWhitespaces:

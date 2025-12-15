@@ -10,7 +10,7 @@ class DiffResult {
     struct Options: OptionSet {
         let rawValue: Int
 
-        static let compareLineEndings = Options(rawValue: 1 << 0)
+        static let ignoreLineEndings = Options(rawValue: 1 << 0)
         static let ignoreLeadingWhitespaces = Options(rawValue: 1 << 1)
         static let ignoreTrailingWhitespaces = Options(rawValue: 1 << 2)
         static let ignoreInternalWhitespaces = Options(rawValue: 1 << 3)

@@ -13,7 +13,7 @@ struct FilePreferences {
 extension FilePreferences {
     mutating func fromUserDefaults() {
         let options: [(CommonPrefs.Name, DiffResult.Options)] = [
-            (.compareLineEndings, .compareLineEndings),
+            (.ignoreLineEndings, .ignoreLineEndings),
             (.ignoreLeadingWhitespaces, .ignoreLeadingWhitespaces),
             (.ignoreTrailingWhitespaces, .ignoreTrailingWhitespaces),
             (.ignoreInternalWhitespaces, .ignoreInternalWhitespaces),
@@ -26,7 +26,7 @@ extension FilePreferences {
 }
 
 extension CommonPrefs.Name {
-    static let compareLineEndings = CommonPrefs.Name(rawValue: "compareLineEndings")
+    static let ignoreLineEndings = CommonPrefs.Name(rawValue: "ignoreLineEndings")
     static let ignoreLeadingWhitespaces = CommonPrefs.Name(rawValue: "ignoreLeadingWhitespaces")
     static let ignoreTrailingWhitespaces = CommonPrefs.Name(rawValue: "ignoreTrailingWhitespaces")
     static let ignoreInternalWhitespaces = CommonPrefs.Name(rawValue: "ignoreInternalWhitespaces")
