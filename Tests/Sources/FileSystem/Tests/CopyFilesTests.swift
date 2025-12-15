@@ -994,9 +994,9 @@ final class CopyFilesTests: BaseTests {
         try assertSymlink(child7, "symlink_test2", true)
         try assertSymlink(child7.linkedItem!, "symlink_test2", true)
 
-        let errors = fileOperationDelegate.errors
-        #expect(errors.count == 1, "Errors must contain an object")
-        assertError(errors[0], FileError.createSymLink(path: child3.path!))
+        assertErrors(fileOperationDelegate.errors, [
+            FileError.createSymLink(path: child3.path!),
+        ])
 
         do {
             // VisibleItems

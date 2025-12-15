@@ -1499,9 +1499,9 @@ final class MoveFilesTests: BaseTests {
         assertItem(child7.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         try assertSymlink(child7, "symlink_test2", true)
 
-        let errors = fileOperationDelegate.errors
-        #expect(errors.count == 1, "Errors must contain an object")
-        assertError(errors[0], FileError.createSymLink(path: child3.path!))
+        assertErrors(fileOperationDelegate.errors, [
+            FileError.createSymLink(path: child3.path!),
+        ])
 
         do {
             // VisibleItems

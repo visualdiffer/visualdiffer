@@ -10,6 +10,7 @@
 
 class MockFolderReaderDelegate: FolderReaderDelegate {
     var isRunning = false
+    var errors = [Error]()
 
     init(isRunning: Bool) {
         self.isRunning = isRunning
@@ -21,7 +22,8 @@ class MockFolderReaderDelegate: FolderReaderDelegate {
 
     func progress(_: VisualDiffer.FolderReader, status _: VisualDiffer.FolderReaderStatus) {}
 
-    func folderReader(_: VisualDiffer.FolderReader, handleError _: any Error, forPath _: URL) -> Bool {
-        true
+    func folderReader(_: VisualDiffer.FolderReader, handleError error: any Error, forPath _: URL) -> Bool {
+        errors.append(error)
+        return true
     }
 }

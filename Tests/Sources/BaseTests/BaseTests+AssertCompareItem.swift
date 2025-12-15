@@ -54,6 +54,13 @@ public extension BaseTests {
         #expect(arr.count == expectedCount, "\(arr) array count expected \(expectedCount) but found \(arr.count)", sourceLocation: sourceLocation)
     }
 
+    func assertErrors(_ errors: [Error], _ expected: [FileError], sourceLocation: SourceLocation = #_sourceLocation) {
+        #expect(errors.count == expected.count, "Errors must contain \(expected.count) items")
+        for (index, error) in errors.enumerated() {
+            assertError(error, expected[index], sourceLocation: sourceLocation)
+        }
+    }
+
     func assertError(_ error: Error, _ expected: FileError, sourceLocation: SourceLocation = #_sourceLocation) {
         guard let fileError = error as? FileError else {
             Issue.record("Error is not a FileError: \(error)", sourceLocation: sourceLocation)

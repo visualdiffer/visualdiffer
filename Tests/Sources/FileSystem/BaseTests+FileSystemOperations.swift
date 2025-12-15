@@ -58,10 +58,18 @@ public extension BaseTests {
     }
 
     func createSymlink(_ path: String, _ destPath: String, functionName: String = #function) throws {
-        try fm.createSymbolicLink(
-            at: appendFolder(path, functionName: functionName),
-            withDestinationURL: appendFolder(destPath, functionName: functionName)
-        )
+        if destPath.starts(with: "..") {
+            // URL create absolute paths so we use the string version for relative paths
+            try fm.createSymbolicLink(
+                atPath: appendFolder(path, functionName: functionName).osPath,
+                withDestinationPath: destPath
+            )
+        } else {
+            try fm.createSymbolicLink(
+                at: appendFolder(path, functionName: functionName),
+                withDestinationURL: appendFolder(destPath, functionName: functionName)
+            )
+        }
     }
 
     func add(

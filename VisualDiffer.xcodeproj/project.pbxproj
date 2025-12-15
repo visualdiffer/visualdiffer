@@ -498,6 +498,7 @@
 		55E31E021BC572F3001ACE4D /* top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E31E001BC572F3001ACE4D /* top@2x.png */; };
 		55E31E051BC57373001ACE4D /* bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E31E031BC57373001ACE4D /* bottom.png */; };
 		55E31E061BC57373001ACE4D /* bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E31E041BC57373001ACE4D /* bottom@2x.png */; };
+		55E381C12EEFFD0500CB2F00 /* SymbolicLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E381C02EEFFCF500CB2F00 /* SymbolicLinkTests.swift */; };
 		55E3A5661826552A002A890B /* lockedbadge.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A5641826552A002A890B /* lockedbadge.png */; };
 		55E3A5671826552A002A890B /* lockedbadge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A5651826552A002A890B /* lockedbadge@2x.png */; };
 		55ECD8621476B03400D8BEB4 /* prefs_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 55ECD8611476B03400D8BEB4 /* prefs_text.png */; };
@@ -1093,6 +1094,7 @@
 		55E31E001BC572F3001ACE4D /* top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top@2x.png"; sourceTree = "<group>"; };
 		55E31E031BC57373001ACE4D /* bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom.png; sourceTree = "<group>"; };
 		55E31E041BC57373001ACE4D /* bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom@2x.png"; sourceTree = "<group>"; };
+		55E381C02EEFFCF500CB2F00 /* SymbolicLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolicLinkTests.swift; sourceTree = "<group>"; };
 		55E3A5641826552A002A890B /* lockedbadge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lockedbadge.png; sourceTree = "<group>"; };
 		55E3A5651826552A002A890B /* lockedbadge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockedbadge@2x.png"; sourceTree = "<group>"; };
 		55E3EF3524C2D06800F7A95A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -2879,7 +2881,6 @@
 		55DF3DC32E924BB10044CC0C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				55DF3DB72E924BB10044CC0C /* MetaData */,
 				55DF3DB82E924BB10044CC0C /* AlignmentTests.swift */,
 				55DF3DB92E924BB10044CC0C /* BufferedInputStreamTests.swift */,
 				55DF3DBA2E924BB10044CC0C /* ComparatorTests.swift */,
@@ -2888,8 +2889,10 @@
 				55DF3DBD2E924BB10044CC0C /* DisplayTests.swift */,
 				55DF3DBE2E924BB10044CC0C /* EmptyFolderColorTests.swift */,
 				55DF3DBF2E924BB10044CC0C /* FiltersTests.swift */,
+				55DF3DB72E924BB10044CC0C /* MetaData */,
 				55DF3DC02E924BB10044CC0C /* MoveFilesTests.swift */,
 				55DF3DC12E924BB10044CC0C /* RenameFilesTests.swift */,
+				55E381C02EEFFCF500CB2F00 /* SymbolicLinkTests.swift */,
 				55DF3DC22E924BB10044CC0C /* TouchFilesTests.swift */,
 			);
 			path = Tests;
@@ -3184,6 +3187,7 @@
 				55DF3DDE2E924BB10044CC0C /* BaseTests+AssertCompareItem.swift in Sources */,
 				55A4DF322E9A49B000ED11BB /* EndOfLineTests.swift in Sources */,
 				55DF3DDF2E924BB10044CC0C /* AlignmentTests.swift in Sources */,
+				55E381C12EEFFD0500CB2F00 /* SymbolicLinkTests.swift in Sources */,
 				55B1CE312E9934F800426FEC /* DiffResultBaseTests.swift in Sources */,
 				55B1CE322E9934F800426FEC /* DiffResultTests.swift in Sources */,
 				55DF3DE02E924BB10044CC0C /* RefreshInfoTests.swift in Sources */,
