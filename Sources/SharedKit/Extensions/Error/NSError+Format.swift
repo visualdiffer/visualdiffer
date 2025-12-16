@@ -16,7 +16,11 @@ extension NSError {
                let attrs = try? FileManager.default.attributesOfItem(atPath: path).fileAttributeType,
                attrs == .typeSymbolicLink,
                let destination = try? FileManager.default.destinationOfSymbolicLink(atPath: path) {
-                String.localizedStringWithFormat(NSLocalizedString("Permission denied for symbolic link destination %@ for path %@", comment: ""), destination, path)
+                String.localizedStringWithFormat(
+                    NSLocalizedString("Permission denied: symbolic link at %@ points to destination %@. Add the destination to 'Trusted Paths' to allow access.", comment: ""),
+                    path,
+                    destination
+                )
             } else {
                 String(format: "%@: %@", path, localizedDescription)
             }

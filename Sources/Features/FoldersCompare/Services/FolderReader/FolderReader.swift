@@ -213,7 +213,7 @@ public class FolderReader: @unchecked Sendable {
         do {
             // symlink root must be traversed so allocate it after checking for symlink
             let root = try createParentIfNil(path: parentPath, parent: parent)
-            let list = try fileManager.contentsOfDirectory(atPath: parentPath.path)
+            let list = try contentsOfSandboxedDirectory(atPath: parentPath.path)
 
             for entry in list where isRunning {
                 addEntryFile(entry: entry, root: root, parentPath: parentPath, recursive: recursive)
@@ -225,6 +225,38 @@ public class FolderReader: @unchecked Sendable {
         } catch {
             delegate.folderReader(self, handleError: error, forPath: parentPath)
             return nil
+        }
+    }
+
+    /// Reads the contents of a directory, handling symbolic links outside the sandbox.
+    ///
+    /// If the path is a symbolic link to an inaccessible destination within the sandbox,
+    /// the function attempts to gain access via security-scoped bookmark.
+    ///
+    /// - Parameter path: The absolute path of the directory to read
+    /// - Returns: Array of file and folder names contained in the directory
+    /// - Throws: `NSFileReadNoPermissionError` if the symlink points outside the sandbox
+    ///           without a valid bookmark in 'Trusted Paths'
+    /// - Throws: Other `FileManager` errors if reading fails for different reasons
+    private func contentsOfSandboxedDirectory(atPath path: String) throws -> [String] {
+        do {
+            return try fileManager.contentsOfDirectory(atPath: path)
+        } catch let error as NSError where error.domain == NSCocoaErrorDomain &&
+            error.code == NSFileReadNoPermissionError {
+            guard let destination = try? fileManager.destinationOfSymbolicLink(atPath: path) else {
+                throw error
+            }
+
+            let secureUrl = SecureBookmark.shared.secure(
+                fromBookmark: URL(filePath: destination),
+                startSecured: true
+            )
+
+            defer {
+                SecureBookmark.shared.stopAccessing(url: secureUrl)
+            }
+
+            return try fileManager.contentsOfDirectory(atPath: path)
         }
     }
 
