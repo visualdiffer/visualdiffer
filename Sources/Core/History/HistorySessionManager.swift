@@ -160,12 +160,18 @@ class HistorySessionManager: @unchecked Sendable {
             fatalError("Error getting store URL")
         }
 
+        // start a lightweight migration for added/deleted attributes
+        let options = [
+            NSMigratePersistentStoresAutomaticallyOption: true,
+            NSInferMappingModelAutomaticallyOption: true,
+        ]
+
         do {
             _ = try psc.addPersistentStore(
                 type: .sqlite,
                 configuration: nil,
                 at: storeURL,
-                options: nil
+                options: options
             )
         } catch let error as NSError {
             fatalError("Error initializing PSC: \(error.localizedDescription)\n\(error.userInfo)")

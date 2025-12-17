@@ -54,6 +54,7 @@
 		5532516E2765F06B0092D65F /* mask-middle.png in Resources */ = {isa = PBXBuildFile; fileRef = 553251692765F06B0092D65F /* mask-middle.png */; };
 		5532516F2765F06B0092D65F /* mask-back-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 5532516A2765F06B0092D65F /* mask-back-white.png */; };
 		553251702765F06B0092D65F /* mask-front.png in Resources */ = {isa = PBXBuildFile; fileRef = 5532516B2765F06B0092D65F /* mask-front.png */; };
+		5536ADBA2EF169820019EFBF /* SessionDiff+ExtraData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5536ADB92EF169820019EFBF /* SessionDiff+ExtraData.swift */; };
 		553741792E9372DF00AB56D0 /* NSAppearance+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740E52E9372DF00AB56D0 /* NSAppearance+DarkMode.swift */; };
 		5537417A2E9372DF00AB56D0 /* QLPreviewPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740FD2E9372DF00AB56D0 /* QLPreviewPanel.swift */; };
 		5537417B2E9372DF00AB56D0 /* TrustedPathsPreferencesPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740A12E9372DF00AB56D0 /* TrustedPathsPreferencesPanel.swift */; };
@@ -154,7 +155,6 @@
 		553741DF2E9372DF00AB56D0 /* CommonPrefs+ConsoleLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740362E9372DF00AB56D0 /* CommonPrefs+ConsoleLog.swift */; };
 		553741E02E9372DF00AB56D0 /* NSToolbar+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537410C2E9372DF00AB56D0 /* NSToolbar+Create.swift */; };
 		553741E12E9372DF00AB56D0 /* String+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741032E9372DF00AB56D0 /* String+Helper.swift */; };
-		553741E22E9372DF00AB56D0 /* TOPMigrationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553740C22E9372DF00AB56D0 /* TOPMigrationController.m */; };
 		553741E32E9372DF00AB56D0 /* LineNumberTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FC02E9372DF00AB56D0 /* LineNumberTableRowView.swift */; };
 		553741E42E9372DF00AB56D0 /* FolderReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537405E2E9372DF00AB56D0 /* FolderReader.swift */; };
 		553741E52E9372DF00AB56D0 /* DateFormatter+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740F32E9372DF00AB56D0 /* DateFormatter+Helper.swift */; };
@@ -615,6 +615,7 @@
 		553251692765F06B0092D65F /* mask-middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask-middle.png"; sourceTree = "<group>"; };
 		5532516A2765F06B0092D65F /* mask-back-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask-back-white.png"; sourceTree = "<group>"; };
 		5532516B2765F06B0092D65F /* mask-front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask-front.png"; sourceTree = "<group>"; };
+		5536ADB92EF169820019EFBF /* SessionDiff+ExtraData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionDiff+ExtraData.swift"; sourceTree = "<group>"; };
 		55373F8D2E9372DF00AB56D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55373F8F2E9372DF00AB56D0 /* AlignRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignRule.swift; sourceTree = "<group>"; };
 		55373F902E9372DF00AB56D0 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
@@ -852,8 +853,6 @@
 		553740BD2E9372DF00AB56D0 /* UDiffScriptBuilder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UDiffScriptBuilder.m; sourceTree = "<group>"; };
 		553740BE2E9372DF00AB56D0 /* UnifiedDiff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnifiedDiff.h; sourceTree = "<group>"; };
 		553740BF2E9372DF00AB56D0 /* UnifiedDiff.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnifiedDiff.m; sourceTree = "<group>"; };
-		553740C12E9372DF00AB56D0 /* TOPMigrationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TOPMigrationController.h; sourceTree = "<group>"; };
-		553740C22E9372DF00AB56D0 /* TOPMigrationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TOPMigrationController.m; sourceTree = "<group>"; };
 		553740C72E9372DF00AB56D0 /* BigFileFileOperationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigFileFileOperationManager.h; sourceTree = "<group>"; };
 		553740C82E9372DF00AB56D0 /* BigFileFileOperationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigFileFileOperationManager.m; sourceTree = "<group>"; };
 		553740CD2E9372DF00AB56D0 /* MGRecessedPopUpButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGRecessedPopUpButtonCell.h; sourceTree = "<group>"; };
@@ -967,6 +966,7 @@
 		5537434B2E937B7F00AB56D0 /* colorsDark.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = colorsDark.json; path = AppDefaults/colorsDark.json; sourceTree = "<group>"; };
 		5537434C2E937B7F00AB56D0 /* VDDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VDDefaults.plist; path = AppDefaults/VDDefaults.plist; sourceTree = "<group>"; };
 		5537434D2E937B7F00AB56D0 /* VisualDiffer.sdef */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = VisualDiffer.sdef; path = AppDefaults/VisualDiffer.sdef; sourceTree = "<group>"; };
+		553A58692EF2758800685D02 /* MyDocument1.4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyDocument1.4.xcdatamodel; sourceTree = "<group>"; };
 		553D10D8163BD0BC008D3F65 /* prefs_confirmations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_confirmations.png; sourceTree = "<group>"; };
 		5542D19516317DAC00F801AA /* vd.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = vd.iconset; path = images/vd.iconset; sourceTree = "<group>"; };
 		55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextPreferencesPanel+PreferencesBoxDataSource.swift"; sourceTree = "<group>"; };
@@ -1435,6 +1435,7 @@
 			children = (
 				55373FAE2E9372DF00AB56D0 /* SessionDiff.swift */,
 				55373FAF2E9372DF00AB56D0 /* SessionDiff+AlignRule.swift */,
+				5536ADB92EF169820019EFBF /* SessionDiff+ExtraData.swift */,
 				559590202EABAFC200B5AB0B /* SessionDiff+ItemComparator.swift */,
 				55373FB12E9372DF00AB56D0 /* SessionDiff+NSSortDescriptor.swift */,
 				55373FB22E9372DF00AB56D0 /* SessionDiff+ResolvePath.swift */,
@@ -2107,8 +2108,6 @@
 		553740C32E9372DF00AB56D0 /* Document */ = {
 			isa = PBXGroup;
 			children = (
-				553740C12E9372DF00AB56D0 /* TOPMigrationController.h */,
-				553740C22E9372DF00AB56D0 /* TOPMigrationController.m */,
 			);
 			path = Document;
 			sourceTree = "<group>";
@@ -3338,7 +3337,6 @@
 				553741DF2E9372DF00AB56D0 /* CommonPrefs+ConsoleLog.swift in Sources */,
 				553741E02E9372DF00AB56D0 /* NSToolbar+Create.swift in Sources */,
 				553741E12E9372DF00AB56D0 /* String+Helper.swift in Sources */,
-				553741E22E9372DF00AB56D0 /* TOPMigrationController.m in Sources */,
 				553741E32E9372DF00AB56D0 /* LineNumberTableRowView.swift in Sources */,
 				553741E42E9372DF00AB56D0 /* FolderReader.swift in Sources */,
 				553741E52E9372DF00AB56D0 /* DateFormatter+Helper.swift in Sources */,
@@ -3406,6 +3404,7 @@
 				553742172E9372DF00AB56D0 /* FolderPanelView.swift in Sources */,
 				553742182E9372DF00AB56D0 /* ComparatorOptions+Description.swift in Sources */,
 				553742192E9372DF00AB56D0 /* FoldersOutlineView+Clipboard.swift in Sources */,
+				5536ADBA2EF169820019EFBF /* SessionDiff+ExtraData.swift in Sources */,
 				5537421A2E9372DF00AB56D0 /* DatePickersStackView.swift in Sources */,
 				5537421B2E9372DF00AB56D0 /* UnifiedDiff.m in Sources */,
 				5537421C2E9372DF00AB56D0 /* SyncOutlineView.swift in Sources */,
@@ -4471,8 +4470,9 @@
 				55916A0D2E8A814200ED6629 /* MyDocument1.1.xcdatamodel */,
 				55916A0E2E8A814200ED6629 /* MyDocument1.2.xcdatamodel */,
 				55916A0F2E8A814200ED6629 /* MyDocument1.3.xcdatamodel */,
+				553A58692EF2758800685D02 /* MyDocument1.4.xcdatamodel */,
 			);
-			currentVersion = 55916A0F2E8A814200ED6629 /* MyDocument1.3.xcdatamodel */;
+			currentVersion = 553A58692EF2758800685D02 /* MyDocument1.4.xcdatamodel */;
 			path = MyDocument.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

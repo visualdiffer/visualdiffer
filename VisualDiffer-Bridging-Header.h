@@ -8,8 +8,6 @@
 #import "NSPredicate+Objc.h"
 #import "TitlePredicateEditorRowTemplate.h"
 #import "TOPFileSizePredicateEditorRowTemplate.h"
-#import "TOPMigrationController.h"
 #import "TOPTimestampPredicateEditorRowTemplate.h"
 #import "UnifiedDiff.h"
 #import "UDiffScriptBuilder.h"
-

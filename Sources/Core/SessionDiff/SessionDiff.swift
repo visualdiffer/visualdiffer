@@ -81,6 +81,8 @@ extension SessionDiff {
         fileExtraOptions = FileExtraOptions(rawValue: prefs.integer(forKey: .fileInfoFlags))
         expandAllFolders = prefs.bool(forKey: .expandAllFolders)
 
+        extraData = ExtraData.fromUserDefaults()
+
         leftReadOnly = false
         rightReadOnly = false
 

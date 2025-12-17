@@ -11,17 +11,8 @@ struct FilePreferences {
 }
 
 extension FilePreferences {
-    mutating func fromUserDefaults() {
-        let options: [(CommonPrefs.Name, DiffResult.Options)] = [
-            (.ignoreLineEndings, .ignoreLineEndings),
-            (.ignoreLeadingWhitespaces, .ignoreLeadingWhitespaces),
-            (.ignoreTrailingWhitespaces, .ignoreTrailingWhitespaces),
-            (.ignoreInternalWhitespaces, .ignoreInternalWhitespaces),
-        ]
-
-        for (prefName, option) in options {
-            diffResultOptions.setValue(CommonPrefs.shared.bool(forKey: prefName), element: option)
-        }
+    mutating func from(sessionDiff: SessionDiff) {
+        diffResultOptions = sessionDiff.extraData.diffResultOptions
     }
 }
 

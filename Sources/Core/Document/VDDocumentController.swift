@@ -158,24 +158,4 @@ class VDDocumentController: NSDocumentController {
 
         return doc
     }
-
-    // MARK: - Migration support methods
-
-    override func makeDocument(withContentsOf url: URL, ofType typeName: String) throws -> NSDocument {
-        // I'm pretty sure this code doesn't work :(
-        let migrationController = TOPMigrationController(modelName: "MyDocument")
-
-        guard (try? migrationController.requiresMigration(url)) != nil,
-              let destinationURL = TOPMigrationController.pickDestinationURL(with: url) else {
-            return try super.makeDocument(withContentsOf: url, ofType: typeName)
-        }
-
-        do {
-            try migrationController.migrateURL(url, to: destinationURL)
-            return try super.makeDocument(withContentsOf: destinationURL, ofType: typeName)
-        } catch {
-            Logger.general.error("Error while migrating \(url) to \(destinationURL) \(error)")
-        }
-        return try super.makeDocument(withContentsOf: url, ofType: typeName)
-    }
 }

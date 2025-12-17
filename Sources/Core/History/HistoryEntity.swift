@@ -41,54 +41,38 @@
         updateTime = Date()
         starred = false
 
-        leftPath = sessionDiff.leftPath
-        leftReadOnly = sessionDiff.leftReadOnly
-
-        rightPath = sessionDiff.rightPath
-        rightReadOnly = sessionDiff.rightReadOnly
-
-        expandAllFolders = sessionDiff.expandAllFolders
-
-        itemType = sessionDiff.itemType
-
-        comparatorOptions = sessionDiff.comparatorOptions
-        displayOptions = sessionDiff.displayOptions
-        followSymLinks = sessionDiff.followSymLinks
-        timestampToleranceSeconds = sessionDiff.timestampToleranceSeconds
-        exclusionFileFilters = sessionDiff.exclusionFileFilters
-        skipPackages = sessionDiff.skipPackages
-        fileExtraOptions = sessionDiff.fileExtraOptions
-        traverseFilteredFolders = sessionDiff.traverseFilteredFolders
-        fileNameAlignments = sessionDiff.fileNameAlignments
-
-        currentSortColumn = sessionDiff.currentSortColumn
-        isCurrentSortAscending = sessionDiff.isCurrentSortAscending
-        currentSortSide = sessionDiff.currentSortSide
+        Self.copySessionDiff(source: sessionDiff, destination: self)
     }
 
     func fill(sessionDiff: SessionDiff) {
-        sessionDiff.leftPath = leftPath
-        sessionDiff.leftReadOnly = leftReadOnly
+        Self.copySessionDiff(source: self, destination: sessionDiff)
+    }
 
-        sessionDiff.rightPath = rightPath
-        sessionDiff.rightReadOnly = rightReadOnly
+    private static func copySessionDiff(source: SessionDiff, destination: SessionDiff) {
+        destination.leftPath = source.leftPath
+        destination.leftReadOnly = source.leftReadOnly
 
-        sessionDiff.expandAllFolders = expandAllFolders
+        destination.rightPath = source.rightPath
+        destination.rightReadOnly = source.rightReadOnly
 
-        sessionDiff.itemType = itemType
+        destination.expandAllFolders = source.expandAllFolders
 
-        sessionDiff.comparatorOptions = comparatorOptions
-        sessionDiff.displayOptions = displayOptions
-        sessionDiff.followSymLinks = followSymLinks
-        sessionDiff.timestampToleranceSeconds = timestampToleranceSeconds
-        sessionDiff.exclusionFileFilters = exclusionFileFilters
-        sessionDiff.skipPackages = skipPackages
-        sessionDiff.fileExtraOptions = fileExtraOptions
-        sessionDiff.traverseFilteredFolders = traverseFilteredFolders
-        sessionDiff.fileNameAlignments = fileNameAlignments
+        destination.itemType = source.itemType
 
-        sessionDiff.currentSortColumn = currentSortColumn
-        sessionDiff.isCurrentSortAscending = isCurrentSortAscending
-        sessionDiff.currentSortSide = currentSortSide
+        destination.comparatorOptions = source.comparatorOptions
+        destination.displayOptions = source.displayOptions
+        destination.followSymLinks = source.followSymLinks
+        destination.timestampToleranceSeconds = source.timestampToleranceSeconds
+        destination.exclusionFileFilters = source.exclusionFileFilters
+        destination.skipPackages = source.skipPackages
+        destination.fileExtraOptions = source.fileExtraOptions
+        destination.traverseFilteredFolders = source.traverseFilteredFolders
+        destination.fileNameAlignments = source.fileNameAlignments
+
+        destination.currentSortColumn = source.currentSortColumn
+        destination.isCurrentSortAscending = source.isCurrentSortAscending
+        destination.currentSortSide = source.currentSortSide
+
+        destination.extraData = source.extraData
     }
 }

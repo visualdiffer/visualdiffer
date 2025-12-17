@@ -107,8 +107,6 @@ class FilesWindowController: NSWindowController {
             sliderAction: #selector(sliderMoved)
         )
 
-        setupPreferences()
-
         shouldCascadeWindows = false
 
         initAllViews()
@@ -127,10 +125,6 @@ class FilesWindowController: NSWindowController {
     ) {
         filePanel.setDelegate(delegate)
         filePanel.setSliderChangeAction(target, action: action)
-    }
-
-    func setupPreferences() {
-        preferences.fromUserDefaults()
     }
 
     @available(*, unavailable)

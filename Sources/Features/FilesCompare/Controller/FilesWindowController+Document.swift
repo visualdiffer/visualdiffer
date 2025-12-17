@@ -12,6 +12,7 @@ extension FilesWindowController: @preconcurrency DocumentWindowControllerDelegat
             // create a shortcut to sessionDiff held by document
             if let sessionDiff = (document as? VDDocument)?.sessionDiff {
                 self.sessionDiff = sessionDiff
+                preferences.from(sessionDiff: sessionDiff)
                 setupUIState()
             }
         }

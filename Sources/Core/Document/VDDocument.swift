@@ -295,6 +295,25 @@ public protocol DocumentWindowControllerDelegate: AnyObject {
             super.displayName = newValue
         }
     }
+
+    override public func configurePersistentStoreCoordinator(
+        for url: URL,
+        ofType fileType: String,
+        modelConfiguration configuration: String?,
+        storeOptions: [String: Any]? = nil
+    ) throws {
+        // use lightweight migration
+        var options = storeOptions ?? [:]
+        options[NSMigratePersistentStoresAutomaticallyOption] = true
+        options[NSInferMappingModelAutomaticallyOption] = true
+
+        try super.configurePersistentStoreCoordinator(
+            for: url,
+            ofType: fileType,
+            modelConfiguration: configuration,
+            storeOptions: options
+        )
+    }
 }
 
 public extension Notification.Name {

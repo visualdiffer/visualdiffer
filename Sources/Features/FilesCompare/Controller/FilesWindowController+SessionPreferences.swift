@@ -23,6 +23,7 @@ extension FilesWindowController {
     private func updateSessionPreferences(_ returnCode: NSApplication.ModalResponse) {
         if returnCode == .OK {
             preferences = sessionPreferencesSheet.preferences
+            sessionDiff.extraData.diffResultOptions = preferences.diffResultOptions
             startComparison()
         }
     }
