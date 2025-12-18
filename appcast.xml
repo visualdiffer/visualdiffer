@@ -5,37 +5,34 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.0</title>
+            <title>Version 2.1.1</title>
             <description>
                 <![CDATA[
-                <h1 id="v210">v2.1.0</h1>
+                <h1 id="v211">v2.1.1</h1>
 
 <h3 id="features">🚀 Features</h3>
 
 <ul>
-  <li>General: Use Sparkle to update application</li>
-  <li>File Compare: Allow to wrap text</li>
-  <li>File Compare: Ignore white space differences</li>
-  <li>File Compare: Compare line endings (DOS/Unix)</li>
+  <li>None</li>
 </ul>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>General: The fonts are not updated</li>
-  <li>File Compare: Copy Lines from clipboard does nothing</li>
+  <li>Folder Compare: Handle symbolic link to an inaccessible destination within the sandbox</li>
+  <li>File Compare: The <code>ignoreXXX</code> properties are not saved for the session but only globally</li>
 </ul>
 
                 ]]>
             </description>
-            <pubDate>Tue, 9 December 2025 00:00:00 +0100</pubDate>
-            <sparkle:version>2.1.0</sparkle:version>
-            <sparkle:shortVersionString>2.1.0</sparkle:shortVersionString>
+            <pubDate>Thu, 18 December 2025 00:00:00 +0100</pubDate>
+            <sparkle:version>2.1.1</sparkle:version>
+            <sparkle:shortVersionString>2.1.1</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.0/VisualDiffer-2.1.0.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.1/VisualDiffer-2.1.1.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="JhDiZ5DYelqYtfovk/uv4t7ZtVFEpOTqIMeKsaZ1UVsHUFiAvAx6fz5Y5iqFfIi6Fjh4T0uDy2RED1fn7KP+DA==" length="5473762"
+                sparkle:edSignature="3atB5x4ChTa7WnPB7iaYZErghzKo7nwlPtr0txVru6MRZMzKaNBZTV1Bfg059kNCysaBNfP/o9uwghYRSvj5BQ==" length="5478878"
 
             />
         </item>
