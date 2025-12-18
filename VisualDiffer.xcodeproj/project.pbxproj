@@ -2105,13 +2105,6 @@
 			path = DiffEngine;
 			sourceTree = "<group>";
 		};
-		553740C32E9372DF00AB56D0 /* Document */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Document;
-			sourceTree = "<group>";
-		};
 		553740C92E9372DF00AB56D0 /* FileManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2153,7 +2146,6 @@
 			isa = PBXGroup;
 			children = (
 				553740C02E9372DF00AB56D0 /* DiffEngine */,
-				553740C32E9372DF00AB56D0 /* Document */,
 				553740C92E9372DF00AB56D0 /* FileManager */,
 				553740D32E9372DF00AB56D0 /* MGScopeBar */,
 				553740DC2E9372DF00AB56D0 /* Predicate */,
