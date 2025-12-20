@@ -54,6 +54,14 @@ For more information, visit the [VisualDiffer Wiki](https://wiki.visualdiffer.co
 > 
 > **Sandboxing** restricts what an app can access on your Mac, for example the application can only access files/folders the user explicitly grants access to.
 
+### From Homebrew
+
+You can install visualdiffer using homebrew with this command:
+
+```bash
+brew install visualdiffer
+```
+
 ### From GitHub Releases
 
 Download from [releases](https://github.com/visualdiffer/visualdiffer/releases/latest), unzip, and drag the app to Applications folder
