@@ -1,0 +1,36 @@
+desc "Lint source code with SwiftLint"
+lane :lint_app do
+  config = File.join(ENV["PROJECT_ROOT"], '.swiftlint.yml')
+  config_local = File.join(ENV["PROJECT_ROOT"], '.swiftlint.local.yml')
+
+  if File.exist?(config_local)
+      config = config_local
+  end
+
+  swiftlint(
+    mode: :lint,
+    config_file: config,
+    quiet: true,
+    raise_if_swiftlint_error: true,
+  )   
+end
+
+desc "Format source code with SwiftFormat (pass check: false to fix code)"
+lane :format_app do |options|
+  check = options.fetch(:check, true)
+
+  root_path = File.join(ENV["PROJECT_ROOT"])
+  config = File.join(ENV["PROJECT_ROOT"], '.swiftformat')
+  error_result = nil
+
+
+  command = "swiftformat --config #{config} #{root_path}"
+  command << " --lint" if check
+
+  sh(
+    command,
+    error_callback: ->(result) { error_result = result }
+  )
+
+  UI.user_error!("Found files to format") if error_result
+end

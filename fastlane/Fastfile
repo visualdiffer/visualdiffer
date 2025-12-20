@@ -6,6 +6,9 @@ require 'kramdown'
 require 'time'
 require 'tmpdir'
 
+import "Sparkle"
+import "Linter"
+
 platform :mac do
   before_all do
 
@@ -24,6 +27,10 @@ platform :mac do
 
   desc "Create release, build project and create the zip file"
   lane :release do
+    lint_app
+    format_app(
+      check: true
+    )
     build_archive_app
     verify_codesign
 
@@ -32,33 +39,6 @@ platform :mac do
     github if ENV["GITHUB_ENABLED"] == "true"
     sparkle if ENV["SPARKLE_ENABLED"] == "true"
     UI.success("🎉 Release completed")
-  end
-
-
-  lane :sparkle do
-    sign_update_signature = sh("#{ENV["SPARKLE_BIN_HOME"]}/sign_update #{ENV["ZIP_PATH"]} -f #{ENV["SPARKLE_PRIVATE_KEY_PATH"]}")
-    zip_url = ENV["SPARKLE_ZIP_ROOT_URL"]
-      .gsub("$app_version$", ENV["APP_VERSION"])
-      .gsub("$zip_name$", ENV["ZIP_NAME"])
-    note_file_name = File.join(ENV["BUILD_PATH"], ENV["RELEASE_NOTE_PATH"], ENV["APP_VERSION"])
-    notes_full_path = File.join(ENV["PROJECT_ROOT"], "#{note_file_name}.md")
-    relnotes_html = Kramdown::Document.new(File.read(notes_full_path)).to_html
-
-    properties = {
-      'app_version' => ENV["APP_VERSION"],
-      'relnotes_html' => relnotes_html,
-      'pub_date' => Time.now.strftime("%a, %-d %B %Y 00:00:00 %z"),
-      'zip_url' => zip_url,
-      'sign_update_signature' => sign_update_signature,
-    }
-    appcast_text = File.read(File.expand_path(ENV['SPARKLE_APPCAST_TEMPLATE_PATH']))
-
-    properties.each_pair { |k, v| appcast_text.gsub!("$#{k}$", v) }
-
-    output_appcast_path = File.expand_path(ENV["SPARKLE_APPCAST_UPDATED_PATH"])
-    File.write(output_appcast_path, appcast_text)
-
-    upload_appcast
   end
 
   private_lane :build_archive_app do
@@ -114,30 +94,6 @@ platform :mac do
     UI.success("✅ App notarized and stapled")
   end
 
-  private_lane :upload_appcast do
-    output_appcast_path = File.expand_path(ENV["SPARKLE_APPCAST_UPDATED_PATH"])
-
-    Dir.mktmpdir do |temp_dir|
-      sh("git worktree add -B gh-pages #{temp_dir} origin/gh-pages")
-      sh("cp #{output_appcast_path} #{temp_dir}/")
-
-      Dir.chdir(temp_dir) do
-        repo_clean = sh("git status --porcelain").empty?
-    
-        if repo_clean
-          UI.success("✅ No appcast modified, working tree clean.")
-        else
-          sh("git add appcast.xml")
-          sh("git commit -m 'Update appcast for #{ENV["APP_VERSION"]}'")
-          sh("git push origin gh-pages")
-        end
-      end
-    end
-    # use prune because git worktree remove <<dir>> deletes the directory
-    # and Dir.mktmpdir fails removing it itself
-    sh("git worktree prune")
-  end  
-
   desc "Create and upload release to GitHub"
   lane :github do
     UI.header("🚀 GitHub distribution")
@@ -158,4 +114,5 @@ platform :mac do
 
     UI.success("✅ GitHub release completed")
   end
+
 end
