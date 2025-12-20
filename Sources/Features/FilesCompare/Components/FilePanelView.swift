@@ -7,19 +7,8 @@
 //
 
 class FilePanelView: TablePanelView<FilesTableView, FileInfoBar> {
-    private var sliderPosition: NSLayoutConstraint?
-
     lazy var columnSlider: NSSlider = createSlider()
     var fileInfoBar: FileInfoBar
-
-    var isDirty: Bool {
-        get {
-            treeView.isDirty
-        }
-        set {
-            treeView.isDirty = newValue
-        }
-    }
 
     var isEditAllowed: Bool {
         get {
@@ -67,7 +56,6 @@ class FilePanelView: TablePanelView<FilesTableView, FileInfoBar> {
 
     override func setupBottomBarConstraints() {
         let constraints = columnSlider.leadingAnchor.constraint(equalTo: leadingAnchor)
-        sliderPosition = constraints
 
         NSLayoutConstraint.activate([
             scrollView.bottomAnchor.constraint(equalTo: columnSlider.topAnchor),
@@ -80,10 +68,6 @@ class FilePanelView: TablePanelView<FilesTableView, FileInfoBar> {
             bottomBar.trailingAnchor.constraint(equalTo: trailingAnchor),
             bottomBar.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
-    }
-
-    func alignSlider(width textX: CGFloat) {
-        sliderPosition?.constant = textX
     }
 
     func setSliderMaxValue(_ left: [DiffLine], right: [DiffLine]) {

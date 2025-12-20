@@ -70,6 +70,13 @@ extension FilesWindowController: RowHeightDataSource {
     }
 
     func setWordWrap(enabled: Bool) {
+        // reset the slider position before reloading data to prevent display issues
+        leftPanelView.columnSlider.isHidden = enabled
+        leftPanelView.columnSlider.doubleValue = 0
+
+        rightPanelView.columnSlider.isHidden = enabled
+        rightPanelView.columnSlider.doubleValue = 0
+
         rowHeightCalculator.isWordWrapEnabled = enabled
 
         let row = lastUsedView.firstVisibleRow
@@ -78,12 +85,6 @@ extension FilesWindowController: RowHeightDataSource {
         rightPanelView.reloadTreeData()
 
         lastUsedView.scrollTo(row: row, center: false)
-
-        leftPanelView.columnSlider.isHidden = enabled
-        leftPanelView.columnSlider.doubleValue = 0
-
-        rightPanelView.columnSlider.isHidden = enabled
-        rightPanelView.columnSlider.doubleValue = 0
 
         updateToolbar()
     }
