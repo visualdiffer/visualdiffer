@@ -63,7 +63,7 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
         } else if action == #selector(copyLinesToLeft) {
             if lastUsedView.side == .right {
                 item.isHidden = false
-                return !sessionDiff.leftReadOnly && self.leftView.isEditAllowed
+                return !sessionDiff.leftReadOnly && leftView.isEditAllowed
             } else {
                 item.isHidden = true
                 return false
@@ -71,7 +71,7 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
         } else if action == #selector(copyLinesToRight) {
             if isLeftView {
                 item.isHidden = false
-                return !sessionDiff.rightReadOnly && self.rightView.isEditAllowed
+                return !sessionDiff.rightReadOnly && rightView.isEditAllowed
             } else {
                 item.isHidden = true
                 return false
@@ -79,17 +79,17 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
         } else if action == #selector(deleteLines) {
             if isLeftView {
                 item.title = NSLocalizedString("Delete Lines from Left", comment: "")
-                return !sessionDiff.leftReadOnly && self.leftView.isEditAllowed
+                return !sessionDiff.leftReadOnly && leftView.isEditAllowed
             } else {
                 item.title = NSLocalizedString("Delete Lines from Right", comment: "")
-                return !sessionDiff.rightReadOnly && self.rightView.isEditAllowed
+                return !sessionDiff.rightReadOnly && rightView.isEditAllowed
             }
         } else if action == #selector(pasteLinesToClipboard) || action == #selector(cutToClipboard) {
-            if self.scopeBar.showLinesFilter == .all {
+            if scopeBar.showLinesFilter == .all {
                 if isLeftView {
-                    return !sessionDiff.leftReadOnly && self.leftView.isEditAllowed
+                    return !sessionDiff.leftReadOnly && leftView.isEditAllowed
                 } else {
-                    return !sessionDiff.rightReadOnly && self.rightView.isEditAllowed
+                    return !sessionDiff.rightReadOnly && rightView.isEditAllowed
                 }
             }
             return false
@@ -100,7 +100,7 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
             item.state = sessionDiff.rightReadOnly ? .on : .off
             return true
         } else if action == #selector(toggleDetails) {
-            item.title = self.linesDetailView.isHidden
+            item.title = linesDetailView.isHidden
                 ? NSLocalizedString("Show Details", comment: "")
                 : NSLocalizedString("Hide Details", comment: "")
             return true

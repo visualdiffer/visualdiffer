@@ -11,7 +11,7 @@ import Foundation
 @objc extension NSImage {
     static func imageSymbolCompat(_ name: NSImage.Name) -> NSImage? {
         if #available(macOS 11.0, *) {
-            if let symbolInfo = Self.symbolMap[name] {
+            if let symbolInfo = symbolMap[name] {
                 return NSImage(systemSymbolName: symbolInfo[0], accessibilityDescription: symbolInfo[1])
             }
         }

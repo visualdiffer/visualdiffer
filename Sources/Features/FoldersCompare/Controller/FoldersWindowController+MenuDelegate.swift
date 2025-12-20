@@ -23,7 +23,7 @@ extension FoldersWindowController: NSMenuDelegate,
         let fsi = lastUsedView.selectionInfo
 
         if action == #selector(toggleFilteredFiles) {
-            if self.showFilteredFiles {
+            if showFilteredFiles {
                 menuItem.title = NSLocalizedString("Hide Filtered Files", comment: "")
             } else {
                 menuItem.title = NSLocalizedString("Show Filtered Files", comment: "")
@@ -112,9 +112,9 @@ extension FoldersWindowController: NSMenuDelegate,
             }
             return isValid
         } else if action == #selector(findNext) {
-            return self.scopeBar.findView.hasMatches
+            return scopeBar.findView.hasMatches
         } else if action == #selector(findPrevious) {
-            return self.scopeBar.findView.hasMatches
+            return scopeBar.findView.hasMatches
         } else if action == #selector(compareFolders) {
             return fsi.validateCompareFolders()
         } else if action == #selector(moveFiles) {
@@ -128,7 +128,7 @@ extension FoldersWindowController: NSMenuDelegate,
         } else if action == #selector(setModificationDate) {
             return fsi.validateFileTouch(sessionDiff)
         } else if action == #selector(toggleLogConsole) {
-            if self.consoleSplitter.hasSubviewCollapsed {
+            if consoleSplitter.hasSubviewCollapsed {
                 menuItem.title = NSLocalizedString("Show Log Console", comment: "")
             } else {
                 menuItem.title = NSLocalizedString("Hide Log Console", comment: "")

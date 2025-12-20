@@ -131,7 +131,7 @@
             || action == #selector(copyFileNames) {
             isValid = true
         } else if action == #selector(showWhitespaces) {
-            if self.scopeBar.showWhitespaces {
+            if scopeBar.showWhitespaces {
                 menuItem.title = NSLocalizedString("Hide Whitespaces", comment: "")
             } else {
                 menuItem.title = NSLocalizedString("Show Whitespaces", comment: "")
