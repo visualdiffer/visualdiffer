@@ -96,9 +96,9 @@ Thanks to everyone who has helped improve **VisualDiffer**!
 
 | Name | Role |
 |------|:------|
-| **Davide Ficano** | Creator & Maintainer |
+| **[Davide Ficano](https://github.com/dafi)** | Creator & Maintainer |
 | Pablo J. Malacara | Application Icon |
-
+| [aancw](https://github.com/aancw) | [Homebrew](https://brew.sh/) integration |
 
 ## 👥Contributing  
 
