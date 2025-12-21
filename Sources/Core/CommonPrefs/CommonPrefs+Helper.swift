@@ -7,6 +7,7 @@
 //
 
 extension CommonPrefs {
+    // periphery:ignore
     func number(forKey: CommonPrefs.Name, _ defaultValue: Bool) -> NSNumber {
         object(forKey: forKey) as? NSNumber ?? NSNumber(value: defaultValue)
     }

@@ -12,7 +12,6 @@ private let separatorColor = NSColor(calibratedWhite: 0.52, alpha: 1.0)
 
 protocol FileInfoBarDelegate: AnyObject {
     func fileInfoBar(_ fileInfoBar: FileInfoBar, changedEncoding encoding: String.Encoding)
-    func fileInfoBar(_ fileInfoBar: FileInfoBar, changedEOL eol: EndOfLine)
 }
 
 class FileInfoBar: NSView {

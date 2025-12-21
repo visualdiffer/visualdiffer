@@ -6,3 +6,6 @@ schemes:
 exclude_tests: true
 index_exclude:
   - "**/NSEvent+VirtualKeys.swift"
+report_exclude:
+  - "**/SharedKit/**"
+  - "**/SharedUI/**"

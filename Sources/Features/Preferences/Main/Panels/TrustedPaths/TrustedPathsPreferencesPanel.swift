@@ -269,19 +269,6 @@ class TrustedPathsPreferencesPanel: NSView, NSTableViewDataSource, NSTableViewDe
         pathTableView.reloadData()
     }
 
-    func removeInvalidPaths() {
-        guard let arr = SecureBookmark.shared.securedPaths?.keys else {
-            return
-        }
-
-        let fm = FileManager.default
-        let invalidPaths = arr.filter { !fm.fileExists(atPath: $0) }
-
-        if !invalidPaths.isEmpty {
-            SecureBookmark.shared.removePaths(invalidPaths)
-        }
-    }
-
     // MARK: - NSTableView data source messages
 
     func numberOfRows(in _: NSTableView) -> Int {

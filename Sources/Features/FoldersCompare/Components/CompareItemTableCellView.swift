@@ -7,8 +7,6 @@
 //
 
 class CompareItemTableCellView: NSView {
-    private static let fakeImagePath = URL(filePath: "/vdFakeNoExt", directoryHint: .notDirectory)
-
     lazy var text: NSTextField = createTextField()
     var icon: NSImageView?
 

@@ -77,10 +77,6 @@ class FontPreferencesPanel: NSView, NSFontChanging, PreferencesPanelDataSource {
         return view
     }
 
-    func folderFont() -> NSFont? {
-        folderFontBox.previewFont
-    }
-
     @objc func restoreDefaultsAction(_: AnyObject) {
         CommonPrefs.shared.restoreDefaultFonts()
         reloadData()

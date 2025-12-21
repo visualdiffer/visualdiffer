@@ -13,6 +13,7 @@ class CopyFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
     var progressLabel = NSLocalizedString("Copying", comment: "")
     var prefName: CommonPrefs.Name? = .confirmCopy
 
+    // periphery:ignore
     private let side: DisplaySide
 
     private let items: [CompareItem]

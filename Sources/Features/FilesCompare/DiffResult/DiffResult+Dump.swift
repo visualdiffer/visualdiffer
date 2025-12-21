@@ -6,6 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+// periphery:ignore:all
+
 #if DEBUG
 
     import os.log

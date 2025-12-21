@@ -56,21 +56,6 @@ class SyncFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
         allItems.linkedInfo?.linkedInfo = allItems
     }
 
-    func setTitle(_ syncBothSides: Bool) {
-        if syncBothSides {
-            image = NSImage(named: VDImageNameSyncBoth)
-            summary = NSLocalizedString("Copy newer and orphan files to other side", comment: "")
-        } else {
-            if side == .left {
-                image = NSImage(named: VDImageNameSyncRight)
-                summary = NSLocalizedString("Copy newer and orphan files to right", comment: "")
-            } else {
-                image = NSImage(named: VDImageNameSyncLeft)
-                summary = NSLocalizedString("Copy newer and orphan files to left", comment: "")
-            }
-        }
-    }
-
     func execute(_ manager: FileOperationManagerAction, payload: Payload?) {
         guard let payload else {
             fatalError("Missing payload")

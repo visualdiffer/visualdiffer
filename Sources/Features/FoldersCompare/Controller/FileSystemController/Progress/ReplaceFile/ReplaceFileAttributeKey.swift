@@ -6,6 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+// periphery:ignore:all
+
 struct ReplaceFileAttributeKey: Hashable, RawRepresentable {
     let rawValue: String
 

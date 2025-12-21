@@ -38,6 +38,7 @@ extension NSApplication.ModalResponse {
             keyEquivalent == KeyEquivalent.escape ? "Escape" : keyEquivalent
         }
 
+        // periphery:ignore
         var modalResponse: NSApplication.ModalResponse {
             NSApplication.ModalResponse(rawValue: rawValue)
         }

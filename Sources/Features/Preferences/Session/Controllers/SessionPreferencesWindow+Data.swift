@@ -17,7 +17,6 @@ extension SessionPreferencesWindow {
         var expandAllFolders: Bool
         var fileExtraOptions: FileExtraOptions
         var fileFilters: String?
-        var alignFlags: ComparatorOptions
         var alignRules: [AlignRule]
 
         init() {
@@ -30,7 +29,6 @@ extension SessionPreferencesWindow {
             expandAllFolders = false
             fileExtraOptions = []
             fileFilters = nil
-            alignFlags = []
             alignRules = [AlignRule]()
         }
     }
@@ -62,7 +60,6 @@ extension SessionPreferencesWindow.Data {
         data.expandAllFolders = CommonPrefs.shared.bool(forKey: .expandAllFolders)
         data.fileExtraOptions = CommonPrefs.shared.fileExtraOptions
         data.fileFilters = SessionDiff.defaultFileFilters()
-        data.alignFlags = CommonPrefs.shared.comparatorOptions.onlyAlignFlags
         data.alignRules = [AlignRule]()
 
         return data
@@ -80,7 +77,6 @@ extension SessionPreferencesWindow.Data {
         data.expandAllFolders = sessionDiff.expandAllFolders
         data.fileExtraOptions = sessionDiff.fileExtraOptions
         data.fileFilters = sessionDiff.exclusionFileFilters
-        data.alignFlags = sessionDiff.comparatorOptions.onlyAlignFlags
         data.alignRules = if let fileNameAlignments = sessionDiff.fileNameAlignments {
             fileNameAlignments
         } else {

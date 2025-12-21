@@ -8,12 +8,4 @@
 
 extension FilesWindowController: @preconcurrency FileInfoBarDelegate {
     func fileInfoBar(_: FileInfoBar, changedEncoding _: String.Encoding) {}
-
-    func fileInfoBar(_ fileInfoBar: FileInfoBar, changedEOL eol: EndOfLine) {
-        if fileInfoBar === leftPanelView.fileInfoBar {
-            diffResult?.leftSide.eol = eol
-        } else if fileInfoBar === rightPanelView.fileInfoBar {
-            diffResult?.rightSide.eol = eol
-        }
-    }
 }
