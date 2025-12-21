@@ -81,6 +81,7 @@
         textField.isEditable = false
         textField.isSelectable = false
         textField.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+        textField.lineBreakMode = .byTruncatingMiddle
 
         cell.addSubview(textField)
         cell.textField = textField

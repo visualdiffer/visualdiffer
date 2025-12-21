@@ -34,7 +34,7 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
     )
 
     private lazy var scrollView: NSScrollView = createScrollView()
-    private lazy var treeView: NSOutlineView = SyncOutlineView(items: itemsToSync)
+    private lazy var treeView: SyncOutlineView = .init(items: itemsToSync)
 
     private lazy var itemsToSync: SyncItemsInfo = {
         let view = SyncItemsInfo()
@@ -175,11 +175,26 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
         }
     }
 
+    override func setupViews() {
+        super.setupViews()
+
+        if !executor.hasSelectedItems {
+            checkboxUseSelection.state = .off
+            checkboxUseSelection.isEnabled = false
+        }
+    }
+
     @objc override func updateCount(_: AnyObject?) {
+        setupTitle()
+        fillItemsToSync()
+
+        treeView.reloadData()
+    }
+
+    private func fillItemsToSync() {
         let useSelection = checkboxUseSelection.state == .on
         let syncBothSides = checkboxSyncBothSides.state == .on
 
-        setupTitle()
         executor.prepareSyncItemsInfo(
             items: itemsToSync,
             withSelection: useSelection,
@@ -187,7 +202,17 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
             createEmptyFolders: createEmptyFolders,
             view: view
         )
-        treeView.reloadData()
+        guard let nodes = itemsToSync.nodes,
+              nodes.children.isEmpty else {
+            return
+        }
+        let text = if view.side == .left {
+            NSLocalizedString("No files to copy on the right", comment: "")
+        } else {
+            NSLocalizedString("No files to copy on the left", comment: "")
+        }
+
+        nodes.children.append(DescriptionOutlineNode(text: text, isContainer: false))
     }
 
     override func prepareExecute() {
