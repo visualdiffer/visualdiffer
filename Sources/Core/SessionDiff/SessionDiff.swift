@@ -209,12 +209,4 @@ extension SessionDiff {
             }
         }
     }
-
-    func observeDisplayOptions(_ closure: @escaping @Sendable (DisplayOptions) -> Void) -> NSKeyValueObservation {
-        observe(\.displayFilters, options: [.new]) { _, change in
-            if let flags = change.newValue {
-                closure(DisplayOptions(rawValue: Int(flags)))
-            }
-        }
-    }
 }

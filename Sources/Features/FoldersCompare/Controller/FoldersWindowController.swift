@@ -47,9 +47,6 @@ public class FoldersWindowController: NSWindowController,
         }
     }
 
-    // it works like comparatorMethod
-    var displayOptionsMethod: DisplayOptions = []
-
     // swiftlint:disable:next implicitly_unwrapped_optional
     var currentFont: NSFont!
 

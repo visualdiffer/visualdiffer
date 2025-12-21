@@ -115,7 +115,6 @@ extension FoldersWindowController {
         setupObservers()
 
         comparatorMethod = sessionDiff.comparatorOptions.onlyMethodFlags
-        displayOptionsMethod = sessionDiff.displayOptions.onlyMethodFlags
 
         hideEmptyFolders = CommonPrefs.shared.hideEmptyFolders
 
@@ -159,13 +158,7 @@ extension FoldersWindowController {
             }
         }
 
-        let displayOptionsObservation = sessionDiff.observeDisplayOptions { flags in
-            Task { @MainActor in
-                self.displayOptionsMethod = flags.onlyMethodFlags
-            }
-        }
-
-        observations.append(contentsOf: [comparatorOptionsObservation, displayOptionsObservation])
+        observations.append(contentsOf: [comparatorOptionsObservation])
 
         UNUserNotificationCenter.current().delegate = self
     }
