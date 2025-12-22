@@ -126,7 +126,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             let item = CustomValidationToolbarItem(itemIdentifier: itemIdentifier)
                 .with(
                     label: NSLocalizedString("Open With", comment: ""),
-                    tooltip: NSLocalizedString("Open using selected application", comment: ""),
+                    tooltip: NSLocalizedString("Open using the selected application", comment: ""),
                     image: NSImage(named: VDImageNameFinder),
                     target: nil,
                     action: nil

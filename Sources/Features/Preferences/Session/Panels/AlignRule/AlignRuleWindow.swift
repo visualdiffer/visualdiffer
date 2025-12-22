@@ -22,7 +22,7 @@ class AlignRuleWindow: NSWindow, NSTextFieldDelegate {
 
     private lazy var leftExpressionBox: ExpressionBox = {
         let view = ExpressionBox(
-            title: NSLocalizedString("Left file name match regular expression", comment: "")
+            title: NSLocalizedString("Left file name matches regular expression", comment: "")
         )
         view.delegate = self
         view.popupMenu = ExpressionBox.defaultRegExpMenu
@@ -32,7 +32,7 @@ class AlignRuleWindow: NSWindow, NSTextFieldDelegate {
 
     private lazy var rightExpressionBox: ExpressionBox = {
         let view = ExpressionBox(
-            title: NSLocalizedString("Right file name match pattern (this is not a regular expression)", comment: "")
+            title: NSLocalizedString("Right file name matches pattern (this is not a regular expression)", comment: "")
         )
         view.delegate = self
         view.popupMenu = ExpressionBox.defaultRightExpressionMenu

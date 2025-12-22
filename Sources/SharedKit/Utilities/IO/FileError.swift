@@ -25,7 +25,7 @@ extension FileError: LocalizedError {
             let message = NSLocalizedString("Unable to open file '%@'", comment: "")
             return String.localizedStringWithFormat(message, path)
         case let .createSymLink(path):
-            let message = NSLocalizedString("Unable to create symbolic link to destination '%@' because existing file isn't a symbolic link", comment: "")
+            let message = NSLocalizedString("Unable to create symbolic link to destination '%@' because the existing file isn't a symbolic link", comment: "")
             return String.localizedStringWithFormat(message, path)
         case let .fileNotExists(path, side):
             let message = switch side {

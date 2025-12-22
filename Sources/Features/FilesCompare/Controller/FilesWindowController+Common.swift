@@ -36,12 +36,12 @@ extension FilesWindowController {
     func askReload() -> Bool {
         let informativeLines = [
             NSLocalizedString("Another application has made changes to the file for this document.", comment: ""),
-            NSLocalizedString("You can choose to compare using the modified version on file system, or keep existing one", comment: ""),
+            NSLocalizedString("You can choose to compare using the modified version on the file system, or keep the existing one", comment: ""),
             NSLocalizedString("(Reverting will lose any unsaved changes.)", comment: ""),
         ]
 
         return NSAlert.showModalConfirm(
-            messageText: NSLocalizedString("The file(s) has been changed on the file system, do you want to reload all modified files?", comment: ""),
+            messageText: NSLocalizedString("The file(s) have been changed on the file system. Do you want to reload all modified files?", comment: ""),
             informativeText: informativeLines.joined(separator: "\n"),
             suppressPropertyName: CommonPrefs.Name.confirmReloadFiles.rawValue,
             yesText: NSLocalizedString("Reload", comment: ""),

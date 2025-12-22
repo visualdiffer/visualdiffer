@@ -307,13 +307,13 @@
                                     <action selector="setAsBaseFolder:" target="-1" id="627"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Set as Base Folder on Other Side" id="606">
+                            <menuItem title="Set as Base Folder on the Other Side" id="606">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="setAsBaseFolderOtherSide:" target="-1" id="628"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Set as Base Folder Both Side" id="607">
+                            <menuItem title="Set as Base Folder Both Sides" id="607">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="setAsBaseFoldersBothSides:" target="-1" id="629"/>

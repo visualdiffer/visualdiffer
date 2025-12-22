@@ -77,7 +77,7 @@ enum FileScopeGroupOptions: Int {
         groupItems.append([
             .selectionMode: MGScopeBarGroupSelectionMode.multiple,
             .items: [
-                mkItem(showWhitespacesId, NSLocalizedString("Show Whitespaces", comment: "")),
+                mkItem(showWhitespacesId, NSLocalizedString("Show Whitespace", comment: "")),
             ],
         ])
 

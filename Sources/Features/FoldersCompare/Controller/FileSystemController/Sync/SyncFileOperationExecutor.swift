@@ -17,7 +17,7 @@ class SyncFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
     }
 
     var title = NSLocalizedString("Sync", comment: "")
-    var summary = NSLocalizedString("Copy newer and orphan files to other side", comment: "")
+    var summary = NSLocalizedString("Copy newer and orphan files to the other side", comment: "")
     var image: NSImage?
     var progressLabel = ""
     var prefName: CommonPrefs.Name?

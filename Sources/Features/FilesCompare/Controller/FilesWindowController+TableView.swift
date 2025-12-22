@@ -132,9 +132,9 @@
             isValid = true
         } else if action == #selector(showWhitespaces) {
             if scopeBar.showWhitespaces {
-                menuItem.title = NSLocalizedString("Hide Whitespaces", comment: "")
+                menuItem.title = NSLocalizedString("Hide Whitespace", comment: "")
             } else {
-                menuItem.title = NSLocalizedString("Show Whitespaces", comment: "")
+                menuItem.title = NSLocalizedString("Show Whitespace", comment: "")
             }
 
             isValid = true

@@ -23,7 +23,7 @@ class SessionPreferencesComparisonPanel: NSView, PreferencesPanelDataSource {
     override init(frame frameRect: NSRect) {
         stackView = NSStackView.preferences(with: [
             FolderComparisonBox(title: NSLocalizedString("Comparison", comment: "")),
-            FoldersTraversalBox(title: "Folders Traversal"),
+            FoldersTraversalBox(title: "Folder Traversal"),
             FolderViewBox(title: NSLocalizedString("View", comment: "")),
         ])
 

@@ -21,7 +21,7 @@
         ViewItemConfiguration(
             key: .toTitle,
             view: NSTextField.hintWithTitle(
-                NSLocalizedString("Would you like to replace the existing file", comment: "")
+                NSLocalizedString("Would you like to replace the existing file?", comment: "")
             )
         ),
 

@@ -16,10 +16,10 @@ class ConfirmationsDocumentsBox: PreferencesBox {
     private func setupViews() {
         let stackView = NSStackView.preferences(with: [
             createCheckBox(
-                title: NSLocalizedString("Don't ask to save document with changes when close", comment: ""),
+                title: NSLocalizedString("Don't ask to save the document with changes when closing", comment: ""),
                 prefName: .confirmDontAskToSaveSession
             ),
-            NSTextField.hintWithTitle(NSLocalizedString("Be careful, any changes will be lost (filters, aligment rules, ...)", comment: "")),
+            NSTextField.hintWithTitle(NSLocalizedString("Be careful, any changes will be lost (filters, alignment rules, ...)", comment: "")),
         ])
 
         if let contentView {

@@ -17,8 +17,8 @@ extension NSWorkspace {
     @MainActor @objc func show(inFinder paths: [String]) {
         if paths.count > maxFoldersToShowWithoutAlert {
             let confirmOpen = NSAlert.showModalConfirm(
-                messageText: String(format: NSLocalizedString("Are you sure to open %lu Finder windows?", comment: ""), paths.count),
-                informativeText: NSLocalizedString("You have chosen to open a large number of windows, this can take a long time", comment: ""),
+                messageText: String(format: NSLocalizedString("Are you sure you want to open %lu Finder windows?", comment: ""), paths.count),
+                informativeText: NSLocalizedString("You have chosen to open a large number of windows. This can take a long time", comment: ""),
                 suppressPropertyName: suppressShowInFinder,
                 yesText: nil,
                 noText: nil

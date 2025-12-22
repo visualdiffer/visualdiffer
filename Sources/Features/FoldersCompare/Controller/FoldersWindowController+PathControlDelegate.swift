@@ -22,7 +22,7 @@ extension FoldersWindowController: PathControlDelegate {
             keyEquivalent: ""
         ).tag = pathControlMenu
         menu.addItem(
-            withTitle: NSLocalizedString("Set as Base Folder on Other Side", comment: ""),
+            withTitle: NSLocalizedString("Set as Base Folder on the Other Side", comment: ""),
             action: #selector(setAsBaseFolderOtherSide),
             keyEquivalent: ""
         ).tag = pathControlMenu

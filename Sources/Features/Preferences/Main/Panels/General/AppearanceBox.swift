@@ -86,7 +86,7 @@ class AppearanceBox: PreferencesBox {
             return true
         }
         return NSAlert.showModalConfirm(
-            messageText: NSLocalizedString("The app is using a custom color scheme which will continue to be used by changing appearance, colors may not be suitable for the new appearance, are you sure?", comment: ""),
+            messageText: NSLocalizedString("The app is using a custom color scheme that will continue to be used when changing appearance. Colors may not be suitable for the new appearance. Are you sure?", comment: ""),
             informativeText: ""
         )
     }

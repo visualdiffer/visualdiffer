@@ -19,7 +19,7 @@ class FolderPreferencesPanel: NSView, PreferencesPanelDataSource {
 
     private func setupViews() {
         let views = [
-            FoldersTraversalBox(title: NSLocalizedString("Folders Traversal", comment: "")),
+            FoldersTraversalBox(title: NSLocalizedString("Folder Traversal", comment: "")),
             FolderViewBox(title: NSLocalizedString("View", comment: "")),
             DifferenceNavigatorBox(title: NSLocalizedString("Difference Navigator", comment: "")),
         ]

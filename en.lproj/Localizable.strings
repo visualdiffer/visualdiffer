@@ -143,7 +143,7 @@
 "Another application has made changes to the file for this document." = "Another application has made changes to the file for this document.";
 
 /* No comment provided by engineer. */
-"Are you sure to open %lu Finder windows?" = "Are you sure to open %lu Finder windows?";
+"Are you sure you want to open %lu Finder windows?" = "Are you sure you want to open %lu Finder windows?";
 
 /* No comment provided by engineer. */
 "Are you sure to stop the operation?" = "Are you sure to stop the operation?";
@@ -233,7 +233,7 @@
 "Copy newer and orphan files to left" = "Copy newer and orphan files to left";
 
 /* No comment provided by engineer. */
-"Copy newer and orphan files to other side" = "Copy newer and orphan files to other side";
+"Copy newer and orphan files to the other side" = "Copy newer and orphan files to the other side";
 
 /* No comment provided by engineer. */
 "Copy newer and orphan files to right" = "Copy newer and orphan files to right";
@@ -332,7 +332,7 @@
 "Filtered" = "Filtered";
 
 /* No comment provided by engineer. */
-"Finder doesn't show files starting with . (period) character" = "Finder doesn't show files starting with . (period) character";
+"Finder doesn't show files starting with a . (period) character" = "Finder doesn't show files starting with a . (period) character";
 
 /* No comment provided by engineer. */
 "Folder" = "Folder";
@@ -341,7 +341,7 @@
 "Folder View" = "Folder View";
 
 /* No comment provided by engineer. */
-"Folders comparison completed" = "Folders comparison completed";
+"Folder comparison completed" = "Folder comparison completed";
 
 /* No comment provided by engineer. */
 "Folders:" = "Folders:";
@@ -368,10 +368,10 @@
 "Hide Log Console" = "Hide Log Console";
 
 /* No comment provided by engineer. */
-"Hide Whitespaces" = "Hide Whitespaces";
+"Hide Whitespace" = "Hide Whitespace";
 
 /* No comment provided by engineer. */
-"If operation takes long time to run you can stop it but the results could be inaccurate" = "If operation takes long time to run you can stop it but the results could be inaccurate";
+"If the operation takes a long time to run, you can stop it, but the results could be inaccurate" = "If the operation takes a long time to run, you can stop it, but the results could be inaccurate";
 
 /* No comment provided by engineer. */
 "Ignore Case" = "Ignore Case";
@@ -398,7 +398,7 @@
 "Keyboard shortcuts" = "Keyboard shortcuts";
 
 /* No comment provided by engineer. */
-"Left and Right paths must be both folders or files" = "Left and Right paths must be both folders or files";
+"Left and right paths must both be folders or files" = "Left and right paths must both be folders or files";
 
 /* No comment provided by engineer. */
 "Left expression can't be empty" = "Left expression can't be empty";
@@ -476,7 +476,7 @@
 "Path no longer exists" = "Path no longer exists";
 
 /* No comment provided by engineer. */
-"Paths granted to access to VisualDiffer" = "Paths granted to access to VisualDiffer";
+"Paths granted access to VisualDiffer" = "Paths granted access to VisualDiffer";
 
 /* No comment provided by engineer. */
 "Please provide a valid value" = "Please provide a valid value";
@@ -575,7 +575,7 @@
 "Set as Base Folder" = "Set as Base Folder";
 
 /* No comment provided by engineer. */
-"Set as Base Folder on Other Side" = "Set as Base Folder on Other Side";
+"Set as Base Folder on the Other Side" = "Set as Base Folder on the Other Side";
 
 /* No comment provided by engineer. */
 "Set as Base Folders Both Sides" = "Set as Base Folders Both Sides";
@@ -605,7 +605,7 @@
 "Show Log Console" = "Show Log Console";
 
 /* No comment provided by engineer. */
-"Show Whitespaces" = "Show Whitespaces";
+"Show Whitespace" = "Show Whitespace";
 
 /* No comment provided by engineer. */
 "Some selected file(s) may not be visible in Finder" = "Some selected file(s) may not be visible in Finder";
@@ -638,10 +638,10 @@
 "Text Differences" = "Text Differences";
 
 /* No comment provided by engineer. */
-"The custom defined defaults will be replaced with application defaults, are you sure?" = "The custom defined defaults will be replaced with application defaults, are you sure?";
+"The custom-defined defaults will be replaced with the application defaults. Are you sure?" = "The custom-defined defaults will be replaced with the application defaults. Are you sure?";
 
 /* No comment provided by engineer. */
-"The file(s) has been changed on the file system, do you want to reload all modified files?" = "The file(s) has been changed on the file system, do you want to reload all modified files?";
+"The file(s) have been changed on the file system. Do you want to reload all modified files?" = "The file(s) have been changed on the file system. Do you want to reload all modified files?";
 
 /* No comment provided by engineer. */
 "The path %@ no longer exists or isn't a valid file" = "The path %@ no longer exists or isn't a valid file";
@@ -665,7 +665,7 @@
 "Trusted Paths" = "Trusted Paths";
 
 /* No comment provided by engineer. */
-"Unable to create symbolic link to destination '%@' because existing file isn't a symbolic link" = "Unable to create symbolic link to destination '%@' because existing file isn't a symbolic link";
+"Unable to create symbolic link to destination '%@' because the existing file isn't a symbolic link" = "Unable to create symbolic link to destination '%@' because the existing file isn't a symbolic link";
 
 /* No comment provided by engineer. */
 "Unable to parse filter expression" = "Unable to parse filter expression";
@@ -686,10 +686,10 @@
 "Yes to All" = "Yes to All";
 
 /* No comment provided by engineer. */
-"You can choose to compare using the modified version on file system, or keep existing one" = "You can choose to compare using the modified version on file system, or keep existing one";
+"You can choose to compare using the modified version on the file system, or keep the existing one" = "You can choose to compare using the modified version on the file system, or keep the existing one";
 
 /* No comment provided by engineer. */
-"You have chosen to open a large number of windows, this can take a long time" = "You have chosen to open a large number of windows, this can take a long time";
+"You have chosen to open a large number of windows. This can take a long time" = "You have chosen to open a large number of windows. This can take a long time";
 
 /* No comment provided by engineer. */
 "Your document needs to be upgraded. This manual step is required by Apple Sandbox rules" = "Your document needs to be upgraded. This manual step is required by Apple Sandbox rules";
@@ -723,13 +723,13 @@
 "Expand All Folders" = "Expand All Folders";
 "Collapse All Folders" = "Collapse All Folders";
 "Edit Session Settings" = "Edit Session Settings";
-"Folders reading and comparison" = "Folders reading and comparison";
+"Reading and comparing folders" = "Reading and comparing folders";
 "Remove" = "Remove";
 "Select Invalid Paths" = "Select Invalid Paths";
 "The document could not be opened." = "The document could not be opened.";
 "Left path doesn't exist" = "Left path doesn't exist";
 "Right path doesn't exist" = "Right path doesn't exist";
-"Left path is a folder but right is a file, both must be folders or files" = "Left path is a folder but right is a file, both must be folders or files";
-"Left path is a file but right is a folder, both must be folders or files" = "Left path is a file but right is a folder, both must be folders or files";
+"Left path is a folder but the right is a file; both must be folders or files" = "Left path is a folder but the right is a file; both must be folders or files";
+"Left path is a file but the right is a folder; both must be folders or files" = "Left path is a file but the right is a folder; both must be folders or files";
 "Unable to get application info" = "Unable to get application info";
 "The unix task '%@' must have the execute flag set (eg chmod +x)" = "The unix task '%@' must have the execute flag set (eg chmod +x)";

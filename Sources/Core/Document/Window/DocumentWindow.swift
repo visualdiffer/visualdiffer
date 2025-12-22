@@ -43,7 +43,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
             action: #selector(showDiffs)
         )
 
-        view.toolTip = NSLocalizedString("Start Compare ⌘↩︎", comment: "")
+        view.toolTip = NSLocalizedString("Start Comparison ⌘↩︎", comment: "")
         view.keyEquivalent = KeyEquivalent.enter
         view.keyEquivalentModifierMask = .command
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -201,7 +201,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
                 NSDocumentController.shared.newDocument(self)
             }
         } else {
-            var errDesc = NSLocalizedString("Left and Right paths must be both folders or files", comment: "")
+            var errDesc = NSLocalizedString("Left and right paths must both be folders or files", comment: "")
             if !leftExists {
                 errDesc = NSLocalizedString("Left file no longer exists", comment: "")
             } else if !rightExists {

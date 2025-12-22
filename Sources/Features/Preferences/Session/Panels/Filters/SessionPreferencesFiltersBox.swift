@@ -182,7 +182,7 @@ class SessionPreferencesFiltersBox: PreferencesBox, NSMenuItemValidation {
     @objc func restoreDefaults(_: AnyObject) {
         let result = NSAlert.showModalConfirm(
             messageText: NSLocalizedString("Restore Defaults", comment: ""),
-            informativeText: NSLocalizedString("The custom defined defaults will be replaced with application defaults, are you sure?", comment: "")
+            informativeText: NSLocalizedString("The custom-defined defaults will be replaced with the application defaults. Are you sure?", comment: "")
         )
         if result {
             CommonPrefs.shared.defaultFileFilters = nil

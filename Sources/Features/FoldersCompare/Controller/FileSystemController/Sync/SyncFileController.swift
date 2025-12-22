@@ -163,7 +163,7 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
 
         if syncBothSides {
             operationSummary.icon.image = NSImage(named: VDImageNameSyncBoth)
-            operationDescription.stringValue = NSLocalizedString("Copy newer and orphan files to other side", comment: "")
+            operationDescription.stringValue = NSLocalizedString("Copy newer and orphan files to the other side", comment: "")
         } else {
             if view.side == .left {
                 operationSummary.icon.image = NSImage(named: VDImageNameSyncRight)

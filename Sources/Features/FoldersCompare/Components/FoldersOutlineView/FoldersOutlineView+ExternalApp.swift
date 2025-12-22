@@ -23,7 +23,7 @@ extension FoldersOutlineView {
         if selectionHasNotVisibleFiles {
             NSAlert.showModalInfo(
                 messageText: NSLocalizedString("Some selected file(s) may not be visible in Finder", comment: ""),
-                informativeText: NSLocalizedString("Finder doesn't show files starting with . (period) character", comment: ""),
+                informativeText: NSLocalizedString("Finder doesn't show files starting with a . (period) character", comment: ""),
                 suppressPropertyName: CommonPrefs.Name.confirmShowInFinderNotVisibleFiles.rawValue
             )
         }

@@ -51,7 +51,7 @@ class AlignTestResultBox: NSBox, NSTextFieldDelegate {
     private func setupViews() {
         fileNameTitle.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
 
-        fileName.placeholderString = NSLocalizedString("Enter a file name to test rule", comment: "")
+        fileName.placeholderString = NSLocalizedString("Enter a file name to test the rule", comment: "")
         fileName.translatesAutoresizingMaskIntoConstraints = false
         fileName.delegate = self
 

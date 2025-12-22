@@ -230,7 +230,7 @@ public class FoldersWindowController: NSWindowController,
     @objc func stopRefresh(_: AnyObject) {
         let retVal = NSAlert.showModalConfirm(
             messageText: NSLocalizedString("Are you sure to stop the operation?", comment: ""),
-            informativeText: NSLocalizedString("If operation takes long time to run you can stop it but the results could be inaccurate", comment: ""),
+            informativeText: NSLocalizedString("If the operation takes a long time to run, you can stop it, but the results could be inaccurate", comment: ""),
             suppressPropertyName: CommonPrefs.Name.confirmStopLongOperation.rawValue
         )
         if retVal {

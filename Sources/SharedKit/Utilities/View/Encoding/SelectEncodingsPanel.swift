@@ -17,7 +17,7 @@ class SelectEncodingsPanel: NSWindow, NSTableViewDataSource, NSTableViewDelegate
 
         let cell = TextFieldVerticalCentered()
         cell.lineBreakMode = .byClipping
-        cell.title = NSLocalizedString("Select encodings to show on main list", comment: "")
+        cell.title = NSLocalizedString("Select encodings to show on the main list", comment: "")
 
         view.cell = cell
 

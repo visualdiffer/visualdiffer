@@ -16,7 +16,7 @@ class ConfirmationsFilesBox: PreferencesBox {
     private func setupViews() {
         let stackView = NSStackView.preferences(with: [
             createCheckBox(
-                title: NSLocalizedString("Confirm reload files changed on the file system by another application", comment: ""),
+                title: NSLocalizedString("Confirm reloading files changed on the file system by another application", comment: ""),
                 prefName: .confirmReloadFiles,
                 isNegated: true
             ),

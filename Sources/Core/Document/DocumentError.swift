@@ -15,7 +15,7 @@ extension DocumentError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidSessionData:
-            NSLocalizedString("Invalid session data, maybe file is corrupted", comment: "")
+            NSLocalizedString("Invalid session data; maybe the file is corrupted", comment: "")
         case .unknownSessionType:
             NSLocalizedString("Session type is unknown", comment: "")
         }

@@ -155,7 +155,7 @@ public extension FoldersWindowController {
     }
 
     func will(startAt _: Date) {
-        PowerAssertion.shared.setDisableSystemSleep(true, with: NSLocalizedString("Folders reading and comparison", comment: ""))
+        PowerAssertion.shared.setDisableSystemSleep(true, with: NSLocalizedString("Reading and comparing folders", comment: ""))
         running = true
 
         setProgressHidden(false)
@@ -167,7 +167,7 @@ public extension FoldersWindowController {
     }
 
     func did(endAt: Date, startedAt: Date) {
-        PowerAssertion.shared.setDisableSystemSleep(false, with: NSLocalizedString("Folders reading and comparison", comment: ""))
+        PowerAssertion.shared.setDisableSystemSleep(false, with: NSLocalizedString("Reading and comparing folders", comment: ""))
         running = false
 
         let elapsedTime = endAt.timeIntervalSinceReferenceDate - startedAt.timeIntervalSinceReferenceDate
@@ -253,7 +253,7 @@ public extension FoldersWindowController {
         }
 
         let content = UNMutableNotificationContent()
-        content.title = NSLocalizedString("Folders comparison completed", comment: "")
+        content.title = NSLocalizedString("Folder comparison completed", comment: "")
         content.body = String(format: NSLocalizedString("'%@' completed in %@", comment: ""), document.displayName, text)
         content.sound = UNNotificationSound.default
 

@@ -42,7 +42,7 @@ public extension FoldersOutlineView {
             keyEquivalent: ""
         )
         theMenu.addItem(
-            withTitle: NSLocalizedString("Set as Base Folder on Other Side", comment: ""),
+            withTitle: NSLocalizedString("Set as Base Folder on the Other Side", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.setAsBaseFolderOtherSide),
             keyEquivalent: ""
         )

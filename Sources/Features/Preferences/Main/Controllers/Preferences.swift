@@ -62,7 +62,7 @@ class Preferences: BasePreferences {
             toolbarItem = NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Trusted Paths", comment: ""),
-                tooltip: NSLocalizedString("Paths granted to access to VisualDiffer", comment: ""),
+                tooltip: NSLocalizedString("Paths granted access to VisualDiffer", comment: ""),
                 image: NSImage.imageSymbolCompat("prefs_paths"),
                 target: self,
                 action: #selector(selectPrefTab)

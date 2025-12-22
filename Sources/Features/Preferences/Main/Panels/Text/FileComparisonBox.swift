@@ -20,9 +20,9 @@ class FileComparisonBox: PreferencesBox {
     private func setupViews() {
         let checkboxes: [(String, CommonPrefs.Name)] = [
             (NSLocalizedString("Ignore Line Endings (DOS/Mac)", comment: ""), .ignoreLineEndings),
-            (NSLocalizedString("Ignore Leading white space", comment: ""), .ignoreLeadingWhitespaces),
-            (NSLocalizedString("Ignore Trailing white space", comment: ""), .ignoreTrailingWhitespaces),
-            (NSLocalizedString("Ignore Internal white space", comment: ""), .ignoreInternalWhitespaces),
+            (NSLocalizedString("Ignore Leading Whitespace", comment: ""), .ignoreLeadingWhitespaces),
+            (NSLocalizedString("Ignore Trailing Whitespace", comment: ""), .ignoreTrailingWhitespaces),
+            (NSLocalizedString("Ignore Internal Whitespace", comment: ""), .ignoreInternalWhitespaces),
         ]
 
         for (title, prefName) in checkboxes {

@@ -19,15 +19,15 @@ class ConfirmationsFoldersBox: PreferencesBox {
 
         let stackView = NSStackView.preferences(with: [
             createCheckBox(
-                title: NSLocalizedString("Confirm open a large number of windows in Finder", comment: ""),
+                title: NSLocalizedString("Confirm opening a large number of windows in Finder", comment: ""),
                 prefName: .confirmShowInFinder
             ),
             createCheckBox(
-                title: NSLocalizedString("Confirm stop operation in progress", comment: ""),
+                title: NSLocalizedString("Confirm stopping the operation in progress", comment: ""),
                 prefName: .confirmStopLongOperation
             ),
             createCheckBox(
-                title: NSLocalizedString("Warn about files opened may not be visible in Finder", comment: ""),
+                title: NSLocalizedString("Warn that opened files may not be visible in Finder", comment: ""),
                 prefName: .confirmShowInFinderNotVisibleFiles
             ),
             separator,
@@ -47,7 +47,7 @@ class ConfirmationsFoldersBox: PreferencesBox {
                 title: NSLocalizedString("Include Filtered Items By Default", comment: ""),
                 prefName: .confirmIncludeFilteredItems
             ),
-            NSTextField.hintWithTitle(NSLocalizedString("Hold down ⌥ key (ALT) to override confirm flag and show dialog", comment: "")),
+            NSTextField.hintWithTitle(NSLocalizedString("Hold down ⌥ key (ALT) to override confirmation flag and show dialog", comment: "")),
         ])
 
         if let contentView {

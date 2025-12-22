@@ -24,7 +24,7 @@ extension FilesTableView {
         theMenu.autoenablesItems = false
 
         theMenu.addItem(
-            withTitle: NSLocalizedString("Show Whitespaces", comment: ""),
+            withTitle: NSLocalizedString("Show Whitespace", comment: ""),
             action: #selector(FilesTableViewContextMenu.showWhitespaces),
             keyEquivalent: ""
         )
