@@ -220,7 +220,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Next Difference", comment: ""),
-                tooltip: NSLocalizedString("Go to Next Difference", comment: ""),
+                tooltip: NSLocalizedString("Go to next difference", comment: ""),
                 image: NSImage(named: VDImageNameNext),
                 target: self,
                 action: #selector(nextDifference)
@@ -229,7 +229,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Prev Difference", comment: ""),
-                tooltip: NSLocalizedString("Go to Previous Difference", comment: ""),
+                tooltip: NSLocalizedString("Go to previous difference", comment: ""),
                 image: NSImage(named: VDImageNamePrev),
                 target: self,
                 action: #selector(previousDifference)

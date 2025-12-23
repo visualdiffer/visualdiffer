@@ -22,7 +22,7 @@
                 return
             }
             let checkForUpdatesItem = NSMenuItem(
-                title: "Check for Updates…",
+                title: NSLocalizedString("Check for Updates…", comment: ""),
                 action: #selector(SPUStandardUpdaterController.checkForUpdates(_:)),
                 keyEquivalent: ""
             )

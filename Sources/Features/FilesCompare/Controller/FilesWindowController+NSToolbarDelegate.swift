@@ -81,7 +81,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Prev Difference", comment: ""),
-                tooltip: NSLocalizedString("Go to Previous Difference", comment: ""),
+                tooltip: NSLocalizedString("Go to previous difference", comment: ""),
                 image: NSImage(named: VDImageNamePrev),
                 target: self,
                 action: #selector(previousDifference)
@@ -90,7 +90,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Next Difference", comment: ""),
-                tooltip: NSLocalizedString("Go to Next Difference", comment: ""),
+                tooltip: NSLocalizedString("Go to next difference", comment: ""),
                 image: NSImage(named: VDImageNameNext),
                 target: self,
                 action: #selector(nextDifference)
@@ -99,7 +99,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Previous File", comment: ""),
-                tooltip: NSLocalizedString("Go to Previous File With Differences", comment: ""),
+                tooltip: NSLocalizedString("Go to previous file with differences", comment: ""),
                 image: NSImage(named: VDImageNamePrevFile),
                 target: self,
                 action: #selector(previousDifferenceFiles)
@@ -108,7 +108,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Next File", comment: ""),
-                tooltip: NSLocalizedString("Go to Next File With Differences", comment: ""),
+                tooltip: NSLocalizedString("Go to next file with differences", comment: ""),
                 image: NSImage(named: VDImageNameNextFile),
                 target: self,
                 action: #selector(nextDifferenceFiles)

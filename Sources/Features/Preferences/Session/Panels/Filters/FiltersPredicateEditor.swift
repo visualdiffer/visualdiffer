@@ -35,7 +35,7 @@ class FiltersPredicateEditor: NSPredicateEditor {
 
             // File Name Ignore Case
             TitlePredicateEditorRowTemplate(
-                keyPathDisplayNames: ["fileName": NSLocalizedString("Name Ignore Case", comment: "")],
+                keyPathDisplayNames: ["fileName": NSLocalizedString("Name (Ignore Case)", comment: "")],
                 leftKeyPath: "fileName",
                 rightExpressionAttributeType: .stringAttributeType,
                 caseInsensitive: true,
@@ -67,7 +67,7 @@ class FiltersPredicateEditor: NSPredicateEditor {
 
             // Path Ignore Case
             TitlePredicateEditorRowTemplate(
-                keyPathDisplayNames: ["pathRelativeToRoot": NSLocalizedString("Path Ignore Case", comment: "")],
+                keyPathDisplayNames: ["pathRelativeToRoot": NSLocalizedString("Path (Ignore Case)", comment: "")],
                 leftKeyPath: "pathRelativeToRoot",
                 rightExpressionAttributeType: .stringAttributeType,
                 caseInsensitive: true,

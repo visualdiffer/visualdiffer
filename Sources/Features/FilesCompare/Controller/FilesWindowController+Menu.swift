@@ -91,7 +91,7 @@ extension FilesWindowController {
         let actionsMenu = NSMenu(title: NSLocalizedString("Actions", comment: ""))
 
         let left = NSMenuItem(
-            title: NSLocalizedString("Copy Lines To Left", comment: ""),
+            title: NSLocalizedString("Copy Lines to Left", comment: ""),
             action: #selector(copyLinesToLeft),
             keyEquivalent: KeyEquivalent.leftArrow
         )
@@ -100,7 +100,7 @@ extension FilesWindowController {
         actionsMenu.addItem(left)
 
         let right = NSMenuItem(
-            title: NSLocalizedString("Copy Lines To Right", comment: ""),
+            title: NSLocalizedString("Copy Lines to Right", comment: ""),
             action: #selector(copyLinesToRight),
             keyEquivalent: KeyEquivalent.rightArrow
         )
@@ -140,12 +140,12 @@ extension FilesWindowController {
         let viewMenu = NSMenu(title: NSLocalizedString("View", comment: ""))
 
         viewMenu.addItem(
-            withTitle: NSLocalizedString("Set Left ReadOnly", comment: ""),
+            withTitle: NSLocalizedString("Set Left Read-Only", comment: ""),
             action: #selector(setLeftReadOnly),
             keyEquivalent: ""
         )
         viewMenu.addItem(
-            withTitle: NSLocalizedString("Set Right ReadOnly", comment: ""),
+            withTitle: NSLocalizedString("Set Right Read-Only", comment: ""),
             action: #selector(setRightReadOnly),
             keyEquivalent: ""
         )

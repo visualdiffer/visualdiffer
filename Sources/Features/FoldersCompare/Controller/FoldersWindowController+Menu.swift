@@ -279,12 +279,12 @@ extension FoldersWindowController {
         let menu = NSMenu(title: NSLocalizedString("View", comment: ""))
 
         menu.addItem(
-            withTitle: NSLocalizedString("Set Left ReadOnly", comment: ""),
+            withTitle: NSLocalizedString("Set Left Read-Only", comment: ""),
             action: #selector(setLeftReadOnly),
             keyEquivalent: ""
         )
         menu.addItem(
-            withTitle: NSLocalizedString("Set Right ReadOnly", comment: ""),
+            withTitle: NSLocalizedString("Set Right Read-Only", comment: ""),
             action: #selector(setRightReadOnly),
             keyEquivalent: ""
         )

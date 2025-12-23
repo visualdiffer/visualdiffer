@@ -153,7 +153,7 @@ class SessionPreferencesFiltersBox: PreferencesBox, NSMenuItemValidation {
             } catch {
                 let alert = NSAlert()
 
-                alert.messageText = NSLocalizedString("File filter expression contains errors", comment: "")
+                alert.messageText = NSLocalizedString("The file filter expression contains errors", comment: "")
                 alert.alertStyle = .critical
                 alert.informativeText = error.localizedDescription
 

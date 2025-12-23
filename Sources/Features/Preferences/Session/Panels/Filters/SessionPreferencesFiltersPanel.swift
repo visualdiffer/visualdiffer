@@ -17,7 +17,7 @@ class SessionPreferencesFiltersPanel: NSView, PreferencesPanelDataSource {
 
     override init(frame frameRect: NSRect) {
         filterBox = SessionPreferencesFiltersBox(
-            title: NSLocalizedString("Do not show files matching criteria shown below", comment: "")
+            title: NSLocalizedString("Do not show files matching the criteria below", comment: "")
         )
 
         super.init(frame: frameRect)
