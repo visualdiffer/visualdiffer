@@ -46,7 +46,7 @@ platform :mac do
     clean_build_artifacts
     gym(
       project: ENV["PROJECT_PATH"],
-      scheme: ENV["SCHEME"],
+      scheme: find_scheme,
       archive_path: ENV["ARCHIVE_PATH"],
       export_method: "developer-id",
       export_options: {
@@ -113,6 +113,20 @@ platform :mac do
     )
 
     UI.success("✅ GitHub release completed")
+  end
+
+  def find_scheme
+    if ENV["SPARKLE_ENABLED"] == "true"
+      scheme = ENV["SPARKLE_SCHEME"] 
+
+      UI.user_error!("Scheme for sparkle not defined") if scheme.nil? || scheme.empty?
+      return scheme
+    end
+
+    scheme = ENV["SCHEME"]
+    UI.user_error!("Default Scheme not defined") if scheme.nil? || scheme.empty?
+
+    return scheme
   end
 
 end
