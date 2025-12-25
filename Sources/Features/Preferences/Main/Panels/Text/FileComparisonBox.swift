@@ -23,6 +23,7 @@ class FileComparisonBox: PreferencesBox {
             (NSLocalizedString("Ignore Leading Whitespace", comment: ""), .ignoreLeadingWhitespaces),
             (NSLocalizedString("Ignore Trailing Whitespace", comment: ""), .ignoreTrailingWhitespaces),
             (NSLocalizedString("Ignore Internal Whitespace", comment: ""), .ignoreInternalWhitespaces),
+            (NSLocalizedString("Ignore Character Case", comment: ""), .ignoreCharacterCase),
         ]
 
         for (title, prefName) in checkboxes {

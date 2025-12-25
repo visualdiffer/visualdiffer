@@ -43,7 +43,7 @@ class TextPreferencesPanel: NSView, PreferencesPanelDataSource {
             fileComparisonBox.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             fileComparisonBox.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             fileComparisonBox.topAnchor.constraint(equalTo: visualizationBox.bottomAnchor, constant: 5),
-            fileComparisonBox.heightAnchor.constraint(equalToConstant: 120),
+            fileComparisonBox.heightAnchor.constraint(equalToConstant: 160),
         ])
     }
 

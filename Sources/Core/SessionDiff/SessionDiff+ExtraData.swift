@@ -33,6 +33,7 @@ struct ExtraData {
             (.ignoreLeadingWhitespaces, .ignoreLeadingWhitespaces),
             (.ignoreTrailingWhitespaces, .ignoreTrailingWhitespaces),
             (.ignoreInternalWhitespaces, .ignoreInternalWhitespaces),
+            (.ignoreCharacterCase, .ignoreCharacterCase),
         ]
 
         var data = ExtraData()

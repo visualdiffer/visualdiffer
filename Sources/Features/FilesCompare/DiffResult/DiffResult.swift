@@ -14,6 +14,7 @@ class DiffResult {
         static let ignoreLeadingWhitespaces = Options(rawValue: 1 << 1)
         static let ignoreTrailingWhitespaces = Options(rawValue: 1 << 2)
         static let ignoreInternalWhitespaces = Options(rawValue: 1 << 3)
+        static let ignoreCharacterCase = Options(rawValue: 1 << 4)
     }
 
     private(set) var leftSide = DiffSide()

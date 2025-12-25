@@ -12,7 +12,8 @@ extension TextPreferencesPanel: @preconcurrency PreferencesBoxDataSource {
         case .ignoreLineEndings,
              .ignoreLeadingWhitespaces,
              .ignoreTrailingWhitespaces,
-             .ignoreInternalWhitespaces:
+             .ignoreInternalWhitespaces,
+             .ignoreCharacterCase:
             CommonPrefs.shared.bool(forKey: key)
         default:
             fatalError("key \(key) not handled")
@@ -24,7 +25,8 @@ extension TextPreferencesPanel: @preconcurrency PreferencesBoxDataSource {
         case .ignoreLineEndings,
              .ignoreLeadingWhitespaces,
              .ignoreTrailingWhitespaces,
-             .ignoreInternalWhitespaces:
+             .ignoreInternalWhitespaces,
+             .ignoreCharacterCase:
             CommonPrefs.shared.set(value, forKey: key)
         default:
             fatalError("key \(key) not handled")

@@ -17,6 +17,8 @@ extension FileSessionPreferencesWindow: @preconcurrency PreferencesBoxDataSource
             preferences.diffResultOptions.contains(.ignoreTrailingWhitespaces)
         case .ignoreInternalWhitespaces:
             preferences.diffResultOptions.contains(.ignoreInternalWhitespaces)
+        case .ignoreCharacterCase:
+            preferences.diffResultOptions.contains(.ignoreCharacterCase)
         default:
             false
         }
@@ -32,6 +34,8 @@ extension FileSessionPreferencesWindow: @preconcurrency PreferencesBoxDataSource
             preferences.diffResultOptions.setValue(value, element: .ignoreTrailingWhitespaces)
         case .ignoreInternalWhitespaces:
             preferences.diffResultOptions.setValue(value, element: .ignoreInternalWhitespaces)
+        case .ignoreCharacterCase:
+            preferences.diffResultOptions.setValue(value, element: .ignoreCharacterCase)
         default:
             fatalError("key \(key) not handled")
         }

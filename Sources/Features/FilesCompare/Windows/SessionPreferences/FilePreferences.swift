@@ -21,4 +21,5 @@ extension CommonPrefs.Name {
     static let ignoreLeadingWhitespaces = CommonPrefs.Name(rawValue: "ignoreLeadingWhitespaces")
     static let ignoreTrailingWhitespaces = CommonPrefs.Name(rawValue: "ignoreTrailingWhitespaces")
     static let ignoreInternalWhitespaces = CommonPrefs.Name(rawValue: "ignoreInternalWhitespaces")
+    static let ignoreCharacterCase = CommonPrefs.Name(rawValue: "ignoreCharacterCase")
 }

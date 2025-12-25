@@ -61,7 +61,11 @@ extension DiffResult.Options {
     }
 
     func applyTransformations(component: DiffLineComponent) -> String {
-        let stripped = stripWhitespaces(text: component.text)
+        var stripped = stripWhitespaces(text: component.text)
+
+        if contains(.ignoreCharacterCase) {
+            stripped = stripped.lowercased()
+        }
 
         if contains(.ignoreLineEndings) {
             return stripped
