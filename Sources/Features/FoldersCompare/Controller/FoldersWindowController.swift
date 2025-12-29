@@ -263,4 +263,19 @@ public class FoldersWindowController: NSWindowController,
     @objc func zoomResetFont(_: AnyObject) {
         fontZoomFactor = 0
     }
+
+    #if DEBUG
+        override public func keyDown(with event: NSEvent) {
+            // Cmd + F12 pressed, create the test code
+            if event.modifierFlags.contains(.command),
+               event.charactersIgnoringModifiers?.unicodeScalars.first?.value == UInt32(NSF12FunctionKey) {
+                FileSystemTestHelper.createTestCode(leftView, sessionDiff: sessionDiff)
+                NSLog("Unit Test generated and copied on clipboard")
+
+                return
+            }
+
+            super.keyDown(with: event)
+        }
+    #endif
 }

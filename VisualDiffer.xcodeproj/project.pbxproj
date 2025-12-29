@@ -463,6 +463,7 @@
 		55C1CC012E8BB755004FE322 /* visdiff in Copy Visdiff to Helpers */ = {isa = PBXBuildFile; fileRef = 55C1CBE22E8BB6A2004FE322 /* visdiff */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55C1CC072E8BBD85004FE322 /* DocumentWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1CC062E8BBAD1004FE322 /* DocumentWaiter.swift */; };
 		55C84A712DA93ADB00BA39DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C84A702DA93ADB00BA39DA /* UserNotifications.framework */; };
+		55D352E72EFD0C5B00C944D5 /* FileSystemTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D352E62EFD0C4D00C944D5 /* FileSystemTestHelper.swift */; };
 		55D71FD62EE584B7007E0FA0 /* AppUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D71FD52EE584B7007E0FA0 /* AppUpdater.swift */; };
 		55DF3DD22E924BB10044CC0C /* BaseTests+FileSystemOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DF3DC52E924BB10044CC0C /* BaseTests+FileSystemOperations.swift */; };
 		55DF3DD32E924BB10044CC0C /* FiltersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DF3DBF2E924BB10044CC0C /* FiltersTests.swift */; };
@@ -1056,6 +1057,7 @@
 		55C1CC062E8BBAD1004FE322 /* DocumentWaiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentWaiter.swift; sourceTree = "<group>"; };
 		55C84A702DA93ADB00BA39DA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		55D26E84140E2EAD00646F50 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		55D352E62EFD0C4D00C944D5 /* FileSystemTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemTestHelper.swift; sourceTree = "<group>"; };
 		55D71FD52EE584B7007E0FA0 /* AppUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdater.swift; sourceTree = "<group>"; };
 		55D71FD72EE584FF007E0FA0 /* AppConfig-Sparkle.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AppConfig-Sparkle.xcconfig"; sourceTree = "<group>"; };
 		55D71FD82EE584FF007E0FA0 /* VisualDiffer-Sparkle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "VisualDiffer-Sparkle.entitlements"; sourceTree = "<group>"; };
@@ -1671,14 +1673,15 @@
 			children = (
 				55373FFC2E9372DF00AB56D0 /* Copy */,
 				55373FFE2E9372DF00AB56D0 /* Delete */,
-				553740002E9372DF00AB56D0 /* Move */,
-				5537400B2E9372DF00AB56D0 /* Progress */,
-				553740102E9372DF00AB56D0 /* Sync */,
-				553740152E9372DF00AB56D0 /* Touch */,
 				553740162E9372DF00AB56D0 /* FileOperationExecutor.swift */,
 				553740172E9372DF00AB56D0 /* FileSummaryView.swift */,
 				553740182E9372DF00AB56D0 /* FileSystemController.swift */,
+				55D352E62EFD0C4D00C944D5 /* FileSystemTestHelper.swift */,
+				553740002E9372DF00AB56D0 /* Move */,
 				553740192E9372DF00AB56D0 /* OperationSummaryView.swift */,
+				5537400B2E9372DF00AB56D0 /* Progress */,
+				553740102E9372DF00AB56D0 /* Sync */,
+				553740152E9372DF00AB56D0 /* Touch */,
 			);
 			path = FileSystemController;
 			sourceTree = "<group>";
@@ -3251,6 +3254,7 @@
 				553741982E9372DF00AB56D0 /* CommonPrefs+FolderCompare.swift in Sources */,
 				553741992E9372DF00AB56D0 /* FoldersWindowController+PathControlDelegate.swift in Sources */,
 				551DE3B82ED439AF0067AB18 /* PreferencesBoxDataSource+Default.swift in Sources */,
+				55D352E72EFD0C5B00C944D5 /* FileSystemTestHelper.swift in Sources */,
 				5537419A2E9372DF00AB56D0 /* FontBox.swift in Sources */,
 				5537419B2E9372DF00AB56D0 /* FilesTableViewFindTextDelegate.swift in Sources */,
 				5537419C2E9372DF00AB56D0 /* DeleteFileOperationExecutor.swift in Sources */,
