@@ -47,7 +47,7 @@
 	<key>foldersDifferenceNavigatorCenterInWindow</key>
 	<true/>
 	<key>comparatorBinaryBufferSize</key>
-	<integer>131072</integer>
+	<integer>2097152</integer>
 	<key>filesStatusBarShowMessageTimeout</key>
 	<integer>3</integer>
 	<key>tabWidth</key>

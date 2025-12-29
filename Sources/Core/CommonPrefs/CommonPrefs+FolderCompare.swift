@@ -6,7 +6,7 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-let defaultComparatorBinaryBufferSize = 128 * 1024
+let defaultComparatorBinaryBufferSize = 2 * 1024 * 1024
 
 enum FolderColorAttribute: String {
     case unknown
