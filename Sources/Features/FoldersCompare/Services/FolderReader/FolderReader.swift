@@ -356,16 +356,18 @@ public class FolderReader: @unchecked Sendable {
         // but the order can change from a different sort in the delegate
         // so we get the current order and use it to traverse the folders
         var traversalOrder = [CompareItem]()
+        var seenItems = Set<ObjectIdentifier>()
         if let visibleItem = leftItem.visibleItem {
             for vi in visibleItem.children {
                 traversalOrder.append(vi.item)
+                seenItems.insert(ObjectIdentifier(vi.item))
             }
         }
 
         // Only VisibleItems are ordered so filtered elements are not present inside the array
         // We must iterate also the not filtered items to correctly update folders informations like the subfolders size
         // We add the missing CompareItem to the end, this is correct because they are not visible
-        for item in leftItem.children where !traversalOrder.contains(where: { $0 == item }) {
+        for item in leftItem.children where !seenItems.contains(ObjectIdentifier(item)) {
             traversalOrder.append(item)
         }
 
