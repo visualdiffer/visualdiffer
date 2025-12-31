@@ -508,6 +508,7 @@
 		55F9E79A2EDD5DBD001218C7 /* DiffResult.Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */; };
 		55F9E79C2EDD6221001218C7 /* WhitespacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */; };
 		55FD7E28180C484500CF473C /* prefs_folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FD7E25180C484500CF473C /* prefs_folder@2x.png */; };
+		55FE894A2F054B260003864A /* FlagSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE89492F054B260003864A /* FlagSet.swift */; };
 		775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
@@ -1108,6 +1109,7 @@
 		55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhitespacesTests.swift; sourceTree = "<group>"; };
 		55FC15F22557CD000075E30D /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		55FD7E25180C484500CF473C /* prefs_folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prefs_folder@2x.png"; sourceTree = "<group>"; };
+		55FE89492F054B260003864A /* FlagSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagSet.swift; sourceTree = "<group>"; };
 		7788DA0506752A1600599AAD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		8D15AC360486D014006FF6A4 /* VisualDiffer-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "VisualDiffer-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* VisualDiffer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisualDiffer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2256,6 +2258,7 @@
 		553740FA2E9372DF00AB56D0 /* OptionSet */ = {
 			isa = PBXGroup;
 			children = (
+				55FE89492F054B260003864A /* FlagSet.swift */,
 				553740F92E9372DF00AB56D0 /* OptionSet+Toggle.swift */,
 			);
 			path = OptionSet;
@@ -3223,6 +3226,7 @@
 				55916A102E8A814200ED6629 /* MyDocument.xcdatamodeld in Sources */,
 				553741792E9372DF00AB56D0 /* NSAppearance+DarkMode.swift in Sources */,
 				5537417A2E9372DF00AB56D0 /* QLPreviewPanel.swift in Sources */,
+				55FE894A2F054B260003864A /* FlagSet.swift in Sources */,
 				5537417B2E9372DF00AB56D0 /* TrustedPathsPreferencesPanel.swift in Sources */,
 				5537417C2E9372DF00AB56D0 /* TouchPickersStackView.swift in Sources */,
 				5537417D2E9372DF00AB56D0 /* BasePreferences.swift in Sources */,

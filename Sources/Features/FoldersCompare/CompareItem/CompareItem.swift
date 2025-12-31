@@ -8,9 +8,8 @@
 
 typealias CompareItemComparison = (CompareItem, CompareItem) -> ComparisonResult
 
-// swiftlint:disable file_length
 public class CompareItem: NSObject {
-    struct FileOptions: OptionSet {
+    struct FileOptions: FlagSet {
         var rawValue: Int
 
         static let isFile = FileOptions(rawValue: 1 << 0)
@@ -20,20 +19,6 @@ public class CompareItem: NSObject {
         static let isResourceFork = FileOptions(rawValue: 1 << 4)
         static let isLocked = FileOptions(rawValue: 1 << 5)
         static let isValidFile = FileOptions(rawValue: 1 << 6)
-
-        subscript(option: FileOptions) -> Bool {
-            get {
-                contains(option)
-            }
-
-            set {
-                if newValue {
-                    insert(option)
-                } else {
-                    remove(option)
-                }
-            }
-        }
     }
 
     var linkedItem: CompareItem?
@@ -401,5 +386,3 @@ public class CompareItem: NSObject {
         isFiltered = false
     }
 }
-
-// swiftlint:enable file_length
