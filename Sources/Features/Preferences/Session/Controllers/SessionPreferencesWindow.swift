@@ -205,7 +205,7 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
     func preferenceBox(_: PreferencesBox, boolForKey key: CommonPrefs.Name) -> Bool {
         switch key {
         case .virtualResourceFork:
-            currentPreferences.fileExtraOptions.hasCheckResourceForks
+            currentPreferences.fileExtraOptions[.resourceFork]
         case .virtualFinderLabel:
             currentPreferences.comparatorOptions.hasFinderLabel
         case .virtualFinderTags:
@@ -226,7 +226,7 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
     func preferenceBox(_: PreferencesBox, setBool value: Bool, forKey key: CommonPrefs.Name) {
         switch key {
         case .virtualResourceFork:
-            currentPreferences.fileExtraOptions = currentPreferences.fileExtraOptions.changeCheckResourceForks(value)
+            currentPreferences.fileExtraOptions[.resourceFork] = value
         case .virtualFinderLabel:
             currentPreferences.comparatorOptions = currentPreferences.comparatorOptions.changeFinderLabel(value)
         case .virtualFinderTags:

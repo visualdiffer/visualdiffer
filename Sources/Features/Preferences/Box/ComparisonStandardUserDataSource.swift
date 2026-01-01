@@ -13,7 +13,7 @@ class ComparisonStandardUserDataSource: StandardUserPreferencesBoxDataSource {
     ) -> Bool {
         switch key {
         case .virtualResourceFork:
-            CommonPrefs.shared.checkResourceForks
+            CommonPrefs.shared.fileExtraOptions[.resourceFork]
         case .virtualFinderLabel:
             CommonPrefs.shared.finderLabel
         case .virtualFinderTags:
@@ -30,7 +30,7 @@ class ComparisonStandardUserDataSource: StandardUserPreferencesBoxDataSource {
     ) {
         switch key {
         case .virtualResourceFork:
-            CommonPrefs.shared.checkResourceForks = value
+            CommonPrefs.shared.fileExtraOptions[.resourceFork] = value
         case .virtualFinderLabel:
             CommonPrefs.shared.finderLabel = value
         case .virtualFinderTags:

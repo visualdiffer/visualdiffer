@@ -114,16 +114,6 @@ extension CommonPrefs {
         }
     }
 
-    var checkResourceForks: Bool {
-        get {
-            fileExtraOptions.hasCheckResourceForks
-        }
-
-        set {
-            fileExtraOptions = fileExtraOptions.changeCheckResourceForks(newValue)
-        }
-    }
-
     // MARK: - Filters
 
     var defaultFileFilters: String? {
