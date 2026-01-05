@@ -9,7 +9,6 @@
 extension CompareItem {
     override public var description: String {
         String(
-            // swiftlint:disable:next line_length
             format: "Path %@, isFileValid %d, isFolder %d, isFiltered %d, isDisp %d, subs , type %@, older %ld, changed %ld, orphan %ld, matched %ld, tags = %ld, labels = %ld, linkedItem %@",
             path ?? "",
             isValidFile,

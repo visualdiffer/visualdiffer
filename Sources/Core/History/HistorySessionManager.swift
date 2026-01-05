@@ -25,7 +25,10 @@ class HistorySessionManager: @unchecked Sendable {
     }
 
     func maxItemCountPref() -> Int {
-        let maxItemCount = CommonPrefs.shared.number(forKey: .History.maximumHistoryCount, Self.defaultMaxItemsCount).intValue
+        let maxItemCount = CommonPrefs.shared.number(
+            forKey: .History.maximumHistoryCount,
+            Self.defaultMaxItemsCount
+        ).intValue
 
         if maxItemCount >= 0 {
             return maxItemCount
@@ -87,7 +90,10 @@ class HistorySessionManager: @unchecked Sendable {
     }
 
     func createNewHistory() -> HistoryEntity? {
-        guard let history = NSEntityDescription.insertNewObject(forEntityName: HistoryEntity.name, into: historyMOC) as? HistoryEntity else {
+        guard let history = NSEntityDescription.insertNewObject(
+            forEntityName: HistoryEntity.name,
+            into: historyMOC
+        ) as? HistoryEntity else {
             return nil
         }
         return history
@@ -98,7 +104,9 @@ class HistorySessionManager: @unchecked Sendable {
         rightPath: String
     ) -> Bool {
         do {
-            let count = try historyMOC.count(for: HistoryEntity.searchPathRequest(leftPath: leftPath, rightPath: rightPath))
+            let count = try historyMOC.count(
+                for: HistoryEntity.searchPathRequest(leftPath: leftPath, rightPath: rightPath)
+            )
             return (count == NSNotFound || count == 0) ? false : true
         } catch {}
         return false

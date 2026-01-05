@@ -208,7 +208,9 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
 
     @MainActor func updateToolbarButton(_ item: NSToolbarItem) {
         if item.itemIdentifier == .Files.wordWrap {
-            item.image = NSImage(named: rowHeightCalculator.isWordWrapEnabled ? VDImageNameWordWrapOn : VDImageNameWordWrapOff)
+            item.image = NSImage(
+                named: rowHeightCalculator.isWordWrapEnabled ? VDImageNameWordWrapOn : VDImageNameWordWrapOff
+            )
             return
         }
         switch lastUsedView.side {

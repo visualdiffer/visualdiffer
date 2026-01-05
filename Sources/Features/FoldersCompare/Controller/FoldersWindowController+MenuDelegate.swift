@@ -49,7 +49,10 @@ extension FoldersWindowController: NSMenuDelegate,
             return fsi.validateCopyFiles(sessionDiff)
         } else if action == #selector(deleteFiles) {
             return fsi.validateDeleteFiles(sessionDiff)
-        } else if action == #selector(copyFullPaths) || action == #selector(copyFileNames) || action == #selector(copy(_:)) || action == #selector(copyUrls) {
+        } else if action == #selector(copyFullPaths)
+            || action == #selector(copyFileNames)
+            || action == #selector(copy(_:))
+            || action == #selector(copyUrls) {
             return fsi.validateClipboardCopy()
         } else if action == #selector(setAsBaseFolder) {
             return fsi.validateSetAsBaseFolder()

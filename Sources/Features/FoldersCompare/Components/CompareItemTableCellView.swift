@@ -98,7 +98,12 @@ class CompareItemTableCellView: NSView {
             text.lineBreakMode = .byTruncatingMiddle
         }
         text.font = font
-        icon?.image = IconUtils.shared.icon(for: item, size: 16, isExpanded: isExpanded, hideEmptyFolders: hideEmptyFolders)
+        icon?.image = IconUtils.shared.icon(
+            for: item,
+            size: 16,
+            isExpanded: isExpanded,
+            hideEmptyFolders: hideEmptyFolders
+        )
     }
 
     func fileSize(

@@ -67,7 +67,8 @@ extension FoldersOutlineView {
             + NSScroller.scrollerWidth(for: .regular, scrollerStyle: .legacy)
 
         let fileSizeFormatter = FileSizeFormatter(showInBytes: true, showUnitForBytes: false)
-        let sizeCellWidth = (fileSizeFormatter.string(from: NSNumber(value: 999_999_999_999)) as? NSString)?.size(withAttributes: textAttrs).width ?? 0
+        let sizeCellWidth = (fileSizeFormatter.string(from: NSNumber(value: 999_999_999_999)) as? NSString)?
+            .size(withAttributes: textAttrs).width ?? 0
 
         tableColumn(withIdentifier: .Folders.cellName)?.width = totalWidth - dateCellWidth - sizeCellWidth
         tableColumn(withIdentifier: .Folders.cellSize)?.width = sizeCellWidth

@@ -91,9 +91,15 @@ extension NSTableView {
 
         let point = if center,
                        let scrollView {
-            NSPoint(x: 0, y: rowRect.origin.y - headerHeight + (rowRect.size.height / 2) - (scrollView.frame.size.height / 2))
+            NSPoint(
+                x: 0,
+                y: rowRect.origin.y - headerHeight + (rowRect.size.height / 2) - (scrollView.frame.size.height / 2)
+            )
         } else {
-            NSPoint(x: 0, y: rowRect.origin.y - headerHeight)
+            NSPoint(
+                x: 0,
+                y: rowRect.origin.y - headerHeight
+            )
         }
         scroll(point)
     }

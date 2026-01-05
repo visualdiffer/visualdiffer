@@ -210,8 +210,17 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
     func resize() {
         let windowFrame = NSWindow.contentRect(forFrameRect: prefPanel.frame, styleMask: prefPanel.styleMask)
         let height = minWindowHeight()
-        let frameRect = NSRect(x: windowFrame.origin.x, y: windowFrame.origin.y + windowFrame.size.height - height, width: windowFrame.size.width, height: height)
-        prefPanel.setFrame(NSWindow.frameRect(forContentRect: frameRect, styleMask: prefPanel.styleMask), display: true, animate: prefPanel.isVisible)
+        let frameRect = NSRect(
+            x: windowFrame.origin.x,
+            y: windowFrame.origin.y + windowFrame.size.height - height,
+            width: windowFrame.size.width,
+            height: height
+        )
+        prefPanel.setFrame(
+            NSWindow.frameRect(forContentRect: frameRect, styleMask: prefPanel.styleMask),
+            display: true,
+            animate: prefPanel.isVisible
+        )
     }
 
     func tabView(_: NSTabView, didSelect _: NSTabViewItem?) {

@@ -27,7 +27,10 @@
         let arr = diffSide.lines
         let diffLine = arr[row]
 
-        let view = tableView.makeView(withIdentifier: identifier, owner: nil) as? LineNumberTableCellView ?? LineNumberTableCellView()
+        let view = tableView.makeView(
+            withIdentifier: identifier,
+            owner: nil
+        ) as? LineNumberTableCellView ?? LineNumberTableCellView()
 
         view.diffLine = diffLine
         view.font = treeViewFont()
@@ -52,7 +55,11 @@
         let visibleRows = tableView.rows(in: tableView.visibleRect)
 
         for row in visibleRows.location ..< NSMaxRange(visibleRows) {
-            if let cellView = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as? LineNumberTableCellView {
+            if let cellView = tableView.view(
+                atColumn: 0,
+                row: row,
+                makeIfNecessary: false
+            ) as? LineNumberTableCellView {
                 cellView.isSelected = tableView.isRowSelected(row)
             }
         }
@@ -75,7 +82,10 @@
 
         let path1 = arr[0].osPath
         var isDir = ObjCBool(false)
-        let isValidPath1 = FileManager.default.fileExists(atPath: path1, isDirectory: &isDir) && isDir.boolValue == false
+        let isValidPath1 = FileManager.default.fileExists(
+            atPath: path1,
+            isDirectory: &isDir
+        ) && isDir.boolValue == false
 
         if arr.count < 2 {
             if isValidPath1 {
@@ -83,7 +93,10 @@
             }
         } else {
             let path2 = arr[1].osPath
-            let isValidPath2 = FileManager.default.fileExists(atPath: path2, isDirectory: &isDir) && isDir.boolValue == false
+            let isValidPath2 = FileManager.default.fileExists(
+                atPath: path2,
+                isDirectory: &isDir
+            ) && isDir.boolValue == false
             if isValidPath1, isValidPath2 {
                 result = .copy
             }

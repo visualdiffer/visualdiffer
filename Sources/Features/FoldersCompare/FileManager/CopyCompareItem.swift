@@ -380,7 +380,11 @@ class CopyCompareItem: NSObject {
 
         // set the timestamps at the end so we are sure they are not 'overwritten'
         // For example modification date for folders changes after a file is copied into it
-        try fm.setFileAttributes(operationManager.timestampAttributesFrom(attributes), ofItemAtPath: destFullPath, volumeType: volumeType)
+        try fm.setFileAttributes(
+            operationManager.timestampAttributesFrom(attributes),
+            ofItemAtPath: destFullPath,
+            volumeType: volumeType
+        )
         // the delete above reset path and file to nil
         // here we assign again the copied values
         let destAttrs = try fm.attributesOfItem(atPath: destFullPath.osPath)

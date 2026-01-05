@@ -48,7 +48,10 @@ public extension URL {
 
             return destBaseURL
                 .appending(path: String(relativePath))
-                .appending(path: destURL.lastPathComponent, directoryHint: destURL.hasDirectoryPath ? .isDirectory : .notDirectory)
+                .appending(
+                    path: destURL.lastPathComponent,
+                    directoryHint: destURL.hasDirectoryPath ? .isDirectory : .notDirectory
+                )
         }
         let trailingPath = String(srcPath[srcBaseDir.endIndex...]).trimmingPrefix("/")
         return destBaseURL

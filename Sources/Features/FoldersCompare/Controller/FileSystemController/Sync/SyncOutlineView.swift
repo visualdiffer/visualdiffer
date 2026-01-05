@@ -63,7 +63,10 @@
               let identifier = tableColumn?.identifier else {
             return nil
         }
-        let cell = outlineView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView ?? createCell(identifier)
+        let cell = outlineView.makeView(
+            withIdentifier: identifier,
+            owner: self
+        ) as? NSTableCellView ?? createCell(identifier)
         cell.textField?.stringValue = item.text
 
         return cell

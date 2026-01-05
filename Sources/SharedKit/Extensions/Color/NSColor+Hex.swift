@@ -10,7 +10,12 @@ import Cocoa
 
 extension NSColor {
     @objc static func colorRGBA(_ red: UInt, green: UInt, blue: UInt, alpha: UInt) -> NSColor {
-        NSColor(calibratedRed: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: CGFloat(alpha) / 255.0)
+        NSColor(
+            calibratedRed: CGFloat(red) / 255.0,
+            green: CGFloat(green) / 255.0,
+            blue: CGFloat(blue) / 255.0,
+            alpha: CGFloat(alpha) / 255.0
+        )
     }
 
     @objc static func colorFromHexRGBA(_ inColorString: String) -> NSColor? {

@@ -55,7 +55,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func initDefaults() {
         if let defaultsPath = Bundle.main.url(forResource: "VDDefaults", withExtension: "plist"),
            let data = try? Data(contentsOf: defaultsPath),
-           let defaultsDict = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any] {
+           let defaultsDict = try? PropertyListSerialization.propertyList(
+               from: data,
+               options: [],
+               format: nil
+           ) as? [String: Any] {
             UserDefaults.standard.register(defaults: defaultsDict)
         }
     }

@@ -20,7 +20,10 @@ extension ItemComparator {
         var lIndex = leftIndex
         var rIndex = rightIndex
 
-        let result = leftChild.compare(rightChild, followSymLinks: alignConfig.followSymLinks) { self.compareByRegularExpression(
+        let result = leftChild.compare(
+            rightChild,
+            followSymLinks: alignConfig.followSymLinks
+        ) { self.compareByRegularExpression(
             lhs: $0,
             rhs: $1,
             leftRoot: leftRoot,

@@ -100,8 +100,14 @@ public extension NSImage {
             return nil
         }
 
-        compositingFilter.setValue(colorFilter.value(forKey: kCIOutputImageKey), forKey: kCIInputImageKey)
-        compositingFilter.setValue(monochromeFilter.value(forKey: kCIOutputImageKey), forKey: kCIInputBackgroundImageKey)
+        compositingFilter.setValue(
+            colorFilter.value(forKey: kCIOutputImageKey),
+            forKey: kCIInputImageKey
+        )
+        compositingFilter.setValue(
+            monochromeFilter.value(forKey: kCIOutputImageKey),
+            forKey: kCIInputBackgroundImageKey
+        )
 
         return compositingFilter
     }

@@ -19,7 +19,11 @@
            let url = item.toUrl() {
             if item.isLocked {
                 if item.isFolder {
-                    let name = ColoredFoldersManager.shared.iconName(item, isExpanded: isExpanded, hideEmptyFolders: hideEmptyFolders)
+                    let name = ColoredFoldersManager.shared.iconName(
+                        item,
+                        isExpanded: isExpanded,
+                        hideEmptyFolders: hideEmptyFolders
+                    )
                     let url = URL(filePath: name)
                     icon = self.icon(forLockedFile: url, size: size)
                 } else {
@@ -27,7 +31,11 @@
                 }
             } else if item.isSymbolicLink {
                 if item.isFolder {
-                    let name = ColoredFoldersManager.shared.iconName(item, isExpanded: isExpanded, hideEmptyFolders: hideEmptyFolders)
+                    let name = ColoredFoldersManager.shared.iconName(
+                        item,
+                        isExpanded: isExpanded,
+                        hideEmptyFolders: hideEmptyFolders
+                    )
                     let url = URL(filePath: name)
                     icon = self.icon(forSymbolicLink: url, size: size)
                 } else {
@@ -35,7 +43,12 @@
                 }
             } else {
                 if item.isFolder {
-                    icon = ColoredFoldersManager.shared.icon(forFolder: item, size: size, isExpanded: isExpanded, hideEmptyFolders: hideEmptyFolders)
+                    icon = ColoredFoldersManager.shared.icon(
+                        forFolder: item,
+                        size: size,
+                        isExpanded: isExpanded,
+                        hideEmptyFolders: hideEmptyFolders
+                    )
                 } else {
                     // get the icon from path because for some files (eg resource forks)
                     // the file type should be irrelevant

@@ -14,7 +14,6 @@ public enum FileError: Error, Equatable {
     case unknownVolumeType
 }
 
-// swiftlint:disable line_length
 extension FileError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -49,5 +48,3 @@ extension FileError: LocalizedError {
         }
     }
 }
-
-// swiftlint:enable line_length

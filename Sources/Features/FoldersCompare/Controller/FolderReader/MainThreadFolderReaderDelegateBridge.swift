@@ -37,7 +37,9 @@ class MainThreadFolderReaderDelegateBridge: FolderReaderDelegate {
         case let .did(endAt, startedAt):
             DispatchQueue.main.sync { controller.did(endAt: endAt, startedAt: startedAt) }
         case let .rootFoldersDidRead(folderCount):
-            DispatchQueue.main.sync { controller.rootFoldersDidRead(folderReader: folderReader, foldersOnRoot: folderCount) }
+            DispatchQueue.main.sync {
+                controller.rootFoldersDidRead(folderReader: folderReader, foldersOnRoot: folderCount)
+            }
         case let .willTraverse(item):
             DispatchQueue.main.async { controller.willTraverse(item) }
         case let .didTraverse(item):

@@ -262,7 +262,10 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         totalSize = fileCount.subfoldersSize
 
         if includesFiltered {
-            totalFiles += fileFilteredCount.olderFiles + fileFilteredCount.changedFiles + fileFilteredCount.orphanFiles + fileFilteredCount.matchedFiles
+            totalFiles += fileFilteredCount.olderFiles
+                + fileFilteredCount.changedFiles
+                + fileFilteredCount.orphanFiles
+                + fileFilteredCount.matchedFiles
             totalFolders += fileFilteredCount.folders
             totalSize += fileFilteredCount.subfoldersSize
         }
@@ -341,7 +344,10 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
     func itemsCount() -> Int {
         var count = fileCount.olderFiles + fileCount.changedFiles + fileCount.orphanFiles + fileCount.matchedFiles
         count += fileCount.folders
-        count += fileFilteredCount.olderFiles + fileFilteredCount.changedFiles + fileFilteredCount.orphanFiles + fileFilteredCount.matchedFiles
+        count += fileFilteredCount.olderFiles
+            + fileFilteredCount.changedFiles
+            + fileFilteredCount.orphanFiles
+            + fileFilteredCount.matchedFiles
         count += fileFilteredCount.folders
 
         return count

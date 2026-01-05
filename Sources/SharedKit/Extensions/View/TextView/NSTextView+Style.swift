@@ -11,7 +11,7 @@
         guard let font else {
             return
         }
-        guard let paragraphStyle: NSMutableParagraphStyle = defaultParagraphStyle?.mutableCopy() as? NSMutableParagraphStyle
+        guard let paragraphStyle = defaultParagraphStyle?.mutableCopy() as? NSMutableParagraphStyle
             ?? NSParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle else {
             return
         }

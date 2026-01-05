@@ -1,3 +1,7 @@
+excluded:
+  - Sources/*/FileSystemTestHelper.swift
+  - Tests/*/*.swift
+
 opt_in_rules:
   - array_init
   - attributes
@@ -104,6 +108,24 @@ line_length:
   ignores_urls: true
   ignores_function_declarations: true
   ignores_comments: true
+  ignores_interpolated_strings: true
+  excluded_lines_patterns:
+    # String format
+    - 'NSLocalizedString\('
+    - 'String\.localizedStringWithFormat\('
+    - 'String\(format'
+    - 'format: ".*",$'
+    - 'fatalError\('
+    - 'NSLog\('
+    - 'print\('
+    - 'NSPredicate\(format'
+
+    # Constraints
+    - 'constraint\(equalTo'
+
+    # App Specific
+    - 'folder-\d+(-open)?'
+    - 'FileSizeFormatter\.default'
 
 multiline_arguments:
   first_argument_location: next_line

@@ -34,8 +34,14 @@ extension URL {
             return text.string
         }
         // try fallback encoding NSWindowsCP1252StringEncoding
-        let optionsWithBestEncoding = options.merging([.characterEncoding: NSWindowsCP1252StringEncoding]) { _, new in new }
-        if let text = try readHandlingInapplicableStringEncoding(options: optionsWithBestEncoding, documentAttributes: &docAttrs) {
+        let optionsWithBestEncoding = options.merging(
+            [.characterEncoding: NSWindowsCP1252StringEncoding]
+        ) { _, new in new }
+
+        if let text = try readHandlingInapplicableStringEncoding(
+            options: optionsWithBestEncoding,
+            documentAttributes: &docAttrs
+        ) {
             return text.string
         }
         // try removing encoding

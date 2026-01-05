@@ -85,7 +85,10 @@ class FilePathTableCellView: NSTableCellView {
         }
 
         if pathTextField.fileExists {
-            imageView.image = IconUtils.shared.icon(forFile: URL(filePath: path, directoryHint: .notDirectory), size: 16.0)
+            imageView.image = IconUtils.shared.icon(
+                forFile: URL(filePath: path, directoryHint: .notDirectory),
+                size: 16.0
+            )
         } else {
             imageView.image = NSImage(named: NSImage.cautionName)
             imageView.image?.size = NSSize(width: 16.0, height: 16.0)

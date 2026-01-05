@@ -446,7 +446,10 @@ public class MoveCompareItem: NSObject {
         }
         // update file information after move
         destRoot.path = destFullPath.osPath
-        destRoot.setAttributes(try? FileManager.default.attributesOfItem(atPath: destFullPath.osPath), fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+        destRoot.setAttributes(
+            try? FileManager.default.attributesOfItem(atPath: destFullPath.osPath),
+            fileExtraOptions: operationManager.filterConfig.fileExtraOptions
+        )
 
         if destRoot.isFiltered,
            let filter = operationManager.filterConfig.predicate {

@@ -121,7 +121,10 @@ extension CompareItem {
             setAttributes(try? fm.attributesOfItem(atPath: path), fileExtraOptions: filterConfig.fileExtraOptions)
         }
         if let path = destRoot.path {
-            destRoot.setAttributes(try? fm.attributesOfItem(atPath: path), fileExtraOptions: filterConfig.fileExtraOptions)
+            destRoot.setAttributes(
+                try? fm.attributesOfItem(atPath: path),
+                fileExtraOptions: filterConfig.fileExtraOptions
+            )
         }
 
         srcDiffSize = fileSize - srcDiffSize

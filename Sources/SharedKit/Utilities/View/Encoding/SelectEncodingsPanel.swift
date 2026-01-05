@@ -187,7 +187,10 @@ class SelectEncodingsPanel: NSWindow, NSTableViewDataSource, NSTableViewDelegate
         guard let identifier = tableColumn?.identifier else {
             return nil
         }
-        let cell = tableView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView ?? createCell(identifier)
+        let cell = tableView.makeView(
+            withIdentifier: identifier,
+            owner: self
+        ) as? NSTableCellView ?? createCell(identifier)
 
         cell.textField?.stringValue = String.localizedName(of: encodingsList[row])
 

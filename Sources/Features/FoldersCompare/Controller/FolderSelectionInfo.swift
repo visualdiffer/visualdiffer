@@ -74,7 +74,6 @@ struct SelectionType: OptionSet {
 
     var debugDescription: String {
         String(
-            // swiftlint:disable:next line_length
             format: "selType %ld, nullFilesCount %d, foldersCount %d, folders %@, filesCount %d, files %@, hasMultipleSel %d",
             selType.rawValue,
             nullFilesCount,

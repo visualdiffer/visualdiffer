@@ -97,7 +97,9 @@ extension ItemComparator {
             return .orderedSame
         }
 
-        var res: ComparisonResult = leftTags.count == rightTags.count ? .orderedSame : leftTags.count < rightTags.count ? .orderedAscending : .orderedDescending
+        var res: ComparisonResult = leftTags.count == rightTags.count
+            ? .orderedSame
+            : leftTags.count < rightTags.count ? .orderedAscending : .orderedDescending
         if res == .orderedSame {
             for (index, item) in leftTags.enumerated() where res == .orderedSame {
                 res = item.caseInsensitiveCompare(rightTags[index])

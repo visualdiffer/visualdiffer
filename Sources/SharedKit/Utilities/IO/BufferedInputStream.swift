@@ -110,7 +110,11 @@ public class BufferedInputStream: InputStream {
         ]
         do {
             let line = try withUnsafeMutablePointer(to: &docAttrs) { docAttrsPointer in
-                try NSAttributedString(data: data, options: options, documentAttributes: AutoreleasingUnsafeMutablePointer(docAttrsPointer)).string
+                try NSAttributedString(
+                    data: data,
+                    options: options,
+                    documentAttributes: AutoreleasingUnsafeMutablePointer(docAttrsPointer)
+                ).string
             }
 
             if let val = docAttrs[NSAttributedString.DocumentAttributeKey.characterEncoding] as? NSNumber {

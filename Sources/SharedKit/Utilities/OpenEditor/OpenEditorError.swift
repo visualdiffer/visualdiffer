@@ -11,7 +11,6 @@ enum OpenEditorError: Error {
     case missingExecutePermission(URL)
 }
 
-// swiftlint:disable line_length
 extension OpenEditorError: LocalizedError {
     var errorDescription: String? {
         switch self {
@@ -24,5 +23,3 @@ extension OpenEditorError: LocalizedError {
         }
     }
 }
-
-// swiftlint:enable line_length

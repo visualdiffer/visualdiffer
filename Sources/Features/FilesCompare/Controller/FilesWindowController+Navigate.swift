@@ -71,9 +71,17 @@ extension FilesWindowController {
         }
 
         if navigateToNext {
-            parentSession.nextDifferenceFiles(from: sessionDiff.leftPath, rightPath: sessionDiff.rightPath, block: block)
+            parentSession.nextDifferenceFiles(
+                from: sessionDiff.leftPath,
+                rightPath: sessionDiff.rightPath,
+                block: block
+            )
         } else {
-            parentSession.prevDifferenceFiles(from: sessionDiff.leftPath, rightPath: sessionDiff.rightPath, block: block)
+            parentSession.prevDifferenceFiles(
+                from: sessionDiff.leftPath,
+                rightPath: sessionDiff.rightPath,
+                block: block
+            )
         }
     }
 

@@ -192,7 +192,8 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
             leftPathChooser.addPath(leftPath)
             rightPathChooser.addPath(rightPath)
 
-            if !userChosenPreferences, HistorySessionManager.shared.containsHistory(leftPath: leftPath, rightPath: rightPath) {
+            if !userChosenPreferences,
+               HistorySessionManager.shared.containsHistory(leftPath: leftPath, rightPath: rightPath) {
                 try? HistorySessionManager.shared.openDocument(leftPath: leftPath, rightPath: rightPath)
             } else {
                 // Create a new document

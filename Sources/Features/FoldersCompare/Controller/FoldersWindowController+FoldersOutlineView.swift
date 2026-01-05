@@ -70,7 +70,10 @@ extension FoldersWindowController: NSOutlineViewDelegate,
     public func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         guard let tableColumn,
               let itemCompare = (item as? VisibleItem)?.item,
-              let result = outlineView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? CompareItemTableCellView else {
+              let result = outlineView.makeView(
+                  withIdentifier: tableColumn.identifier,
+                  owner: nil
+              ) as? CompareItemTableCellView else {
             return nil
         }
 
