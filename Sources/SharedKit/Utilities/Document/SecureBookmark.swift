@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 private let sandboxedPaths = "sandboxedPaths"
 
@@ -48,7 +49,7 @@ class SecureBookmark: @unchecked Sendable {
                 dict![path.osPath] = bookmark
                 UserDefaults.standard.set(dict, forKey: sandboxedPaths)
             } catch {
-                NSLog("Secure bookmark failed \(error)")
+                Logger.general.error("Secure bookmark failed \(error)")
                 return false
             }
         }
@@ -77,7 +78,7 @@ class SecureBookmark: @unchecked Sendable {
             }
             return url
         } catch {
-            NSLog("Secure bookmark error while resolving bookmark \(error)")
+            Logger.general.error("Secure bookmark error while resolving bookmark \(error)")
         }
         return nil
     }

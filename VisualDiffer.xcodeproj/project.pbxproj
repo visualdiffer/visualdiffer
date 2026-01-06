@@ -871,7 +871,6 @@
 		553740D92E9372DF00AB56D0 /* TOPFileSizePredicateEditorRowTemplate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TOPFileSizePredicateEditorRowTemplate.m; sourceTree = "<group>"; };
 		553740DA2E9372DF00AB56D0 /* TOPTimestampPredicateEditorRowTemplate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TOPTimestampPredicateEditorRowTemplate.h; sourceTree = "<group>"; };
 		553740DB2E9372DF00AB56D0 /* TOPTimestampPredicateEditorRowTemplate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TOPTimestampPredicateEditorRowTemplate.m; sourceTree = "<group>"; };
-		553740E02E9372DF00AB56D0 /* TOPMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TOPMacros.h; sourceTree = "<group>"; };
 		553740E22E9372DF00AB56D0 /* OpenDiffCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDiffCommand.swift; sourceTree = "<group>"; };
 		553740E52E9372DF00AB56D0 /* NSAppearance+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAppearance+DarkMode.swift"; sourceTree = "<group>"; };
 		553740E72E9372DF00AB56D0 /* Array+MoveIndexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+MoveIndexes.swift"; sourceTree = "<group>"; };
@@ -2154,7 +2153,6 @@
 				553740C92E9372DF00AB56D0 /* FileManager */,
 				553740D32E9372DF00AB56D0 /* MGScopeBar */,
 				553740DC2E9372DF00AB56D0 /* Predicate */,
-				553740E02E9372DF00AB56D0 /* TOPMacros.h */,
 			);
 			path = Legacy;
 			sourceTree = "<group>";

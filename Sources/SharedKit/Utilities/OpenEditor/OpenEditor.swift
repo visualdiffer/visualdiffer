@@ -6,6 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+import os.log
+
 struct OpenEditor {
     let attributes: [OpenEditorAttribute]
 
@@ -62,7 +64,7 @@ extension OpenEditor {
                 configuration: NSWorkspace.OpenConfiguration()
             ) { _, error in
                 if let error {
-                    NSLog("Unable to open file \(item.path): \(error)")
+                    Logger.general.error("Unable to open file \(item.path): \(error)")
                 }
             }
         }
@@ -93,7 +95,7 @@ extension OpenEditor {
             let task = try NSUserUnixTask(url: scriptURL)
             task.execute(withArguments: arguments()) { taskError in
                 if let taskError {
-                    NSLog("Unable to launch \(scriptURL.osPath), \(taskError)")
+                    Logger.general.error("Unable to launch \(scriptURL.osPath), \(taskError)")
                 }
             }
         } catch {

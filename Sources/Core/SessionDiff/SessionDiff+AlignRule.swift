@@ -6,6 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+import os.log
+
 extension SessionDiff {
     var fileNameAlignments: [AlignRule]? {
         get {
@@ -25,7 +27,7 @@ extension SessionDiff {
                 )
                 return (data as? [[String: Any]])?.compactMap { AlignRule($0) }
             } catch {
-                NSLog("Unable to unarchive file name alignments array \(error)")
+                Logger.general.error("Unable to unarchive file name alignments array \(error)")
 
                 return nil
             }
@@ -40,7 +42,7 @@ extension SessionDiff {
                         requiringSecureCoding: false
                     )
                 } catch {
-                    NSLog("Unable to save file name alignments array \(error)")
+                    Logger.general.error("Unable to save file name alignments array \(error)")
                     fileNameAlignmentsData = nil
                 }
             } else {

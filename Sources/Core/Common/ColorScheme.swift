@@ -6,6 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+import os.log
+
 struct ColorSet {
     enum Key: String {
         case text = "textColor"
@@ -47,7 +49,7 @@ extension ColorSet {
             case .background:
                 tempBackground = color
             default:
-                NSLog("Found invalid color type: \(key)")
+                Logger.general.error("Found invalid color type: \(key)")
             }
         }
 

@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 visualdiffer.com
 //
 
+import os.log
+
 class HistorySessionManager: @unchecked Sendable {
     static let defaultMaxItemsCount = 50
 
@@ -83,7 +85,7 @@ class HistorySessionManager: @unchecked Sendable {
             do {
                 try historyMOC.save()
             } catch {
-                NSLog("Unable to save history \(error)")
+                Logger.general.error("Unable to save history \(error)")
             }
             documents.insert(document.uuid)
         }
@@ -148,7 +150,7 @@ class HistorySessionManager: @unchecked Sendable {
         do {
             return try historyMOC.fetch(HistoryEntity.searchPathRequest(leftPath: leftPath, rightPath: rightPath)).first
         } catch {
-            NSLog("Error fetching objects: \(error.localizedDescription)")
+            Logger.general.error("Error fetching objects: \(error.localizedDescription)")
         }
         return nil
     }
@@ -200,7 +202,7 @@ class HistorySessionManager: @unchecked Sendable {
                     withIntermediateDirectories: true
                 )
             } catch {
-                NSLog("Unable to create history directory \(historyPath), reason \(error)")
+                Logger.general.error("Unable to create history directory \(historyPath), reason \(error)")
                 return nil
             }
         }

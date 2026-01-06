@@ -2,8 +2,6 @@
 // Prefix header for all source files of the 'VisualDiffer' target in the 'VisualDiffer' project
 //
 
-#import "TOPMacros.h"
-
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>

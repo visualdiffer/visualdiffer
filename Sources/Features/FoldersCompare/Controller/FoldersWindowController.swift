@@ -8,6 +8,7 @@
 
 import Quartz
 import UserNotifications
+import os.log
 
 // the heights are in flipped coordinates
 private let splitViewMinHeight: CGFloat = 160.0
@@ -270,7 +271,7 @@ public class FoldersWindowController: NSWindowController,
             if event.modifierFlags.contains(.command),
                event.charactersIgnoringModifiers?.unicodeScalars.first?.value == UInt32(NSF12FunctionKey) {
                 FileSystemTestHelper.createTestCode(leftView, sessionDiff: sessionDiff)
-                NSLog("Unit Test generated and copied on clipboard")
+                Logger.ui.info("Unit Test generated and copied on clipboard")
 
                 return
             }

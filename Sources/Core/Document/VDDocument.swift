@@ -6,6 +6,8 @@
 //  Copyright (c) 2010 visualdiffer.com
 //
 
+import os.log
+
 public protocol DocumentWindowControllerDelegate: AnyObject {
     func canClose(_ document: VDDocument) -> Bool
 }
@@ -181,7 +183,7 @@ public protocol DocumentWindowControllerDelegate: AnyObject {
             addWindowController(fwc)
             fwc.startComparison()
         default:
-            NSLog("Invalid session type")
+            Logger.general.error("Invalid session type")
         }
         // disable restoration for new documents
         // otherwise when the application restarts it restores an invalid document

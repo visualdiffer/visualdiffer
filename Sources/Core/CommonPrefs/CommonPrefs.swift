@@ -6,6 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+import os.log
+
 private let darkColorSchemeFileName: String = "colorsDark"
 private let lightColorSchemeFileName: String = "colors"
 
@@ -65,7 +67,7 @@ public class CommonPrefs: @unchecked Sendable {
         do {
             return try readJSON(configPath) as? [String: Any]
         } catch {
-            NSLog("Error while loading colors from %@, error %@. Try to load default colors config", configPath, error.localizedDescription)
+            Logger.general.error("Error while loading colors from \(configPath), error \(error.localizedDescription). Try to load default colors config")
             // fallback to defaults
             if let path = defaultColorsConfigPath {
                 return try? readJSON(path) as? [String: Any]
