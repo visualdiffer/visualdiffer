@@ -69,6 +69,7 @@ extension FilesWindowController {
             try checkFile(path, side: view.side)
         } else {
             if let url = choosePath() {
+                path = url
                 if isLeftView {
                     resolvedLeftPath = url
                     sessionDiff.leftPath = url.osPath
@@ -76,8 +77,6 @@ extension FilesWindowController {
                     resolvedRightPath = url
                     sessionDiff.rightPath = url.osPath
                 }
-            } else {
-                return
             }
         }
 
