@@ -97,7 +97,7 @@ extension FilesWindowController {
 
     // MARK: - Actions
 
-    @objc func refresh(_: AnyObject?) {
+    @objc func reload(_: AnyObject?) {
         guard alertSaveDirtyFiles() else {
             return
         }

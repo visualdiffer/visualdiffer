@@ -47,7 +47,7 @@ extension FilesWindowController: NSWindowDelegate {
             if askReload() {
                 leftView.isDirty = false
                 rightView.isDirty = false
-                refresh(nil)
+                reload(nil)
                 if leftChanged, rightChanged {
                     differenceCounters.stringValue = NSLocalizedString("Reloaded left and right files", comment: "")
                 } else if leftChanged {

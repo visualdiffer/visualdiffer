@@ -162,8 +162,8 @@ extension FilesWindowController {
             keyEquivalent: "W"
         )
         viewMenu.addItem(
-            withTitle: NSLocalizedString("Refresh", comment: ""),
-            action: #selector(refresh),
+            withTitle: NSLocalizedString("Reload Files", comment: ""),
+            action: #selector(reload),
             keyEquivalent: "r"
         )
         viewMenu.addItem(NSMenuItem.separator())
