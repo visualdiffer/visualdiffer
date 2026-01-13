@@ -16,7 +16,7 @@ func swap<T>(_ lhs: inout T, _ rhs: inout T) {
 extension FilesWindowController {
     // MARK: - Refresh after edit
 
-    @objc func refreshAfterTextEdit() {
+    func refreshAfterTextEdit(_ selectedRow: Int = -1) {
         guard let diffResult else {
             return
         }
@@ -25,10 +25,15 @@ extension FilesWindowController {
         differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: diffResult))
         cachedLineTextMap.removeAllObjects()
 
+        let selectedRow = selectedRow < 0 ? lastUsedView.selectedRow : selectedRow
+
         leftView.reloadData()
         rightView.reloadData()
 
-        updateDetailLines(lastUsedView.selectedRow)
+        lastUsedView.selectRowIndexes(IndexSet(integer: selectedRow), byExtendingSelection: true)
+        lastUsedView.scrollRowToVisible(selectedRow)
+
+        updateDetailLines(selectedRow)
 
         fileThumbnail.needsDisplay = true
     }

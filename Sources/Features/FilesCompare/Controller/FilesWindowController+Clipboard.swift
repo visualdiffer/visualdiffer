@@ -53,13 +53,14 @@
             return
         }
 
-        diffResult.insert(
+        let currentRow = diffResult.insert(
             text: text,
             at: row,
             side: lastUsedView.side
         )
         lastUsedView.isDirty = true
-        refreshAfterTextEdit()
+
+        refreshAfterTextEdit(currentRow)
     }
 
     @objc func cut(_ sender: AnyObject) {

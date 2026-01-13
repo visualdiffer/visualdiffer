@@ -237,7 +237,7 @@ class DiffResult {
         text: String,
         at startIndex: Int,
         side: DisplaySide
-    ) {
+    ) -> Int {
         switch side {
         case .left:
             insertLines(
@@ -264,7 +264,7 @@ class DiffResult {
         otherSide: DiffSide,
         at startIndex: Int,
         type: DiffChangeType
-    ) {
+    ) -> Int {
         var index = startIndex
 
         DiffLineComponent.enumerateLines(text: text) { component in
@@ -288,6 +288,8 @@ class DiffResult {
             index += 1
         }
         destination.renumberLines()
+
+        return index < destination.lines.count ? index : index - 1
     }
 
     func removeLine(at index: Int) {
