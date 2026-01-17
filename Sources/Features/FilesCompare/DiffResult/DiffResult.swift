@@ -233,6 +233,7 @@ class DiffResult {
         }
     }
 
+    @discardableResult
     func insert(
         text: String,
         at startIndex: Int,
@@ -265,9 +266,18 @@ class DiffResult {
         at startIndex: Int,
         type: DiffChangeType
     ) -> Int {
+        // adding lines beyond the end is not allowed
+        if startIndex > destination.lines.count {
+            return -1
+        }
         var index = startIndex
 
         DiffLineComponent.enumerateLines(text: text) { component in
+            // adds missing lines to both diff sides to accommodate insertion at the specified index
+            if index == destination.lines.count {
+                destination.insert(DiffLine.missingLine(), at: index)
+                otherSide.insert(DiffLine.missingLine(), at: index)
+            }
             let destLine = destination.lines[index]
             if destLine.type == .missing {
                 destLine.component = component
@@ -277,8 +287,12 @@ class DiffResult {
                     otherLine.type = .matching
                     destLine.type = .matching
                 } else {
-                    otherLine.type = .changed
-                    destLine.type = .changed
+                    if otherLine.type == .missing {
+                        destLine.type = type
+                    } else {
+                        otherLine.type = .changed
+                        destLine.type = .changed
+                    }
                 }
             } else {
                 // line numbers will be set correctly below

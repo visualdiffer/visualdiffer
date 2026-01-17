@@ -559,6 +559,110 @@ final class DiffResultTests: DiffResultBaseTests {
             #expect(rightLine == diffRightLine.text)
         }
     }
+
+    @Test func insertLinesAtBottom() throws {
+        let leftText = "line1\nline2\n"
+        let rightText = "line1\n"
+
+        let diffResult = DiffResult()
+        diffResult.diff(leftText: leftText, rightText: rightText)
+
+        let newLines = "line2\nline3\nline4"
+        diffResult.insert(text: newLines, at: 1, side: .right)
+        diffResult.refreshSections()
+
+        let leftChangeType: [DiffChangeType] = [.matching, .matching, .missing, .missing]
+        assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
+        let rightChangeType: [DiffChangeType] = [.matching, .matching, .added, .added]
+        assert(lines: diffResult.rightSide.lines, expectedValue: rightChangeType)
+
+        assert(sectionSeparators: diffResult.leftSide.lines, isSeparator: false)
+        assert(sectionSeparators: diffResult.rightSide.lines, isSeparator: false)
+
+        #expect(diffResult.summary == DiffSummary(matching: 2, added: 2, deleted: 0, changed: 0))
+
+        assertArrayCount(diffResult.sections, 1)
+        #expect(diffResult.sections[0] == DiffSection(start: 2, end: 3))
+
+        let expectedLeftLines = [
+            (1, "line1"),
+            (2, "line2"),
+            (-1, ""),
+            (-1, ""),
+        ]
+
+        let expectedRightLines = [
+            (1, "line1"),
+            (2, "line2"),
+            (3, "line3"),
+            (4, "line4"),
+        ]
+
+        for (index, (leftNumber, leftLine)) in expectedLeftLines.enumerated() {
+            let (rightNumber, rightLine) = expectedRightLines[index]
+            let diffLeftLine = diffResult.leftSide.lines[index]
+            let diffRightLine = diffResult.rightSide.lines[index]
+
+            #expect(leftNumber == diffLeftLine.number)
+            #expect(leftLine == diffLeftLine.text)
+
+            #expect(rightNumber == diffRightLine.number)
+            #expect(rightLine == diffRightLine.text)
+        }
+    }
+
+    @Test func insertOverMatchingLine() throws {
+        let leftText = "line1\nline5"
+        let rightText = "line1\nline5"
+
+        let diffResult = DiffResult()
+        diffResult.diff(leftText: leftText, rightText: rightText)
+
+        let newLines = "line2\nline3\nline4"
+        diffResult.insert(text: newLines, at: 1, side: .right)
+        diffResult.refreshSections()
+
+        let leftChangeType: [DiffChangeType] = [.matching, .missing, .missing, .missing, .matching]
+        assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
+        let rightChangeType: [DiffChangeType] = [.matching, .added, .added, .added, .matching]
+        assert(lines: diffResult.rightSide.lines, expectedValue: rightChangeType)
+
+        assert(sectionSeparators: diffResult.leftSide.lines, isSeparator: false)
+        assert(sectionSeparators: diffResult.rightSide.lines, isSeparator: false)
+
+        #expect(diffResult.summary == DiffSummary(matching: 2, added: 3, deleted: 0, changed: 0))
+
+        assertArrayCount(diffResult.sections, 1)
+        #expect(diffResult.sections[0] == DiffSection(start: 1, end: 3))
+
+        let expectedLeftLines = [
+            (1, "line1"),
+            (-1, ""),
+            (-1, ""),
+            (-1, ""),
+            (2, "line5"),
+        ]
+
+        let expectedRightLines = [
+            (1, "line1"),
+            (2, "line2"),
+            (3, "line3"),
+            (4, "line4"),
+            (5, "line5"),
+        ]
+
+        for (index, (leftNumber, leftLine)) in expectedLeftLines.enumerated() {
+            let (rightNumber, rightLine) = expectedRightLines[index]
+            let diffLeftLine = diffResult.leftSide.lines[index]
+            let diffRightLine = diffResult.rightSide.lines[index]
+
+            #expect(leftNumber == diffLeftLine.number)
+            #expect(leftLine == diffLeftLine.text)
+
+            #expect(rightNumber == diffRightLine.number)
+            #expect(rightLine == diffRightLine.text)
+        }
+    }
 }
 
 // swiftlint:enable file_length

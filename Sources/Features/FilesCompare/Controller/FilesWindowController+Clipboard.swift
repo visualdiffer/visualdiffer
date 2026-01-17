@@ -53,9 +53,10 @@
             return
         }
 
+        // insert below the selected row
         let currentRow = diffResult.insert(
             text: text,
-            at: row,
+            at: row + 1,
             side: lastUsedView.side
         )
         lastUsedView.isDirty = true
