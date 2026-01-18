@@ -5,37 +5,56 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.2</title>
+            <title>Version 2.1.3</title>
             <description>
                 <![CDATA[
-                <h1 id="v212">v2.1.2</h1>
-
-<p>This is a minor release with bug fixes.</p>
+                <h1 id="v213">v2.1.3</h1>
 
 <h3 id="features">🚀 Features</h3>
 
 <ul>
-  <li>None</li>
+  <li>File Compare: ignore character case in comparison</li>
 </ul>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>General: Corrected message formatting for title case and sentence case</li>
-  <li>Folder Compare: Fixed sync dialog not showing items</li>
-  <li>File Compare: Word-wrap truncates text when slider is not at beginning</li>
+  <li>
+    <p>File Compare: crash when pasting at end of file (<a href="https://github.com/visualdiffer/visualdiffer/commit/b283815a16d35c7322dfd5f931ad1aec546b990c">b283815</a>)</p>
+  </li>
+  <li>
+    <p>File Compare: handle unsaved files (<a href="https://github.com/visualdiffer/visualdiffer/commit/e5b91454c434cd6588d7777de98c73f382edc4ce">e5b9145</a>)</p>
+  </li>
+  <li>
+    <p>File Compare: redo compare without saving files (<a href="https://github.com/visualdiffer/visualdiffer/commit/4a80dd7dc8595184a54c5c538ab7d5a4da183e34">4a80dd7</a>)</p>
+  </li>
+  <li>
+    <p>Folder Compare: window expands for long file paths (<a href="https://github.com/visualdiffer/visualdiffer/commit/0e2180f68c95b5055f5b6a2f9bf060ec63164a36">0e2180f</a>)</p>
+  </li>
 </ul>
+
+<h3 id="performance">✨ Performance</h3>
+
+<ul>
+  <li>
+    <p>Fix regression from objc original code (<a href="https://github.com/visualdiffer/visualdiffer/commit/c94c99ae81df25b705da6281368decd15d356013">c94c99a</a>)</p>
+  </li>
+  <li>
+    <p>increase buffer size used by binary comparison (<a href="https://github.com/visualdiffer/visualdiffer/commit/e9c4daea9154ec8d60f63a084a4489fda918e70c">e9c4dae</a>)</p>
+  </li>
+</ul>
+
 
                 ]]>
             </description>
-            <pubDate>Wed, 24 December 2025 00:00:00 +0100</pubDate>
-            <sparkle:version>2.1.2</sparkle:version>
-            <sparkle:shortVersionString>2.1.2</sparkle:shortVersionString>
+            <pubDate>Sun, 18 January 2026 00:00:00 +0100</pubDate>
+            <sparkle:version>2.1.3</sparkle:version>
+            <sparkle:shortVersionString>2.1.3</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.2/VisualDiffer-2.1.2.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.3/VisualDiffer-2.1.3.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="RG7wesMTJcYJhT12T9kjHco4OvkY+yroWCPVfdF24Pn5TrGQrOcVSUxLLpkmYwfokBqPvno7k7Kiqw/2rBXzCQ==" length="5479786"
+                sparkle:edSignature="5nsPSTakM8nSPFBAEW0HknKZc7BKJfCDKH58fZ+W9sD5GEmMM0YwNZUvZzKokqQSicaNuU3pxG8cP8Sl5F58Dw==" length="5489249"
 
             />
         </item>
