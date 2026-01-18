@@ -27,6 +27,7 @@ platform :mac do
 
   desc "Create release, build project and create the zip file"
   lane :release do
+    check_release_version
     lint_app
     format_app(
       check: true
@@ -39,6 +40,13 @@ platform :mac do
     github if ENV["GITHUB_ENABLED"] == "true"
     sparkle if ENV["SPARKLE_ENABLED"] == "true"
     UI.success("🎉 Release completed")
+  end
+
+  private_lane :check_release_version do
+    app_version = Gem::Version.new(ENV["APP_VERSION"])
+    last_version = Gem::Version.new(last_git_tag.gsub(/^v/, ''))
+    
+    UI.user_error!("App version must be greater than the last tag. You must increase the version before creating a new release.") if app_version <= last_version
   end
 
   private_lane :build_archive_app do
@@ -111,6 +119,9 @@ platform :mac do
       is_prerelease: (ENV["APP_VERSION"] =~ /(alpha|beta|rc)/i).to_i > 0,
       upload_assets: [ENV["ZIP_PATH"]]
     )
+
+    # GitHub creates the remote tag, so ensures local tags are up to date with remote ones
+    sh('git fetch --tags')
 
     UI.success("✅ GitHub release completed")
   end
