@@ -103,6 +103,9 @@ class ProgressBarView: NSView {
             messageText.bottomAnchor.constraint(equalTo: bottomAnchor),
             messageText.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
+
+        messageText.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        messageText.setContentHuggingPriority(.defaultLow, for: .horizontal)
     }
 
     func updateMessage(_ text: String) {
