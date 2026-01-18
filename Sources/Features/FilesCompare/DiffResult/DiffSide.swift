@@ -64,4 +64,10 @@ class DiffSide {
             lineNumber += 1
         }
     }
+
+    func nonMissingLineComponents() -> [DiffLineComponent] {
+        lines.compactMap { line in
+            line.type == .missing ? nil : line.component
+        }
+    }
 }

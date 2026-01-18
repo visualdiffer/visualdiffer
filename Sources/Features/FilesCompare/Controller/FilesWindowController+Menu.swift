@@ -166,6 +166,11 @@ extension FilesWindowController {
             action: #selector(reload),
             keyEquivalent: "r"
         )
+        viewMenu.addItem(
+            withTitle: NSLocalizedString("Recompare", comment: ""),
+            action: #selector(recompare),
+            keyEquivalent: "R"
+        )
         viewMenu.addItem(NSMenuItem.separator())
 
         let fontItem = NSMenuItem(

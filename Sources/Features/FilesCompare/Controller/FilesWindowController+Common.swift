@@ -119,6 +119,23 @@ extension FilesWindowController {
         }
     }
 
+    @objc func recompare(_: AnyObject?) {
+        guard let diffResult else {
+            return
+        }
+
+        let row = lastUsedView.selectedRow
+
+        compare(
+            leftLines: diffResult.leftSide.nonMissingLineComponents(),
+            rightLines: diffResult.rightSide.nonMissingLineComponents(),
+            moveToFirstDifference: false
+        )
+
+        lastUsedView.scrollTo(row: row, center: true)
+        lastUsedView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: true)
+    }
+
     @objc func swapSides(_: AnyObject) {
         swap(&sessionDiff.leftPath, &sessionDiff.rightPath)
         swap(&leftView.diffSide, &rightView.diffSide)

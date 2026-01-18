@@ -50,12 +50,28 @@
             rightPanelView.isEditAllowed = true
         }
 
+        compare(
+            leftLines: DiffLineComponent.splitLines(leftContent),
+            rightLines: DiffLineComponent.splitLines(rightContent),
+            moveToFirstDifference: moveToFirstDifference
+        )
+    }
+
+    func compare(
+        leftLines: [DiffLineComponent],
+        rightLines: [DiffLineComponent],
+        moveToFirstDifference: Bool
+    ) {
         let newDiffResult = DiffResult()
 
         diffResult = newDiffResult
         currentDiffResult = nil
 
-        newDiffResult.diff(leftText: leftContent, rightText: rightContent, options: preferences.diffResultOptions)
+        newDiffResult.diff(
+            leftLines: leftLines,
+            rightLines: rightLines,
+            options: preferences.diffResultOptions
+        )
         setSliderMaxValue()
         differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: newDiffResult))
         refreshLinesStatus()

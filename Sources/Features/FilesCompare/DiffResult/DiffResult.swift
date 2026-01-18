@@ -28,16 +28,27 @@ class DiffResult {
         self.sections = sections
     }
 
+    // currently used only by the unit tests
+    // periphery:ignore
     func diff(
         leftText: String,
         rightText: String,
         options: Options = []
     ) {
+        diff(
+            leftLines: DiffLineComponent.splitLines(leftText),
+            rightLines: DiffLineComponent.splitLines(rightText),
+            options: options
+        )
+    }
+
+    func diff(
+        leftLines: [DiffLineComponent],
+        rightLines: [DiffLineComponent],
+        options: Options = []
+    ) {
         sections = []
         summary.reset()
-
-        let leftLines = DiffLineComponent.splitLines(leftText)
-        let rightLines = DiffLineComponent.splitLines(rightText)
 
         leftSide.eol = leftLines.detectEOL()
         rightSide.eol = rightLines.detectEOL()
