@@ -37,15 +37,22 @@ class CompareItemTableCellView: NSView {
     }
 
     private func setupConstraints(icon: NSImageView) {
+        let textLeadingToIcon = text.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 2)
+        textLeadingToIcon.priority = .defaultHigh
+
         NSLayoutConstraint.activate([
             icon.centerYAnchor.constraint(equalTo: centerYAnchor),
             icon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2),
+            icon.widthAnchor.constraint(equalToConstant: 16),
+            icon.heightAnchor.constraint(equalToConstant: 16),
 
             text.topAnchor.constraint(equalTo: topAnchor, constant: 2),
-            // Align the textField to the bottom of the superview (view)
+            // align the text field to the bottom of the superview
             text.bottomAnchor.constraint(equalTo: bottomAnchor),
-            // is relative to icon
-            text.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 2),
+            // keep spacing to the icon when there is room
+            textLeadingToIcon,
+            // is relative to super view
+            text.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
             text.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
@@ -53,7 +60,7 @@ class CompareItemTableCellView: NSView {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             text.topAnchor.constraint(equalTo: topAnchor, constant: 2),
-            // Align the textField to the bottom of the superview (view)
+            // align the text field to the bottom of the superview
             text.bottomAnchor.constraint(equalTo: bottomAnchor),
             // is relative to super view
             text.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -70,6 +77,7 @@ class CompareItemTableCellView: NSView {
         view.isBordered = false
         view.backgroundColor = NSColor.clear
         view.refusesFirstResponder = true
+        view.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
@@ -79,8 +87,12 @@ class CompareItemTableCellView: NSView {
         let view = NSImageView()
 
         view.alignment = .left
-        view.imageScaling = .scaleProportionallyDown
+        view.imageScaling = .scaleNone
         view.refusesFirstResponder = true
+        view.setContentCompressionResistancePriority(.required, for: .horizontal)
+        view.setContentCompressionResistancePriority(.required, for: .vertical)
+        view.setContentHuggingPriority(.required, for: .horizontal)
+        view.setContentHuggingPriority(.required, for: .vertical)
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
