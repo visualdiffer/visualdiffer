@@ -1,0 +1,6 @@
+#include "../Signing.local.xcconfig"
+
+CODE_SIGN_ENTITLEMENTS[config=Debug] = $(FINDER_COMPARE_ROOT)/FinderCompare.entitlements
+CODE_SIGN_ENTITLEMENTS[config=Release] = $(FINDER_COMPARE_ROOT)/FinderCompare.entitlements
+CODE_SIGN_ENTITLEMENTS[config=DebugNoSandbox] = $(FINDER_COMPARE_ROOT)/FinderCompare.entitlements
+CODE_SIGN_ENTITLEMENTS[config=Sparkle] = $(FINDER_COMPARE_ROOT)/FinderCompare.entitlements

@@ -24,6 +24,9 @@ LD_RUNPATH_SEARCH_PATHS=@executable_path/../Frameworks
 
 INFOPLIST_FILE = ./VisualDiffer-Info.plist
 
+// Allow the "Run script" to write to /Applications
+ENABLE_USER_SCRIPT_SANDBOXING[config=Debug] = NO
+
 #include "Signing.local.xcconfig"
 #include "Versions.local.xcconfig"
 #include "Warnings.xcconfig"

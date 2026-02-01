@@ -3,18 +3,10 @@
 Clone the repository and build the app:
 
 ```bash
-git clone https://github.com/<your-account>/visualdiffer.git
+git clone https://github.com/visualdiffer/visualdiffer.git
+
 cd visualdiffer
-
-# copy files to local usage
-cp ./Signing-Template.xcconfig ./Signing.local.xcconfig
-cp ./Versions-Template.xcconfig ./Versions.local.xcconfig
-
-cp ./Signing-Template.xcconfig ./visdiff/Signing.local.xcconfig
-cp ./Versions-Template.xcconfig ./visdiff/Versions.local.xcconfig
-
-cp ./Signing-Template.xcconfig ./Tests/Signing.local.xcconfig
-cp ./Versions-Template.xcconfig ./Tests/Versions.local.xcconfig
+./scripts/setup-local-env.sh
 
 ```
 
@@ -33,3 +25,13 @@ To contribute:
 4. Open a pull request describing your update  
 
 ⚠️ Please follow the existing code style and include tests or examples when possible.
+
+## Deploy
+
+Build the release version to deploy on GitHub
+
+    bundle exec fastlane release --env local
+
+Build the version used for pre-release test
+
+    bundle exec fastlane release --env test.local

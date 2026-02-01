@@ -396,6 +396,7 @@
 		553743512E937B7F00AB56D0 /* VisualDiffer.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 5537434D2E937B7F00AB56D0 /* VisualDiffer.sdef */; };
 		553D10D9163BD0BC008D3F65 /* prefs_confirmations.png in Resources */ = {isa = PBXBuildFile; fileRef = 553D10D8163BD0BC008D3F65 /* prefs_confirmations.png */; };
 		5542D19616317DAC00F801AA /* vd.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 5542D19516317DAC00F801AA /* vd.iconset */; };
+		5544AF142F2F31C200952362 /* FinderExtensionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5544AF132F2F31C200952362 /* FinderExtensionBox.swift */; };
 		55450B172ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */; };
 		55450B192ED47B700048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55450B182ED47B680048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift */; };
 		554B4A452E9B7B8F0023AAF0 /* EndOfLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */; };
@@ -415,6 +416,8 @@
 		5550B5951A21D2F3009BC4A4 /* empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5550B5941A21D2F3009BC4A4 /* empty@2x.png */; };
 		555392621889732900D26258 /* deleteRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 555392601889732900D26258 /* deleteRed.png */; };
 		555392631889732900D26258 /* deleteRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 555392611889732900D26258 /* deleteRed@2x.png */; };
+		5553B6072F25F845001F2553 /* FinderCompareItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5553B6062F25F845001F2553 /* FinderCompareItem.swift */; };
+		5553B60A2F260E39001F2553 /* UserDefaults+FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5553B6092F260E39001F2553 /* UserDefaults+FinderSync.swift */; };
 		5560823F12AD0EF8003DC79D /* folder-999-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 5560823D12AD0EF8003DC79D /* folder-999-open.png */; };
 		5560824012AD0EF8003DC79D /* folder-999.png in Resources */ = {isa = PBXBuildFile; fileRef = 5560823E12AD0EF8003DC79D /* folder-999.png */; };
 		557315B12551307800CF4372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 557315B02551307800CF4372 /* Images.xcassets */; };
@@ -510,8 +513,11 @@
 		55FD7E28180C484500CF473C /* prefs_folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FD7E25180C484500CF473C /* prefs_folder@2x.png */; };
 		55FE894A2F054B260003864A /* FlagSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE89492F054B260003864A /* FlagSet.swift */; };
 		775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		8079642EA05641619077418B /* FinderSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F344CEF77C14D3FA67A1D16 /* FinderSync.framework */; };
+		8C37ED9F8A8B456394E9A940 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7946446268489AAE7D1E13 /* FinderSync.swift */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
+		BB36D08D35B04BDDB4075D1E /* FinderCompare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 681ECC74044B4FBE903C3EB1 /* FinderCompare.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -528,6 +534,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 55C1CBE12E8BB6A2004FE322;
 			remoteInfo = visdiff;
+		};
+		67FE37E918B644BCAC3B3FF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC24CE3C8C2E4218B19EF7FE;
+			remoteInfo = FinderCompare;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -562,12 +575,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		75C41AF321FB4B98B7F7A689 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BB36D08D35B04BDDB4075D1E /* FinderCompare.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		1D7946446268489AAE7D1E13 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		2DD552A277C044DAA6FCD173 /* FinderCompare-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FinderCompare-Info.plist"; sourceTree = "<group>"; };
+		2EEB9F2BDB5C4463BB1CBA95 /* FinderCompare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinderCompare.entitlements; sourceTree = "<group>"; };
 		32DBCF750370BD2300C91783 /* VisualDiffer_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualDiffer_Prefix.pch; sourceTree = "<group>"; };
 		550A2CC113FF973B00981A9B /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		55157D6012898F8800826FF8 /* folder-000-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-000-open.png"; sourceTree = "<group>"; };
@@ -970,6 +997,7 @@
 		553A58692EF2758800685D02 /* MyDocument1.4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyDocument1.4.xcdatamodel; sourceTree = "<group>"; };
 		553D10D8163BD0BC008D3F65 /* prefs_confirmations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_confirmations.png; sourceTree = "<group>"; };
 		5542D19516317DAC00F801AA /* vd.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = vd.iconset; path = images/vd.iconset; sourceTree = "<group>"; };
+		5544AF132F2F31C200952362 /* FinderExtensionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderExtensionBox.swift; sourceTree = "<group>"; };
 		55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextPreferencesPanel+PreferencesBoxDataSource.swift"; sourceTree = "<group>"; };
 		55450B182ED47B680048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileSessionPreferencesWindow+PreferencesBoxDataSource.swift"; sourceTree = "<group>"; };
 		554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfLine.swift; sourceTree = "<group>"; };
@@ -989,6 +1017,8 @@
 		5550B5941A21D2F3009BC4A4 /* empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty@2x.png"; sourceTree = "<group>"; };
 		555392601889732900D26258 /* deleteRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteRed.png; sourceTree = "<group>"; };
 		555392611889732900D26258 /* deleteRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deleteRed@2x.png"; sourceTree = "<group>"; };
+		5553B6062F25F845001F2553 /* FinderCompareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderCompareItem.swift; sourceTree = "<group>"; };
+		5553B6092F260E39001F2553 /* UserDefaults+FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+FinderSync.swift"; sourceTree = "<group>"; };
 		555CAD9B1C2710D000371E4D /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
 		5560823D12AD0EF8003DC79D /* folder-999-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-999-open.png"; sourceTree = "<group>"; };
 		5560823E12AD0EF8003DC79D /* folder-999.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-999.png"; sourceTree = "<group>"; };
@@ -1109,9 +1139,13 @@
 		55FC15F22557CD000075E30D /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		55FD7E25180C484500CF473C /* prefs_folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prefs_folder@2x.png"; sourceTree = "<group>"; };
 		55FE89492F054B260003864A /* FlagSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagSet.swift; sourceTree = "<group>"; };
+		681ECC74044B4FBE903C3EB1 /* FinderCompare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FinderCompare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		69C3C74BD5BE435DB6B99574 /* Signing.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.local.xcconfig; sourceTree = "<group>"; };
 		7788DA0506752A1600599AAD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		8D15AC360486D014006FF6A4 /* VisualDiffer-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "VisualDiffer-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* VisualDiffer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisualDiffer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F344CEF77C14D3FA67A1D16 /* FinderSync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FinderSync.framework; path = System/Library/Frameworks/FinderSync.framework; sourceTree = SDKROOT; };
+		A59A8F0092C8466C86D585C7 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1142,6 +1176,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C8E5F0163F9943BE9144F242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8079642EA05641619077418B /* FinderSync.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1169,6 +1211,7 @@
 				8D15AC370486D014006FF6A4 /* VisualDiffer.app */,
 				55944CC72E5C8D9F00FB1F8C /* VisualDifferTests.xctest */,
 				55C1CBE22E8BB6A2004FE322 /* visdiff */,
+				681ECC74044B4FBE903C3EB1 /* FinderCompare.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1191,6 +1234,7 @@
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				55944CDA2E5C8E5B00FB1F8C /* Tests */,
 				55C1CBFC2E8BB6AD004FE322 /* visdiff */,
+				F0C21C27F08B432194E57CE2 /* FinderCompare */,
 				55656A852DD34C5100DD5835 /* VisualDiffer-Bridging-Header.h */,
 			);
 			name = QuickDirtyDiff;
@@ -1228,6 +1272,7 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F344CEF77C14D3FA67A1D16 /* FinderSync.framework */,
 				55C84A702DA93ADB00BA39DA /* UserNotifications.framework */,
 				55FC15F22557CD000075E30D /* ScriptingBridge.framework */,
 				55D26E84140E2EAD00646F50 /* AppKit.framework */,
@@ -1960,6 +2005,7 @@
 				553740972E9372DF00AB56D0 /* FolderComparisonBox.swift */,
 				553740982E9372DF00AB56D0 /* GeneralPreferencesPanel.swift */,
 				553740992E9372DF00AB56D0 /* PreferredEditorBox.swift */,
+				5544AF132F2F31C200952362 /* FinderExtensionBox.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -2951,6 +2997,20 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		F0C21C27F08B432194E57CE2 /* FinderCompare */ = {
+			isa = PBXGroup;
+			children = (
+				A59A8F0092C8466C86D585C7 /* AppConfig.xcconfig */,
+				69C3C74BD5BE435DB6B99574 /* Signing.local.xcconfig */,
+				5553B6062F25F845001F2553 /* FinderCompareItem.swift */,
+				2EEB9F2BDB5C4463BB1CBA95 /* FinderCompare.entitlements */,
+				2DD552A277C044DAA6FCD173 /* FinderCompare-Info.plist */,
+				1D7946446268489AAE7D1E13 /* FinderSync.swift */,
+				5553B6092F260E39001F2553 /* UserDefaults+FinderSync.swift */,
+			);
+			path = FinderCompare;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2999,13 +3059,16 @@
 			buildPhases = (
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				5504B6FF255FCBBA00CDE04A /* Copy Visdiff to Helpers */,
+				75C41AF321FB4B98B7F7A689 /* Embed App Extensions */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				55943C852EE43E3800DE513B /* Embed Frameworks */,
+				5564F7132F28A66200AED072 /* Create Symlink to /Applications */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				16BE4321C7CF41AD871E00B5 /* PBXTargetDependency */,
 				55C1CC002E8BB749004FE322 /* PBXTargetDependency */,
 			);
 			name = VisualDiffer;
@@ -3013,6 +3076,25 @@
 			productName = QuickDirtyDiff;
 			productReference = 8D15AC370486D014006FF6A4 /* VisualDiffer.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DC24CE3C8C2E4218B19EF7FE /* FinderCompare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 586DBABEA13947818CF27CE5 /* Build configuration list for PBXNativeTarget "FinderCompare" */;
+			buildPhases = (
+				2590B9E023264DCDB99DE30B /* Sources */,
+				C8E5F0163F9943BE9144F242 /* Frameworks */,
+				F597E9F72D5E4976AB036F44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FinderCompare;
+			packageProductDependencies = (
+			);
+			productName = FinderCompare;
+			productReference = 681ECC74044B4FBE903C3EB1 /* FinderCompare.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -3040,6 +3122,10 @@
 						LastSwiftMigration = 1630;
 						ProvisioningStyle = Automatic;
 					};
+					DC24CE3C8C2E4218B19EF7FE = {
+						CreatedOnToolsVersion = 16.4;
+						LastSwiftMigration = 2600;
+					};
 				};
 			};
 			buildConfigurationList = 26FC0AA90875C8B900E6366F /* Build configuration list for PBXProject "VisualDiffer" */;
@@ -3059,6 +3145,7 @@
 			targets = (
 				8D15AC270486D014006FF6A4 /* VisualDiffer */,
 				55C1CBE12E8BB6A2004FE322 /* visdiff */,
+				DC24CE3C8C2E4218B19EF7FE /* FinderCompare */,
 				55944CC62E5C8D9F00FB1F8C /* VisualDifferTests */,
 			);
 		};
@@ -3162,9 +3249,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F597E9F72D5E4976AB036F44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5564F7132F28A66200AED072 /* Create Symlink to /Applications */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Create Symlink to /Applications";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# the finder extension requires the app to be present in /Applications\n# so we copy the latest build after the build completes\n\nif [[ \"${CONFIGURATION}\" == \"Debug\" ]]; then\n    ln -sfn \"${BUILT_PRODUCTS_DIR}/VisualDiffer.app\" /Applications/\n    # pluginkit -a /Applications/VisualDiffer.app\n    # killall Finder\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		2590B9E023264DCDB99DE30B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5553B60A2F260E39001F2553 /* UserDefaults+FinderSync.swift in Sources */,
+				8C37ED9F8A8B456394E9A940 /* FinderSync.swift in Sources */,
+				5553B6072F25F845001F2553 /* FinderCompareItem.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55944CC32E5C8D9F00FB1F8C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3321,6 +3448,7 @@
 				553741D32E9372DF00AB56D0 /* CompareItem+DifferenceNavigator.swift in Sources */,
 				558DEAD22EA26C5B00F05A10 /* Logger+App.swift in Sources */,
 				551DE3AA2ED428B40067AB18 /* FilePreferences.swift in Sources */,
+				5544AF142F2F31C200952362 /* FinderExtensionBox.swift in Sources */,
 				553741D42E9372DF00AB56D0 /* PreferencesBox.swift in Sources */,
 				553741D52E9372DF00AB56D0 /* NSAlert+ReplaceFile.swift in Sources */,
 				553741D72E9372DF00AB56D0 /* URL+SymLink.swift in Sources */,
@@ -3604,6 +3732,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		16BE4321C7CF41AD871E00B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC24CE3C8C2E4218B19EF7FE /* FinderCompare */;
+			targetProxy = 67FE37E918B644BCAC3B3FF9 /* PBXContainerItemProxy */;
+		};
 		55944CCC2E5C8D9F00FB1F8C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D15AC270486D014006FF6A4 /* VisualDiffer */;
@@ -3660,6 +3793,47 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1E7436ADF428452E986BC3A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A59A8F0092C8466C86D585C7 /* AppConfig.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		26FC0AA60875C8B900E6366F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 55F013FC27A90C46003EA2D4 /* AppConfig.xcconfig */;
@@ -4382,6 +4556,145 @@
 			};
 			name = Sparkle;
 		};
+		90018A1853B248E98D19088F /* Sparkle */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A59A8F0092C8466C86D585C7 /* AppConfig.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Sparkle;
+		};
+		AC683B197B82467EB1D161FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A59A8F0092C8466C86D585C7 /* AppConfig.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FEDCCF48B29F42C78BF30B7E /* DebugNoSandbox */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A59A8F0092C8466C86D585C7 /* AppConfig.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = DebugNoSandbox;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4425,6 +4738,17 @@
 				55C1CBE82E8BB6A2004FE322 /* DebugNoSandbox */,
 				55C1CBE92E8BB6A2004FE322 /* Release */,
 				55D71FDC2EE58630007E0FA0 /* Sparkle */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		586DBABEA13947818CF27CE5 /* Build configuration list for PBXNativeTarget "FinderCompare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC683B197B82467EB1D161FA /* Debug */,
+				FEDCCF48B29F42C78BF30B7E /* DebugNoSandbox */,
+				1E7436ADF428452E986BC3A1 /* Release */,
+				90018A1853B248E98D19088F /* Sparkle */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

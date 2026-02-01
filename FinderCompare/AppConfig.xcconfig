@@ -1,0 +1,13 @@
+FINDER_COMPARE_ROOT = FinderCompare
+
+PRODUCT_BUNDLE_IDENTIFIER = com.visualdiffer.findercompare
+PRODUCT_NAME = $(TARGET_NAME)
+CREATE_INFOPLIST_SECTION_IN_BINARY = YES
+SKIP_INSTALL = YES
+
+INFOPLIST_FILE = $(FINDER_COMPARE_ROOT)/FinderCompare-Info.plist
+
+REGISTER_APP_GROUPS = NO
+
+#include "Signing.local.xcconfig"
+#include "../Versions.local.xcconfig"
