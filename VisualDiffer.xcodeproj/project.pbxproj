@@ -396,7 +396,7 @@
 		553743512E937B7F00AB56D0 /* VisualDiffer.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 5537434D2E937B7F00AB56D0 /* VisualDiffer.sdef */; };
 		553D10D9163BD0BC008D3F65 /* prefs_confirmations.png in Resources */ = {isa = PBXBuildFile; fileRef = 553D10D8163BD0BC008D3F65 /* prefs_confirmations.png */; };
 		5542D19616317DAC00F801AA /* vd.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 5542D19516317DAC00F801AA /* vd.iconset */; };
-		5544AF142F2F31C200952362 /* FinderExtensionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5544AF132F2F31C200952362 /* FinderExtensionBox.swift */; };
+		5544AF142F2F31C200952362 /* ExtensionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5544AF132F2F31C200952362 /* ExtensionBox.swift */; };
 		55450B172ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */; };
 		55450B192ED47B700048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55450B182ED47B680048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift */; };
 		554B4A452E9B7B8F0023AAF0 /* EndOfLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */; };
@@ -997,7 +997,7 @@
 		553A58692EF2758800685D02 /* MyDocument1.4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyDocument1.4.xcdatamodel; sourceTree = "<group>"; };
 		553D10D8163BD0BC008D3F65 /* prefs_confirmations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_confirmations.png; sourceTree = "<group>"; };
 		5542D19516317DAC00F801AA /* vd.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = vd.iconset; path = images/vd.iconset; sourceTree = "<group>"; };
-		5544AF132F2F31C200952362 /* FinderExtensionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderExtensionBox.swift; sourceTree = "<group>"; };
+		5544AF132F2F31C200952362 /* ExtensionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionBox.swift; sourceTree = "<group>"; };
 		55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextPreferencesPanel+PreferencesBoxDataSource.swift"; sourceTree = "<group>"; };
 		55450B182ED47B680048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileSessionPreferencesWindow+PreferencesBoxDataSource.swift"; sourceTree = "<group>"; };
 		554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfLine.swift; sourceTree = "<group>"; };
@@ -2005,7 +2005,7 @@
 				553740972E9372DF00AB56D0 /* FolderComparisonBox.swift */,
 				553740982E9372DF00AB56D0 /* GeneralPreferencesPanel.swift */,
 				553740992E9372DF00AB56D0 /* PreferredEditorBox.swift */,
-				5544AF132F2F31C200952362 /* FinderExtensionBox.swift */,
+				5544AF132F2F31C200952362 /* ExtensionBox.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -3448,7 +3448,7 @@
 				553741D32E9372DF00AB56D0 /* CompareItem+DifferenceNavigator.swift in Sources */,
 				558DEAD22EA26C5B00F05A10 /* Logger+App.swift in Sources */,
 				551DE3AA2ED428B40067AB18 /* FilePreferences.swift in Sources */,
-				5544AF142F2F31C200952362 /* FinderExtensionBox.swift in Sources */,
+				5544AF142F2F31C200952362 /* ExtensionBox.swift in Sources */,
 				553741D42E9372DF00AB56D0 /* PreferencesBox.swift in Sources */,
 				553741D52E9372DF00AB56D0 /* NSAlert+ReplaceFile.swift in Sources */,
 				553741D72E9372DF00AB56D0 /* URL+SymLink.swift in Sources */,

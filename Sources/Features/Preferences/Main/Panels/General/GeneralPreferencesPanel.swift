@@ -9,25 +9,14 @@
 class GeneralPreferencesPanel: NSView, PreferencesPanelDataSource {
     private var appearanceBox: AppearanceBox
     private var preferredEditorBox: PreferredEditorBox
-    private var comparisonBox: FolderComparisonBox
-    private var finderExtensionBox: FinderExtensionBox
+    private var extensionBox: ExtensionBox
     private let stackView: NSStackView
 
-    private var comparisonDelegate: ComparisonStandardUserDataSource
-
     override init(frame frameRect: NSRect) {
-        comparisonDelegate = ComparisonStandardUserDataSource()
-
         appearanceBox = AppearanceBox(title: NSLocalizedString("Appearance", comment: ""))
-
-        comparisonBox = FolderComparisonBox(
-            title: NSLocalizedString("Comparison and Display Defaults for New Folder Documents", comment: "")
-        )
-        comparisonBox.delegate = comparisonDelegate
-
         preferredEditorBox = PreferredEditorBox(title: NSLocalizedString("Preferred Viewer/Editor", comment: ""))
+        extensionBox = ExtensionBox(title: NSLocalizedString("Extensions", comment: ""))
 
-        finderExtensionBox = FinderExtensionBox(title: NSLocalizedString("Finder Integration", comment: ""))
         stackView = NSStackView()
 
         super.init(frame: frameRect)
@@ -48,9 +37,8 @@ class GeneralPreferencesPanel: NSView, PreferencesPanelDataSource {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         stackView.addArrangedSubview(appearanceBox)
-        stackView.addArrangedSubview(comparisonBox)
         stackView.addArrangedSubview(preferredEditorBox)
-        stackView.addArrangedSubview(finderExtensionBox)
+        stackView.addArrangedSubview(extensionBox)
 
         addSubview(stackView)
 
@@ -66,19 +54,17 @@ class GeneralPreferencesPanel: NSView, PreferencesPanelDataSource {
             appearanceBox.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             appearanceBox.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             appearanceBox.heightAnchor.constraint(equalToConstant: 60),
-            comparisonBox.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            comparisonBox.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            comparisonBox.heightAnchor.constraint(equalToConstant: 160),
+
             preferredEditorBox.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             preferredEditorBox.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             preferredEditorBox.heightAnchor.constraint(equalToConstant: 80),
-            finderExtensionBox.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            finderExtensionBox.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+
+            extensionBox.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            extensionBox.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
         ])
     }
 
     func reloadData() {
         appearanceBox.reloadData()
-        comparisonBox.reloadData()
     }
 }
