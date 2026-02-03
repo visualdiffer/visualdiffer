@@ -73,6 +73,14 @@ class PreferredEditorBox: PreferencesBox {
             scriptLinkButton.leadingAnchor.constraint(equalTo: editorPopup.leadingAnchor),
             scriptLinkButton.topAnchor.constraint(equalTo: editorPopup.bottomAnchor, constant: 5),
         ])
+
+        // fill the space when the container grows
+        editorPopup.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        editorPopup.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        // do not resize
+        removeButton.setContentHuggingPriority(.required, for: .horizontal)
+        removeButton.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 
     @objc func openScriptFolder(_: AnyObject) {
