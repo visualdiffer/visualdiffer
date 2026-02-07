@@ -126,7 +126,9 @@
             )
         }
 
-        private static func bool2String(_ value: Bool) -> String { value ? "true" : "false" }
+        private static func bool2String(_ value: Bool) -> String {
+            value ? "true" : "false"
+        }
 
         private static func stringify(
             flag: Int,

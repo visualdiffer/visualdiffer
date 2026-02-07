@@ -87,10 +87,12 @@ class FilePanelView: TablePanelView<FilesTableView, FileInfoBar> {
         columnSlider.action = action
     }
 
-    func setDelegate(_ delegate: PathControlDelegate
-        & FilesTableViewDelegate
-        & FileInfoBarDelegate
-        & NSTableViewDataSource) {
+    func setDelegate(
+        _ delegate: PathControlDelegate
+            & FilesTableViewDelegate
+            & FileInfoBarDelegate
+            & NSTableViewDataSource
+    ) {
         pathViewDelegate = delegate
 
         treeView.delegate = delegate

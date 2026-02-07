@@ -13,6 +13,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     #endif
     private var appearanceObservation: NSKeyValueObservation?
 
+    func application(_: NSApplication, open _: [URL]) {
+        // allows `open` to temporarily sandbox urls
+        // see https://github.com/visualdiffer/visualdiffer/issues/21#issuecomment-3863880590
+    }
+
     func applicationWillFinishLaunching(_: Notification) {
         initDefaults()
         NSAppearance.change()

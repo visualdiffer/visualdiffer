@@ -26,9 +26,11 @@ open class BaseTests {
     }
 
     public convenience init() {
-        self.init(rootDir: URL
-            .desktopDirectory
-            .appending(path: "visualdiffer/test_suite_swift/", directoryHint: .isDirectory))
+        self.init(
+            rootDir: URL
+                .desktopDirectory
+                .appending(path: "visualdiffer/test_suite_swift/", directoryHint: .isDirectory)
+        )
     }
 
     public func buildDate(_ strDate: String) throws -> Date {
