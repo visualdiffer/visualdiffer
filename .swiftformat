@@ -16,3 +16,6 @@
 --wrap-collections before-first
 
 --trailing-commas collections-only
+
+--disable docComments
+
