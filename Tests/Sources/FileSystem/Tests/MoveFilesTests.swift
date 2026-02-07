@@ -70,9 +70,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var l = rootL.children[0]
         assertItem(l, 1, 1, 0, 3, 4, "folder_1", .orphan, 23)
@@ -349,9 +349,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var l = rootL.children[0]
         assertItem(l, 1, 0, 0, 1, 1, "folder_1", .orphan, 7)
@@ -547,9 +547,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let l = rootL.children[0]
         assertItem(l, 0, 0, 5, 1, 1, "bootstrap", .orphan, 23)
@@ -792,9 +792,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0]
         assertItem(child1, 0, 0, 0, 2, 1, "src", .orphan, 8)
@@ -1018,9 +1018,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0]
         assertItem(child1, 1, 1, 0, 1, 1, "folder_1", .orphan, 12)
@@ -1187,9 +1187,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0]
         assertItem(child1, 0, 0, 0, 0, 2, "only_on_left", .orphan, 13)
@@ -1372,9 +1372,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 0, 0, 1, "folder1", .orphan, 0)
@@ -1462,8 +1462,8 @@ final class MoveFilesTests: BaseTests {
             bigFileSizeThreshold: 100_000
         )
 
-        fileOperation.move(
-            srcRoot: child2.linkedItem!,
+        try fileOperation.move(
+            srcRoot: #require(child2.linkedItem),
             srcBaseDir: appendFolder("r"),
             destBaseDir: appendFolder("l")
         )
@@ -1483,7 +1483,7 @@ final class MoveFilesTests: BaseTests {
         child4 = child2.children[1] // folder2
         assertItem(child4, 0, 0, 0, 0, 0, nil, .orphan, 0)
         assertItem(child4.linkedItem, 0, 0, 0, 0, 0, "folder3", .orphan, 0)
-        try assertSymlink(child4.linkedItem!, "symlink_test1", true)
+        try assertSymlink(#require(child4.linkedItem), "symlink_test1", true)
 
         child5 = child2.children[2] // folder2
         assertItem(child5, 0, 0, 0, 0, 0, "orphan_symlink", .orphan, 0)
@@ -1499,8 +1499,8 @@ final class MoveFilesTests: BaseTests {
         assertItem(child7.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
         try assertSymlink(child7, "symlink_test2", true)
 
-        assertErrors(fileOperationDelegate.errors, [
-            FileError.createSymLink(path: child3.path!),
+        try assertErrors(fileOperationDelegate.errors, [
+            FileError.createSymLink(path: #require(child3.path)),
         ])
 
         do {
@@ -1593,9 +1593,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 1, 0, 1, "dir1", .orphan, 7)
@@ -1615,7 +1615,7 @@ final class MoveFilesTests: BaseTests {
 
         // simulate a copy error deleting the file to copy
         do {
-            try fm.removeItem(atPath: child4.path!)
+            try fm.removeItem(atPath: #require(child4.path))
         } catch {
             Issue.record("Found error \(error)")
         }
@@ -1760,9 +1760,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 0, 0, 1, "folder1", .orphan, 0)
@@ -1901,9 +1901,9 @@ final class MoveFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let moveItem: CompareItem
 
@@ -1980,7 +1980,7 @@ final class MoveFilesTests: BaseTests {
             assertItem(child2, 0, 0, 0, 0, 0, nil, .orphan, 0)
             assertItem(child2.linkedItem, 0, 0, 1, 0, 0, "file1.html", .orphan, 11)
             #expect(child2.isFiltered == true, "\(child2.fileName!) must be filtered")
-            #expect(child2.linkedItem!.isFiltered == true, "\(child2.linkedItem!.fileName!) must be filtered")
+            #expect(child2.linkedItem?.isFiltered == true, "\(child2.linkedItem!.fileName!) must be filtered")
         }
     }
 }

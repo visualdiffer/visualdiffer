@@ -62,9 +62,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -195,9 +195,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -327,9 +327,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -470,9 +470,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -589,9 +589,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -700,9 +700,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -844,9 +844,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -1032,9 +1032,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -1138,9 +1138,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -1379,9 +1379,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
@@ -1535,9 +1535,9 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r

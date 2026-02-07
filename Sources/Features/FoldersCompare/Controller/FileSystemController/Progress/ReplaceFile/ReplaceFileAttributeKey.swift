@@ -20,10 +20,27 @@ struct ReplaceFileAttributeKey: Hashable, RawRepresentable {
 }
 
 extension [ReplaceFileAttributeKey: Any] {
-    var fromPath: String? { self[.fromPath] as? String }
-    var fromSize: Int? { self[.fromSize] as? Int }
-    var fromDate: Date? { self[.fromDate] as? Date }
-    var toPath: String? { self[.toPath] as? String }
-    var toSize: Int? { self[.toSize] as? Int }
-    var toDate: Date? { self[.toDate] as? Date }
+    var fromPath: String? {
+        self[.fromPath] as? String
+    }
+
+    var fromSize: Int? {
+        self[.fromSize] as? Int
+    }
+
+    var fromDate: Date? {
+        self[.fromDate] as? Date
+    }
+
+    var toPath: String? {
+        self[.toPath] as? String
+    }
+
+    var toSize: Int? {
+        self[.toSize] as? Int
+    }
+
+    var toDate: Date? {
+        self[.toDate] as? Date
+    }
 }

@@ -56,9 +56,9 @@ final class CopyFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0]
         assertItem(child1, 1, 0, 0, 0, 1, "a", .orphan, 12)
@@ -239,9 +239,9 @@ final class CopyFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0]
         assertItem(child1, 1, 1, 0, 0, 4, "folder_0", .orphan, 20)
@@ -324,8 +324,8 @@ final class CopyFilesTests: BaseTests {
             bigFileSizeThreshold: 100_000
         )
 
-        fileOperation.copy(
-            srcRoot: child1.linkedItem!,
+        try fileOperation.copy(
+            srcRoot: #require(child1.linkedItem),
             srcBaseDir: appendFolder("r"),
             destBaseDir: appendFolder("l")
         )
@@ -440,9 +440,9 @@ final class CopyFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0]
         assertItem(child1, 0, 0, 0, 0, 2, "only_on_left", .orphan, 7)
@@ -628,9 +628,9 @@ final class CopyFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let l = rootL.children[0]
         assertItem(l, 1, 1, 0, 3, 4, "folder_1", .orphan, 17)
@@ -680,7 +680,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child1, 1, 1, 0, 3, 1, "l", .orphan, 17)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 1, 1, 1, 3, 1, "r", .orphan, 16)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
 
             let childVI2 = childVI1.children[0] // l <--> r
             assertArrayCount(childVI2.children, 2)
@@ -688,7 +688,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child2, 1, 1, 0, 3, 4, "folder_1", .orphan, 17)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 1, 1, 1, 3, 4, "folder_1", .orphan, 16)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
 
             let childVI3 = childVI2.children[0] // folder_1 <--> folder_1
             assertArrayCount(childVI3.children, 1)
@@ -696,7 +696,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child3, 1, 1, 0, 1, 1, "folder_1_1", .orphan, 14)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
             assertItem(child3.linkedItem, 1, 1, 0, 1, 1, "folder_1_1", .orphan, 6)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
 
             let childVI4 = childVI3.children[0] // folder_1_1 <--> folder_1_1
             assertArrayCount(childVI4.children, 2)
@@ -704,19 +704,19 @@ final class CopyFilesTests: BaseTests {
             assertItem(child4, 1, 1, 0, 1, 3, "folder_2_1", .orphan, 14)
             #expect(child4.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.orphanFolders)")
             assertItem(child4.linkedItem, 1, 1, 0, 1, 3, "folder_2_1", .orphan, 6)
-            #expect(child4.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
+            #expect(child4.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
 
             let childVI5 = childVI4.children[0] // folder_2_1 <--> folder_2_1
             assertArrayCount(childVI5.children, 0)
             let child5 = childVI5.item // folder_2_1 <-> folder_2_1
             assertItem(child5, 0, 1, 0, 0, 0, "file_changed.m", .changed, 5)
-            assertItem(child5.linkedItem!, 1, 0, 0, 0, 0, "file_changed.m", .old, 1)
+            try assertItem(#require(child5.linkedItem), 1, 0, 0, 0, 0, "file_changed.m", .old, 1)
 
             let childVI6 = childVI4.children[1] // folder_2_1 <--> folder_2_1
             assertArrayCount(childVI6.children, 0)
             let child6 = childVI6.item // folder_2_1 <-> folder_2_1
             assertItem(child6, 1, 0, 0, 0, 0, "file_older.txt", .old, 5)
-            assertItem(child6.linkedItem!, 0, 1, 0, 0, 0, "file_older.txt", .changed, 1)
+            try assertItem(#require(child6.linkedItem), 0, 1, 0, 0, 0, "file_older.txt", .changed, 1)
 
             let childVI7 = childVI2.children[1] // folder_1 <--> folder_1
             assertArrayCount(childVI7.children, 0)
@@ -794,7 +794,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child1, 0, 0, 0, 5, 1, "l", .orphan, 17)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 1, 5, 1, "r", .orphan, 24)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
 
             let childVI2 = childVI1.children[0] // l <--> r
             assertArrayCount(childVI2.children, 1)
@@ -802,7 +802,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child2, 0, 0, 0, 5, 4, "folder_1", .orphan, 17)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 1, 5, 4, "folder_1", .orphan, 24)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
 
             let childVI3 = childVI2.children[0] // folder_1 <--> folder_1
             assertArrayCount(childVI3.children, 0)
@@ -869,9 +869,9 @@ final class CopyFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 0, 0, 1, "folder1", .orphan, 0)
@@ -955,8 +955,8 @@ final class CopyFilesTests: BaseTests {
             bigFileSizeThreshold: 100_000
         )
 
-        fileOperation.copy(
-            srcRoot: child2.linkedItem!,
+        try fileOperation.copy(
+            srcRoot: #require(child2.linkedItem),
             srcBaseDir: appendFolder("r"),
             destBaseDir: appendFolder("l")
         )
@@ -976,13 +976,13 @@ final class CopyFilesTests: BaseTests {
         child4 = child2.children[1] // folder2
         assertItem(child4, 0, 0, 0, 0, 0, nil, .orphan, 0)
         assertItem(child4.linkedItem, 0, 0, 0, 0, 0, "folder3", .orphan, 0)
-        try assertSymlink(child4.linkedItem!, "symlink_test1", true)
+        try assertSymlink(#require(child4.linkedItem), "symlink_test1", true)
 
         child5 = child2.children[2] // folder2
         assertItem(child5, 0, 0, 0, 0, 0, "orphan_symlink", .orphan, 0)
         assertItem(child5.linkedItem, 0, 0, 0, 0, 0, "orphan_symlink", .orphan, 0)
         try assertSymlink(child5, "symlink_test2", true)
-        try assertSymlink(child5.linkedItem!, "symlink_test2", true)
+        try assertSymlink(#require(child5.linkedItem), "symlink_test2", true)
 
         child6 = child2.children[3] // folder2
         assertItem(child6, 0, 0, 0, 1, 0, "sample.txt", .same, 2)
@@ -992,10 +992,10 @@ final class CopyFilesTests: BaseTests {
         assertItem(child7, 0, 0, 0, 0, 0, "symlink1", .orphan, 0)
         assertItem(child7.linkedItem, 0, 0, 0, 0, 0, "symlink1", .orphan, 0)
         try assertSymlink(child7, "symlink_test2", true)
-        try assertSymlink(child7.linkedItem!, "symlink_test2", true)
+        try assertSymlink(#require(child7.linkedItem), "symlink_test2", true)
 
-        assertErrors(fileOperationDelegate.errors, [
-            FileError.createSymLink(path: child3.path!),
+        try assertErrors(fileOperationDelegate.errors, [
+            FileError.createSymLink(path: #require(child3.path)),
         ])
 
         do {
@@ -1084,9 +1084,9 @@ final class CopyFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 1, 1, 1, "folder1", .orphan, 8)
@@ -1208,8 +1208,8 @@ final class CopyFilesTests: BaseTests {
             bigFileSizeThreshold: 100_000
         )
 
-        fileOperation.copy(
-            srcRoot: child2.linkedItem!,
+        try fileOperation.copy(
+            srcRoot: #require(child2.linkedItem),
             srcBaseDir: appendFolder("r"),
             destBaseDir: appendFolder("l")
         )
@@ -1265,7 +1265,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child1, 0, 0, 1, 5, 1, "l", .orphan, 21)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 0, 5, 1, "r", .orphan, 16)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
 
             let childVI2 = childVI1.children[0] // l <--> r
             assertArrayCount(childVI2.children, 1)
@@ -1273,7 +1273,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child2, 0, 0, 1, 5, 1, "folder1", .orphan, 21)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 0, 5, 1, "folder1", .orphan, 16)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
 
             let childVI3 = childVI2.children[0] // folder1 <--> folder1
             assertArrayCount(childVI3.children, 1)
@@ -1281,7 +1281,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child3, 0, 0, 1, 5, 4, "folder2", .orphan, 21)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
             assertItem(child3.linkedItem, 0, 0, 0, 5, 4, "folder2", .orphan, 16)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
 
             let childVI4 = childVI3.children[0] // folder2 <--> folder2
             assertArrayCount(childVI4.children, 1)
@@ -1289,7 +1289,7 @@ final class CopyFilesTests: BaseTests {
             assertItem(child4, 0, 0, 1, 1, 2, "symlink1", .orphan, 8)
             #expect(child4.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.orphanFolders)")
             assertItem(child4.linkedItem, 0, 0, 0, 1, 2, "symlink1", .orphan, 3)
-            #expect(child4.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
+            #expect(child4.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
 
             let childVI5 = childVI4.children[0] // symlink1 <--> symlink1
             assertArrayCount(childVI5.children, 0)
@@ -1343,9 +1343,9 @@ final class CopyFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 1, 0, 1, "dir1", .orphan, 7)
@@ -1365,7 +1365,7 @@ final class CopyFilesTests: BaseTests {
 
         // simulate a copy error deleting the file to copy
         do {
-            try fm.removeItem(atPath: child4.path!)
+            try fm.removeItem(atPath: #require(child4.path))
         } catch {
             Issue.record("Found error \(error)")
         }
@@ -1513,9 +1513,9 @@ final class CopyFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 1, 0, 1, "folder1", .orphan, 2)

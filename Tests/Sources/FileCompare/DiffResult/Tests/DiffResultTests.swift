@@ -11,7 +11,7 @@ import Testing
 
 // swiftlint:disable file_length
 final class DiffResultTests: DiffResultBaseTests {
-    @Test func diffLine() throws {
+    @Test func diffLine() {
         let leftText = "line1\n\nline2\nline3"
         let rightText = "line1\nline2\nline4"
 
@@ -33,7 +33,7 @@ final class DiffResultTests: DiffResultBaseTests {
         #expect(diffResult.sections[1] == DiffSection(start: 3, end: 3))
     }
 
-    @Test func findNextSection() throws {
+    @Test func findNextSection() {
         let leftText = "line1\n\nline2\nline3"
         let rightText = "line1\nline2\nline4"
 
@@ -74,7 +74,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
     }
 
-    @Test func findPrevSection() throws {
+    @Test func findPrevSection() {
         let leftText = "line1\n\nline2\nline3\nline5\nline7\nline8\nline9"
         let rightText = "line1\nline2\nline4"
 
@@ -117,7 +117,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
     }
 
-    @Test func findSectionRange() throws {
+    @Test func findSectionRange() {
         let leftText = "line1\n\nline2\nline3\nline5\nline7\nline8\nline9"
         let rightText = "line1\nline2\nline4"
 
@@ -139,7 +139,7 @@ final class DiffResultTests: DiffResultBaseTests {
         #expect(indexes == IndexSet(integersIn: 4 ..< 8))
     }
 
-    @Test func findAdjacentSections() throws {
+    @Test func findAdjacentSections() {
         let leftText = "line1\n\nline2\nline3\nline5\nline7\nline8\nline9"
         let rightText = "line1\nline2\nline4"
 
@@ -452,7 +452,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
     }
 
-    @Test func insertLinesLeftDestination() throws {
+    @Test func insertLinesLeftDestination() {
         let leftText = "line1\n\nline2\nline3"
         let rightText = "line1\nline2\nline4"
 
@@ -507,7 +507,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
     }
 
-    @Test func insertLinesRightDestination() throws {
+    @Test func insertLinesRightDestination() {
         let leftText = "line1\n\nline2\nline3"
         let rightText = "line1\nline2\nline4"
 
@@ -560,7 +560,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
     }
 
-    @Test func insertLinesAtBottom() throws {
+    @Test func insertLinesAtBottom() {
         let leftText = "line1\nline2\n"
         let rightText = "line1\n"
 
@@ -611,7 +611,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
     }
 
-    @Test func insertOverMatchingLine() throws {
+    @Test func insertOverMatchingLine() {
         let leftText = "line1\nline5"
         let rightText = "line1\nline5"
 

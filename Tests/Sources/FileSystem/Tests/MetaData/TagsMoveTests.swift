@@ -72,9 +72,9 @@ final class TagsMoveTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var operationElement: CompareItem
 
@@ -83,7 +83,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child1, 0, 0, 0, 2, 1, "l", .orphan, 28)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 0, 2, 1, "r", .orphan, 28)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
             assertFolderTags(child1, false, "r")
             assertMismatchingTags(child1, 3, "r")
 
@@ -91,7 +91,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child2, 0, 0, 0, 2, 2, "Parent", .orphan, 28)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 0, 2, 2, "Parent", .orphan, 28)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
             assertFolderTags(child2, false, "Parent")
             assertMismatchingTags(child2, 3, "Parent")
 
@@ -99,7 +99,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child3, 0, 0, 0, 2, 3, "FolderWithTags", .mismatchingTags, 22)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
             assertItem(child3.linkedItem, 0, 0, 0, 2, 3, "FolderWithTags", .mismatchingTags, 22)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
             assertFolderTags(child3, true, "FolderWithTags")
             assertMismatchingTags(child3, 1, "FolderWithTags")
 
@@ -135,7 +135,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child1, 0, 0, 0, 2, 1, "l", .orphan, 28)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 0, 2, 1, "r", .orphan, 28)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
             assertFolderTags(child1, false, "r")
             assertMismatchingTags(child1, 3, "r")
 
@@ -145,7 +145,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child2, 0, 0, 0, 2, 2, "Parent", .orphan, 28)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 0, 2, 2, "Parent", .orphan, 28)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
             assertFolderTags(child2, false, "Parent")
             assertMismatchingTags(child2, 3, "Parent")
 
@@ -156,7 +156,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child3, 0, 0, 0, 2, 3, "FolderWithTags", .mismatchingTags, 22)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
             assertItem(child3.linkedItem, 0, 0, 0, 2, 3, "FolderWithTags", .mismatchingTags, 22)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
             assertFolderTags(child3, true, "FolderWithTags")
             assertMismatchingTags(child3, 1, "FolderWithTags")
 
@@ -219,7 +219,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child1, 0, 0, 0, 0, 1, "l", .orphan, 6)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 3, 0, 1, "r", .orphan, 28)
-            #expect(child1.linkedItem!.orphanFolders == 1, "OrphanFolder: Expected count \(1) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count \(1) found \(child1.linkedItem!.orphanFolders)")
             assertFolderTags(child1, false, "r")
             assertMismatchingTags(child1, 1, "r")
             assertFolderTags(child1.linkedItem, false, "r")
@@ -229,7 +229,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child2, 0, 0, 0, 0, 2, "Parent", .orphan, 6)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 3, 0, 2, "Parent", .orphan, 28)
-            #expect(child2.linkedItem!.orphanFolders == 1, "OrphanFolder: Expected count \(1) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count \(1) found \(child2.linkedItem!.orphanFolders)")
             assertFolderTags(child2, false, "Parent")
             assertMismatchingTags(child2, 1, "Parent")
             assertFolderTags(child2.linkedItem, false, "Parent")
@@ -238,7 +238,7 @@ final class TagsMoveTests: BaseTests {
             let child3 = child2.children[0] // Parent <-> Parent
             assertItem(child3, 0, 0, 0, 0, 3, nil, .orphan, 0)
             assertItem(child3.linkedItem, 0, 0, 3, 0, 3, "FolderWithTags", .orphan, 22)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
             assertFolderTags(child3, false, "FolderWithTags")
             assertMismatchingTags(child3, 0, "FolderWithTags")
             assertFolderTags(child3.linkedItem, false, "FolderWithTags")
@@ -284,7 +284,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child1, 0, 0, 0, 0, 1, "l", .orphan, 6)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 3, 0, 1, "r", .orphan, 28)
-            #expect(child1.linkedItem!.orphanFolders == 1, "OrphanFolder: Expected count \(1) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count \(1) found \(child1.linkedItem!.orphanFolders)")
             assertFolderTags(child1, false, "r")
             assertMismatchingTags(child1, 1, "r")
             assertFolderTags(child1.linkedItem, false, "r")
@@ -296,7 +296,7 @@ final class TagsMoveTests: BaseTests {
             assertItem(child2, 0, 0, 0, 0, 2, "Parent", .orphan, 6)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 3, 0, 2, "Parent", .orphan, 28)
-            #expect(child2.linkedItem!.orphanFolders == 1, "OrphanFolder: Expected count \(1) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count \(1) found \(child2.linkedItem!.orphanFolders)")
             assertFolderTags(child2, false, "Parent")
             assertMismatchingTags(child2, 1, "Parent")
             assertFolderTags(child2.linkedItem, false, "Parent")
@@ -307,7 +307,7 @@ final class TagsMoveTests: BaseTests {
             let child3 = childVI3.item // Parent <-> Parent
             assertItem(child3, 0, 0, 0, 0, 3, nil, .orphan, 0)
             assertItem(child3.linkedItem, 0, 0, 3, 0, 3, "FolderWithTags", .orphan, 22)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
             assertFolderTags(child3, false, "FolderWithTags")
             assertMismatchingTags(child3, 0, "FolderWithTags")
             assertFolderTags(child3.linkedItem, false, "FolderWithTags")

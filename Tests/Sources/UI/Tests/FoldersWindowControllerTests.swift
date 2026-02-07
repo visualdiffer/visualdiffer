@@ -73,7 +73,7 @@ final class FoldersWindowControllerTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
 
         let child1 = rootL.children[0] // l

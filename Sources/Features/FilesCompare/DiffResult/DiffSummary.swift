@@ -41,6 +41,7 @@ struct DiffSummary {
 }
 
 extension DiffSummary: Equatable {
+    // swiftformat:disable redundantEquatable
     static func == (lhs: DiffSummary, rhs: DiffSummary) -> Bool {
         lhs.matching == rhs.matching &&
             lhs.added == rhs.added &&

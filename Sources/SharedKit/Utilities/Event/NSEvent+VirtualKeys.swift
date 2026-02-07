@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 visualdiffer.com
 //
 
+// swiftformat:disable wrapPropertyBodies
 // swiftlint:disable identifier_name
 @objc enum KeyCode: UInt16 {
     case ansi_A = 0x00

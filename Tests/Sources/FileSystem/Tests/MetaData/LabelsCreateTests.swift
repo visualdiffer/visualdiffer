@@ -68,16 +68,16 @@ final class LabelsCreateTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         do {
             let child1 = rootL // l <-> r
             assertItem(child1, 0, 0, 0, 3, 2, "l", .orphan, 27)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 0, 3, 2, "r", .orphan, 27)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
             assertFolderLabels(child1, false, "r")
             assertMismatchingLabels(child1, 2, "r")
             assertFolderLabels(child1.linkedItem, false, "r")
@@ -87,7 +87,7 @@ final class LabelsCreateTests: BaseTests {
             assertItem(child2, 0, 0, 0, 2, 1, "Parent", .orphan, 22)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 0, 2, 1, "Parent", .orphan, 22)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
             assertFolderLabels(child2, false, "Parent")
             assertMismatchingLabels(child2, 2, "Parent")
             assertFolderLabels(child2.linkedItem, false, "Parent")
@@ -97,7 +97,7 @@ final class LabelsCreateTests: BaseTests {
             assertItem(child3, 0, 0, 0, 2, 3, "FolderWithLabels", .mismatchingLabels, 22)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
             assertItem(child3.linkedItem, 0, 0, 0, 2, 3, "FolderWithLabels", .mismatchingLabels, 22)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
             assertFolderLabels(child3, true, "FolderWithLabels")
             assertMismatchingLabels(child3, 1, "FolderWithLabels")
             assertFolderLabels(child3.linkedItem, true, "FolderWithLabels")
@@ -143,7 +143,7 @@ final class LabelsCreateTests: BaseTests {
             assertItem(child1, 0, 0, 0, 3, 2, "l", .orphan, 27)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 0, 3, 2, "r", .orphan, 27)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
             assertFolderLabels(child1, false, "r")
             assertMismatchingLabels(child1, 2, "r")
             assertFolderLabels(child1.linkedItem, false, "r")
@@ -155,7 +155,7 @@ final class LabelsCreateTests: BaseTests {
             assertItem(child2, 0, 0, 0, 2, 1, "Parent", .orphan, 22)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 0, 2, 1, "Parent", .orphan, 22)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
             assertFolderLabels(child2, false, "Parent")
             assertMismatchingLabels(child2, 2, "Parent")
             assertFolderLabels(child2.linkedItem, false, "Parent")
@@ -167,7 +167,7 @@ final class LabelsCreateTests: BaseTests {
             assertItem(child3, 0, 0, 0, 2, 3, "FolderWithLabels", .mismatchingLabels, 22)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
             assertItem(child3.linkedItem, 0, 0, 0, 2, 3, "FolderWithLabels", .mismatchingLabels, 22)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
             assertFolderLabels(child3, true, "FolderWithLabels")
             assertMismatchingLabels(child3, 1, "FolderWithLabels")
             assertFolderLabels(child3.linkedItem, true, "FolderWithLabels")

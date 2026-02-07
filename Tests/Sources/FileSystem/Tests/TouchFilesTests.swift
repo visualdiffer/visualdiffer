@@ -61,9 +61,9 @@ final class TouchFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0]
         assertItem(child1, 1, 1, 0, 0, 1, "a", .orphan, 4)
@@ -237,9 +237,9 @@ final class TouchFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 1, 0, 1, "dir1", .orphan, 2)

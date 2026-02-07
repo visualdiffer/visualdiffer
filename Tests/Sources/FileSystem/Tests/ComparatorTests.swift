@@ -68,17 +68,17 @@ final class ComparatorTests: BaseTests {
         try setFileTimestamp("r/sample04.txt", "2001-03-24 10: 45: 20 +0600")
         try setFileTimestamp("r/sample05.txt", "2001-03-24 10: 45: 15 +0600")
 
-        let rootL = folderReader.readFolder(
+        let rootL = try #require(folderReader.readFolder(
             atPath: appendFolder("l"),
             parent: nil,
             recursive: false
-        )!
+        ))
 
-        let rootR = folderReader.readFolder(
+        let rootR = try #require(folderReader.readFolder(
             atPath: appendFolder("r"),
             parent: nil,
             recursive: false
-        )!
+        ))
 
         let expectedResults: [ComparisonResult] = [
             .orderedSame,
@@ -140,17 +140,17 @@ final class ComparatorTests: BaseTests {
         try createFile("l/sample03.txt", "a\n\n\nb")
         try createFile("r/sample03.txt", "a\r\n\r\n\r\nb")
 
-        let rootL = folderReader.readFolder(
+        let rootL = try #require(folderReader.readFolder(
             atPath: appendFolder("l"),
             parent: nil,
             recursive: false
-        )!
+        ))
 
-        let rootR = folderReader.readFolder(
+        let rootR = try #require(folderReader.readFolder(
             atPath: appendFolder("r"),
             parent: nil,
             recursive: false
-        )!
+        ))
 
         let expectedResults: [ComparisonResult] = [
             .orderedSame,
@@ -231,17 +231,17 @@ final class ComparatorTests: BaseTests {
         rightBytes[rightBytes.count - 1] -= 0x11
         try createDataFile("r/sample03.txt", rightBytes)
 
-        let rootL = folderReader.readFolder(
+        let rootL = try #require(folderReader.readFolder(
             atPath: appendFolder("l"),
             parent: nil,
             recursive: false
-        )!
+        ))
 
-        let rootR = folderReader.readFolder(
+        let rootR = try #require(folderReader.readFolder(
             atPath: appendFolder("r"),
             parent: nil,
             recursive: false
-        )!
+        ))
 
         let expectedResults: [ComparisonResult] = [
             .orderedAscending,
@@ -302,17 +302,17 @@ final class ComparatorTests: BaseTests {
         try createFile("r/sample03.txt", "123")
         try createFile("r/sample04.txt", "21")
 
-        let rootL = folderReader.readFolder(
+        let rootL = try #require(folderReader.readFolder(
             atPath: appendFolder("l"),
             parent: nil,
             recursive: false
-        )!
+        ))
 
-        let rootR = folderReader.readFolder(
+        let rootR = try #require(folderReader.readFolder(
             atPath: appendFolder("r"),
             parent: nil,
             recursive: false
-        )!
+        ))
 
         let expectedResults: [ComparisonResult] = [
             .orderedAscending,

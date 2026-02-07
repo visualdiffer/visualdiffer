@@ -59,8 +59,8 @@ final class DeleteFileTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
-        let vi = rootL.visibleItem!
+        let rootL = try #require(folderReader.leftRoot)
+        let vi = try #require(rootL.visibleItem)
 
         var l = rootL.children[0]
         assertItem(l, 1, 0, 0, 0, 1, "a", .orphan, 12)
@@ -125,8 +125,8 @@ final class DeleteFileTests: BaseTests {
         )
         let fileOperation = DeleteCompareItem(operationManager: fileOperationManager)
 
-        fileOperation.delete(
-            child2.linkedItem!,
+        try fileOperation.delete(
+            #require(child2.linkedItem),
             baseDir: appendFolder("r")
         )
 
@@ -222,9 +222,9 @@ final class DeleteFileTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var l = rootL.children[0]
         assertItem(l, 0, 0, 0, 0, 2, "only_on_left", .orphan, 18)
@@ -383,9 +383,9 @@ final class DeleteFileTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var l = rootL.children[0]
         assertItem(l, 0, 0, 0, 0, 2, "only_on_left", .orphan, 7)
@@ -578,9 +578,9 @@ final class DeleteFileTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let l = rootL.children[0]
         assertItem(l, 1, 1, 0, 3, 4, "folder_1", .orphan, 16)
@@ -630,7 +630,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child1, 1, 1, 0, 3, 1, "l", .orphan, 16)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 1, 1, 1, 3, 1, "r", .orphan, 19)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
 
             let childVI2 = childVI1.children[0] // l <--> r
             assertArrayCount(childVI2.children, 2)
@@ -638,7 +638,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child2, 1, 1, 0, 3, 4, "folder_1", .orphan, 16)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 1, 1, 1, 3, 4, "folder_1", .orphan, 19)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
 
             let childVI3 = childVI2.children[0] // folder_1 <--> folder_1
             assertArrayCount(childVI3.children, 1)
@@ -646,7 +646,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child3, 1, 1, 0, 1, 1, "folder_1_1", .orphan, 11)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
             assertItem(child3.linkedItem, 1, 1, 0, 1, 1, "folder_1_1", .orphan, 7)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
 
             let childVI4 = childVI3.children[0] // folder_1_1 <--> folder_1_1
             assertArrayCount(childVI4.children, 2)
@@ -654,7 +654,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child4, 1, 1, 0, 1, 3, "folder_2_1", .orphan, 11)
             #expect(child4.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.orphanFolders)")
             assertItem(child4.linkedItem, 1, 1, 0, 1, 3, "folder_2_1", .orphan, 7)
-            #expect(child4.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
+            #expect(child4.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
 
             let childVI5 = childVI4.children[0] // folder_2_1 <--> folder_2_1
             assertArrayCount(childVI5.children, 0)
@@ -699,25 +699,25 @@ final class DeleteFileTests: BaseTests {
             assertItem(child1, 0, 0, 0, 3, 1, "l", .orphan, 7)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 3, 3, 1, "r", .orphan, 19)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
 
             let child2 = child1.children[0] // l <-> r
             assertItem(child2, 0, 0, 0, 3, 4, "folder_1", .orphan, 7)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 3, 3, 4, "folder_1", .orphan, 19)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
 
             let child3 = child2.children[0] // folder_1 <-> folder_1
             assertItem(child3, 0, 0, 0, 1, 1, "folder_1_1", .orphan, 2)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
             assertItem(child3.linkedItem, 0, 0, 2, 1, 1, "folder_1_1", .orphan, 7)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
 
             let child4 = child3.children[0] // folder_1_1 <-> folder_1_1
             assertItem(child4, 0, 0, 0, 1, 3, "folder_2_1", .orphan, 2)
             #expect(child4.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.orphanFolders)")
             assertItem(child4.linkedItem, 0, 0, 2, 1, 3, "folder_2_1", .orphan, 7)
-            #expect(child4.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
+            #expect(child4.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
 
             let child5 = child4.children[0] // folder_2_1 <-> folder_2_1
             assertItem(child5, 0, 0, 0, 0, 0, nil, .orphan, 0)
@@ -735,7 +735,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child8, 0, 0, 0, 1, 1, "folder_1_2", .orphan, 4)
             #expect(child8.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child8.orphanFolders)")
             assertItem(child8.linkedItem, 0, 0, 0, 1, 1, "folder_1_2", .orphan, 4)
-            #expect(child8.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child8.linkedItem!.orphanFolders)")
+            #expect(child8.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child8.linkedItem!.orphanFolders)")
 
             let child9 = child8.children[0] // folder_1_2 <-> folder_1_2
             assertItem(child9, 0, 0, 0, 1, 0, "match_2_1.m", .same, 4)
@@ -757,7 +757,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child1, 0, 0, 0, 3, 1, "l", .orphan, 7)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
             assertItem(child1.linkedItem, 0, 0, 3, 3, 1, "r", .orphan, 19)
-            #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
 
             let childVI2 = childVI1.children[0] // l <--> r
             assertArrayCount(childVI2.children, 2)
@@ -765,7 +765,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child2, 0, 0, 0, 3, 4, "folder_1", .orphan, 7)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
             assertItem(child2.linkedItem, 0, 0, 3, 3, 4, "folder_1", .orphan, 19)
-            #expect(child2.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
 
             let childVI3 = childVI2.children[0] // folder_1 <--> folder_1
             assertArrayCount(childVI3.children, 1)
@@ -773,7 +773,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child3, 0, 0, 0, 1, 1, "folder_1_1", .orphan, 2)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
             assertItem(child3.linkedItem, 0, 0, 2, 1, 1, "folder_1_1", .orphan, 7)
-            #expect(child3.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
 
             let childVI4 = childVI3.children[0] // folder_1_1 <--> folder_1_1
             assertArrayCount(childVI4.children, 2)
@@ -781,7 +781,7 @@ final class DeleteFileTests: BaseTests {
             assertItem(child4, 0, 0, 0, 1, 3, "folder_2_1", .orphan, 2)
             #expect(child4.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.orphanFolders)")
             assertItem(child4.linkedItem, 0, 0, 2, 1, 3, "folder_2_1", .orphan, 7)
-            #expect(child4.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
+            #expect(child4.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child4.linkedItem!.orphanFolders)")
 
             let childVI5 = childVI4.children[0] // folder_2_1 <--> folder_2_1
             assertArrayCount(childVI5.children, 0)
@@ -856,9 +856,9 @@ final class DeleteFileTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 0, 0, 1, "folder1", .orphan, 0)
@@ -983,9 +983,9 @@ final class DeleteFileTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 0, 1, 1, "dir1", .orphan, 10)
@@ -1015,8 +1015,8 @@ final class DeleteFileTests: BaseTests {
         )
         let fileOperation = DeleteCompareItem(operationManager: fileOperationManager)
 
-        fileOperation.delete(
-            child2.linkedItem!,
+        try fileOperation.delete(
+            #require(child2.linkedItem),
             baseDir: appendFolder("r")
         )
 

@@ -51,9 +51,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         var child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 1, 0, 1, "dir1", .orphan, 2)
@@ -151,9 +151,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 2, 0, 2, "dir1", .orphan, 8)
@@ -305,9 +305,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 2, 0, 2, "dir1", .orphan, 8)
@@ -450,9 +450,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l
         assertItem(child1, 0, 1, 1, 0, 2, "dir1", .orphan, 8)
@@ -613,9 +613,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l
         assertItem(child1, 0, 1, 1, 0, 2, "dir1", .orphan, 8)
@@ -768,9 +768,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l <-> r
         assertItem(child1, 0, 1, 2, 0, 2, "dir1", .orphan, 13)
@@ -810,8 +810,8 @@ final class RenameFilesTests: BaseTests {
         )
         let fileOperation = RenameCompareItem(operationManager: fileOperationManager)
 
-        fileOperation.rename(
-            srcRoot: child3.linkedItem!,
+        try fileOperation.rename(
+            srcRoot: #require(child3.linkedItem),
             toName: "110.txt"
         )
 
@@ -905,9 +905,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l
         assertItem(child1, 0, 1, 2, 1, 2, "dir100", .orphan, 16)
@@ -1104,9 +1104,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l
         assertItem(child1, 0, 0, 6, 0, 5, "dir050", .orphan, 28)
@@ -1417,9 +1417,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l <-> r
         assertItem(child1, 1, 0, 4, 1, 5, "dir050", .orphan, 28)
@@ -1719,9 +1719,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l <-> r
         assertItem(child1, 1, 0, 1, 3, 2, "dir050", .orphan, 22)
@@ -1912,9 +1912,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l <-> r
         assertItem(child1, 0, 0, 6, 0, 5, "dir050", .orphan, 28)
@@ -1994,8 +1994,8 @@ final class RenameFilesTests: BaseTests {
         )
         let fileOperation = RenameCompareItem(operationManager: fileOperationManager)
 
-        fileOperation.rename(
-            srcRoot: child7.linkedItem!,
+        try fileOperation.rename(
+            srcRoot: #require(child7.linkedItem),
             toName: "dir105"
         )
 
@@ -2194,9 +2194,9 @@ final class RenameFilesTests: BaseTests {
             rightPath: appendFolder("r")
         )
 
-        let rootL = folderReader.leftRoot!
+        let rootL = try #require(folderReader.leftRoot)
         // let rootR = folderReader.rightRoot!
-        let vi = rootL.visibleItem!
+        let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL.children[0] // l <-> r
         assertItem(child1, 0, 0, 3, 0, 2, "dir100", .orphan, 10)
@@ -2244,8 +2244,8 @@ final class RenameFilesTests: BaseTests {
         )
         let fileOperation = RenameCompareItem(operationManager: fileOperationManager)
 
-        fileOperation.rename(
-            srcRoot: child2.linkedItem!,
+        try fileOperation.rename(
+            srcRoot: #require(child2.linkedItem),
             toName: "dir120"
         )
 

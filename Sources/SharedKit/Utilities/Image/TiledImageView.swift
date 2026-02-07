@@ -11,7 +11,9 @@ final class TiledImageView: NSView {
         didSet { needsDisplay = true }
     }
 
-    override var isFlipped: Bool { false }
+    override var isFlipped: Bool {
+        false
+    }
 
     override func draw(_ dirtyRect: NSRect) {
         NSBezierPath(rect: bounds).addClip()
