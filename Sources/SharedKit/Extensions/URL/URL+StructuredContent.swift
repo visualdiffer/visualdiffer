@@ -88,7 +88,6 @@ extension URL {
                     .plain: .plainText,
                     .rtf: .rtf,
                     .rtfd: .rtfd,
-                    .html: .html,
                 ]
 
                 // add only if are not nil
