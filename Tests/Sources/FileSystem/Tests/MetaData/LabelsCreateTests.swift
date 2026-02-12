@@ -74,9 +74,9 @@ final class LabelsCreateTests: BaseTests {
 
         do {
             let child1 = rootL // l <-> r
-            assertItem(child1, 0, 0, 0, 3, 2, "l", .orphan, 27)
+            assertItem(child1, 0, 0, 0, 4, 2, "l", .orphan, 27)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
-            assertItem(child1.linkedItem, 0, 0, 0, 3, 2, "r", .orphan, 27)
+            assertItem(child1.linkedItem, 0, 0, 0, 4, 2, "r", .orphan, 27)
             #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
             assertFolderLabels(child1, false, "r")
             assertMismatchingLabels(child1, 2, "r")
@@ -84,9 +84,9 @@ final class LabelsCreateTests: BaseTests {
             assertMismatchingLabels(child1.linkedItem, 2, "r")
 
             let child2 = child1.children[0] // l <-> r
-            assertItem(child2, 0, 0, 0, 2, 1, "Parent", .orphan, 22)
+            assertItem(child2, 0, 0, 0, 3, 1, "Parent", .orphan, 22)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
-            assertItem(child2.linkedItem, 0, 0, 0, 2, 1, "Parent", .orphan, 22)
+            assertItem(child2.linkedItem, 0, 0, 0, 3, 1, "Parent", .orphan, 22)
             #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
             assertFolderLabels(child2, false, "Parent")
             assertMismatchingLabels(child2, 2, "Parent")
@@ -94,9 +94,9 @@ final class LabelsCreateTests: BaseTests {
             assertMismatchingLabels(child2.linkedItem, 2, "Parent")
 
             let child3 = child2.children[0] // Parent <-> Parent
-            assertItem(child3, 0, 0, 0, 2, 3, "FolderWithLabels", .mismatchingLabels, 22)
+            assertItem(child3, 0, 0, 0, 3, 3, "FolderWithLabels", .mismatchingLabels, 22)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
-            assertItem(child3.linkedItem, 0, 0, 0, 2, 3, "FolderWithLabels", .mismatchingLabels, 22)
+            assertItem(child3.linkedItem, 0, 0, 0, 3, 3, "FolderWithLabels", .mismatchingLabels, 22)
             #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
             assertFolderLabels(child3, true, "FolderWithLabels")
             assertMismatchingLabels(child3, 1, "FolderWithLabels")
@@ -112,8 +112,8 @@ final class LabelsCreateTests: BaseTests {
             assertMismatchingLabels(child4.linkedItem, 0, "attachment_one.txt")
 
             let child5 = child3.children[1] // FolderWithLabels <-> FolderWithLabels
-            assertItem(child5, 0, 0, 0, 0, 0, "file1.txt", .same, 6)
-            assertItem(child5.linkedItem, 0, 0, 0, 0, 0, "file1.txt", .same, 6)
+            assertItem(child5, 0, 0, 0, 1, 0, "file1.txt", .same, 6)
+            assertItem(child5.linkedItem, 0, 0, 0, 1, 0, "file1.txt", .same, 6)
             assertFolderLabels(child5, false, "file1.txt")
             assertMismatchingLabels(child5, 1, "file1.txt")
             assertFolderLabels(child5.linkedItem, false, "file1.txt")
@@ -140,9 +140,9 @@ final class LabelsCreateTests: BaseTests {
             let childVI1 = vi // l <--> r
             assertArrayCount(childVI1.children, 2)
             let child1 = childVI1.item // (null) <-> (null)
-            assertItem(child1, 0, 0, 0, 3, 2, "l", .orphan, 27)
+            assertItem(child1, 0, 0, 0, 4, 2, "l", .orphan, 27)
             #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.orphanFolders)")
-            assertItem(child1.linkedItem, 0, 0, 0, 3, 2, "r", .orphan, 27)
+            assertItem(child1.linkedItem, 0, 0, 0, 4, 2, "r", .orphan, 27)
             #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child1.linkedItem!.orphanFolders)")
             assertFolderLabels(child1, false, "r")
             assertMismatchingLabels(child1, 2, "r")
@@ -152,9 +152,9 @@ final class LabelsCreateTests: BaseTests {
             let childVI2 = childVI1.children[0] // l <--> r
             assertArrayCount(childVI2.children, 1)
             let child2 = childVI2.item // l <-> r
-            assertItem(child2, 0, 0, 0, 2, 1, "Parent", .orphan, 22)
+            assertItem(child2, 0, 0, 0, 3, 1, "Parent", .orphan, 22)
             #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.orphanFolders)")
-            assertItem(child2.linkedItem, 0, 0, 0, 2, 1, "Parent", .orphan, 22)
+            assertItem(child2.linkedItem, 0, 0, 0, 3, 1, "Parent", .orphan, 22)
             #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child2.linkedItem!.orphanFolders)")
             assertFolderLabels(child2, false, "Parent")
             assertMismatchingLabels(child2, 2, "Parent")
@@ -164,9 +164,9 @@ final class LabelsCreateTests: BaseTests {
             let childVI3 = childVI2.children[0] // Parent <--> Parent
             assertArrayCount(childVI3.children, 3)
             let child3 = childVI3.item // Parent <-> Parent
-            assertItem(child3, 0, 0, 0, 2, 3, "FolderWithLabels", .mismatchingLabels, 22)
+            assertItem(child3, 0, 0, 0, 3, 3, "FolderWithLabels", .mismatchingLabels, 22)
             #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.orphanFolders)")
-            assertItem(child3.linkedItem, 0, 0, 0, 2, 3, "FolderWithLabels", .mismatchingLabels, 22)
+            assertItem(child3.linkedItem, 0, 0, 0, 3, 3, "FolderWithLabels", .mismatchingLabels, 22)
             #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count \(0) found \(child3.linkedItem!.orphanFolders)")
             assertFolderLabels(child3, true, "FolderWithLabels")
             assertMismatchingLabels(child3, 1, "FolderWithLabels")
@@ -186,8 +186,8 @@ final class LabelsCreateTests: BaseTests {
             let childVI5 = childVI3.children[1] // FolderWithLabels <--> FolderWithLabels
             assertArrayCount(childVI5.children, 0)
             let child5 = childVI5.item // FolderWithLabels <-> FolderWithLabels
-            assertItem(child5, 0, 0, 0, 0, 0, "file1.txt", .same, 6)
-            assertItem(child5.linkedItem, 0, 0, 0, 0, 0, "file1.txt", .same, 6)
+            assertItem(child5, 0, 0, 0, 1, 0, "file1.txt", .same, 6)
+            assertItem(child5.linkedItem, 0, 0, 0, 1, 0, "file1.txt", .same, 6)
             assertFolderLabels(child5, false, "file1.txt")
             assertMismatchingLabels(child5, 1, "file1.txt")
             assertFolderLabels(child5.linkedItem, false, "file1.txt")

@@ -710,13 +710,13 @@ final class CopyFilesTests: BaseTests {
             assertArrayCount(childVI5.children, 0)
             let child5 = childVI5.item // folder_2_1 <-> folder_2_1
             assertItem(child5, 0, 1, 0, 0, 0, "file_changed.m", .changed, 5)
-            try assertItem(#require(child5.linkedItem), 1, 0, 0, 0, 0, "file_changed.m", .old, 1)
+            assertItem(child5.linkedItem, 1, 0, 0, 0, 0, "file_changed.m", .old, 1)
 
             let childVI6 = childVI4.children[1] // folder_2_1 <--> folder_2_1
             assertArrayCount(childVI6.children, 0)
             let child6 = childVI6.item // folder_2_1 <-> folder_2_1
             assertItem(child6, 1, 0, 0, 0, 0, "file_older.txt", .old, 5)
-            try assertItem(#require(child6.linkedItem), 0, 1, 0, 0, 0, "file_older.txt", .changed, 1)
+            assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "file_older.txt", .changed, 1)
 
             let childVI7 = childVI2.children[1] // folder_1 <--> folder_1
             assertArrayCount(childVI7.children, 0)

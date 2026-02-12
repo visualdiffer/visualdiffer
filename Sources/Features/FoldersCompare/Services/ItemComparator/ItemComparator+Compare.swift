@@ -33,10 +33,11 @@ extension ItemComparator {
             }
             // label and tags are mutually exclusive
             if options.contains(.finderLabel) {
-                res = compareFinderLabel(lhs, rhs)
+                _ = compareFinderLabel(lhs, rhs)
             } else if options.contains(.finderTags) {
-                res = compareFinderTag(lhs, rhs)
+                _ = compareFinderTag(lhs, rhs)
             }
+            // other options are compared regardless of the tag/label comparison result
             if res == .orderedSame, options.contains(.contentTimestamp) {
                 res = compareContentAndTimestamp(lhs, rhs)
             } else {
