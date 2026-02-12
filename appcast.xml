@@ -27,14 +27,14 @@
 
                 ]]>
             </description>
-            <pubDate>Sat, 7 February 2026 00:00:00 +0100</pubDate>
+            <pubDate>Thu, 12 February 2026 00:00:00 +0100</pubDate>
             <sparkle:version>2.1.4</sparkle:version>
             <sparkle:shortVersionString>2.1.4</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
                 url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.4/VisualDiffer-2.1.4.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="051GGZCmYLZ5fTEKZ6jCejHJY6vFoojzTVThzGwtyFOrt6OuY48/eOWaF3lUW2Q1ylYSG07TJKb7S9ms/IpSBw==" length="5489800"
+                sparkle:edSignature="DzPL2J0NeawW8dbvX9mNLvzCAxlQjJnk1/ZZBzGcnsGEnf2BowsOoG8Fd2ErWe4AbKwTChnB6hPjhtmYnwhqDw==" length="5489769"
 
             />
         </item>
