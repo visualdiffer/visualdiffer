@@ -28,15 +28,10 @@ extension CompareItem {
         } else if isFile {
             if isNewerThanLinked {
                 type = .newer
-            } else if orphanFiles == 0, olderFiles == 0, changedFiles == 0 {
-                // only differs for metadata so choose the appropriate status
-                if summary.hasMetadataTags || mismatchingTags > 0 {
-                    type = .mismatchingTags
-                } else if summary.hasMetadataLabels || mismatchingLabels > 0 {
-                    type = .mismatchingLabels
-                } else {
-                    type = self.type
-                }
+            } else if summary.hasMetadataTags || mismatchingTags > 0 {
+                type = .mismatchingTags
+            } else if summary.hasMetadataLabels || mismatchingLabels > 0 {
+                type = .mismatchingLabels
             } else {
                 type = self.type
             }
