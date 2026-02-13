@@ -39,15 +39,24 @@ extension CompareItem {
         }
     }
 
-    func copyMetadata(toPath destPath: inout URL) throws {
+    /// copies metadata to destination, optionally forcing copy even when summary flags are false
+    /// - Parameters:
+    ///   - destPath: destination url to receive metadata
+    ///   - options: forces copying tags or labels even when the corresponding summary flags are false
+    /// - Throws: rethrows any errors from metadata copy operations
+    /// - Returns: nothing
+    func copyMetadata(
+        toPath destPath: inout URL,
+        options: DirectoryOptions = []
+    ) throws {
         guard let url = toUrl() else {
             return
         }
 
-        if summary.hasMetadataTags {
+        if options.contains(.copyTags) || summary.hasMetadataTags {
             try url.copyTags(to: &destPath)
         }
-        if summary.hasMetadataLabels {
+        if options.contains(.copyLabels) || summary.hasMetadataLabels {
             try url.copyLabel(to: &destPath)
         }
     }
