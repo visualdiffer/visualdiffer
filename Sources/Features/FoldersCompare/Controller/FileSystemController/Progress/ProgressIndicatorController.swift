@@ -13,6 +13,16 @@ class ProgressIndicatorController: NSWindowController {
         }
     }
 
+    var isSizeLeftHidden: Bool {
+        get {
+            sizeLeftView.isHidden
+        }
+
+        set {
+            sizeLeftView.isHidden = newValue
+        }
+    }
+
     var operationOnSingleItem = false
 
     var operationDescription: String {

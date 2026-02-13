@@ -40,12 +40,7 @@ extension FoldersWindowController: NSMenuDelegate,
         } else if action == #selector(showInFinder) {
             return fsi.validateShowInFinder()
         } else if action == #selector(copyFiles) {
-            switch fsi.view.side {
-            case .left:
-                menuItem.title = NSLocalizedString("Copy to Right...", comment: "")
-            case .right:
-                menuItem.title = NSLocalizedString("Copy to Left...", comment: "")
-            }
+            menuItem.title = CopyFilesTag.localizedTag(side: fsi.view.side, tag: menuItem.tag)
             return fsi.validateCopyFiles(sessionDiff)
         } else if action == #selector(deleteFiles) {
             return fsi.validateDeleteFiles(sessionDiff)

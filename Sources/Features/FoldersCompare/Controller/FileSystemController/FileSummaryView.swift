@@ -6,35 +6,17 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@objc class FileSummaryView: NSStackView {
-    @objc let folderTotalText: NSTextField
-    @objc let fileTotalText: NSTextField
-    @objc let sizeTotalText: NSTextField
-    @objc let operationDescription: NSTextField
-    @objc let filteredFilesInSelectionText: NSTextField
-    @objc let checkboxFilteredFiles: NSButton
+class FileSummaryView: NSStackView {
+    lazy var folderTotalText = createFolderTotalText()
+    lazy var fileTotalText = createFileTotalText()
+    lazy var sizeTotalText = createSizeTotalText()
+    lazy var operationDescription = createOperationDescription()
+    lazy var filteredFilesInSelectionText = createFilteredFilesInSelectionText()
+    lazy var checkboxFilteredFiles = createCheckboxFilteredFiles()
+    lazy var checkboxCopyMetadataOnly = createCheckboxCopyMetadataOnly()
+    lazy var copyFinderMetadataHelpText = createCopyFinderMetadataHelpText()
 
     init() {
-        operationDescription = NSTextField.labelWithTitle("")
-        operationDescription.font = NSFont.boldSystemFont(ofSize: NSFont.systemFontSize)
-
-        folderTotalText = NSTextField.hintWithTitle("")
-        fileTotalText = NSTextField.hintWithTitle("")
-        sizeTotalText = NSTextField.hintWithTitle("")
-
-        checkboxFilteredFiles = NSButton(
-            checkboxWithTitle: NSLocalizedString("Include Filtered Files", comment: ""),
-            target: nil,
-            action: nil
-        )
-        checkboxFilteredFiles.translatesAutoresizingMaskIntoConstraints = false
-
-        filteredFilesInSelectionText = NSTextField.hintWithTitle(
-            NSLocalizedString("Selection already contains Filtered Files", comment: "")
-        )
-        filteredFilesInSelectionText.controlSize = .mini
-        filteredFilesInSelectionText.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .mini))
-
         super.init(frame: .zero)
 
         orientation = .vertical
@@ -56,7 +38,12 @@
         addArrangedSubview(fileTotalText)
         addArrangedSubview(sizeTotalText)
         addArrangedSubview(checkboxFilteredFiles)
+        addArrangedSubview(checkboxCopyMetadataOnly)
+        addArrangedSubview(copyFinderMetadataHelpText)
         addArrangedSubview(filteredFilesInSelectionText)
+
+        setCustomSpacing(4, after: checkboxFilteredFiles)
+        setCustomSpacing(4, after: checkboxCopyMetadataOnly)
 
         setupConstraints()
     }
@@ -64,11 +51,11 @@
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             filteredFilesInSelectionText.leadingAnchor.constraint(equalTo: checkboxFilteredFiles.leadingAnchor, constant: 20),
-            filteredFilesInSelectionText.topAnchor.constraint(equalTo: checkboxFilteredFiles.bottomAnchor, constant: 4),
+            copyFinderMetadataHelpText.leadingAnchor.constraint(equalTo: checkboxCopyMetadataOnly.leadingAnchor, constant: 20),
         ])
     }
 
-    @objc func setupCheckboxFilteredFiles(
+    func setupCheckboxFilteredFiles(
         _ includesFilteredFiles: Bool,
         hasFilteredInSelection: Bool
     ) {
@@ -81,5 +68,68 @@
             checkboxFilteredFiles.state = .off
             checkboxFilteredFiles.isEnabled = false
         }
+    }
+
+    private func createFolderTotalText() -> NSTextField {
+        NSTextField.hintWithTitle("")
+    }
+
+    private func createFileTotalText() -> NSTextField {
+        NSTextField.hintWithTitle("")
+    }
+
+    private func createSizeTotalText() -> NSTextField {
+        NSTextField.hintWithTitle("")
+    }
+
+    private func createOperationDescription() -> NSTextField {
+        let view = NSTextField.labelWithTitle("")
+        view.font = NSFont.boldSystemFont(ofSize: NSFont.systemFontSize)
+
+        return view
+    }
+
+    private func createFilteredFilesInSelectionText() -> NSTextField {
+        let view = NSTextField.hintWithTitle(
+            NSLocalizedString("Selection already contains Filtered Files", comment: "")
+        )
+        view.controlSize = .mini
+        view.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .mini))
+
+        return view
+    }
+
+    private func createCheckboxFilteredFiles() -> NSButton {
+        let view = NSButton(
+            checkboxWithTitle: NSLocalizedString("Include Filtered Files", comment: ""),
+            target: nil,
+            action: nil
+        )
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }
+
+    private func createCheckboxCopyMetadataOnly() -> NSButton {
+        let view = NSButton(
+            checkboxWithTitle: NSLocalizedString("Copy Finder metadata", comment: ""),
+            target: nil,
+            action: nil
+        )
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+
+        return view
+    }
+
+    private func createCopyFinderMetadataHelpText() -> NSTextField {
+        let view = NSTextField.hintWithTitle(
+            NSLocalizedString("Copies Finder metadata (tags, labels), not file contents", comment: "")
+        )
+        view.controlSize = .mini
+        view.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .mini))
+        view.isHidden = true
+
+        return view
     }
 }

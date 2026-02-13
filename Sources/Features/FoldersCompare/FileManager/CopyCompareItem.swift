@@ -264,9 +264,9 @@ class CopyCompareItem: NSObject {
             delegate.fileManager(operationManager, addError: error, forItem: srcRoot)
         }
 
-#if DEBUG && __VD_SLOW_OP__
-        simulateSlowOperation("copy")
-#endif
+        #if DEBUG && __VD_SLOW_OP__
+            simulateSlowOperation("copy")
+        #endif
 
         srcRoot.addMatchedFiles(1)
         srcRoot.updateMetadata(
