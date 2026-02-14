@@ -19,7 +19,6 @@ struct ColorSet {
 }
 
 struct ColorScheme {
-    // periphery:ignore
     let name: String
     let colors: [String: ColorSet]
 
