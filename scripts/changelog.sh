@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+include_scope="${1:-dev}"
+
 XC_CONFIG_FILE="Versions.local.xcconfig"
 CONTEXT_JSON="changelog-context.local.json"
 
@@ -59,10 +61,13 @@ rename_json_property() {
 version="$(get_key_from_xcconfig $XC_CONFIG_FILE)"
 update_json_property $CONTEXT_JSON "appVersion" "v$version"
 
-if [ "$1" == "all" ]; then
+if [ "$include_scope" == "dev" ]; then
   rename_json_property $CONTEXT_JSON "excludeTypes" "_excludeTypes"
-else
+elif [ "$include_scope" == "prod" ]; then
   rename_json_property $CONTEXT_JSON "_excludeTypes" "excludeTypes"
+else
+  echo "Pass dev or prod to exclude the dev scopes"
+  exit 1
 fi
 
 npx conventional-changelog -p visualdiffer -c $CONTEXT_JSON
