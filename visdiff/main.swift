@@ -13,6 +13,7 @@ let version = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "n/a"
 enum Flags: String {
     case version = "--version"
     case wait = "--wait"
+    case noWarning = "--no-warning"
 
     func isEqual(_ lhs: String) -> Bool {
         rawValue.caseInsensitiveCompare(lhs) == .orderedSame
@@ -20,7 +21,7 @@ enum Flags: String {
 }
 
 func showHelp() {
-    print("Usage: leftFileOrFolder rightFileOrFolder \(Flags.version.rawValue) \(Flags.wait.rawValue)\nNotes: left and right must be both files or both folders\n")
+    print("Usage: leftFileOrFolder rightFileOrFolder \(Flags.version.rawValue) \(Flags.wait.rawValue) \(Flags.noWarning.rawValue)\nNotes: left and right must be both files or both folders\n")
 }
 
 func showVersion() {
@@ -29,6 +30,7 @@ func showVersion() {
 
 func main() -> Int32 {
     var waitClose = false
+    var showWarning = true
 
     // remove executable path
     let argv = ProcessInfo.processInfo.arguments
@@ -50,7 +52,27 @@ func main() -> Int32 {
             showVersion()
         } else if Flags.wait.isEqual(arg) {
             waitClose = true
+        } else if Flags.noWarning.isEqual(arg) {
+            showWarning = false
         }
+    }
+
+    if showWarning {
+        let message = """
+warning: VisualDiffer is sandboxed.
+
+To let visdiff work without asking again, choose a folder in the app
+that contains the files you want to compare.
+
+If your files are stored in different locations, you can select a common
+parent directory (or even "/" if appropriate). The app will only access
+files within the folder you choose and its subfolders.
+
+You can change this anytime in Settings -> Trusted Path.
+Use --no-warning to suppress this message.
+
+"""
+        try? FileHandle.standardError.write(contentsOf: Data(message.utf8))
     }
 
     do {
