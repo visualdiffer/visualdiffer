@@ -4,7 +4,6 @@ default_platform(:mac)
 
 require 'kramdown'
 require 'time'
-require 'tmpdir'
 
 import "Sparkle"
 import "Linter"
@@ -21,24 +20,21 @@ platform :mac do
     ENV["APP_VERSION"] = get_version_number(xcodeproj: ENV["PROJECT_PATH"], target: ENV["TARGET"])
     ENV["ZIP_NAME"] = "#{ENV['APP_NAME']}-#{ENV["APP_VERSION"]}.zip"
     ENV["ZIP_PATH"] = File.join(ENV["PROJECT_ROOT"], ENV["EXPORT_PATH"], ENV['ZIP_NAME'])
+    ENV["IS_PRERELEASE"] = ENV["APP_VERSION"].match?(/(alpha|beta|rc)/i) ? "true" : "false"
 
     UI.message("🏗️ Environment loaded: #{ENV['FASTLANE_ENVIRONMENT'] || 'default'}")
   end
 
   desc "Create release, build project and create the zip file"
   lane :release do
-    check_release_version
-    lint_app
-    format_app(
-      check: true
-    )
+    release_precondition
     build_archive_app
     verify_codesign
 
     notarize_app if ENV["NOTARIZE_ENABLED"] == "true"
     zip_app
     github if ENV["GITHUB_ENABLED"] == "true"
-    sparkle if ENV["SPARKLE_ENABLED"] == "true"
+    sparkle if ENV["SPARKLE_ENABLED"] == "true" && ENV["IS_PRERELEASE"] != "true"
     UI.success("🎉 Release completed")
   end
 
@@ -64,6 +60,18 @@ platform :mac do
       },
       output_directory: ENV["EXPORT_PATH"]
     )
+  end
+
+  private_lane :release_precondition do
+    check_release_version
+    lint_app
+    format_app(
+      check: true
+    )
+
+    note_file_name = File.join(ENV["BUILD_PATH"], ENV["RELEASE_NOTE_PATH"], ENV["APP_VERSION"])
+    notes_full_path = File.join(ENV["PROJECT_ROOT"], "#{note_file_name}.md")
+    UI.user_error!("Unable to find #{note_file_name}") unless File.exist?(notes_full_path)
   end
 
   private_lane :verify_codesign do
@@ -116,7 +124,7 @@ platform :mac do
       tag_name: "v#{ENV["APP_VERSION"]}",
       name: "#{ENV['APP_NAME']} v#{ENV["APP_VERSION"]}",
       description: notes,
-      is_prerelease: (ENV["APP_VERSION"] =~ /(alpha|beta|rc)/i).to_i > 0,
+      is_prerelease: ENV["IS_PRERELEASE"] == "true",
       upload_assets: [ENV["ZIP_PATH"]]
     )
 
