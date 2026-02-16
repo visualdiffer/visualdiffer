@@ -465,6 +465,7 @@
 		55C84A712DA93ADB00BA39DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C84A702DA93ADB00BA39DA /* UserNotifications.framework */; };
 		55D352E72EFD0C5B00C944D5 /* FileSystemTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D352E62EFD0C4D00C944D5 /* FileSystemTestHelper.swift */; };
 		55D71FD62EE584B7007E0FA0 /* AppUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D71FD52EE584B7007E0FA0 /* AppUpdater.swift */; };
+		55D8812E2F3DA332008DE497 /* CopyFinderMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D8812D2F3DA329008DE497 /* CopyFinderMetadata.swift */; };
 		55DF3DD22E924BB10044CC0C /* BaseTests+FileSystemOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DF3DC52E924BB10044CC0C /* BaseTests+FileSystemOperations.swift */; };
 		55DF3DD32E924BB10044CC0C /* FiltersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DF3DBF2E924BB10044CC0C /* FiltersTests.swift */; };
 		55DF3DD42E924BB10044CC0C /* LeafPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DF3DC82E924BB10044CC0C /* LeafPathTests.swift */; };
@@ -502,6 +503,7 @@
 		55E381C12EEFFD0500CB2F00 /* SymbolicLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E381C02EEFFCF500CB2F00 /* SymbolicLinkTests.swift */; };
 		55E3A5661826552A002A890B /* lockedbadge.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A5641826552A002A890B /* lockedbadge.png */; };
 		55E3A5671826552A002A890B /* lockedbadge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A5651826552A002A890B /* lockedbadge@2x.png */; };
+		55EC0A4B2F3868E4008201E1 /* CopyFilesTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC0A4A2F3868E4008201E1 /* CopyFilesTag.swift */; };
 		55ECD8621476B03400D8BEB4 /* prefs_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 55ECD8611476B03400D8BEB4 /* prefs_text.png */; };
 		55F6B0631AEA93E30096E55E /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0611AEA93E30096E55E /* Localizable.stringsdict */; };
 		55F6B0661AEA99680096E55E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0641AEA99680096E55E /* Localizable.strings */; };
@@ -1062,6 +1064,7 @@
 		55D71FD72EE584FF007E0FA0 /* AppConfig-Sparkle.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AppConfig-Sparkle.xcconfig"; sourceTree = "<group>"; };
 		55D71FD82EE584FF007E0FA0 /* VisualDiffer-Sparkle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "VisualDiffer-Sparkle.entitlements"; sourceTree = "<group>"; };
 		55D71FD92EE584FF007E0FA0 /* VisualDiffer-Sparkle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VisualDiffer-Sparkle-Info.plist"; sourceTree = "<group>"; };
+		55D8812D2F3DA329008DE497 /* CopyFinderMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyFinderMetadata.swift; sourceTree = "<group>"; };
 		55DF3DA92E924BB10044CC0C /* BaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTests.swift; sourceTree = "<group>"; };
 		55DF3DAA2E924BB10044CC0C /* BaseTests+AssertCompareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseTests+AssertCompareItem.swift"; sourceTree = "<group>"; };
 		55DF3DAC2E924BB10044CC0C /* MockFileOperationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFileOperationManagerDelegate.swift; sourceTree = "<group>"; };
@@ -1101,6 +1104,7 @@
 		55E3A5651826552A002A890B /* lockedbadge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockedbadge@2x.png"; sourceTree = "<group>"; };
 		55E3EF3524C2D06800F7A95A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		55E78B57164FCE7800877721 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		55EC0A4A2F3868E4008201E1 /* CopyFilesTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyFilesTag.swift; sourceTree = "<group>"; };
 		55ECD8611476B03400D8BEB4 /* prefs_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_text.png; sourceTree = "<group>"; };
 		55ECD8671476B34600D8BEB4 /* VisualDiffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VisualDiffer.entitlements; sourceTree = "<group>"; };
 		55F013FC27A90C46003EA2D4 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
@@ -1699,6 +1703,7 @@
 		553740352E9372DF00AB56D0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				55EC0A4A2F3868E4008201E1 /* CopyFilesTag.swift */,
 				55373FFA2E9372DF00AB56D0 /* Comparator */,
 				5537401A2E9372DF00AB56D0 /* FileSystemController */,
 				5537401D2E9372DF00AB56D0 /* FolderReader */,
@@ -2880,6 +2885,7 @@
 				55DF3DB92E924BB10044CC0C /* BufferedInputStreamTests.swift */,
 				55DF3DBA2E924BB10044CC0C /* ComparatorTests.swift */,
 				55DF3DBB2E924BB10044CC0C /* CopyFilesTests.swift */,
+				55D8812D2F3DA329008DE497 /* CopyFinderMetadata.swift */,
 				55DF3DBC2E924BB10044CC0C /* DeleteFileTests.swift */,
 				55DF3DBD2E924BB10044CC0C /* DisplayTests.swift */,
 				55DF3DBE2E924BB10044CC0C /* EmptyFolderColorTests.swift */,
@@ -3178,6 +3184,7 @@
 				55DF3DD92E924BB10044CC0C /* StringUtils.swift in Sources */,
 				55DF3DDB2E924BB10044CC0C /* BufferedInputStreamTests.swift in Sources */,
 				55DF3DDC2E924BB10044CC0C /* TagsMoveTests.swift in Sources */,
+				55D8812E2F3DA332008DE497 /* CopyFinderMetadata.swift in Sources */,
 				55DF3DDD2E924BB10044CC0C /* CaseSensitiveBaseTest.swift in Sources */,
 				55DF3DDE2E924BB10044CC0C /* BaseTests+AssertCompareItem.swift in Sources */,
 				55A4DF322E9A49B000ED11BB /* EndOfLineTests.swift in Sources */,
@@ -3222,6 +3229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55916A102E8A814200ED6629 /* MyDocument.xcdatamodeld in Sources */,
+				55EC0A4B2F3868E4008201E1 /* CopyFilesTag.swift in Sources */,
 				553741792E9372DF00AB56D0 /* NSAppearance+DarkMode.swift in Sources */,
 				5537417A2E9372DF00AB56D0 /* QLPreviewPanel.swift in Sources */,
 				55FE894A2F054B260003864A /* FlagSet.swift in Sources */,

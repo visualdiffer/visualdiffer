@@ -6,8 +6,6 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-// periphery:ignore:all
-
 struct ReplaceFileAttributeKey: Hashable, RawRepresentable {
     let rawValue: String
 
@@ -24,10 +22,12 @@ extension [ReplaceFileAttributeKey: Any] {
         self[.fromPath] as? String
     }
 
+    // periphery:ignore
     var fromSize: Int? {
         self[.fromSize] as? Int
     }
 
+    // periphery:ignore
     var fromDate: Date? {
         self[.fromDate] as? Date
     }
@@ -36,10 +36,12 @@ extension [ReplaceFileAttributeKey: Any] {
         self[.toPath] as? String
     }
 
+    // periphery:ignore
     var toSize: Int? {
         self[.toSize] as? Int
     }
 
+    // periphery:ignore
     var toDate: Date? {
         self[.toDate] as? Date
     }

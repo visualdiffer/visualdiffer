@@ -88,7 +88,6 @@ public class FoldersWindowController: NSWindowController,
 
     // hold it to be sure it isn't deallocated when used from another element
     // the FileSystemController uses it but is released before
-    // periphery:ignore
     var progressIndicatorController: ProgressIndicatorController?
 
     var consoleDelegate = DualPaneSplitViewDelegate(

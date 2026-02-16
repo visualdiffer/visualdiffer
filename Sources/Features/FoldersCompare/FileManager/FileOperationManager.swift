@@ -42,10 +42,22 @@ public protocol FileOperationManagerAction: AnyObject {
 
 @objc class FileOperationManager: NSObject, @unchecked Sendable {
     /**
-     * Can be modified by callers, this allows file system operations to include filtered files while copying, moving
-     * The filterConfig.showFilteredFiles is then used to correctly updated the UI
+     * Specifies whether filtered files are included in file system operations
+     * (e.g. copy and move).
+     *
+     * This flag is mutable by callers. When enabled, file system operations will
+     * process filtered entries as well, and `filterConfig.showFilteredFiles` is
+     * used to ensure UI state consistency.
      */
     var includesFiltered: Bool
+
+    /**
+     * Controls whether the copy operation is restricted to Finder metadata only.
+     *
+     * This value is mutable by callers and typically driven by the UI layer.
+     * A value of `nil` indicates that the default copy behavior should be applied.
+     */
+    var copyFinderMetadataOnly: Bool?
 
     let filterConfig: FilterConfig
     let comparator: ItemComparator
@@ -55,11 +67,13 @@ public protocol FileOperationManagerAction: AnyObject {
         filterConfig: FilterConfig,
         comparator: ItemComparator,
         delegate: FileOperationManagerDelegate,
-        includesFiltered: Bool? = nil
+        includesFiltered: Bool? = nil,
+        copyFinderMetadataOnly: Bool? = nil
     ) {
         self.includesFiltered = includesFiltered ?? filterConfig.showFilteredFiles
         self.filterConfig = filterConfig
         self.comparator = comparator
         self.delegate = delegate
+        self.copyFinderMetadataOnly = copyFinderMetadataOnly
     }
 }

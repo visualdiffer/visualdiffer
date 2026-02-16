@@ -8,13 +8,20 @@
 
 import os.log
 
-// swiftlint:disable function_parameter_count
+// swiftlint:disable function_parameter_count file_length
 class CopyCompareItem: NSObject {
     let operationManager: FileOperationManager
     private let fm = FileManager.default
     private let deleteCompareItem: DeleteCompareItem
     private(set) var bigFileSizeThreshold: UInt64
     private var bigFileManager: BigFileFileOperationManager
+
+    private var copyFinderMetadataOnly: Bool {
+        guard let value = operationManager.copyFinderMetadataOnly else {
+            return false
+        }
+        return value
+    }
 
     init(
         operationManager: FileOperationManager,
@@ -123,6 +130,11 @@ class CopyCompareItem: NSObject {
             return true
         }
 
+        // skip orphans items when copy metadata
+        guard destRoot.isValidFile || !copyFinderMetadataOnly else {
+            return true
+        }
+
         var retVal = true
         var destFullPath = srcRoot.buildDestinationPath(from: srcBaseDir, to: destBaseDir)
 
@@ -167,6 +179,8 @@ class CopyCompareItem: NSObject {
                 destRoot: destRoot,
                 attributes: srcAttrs,
                 destFullPath: destFullPath,
+                parentSrcCount: &parentSrcCount,
+                parentDestCount: &parentDestCount,
                 volumeType: volumeType
             )
         } catch {
@@ -185,6 +199,9 @@ class CopyCompareItem: NSObject {
         skipFile: inout Bool,
         volumeType: String
     ) throws {
+        if copyFinderMetadataOnly {
+            return
+        }
         skipFile = false
         guard let srcRootPath = srcRoot.path else {
             return
@@ -369,8 +386,29 @@ class CopyCompareItem: NSObject {
         destRoot: CompareItem,
         attributes: [FileAttributeKey: Any],
         destFullPath: URL,
+        parentSrcCount: inout CompareSummary,
+        parentDestCount: inout CompareSummary,
         volumeType: String
     ) throws {
+        if copyFinderMetadataOnly {
+            var srcCount = srcRoot.summary
+            var destCount = destRoot.summary
+            var destFullPath = destFullPath
+
+            try srcRoot.copyMetadata(
+                toPath: &destFullPath,
+                options: [.copyTags, .copyLabels]
+            )
+            srcRoot.updateMetadata(
+                with: &parentSrcCount,
+                fileObjectCount: &srcCount
+            )
+            destRoot.updateMetadata(
+                with: &parentDestCount,
+                fileObjectCount: &destCount
+            )
+            return
+        }
         guard let fsSrcPath = (srcRoot.path as? NSString)?.fileSystemRepresentation else {
             throw FolderManagerError.nilPath
         }
@@ -396,4 +434,4 @@ class CopyCompareItem: NSObject {
     }
 }
 
-// swiftlint:enable function_parameter_count
+// swiftlint:enable function_parameter_count file_length

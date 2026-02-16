@@ -172,7 +172,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 action: #selector(collapseAllFolders)
             )
         } else if itemIdentifier == .Folders.copy {
-            return NSToolbarItem(
+            let toolbarItem = NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Copy Files", comment: ""),
                 tooltip: NSLocalizedString("Copy Files", comment: ""),
@@ -180,6 +180,8 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 target: self,
                 action: #selector(copyFiles)
             )
+            toolbarItem.tag = CopyFilesTag.fileContents.rawValue
+            return toolbarItem
         } else if itemIdentifier == .Folders.move {
             return NSToolbarItem(
                 identifier: itemIdentifier,

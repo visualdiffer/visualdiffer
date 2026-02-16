@@ -6,6 +6,7 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+// swiftlint:disable file_length
 extension FoldersWindowController {
     // swiftlint:disable:next function_body_length
     private static func editMenu() -> NSMenu {
@@ -214,13 +215,22 @@ extension FoldersWindowController {
             action: #selector(compareFiles),
             keyEquivalent: ""
         )
-        let copyFiles = NSMenuItem(
+        let copyFilesItem = NSMenuItem(
             title: NSLocalizedString("Copy Files...", comment: ""),
             action: #selector(copyFiles),
             keyEquivalent: KeyEquivalent.f5
         )
-        copyFiles.keyEquivalentModifierMask = []
-        menu.addItem(copyFiles)
+        copyFilesItem.keyEquivalentModifierMask = []
+        menu.addItem(copyFilesItem)
+
+        let copyFinderMetadata = NSMenuItem(
+            title: NSLocalizedString("Copy Metadata...", comment: ""),
+            action: #selector(copyFiles),
+            keyEquivalent: KeyEquivalent.f5
+        )
+        copyFinderMetadata.keyEquivalentModifierMask = [.shift]
+        copyFinderMetadata.tag = CopyFilesTag.finderMetadataOnly.rawValue
+        menu.addItem(copyFinderMetadata)
 
         let syncFiles = NSMenuItem(
             title: NSLocalizedString("Sync Files...", comment: ""),
@@ -397,3 +407,5 @@ extension FoldersWindowController {
         mainMenu.item(withTag: MainMenu.view.rawValue)?.submenu = StaticMenus.view
     }
 }
+
+// swiftlint:enable file_length

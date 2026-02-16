@@ -42,7 +42,6 @@
             }
         }
 
-        // periphery:ignore
         static func writeLine(_ fileHandle: FileHandle, line: String) {
             if let data = String(format: "%@\n", line).data(using: .ascii) {
                 fileHandle.write(data)

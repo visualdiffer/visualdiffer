@@ -13,7 +13,6 @@ class MoveFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
     var progressLabel = NSLocalizedString("Moving", comment: "")
     var prefName: CommonPrefs.Name? = .confirmMove
 
-    // periphery:ignore
     private let side: DisplaySide
 
     private let items: [CompareItem]

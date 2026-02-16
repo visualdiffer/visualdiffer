@@ -67,6 +67,15 @@ public extension FoldersOutlineView {
             action: #selector(FoldersOutlineViewContextMenu.copyFiles),
             keyEquivalent: ""
         )
+
+        let copyFinderMetadataItem = theMenu.addItem(
+            withTitle: NSLocalizedString("Copy Metadata...", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.copyFiles),
+            keyEquivalent: ""
+        )
+        copyFinderMetadataItem.keyEquivalentModifierMask = [.shift]
+        copyFinderMetadataItem.tag = CopyFilesTag.finderMetadataOnly.rawValue
+
         theMenu.addItem(
             withTitle: NSLocalizedString("Delete...", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.deleteFiles),

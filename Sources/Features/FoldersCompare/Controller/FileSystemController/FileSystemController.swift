@@ -173,6 +173,18 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         fileSummary.checkboxFilteredFiles.action = #selector(updateCount)
         fileSummary.filteredFilesInSelectionText.isHidden = !hasFilteredInSelection
 
+        if let copyFinderMetadataOnly = fileOperationManager.copyFinderMetadataOnly {
+            fileSummary.checkboxCopyMetadataOnly.target = self
+            fileSummary.checkboxCopyMetadataOnly.action = #selector(updateCopyMetadata)
+            fileSummary.checkboxCopyMetadataOnly.isHidden = false
+            fileSummary.checkboxCopyMetadataOnly.state = copyFinderMetadataOnly ? .on : .off
+
+            fileSummary.copyFinderMetadataHelpText.isHidden = false
+        } else {
+            fileSummary.checkboxCopyMetadataOnly.isHidden = true
+            fileSummary.copyFinderMetadataHelpText.isHidden = true
+        }
+
         operationSummary.addArrangedSubview(fileSummary)
     }
 
@@ -256,6 +268,11 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         CommonPrefs.shared.set(isSuppressed, forKey: prefName)
     }
 
+    @objc func updateCopyMetadata(_: AnyObject?) {
+        let status = fileSummary.checkboxCopyMetadataOnly.state == .on
+        fileOperationManager.copyFinderMetadataOnly = status
+    }
+
     private func recalcTotals(_ includesFiltered: Bool) {
         totalFiles = fileCount.olderFiles + fileCount.changedFiles + fileCount.orphanFiles + fileCount.matchedFiles
         totalFolders = fileCount.folders
@@ -287,6 +304,10 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
 
         recalcTotals(includesFilteredFiles)
 
+        if let copyFinderMetadataOnly = fileOperationManager.copyFinderMetadataOnly,
+           copyFinderMetadataOnly {
+            progressIndicatorController?.isSizeLeftHidden = copyFinderMetadataOnly
+        }
         progressIndicatorController?.beginSheetModal(
             for: callerWindow,
             processingItemsCount: totalFiles,

@@ -7,7 +7,10 @@
 //
 
 extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate {
-    @objc func copyFiles(_: AnyObject?) {
+    private typealias FileOperationManagerBuilder =
+        (FilterConfig, ItemComparator, FileOperationManagerDelegate) -> FileOperationManager
+
+    @objc func copyFiles(_ sender: AnyObject?) {
         guard let vi = lastUsedView.dataSource?.outlineView?(lastUsedView, child: 0, ofItem: nil) as? VisibleItem,
               let root = vi.item.parent,
               let srcBaseDir = root.path,
@@ -20,7 +23,14 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
             items: lastUsedView.selectedItems(),
             side: lastUsedView.side
         )
-        run(executor)
+        run(executor) { config, comparator, delegate in
+            FileOperationManager(
+                filterConfig: config,
+                comparator: comparator,
+                delegate: delegate,
+                copyFinderMetadataOnly: CopyFilesTag.isCopyFinderMetadataOnly(sender: sender)
+            )
+        }
     }
 
     @objc func deleteFiles(_: AnyObject?) {
@@ -127,7 +137,10 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         NSApp.requestUserAttention(.informationalRequest)
     }
 
-    private func run(_ executor: some FileOperationExecutor) {
+    private func run(
+        _ executor: some FileOperationExecutor,
+        builder: FileOperationManagerBuilder? = nil
+    ) {
         guard let window else {
             return
         }
@@ -136,7 +149,7 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         let delegate = FileOperationManagerDelegateImpl(progressIndicatorController: pic)
         let fileSystemController = FileSystemController(
             executor: executor,
-            fileOperationManager: createLocalFileManager(delegate: delegate),
+            fileOperationManager: createLocalFileManager(delegate: delegate, builder: builder),
             view: lastUsedView,
             progressIndicatorController: pic,
             filteredFileVisible: showFilteredFiles
@@ -145,7 +158,10 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         fileSystemController.beginSheetModal(for: window)
     }
 
-    private func createLocalFileManager(delegate: FileOperationManagerDelegate) -> FileOperationManager {
+    private func createLocalFileManager(
+        delegate: FileOperationManagerDelegate,
+        builder: FileOperationManagerBuilder? = nil
+    ) -> FileOperationManager {
         guard let comparator else {
             fatalError("Comparator not found")
         }
@@ -154,10 +170,13 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
             showFilteredFiles: showFilteredFiles,
             hideEmptyFolders: hideEmptyFolders
         )
-        return FileOperationManager(
-            filterConfig: config,
-            comparator: comparator,
-            delegate: delegate
-        )
+        guard let builder else {
+            return FileOperationManager(
+                filterConfig: config,
+                comparator: comparator,
+                delegate: delegate
+            )
+        }
+        return builder(config, comparator, delegate)
     }
 }

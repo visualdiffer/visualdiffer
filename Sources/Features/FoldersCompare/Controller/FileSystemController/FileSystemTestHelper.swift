@@ -301,10 +301,10 @@
             outString: inout String,
             linked: Bool
         ) {
-            let fileName = if let fileName = fs.fileName {
+            let fileName: String? = if let fileName = fs.fileName {
                 String(format: "\"%@\"", fileName)
             } else {
-                "nil"
+                nil
             }
 
             let linkedString = linked ? ".linkedItem" : ""
@@ -318,7 +318,7 @@
                 fs.orphanFiles,
                 fs.matchedFiles,
                 fs.children.count,
-                fileName,
+                fileName ?? "nil",
                 fs.type.description,
                 fs.isFolder ? fs.subfoldersSize : fs.fileSize
             ))
@@ -335,11 +335,11 @@
                 ))
             }
 
-            if comparatorFlags.contains(.finderTags) {
+            if let fileName, comparatorFlags.contains(.finderTags) {
                 outString.append(String(format: "assertFolderTags(child%ld%@, %@, %@)\n", childNum, linkedString, Self.bool2String(fs.summary.hasMetadataTags), fileName))
                 outString.append(String(format: "assertMismatchingTags(child%ld%@, %ld, %@)\n", childNum, linkedString, fs.mismatchingTags, fileName))
             }
-            if comparatorFlags.contains(.finderLabel) {
+            if let fileName, comparatorFlags.contains(.finderLabel) {
                 outString.append(String(format: "assertFolderLabels(child%ld%@, %@, %@)\n", childNum, linkedString, Self.bool2String(fs.summary.hasMetadataLabels), fileName))
                 outString.append(String(format: "assertMismatchingLabels(child%ld%@, %ld, %@)\n", childNum, linkedString, fs.mismatchingLabels, fileName))
                 addAssertLabelsOnDisk(&outString, fs: fs, linked: linked, index: childNum)
