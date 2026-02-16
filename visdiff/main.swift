@@ -59,19 +59,19 @@ func main() -> Int32 {
 
     if showWarning {
         let message = """
-warning: VisualDiffer is sandboxed.
+        warning: VisualDiffer is sandboxed.
 
-To let visdiff work without asking again, choose a folder in the app
-that contains the files you want to compare.
+        To let visdiff work without asking again, choose a folder in the app
+        that contains the files you want to compare.
 
-If your files are stored in different locations, you can select a common
-parent directory (or even "/" if appropriate). The app will only access
-files within the folder you choose and its subfolders.
+        If your files are stored in different locations, you can select a common
+        parent directory (or even "/" if appropriate). The app will only access
+        files within the folder you choose and its subfolders.
 
-You can change this anytime in Settings -> Trusted Path.
-Use --no-warning to suppress this message.
+        You can change this anytime in Settings -> Trusted Path.
+        Use --no-warning to suppress this message.
 
-"""
+        """
         try? FileHandle.standardError.write(contentsOf: Data(message.utf8))
     }
 
