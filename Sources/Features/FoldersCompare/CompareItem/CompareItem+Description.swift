@@ -40,4 +40,24 @@ extension CompareItem {
             fileName ?? ""
         )
     }
+
+    var fileSizeDescription: String {
+        var size: NSNumber
+        var localizedString: String
+
+        if isFile {
+            size = NSNumber(value: Int64(fileSize))
+            localizedString = NSLocalizedString("Size: %@", comment: "")
+        } else {
+            size = NSNumber(value: subfoldersSize)
+            localizedString = NSLocalizedString("Total Size: %@", comment: "")
+        }
+        let strSize = FileSizeFormatter.default.string(
+            from: size,
+            showInBytes: true,
+            showUnitForBytes: true
+        ) ?? "\(size)"
+
+        return String.localizedStringWithFormat(localizedString, strSize)
+    }
 }

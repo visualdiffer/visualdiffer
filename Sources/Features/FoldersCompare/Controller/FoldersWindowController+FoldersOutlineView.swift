@@ -78,6 +78,8 @@ extension FoldersWindowController: NSOutlineViewDelegate,
         }
 
         result.text.stringValue = ""
+        result.toolTip = ""
+        result.text.toolTip = ""
 
         if tableColumn.identifier == .Folders.cellName {
             result.fileName(
@@ -88,6 +90,9 @@ extension FoldersWindowController: NSOutlineViewDelegate,
                 hideEmptyFolders: hideEmptyFolders
             )
         } else if tableColumn.identifier == .Folders.cellSize {
+            let tooltip = itemCompare.fileSizeDescription
+            result.toolTip = tooltip
+            result.text.toolTip = tooltip
             result.fileSize(
                 itemCompare,
                 font: currentFont,

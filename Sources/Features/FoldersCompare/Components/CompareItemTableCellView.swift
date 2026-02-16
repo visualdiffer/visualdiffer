@@ -129,18 +129,12 @@ class CompareItemTableCellView: NSView {
             text.alignment = .right
 
             let size = item.isFile ? Int64(item.fileSize) : item.subfoldersSize
-            var strSize = FileSizeFormatter.default.string(from: NSNumber(value: size), showInBytes: true, showUnitForBytes: false)
-            // increment width by one digit to be sure it is enough large to contain the formatted number
-            let sizeCellWidth: CGFloat = if let cell = text.cell as? NSTextFieldCell,
-                                            let strSize {
-                cell.widthString("9") + cell.widthString(strSize)
-            } else {
-                0
-            }
+            let strSize = FileSizeFormatter.default.string(
+                from: NSNumber(value: size),
+                showInBytes: false,
+                showUnitForBytes: true
+            )
 
-            if columnWidth < sizeCellWidth {
-                strSize = FileSizeFormatter.default.string(from: NSNumber(value: size), showInBytes: false, showUnitForBytes: false)
-            }
             text.stringValue = strSize ?? "\(size)"
         }
     }
