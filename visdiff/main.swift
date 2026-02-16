@@ -68,7 +68,7 @@ func main() -> Int32 {
         parent directory (or even "/" if appropriate). The app will only access
         files within the folder you choose and its subfolders.
 
-        You can change this anytime in Settings -> Trusted Path.
+        You can change this anytime in Settings -> Trusted Paths.
         Use --no-warning to suppress this message.
 
         """
