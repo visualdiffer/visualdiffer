@@ -121,7 +121,7 @@ class CompareItemTableCellView: NSView {
     func fileSize(
         _ item: CompareItem,
         font: NSFont,
-        columnWidth: CGFloat
+        columnWidth _: CGFloat
     ) {
         if item.isValidFile {
             text.frame = NSRect(x: 0, y: -2, width: 80, height: 17)

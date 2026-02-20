@@ -28,9 +28,8 @@ extension DiffCountersItem {
             if linkedChanged > 0, compareItem.olderFiles > 0 {
                 rightNewer = compareItem.olderFiles
             }
-            if leftNewer == 0, rightNewer == 0, compareItem.changedFiles > 0 {
-                changed = compareItem.changedFiles
-            }
+            // subtract files already classified as left newer to avoid counting the same difference twice
+            changed = compareItem.changedFiles - leftNewer
         } else {
             changed = compareItem.changedFiles
         }
