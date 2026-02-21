@@ -32,7 +32,8 @@ let defaultStringsEncodings: [String.Encoding] = [
     CFStringEncodings.macChineseSimp.stringEncoding,
 ].compactMap(\.self)
 
-@MainActor class EncodingManager: NSObject, @unchecked Sendable {
+@MainActor
+class EncodingManager: NSObject, @unchecked Sendable {
     static let listNotification = Notification.Name("EncodingsListChanged")
 
     static let shared = EncodingManager()
@@ -80,7 +81,8 @@ let defaultStringsEncodings: [String.Encoding] = [
         popup.selectItem(at: itemToSelect)
     }
 
-    @objc func showPanel(_ sender: AnyObject) {
+    @objc
+    func showPanel(_ sender: AnyObject) {
         if encodingPanel == nil {
             encodingPanel = SelectEncodingsPanel.createSheet()
             encodingPanel?.onClose = onClose

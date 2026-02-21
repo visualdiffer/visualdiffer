@@ -98,7 +98,8 @@ class ExpressionBox: NSBox {
         return view
     }
 
-    @objc func insertRegExp(_ sender: AnyObject) {
+    @objc
+    func insertRegExp(_ sender: AnyObject) {
         guard let shortcut = sender.representedObject as? String,
               let editor = expression.currentEditor() else {
             return
@@ -134,7 +135,8 @@ class ExpressionBox: NSBox {
         }
     }
 
-    @objc func appendGroupExpression(_ sender: AnyObject) {
+    @objc
+    func appendGroupExpression(_ sender: AnyObject) {
         if let sender = sender as? NSMenuItem,
            let text = sender.representedObject,
            let editor = expression.currentEditor() {

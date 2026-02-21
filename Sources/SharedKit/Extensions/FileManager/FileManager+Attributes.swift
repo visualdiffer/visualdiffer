@@ -27,7 +27,8 @@ public extension FileManager {
         )
     }
 
-    @objc func setFileAttributes(
+    @objc
+    func setFileAttributes(
         _ attrs: [FileAttributeKey: Any],
         ofItemAtPath path: String,
         volumeType type: String

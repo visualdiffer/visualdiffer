@@ -7,5 +7,6 @@
 //
 
 protocol TableViewContextMenuDelegate: AnyObject {
-    @MainActor func tableView(_ tableView: NSTableView, menuItem: NSMenuItem, hideMenuItem hide: inout Bool) -> Bool
+    @MainActor
+    func tableView(_ tableView: NSTableView, menuItem: NSMenuItem, hideMenuItem hide: inout Bool) -> Bool
 }

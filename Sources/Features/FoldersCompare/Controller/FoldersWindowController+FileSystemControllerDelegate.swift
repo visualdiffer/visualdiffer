@@ -10,7 +10,8 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
     private typealias FileOperationManagerBuilder =
         (FilterConfig, ItemComparator, FileOperationManagerDelegate) -> FileOperationManager
 
-    @objc func copyFiles(_ sender: AnyObject?) {
+    @objc
+    func copyFiles(_ sender: AnyObject?) {
         guard let vi = lastUsedView.dataSource?.outlineView?(lastUsedView, child: 0, ofItem: nil) as? VisibleItem,
               let root = vi.item.parent,
               let srcBaseDir = root.path,
@@ -33,7 +34,8 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         }
     }
 
-    @objc func deleteFiles(_: AnyObject?) {
+    @objc
+    func deleteFiles(_: AnyObject?) {
         guard let vi = lastUsedView.dataSource?.outlineView?(lastUsedView, child: 0, ofItem: nil) as? VisibleItem,
               let root = vi.item.parent,
               let srcBaseDir = root.path else {
@@ -46,7 +48,8 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         run(executor)
     }
 
-    @objc func moveFiles(_: AnyObject?) {
+    @objc
+    func moveFiles(_: AnyObject?) {
         guard let vi = lastUsedView.dataSource?.outlineView?(lastUsedView, child: 0, ofItem: nil) as? VisibleItem,
               let root = vi.item.parent,
               let srcBaseDir = root.path,
@@ -62,7 +65,8 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         run(executor)
     }
 
-    @objc func syncFiles(_: AnyObject?) {
+    @objc
+    func syncFiles(_: AnyObject?) {
         guard let window else {
             return
         }
@@ -82,7 +86,8 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         fileSystemController.beginSheetModal(for: window)
     }
 
-    @objc func setModificationDate(_: AnyObject) {
+    @objc
+    func setModificationDate(_: AnyObject) {
         guard let window else {
             return
         }
@@ -104,7 +109,8 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
 
     // MARK: - File Operations Delegate
 
-    @MainActor public func fileSystem(
+    @MainActor
+    public func fileSystem(
         _: FileSystemController<some FileOperationExecutor>,
         restoreSelection selectedVisibleItems: [VisibleItem],
         errors: [any Error]?

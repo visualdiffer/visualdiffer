@@ -12,7 +12,8 @@ enum CommandError: Int {
 }
 
 // the attribute @objc is necessary to work correctly in Swift
-@objc(OpenDiffCommand) class OpenDiffCommand: NSScriptCommand {
+@objc(OpenDiffCommand)
+class OpenDiffCommand: NSScriptCommand {
     override func performDefaultImplementation() -> Any? {
         guard let evaluatedArguments,
               let leftPath = evaluatedArguments["LeftPath"] as? String,

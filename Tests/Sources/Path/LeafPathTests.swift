@@ -9,7 +9,7 @@
 import Testing
 @testable import VisualDiffer
 
-// swiftlint:disable function_body_length
+// swiftlint:disable function_body_length line_length
 final class LeafPathTests: BaseTests {
     func findLeafPaths(_ paths: [String]) -> [CompareItem] {
         let arr = paths.map { CompareItem(
@@ -23,7 +23,8 @@ final class LeafPathTests: BaseTests {
         return CompareItem.findLeafPaths(arr)
     }
 
-    @Test func findLeafPaths1() {
+    @Test
+    func findLeafPaths1() {
         let paths = [
             "/Users/dave/trash/test_suite/createDir/l/dir1/dir2/dir3/test_date",
             "/Users/dave/trash/test_suite/createDir/l/dir1/dir2/dir3/test_date copia",
@@ -34,7 +35,8 @@ final class LeafPathTests: BaseTests {
         #expect(result[1].path == paths[1], "\(String(describing: result[1].path))")
     }
 
-    @Test func findLeafPaths2() {
+    @Test
+    func findLeafPaths2() {
         let paths = [
             "/Users/dave/trash/test_suite/createDir/l/dir1/dir2",
             "/Users/dave/trash/test_suite/createDir/l/dir1/dir2/dir3",
@@ -45,7 +47,8 @@ final class LeafPathTests: BaseTests {
         #expect(result[0].path == paths[2], "\(String(describing: result[0].path))")
     }
 
-    @Test func findLeafPaths3() {
+    @Test
+    func findLeafPaths3() {
         let paths = [
             "/Users/dave/trash/test_suite/createDir/test/10/20/30/40",
             "/Users/dave/trash/test_suite/createDir/test/10/40",
@@ -56,7 +59,8 @@ final class LeafPathTests: BaseTests {
         #expect(result[1].path == paths[1], "\(String(describing: result[1].path))")
     }
 
-    @Test func findLeafPaths4() {
+    @Test
+    func findLeafPaths4() {
         let paths = [
             "/Users/dave/trash/app/VisualDiffer.xcodeproj",
             "/Users/dave/trash/app/VisualDiffer.xcodeproj/project.xcworkspace",
@@ -71,7 +75,8 @@ final class LeafPathTests: BaseTests {
         #expect(result[1].path == paths[5], "\(String(describing: result[1].path))")
     }
 
-    @Test func closestPath() {
+    @Test
+    func closestPath() {
         var arr = [
             "/Users/dave/trash/test_suite/bug244/r.txt",
             "/Users/dave/trash/0latest_stable/app",
@@ -218,4 +223,4 @@ final class LeafPathTests: BaseTests {
     }
 }
 
-// swiftlint:enable function_body_length
+// swiftlint:enable function_body_length line_length

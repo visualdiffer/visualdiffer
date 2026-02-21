@@ -6,7 +6,8 @@
 //  Copyright (c) 2011 visualdiffer.com
 //
 
-@objc extension NSTextFieldCell {
+@objc
+extension NSTextFieldCell {
     var textAttributes: [NSAttributedString.Key: Any] {
         var attributes = [NSAttributedString.Key: Any]()
 

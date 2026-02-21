@@ -11,7 +11,8 @@ import Quartz
 // swiftlint:disable implicitly_unwrapped_optional
 extension FoldersWindowController: @preconcurrency QLPreviewPanelDataSource,
     @preconcurrency QLPreviewPanelDelegate {
-    @objc func togglePreviewPanel(_: AnyObject?) {
+    @objc
+    func togglePreviewPanel(_: AnyObject?) {
         QLPreviewPanel.toggle()
     }
 

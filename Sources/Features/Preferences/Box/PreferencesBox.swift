@@ -54,13 +54,15 @@ class PreferencesBox: NSBox {
         checkboxes[checkbox.prefName] = checkbox
     }
 
-    @objc func toggleCheckbox(_ sender: PreferencesCheckbox) {
+    @objc
+    func toggleCheckbox(_ sender: PreferencesCheckbox) {
         let isOn = sender.state == .on
 
         delegate?.preferenceBox(self, setBool: isOn, forKey: sender.prefName)
     }
 
-    @objc func reloadData() {
+    @objc
+    func reloadData() {
         guard let delegate else {
             return
         }

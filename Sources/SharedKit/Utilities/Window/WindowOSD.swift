@@ -28,7 +28,8 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
 
     private var viewAnimation: NSViewAnimation?
 
-    @objc init(image: NSImage, parent: NSWindow?) {
+    @objc
+    init(image: NSImage, parent: NSWindow?) {
         let windowFrame = NSRect(x: 0, y: 0, width: Self.windowWidth, height: Self.windowHeight)
 
         super.init(
@@ -109,7 +110,8 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
         false
     }
 
-    @objc func animateInside(_ areaFrame: NSRect) {
+    @objc
+    func animateInside(_ areaFrame: NSRect) {
         let frame = frame
         setFrameOrigin(NSPoint(
             x: areaFrame.origin.x + (areaFrame.width - frame.width) / 2,
@@ -147,7 +149,8 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
 
     // MARK: - Image
 
-    @objc func setImage(_ image: NSImage?) {
+    @objc
+    func setImage(_ image: NSImage?) {
         guard let imageView = contentView?.subviews[0] as? NSImageView else {
             return
         }
@@ -163,7 +166,8 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
 
     // MARK: - Text
 
-    @objc func setText(_ text: String) {
+    @objc
+    func setText(_ text: String) {
         guard let textField = contentView?.subviews[1] as? NSTextField,
               let font = textField.font else {
             return

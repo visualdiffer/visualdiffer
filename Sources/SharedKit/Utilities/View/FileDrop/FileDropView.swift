@@ -9,7 +9,8 @@
 import Foundation
 import Cocoa
 
-@MainActor protocol FileDropImageViewDelegate: AnyObject {
+@MainActor
+protocol FileDropImageViewDelegate: AnyObject {
     // Return true if delegate update path
     func fileDropImageViewUpdatePath(_ view: FileDropView, paths: [URL]) -> Bool
 }

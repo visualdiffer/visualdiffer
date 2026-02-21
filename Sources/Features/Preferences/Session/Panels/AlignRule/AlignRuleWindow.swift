@@ -185,7 +185,8 @@ class AlignRuleWindow: NSWindow, NSTextFieldDelegate {
 
     // MARK: - Action methods
 
-    @objc func closeAlignWindow(_ sender: AnyObject) {
+    @objc
+    func closeAlignWindow(_ sender: AnyObject) {
         guard let sender = sender as? NSButton else {
             return
         }
@@ -213,7 +214,8 @@ class AlignRuleWindow: NSWindow, NSTextFieldDelegate {
         sheetParent?.endSheet(self, returnCode: .init(sender.tag))
     }
 
-    @objc func toggleLeftExpressionCaseSensitive(_: AnyObject) {
+    @objc
+    func toggleLeftExpressionCaseSensitive(_: AnyObject) {
         if leftOptions.contains(.caseInsensitive) {
             leftOptions.remove(.caseInsensitive)
         } else {
@@ -222,7 +224,8 @@ class AlignRuleWindow: NSWindow, NSTextFieldDelegate {
         updateTestResult()
     }
 
-    @objc func toggleRightExpressionCaseSensitive(_: AnyObject) {
+    @objc
+    func toggleRightExpressionCaseSensitive(_: AnyObject) {
         if rightOptions.contains(.caseInsensitive) {
             rightOptions.remove(.caseInsensitive)
         } else {

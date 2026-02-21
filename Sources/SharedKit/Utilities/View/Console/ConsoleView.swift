@@ -139,11 +139,13 @@ class ConsoleView: NSView, NSTextViewDelegate {
         )
     }
 
-    @objc func clear(_: AnyObject) {
+    @objc
+    func clear(_: AnyObject) {
         consoleText.string = ""
     }
 
-    @objc func hide(_: AnyObject) {
+    @objc
+    func hide(_: AnyObject) {
         delegate?.hide(console: self)
     }
 

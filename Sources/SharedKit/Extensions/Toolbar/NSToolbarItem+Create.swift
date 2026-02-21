@@ -6,7 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@objc extension NSToolbarItem {
+@objc
+extension NSToolbarItem {
     convenience init(
         identifier: NSToolbarItem.Identifier,
         label: String,

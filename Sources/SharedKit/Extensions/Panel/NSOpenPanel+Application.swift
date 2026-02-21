@@ -7,7 +7,8 @@
 //
 
 extension NSOpenPanel {
-    @objc func openApplication(title: String) -> NSOpenPanel {
+    @objc
+    func openApplication(title: String) -> NSOpenPanel {
         self.title = title
         // since 10.11 the title is no longer shown so we use the message property
         message = title

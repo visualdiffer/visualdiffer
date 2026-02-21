@@ -9,7 +9,8 @@
 import Quartz
 
 extension QLPreviewPanel {
-    @objc static func toggle() {
+    @objc
+    static func toggle() {
         if sharedPreviewPanelExists(), shared().isVisible {
             shared().orderOut(nil)
         } else {

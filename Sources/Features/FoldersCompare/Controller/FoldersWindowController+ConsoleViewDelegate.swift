@@ -26,7 +26,8 @@ extension FoldersWindowController: @preconcurrency ConsoleViewDelegate {
         consoleView.focus()
     }
 
-    @objc func toggleLogConsole(_: AnyObject?) {
+    @objc
+    func toggleLogConsole(_: AnyObject?) {
         hide(console: consoleView)
     }
 }

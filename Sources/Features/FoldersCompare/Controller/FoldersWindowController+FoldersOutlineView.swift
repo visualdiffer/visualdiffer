@@ -188,7 +188,8 @@ extension FoldersWindowController: NSOutlineViewDelegate,
         rightView.reloadData()
     }
 
-    @objc func sortBySessionColumn() {
+    @objc
+    func sortBySessionColumn() {
         guard let leftVisibleItems else {
             return
         }

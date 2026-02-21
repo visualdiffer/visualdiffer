@@ -9,7 +9,8 @@
 import Foundation
 
 extension FileDropView {
-    @MainActor static func create(
+    @MainActor
+    static func create(
         title: String,
         delegate: FileDropImageViewDelegate
     ) -> FileDropView {

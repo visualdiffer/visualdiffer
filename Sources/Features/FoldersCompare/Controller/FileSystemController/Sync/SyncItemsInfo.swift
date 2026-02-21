@@ -12,11 +12,13 @@ class SyncItemsInfo: NSObject {
     @objc var emptyFoldersNodes: DescriptionOutlineNode?
     @objc var linkedInfo: SyncItemsInfo?
 
-    @objc func removeAll() {
+    @objc
+    func removeAll() {
         nodes?.children.removeAll()
     }
 
-    @objc func add(_ syncNode: DescriptionOutlineNode) {
+    @objc
+    func add(_ syncNode: DescriptionOutlineNode) {
         guard let syncDataSource = syncNode.items,
               let nodes else {
             return

@@ -50,7 +50,8 @@ class AppearanceBox: PreferencesBox {
         ])
     }
 
-    @objc func updateAppearance(_: AnyObject) {
+    @objc
+    func updateAppearance(_: AnyObject) {
         if #available(macOS 10.14, *) {
             if !alertForCustomColorScheme() {
                 // restore the previous selection

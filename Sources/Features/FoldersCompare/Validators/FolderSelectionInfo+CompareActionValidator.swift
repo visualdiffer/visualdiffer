@@ -6,7 +6,8 @@
 //  Copyright (c) 2021 visualdiffer.com
 //
 
-@MainActor extension FolderSelectionInfo {
+@MainActor
+extension FolderSelectionInfo {
     func validateCompareFiles() -> Bool {
         guard let linkedSelInfo = view.linkedView?.selectionInfo else {
             return false

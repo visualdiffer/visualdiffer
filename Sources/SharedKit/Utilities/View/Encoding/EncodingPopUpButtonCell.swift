@@ -54,7 +54,8 @@ class EncodingPopUpButtonCell: NSPopUpButtonCell {
         }
     }
 
-    @objc func encodingsListChanged(_: Notification) {
+    @objc
+    func encodingsListChanged(_: Notification) {
         let encoding = if let value = selectedItem?.representedObject as? NSNumber {
             String.Encoding(rawValue: value.uintValue)
         } else {

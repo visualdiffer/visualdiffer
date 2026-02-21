@@ -56,7 +56,8 @@ extension FilesWindowController {
 
     // MARK: - Details lines
 
-    @objc func updateDetailLines(_ row: Int) {
+    @objc
+    func updateDetailLines(_ row: Int) {
         if row < 0 {
             setColor(for: nil, view: leftDetailsTextView)
             setColor(for: nil, view: rightDetailsTextView)
@@ -102,7 +103,8 @@ extension FilesWindowController {
 
     // MARK: - Actions
 
-    @objc func reload(_: AnyObject?) {
+    @objc
+    func reload(_: AnyObject?) {
         guard alertSaveDirtyFiles() else {
             return
         }
@@ -119,7 +121,8 @@ extension FilesWindowController {
         }
     }
 
-    @objc func recompare(_: AnyObject?) {
+    @objc
+    func recompare(_: AnyObject?) {
         guard let diffResult else {
             return
         }
@@ -136,7 +139,8 @@ extension FilesWindowController {
         lastUsedView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: true)
     }
 
-    @objc func swapSides(_: AnyObject) {
+    @objc
+    func swapSides(_: AnyObject) {
         swap(&sessionDiff.leftPath, &sessionDiff.rightPath)
         swap(&leftView.diffSide, &rightView.diffSide)
         swap(&leftPanelView.fileInfoBar.fileAttrs, &rightPanelView.fileInfoBar.fileAttrs)
@@ -147,29 +151,35 @@ extension FilesWindowController {
         fileThumbnail.needsDisplay = true
     }
 
-    @objc func toggleWordWrap(_: AnyObject) {
+    @objc
+    func toggleWordWrap(_: AnyObject) {
         setWordWrap(enabled: !rowHeightCalculator.isWordWrapEnabled)
     }
 
     // MARK: Find Methods
 
-    @objc func find(_: AnyObject) {
+    @objc
+    func find(_: AnyObject) {
         window?.makeFirstResponder(scopeBar)
     }
 
-    @objc func findPrevious(_: AnyObject) {
+    @objc
+    func findPrevious(_: AnyObject) {
         scopeBar.findView.moveToMatch(false)
     }
 
-    @objc func findNext(_: AnyObject) {
+    @objc
+    func findNext(_: AnyObject) {
         scopeBar.findView.moveToMatch(true)
     }
 
-    @objc func setLeftReadOnly(_: AnyObject) {
+    @objc
+    func setLeftReadOnly(_: AnyObject) {
         sessionDiff.leftReadOnly.toggle()
     }
 
-    @objc func setRightReadOnly(_: AnyObject) {
+    @objc
+    func setRightReadOnly(_: AnyObject) {
         sessionDiff.rightReadOnly.toggle()
     }
 }

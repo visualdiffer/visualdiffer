@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable force_unwrapping function_body_length
 final class TagsMoveTests: BaseTests {
-    @Test func moveFolderWithTags() throws {
+    @Test
+    func moveFolderWithTags() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .finderTags, .size, .alignMatchCase],

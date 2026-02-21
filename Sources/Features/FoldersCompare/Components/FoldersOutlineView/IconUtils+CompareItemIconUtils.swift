@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 visualdiffer.com
 //
 
-@MainActor extension IconUtils {
+@MainActor
+extension IconUtils {
     func icon(
         for item: CompareItem,
         size: CGFloat,

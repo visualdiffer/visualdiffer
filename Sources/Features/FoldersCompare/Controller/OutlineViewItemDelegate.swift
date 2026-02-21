@@ -12,6 +12,8 @@
  * The views in sync expand and collapse items and must take care to disable notification when necessary
  */
 protocol OutlineViewItemDelegate: AnyObject {
-    @MainActor func itemDidExpand(_ item: Any?, outlineView: NSOutlineView)
-    @MainActor func itemDidCollapse(_ item: Any?, outlineView: NSOutlineView)
+    @MainActor
+    func itemDidExpand(_ item: Any?, outlineView: NSOutlineView)
+    @MainActor
+    func itemDidCollapse(_ item: Any?, outlineView: NSOutlineView)
 }

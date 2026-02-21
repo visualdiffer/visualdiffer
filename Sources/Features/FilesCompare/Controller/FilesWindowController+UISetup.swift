@@ -7,7 +7,8 @@
 //
 
 extension FilesWindowController {
-    @objc func initAllViews() {
+    @objc
+    func initAllViews() {
         setupWindowLayout()
 
         // must be called after setting up all views
@@ -95,7 +96,8 @@ extension FilesWindowController {
         window.collectionBehavior = [window.collectionBehavior, .fullScreenPrimary]
     }
 
-    @objc func updateUI() {
+    @objc
+    func updateUI() {
         updateTreeViewFont()
 
         // invalidate the line text cache
@@ -214,7 +216,8 @@ extension FilesWindowController {
         )
     }
 
-    @objc private func fontDidChange(notification: Notification) {
+    @objc
+    private func fontDidChange(notification: Notification) {
         guard let userInfo = notification.userInfo,
               let target = userInfo[PrefChangedKey.target] as? PrefChangedKey.Target else {
             return
@@ -225,7 +228,8 @@ extension FilesWindowController {
         }
     }
 
-    @objc func appAppearanceDidChange(_: Notification) {
+    @objc
+    func appAppearanceDidChange(_: Notification) {
         leftView.reloadData()
         rightView.reloadData()
 
@@ -238,7 +242,8 @@ extension FilesWindowController {
 
     // MARK: - File and view scroll
 
-    @objc func synchronizedViewContentBoundsDidChange(_: Notification) {
+    @objc
+    func synchronizedViewContentBoundsDidChange(_: Notification) {
         fileThumbnail.needsDisplay = true
     }
 }

@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable file_length force_unwrapping function_body_length
 final class CopyFilesTests: BaseTests {
-    @Test func copyFilesOnlyMatches() throws {
+    @Test
+    func copyFilesOnlyMatches() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -188,7 +189,8 @@ final class CopyFilesTests: BaseTests {
         }
     }
 
-    @Test func copyFilesReplaceNoToAll() throws {
+    @Test
+    func copyFilesReplaceNoToAll() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -393,7 +395,8 @@ final class CopyFilesTests: BaseTests {
         }
     }
 
-    @Test func copyOrphan() throws {
+    @Test
+    func copyOrphan() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -569,7 +572,8 @@ final class CopyFilesTests: BaseTests {
         }
     }
 
-    @Test func copyFilesPresentOnBothSidesWithFiltered() throws {
+    @Test
+    func copyFilesPresentOnBothSidesWithFiltered() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -812,7 +816,8 @@ final class CopyFilesTests: BaseTests {
         }
     }
 
-    @Test func copyDontFollowSymLink() throws {
+    @Test
+    func copyDontFollowSymLink() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -1026,7 +1031,8 @@ final class CopyFilesTests: BaseTests {
         }
     }
 
-    @Test func copyFollowSymLink() throws {
+    @Test
+    func copyFollowSymLink() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -1299,7 +1305,8 @@ final class CopyFilesTests: BaseTests {
         }
     }
 
-    @Test func copyFailure() throws {
+    @Test
+    func copyFailure() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -1461,7 +1468,8 @@ final class CopyFilesTests: BaseTests {
         }
     }
 
-    @Test func copyPreserveFolderTimestamp() throws {
+    @Test
+    func copyPreserveFolderTimestamp() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,

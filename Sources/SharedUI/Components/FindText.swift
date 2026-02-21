@@ -146,7 +146,8 @@ class FindText: NSView, NSSearchFieldDelegate {
         }
     }
 
-    @objc func search(_: AnyObject) {
+    @objc
+    func search(_: AnyObject) {
         guard let delegate else {
             return
         }
@@ -206,7 +207,8 @@ class FindText: NSView, NSSearchFieldDelegate {
         updateCount()
     }
 
-    @objc func moveByArrow(_: AnyObject) {
+    @objc
+    func moveByArrow(_: AnyObject) {
         moveToMatch(arrows.selectedSegment == 1)
     }
 

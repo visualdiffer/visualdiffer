@@ -6,7 +6,8 @@
 //  Copyright (c) 2020 visualdiffer.com
 //
 
-@MainActor class FoldersOutlineViewFindTextDelegate: @preconcurrency FindTextDelegate {
+@MainActor
+class FoldersOutlineViewFindTextDelegate: @preconcurrency FindTextDelegate {
     let view: FoldersOutlineView
     private var fileNames: [VisibleItem]
 

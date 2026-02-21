@@ -143,7 +143,8 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
     }
 
     // This method is called when the Preference panel is inside the Main.xib
-    @objc func show(_: Any?) {
+    @objc
+    func show(_: Any?) {
         panelWillShow()
 
         prefPanel.center()
@@ -172,7 +173,8 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
         toolbarIdentifiers
     }
 
-    @objc func selectPrefTab(_ sender: Any) {
+    @objc
+    func selectPrefTab(_ sender: Any) {
         if let toolbarItem = sender as? NSToolbarItem {
             UserDefaults.standard.setValue(toolbarItem.itemIdentifier.rawValue, forKey: Self.lastVisiblePrefTab)
             tabView.selectTabViewItem(withIdentifier: toolbarItem.itemIdentifier)

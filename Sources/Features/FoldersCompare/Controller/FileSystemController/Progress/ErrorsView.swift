@@ -41,7 +41,8 @@ class ErrorsView: NSStackView {
         errorsText.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
     }
 
-    @objc func updateErrors(_ errorMessage: String) {
+    @objc
+    func updateErrors(_ errorMessage: String) {
         // Show errors if it is the first time we are called
         if errors.isEmpty {
             isHidden = false

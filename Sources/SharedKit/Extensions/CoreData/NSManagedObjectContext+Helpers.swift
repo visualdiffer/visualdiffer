@@ -12,7 +12,8 @@ extension NSManagedObjectContext {
     ///
     /// Parameters:
     /// - block: the code to execute with registration disabled
-    @MainActor func updateWithoutRecordingModifications(_ block: () -> Void) {
+    @MainActor
+    func updateWithoutRecordingModifications(_ block: () -> Void) {
         undoManager?.disableUndoRegistration()
 
         block()

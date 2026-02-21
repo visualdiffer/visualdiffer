@@ -7,7 +7,8 @@
 //
 
 protocol TableViewCommonDelegate: AnyObject {
-    @MainActor func tableViewCommonKeyDown(_ tableView: NSTableView, event: NSEvent) -> Bool
+    @MainActor
+    func tableViewCommonKeyDown(_ tableView: NSTableView, event: NSEvent) -> Bool
 }
 
 class TableViewCommon: NSTableView {

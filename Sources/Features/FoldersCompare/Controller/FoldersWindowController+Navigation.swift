@@ -7,7 +7,8 @@
 //
 
 extension FoldersWindowController {
-    @objc func previousDifference(_: AnyObject) {
+    @objc
+    func previousDifference(_: AnyObject) {
         let options: DifferenceNavigator = [.previous, CommonPrefs.shared.folderDifferenceNavigatorOptions]
         var didWrap = false
 
@@ -16,7 +17,8 @@ extension FoldersWindowController {
         }
     }
 
-    @objc func nextDifference(_: AnyObject) {
+    @objc
+    func nextDifference(_: AnyObject) {
         let options: DifferenceNavigator = [.next, CommonPrefs.shared.folderDifferenceNavigatorOptions]
         var didWrap = false
 

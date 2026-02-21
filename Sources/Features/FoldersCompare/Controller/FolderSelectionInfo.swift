@@ -14,7 +14,8 @@ struct SelectionType: OptionSet {
     static let file = SelectionType(rawValue: 1 << 2)
 }
 
-@MainActor struct FolderSelectionInfo: @preconcurrency CustomDebugStringConvertible {
+@MainActor
+struct FolderSelectionInfo: @preconcurrency CustomDebugStringConvertible {
     private(set) var selType: SelectionType = []
     private(set) var nullFilesCount = 0
     private(set) var foldersCount = 0

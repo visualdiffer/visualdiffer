@@ -7,7 +7,8 @@
 //
 
 extension FilesWindowController {
-    @objc func openSessionSettingsSheet(_: AnyObject) {
+    @objc
+    func openSessionSettingsSheet(_: AnyObject) {
         guard let window else {
             return
         }

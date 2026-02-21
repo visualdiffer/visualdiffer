@@ -6,7 +6,8 @@
 //  Copyright (c) 2021 visualdiffer.com
 //
 
-@MainActor extension FolderSelectionInfo {
+@MainActor
+extension FolderSelectionInfo {
     func validateCopyFiles(_ sessionDiff: SessionDiff) -> Bool {
         let isValid = switch view.side {
         case .left:

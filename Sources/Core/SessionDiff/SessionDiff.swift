@@ -6,7 +6,7 @@
 //  Copyright (c) 2010 visualdiffer.com
 //
 
-@objc(SessionDiff) // swiftlint:disable:next attributes
+@objc(SessionDiff)
 public class SessionDiff: NSManagedObject {
     // leftPath and rightPath are computed properties because they use custom validation
     @NSManaged var leftReadOnly: Bool
@@ -52,7 +52,8 @@ public class SessionDiff: NSManagedObject {
 extension SessionDiff {
     static let entityName = "Session"
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<SessionDiff> {
+    @nonobjc
+    public class func fetchRequest() -> NSFetchRequest<SessionDiff> {
         NSFetchRequest<SessionDiff>(entityName: entityName)
     }
 

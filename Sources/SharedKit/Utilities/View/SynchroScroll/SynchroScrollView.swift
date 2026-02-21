@@ -6,10 +6,12 @@
 //  Copyright (c) 2010 visualdiffer.com
 //
 
-@MainActor class SynchroScrollView: NSScrollView {
+@MainActor
+class SynchroScrollView: NSScrollView {
     private var synchronizedScrollView: NSScrollView? // not retained
 
-    @objc func setSynchronized(scrollview: NSScrollView) {
+    @objc
+    func setSynchronized(scrollview: NSScrollView) {
         // stop an existing scroll view synchronizing
         stopSynchronizing()
 
@@ -34,7 +36,8 @@
         )
     }
 
-    @objc func synchronizedViewContentBoundsDidChange(_ notification: Notification) {
+    @objc
+    func synchronizedViewContentBoundsDidChange(_ notification: Notification) {
         // get the changed content view from the notification
         guard let changedContentView = notification.object as? NSClipView else {
             return

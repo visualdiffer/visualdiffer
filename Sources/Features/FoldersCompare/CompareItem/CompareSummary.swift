@@ -67,15 +67,18 @@ public extension CompareSummary {
 }
 
 public extension CompareSummary {
-    @inline(__always) var hasMetadataTags: Bool {
+    @inline(__always)
+    var hasMetadataTags: Bool {
         mismatchingFolderMetadata.contains(.tags)
     }
 
-    @inline(__always) var hasMetadataLabels: Bool {
+    @inline(__always)
+    var hasMetadataLabels: Bool {
         mismatchingFolderMetadata.contains(.labels)
     }
 
-    @inline(__always) func containsDifferences() -> Bool {
+    @inline(__always)
+    func containsDifferences() -> Bool {
         olderFiles > 0
             || changedFiles > 0
             || orphanFiles > 0
@@ -85,7 +88,8 @@ public extension CompareSummary {
             || hasMetadataLabels
     }
 
-    @inline(__always) func containsOnlyMatches() -> Bool {
+    @inline(__always)
+    func containsOnlyMatches() -> Bool {
         olderFiles == 0
             && changedFiles == 0
             && orphanFiles == 0

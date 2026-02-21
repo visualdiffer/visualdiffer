@@ -8,7 +8,8 @@
 
 import Foundation
 
-@objc extension NSPopUpButton {
+@objc
+extension NSPopUpButton {
     convenience init(
         identifier: NSUserInterfaceItemIdentifier,
         menuTitle: String,

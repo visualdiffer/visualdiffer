@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable force_unwrapping
 final class BufferedInputStreamTests {
-    @Test func minBufferSize() throws {
+    @Test
+    func minBufferSize() throws {
         let lines = [
             "Ciao 👋",
             "🍕+🍺=❤️",
@@ -27,7 +28,8 @@ final class BufferedInputStreamTests {
         )
     }
 
-    @Test func bigBufferSize() throws {
+    @Test
+    func bigBufferSize() throws {
         let lines = [
             "Ciao 👋",
             "🍕+🍺=❤️",
@@ -99,7 +101,8 @@ final class BufferedInputStreamTests {
         }
     }
 
-    @Test func bigFile() throws {
+    @Test
+    func bigFile() throws {
         let testBundle = Bundle(for: type(of: self))
 
         guard let filePath = testBundle.url(forResource: "big_file_5000_lines", withExtension: "txt") else {
@@ -127,7 +130,8 @@ final class BufferedInputStreamTests {
     }
 
     #if OLD_OBJC_BUFFERED_INPUT_STREAM
-        @Test("Test any regression with the original Objc code") func bigFile2() throws {
+        @Test("Test any regression with the original Objc code")
+        func bigFile2() throws {
             let testBundle = Bundle(for: type(of: self))
 
             guard let filePath = testBundle.url(forResource: "big_file_5000_lines", withExtension: "txt") else {
@@ -168,7 +172,8 @@ final class BufferedInputStreamTests {
         }
     #endif
 
-    @Test("Native Swift Data Encoding differs from Objc") func nativeSwiftAsciiEncoding() {
+    @Test("Native Swift Data Encoding differs from Objc")
+    func nativeSwiftAsciiEncoding() {
         let data = Data(
             [
                 0x62,

@@ -118,7 +118,8 @@ class FontBox: PreferencesBox {
         return view
     }
 
-    @objc func browseFont(_: AnyObject) {
+    @objc
+    func browseFont(_: AnyObject) {
         if let font = preview.font {
             NSFontManager.shared.setSelectedFont(font, isMultiple: false)
         }

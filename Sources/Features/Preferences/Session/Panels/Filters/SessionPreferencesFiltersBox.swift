@@ -134,7 +134,8 @@ class SessionPreferencesFiltersBox: PreferencesBox, NSMenuItemValidation {
 
     // MARK: - Action Methods
 
-    @objc func copyToClipboard(_: AnyObject) {
+    @objc
+    func copyToClipboard(_: AnyObject) {
         if let filters = currentFilters as? NSString {
             let pasteboard = NSPasteboard.general
             pasteboard.clearContents()
@@ -142,7 +143,8 @@ class SessionPreferencesFiltersBox: PreferencesBox, NSMenuItemValidation {
         }
     }
 
-    @objc func pasteFromClipboard(_: AnyObject) {
+    @objc
+    func pasteFromClipboard(_: AnyObject) {
         let pasteboard = NSPasteboard.general
         let supportedTypes = [NSPasteboard.PasteboardType.string]
 
@@ -162,7 +164,8 @@ class SessionPreferencesFiltersBox: PreferencesBox, NSMenuItemValidation {
         }
     }
 
-    @objc func saveDefaults(_: AnyObject) {
+    @objc
+    func saveDefaults(_: AnyObject) {
         guard let filters = currentFilters else {
             return
         }
@@ -179,7 +182,8 @@ class SessionPreferencesFiltersBox: PreferencesBox, NSMenuItemValidation {
         }
     }
 
-    @objc func restoreDefaults(_: AnyObject) {
+    @objc
+    func restoreDefaults(_: AnyObject) {
         let result = NSAlert.showModalConfirm(
             messageText: NSLocalizedString("Restore Defaults", comment: ""),
             informativeText: NSLocalizedString("The custom-defined defaults will be replaced with the application defaults. Are you sure?", comment: "")
@@ -189,7 +193,8 @@ class SessionPreferencesFiltersBox: PreferencesBox, NSMenuItemValidation {
         }
     }
 
-    @objc func fillWithDefaults(_: AnyObject) {
+    @objc
+    func fillWithDefaults(_: AnyObject) {
         if let defaultFilters = SessionDiff.defaultFileFilters() {
             predicateEditor.objectValue = NSPredicate(format: defaultFilters)
         }

@@ -222,7 +222,8 @@ extension FilesWindowController {
     }
 
     static func switchMenu() {
-        @MainActor enum StaticMenus {
+        @MainActor
+        enum StaticMenus {
             static let edit = FilesWindowController.editMenu()
             static let actions = FilesWindowController.actionsMenu()
             static let view = FilesWindowController.viewMenu()

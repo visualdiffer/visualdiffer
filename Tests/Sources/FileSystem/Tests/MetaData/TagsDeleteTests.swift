@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable file_length force_unwrapping function_body_length
 final class TagsDeleteTests: BaseTests {
-    @Test func deleteFileWithTags() throws {
+    @Test
+    func deleteFileWithTags() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .finderTags, .size, .alignMatchCase],
@@ -266,7 +267,8 @@ final class TagsDeleteTests: BaseTests {
         }
     }
 
-    @Test func deleteFolderWithTags() throws {
+    @Test
+    func deleteFolderWithTags() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .finderTags, .size, .alignMatchCase],

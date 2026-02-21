@@ -8,7 +8,8 @@
 
 import Quartz
 
-@MainActor protocol FoldersOutlineViewDelegate: NSOutlineViewDelegate {
+@MainActor
+protocol FoldersOutlineViewDelegate: NSOutlineViewDelegate {
     func foldersOutlineView(_ view: FoldersOutlineView, doubleClickFileObject clickedRow: Int)
     func selectionChanged(in view: FoldersOutlineView)
     func setLastUsedViewResponder(_ view: FoldersOutlineView)
@@ -75,7 +76,8 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
         )
     }
 
-    @objc func tableSelectionChanged(_ notification: Notification) {
+    @objc
+    func tableSelectionChanged(_ notification: Notification) {
         _selectionInfo = nil
 
         if let delegate = delegate as? FoldersOutlineViewDelegate,
@@ -113,7 +115,8 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
         }
     }
 
-    @objc func handleDoubleClick(_ sender: AnyObject) {
+    @objc
+    func handleDoubleClick(_ sender: AnyObject) {
         if clickedRow != -1 { // make sure double click was not in table header
             handleEnterKeypressed(sender.clickedRow)
         }

@@ -11,7 +11,8 @@ public typealias DiffOpenerDelegateBlock = (String?, String?) -> Bool
 ///
 /// Who start comparison, generally a folder view controller opening a file comparison document
 ///
-@MainActor public protocol DiffOpenerDelegate: AnyObject {
+@MainActor
+public protocol DiffOpenerDelegate: AnyObject {
     func addChildDocument(_ document: VDDocument)
     func removeChildDocument(_ document: VDDocument)
 

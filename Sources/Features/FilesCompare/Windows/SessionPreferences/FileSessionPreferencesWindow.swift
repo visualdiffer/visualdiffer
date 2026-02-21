@@ -121,7 +121,8 @@ class FileSessionPreferencesWindow: NSWindowController, NSTabViewDelegate {
         sheetWindow.beginSheet(window, completionHandler: handler)
     }
 
-    @objc func closeSessionSettingsSheet(_ sender: AnyObject) {
+    @objc
+    func closeSessionSettingsSheet(_ sender: AnyObject) {
         guard let window else {
             return
         }

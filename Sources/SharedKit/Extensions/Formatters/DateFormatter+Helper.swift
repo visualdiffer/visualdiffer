@@ -6,7 +6,8 @@
 //  Copyright (c) 2011 visualdiffer.com
 //
 
-@objc extension DateFormatter {
+@objc
+extension DateFormatter {
     func widthOfLongestDateStringWithLevel(attrs: [NSAttributedString.Key: Any]) -> CGFloat {
         // This code is rather tied to the gregorian date.
         // We pick an arbitrary date, and iterate through each of the days of the week

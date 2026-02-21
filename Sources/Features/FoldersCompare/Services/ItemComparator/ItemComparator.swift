@@ -10,7 +10,8 @@ public protocol ItemComparatorDelegate: AnyObject {
     func isRunning(_ comparator: ItemComparator) -> Bool
 }
 
-@objc public class ItemComparator: NSObject {
+@objc
+public class ItemComparator: NSObject {
     let options: ComparatorOptions
     weak var delegate: ItemComparatorDelegate?
     let timestampToleranceSeconds: Int

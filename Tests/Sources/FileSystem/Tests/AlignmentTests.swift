@@ -9,9 +9,10 @@
 import Testing
 @testable import VisualDiffer
 
-// swiftlint:disable file_length force_unwrapping function_body_length
+// swiftlint:disable file_length function_body_length
 final class AlignmentTests: CaseSensitiveBaseTest {
-    @Test func leftMatchCaseRightIgnoreCase() throws {
+    @Test
+    func leftMatchCaseRightIgnoreCase() throws {
         try assertVolumeMounted()
 
         let comparatorDelegate = MockItemComparatorDelegate()
@@ -142,7 +143,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func leftMatchCaseRightIgnoreCase2() throws {
+    @Test
+    func leftMatchCaseRightIgnoreCase2() throws {
         try assertVolumeMounted()
 
         let comparatorDelegate = MockItemComparatorDelegate()
@@ -274,7 +276,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func leftMatchCaseRightIgnoreCase3() throws {
+    @Test
+    func leftMatchCaseRightIgnoreCase3() throws {
         try assertVolumeMounted()
 
         let comparatorDelegate = MockItemComparatorDelegate()
@@ -416,7 +419,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func bothIgnoreCase() throws {
+    @Test
+    func bothIgnoreCase() throws {
         try assertVolumeMounted()
 
         let comparatorDelegate = MockItemComparatorDelegate()
@@ -539,7 +543,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func onlyOneOnLeft() throws {
+    @Test
+    func onlyOneOnLeft() throws {
         try assertVolumeMounted()
 
         let comparatorDelegate = MockItemComparatorDelegate()
@@ -648,7 +653,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func createLeftOrphans() throws {
+    @Test
+    func createLeftOrphans() throws {
         try assertVolumeMounted()
 
         let comparatorDelegate = MockItemComparatorDelegate()
@@ -779,7 +785,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func folders() throws {
+    @Test
+    func folders() throws {
         try assertVolumeMounted()
 
         let comparatorDelegate = MockItemComparatorDelegate()
@@ -983,7 +990,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func closestMatch() throws {
+    @Test
+    func closestMatch() throws {
         try assertVolumeMounted()
 
         let comparatorDelegate = MockItemComparatorDelegate()
@@ -1081,7 +1089,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func copyFolder() throws {
+    @Test
+    func copyFolder() throws {
         try assertVolumeMounted()
 
         let comparatorDelegate = MockItemComparatorDelegate()
@@ -1309,7 +1318,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func regExpr() throws {
+    @Test
+    func regExpr() throws {
         try assertVolumeMounted()
 
         // align both .raw and .png to .jpg
@@ -1478,7 +1488,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func regNoMatchButIgnoreCaseMatch() throws {
+    @Test
+    func regNoMatchButIgnoreCaseMatch() throws {
         try assertVolumeMounted()
 
         // No file matches this rule but they must be aligned by case
@@ -1574,7 +1585,8 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         }
     }
 
-    @Test func bigFolderLeftIgnoreRightMatch() throws {
+    @Test
+    func bigFolderLeftIgnoreRightMatch() throws {
         try removeItem("l")
         try removeItem("r")
 
@@ -1602,4 +1614,4 @@ final class AlignmentTests: CaseSensitiveBaseTest {
     }
 }
 
-// swiftlint:enable file_length force_unwrapping function_body_length
+// swiftlint:enable file_length function_body_length

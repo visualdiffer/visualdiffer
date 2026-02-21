@@ -8,7 +8,8 @@
 
 import Foundation
 
-@objc extension NSBox {
+@objc
+extension NSBox {
     static func separator() -> NSBox {
         let view = NSBox()
 

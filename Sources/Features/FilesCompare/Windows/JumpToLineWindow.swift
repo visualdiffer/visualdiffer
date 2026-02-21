@@ -157,7 +157,8 @@ class JumpToLineWindow: NSWindow, NSWindowDelegate, NSSearchFieldDelegate {
         standardButtons.primaryButton.isEnabled = isEnabled
     }
 
-    @objc func closeSheet(_ sender: AnyObject) {
+    @objc
+    func closeSheet(_ sender: AnyObject) {
         guard let side = DisplaySide(rawValue: jumpSide.selectedSegment) else {
             fatalError("invalid jump side \(jumpSide.selectedSegment)")
         }
@@ -166,7 +167,8 @@ class JumpToLineWindow: NSWindow, NSWindowDelegate, NSSearchFieldDelegate {
         sheetParent?.endSheet(self, returnCode: NSApplication.ModalResponse(rawValue: sender.tag))
     }
 
-    @objc func sideChanged(_: AnyObject) {
+    @objc
+    func sideChanged(_: AnyObject) {
         enableJumpButton()
     }
 

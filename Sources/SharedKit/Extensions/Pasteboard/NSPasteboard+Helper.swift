@@ -8,13 +8,15 @@
 
 extension NSPasteboard {
     @discardableResult
-    @objc func copy(lines: [String]) -> Bool {
+    @objc
+    func copy(lines: [String]) -> Bool {
         clearContents()
         return writeObjects([lines.joined(separator: "\n")] as [NSString])
     }
 
     @discardableResult
-    @objc func copy(urls: [URL]) -> Bool {
+    @objc
+    func copy(urls: [URL]) -> Bool {
         if urls.isEmpty {
             return false
         }

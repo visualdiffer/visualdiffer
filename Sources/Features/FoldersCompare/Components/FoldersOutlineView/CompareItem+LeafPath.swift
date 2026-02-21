@@ -11,7 +11,8 @@ extension CompareItem {
      * Eliminate all ancestor elements from the provided array.
      * The resulting array will contain only leaf paths.
      */
-    @objc static func findLeafPaths(_ items: [CompareItem]) -> [CompareItem] {
+    @objc
+    static func findLeafPaths(_ items: [CompareItem]) -> [CompareItem] {
         // The items must be sorted to find correctly the leaves
         let arr = items.sorted {
             let lhs = $0.path ?? ""

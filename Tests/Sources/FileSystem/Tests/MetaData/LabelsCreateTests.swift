@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable force_unwrapping function_body_length
 final class LabelsCreateTests: BaseTests {
-    @Test func createLabels() throws {
+    @Test
+    func createLabels() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .size, .alignMatchCase, .finderLabel],

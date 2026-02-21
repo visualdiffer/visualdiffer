@@ -7,5 +7,6 @@
 //
 
 protocol PreferencesPanelDataSource {
-    @MainActor func reloadData()
+    @MainActor
+    func reloadData()
 }

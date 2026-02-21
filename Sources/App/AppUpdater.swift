@@ -16,7 +16,8 @@
             userDriverDelegate: nil
         )
 
-        @MainActor func configure() {
+        @MainActor
+        func configure() {
             guard let mainMenu = NSApp.mainMenu,
                   let applicationMenu = mainMenu.item(withTag: MainMenu.application.rawValue)?.submenu else {
                 return

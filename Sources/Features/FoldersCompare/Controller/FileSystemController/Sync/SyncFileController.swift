@@ -184,7 +184,8 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
         }
     }
 
-    @objc override func updateCount(_: AnyObject?) {
+    @objc
+    override func updateCount(_: AnyObject?) {
         setupTitle()
         fillItemsToSync()
 

@@ -86,14 +86,16 @@ public extension FoldersWindowController {
 
     // MARK: - Comparison actions
 
-    @objc func startComparison() {
+    @objc
+    func startComparison() {
         reloadAll(RefreshInfo(
             initState: true,
             expandAllFolders: sessionDiff.expandAllFolders
         ))
     }
 
-    @objc func showEmptyFolders(_: AnyObject?) {
+    @objc
+    func showEmptyFolders(_: AnyObject?) {
         hideEmptyFolders.toggle()
 
         scopeBar.hideEmptyFolders(hideEmptyFolders, informDelegate: false)
@@ -103,7 +105,8 @@ public extension FoldersWindowController {
         reloadAll(RefreshInfo(initState: false))
     }
 
-    @objc func noOrphansFolders(_: AnyObject?) {
+    @objc
+    func noOrphansFolders(_: AnyObject?) {
         let displayOptions = sessionDiff.displayOptions.toggled(.noOrphansFolders)
 
         sessionDiff.displayOptions = displayOptions
@@ -116,7 +119,8 @@ public extension FoldersWindowController {
         reloadAll(RefreshInfo(initState: false))
     }
 
-    @objc func selectComparison(_ sender: AnyObject?) {
+    @objc
+    func selectComparison(_ sender: AnyObject?) {
         guard let tag = sender?.selectedItem?.tag as? Int else {
             return
         }
@@ -133,14 +137,16 @@ public extension FoldersWindowController {
         reloadAll(refreshInfo)
     }
 
-    @objc func refresh(_: AnyObject) {
+    @objc
+    func refresh(_: AnyObject) {
         reloadAll(RefreshInfo(
             initState: true,
             expandAllFolders: sessionDiff.expandAllFolders
         ))
     }
 
-    @objc func toggleFilteredFiles(_: AnyObject?) {
+    @objc
+    func toggleFilteredFiles(_: AnyObject?) {
         showFilteredFiles.toggle()
 
         scopeBar.showFilteredFiles(showFilteredFiles, informDelegate: false)

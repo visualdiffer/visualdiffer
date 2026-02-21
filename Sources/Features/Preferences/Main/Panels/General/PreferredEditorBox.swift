@@ -83,7 +83,8 @@ class PreferredEditorBox: PreferencesBox {
         removeButton.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 
-    @objc func openScriptFolder(_: AnyObject) {
+    @objc
+    func openScriptFolder(_: AnyObject) {
         guard let folder = try? FileManager.default.url(
             for: .applicationScriptsDirectory,
             in: .userDomainMask,

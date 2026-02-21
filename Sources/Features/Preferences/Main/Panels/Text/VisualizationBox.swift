@@ -92,7 +92,8 @@ class VisualizationBox: PreferencesBox, NSTextFieldDelegate {
         ])
     }
 
-    @objc func tabWidthStepperChanged(_: AnyObject) {
+    @objc
+    func tabWidthStepperChanged(_: AnyObject) {
         tabWidth = tabWidthStepper.integerValue
     }
 

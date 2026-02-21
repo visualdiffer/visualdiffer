@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable force_unwrapping function_body_length
 final class DisplayTests: BaseTests {
-    @Test("Bug 0000170: Display filter set to 'No Orphan' hides not matching files") func displayFilterNoOrphan() throws {
+    @Test("Bug 0000170: Display filter set to 'No Orphan' hides not matching files")
+    func displayFilterNoOrphan() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.size, .contentTimestamp],
@@ -144,7 +145,8 @@ final class DisplayTests: BaseTests {
         }
     }
 
-    @Test func displayNoOrphanShowEmptyFolders() throws {
+    @Test
+    func displayNoOrphanShowEmptyFolders() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .size, .alignMatchCase],

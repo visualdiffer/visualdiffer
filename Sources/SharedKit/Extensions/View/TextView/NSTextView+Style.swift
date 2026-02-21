@@ -6,7 +6,8 @@
 //  Copyright (c) 2011 visualdiffer.com
 //
 
-@objc extension NSTextView {
+@objc
+extension NSTextView {
     func setTabStop(_ tabSpaces: Int) {
         guard let font else {
             return

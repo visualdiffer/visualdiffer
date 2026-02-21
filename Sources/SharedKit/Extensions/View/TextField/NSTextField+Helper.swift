@@ -6,7 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@objc extension NSTextField {
+@objc
+extension NSTextField {
     static func labelWithTitle(_ title: String) -> NSTextField {
         let view = NSTextField(frame: .zero)
 

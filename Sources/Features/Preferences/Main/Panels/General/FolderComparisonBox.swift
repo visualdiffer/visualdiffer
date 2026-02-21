@@ -113,7 +113,8 @@ class FolderComparisonBox: PreferencesBox {
         return view
     }
 
-    @objc func updateComparatorFlags(_: AnyObject) {
+    @objc
+    func updateComparatorFlags(_: AnyObject) {
         guard let comparatorFlags = comparisonPopup.selectedItem?.tag else {
             return
         }
@@ -125,7 +126,8 @@ class FolderComparisonBox: PreferencesBox {
         updateTolerance(comparatorFlags, makeFirstResponder: true)
     }
 
-    @objc func updateDisplayFilters(_: AnyObject) {
+    @objc
+    func updateDisplayFilters(_: AnyObject) {
         guard let tag = displayFiltersPopup.selectedItem?.tag else {
             return
         }
@@ -136,7 +138,8 @@ class FolderComparisonBox: PreferencesBox {
         )
     }
 
-    @objc override func toggleCheckbox(_ sender: PreferencesCheckbox) {
+    @objc
+    override func toggleCheckbox(_ sender: PreferencesCheckbox) {
         super.toggleCheckbox(sender)
 
         if sender.prefName == .virtualFinderLabel {

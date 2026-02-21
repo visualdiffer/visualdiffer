@@ -23,7 +23,8 @@ public struct SelectionSide: OptionSet, Sendable {
 }
 
 extension FoldersWindowController {
-    @objc func selectNewer(_ sender: AnyObject) {
+    @objc
+    func selectNewer(_ sender: AnyObject) {
         guard let sender = sender as? NSMenuItem else {
             return
         }
@@ -37,7 +38,8 @@ extension FoldersWindowController {
         }
     }
 
-    @objc func selectOrphans(_ sender: AnyObject) {
+    @objc
+    func selectOrphans(_ sender: AnyObject) {
         guard let sender = sender as? NSMenuItem else {
             return
         }
@@ -51,12 +53,14 @@ extension FoldersWindowController {
         }
     }
 
-    @objc func selectAllBothSides(_ sender: AnyObject) {
+    @objc
+    func selectAllBothSides(_ sender: AnyObject) {
         leftView.selectAll(sender)
         rightView.selectAll(sender)
     }
 
-    @objc func selectAllFiles(_ sender: AnyObject) {
+    @objc
+    func selectAllFiles(_ sender: AnyObject) {
         guard let sender = sender as? NSMenuItem else {
             return
         }
@@ -73,7 +77,8 @@ extension FoldersWindowController {
         }
     }
 
-    @objc func selectAllFolders(_ sender: AnyObject) {
+    @objc
+    func selectAllFolders(_ sender: AnyObject) {
         guard let sender = sender as? NSMenuItem else {
             return
         }
@@ -90,7 +95,8 @@ extension FoldersWindowController {
         }
     }
 
-    @objc func invertSelection(_ sender: AnyObject) {
+    @objc
+    func invertSelection(_ sender: AnyObject) {
         guard let sender = sender as? NSMenuItem else {
             return
         }

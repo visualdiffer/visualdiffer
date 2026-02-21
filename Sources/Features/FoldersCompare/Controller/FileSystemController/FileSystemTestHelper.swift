@@ -6,7 +6,7 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-// swiftlint:disable identifier_name force_unwrapping force_try file_length
+// swiftlint:disable identifier_name force_unwrapping force_try file_length line_length
 #if DEBUG
 
     private let fakeFile = "12345678901234567890"
@@ -158,7 +158,8 @@
             return stringFlags
         }
 
-        @MainActor static func createTestCode(
+        @MainActor
+        static func createTestCode(
             _ view: FoldersOutlineView,
             sessionDiff: SessionDiff
         ) {
@@ -449,4 +450,4 @@
 
 #endif
 
-// swiftlint:enable identifier_name force_unwrapping force_try file_length
+// swiftlint:enable identifier_name force_unwrapping force_try file_length line_length

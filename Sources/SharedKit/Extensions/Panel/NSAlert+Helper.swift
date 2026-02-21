@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 visualdiffer.com
 //
 
-@objc extension NSAlert {
+@objc
+extension NSAlert {
     static func showModalConfirm(
         messageText: String,
         informativeText: String,

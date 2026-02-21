@@ -14,7 +14,9 @@ extension NSWorkspace {
      * @paths array containing absolute file path strings
      * Show the paths on Finder
      */
-    @MainActor @objc func show(inFinder paths: [String]) {
+    @objc
+    @MainActor
+    func show(inFinder paths: [String]) {
         if paths.count > maxFoldersToShowWithoutAlert {
             let confirmOpen = NSAlert.showModalConfirm(
                 messageText: String(format: NSLocalizedString("Are you sure you want to open %lu Finder windows?", comment: ""), paths.count),

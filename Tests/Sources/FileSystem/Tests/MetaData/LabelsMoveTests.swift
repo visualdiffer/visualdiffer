@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable file_length force_unwrapping function_body_length
 final class LabelsMoveTests: BaseTests {
-    @Test func moveFolderWithLabels() throws {
+    @Test
+    func moveFolderWithLabels() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .size, .alignMatchCase, .finderLabel],

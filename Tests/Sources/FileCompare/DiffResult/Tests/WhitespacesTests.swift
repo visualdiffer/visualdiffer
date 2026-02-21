@@ -10,7 +10,8 @@ import Testing
 @testable import VisualDiffer
 
 final class WhitespacesTests: DiffResultBaseTests {
-    @Test func ignoreLeadingWhitespaces() {
+    @Test
+    func ignoreLeadingWhitespaces() {
         let leftText =
             "    leading spaces\n" +
             "  another line"
@@ -34,7 +35,8 @@ final class WhitespacesTests: DiffResultBaseTests {
         assertArrayCount(diffResult.sections, 0)
     }
 
-    @Test func ignoreInternalWhitespaces() {
+    @Test
+    func ignoreInternalWhitespaces() {
         let leftText =
             "   line1\n" +
             "another    text\t\ttabs and  spaces"
@@ -58,7 +60,8 @@ final class WhitespacesTests: DiffResultBaseTests {
         assertArrayCount(diffResult.sections, 1)
     }
 
-    @Test func ignoreAllWhitespaces() {
+    @Test
+    func ignoreAllWhitespaces() {
         let leftText =
             "   line1\n" +
             "another    text\t\ttabs and  spaces\r\n" +
@@ -84,7 +87,8 @@ final class WhitespacesTests: DiffResultBaseTests {
         assertArrayCount(diffResult.sections, 0)
     }
 
-    @Test("Ignore all whitespaces differences but compare EOLs") func ignoreAllWhitespacesThenEol() {
+    @Test("Ignore all whitespaces differences but compare EOLs")
+    func ignoreAllWhitespacesThenEol() {
         let leftText =
             "   line1\n" +
             "another    text\t\ttabs and  spaces\r\n" +
@@ -110,7 +114,8 @@ final class WhitespacesTests: DiffResultBaseTests {
         assertArrayCount(diffResult.sections, 1)
     }
 
-    @Test func ignoreCharacterCase() {
+    @Test
+    func ignoreCharacterCase() {
         let leftText =
             "LINE ONE\n" +
             "Another Line"

@@ -27,7 +27,8 @@ extension NSUserInterfaceItemIdentifier {
 }
 
 extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
-    @objc public func toolbarDefaultItemIdentifiers(_: NSToolbar) -> [NSToolbarItem.Identifier] {
+    @objc
+    public func toolbarDefaultItemIdentifiers(_: NSToolbar) -> [NSToolbarItem.Identifier] {
         [
             .Files.nextDifference,
             .Files.prevDifference,
@@ -40,7 +41,8 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         ]
     }
 
-    @objc public func toolbarAllowedItemIdentifiers(_: NSToolbar) -> [NSToolbarItem.Identifier] {
+    @objc
+    public func toolbarAllowedItemIdentifiers(_: NSToolbar) -> [NSToolbarItem.Identifier] {
         [
             .space,
             .flexibleSpace,
@@ -56,7 +58,8 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         ]
     }
 
-    @objc public func toolbarWillAddItem(_ notification: Notification) {
+    @objc
+    public func toolbarWillAddItem(_ notification: Notification) {
         guard let item = notification.userInfo?["item"] as? NSToolbarItem else {
             return
         }
@@ -67,7 +70,8 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         }
     }
 
-    @objc public func toolbar(_: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar _: Bool) -> NSToolbarItem? {
+    @objc
+    public func toolbar(_: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar _: Bool) -> NSToolbarItem? {
         if itemIdentifier == .Files.copyLines {
             return NSToolbarItem(
                 identifier: itemIdentifier,
@@ -206,7 +210,8 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         return enabled
     }
 
-    @MainActor func updateToolbarButton(_ item: NSToolbarItem) {
+    @MainActor
+    func updateToolbarButton(_ item: NSToolbarItem) {
         if item.itemIdentifier == .Files.wordWrap {
             item.image = NSImage(
                 named: rowHeightCalculator.isWordWrapEnabled ? VDImageNameWordWrapOn : VDImageNameWordWrapOff
@@ -225,7 +230,8 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         }
     }
 
-    @MainActor func updateToolbar() {
+    @MainActor
+    func updateToolbar() {
         guard let items = window?.toolbar?.visibleItems else {
             return
         }

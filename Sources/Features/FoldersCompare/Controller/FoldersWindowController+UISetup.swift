@@ -9,7 +9,8 @@
 import UserNotifications
 
 extension FoldersWindowController {
-    @objc func initAllViews() {
+    @objc
+    func initAllViews() {
         setupWindowLayout()
         setupFoldersLayout()
 
@@ -70,7 +71,8 @@ extension FoldersWindowController {
         ])
     }
 
-    @objc func updateTreeViewFont() {
+    @objc
+    func updateTreeViewFont() {
         let font = treeViewFont()
         leftPanelView.treeView.updateFont(font, reloadData: true)
         rightPanelView.treeView.updateFont(font, reloadData: true)
@@ -111,7 +113,8 @@ extension FoldersWindowController {
     /**
      * Setup elements requiring the sessionDiff is correctly defined, this method must be called after setDocument
      */
-    @objc func setupUIState() {
+    @objc
+    func setupUIState() {
         setupObservers()
 
         comparatorMethod = sessionDiff.comparatorOptions.onlyMethodFlags
@@ -186,7 +189,8 @@ extension FoldersWindowController {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 
-    @objc func updateScopeBar() {
+    @objc
+    func updateScopeBar() {
         let displayOptions = sessionDiff.displayOptions
 
         scopeBar.select(displayOptions, informDelegate: false)
@@ -205,14 +209,16 @@ extension FoldersWindowController {
         consoleSplitter.collapseSubview(at: 1)
     }
 
-    @objc func appAppearanceDidChange(_: Notification) {
+    @objc
+    func appAppearanceDidChange(_: Notification) {
         leftView.reloadData()
         rightView.reloadData()
 
         updateStatusBar()
     }
 
-    @objc func refreshCompareItem(_ notification: Notification) {
+    @objc
+    func refreshCompareItem(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let leftItemOriginal,
               let rightItemOriginal,
@@ -259,7 +265,8 @@ extension FoldersWindowController {
         rightView.reloadData()
     }
 
-    @objc func updateBottomBar(_ view: FoldersOutlineView) {
+    @objc
+    func updateBottomBar(_ view: FoldersOutlineView) {
         if view.side == .left {
             leftPanelView.updateBottomBar()
         } else {
@@ -267,7 +274,8 @@ extension FoldersWindowController {
         }
     }
 
-    @objc func updateStatusBar() {
+    @objc
+    func updateStatusBar() {
         let selInfo = lastUsedView.selectionInfo
         let item = if selInfo.foldersCount == 1,
                       let row = selInfo.foldersIndexes.first,
@@ -286,7 +294,8 @@ extension FoldersWindowController {
         differenceCounters.update(counters: items)
     }
 
-    @objc func fontDidChange(notification: Notification) {
+    @objc
+    func fontDidChange(notification: Notification) {
         guard let userInfo = notification.userInfo,
               let target = userInfo[PrefChangedKey.target] as? PrefChangedKey.Target else {
             return

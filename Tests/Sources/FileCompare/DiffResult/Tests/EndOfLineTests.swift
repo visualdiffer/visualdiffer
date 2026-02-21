@@ -10,7 +10,8 @@ import Testing
 @testable import VisualDiffer
 
 final class EndOfLineTests: DiffResultBaseTests {
-    @Test func endOfLine() {
+    @Test
+    func endOfLine() {
         let eolCarriageMixed = DiffLineComponent.splitLines("line1\rline2\nline3").detectEOL()
         let eolUnix = DiffLineComponent.splitLines("line1\nline2\nline3").detectEOL()
         let eolCRLFMixed = DiffLineComponent.splitLines("line1\r\nline2\nline3").detectEOL()

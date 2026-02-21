@@ -35,7 +35,8 @@ class ColoredFoldersManager: NSObject, @unchecked Sendable {
         return icon(folderName: imageFileName)
     }
 
-    @objc func refresh() {
+    @objc
+    func refresh() {
         queue.async(flags: .barrier) {
             self.foldersColors = Self.buildColoredFolders()
         }

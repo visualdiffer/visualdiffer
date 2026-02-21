@@ -6,7 +6,8 @@
 //  Copyright (c) 2010 visualdiffer.com
 //
 
-@MainActor protocol FilesTableViewDelegate: NSTableViewDelegate {
+@MainActor
+protocol FilesTableViewDelegate: NSTableViewDelegate {
     func setLastUsedViewResponder(_ view: FilesTableView)
     func filesTableView(_ view: FilesTableView, scrollHorizontally leftScroll: Bool)
     func filesTableView(_ view: FilesTableView, doubleClick lickedRow: Int)
@@ -88,7 +89,8 @@ class FilesTableView: NSTableView, @preconcurrency DisplayPositionable, ViewLink
 
     // MARK: Keys and mouse handlers
 
-    @objc func handleDoubleClick(_: AnyObject) {
+    @objc
+    func handleDoubleClick(_: AnyObject) {
         if clickedRow != -1 { // make sure double click was not in table header
             filesTableDelegate?.filesTableView(self, doubleClick: clickedRow)
         }

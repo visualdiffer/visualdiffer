@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable force_unwrapping function_body_length
 final class TagsCreateTests: BaseTests {
-    @Test func createTags() throws {
+    @Test
+    func createTags() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .finderTags, .size, .alignMatchCase],

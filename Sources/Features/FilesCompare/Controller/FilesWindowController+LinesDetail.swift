@@ -7,7 +7,8 @@
 //
 
 extension FilesWindowController: NSTextViewDelegate {
-    @objc func toggleDetails(_: AnyObject) {
+    @objc
+    func toggleDetails(_: AnyObject) {
         let isHidden = !linesDetailView.isHidden
         linesDetailView.isHidden = isHidden
         CommonPrefs.shared.hideFileDiffDetails = isHidden

@@ -10,7 +10,8 @@ import Testing
 @testable import VisualDiffer
 
 final class RefreshInfoTests: BaseTests {
-    @Test func refreshInfoStartComparisonNoExpand() {
+    @Test
+    func refreshInfoStartComparisonNoExpand() {
         let expected = RefreshInfo(
             initState: true,
             expandAllFolders: false
@@ -22,7 +23,8 @@ final class RefreshInfoTests: BaseTests {
         #expect(expected.expandAllFolders == false)
     }
 
-    @Test func refreshInfoExcludeByNameNoExpand() {
+    @Test
+    func refreshInfoExcludeByNameNoExpand() {
         let expected = RefreshInfo(
             initState: false
         )
@@ -33,7 +35,8 @@ final class RefreshInfoTests: BaseTests {
         #expect(expected.expandAllFolders == false)
     }
 
-    @Test func refreshInfoSelectComparisonNoExpand() {
+    @Test
+    func refreshInfoSelectComparisonNoExpand() {
         let expected = RefreshInfo(
             initState: false,
             refreshComparison: true
@@ -45,7 +48,8 @@ final class RefreshInfoTests: BaseTests {
         #expect(expected.expandAllFolders == false)
     }
 
-    @Test func refreshInfoSelectDisplayFlagsNoExpand() {
+    @Test
+    func refreshInfoSelectDisplayFlagsNoExpand() {
         let expected = RefreshInfo(
             initState: false
         )
@@ -55,7 +59,8 @@ final class RefreshInfoTests: BaseTests {
         #expect(expected.expandAllFolders == false)
     }
 
-    @Test func refreshInfoSetBaseFoldersSrcNoExpand() {
+    @Test
+    func refreshInfoSetBaseFoldersSrcNoExpand() {
         let expected = RefreshInfo(
             initState: false,
             realign: true
@@ -69,7 +74,8 @@ final class RefreshInfoTests: BaseTests {
 
     // MARK: - expand
 
-    @Test func refreshInfoStartComparisonExpand() {
+    @Test
+    func refreshInfoStartComparisonExpand() {
         let expected = RefreshInfo(
             initState: true
         )
@@ -79,7 +85,8 @@ final class RefreshInfoTests: BaseTests {
         #expect(expected.expandAllFolders == true)
     }
 
-    @Test func refreshInfoExcludeByNameExpand() {
+    @Test
+    func refreshInfoExcludeByNameExpand() {
         let expected = RefreshInfo(
             initState: false,
             expandAllFolders: true
@@ -90,7 +97,8 @@ final class RefreshInfoTests: BaseTests {
         #expect(expected.expandAllFolders == true)
     }
 
-    @Test func refreshInfoSelectComparisonExpand() {
+    @Test
+    func refreshInfoSelectComparisonExpand() {
         let expected = RefreshInfo(
             initState: false,
             refreshComparison: true,
@@ -103,7 +111,8 @@ final class RefreshInfoTests: BaseTests {
         #expect(expected.expandAllFolders == true)
     }
 
-    @Test func refreshInfoSelectDisplayFlagsExpand() {
+    @Test
+    func refreshInfoSelectDisplayFlagsExpand() {
         let expected = RefreshInfo(
             initState: false,
             expandAllFolders: true
@@ -115,7 +124,8 @@ final class RefreshInfoTests: BaseTests {
         #expect(expected.expandAllFolders == true)
     }
 
-    @Test func refreshInfoSetBaseFoldersSrcExpand() {
+    @Test
+    func refreshInfoSetBaseFoldersSrcExpand() {
         let expected = RefreshInfo(
             initState: false,
             realign: true,

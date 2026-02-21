@@ -9,7 +9,8 @@
 import Foundation
 import Cocoa
 
-@MainActor class PathChooser: NSObject, NSComboBoxDelegate {
+@MainActor
+class PathChooser: NSObject, NSComboBoxDelegate {
     var currentPath: String {
         get {
             comboBox.stringValue
@@ -138,7 +139,8 @@ import Cocoa
         currentPath = arr[0]
     }
 
-    @objc func choosePath(_: AnyObject) {
+    @objc
+    func choosePath(_: AnyObject) {
         let url = URL(filePath: currentPath)
         let selectedUrl = url.selectPath(
             panelTitle: NSLocalizedString("Select File or Folder", comment: ""),
@@ -167,7 +169,8 @@ import Cocoa
         }
     }
 
-    @objc func comboBoxSelectText(_ sender: AnyObject) {
+    @objc
+    func comboBoxSelectText(_ sender: AnyObject) {
         if let comboBox = sender as? NSComboBox {
             dropView.filePath = comboBox.stringValue
         }

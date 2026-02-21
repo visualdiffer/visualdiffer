@@ -14,11 +14,14 @@ private let allId = "AllId"
 private let differencesId = "JustDiffsId"
 private let justMatchesId = "JustMatchesId"
 
-@objc protocol FilesScopeBarDelegate: AnyObject {
-    @objc func filesScopeBar(_ filesScopeBar: FilesScopeBar, action: FilesScopeBarAction)
+@objc
+protocol FilesScopeBarDelegate: AnyObject {
+    @objc
+    func filesScopeBar(_ filesScopeBar: FilesScopeBar, action: FilesScopeBarAction)
 }
 
-@objc enum FilesScopeBarAction: Int {
+@objc
+enum FilesScopeBarAction: Int {
     case showWhitespaces
     case showAllLines
     case showJustMatchingLines
@@ -30,7 +33,8 @@ enum FileScopeGroupOptions: Int {
     case filter
 }
 
-@MainActor class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
+@MainActor
+class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     private var groupItems = [[ScopeBarGroupKey: Any]]()
     private var labels = [String: String]()
 
@@ -66,7 +70,8 @@ enum FileScopeGroupOptions: Int {
         fontSize = 11.0
     }
 
-    @objc func initScopeBar(_ actionDelegate: FilesScopeBarDelegate) {
+    @objc
+    func initScopeBar(_ actionDelegate: FilesScopeBarDelegate) {
         showLinesFilter = DiffLine.Visibility.loadFromUserDefaults()
         showWhitespaces = CommonPrefs.shared.bool(forKey: .FileScope.showWhitespaces)
         self.actionDelegate = actionDelegate

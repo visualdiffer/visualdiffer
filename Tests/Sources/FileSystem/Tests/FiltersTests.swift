@@ -10,7 +10,8 @@ import Testing
 @testable import VisualDiffer
 
 final class FiltersTests: BaseTests {
-    @Test func filterFileNameIgnoreCase() {
+    @Test
+    func filterFileNameIgnoreCase() {
         let root = CompareItem(
             path: "/fakePath",
             attrs: [.type: FileAttributeType.typeDirectory],
@@ -28,7 +29,8 @@ final class FiltersTests: BaseTests {
         #expect(item.evaluate(filter: NSPredicate(format: filter)))
     }
 
-    @Test() func filterFileNameCaseSensitive() {
+    @Test
+    func filterFileNameCaseSensitive() {
         let root = CompareItem(
             path: "/fakePath",
             attrs: [.type: FileAttributeType.typeDirectory],
@@ -46,7 +48,8 @@ final class FiltersTests: BaseTests {
         #expect(item.evaluate(filter: NSPredicate(format: filter)) == false)
     }
 
-    @Test() func filterPathIgnoreCase() {
+    @Test
+    func filterPathIgnoreCase() {
         let root = CompareItem(
             path: "/fakePath",
             attrs: [.type: FileAttributeType.typeDirectory],
@@ -70,7 +73,8 @@ final class FiltersTests: BaseTests {
         #expect(item.evaluate(filter: NSPredicate(format: filter)))
     }
 
-    @Test() func filterPathCaseSensitive() {
+    @Test
+    func filterPathCaseSensitive() {
         let root = CompareItem(
             path: "/fakePath",
             attrs: [.type: FileAttributeType.typeDirectory],
@@ -94,7 +98,8 @@ final class FiltersTests: BaseTests {
         #expect(item.evaluate(filter: NSPredicate(format: filter)) == false)
     }
 
-    @Test func filterFileSize() {
+    @Test
+    func filterFileSize() {
         let attributes: [FileAttributeKey: Any] = [
             .size: NSNumber(value: 5),
         ]
@@ -109,7 +114,8 @@ final class FiltersTests: BaseTests {
         #expect(item.evaluate(filter: NSPredicate(format: filter)))
     }
 
-    @Test func filterModificationDate() throws {
+    @Test
+    func filterModificationDate() throws {
         let attributes: [FileAttributeKey: Any] = try [
             .modificationDate: buildDate("2012-05-05 11: 00: 11 +0000"),
         ]

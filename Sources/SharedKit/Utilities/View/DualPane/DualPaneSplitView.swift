@@ -39,7 +39,8 @@ class DualPaneSplitView: NSSplitView {
         )
     }
 
-    @objc func subviewResized(_ notification: Notification) {
+    @objc
+    func subviewResized(_ notification: Notification) {
         if hasSubviewCollapsed {
             return
         }
@@ -63,7 +64,8 @@ class DualPaneSplitView: NSSplitView {
         return false
     }
 
-    @objc func toggleSubview(at index: Int) {
+    @objc
+    func toggleSubview(at index: Int) {
         if hasSubviewCollapsed {
             expandSubview(at: index)
         } else {
@@ -71,7 +73,8 @@ class DualPaneSplitView: NSSplitView {
         }
     }
 
-    @objc func collapseSubview(at index: Int) {
+    @objc
+    func collapseSubview(at index: Int) {
         if hasSubviewCollapsed {
             return
         }
@@ -91,7 +94,8 @@ class DualPaneSplitView: NSSplitView {
         adjustSubviews()
     }
 
-    @objc func expandSubview(at index: Int) {
+    @objc
+    func expandSubview(at index: Int) {
         if !hasSubviewCollapsed {
             return
         }

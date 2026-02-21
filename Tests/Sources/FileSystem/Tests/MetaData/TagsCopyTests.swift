@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable file_length force_unwrapping function_body_length
 final class TagsCopyTests: BaseTests {
-    @Test func copyFileWithTags() throws {
+    @Test
+    func copyFileWithTags() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .finderTags, .size, .alignMatchCase],
@@ -297,7 +298,8 @@ final class TagsCopyTests: BaseTests {
         }
     }
 
-    @Test func copyFolderWithTags() throws {
+    @Test
+    func copyFolderWithTags() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .finderTags, .size, .alignMatchCase],

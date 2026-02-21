@@ -7,7 +7,8 @@
 //
 
 extension FoldersWindowController {
-    @objc func openSessionSettingsSheet(_: AnyObject) {
+    @objc
+    func openSessionSettingsSheet(_: AnyObject) {
         guard let window else {
             return
         }
@@ -20,7 +21,8 @@ extension FoldersWindowController {
         }
     }
 
-    @objc func openFileFilters(_: AnyObject) {
+    @objc
+    func openFileFilters(_: AnyObject) {
         guard let window else {
             return
         }

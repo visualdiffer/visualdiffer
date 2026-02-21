@@ -240,7 +240,8 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         }
     }
 
-    @objc func closeSheet(_ sender: AnyObject) {
+    @objc
+    func closeSheet(_ sender: AnyObject) {
         guard let sender = sender as? NSButton,
               let window,
               let sheetParent = window.sheetParent else {
@@ -250,7 +251,8 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         sheetParent.endSheet(window, returnCode: tag)
     }
 
-    @objc func updateCount(_: AnyObject?) {
+    @objc
+    func updateCount(_: AnyObject?) {
         includesFilteredFiles = fileSummary.checkboxFilteredFiles.state == .on
         recalcTotals(includesFilteredFiles)
 
@@ -259,7 +261,8 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         fileSummary.sizeTotalText.stringValue = FileSizeFormatter.default.string(from: NSNumber(value: totalSize)) ?? "0"
     }
 
-    @objc func updateSuppressWarning(_: AnyObject) {
+    @objc
+    func updateSuppressWarning(_: AnyObject) {
         guard let prefName = executor.prefName else {
             return
         }
@@ -268,7 +271,8 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         CommonPrefs.shared.set(isSuppressed, forKey: prefName)
     }
 
-    @objc func updateCopyMetadata(_: AnyObject?) {
+    @objc
+    func updateCopyMetadata(_: AnyObject?) {
         let status = fileSummary.checkboxCopyMetadataOnly.state == .on
         fileOperationManager.copyFinderMetadataOnly = status
     }

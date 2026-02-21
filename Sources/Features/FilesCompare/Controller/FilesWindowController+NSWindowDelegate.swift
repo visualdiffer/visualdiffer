@@ -27,7 +27,8 @@ extension FilesWindowController: NSWindowDelegate {
         [proposedOptions, .autoHideToolbar]
     }
 
-    @objc func resetStatusBarMessage(_: AnyObject?) {
+    @objc
+    func resetStatusBarMessage(_: AnyObject?) {
         guard let diffResult else {
             return
         }

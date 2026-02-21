@@ -30,7 +30,8 @@ class SaveFileAccessoryView: NSView {
         }
     }
 
-    @objc convenience init(withLeftChecked leftChecked: Bool, rightChecked: Bool) {
+    @objc
+    convenience init(withLeftChecked leftChecked: Bool, rightChecked: Bool) {
         self.init(frame: NSRect(x: 0, y: 0, width: 100, height: 60))
         saveLeft = leftChecked
         saveRight = rightChecked

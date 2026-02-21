@@ -6,7 +6,8 @@
 //  Copyright (c) 2012 visualdiffer.com
 //
 
-@objc class PreferredEditorPopupCell: NSPopUpButtonCell {
+@objc
+class PreferredEditorPopupCell: NSPopUpButtonCell {
     override init(textCell stringValue: String, pullsDown pullDown: Bool) {
         super.init(textCell: stringValue, pullsDown: pullDown)
         setupPopUpCell()
@@ -65,7 +66,8 @@
         item.image = image
     }
 
-    @objc func choosePreferredEditor(_: AnyObject) {
+    @objc
+    func choosePreferredEditor(_: AnyObject) {
         let openPanel = NSOpenPanel()
             .openApplication(title: NSLocalizedString("Select Preferred Editor", comment: ""))
 
@@ -80,7 +82,8 @@
         }
     }
 
-    @objc func removePreferredEditor(_: AnyObject) {
+    @objc
+    func removePreferredEditor(_: AnyObject) {
         UserDefaults.standard.removeObject(forKey: NSMenu.preferredEditorPrefName)
         setupPopUpCell()
     }

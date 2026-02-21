@@ -14,7 +14,8 @@ public struct AlignConfig {
 }
 
 // Both files are invalid but their path string contains a valid value
-@inline(__always) func bothInvalidWithPath(_ lfs: CompareItem, _ rfs: CompareItem) -> Bool {
+@inline(__always)
+func bothInvalidWithPath(_ lfs: CompareItem, _ rfs: CompareItem) -> Bool {
     !lfs.isValidFile && !rfs.isValidFile && (lfs.path != nil && rfs.path != nil)
 }
 

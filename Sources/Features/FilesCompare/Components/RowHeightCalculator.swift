@@ -6,7 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@MainActor protocol RowHeightDataSource: AnyObject {
+@MainActor
+protocol RowHeightDataSource: AnyObject {
     var lineNumberWidth: CGFloat { get }
     var tableFont: NSFont { get }
 
@@ -23,7 +24,8 @@ private let fontSizeExtraPoint: CGFloat = 4.0
 private let horizontalPadding: CGFloat = 12.0
 private let verticalPadding: CGFloat = 4.0
 
-@MainActor class RowHeightCalculator {
+@MainActor
+class RowHeightCalculator {
     private var heightCache: [Int: CGFloat] = [:]
 
     weak var dataSource: RowHeightDataSource?

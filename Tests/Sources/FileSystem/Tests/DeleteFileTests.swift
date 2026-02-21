@@ -14,7 +14,8 @@ final class DeleteFileTests: BaseTests {
     /**
      * Delete folder with files on right: there is an orphan file and a newer file
      */
-    @Test func deleteCreatingOrphan() throws {
+    @Test
+    func deleteCreatingOrphan() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -177,7 +178,8 @@ final class DeleteFileTests: BaseTests {
      * Delete the folder on left including filtered files
      * Folder is orphan
      */
-    @Test func deleteOrphanWithFiltered() throws {
+    @Test
+    func deleteOrphanWithFiltered() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -339,7 +341,8 @@ final class DeleteFileTests: BaseTests {
      * Delete the folder on left, filtered files remain
      * Folder is orphan
      */
-    @Test func deleteOrphanLeaveFiltered() throws {
+    @Test
+    func deleteOrphanLeaveFiltered() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -519,7 +522,8 @@ final class DeleteFileTests: BaseTests {
         }
     }
 
-    @Test func deleteFilesPresentOnBothSides() throws {
+    @Test
+    func deleteFilesPresentOnBothSides() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -803,7 +807,8 @@ final class DeleteFileTests: BaseTests {
         }
     }
 
-    @Test func deleteDontFollowSymLink() throws {
+    @Test
+    func deleteDontFollowSymLink() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -936,7 +941,8 @@ final class DeleteFileTests: BaseTests {
         }
     }
 
-    @Test func deleteFolderCreatingOnlyOrphans() throws {
+    @Test
+    func deleteFolderCreatingOnlyOrphans() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,

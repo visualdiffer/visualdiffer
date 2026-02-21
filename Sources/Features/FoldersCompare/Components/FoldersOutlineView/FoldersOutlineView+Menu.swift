@@ -6,23 +6,40 @@
 //  Copyright (c) 2010 visualdiffer.com
 //
 
-@objc protocol FoldersOutlineViewContextMenu: NSObjectProtocol {
-    @MainActor func compareFiles(_ sender: AnyObject?)
-    @MainActor func compareFolders(_ sender: AnyObject?)
-    @MainActor func copyFileNames(_ sender: AnyObject?)
-    @MainActor func copyFiles(_ sender: AnyObject?)
-    @MainActor func copyFullPaths(_ sender: AnyObject?)
-    @MainActor func deleteFiles(_ sender: AnyObject?)
-    @MainActor func excludeByExt(_ sender: AnyObject?)
-    @MainActor func excludeByName(_ sender: AnyObject?)
-    @MainActor func expandSelectedSubfolders(_ sender: AnyObject?)
-    @MainActor func moveFiles(_ sender: AnyObject?)
-    @MainActor func popupOpenWithApp(_ sender: AnyObject?)
-    @MainActor func setAsBaseFolder(_ sender: AnyObject?)
-    @MainActor func setAsBaseFolderOtherSide(_ sender: AnyObject?)
-    @MainActor func setAsBaseFoldersBothSides(_ sender: AnyObject?)
-    @MainActor func showInFinder(_ sender: AnyObject?)
-    @MainActor func togglePreviewPanel(_ sender: AnyObject?)
+@objc
+protocol FoldersOutlineViewContextMenu: NSObjectProtocol {
+    @MainActor
+    func compareFiles(_ sender: AnyObject?)
+    @MainActor
+    func compareFolders(_ sender: AnyObject?)
+    @MainActor
+    func copyFileNames(_ sender: AnyObject?)
+    @MainActor
+    func copyFiles(_ sender: AnyObject?)
+    @MainActor
+    func copyFullPaths(_ sender: AnyObject?)
+    @MainActor
+    func deleteFiles(_ sender: AnyObject?)
+    @MainActor
+    func excludeByExt(_ sender: AnyObject?)
+    @MainActor
+    func excludeByName(_ sender: AnyObject?)
+    @MainActor
+    func expandSelectedSubfolders(_ sender: AnyObject?)
+    @MainActor
+    func moveFiles(_ sender: AnyObject?)
+    @MainActor
+    func popupOpenWithApp(_ sender: AnyObject?)
+    @MainActor
+    func setAsBaseFolder(_ sender: AnyObject?)
+    @MainActor
+    func setAsBaseFolderOtherSide(_ sender: AnyObject?)
+    @MainActor
+    func setAsBaseFoldersBothSides(_ sender: AnyObject?)
+    @MainActor
+    func showInFinder(_ sender: AnyObject?)
+    @MainActor
+    func togglePreviewPanel(_ sender: AnyObject?)
 }
 
 public extension FoldersOutlineView {

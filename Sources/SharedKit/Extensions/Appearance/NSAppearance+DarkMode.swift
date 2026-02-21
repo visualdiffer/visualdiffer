@@ -21,7 +21,9 @@ extension NSAppearance {
         return UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
     }
 
-    @objc @MainActor static func change() {
+    @objc
+    @MainActor
+    static func change() {
         if #available(macOS 10.14, *) {
             switch UserDefaults.standard.integer(forKey: "appAppearance") {
             case 1:

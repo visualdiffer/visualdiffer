@@ -8,14 +8,16 @@
 
 import os.log
 
-@MainActor protocol HistoryControllerDelegate: AnyObject {
+@MainActor
+protocol HistoryControllerDelegate: AnyObject {
     func history(controller: HistoryController, selectedEntities entities: [HistoryEntity])
     func history(controller: HistoryController, doubleClickedEntity entity: HistoryEntity?)
 
     func history(controller: HistoryController, droppedPaths paths: [URL]) -> Bool
 }
 
-@MainActor class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, TableViewCommonDelegate {
+@MainActor
+class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, TableViewCommonDelegate {
     lazy var scrollView: NSScrollView = {
         let view = NSScrollView(frame: .zero)
 
@@ -84,13 +86,16 @@ import os.log
         return menu
     }
 
-    @MainActor func setupResults() {
+    @MainActor
+    func setupResults() {
         results.delegate = resultsControllerDelegate
         try? results.performFetch()
         tableView.reloadData()
     }
 
-    @objc @MainActor func handleDoubleClick(_: AnyObject) {
+    @objc
+    @MainActor
+    func handleDoubleClick(_: AnyObject) {
         let row = tableView.clickedRow
 
         // make sure double click was not in table header
@@ -202,7 +207,8 @@ import os.log
 
     // MARK: - Private methods
 
-    @MainActor private func removeEntity(indexes: IndexSet) {
+    @MainActor
+    private func removeEntity(indexes: IndexSet) {
         if indexes.isEmpty {
             return
         }
@@ -222,11 +228,15 @@ import os.log
         }
     }
 
-    @objc @MainActor func removeHistory(_: AnyObject) {
+    @objc
+    @MainActor
+    func removeHistory(_: AnyObject) {
         removeEntity(indexes: tableView.selectedRowIndexes)
     }
 
-    @objc @MainActor func selectInvalidPaths(_: AnyObject) {
+    @objc
+    @MainActor
+    func selectInvalidPaths(_: AnyObject) {
         guard let fetchedObjects = results.fetchedObjects else {
             return
         }
@@ -245,7 +255,8 @@ import os.log
         tableView.window?.makeFirstResponder(tableView)
     }
 
-    @MainActor func filterFor(pattern: String?) {
+    @MainActor
+    func filterFor(pattern: String?) {
         if let pattern, !pattern.isEmpty {
             resultsControllerDelegate.pattern = pattern
             results.fetchRequest.predicate = NSPredicate(format: "(leftPath contains[cd] %@) OR (rightPath contains[cd] %@)", pattern, pattern)

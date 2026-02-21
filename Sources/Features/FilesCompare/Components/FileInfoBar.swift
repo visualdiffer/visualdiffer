@@ -152,7 +152,8 @@ class FileInfoBar: NSView {
 
     // MARK: - Actions methods
 
-    @objc func encodingAction(_: AnyObject) {
+    @objc
+    func encodingAction(_: AnyObject) {
         if let delegate,
            let encoding {
             delegate.fileInfoBar(self, changedEncoding: encoding)

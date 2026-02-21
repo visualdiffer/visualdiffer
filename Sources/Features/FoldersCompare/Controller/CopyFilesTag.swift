@@ -26,7 +26,8 @@ enum CopyFilesTag: Int {
 
     // swiftlint:enable void_function_in_ternary
 
-    @MainActor static func isCopyFinderMetadataOnly(sender: AnyObject?) -> Bool {
+    @MainActor
+    static func isCopyFinderMetadataOnly(sender: AnyObject?) -> Bool {
         let tag = if let menuItem = sender as? NSMenuItem {
             CopyFilesTag(rawValue: menuItem.tag)
         } else if let toolbarItem = sender as? NSToolbarItem {

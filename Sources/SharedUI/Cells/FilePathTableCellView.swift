@@ -7,7 +7,8 @@
 //
 
 class FilePathTableCellView: NSTableCellView {
-    @objc convenience init(identifier: NSUserInterfaceItemIdentifier) {
+    @objc
+    convenience init(identifier: NSUserInterfaceItemIdentifier) {
         self.init(frame: .zero)
         self.identifier = identifier
     }

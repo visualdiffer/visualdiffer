@@ -197,7 +197,8 @@ class ProgressIndicatorController: NSWindowController {
 
     // MARK: - Start/Stop, wait and running
 
-    @objc func stop(_ sender: AnyObject) {
+    @objc
+    func stop(_ sender: AnyObject) {
         guard let sender = sender as? NSButton else {
             return
         }

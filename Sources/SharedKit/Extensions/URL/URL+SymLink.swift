@@ -46,7 +46,8 @@ extension URL {
     ///   - `userSelectOtherPath`: `true` if the selected path differs from the passed one
     ///   -  Returns `nil` if the user doesn't select any path
     ///
-    @MainActor func resolveSymLinksAndAliases(
+    @MainActor
+    func resolveSymLinksAndAliases(
         chooseFiles: Bool,
         chooseDirectories: Bool,
         panelTitle: String,

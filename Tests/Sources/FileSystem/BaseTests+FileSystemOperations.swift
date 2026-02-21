@@ -11,6 +11,7 @@ import Foundation
 public extension BaseTests {
     func appendFolder(_ path: String, _ isFolder: Bool = true, functionName: String = #function) -> URL {
         rootDir
+            // swiftlint:disable:next line_length
             .appending(path: functionName.trimmingCharacters(in: CharacterSet(charactersIn: "()")), directoryHint: .isDirectory)
             .appending(path: path, directoryHint: isFolder ? .isDirectory : .notDirectory)
     }

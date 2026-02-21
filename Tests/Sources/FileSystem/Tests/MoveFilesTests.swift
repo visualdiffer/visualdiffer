@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable file_length force_unwrapping function_body_length
 final class MoveFilesTests: BaseTests {
-    @Test func moveFilesPresentOnBothSidesWithFiltered() throws {
+    @Test
+    func moveFilesPresentOnBothSidesWithFiltered() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -299,7 +300,8 @@ final class MoveFilesTests: BaseTests {
         }
     }
 
-    @Test func moveFilesPresentOnBothSides() throws {
+    @Test
+    func moveFilesPresentOnBothSides() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -488,7 +490,8 @@ final class MoveFilesTests: BaseTests {
         }
     }
 
-    @Test func moveFilesOrphansNoFiltered() throws {
+    @Test
+    func moveFilesOrphansNoFiltered() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -747,7 +750,8 @@ final class MoveFilesTests: BaseTests {
         }
     }
 
-    @Test func moveFilesAllFilesFiltered() throws {
+    @Test
+    func moveFilesAllFilesFiltered() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -965,7 +969,8 @@ final class MoveFilesTests: BaseTests {
         }
     }
 
-    @Test func moveFilesOnlyMatches() throws {
+    @Test
+    func moveFilesOnlyMatches() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -1140,7 +1145,8 @@ final class MoveFilesTests: BaseTests {
         }
     }
 
-    @Test func moveOrphan() throws {
+    @Test
+    func moveOrphan() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -1315,7 +1321,8 @@ final class MoveFilesTests: BaseTests {
         }
     }
 
-    @Test func moveDontFollowSymLink() throws {
+    @Test
+    func moveDontFollowSymLink() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -1549,7 +1556,8 @@ final class MoveFilesTests: BaseTests {
         }
     }
 
-    @Test func moveFailure() throws {
+    @Test
+    func moveFailure() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -1713,7 +1721,8 @@ final class MoveFilesTests: BaseTests {
         }
     }
 
-    @Test func movePreserveFolderTimestamp() throws {
+    @Test
+    func movePreserveFolderTimestamp() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -1856,7 +1865,8 @@ final class MoveFilesTests: BaseTests {
         }
     }
 
-    @Test(.disabled("BUG 0000230: Orphan file not colored correctly after move: Not yet fixed, this test fails")) func moveMatchFileBecomeFiltered() throws {
+    @Test(.disabled("BUG 0000230: Orphan file not colored correctly after move: Not yet fixed, this test fails"))
+    func moveMatchFileBecomeFiltered() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .size, .alignMatchCase],

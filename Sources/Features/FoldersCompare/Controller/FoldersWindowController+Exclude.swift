@@ -7,7 +7,8 @@
 //
 
 extension FoldersWindowController {
-    @objc func excludeByName(_: AnyObject?) {
+    @objc
+    func excludeByName(_: AnyObject?) {
         var arr = [String]()
 
         if let exclusionFileFilters = sessionDiff.exclusionFileFilters,
@@ -38,7 +39,8 @@ extension FoldersWindowController {
         reloadAll(RefreshInfo(initState: false))
     }
 
-    @objc func excludeByExt(_: AnyObject?) {
+    @objc
+    func excludeByExt(_: AnyObject?) {
         var arr = [String]()
 
         if let exclusionFileFilters = sessionDiff.exclusionFileFilters,

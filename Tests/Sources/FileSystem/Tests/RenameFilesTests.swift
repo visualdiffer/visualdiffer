@@ -9,9 +9,10 @@
 import Testing
 @testable import VisualDiffer
 
-// swiftlint:disable file_length force_unwrapping function_body_length
+// swiftlint:disable file_length function_body_length
 final class RenameFilesTests: BaseTests {
-    @Test func renameFileOrphan() throws {
+    @Test
+    func renameFileOrphan() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp],
@@ -104,7 +105,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFileOrphanToOrphan() throws {
+    @Test
+    func renameFileOrphanToOrphan() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp],
@@ -258,7 +260,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFileOrphanToMatching() throws {
+    @Test
+    func renameFileOrphanToMatching() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp],
@@ -403,7 +406,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFileMismatch() throws {
+    @Test
+    func renameFileMismatch() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp],
@@ -565,7 +569,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFileMatchingToMatching() throws {
+    @Test
+    func renameFileMatchingToMatching() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp],
@@ -719,7 +724,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFileOrphanToOrphan_OnlyOrphan_Right() throws {
+    @Test
+    func renameFileOrphanToOrphan_OnlyOrphan_Right() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.size, .contentTimestamp],
@@ -856,7 +862,8 @@ final class RenameFilesTests: BaseTests {
 
     // MARK: Folders rename tests
 
-    @Test func renameFolderFromBothSidesToOrphan() throws {
+    @Test
+    func renameFolderFromBothSidesToOrphan() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp],
@@ -1047,7 +1054,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFolderOrphanToOrphan() throws {
+    @Test
+    func renameFolderOrphanToOrphan() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp],
@@ -1355,7 +1363,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFolderMatchingToMatching() throws {
+    @Test
+    func renameFolderMatchingToMatching() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp],
@@ -1662,7 +1671,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFolder_NoOrphan_Left() throws {
+    @Test
+    func renameFolder_NoOrphan_Left() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.size, .contentTimestamp],
@@ -1855,7 +1865,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFolderOrphanToOrphan_OnlyMismatches_Right() throws {
+    @Test
+    func renameFolderOrphanToOrphan_OnlyMismatches_Right() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.size, .contentTimestamp],
@@ -2144,7 +2155,8 @@ final class RenameFilesTests: BaseTests {
         }
     }
 
-    @Test func renameFolderOrphanToMatching_OnlyMatches_Right_ShowEmptyFolder() throws {
+    @Test
+    func renameFolderOrphanToMatching_OnlyMatches_Right_ShowEmptyFolder() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.size, .contentTimestamp],
@@ -2293,4 +2305,4 @@ final class RenameFilesTests: BaseTests {
     }
 }
 
-// swiftlint:enable file_length force_unwrapping function_body_length
+// swiftlint:enable file_length function_body_length

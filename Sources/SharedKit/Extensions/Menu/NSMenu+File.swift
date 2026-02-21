@@ -14,7 +14,8 @@ enum AppNameAttributeKey: String {
 extension NSMenu {
     static let preferredEditorPrefName = "preferredEditor"
 
-    @objc static func appsMenuForFile(
+    @objc
+    static func appsMenuForFile(
         _ path: URL?,
         openAppAction: Selector,
         openOtherAppAction: Selector
@@ -30,7 +31,8 @@ extension NSMenu {
         return appsMenu
     }
 
-    @objc func addMenuItemsForFile(
+    @objc
+    func addMenuItemsForFile(
         _ path: URL?,
         openAppAction: Selector,
         openOtherAppAction: Selector

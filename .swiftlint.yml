@@ -1,7 +1,3 @@
-excluded:
-  - Sources/*/FileSystemTestHelper.swift
-  - Tests/*/*.swift
-
 opt_in_rules:
   - array_init
   - attributes
@@ -87,14 +83,6 @@ type_name:
 
 analyzer_rules:
   - unused_import
-
-attributes:
-  always_on_same_line:
-    - "@inline"
-    - "@MainActor"
-    - "@objc"
-    - "@nonobjc"
-    - "@Test"
 
 force_cast: warning
 force_try: warning

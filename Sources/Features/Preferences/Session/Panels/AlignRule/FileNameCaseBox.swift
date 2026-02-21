@@ -43,7 +43,8 @@ class FileNameCaseBox: PreferencesBox {
         ])
     }
 
-    @objc func comparisonAlignChange(_: AnyObject) {
+    @objc
+    func comparisonAlignChange(_: AnyObject) {
         guard let item = alignPopup.selectedItem else {
             return
         }

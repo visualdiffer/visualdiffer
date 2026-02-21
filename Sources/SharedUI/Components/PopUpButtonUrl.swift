@@ -37,7 +37,8 @@ class PopUpButtonUrl: NSPopUpButton {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func fill(_ documentUrls: [URL]) {
+    @objc
+    func fill(_ documentUrls: [URL]) {
         let dict = uniq(documentUrls: documentUrls)
 
         // iterate documentURLs instead of dictionary because order is not preserved in dictionary
@@ -64,7 +65,8 @@ class PopUpButtonUrl: NSPopUpButton {
         }
     }
 
-    @objc func clear() {
+    @objc
+    func clear() {
         // leave the button title and remove all other menu items
         for i in stride(from: numberOfItems - 1, through: 1, by: -1) {
             removeItem(at: i)

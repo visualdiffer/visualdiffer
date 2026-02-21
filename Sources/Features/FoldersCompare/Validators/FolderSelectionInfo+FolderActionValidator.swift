@@ -6,7 +6,8 @@
 //  Copyright (c) 2021 visualdiffer.com
 //
 
-@MainActor extension FolderSelectionInfo {
+@MainActor
+extension FolderSelectionInfo {
     func validateSetAsBaseFolder() -> Bool {
         foldersCount == 1
     }

@@ -16,7 +16,6 @@ open class BaseTests {
     public var rootDir: URL
     public var dateBuilder = DateBuilder()
     public var className: String
-    // swiftlint:disable:next line_length
     public let defaultPredicate = NSPredicate(format: "fileName == \".DS_Store\" OR fileName LIKE \"CVS\" OR fileName LIKE \".svn\" OR fileName LIKE \".git\" OR fileName LIKE \".hg\" OR fileName LIKE \".bzr\" OR fileName LIKE \"*~\" OR fileName ENDSWITH \".zip\" OR fileName ENDSWITH \".gz\" OR fileName ENDSWITH \".tgz\" OR fileName ENDSWITH \".tar\"")
     public let fm = FileManager.default
 

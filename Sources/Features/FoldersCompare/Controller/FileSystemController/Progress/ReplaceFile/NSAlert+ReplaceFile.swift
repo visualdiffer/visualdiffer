@@ -6,7 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@MainActor private struct ViewItemConfiguration {
+@MainActor
+private struct ViewItemConfiguration {
     let key: ReplaceFileAttributeKey
     let view: NSTextField
     let indent: CGFloat
@@ -162,7 +163,8 @@ extension NSAlert {
     }
 }
 
-@MainActor private func createPathTextField() -> NSTextField {
+@MainActor
+private func createPathTextField() -> NSTextField {
     let view = NSTextField.hintWithTitle("")
 
     view.lineBreakMode = .byTruncatingMiddle
@@ -171,7 +173,8 @@ extension NSAlert {
     return view
 }
 
-@MainActor private func createNumberTextField() -> NSTextField {
+@MainActor
+private func createNumberTextField() -> NSTextField {
     let formatter = NumberFormatter()
     formatter.numberStyle = .decimal
 
@@ -182,7 +185,8 @@ extension NSAlert {
     return view
 }
 
-@MainActor private func createDateTextField() -> NSTextField {
+@MainActor
+private func createDateTextField() -> NSTextField {
     let formatter = DateFormatter()
     formatter.dateStyle = .short
     formatter.timeStyle = .medium

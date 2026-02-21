@@ -7,23 +7,28 @@
 //
 
 extension FilesWindowController {
-    @objc func previousDifference(_: AnyObject) {
+    @objc
+    func previousDifference(_: AnyObject) {
         moveToDifference(false, showAnim: true)
     }
 
-    @objc func nextDifference(_: AnyObject) {
+    @objc
+    func nextDifference(_: AnyObject) {
         moveToDifference(true, showAnim: true)
     }
 
-    @objc func previousDifferenceFiles(_: AnyObject) {
+    @objc
+    func previousDifferenceFiles(_: AnyObject) {
         navigateToFile(false)
     }
 
-    @objc func nextDifferenceFiles(_: AnyObject) {
+    @objc
+    func nextDifferenceFiles(_: AnyObject) {
         navigateToFile(true)
     }
 
-    @objc func moveToDifference(_ gotoNext: Bool, showAnim: Bool) {
+    @objc
+    func moveToDifference(_ gotoNext: Bool, showAnim: Bool) {
         let currentPos = lastUsedView.selectedRow
         var didWrap = false
 

@@ -6,7 +6,8 @@
 //  Copyright (c) 2020 visualdiffer.com
 //
 
-@objc extension FoldersOutlineView {
+@objc
+extension FoldersOutlineView {
     func copySelectedAsFileNames() {
         var paths = [String]()
 

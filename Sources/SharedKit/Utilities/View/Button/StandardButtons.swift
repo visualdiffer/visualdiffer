@@ -9,11 +9,13 @@
 import Cocoa
 import Foundation
 
-@objc class StandardButtons: NSStackView {
+@objc
+class StandardButtons: NSStackView {
     @objc private(set) var primaryButton: NSButton
     @objc private(set) var secondaryButton: NSButton
 
-    @objc init(
+    @objc
+    init(
         primaryTitle: String,
         secondaryTitle: String,
         target: Any?,

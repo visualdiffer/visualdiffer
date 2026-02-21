@@ -7,7 +7,8 @@
 //
 
 extension FilesWindowController {
-    @objc func jumpToLine(_: AnyObject) {
+    @objc
+    func jumpToLine(_: AnyObject) {
         guard let window,
               let currentDiffResult else {
             return

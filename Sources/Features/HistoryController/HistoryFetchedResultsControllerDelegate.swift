@@ -10,13 +10,15 @@ import os.log
 
 typealias IndexPathPair = (IndexPath, IndexPath?)
 
-@objc class HistoryFetchedResultsControllerDelegate: NSObject, @preconcurrency NSFetchedResultsControllerDelegate {
+@objc
+class HistoryFetchedResultsControllerDelegate: NSObject, @preconcurrency NSFetchedResultsControllerDelegate {
     private(set) var tableView: NSTableView
     @objc var pattern: String?
 
     private var objectChanges = [NSFetchedResultsChangeType: [IndexPathPair]]()
 
-    @objc init(tableView: NSTableView) {
+    @objc
+    init(tableView: NSTableView) {
         self.tableView = tableView
 
         super.init()
@@ -26,7 +28,8 @@ typealias IndexPathPair = (IndexPath, IndexPath?)
         objectChanges.removeAll()
     }
 
-    @MainActor func controllerDidChangeContent(_ controller: NSFetchedResultsController<any NSFetchRequestResult>) {
+    @MainActor
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<any NSFetchRequestResult>) {
         tableView.beginUpdates()
 
         onContentInserted(controller, array: objectChanges[.insert])
@@ -84,7 +87,8 @@ typealias IndexPathPair = (IndexPath, IndexPath?)
         objectChanges[type] = changeSet
     }
 
-    @MainActor func onContentInserted(
+    @MainActor
+    func onContentInserted(
         _: NSFetchedResultsController<any NSFetchRequestResult>,
         array: [IndexPathPair]?
     ) {
@@ -102,7 +106,8 @@ typealias IndexPathPair = (IndexPath, IndexPath?)
         )
     }
 
-    @MainActor func onContentUpdated(
+    @MainActor
+    func onContentUpdated(
         _ controller: NSFetchedResultsController<any NSFetchRequestResult>,
         array: [IndexPathPair]?
     ) {
@@ -122,7 +127,8 @@ typealias IndexPathPair = (IndexPath, IndexPath?)
         }
     }
 
-    @MainActor func onContentDeleted(
+    @MainActor
+    func onContentDeleted(
         _: NSFetchedResultsController<any NSFetchRequestResult>,
         array: [IndexPathPair]?
     ) {
@@ -140,7 +146,8 @@ typealias IndexPathPair = (IndexPath, IndexPath?)
         )
     }
 
-    @MainActor func onContentMoved(
+    @MainActor
+    func onContentMoved(
         _: NSFetchedResultsController<any NSFetchRequestResult>,
         array: [IndexPathPair]?
     ) {

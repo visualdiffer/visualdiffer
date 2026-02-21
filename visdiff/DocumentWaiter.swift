@@ -51,7 +51,8 @@ class DocumentWaiter: NSObject, SBApplicationDelegate {
         )
     }
 
-    @objc func exitFromApp(_ notification: NSNotification) {
+    @objc
+    func exitFromApp(_ notification: NSNotification) {
         let uuidNotification = notification.object as? String
 
         if uuid == uuidNotification {

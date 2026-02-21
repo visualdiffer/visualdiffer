@@ -9,7 +9,8 @@
 let noStringEncoding = String.Encoding(rawValue: UInt.max - 1)
 
 extension CFStringEncoding {
-    @inline(__always) var stringEncoding: String.Encoding? {
+    @inline(__always)
+    var stringEncoding: String.Encoding? {
         let nsEncoding = CFStringConvertEncodingToNSStringEncoding(self)
         if nsEncoding == kCFStringEncodingInvalidId {
             return nil
@@ -19,7 +20,8 @@ extension CFStringEncoding {
 }
 
 extension CFStringEncodings {
-    @inline(__always) var stringEncoding: String.Encoding? {
+    @inline(__always)
+    var stringEncoding: String.Encoding? {
         CFStringEncoding(rawValue).stringEncoding
     }
 }

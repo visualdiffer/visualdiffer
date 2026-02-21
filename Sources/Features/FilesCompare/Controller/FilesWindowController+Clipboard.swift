@@ -6,8 +6,10 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@MainActor extension FilesWindowController {
-    @objc func copyUrlsToClipboard(_: AnyObject) {
+@MainActor
+extension FilesWindowController {
+    @objc
+    func copyUrlsToClipboard(_: AnyObject) {
         if let path = lastUsedView.side == .left ? sessionDiff.leftPath : sessionDiff.rightPath {
             let url = URL(filePath: path, directoryHint: .notDirectory)
 
@@ -15,11 +17,13 @@
         }
     }
 
-    @objc func copy(_ sender: AnyObject) {
+    @objc
+    func copy(_ sender: AnyObject) {
         copyLinesToClipboard(sender)
     }
 
-    @objc func copyLinesToClipboard(_: AnyObject) {
+    @objc
+    func copyLinesToClipboard(_: AnyObject) {
         guard let diffSide = lastUsedView.diffSide else {
             return
         }
@@ -32,11 +36,13 @@
         NSPasteboard.general.copy(lines: lines)
     }
 
-    @objc func paste(_ sender: AnyObject) {
+    @objc
+    func paste(_ sender: AnyObject) {
         pasteLinesToClipboard(sender)
     }
 
-    @objc func pasteLinesToClipboard(_: AnyObject) {
+    @objc
+    func pasteLinesToClipboard(_: AnyObject) {
         guard let diffResult else {
             return
         }
@@ -64,11 +70,13 @@
         refreshAfterTextEdit(currentRow)
     }
 
-    @objc func cut(_ sender: AnyObject) {
+    @objc
+    func cut(_ sender: AnyObject) {
         cutToClipboard(sender)
     }
 
-    @objc func cutToClipboard(_ sender: AnyObject) {
+    @objc
+    func cutToClipboard(_ sender: AnyObject) {
         copyLinesToClipboard(sender)
         deleteLines(sender)
     }

@@ -6,8 +6,10 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@MainActor extension FilesWindowController {
-    @objc func startComparison() {
+@MainActor
+extension FilesWindowController {
+    @objc
+    func startComparison() {
         reloadAllMove(toFirstDifference: true)
     }
 

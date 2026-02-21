@@ -174,7 +174,8 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         ])
     }
 
-    @objc func showDiffs(_: AnyObject?) {
+    @objc
+    func showDiffs(_: AnyObject?) {
         let leftUrl = URL(filePath: leftPathChooser.currentPath)
         let rightUrl = URL(filePath: rightPathChooser.currentPath)
         var leftExists = false
@@ -214,7 +215,8 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         }
     }
 
-    @objc func openRecent(_ sender: AnyObject) {
+    @objc
+    func openRecent(_ sender: AnyObject) {
         guard let sender = sender as? NSPopUpButton else {
             return
         }
@@ -298,11 +300,13 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         return true
     }
 
-    @objc func find(_: AnyObject) {
+    @objc
+    func find(_: AnyObject) {
         makeFirstResponder(searchHistory)
     }
 
-    @objc func selectSessionPreferences(_: AnyObject) {
+    @objc
+    func selectSessionPreferences(_: AnyObject) {
         sessionPreferencesSheet.beginSheet(
             self,
             sessionDiff: nil,
@@ -312,7 +316,8 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         }
     }
 
-    @objc func fillSessionDiff(_ sessionDiff: SessionDiff) -> Bool {
+    @objc
+    func fillSessionDiff(_ sessionDiff: SessionDiff) -> Bool {
         // Update all properties handled by preference sheet
         sessionPreferencesSheet.updateSessionDiff(sessionDiff)
 

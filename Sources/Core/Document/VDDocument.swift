@@ -13,7 +13,8 @@ public protocol DocumentWindowControllerDelegate: AnyObject {
 }
 
 // the attribute @objc is necessary to work correctly in Swift
-@objc(VDDocument) public class VDDocument: NSPersistentDocument {
+@objc(VDDocument)
+public class VDDocument: NSPersistentDocument {
     private var windowController: NSWindowController?
     private var documentManagedObjectModel: NSManagedObjectModel?
 
@@ -57,7 +58,8 @@ public protocol DocumentWindowControllerDelegate: AnyObject {
     // MARK: - init
 
     // —initWithType:error:—that is called only when a new document is created, not when it is subsequently reopened.
-    @MainActor convenience init(type _: String) throws {
+    @MainActor
+    convenience init(type _: String) throws {
         self.init()
 
         guard let moc = managedObjectContext else {

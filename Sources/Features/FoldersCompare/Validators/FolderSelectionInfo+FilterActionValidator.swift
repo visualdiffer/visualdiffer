@@ -6,7 +6,8 @@
 //  Copyright (c) 2021 visualdiffer.com
 //
 
-@MainActor extension FolderSelectionInfo {
+@MainActor
+extension FolderSelectionInfo {
     func validateExclude(byName outExcludedFileName: inout String?) -> Bool {
         if selType.isEmpty || selType == .nullfile {
             return false

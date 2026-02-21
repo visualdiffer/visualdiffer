@@ -29,7 +29,8 @@ class WindowCancelOperation: NSWindow {
         }
     }
 
-    @objc static func createWindow() -> WindowCancelOperation {
+    @objc
+    static func createWindow() -> WindowCancelOperation {
         let styleMask: NSWindow.StyleMask = [.titled, .closable, .miniaturizable, .resizable]
 
         let window = WindowCancelOperation(

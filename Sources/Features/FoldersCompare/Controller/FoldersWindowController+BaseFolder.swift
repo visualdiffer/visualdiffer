@@ -7,7 +7,8 @@
 //
 
 extension FoldersWindowController {
-    @objc func setAsBaseFolder(_ sender: AnyObject?) {
+    @objc
+    func setAsBaseFolder(_ sender: AnyObject?) {
         if let sender = sender as? NSMenuItem,
            isPathControlMenu(sender.tag) {
             let leftUrl = leftPanelView.pathView.pathControl.clickedPath
@@ -48,7 +49,8 @@ extension FoldersWindowController {
         setBaseFolders(leftItem, right: rightItem)
     }
 
-    @objc func setAsBaseFoldersBothSides(_: AnyObject?) {
+    @objc
+    func setAsBaseFoldersBothSides(_: AnyObject?) {
         var leftItem: CompareItem?
         var rightItem: CompareItem?
         let indexes = lastUsedView.selectedRowIndexes
@@ -82,7 +84,8 @@ extension FoldersWindowController {
         setBaseFolders(leftItem, right: rightItem)
     }
 
-    @objc func setAsBaseFolderOtherSide(_ sender: AnyObject?) {
+    @objc
+    func setAsBaseFolderOtherSide(_ sender: AnyObject?) {
         if let sender = sender as? NSMenuItem,
            isPathControlMenu(sender.tag) {
             let leftUrl = leftPanelView.pathView.pathControl.clickedPath

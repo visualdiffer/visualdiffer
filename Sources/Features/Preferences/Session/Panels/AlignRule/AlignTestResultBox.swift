@@ -17,7 +17,8 @@ class AlignTestResultBox: NSBox, NSTextFieldDelegate {
     @objc var rightExpression: String
     @objc var regularExpressionOptions: NSRegularExpression.Options
 
-    @objc convenience init(title: String) {
+    @objc
+    convenience init(title: String) {
         self.init(frame: .zero)
 
         self.title = title
@@ -108,7 +109,8 @@ class AlignTestResultBox: NSBox, NSTextFieldDelegate {
         reloadData()
     }
 
-    @objc func reloadData() {
+    @objc
+    func reloadData() {
         output.stringValue = ""
         errorMessage.stringValue = ""
 
@@ -139,7 +141,8 @@ class AlignTestResultBox: NSBox, NSTextFieldDelegate {
         }
     }
 
-    @objc func clear() {
+    @objc
+    func clear() {
         fileName.stringValue = ""
         output.stringValue = ""
     }

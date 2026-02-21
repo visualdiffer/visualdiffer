@@ -10,7 +10,8 @@ enum DisplayFiltersScopeBarAttributeKey: String {
     case filterFlagsDisplayFilters = "filterFlags"
 }
 
-@objc enum DisplayFiltersScopeBarAction: Int {
+@objc
+enum DisplayFiltersScopeBarAction: Int {
     case selectFilter
     case showFiltered
     case showEmptyFolders
@@ -35,7 +36,9 @@ private enum ScopeGroupOptions: Int {
     case displayFlags
 }
 
-@MainActor @objc class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
+@objc
+@MainActor
+class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     private var groupItems = [[ScopeBarGroupKey: Any]]()
     private var labels = [String: String]()
 
@@ -207,7 +210,8 @@ private enum ScopeGroupOptions: Int {
 
     // MARK: - Actions
 
-    @objc func hideEmptyFolders(_ hideEmptyFolders: Bool, informDelegate _: Bool) {
+    @objc
+    func hideEmptyFolders(_ hideEmptyFolders: Bool, informDelegate _: Bool) {
         // The logic to select the 'empty folders' button is inverted so we pass the negated value
         setSelected(
             !hideEmptyFolders,
@@ -217,7 +221,8 @@ private enum ScopeGroupOptions: Int {
         )
     }
 
-    @objc func showFilteredFiles(_ showFilteredFiles: Bool, informDelegate: Bool) {
+    @objc
+    func showFilteredFiles(_ showFilteredFiles: Bool, informDelegate: Bool) {
         setSelected(
             showFilteredFiles,
             forItem: showFilteredId,
@@ -235,7 +240,8 @@ private enum ScopeGroupOptions: Int {
         )
     }
 
-    @objc func noOrphansFolders(_ noOrphansFolders: Bool, informDelegate: Bool) {
+    @objc
+    func noOrphansFolders(_ noOrphansFolders: Bool, informDelegate: Bool) {
         setSelected(
             noOrphansFolders,
             forItem: showNoOrphansFoldersId,

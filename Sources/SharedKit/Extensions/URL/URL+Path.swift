@@ -99,7 +99,8 @@ public extension URL {
         )
     }
 
-    @MainActor func selectPath(
+    @MainActor
+    func selectPath(
         panelTitle: String,
         chooseFiles: Bool,
         chooseDirectories: Bool
@@ -160,7 +161,8 @@ public extension URL {
         return currDir
     }
 
-    @MainActor func promptUrl(
+    @MainActor
+    func promptUrl(
         at startUrl: URL,
         title: String,
         chooseDirectories: Bool,

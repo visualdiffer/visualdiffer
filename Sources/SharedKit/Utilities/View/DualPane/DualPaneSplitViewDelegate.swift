@@ -11,7 +11,8 @@ class DualPaneSplitViewDelegate: NSObject, NSSplitViewDelegate {
     var maxSize: CGFloat = 0
     var collapsableSubviewIndex = 0
 
-    @objc init(
+    @objc
+    init(
         collapsableSubViewIndex index: Int,
         minSize: CGFloat,
         maxSize: CGFloat

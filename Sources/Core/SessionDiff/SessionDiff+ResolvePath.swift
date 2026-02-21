@@ -15,7 +15,8 @@ extension SessionDiff {
      * @param alwaysResolveSymlinks determine if symlinks must be resolved
      * @return the selected path
      */
-    @MainActor func resolvePath(
+    @MainActor
+    func resolvePath(
         for side: Side,
         chooseFileType fileType: ItemType,
         alwaysResolveSymlinks: Bool

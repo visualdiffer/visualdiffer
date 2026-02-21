@@ -150,7 +150,8 @@ class TouchController: FileSystemController<TouchFileOperationExecutor> {
 
     // MARK: - Action Methods
 
-    @objc func radioButton(_ sender: AnyObject) {
+    @objc
+    func radioButton(_ sender: AnyObject) {
         guard let sender = sender as? NSButton,
               let source = TouchDateFromSource(rawValue: sender.tag) else {
             return

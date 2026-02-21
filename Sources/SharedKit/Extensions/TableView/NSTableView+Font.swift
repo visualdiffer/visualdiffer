@@ -8,7 +8,8 @@
 
 import Foundation
 
-@objc extension NSTableView {
+@objc
+extension NSTableView {
     func updateFont(
         _ font: NSFont,
         reloadData reload: Bool

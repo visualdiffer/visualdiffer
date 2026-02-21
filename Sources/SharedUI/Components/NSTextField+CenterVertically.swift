@@ -6,7 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@objc extension NSTextField {
+@objc
+extension NSTextField {
     func centerVertically() {
         let centeredCell = RSVerticallyCenteredTextFieldCell(textCell: "")
 

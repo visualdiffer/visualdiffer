@@ -77,12 +77,14 @@ class FontPreferencesPanel: NSView, NSFontChanging, PreferencesPanelDataSource {
         return view
     }
 
-    @objc func restoreDefaultsAction(_: AnyObject) {
+    @objc
+    func restoreDefaultsAction(_: AnyObject) {
         CommonPrefs.shared.restoreDefaultFonts()
         reloadData()
     }
 
-    @objc func changeFont(_ sender: NSFontManager?) {
+    @objc
+    func changeFont(_ sender: NSFontManager?) {
         guard let sender,
               let selectedFont = sender.selectedFont else {
             return

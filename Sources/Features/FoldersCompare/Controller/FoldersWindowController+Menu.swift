@@ -393,8 +393,10 @@ extension FoldersWindowController {
         return menu
     }
 
-    @objc static func switchMenu() {
-        @MainActor enum StaticMenus {
+    @objc
+    static func switchMenu() {
+        @MainActor
+        enum StaticMenus {
             static let edit = FoldersWindowController.editMenu()
             static let actions = FoldersWindowController.actionsMenu()
             static let view = FoldersWindowController.viewMenu()

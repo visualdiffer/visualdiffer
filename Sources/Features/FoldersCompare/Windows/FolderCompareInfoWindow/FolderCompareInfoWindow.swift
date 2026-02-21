@@ -206,7 +206,8 @@ class FolderCompareInfoWindow: NSWindow, NSOutlineViewDataSource, NSOutlineViewD
         return String(path[startIndex ..< path.endIndex])
     }
 
-    @objc func closeSheet(_: AnyObject) {
+    @objc
+    func closeSheet(_: AnyObject) {
         sheetParent?.endSheet(self)
     }
 

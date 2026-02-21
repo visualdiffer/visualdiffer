@@ -6,13 +6,24 @@
 //  Copyright (c) 2011 visualdiffer.com
 //
 
-@objc protocol PathControlDelegate: NSPathControlDelegate {
-    @MainActor @objc optional func pathControl(_ pathControl: PathControl, willContextMenu menu: NSMenu)
-    @MainActor @objc optional func pathControl(_ pathControl: PathControl, chosenUrl url: URL)
-    @MainActor @objc optional func pathControl(_ pathControl: PathControl, openWithApp app: URL)
-    @MainActor @objc optional func pathControlOpenWithOtherApp(_ pathControl: PathControl)
+@objc
+protocol PathControlDelegate: NSPathControlDelegate {
+    @objc
+    @MainActor
+    optional func pathControl(_ pathControl: PathControl, willContextMenu menu: NSMenu)
+    @objc
+    @MainActor
+    optional func pathControl(_ pathControl: PathControl, chosenUrl url: URL)
+    @objc
+    @MainActor
+    optional func pathControl(_ pathControl: PathControl, openWithApp app: URL)
+    @objc
+    @MainActor
+    optional func pathControlOpenWithOtherApp(_ pathControl: PathControl)
 
-    @MainActor @objc optional func saveFile(_ sender: AnyObject?)
+    @objc
+    @MainActor
+    optional func saveFile(_ sender: AnyObject?)
 }
 
 public class PathControl: NSPathControl, NSMenuItemValidation {
@@ -121,7 +132,8 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
 
     // MARK: - Actions
 
-    @objc func showInFinder(_: AnyObject) {
+    @objc
+    func showInFinder(_: AnyObject) {
         guard let url = safePathComponentItem?.url else {
             return
         }
@@ -131,7 +143,8 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
         NSWorkspace.shared.show(inFinder: paths)
     }
 
-    @objc func copyFileNames(_: AnyObject) {
+    @objc
+    func copyFileNames(_: AnyObject) {
         guard let url = safePathComponentItem?.url else {
             return
         }
@@ -139,7 +152,8 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
         NSPasteboard.general.copy(lines: [url.lastPathComponent])
     }
 
-    @objc func copyFullPaths(_: AnyObject) {
+    @objc
+    func copyFullPaths(_: AnyObject) {
         guard let url = safePathComponentItem?.url else {
             return
         }
@@ -147,7 +161,8 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
         NSPasteboard.general.copy(lines: [url.osPath])
     }
 
-    @objc func copyUrls(_: AnyObject) {
+    @objc
+    func copyUrls(_: AnyObject) {
         guard let url = safePathComponentItem?.url else {
             return
         }
@@ -157,7 +172,8 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
         NSPasteboard.general.copy(urls: [fileURL])
     }
 
-    @objc func openWithApp(_ sender: AnyObject) {
+    @objc
+    func openWithApp(_ sender: AnyObject) {
         // store the delegate to a strong local variable
         if let delegate = delegate as? PathControlDelegate,
            let applicationPath = sender.representedObject as? String {
@@ -165,13 +181,15 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
         }
     }
 
-    @objc func openWithOther(_: AnyObject) {
+    @objc
+    func openWithOther(_: AnyObject) {
         if let delegate = delegate as? PathControlDelegate {
             delegate.pathControlOpenWithOtherApp?(self)
         }
     }
 
-    @objc func choosePath(_: AnyObject) {
+    @objc
+    func choosePath(_: AnyObject) {
         guard let delegate = delegate as? PathControlDelegate else {
             return
         }

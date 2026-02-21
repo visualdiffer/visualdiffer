@@ -6,7 +6,8 @@
 //  Copyright (c) 2021 visualdiffer.com
 //
 
-@objc extension FoldersOutlineView {
+@objc
+extension FoldersOutlineView {
     func getSelectedVisibleItems(_ includesSelected: Bool) -> [VisibleItem] {
         var arr = [VisibleItem]()
 

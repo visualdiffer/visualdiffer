@@ -144,7 +144,8 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
         reload(tabItem: tabView.selectedTabViewItem)
     }
 
-    @objc func closeSessionSettingsSheet(_ sender: AnyObject) {
+    @objc
+    func closeSessionSettingsSheet(_ sender: AnyObject) {
         guard let window else {
             return
         }

@@ -30,7 +30,8 @@ extension FoldersOutlineView {
         NSWorkspace.shared.show(inFinder: paths)
     }
 
-    @objc func openSelected(with application: URL) {
+    @objc
+    func openSelected(with application: URL) {
         do {
             let editor = OpenEditor(attributes: openEditorFromSelectedFiles())
             try editor.open(withApplication: application)
@@ -41,7 +42,8 @@ extension FoldersOutlineView {
         }
     }
 
-    @objc func openSelectedWithOther() {
+    @objc
+    func openSelectedWithOther() {
         do {
             let editor = OpenEditor(attributes: openEditorFromSelectedFiles())
             try editor.browseApplicationAndLaunch()

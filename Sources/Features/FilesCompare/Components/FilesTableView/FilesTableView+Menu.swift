@@ -6,7 +6,8 @@
 //  Copyright (c) 2010 visualdiffer.com
 //
 
-@objc protocol FilesTableViewContextMenu {
+@objc
+protocol FilesTableViewContextMenu {
     func copyFileNames(_ sender: AnyObject?)
     func copyFullPaths(_ sender: AnyObject?)
     func copyLines(_ sender: AnyObject?)

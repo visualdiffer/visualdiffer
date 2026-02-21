@@ -7,7 +7,8 @@
 //
 
 extension FoldersWindowController: FoldersOutlineViewContextMenu {
-    @objc func compareFiles(_: AnyObject?) {
+    @objc
+    func compareFiles(_: AnyObject?) {
         let leftSelItems = leftView.selectedItems()
         let rightSelItems = rightView.selectedItems()
         var leftItem: CompareItem?
@@ -36,34 +37,41 @@ extension FoldersWindowController: FoldersOutlineViewContextMenu {
         }
     }
 
-    @objc func compareFolders(_ sender: AnyObject?) {
+    @objc
+    func compareFolders(_ sender: AnyObject?) {
         compareFiles(sender)
     }
 
-    @objc func copyFileNames(_: AnyObject?) {
+    @objc
+    func copyFileNames(_: AnyObject?) {
         lastUsedView.copySelectedAsFileNames()
     }
 
-    @objc func copy(_ sender: AnyObject?) {
+    @objc
+    func copy(_ sender: AnyObject?) {
         copyFullPaths(sender)
     }
 
-    @objc func copyFullPaths(_: AnyObject?) {
+    @objc
+    func copyFullPaths(_: AnyObject?) {
         lastUsedView.copySelectedAsFullPaths()
     }
 
-    @objc func expandSelectedSubfolders(_: AnyObject?) {
+    @objc
+    func expandSelectedSubfolders(_: AnyObject?) {
         lastUsedView.expandSelectedSubfolders()
 
         // expand also selected rows on linkedView that may be different for those selected on this view
         lastUsedView.linkedView?.expandSelectedSubfolders()
     }
 
-    @objc func popupOpenWithApp(_: AnyObject?) {
+    @objc
+    func popupOpenWithApp(_: AnyObject?) {
         // Make Cocoa happy otherwise without action the menuitem is always grayed
     }
 
-    @objc func showInFinder(_: AnyObject?) {
+    @objc
+    func showInFinder(_: AnyObject?) {
         lastUsedView.showSelectedInFinder()
     }
 }

@@ -6,7 +6,8 @@
 //  Copyright (c) 2016 visualdiffer.com
 //
 
-@objc protocol FileOperationManagerDelegate: AnyObject {
+@objc
+protocol FileOperationManagerDelegate: AnyObject {
     func waitPause(for fileManager: FileOperationManager)
     func isRunning(_ fileManager: FileOperationManager) -> Bool
     func fileManager(
@@ -20,12 +21,18 @@
     func fileManager(_ fileManager: FileOperationManager, updateForItem item: CompareItem)
     func fileManager(_ fileManager: FileOperationManager, addError error: any Error, forItem item: CompareItem)
 
-    @objc func fileManager(_ fileManager: FileOperationManager, startBigFileOperationForItem item: CompareItem)
-    @objc func isBigFileOperationCancelled(_ fileManager: FileOperationManager) -> Bool
-    @objc func isBigFileOperationCompleted(_ fileManager: FileOperationManager) -> Bool
-    @objc func fileManager(_ fileManager: FileOperationManager, setCancelled cancelled: Bool)
-    @objc func fileManager(_ fileManager: FileOperationManager, setCompleted completed: Bool)
-    @objc func fileManager(_ fileManager: FileOperationManager, updateBytesCompleted bytesCompleted: Double, totalBytes: Double, throughput: Double)
+    @objc
+    func fileManager(_ fileManager: FileOperationManager, startBigFileOperationForItem item: CompareItem)
+    @objc
+    func isBigFileOperationCancelled(_ fileManager: FileOperationManager) -> Bool
+    @objc
+    func isBigFileOperationCompleted(_ fileManager: FileOperationManager) -> Bool
+    @objc
+    func fileManager(_ fileManager: FileOperationManager, setCancelled cancelled: Bool)
+    @objc
+    func fileManager(_ fileManager: FileOperationManager, setCompleted completed: Bool)
+    @objc
+    func fileManager(_ fileManager: FileOperationManager, updateBytesCompleted bytesCompleted: Double, totalBytes: Double, throughput: Double)
 }
 
 public protocol FileOperationManagerAction: AnyObject {
@@ -40,7 +47,8 @@ public protocol FileOperationManagerAction: AnyObject {
     func rename(_ srcRoot: CompareItem, toName: String)
 }
 
-@objc class FileOperationManager: NSObject, @unchecked Sendable {
+@objc
+class FileOperationManager: NSObject, @unchecked Sendable {
     /**
      * Specifies whether filtered files are included in file system operations
      * (e.g. copy and move).

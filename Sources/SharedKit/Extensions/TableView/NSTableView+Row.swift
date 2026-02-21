@@ -11,7 +11,8 @@ import Foundation
 extension NSTableView {
     // Select the row or the closest to it, return the closest row or the original value
     @discardableResult
-    @objc func selectRow(
+    @objc
+    func selectRow(
         closestTo row: Int,
         byExtendingSelection: Bool,
         ensureVisible: Bool
@@ -64,7 +65,8 @@ extension NSTableView {
      * If no row is visible then scroll to suggestedRow, if suggested row is -1 scroll to row 0
      */
     @discardableResult
-    @objc func ensureRowVisibility(suggestedRow: Int) -> Int {
+    @objc
+    func ensureRowVisibility(suggestedRow: Int) -> Int {
         var visibleRow = firstVisibleRow
 
         if visibleRow < 0 {
@@ -78,7 +80,8 @@ extension NSTableView {
         return visibleRow
     }
 
-    @objc func scrollTo(row: Int, center: Bool) {
+    @objc
+    func scrollTo(row: Int, center: Bool) {
         if row < 0 {
             return
         }

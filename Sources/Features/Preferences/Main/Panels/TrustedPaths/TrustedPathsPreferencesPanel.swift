@@ -216,7 +216,8 @@ class TrustedPathsPreferencesPanel: NSView, NSTableViewDataSource, NSTableViewDe
         }
     }
 
-    @objc func choosePaths(_: AnyObject) {
+    @objc
+    func choosePaths(_: AnyObject) {
         let openPanel = NSOpenPanel()
         openPanel.title = NSLocalizedString("Select Trusted Paths", comment: "")
         // since 10.11 the title is no longer shown so we use the message property
@@ -234,7 +235,8 @@ class TrustedPathsPreferencesPanel: NSView, NSTableViewDataSource, NSTableViewDe
         pathTableView.window?.makeFirstResponder(pathTableView)
     }
 
-    @objc func removePaths(_: AnyObject) {
+    @objc
+    func removePaths(_: AnyObject) {
         let selectedRows = pathTableView.selectedRowIndexes
         var paths = [String]()
 
@@ -249,7 +251,8 @@ class TrustedPathsPreferencesPanel: NSView, NSTableViewDataSource, NSTableViewDe
         pathTableView.window?.makeFirstResponder(pathTableView)
     }
 
-    @objc func selectInvalidPaths(_: AnyObject) {
+    @objc
+    func selectInvalidPaths(_: AnyObject) {
         let fm = FileManager.default
         var indexSet = IndexSet()
 

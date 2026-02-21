@@ -7,7 +7,8 @@
 //
 
 extension FilesWindowController {
-    @objc func sliderMoved(_ sender: AnyObject) {
+    @objc
+    func sliderMoved(_ sender: AnyObject) {
         let other = sender === leftPanelView.columnSlider ? rightPanelView.columnSlider : leftPanelView.columnSlider
         other.doubleValue = sender.doubleValue
 
@@ -15,7 +16,8 @@ extension FilesWindowController {
         rightView.reloadData(restoreSelection: true)
     }
 
-    @objc func setSliderMaxValue() {
+    @objc
+    func setSliderMaxValue() {
         guard let diffResult else {
             return
         }

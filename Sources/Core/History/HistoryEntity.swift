@@ -8,7 +8,8 @@
 
 // keep the same entity name that Core Data expects from the model file
 // the attribute @objc is necessary to work correctly in Swift
-@objc(HistoryEntity) class HistoryEntity: SessionDiff {
+@objc(HistoryEntity)
+class HistoryEntity: SessionDiff {
     static let name = "HistoryEntity"
 
     @NSManaged var starred: NSNumber

@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable force_unwrapping
 final class ComparatorTests: BaseTests {
-    @Test() func timestampTolerance() throws {
+    @Test
+    func timestampTolerance() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .timestamp,
@@ -99,7 +100,8 @@ final class ComparatorTests: BaseTests {
         }
     }
 
-    @Test func compareAsText() throws {
+    @Test
+    func compareAsText() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .asText,
@@ -169,7 +171,8 @@ final class ComparatorTests: BaseTests {
         }
     }
 
-    @Test func binaryContent() throws {
+    @Test
+    func binaryContent() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .content,
@@ -260,7 +263,8 @@ final class ComparatorTests: BaseTests {
         }
     }
 
-    @Test func size() throws {
+    @Test
+    func size() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .size,

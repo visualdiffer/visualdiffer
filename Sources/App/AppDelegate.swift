@@ -45,13 +45,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 
-    @objc func openWiki(_: AnyObject) {
+    @objc
+    func openWiki(_: AnyObject) {
         if let url = URL(string: "https://wiki.visualdiffer.com") {
             NSWorkspace.shared.open(url)
         }
     }
 
-    @objc func bugReport(_: AnyObject) {
+    @objc
+    func bugReport(_: AnyObject) {
         if let url = URL(string: "https://bugs.visualdiffer.com") {
             NSWorkspace.shared.open(url)
         }

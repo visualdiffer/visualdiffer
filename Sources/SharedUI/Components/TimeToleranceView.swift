@@ -90,7 +90,8 @@ class TimeToleranceView: NSView, NSTextFieldDelegate {
         return view
     }
 
-    @objc func stepperChanged(_: AnyObject) {
+    @objc
+    func stepperChanged(_: AnyObject) {
         tolerance = stepper.integerValue
     }
 

@@ -135,7 +135,8 @@ public class FoldersWindowController: NSWindowController,
         }
     }
 
-    @objc func openWithApp(_ sender: AnyObject) {
+    @objc
+    func openWithApp(_ sender: AnyObject) {
         guard let path = sender.representedObject as? String else {
             return
         }
@@ -143,15 +144,18 @@ public class FoldersWindowController: NSWindowController,
         lastUsedView.openSelected(with: application)
     }
 
-    @objc func openWithOther(_: AnyObject) {
+    @objc
+    func openWithOther(_: AnyObject) {
         lastUsedView.openSelectedWithOther()
     }
 
-    @objc func copyUrls(_: AnyObject) {
+    @objc
+    func copyUrls(_: AnyObject) {
         lastUsedView.copySelectedAsUrls()
     }
 
-    @objc func expandAllFolders(_: AnyObject) {
+    @objc
+    func expandAllFolders(_: AnyObject) {
         let selectedVisibleItems = lastUsedView.getSelectedVisibleItems(false)
 
         // views are in sync so it's sufficient to expand only one side to propagate to the other
@@ -162,7 +166,8 @@ public class FoldersWindowController: NSWindowController,
         lastUsedView.restoreSelectionAndFocusPosition(selectedVisibleItems)
     }
 
-    @objc func collapseAllFolders(_: AnyObject) {
+    @objc
+    func collapseAllFolders(_: AnyObject) {
         let selectedVisibleItems = lastUsedView.getSelectedVisibleItems(false)
 
         // views are in sync so it's sufficient to expand only one side to propagate to the other
@@ -173,7 +178,8 @@ public class FoldersWindowController: NSWindowController,
         lastUsedView.restoreSelectionAndFocusPosition(selectedVisibleItems)
     }
 
-    @objc func swapSides(_: AnyObject) {
+    @objc
+    func swapSides(_: AnyObject) {
         leftVisibleItems?.swap()
 
         let path = sessionDiff.leftPath
@@ -188,7 +194,8 @@ public class FoldersWindowController: NSWindowController,
         rightView.reloadData()
     }
 
-    @objc func compareInfo(_: AnyObject) {
+    @objc
+    func compareInfo(_: AnyObject) {
         guard let window else {
             return
         }
@@ -203,31 +210,37 @@ public class FoldersWindowController: NSWindowController,
 
     // MARK: - Find Methods
 
-    @objc func find(_: AnyObject) {
+    @objc
+    func find(_: AnyObject) {
         window?.makeFirstResponder(scopeBar)
     }
 
-    @objc func findPrevious(_: AnyObject) {
+    @objc
+    func findPrevious(_: AnyObject) {
         scopeBar.findView.moveToMatch(false)
     }
 
-    @objc func findNext(_: AnyObject) {
+    @objc
+    func findNext(_: AnyObject) {
         scopeBar.findView.moveToMatch(true)
     }
 
     // MARK: - Read only
 
-    @objc func setLeftReadOnly(_: AnyObject) {
+    @objc
+    func setLeftReadOnly(_: AnyObject) {
         sessionDiff.leftReadOnly.toggle()
     }
 
-    @objc func setRightReadOnly(_: AnyObject) {
+    @objc
+    func setRightReadOnly(_: AnyObject) {
         sessionDiff.rightReadOnly.toggle()
     }
 
     // MARK: - Refresh
 
-    @objc func stopRefresh(_: AnyObject) {
+    @objc
+    func stopRefresh(_: AnyObject) {
         let retVal = NSAlert.showModalConfirm(
             messageText: NSLocalizedString("Are you sure to stop the operation?", comment: ""),
             informativeText: NSLocalizedString("If the operation takes a long time to run, you can stop it, but the results could be inaccurate", comment: ""),
@@ -252,15 +265,18 @@ public class FoldersWindowController: NSWindowController,
 
     // MARK: - Zoom Font
 
-    @objc func zoomLargerFont(_: AnyObject) {
+    @objc
+    func zoomLargerFont(_: AnyObject) {
         fontZoomFactor += 1
     }
 
-    @objc func zoomSmallerFont(_: AnyObject) {
+    @objc
+    func zoomSmallerFont(_: AnyObject) {
         fontZoomFactor -= 1
     }
 
-    @objc func zoomResetFont(_: AnyObject) {
+    @objc
+    func zoomResetFont(_: AnyObject) {
         fontZoomFactor = 0
     }
 

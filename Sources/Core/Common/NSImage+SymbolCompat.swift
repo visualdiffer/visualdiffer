@@ -8,7 +8,8 @@
 
 import Foundation
 
-@objc extension NSImage {
+@objc
+extension NSImage {
     static func imageSymbolCompat(_ name: NSImage.Name) -> NSImage? {
         if #available(macOS 11.0, *) {
             if let symbolInfo = symbolMap[name] {

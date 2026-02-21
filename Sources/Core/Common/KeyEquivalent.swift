@@ -9,7 +9,8 @@
 import Foundation
 
 // swiftlint:disable identifier_name
-@objc class KeyEquivalent: NSObject {
+@objc
+class KeyEquivalent: NSObject {
     @objc static let leftArrow = "\u{2190}"
     @objc static let rightArrow = "\u{2192}"
     @objc static let upArrow = "\u{2191}"

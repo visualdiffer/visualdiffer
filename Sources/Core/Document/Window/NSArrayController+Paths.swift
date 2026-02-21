@@ -25,7 +25,8 @@ extension NSArrayController {
         )
     }
 
-    @MainActor func addPath(_ newPath: String) {
+    @MainActor
+    func addPath(_ newPath: String) {
         guard let arrangedObjects = arrangedObjects as? [String] else {
             return
         }

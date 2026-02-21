@@ -14,7 +14,8 @@
 class TextFieldSelectionHolder: NSTextField, NSMenuDelegate {
     private var selectionRange = NSRange(location: NSNotFound, length: 0)
 
-    @objc func attachTo(popUpButton popup: NSPopUpButton) {
+    @objc
+    func attachTo(popUpButton popup: NSPopUpButton) {
         popup.menu?.delegate = self
     }
 

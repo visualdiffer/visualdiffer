@@ -9,9 +9,10 @@
 import Testing
 @testable import VisualDiffer
 
-// swiftlint:disable force_unwrapping function_body_length
+// swiftlint:disable function_body_length
 final class TouchFilesTests: BaseTests {
-    @Test func touchOlderFiles() throws {
+    @Test
+    func touchOlderFiles() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -197,7 +198,8 @@ final class TouchFilesTests: BaseTests {
         }
     }
 
-    @Test func touchOrphanFile() throws {
+    @Test
+    func touchOrphanFile() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
@@ -309,4 +311,4 @@ final class TouchFilesTests: BaseTests {
     }
 }
 
-// swiftlint:enable force_unwrapping function_body_length
+// swiftlint:enable function_body_length

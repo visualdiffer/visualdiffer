@@ -11,7 +11,8 @@ import Testing
 
 // swiftlint:disable file_length force_unwrapping function_body_length
 final class EmptyFolderColorTests: BaseTests {
-    @Test func initialColors() throws {
+    @Test
+    func initialColors() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .size, .alignMatchCase],
@@ -256,7 +257,8 @@ final class EmptyFolderColorTests: BaseTests {
         }
     }
 
-    @Test func moveFolderWithChild() throws {
+    @Test
+    func moveFolderWithChild() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .size, .alignMatchCase],
@@ -704,7 +706,8 @@ final class EmptyFolderColorTests: BaseTests {
         }
     }
 
-    @Test func copy() throws {
+    @Test
+    func copy() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .size, .alignMatchCase],
@@ -897,7 +900,8 @@ final class EmptyFolderColorTests: BaseTests {
         }
     }
 
-    @Test func deleteFolder() throws {
+    @Test
+    func deleteFolder() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp, .size, .alignMatchCase],

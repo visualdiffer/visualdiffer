@@ -71,13 +71,15 @@ private class PowerItem {
  * Minimize the number of IOPMAssertions creating different instances only when the name differs
  *
  */
-@objc class PowerAssertion: NSObject, @unchecked Sendable {
+@objc
+class PowerAssertion: NSObject, @unchecked Sendable {
     @objc static let shared = PowerAssertion()
     private var pmAssertions: [String: PowerItem] = [:]
 
     override private init() {}
 
-    @objc func setDisableSystemSleep(_ disableSleep: Bool, with name: String) {
+    @objc
+    func setDisableSystemSleep(_ disableSleep: Bool, with name: String) {
         let item: PowerItem
 
         if let existingItem = pmAssertions[name] {

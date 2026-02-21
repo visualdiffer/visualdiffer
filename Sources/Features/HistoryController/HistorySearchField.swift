@@ -8,7 +8,8 @@
 
 import Foundation
 
-@objc class HistorySearchField: NSSearchField, NSSearchFieldDelegate {
+@objc
+class HistorySearchField: NSSearchField, NSSearchFieldDelegate {
     @objc var historyController: HistoryController?
 
     override init(frame frameRect: NSRect) {
@@ -33,7 +34,8 @@ import Foundation
         delegate = self
     }
 
-    @objc func search(_: AnyObject) {
+    @objc
+    func search(_: AnyObject) {
         if let historyController {
             let pattern = stringValue.trimmingCharacters(in: NSCharacterSet.whitespaces)
             historyController.filterFor(pattern: pattern)

@@ -25,7 +25,8 @@ struct OpenEditor {
 }
 
 extension OpenEditor {
-    @MainActor func browseApplicationAndLaunch() throws {
+    @MainActor
+    func browseApplicationAndLaunch() throws {
         let openPanel = NSOpenPanel().openApplication(title: NSLocalizedString("Select Application", comment: ""))
 
         if openPanel.runModal() == .OK {

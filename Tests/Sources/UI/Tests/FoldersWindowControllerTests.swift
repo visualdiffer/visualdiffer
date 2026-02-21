@@ -9,11 +9,11 @@
 import Testing
 @testable import VisualDiffer
 
-// swiftlint:disable force_unwrapping
 final class FoldersWindowControllerTests: BaseTests {
     // This create a test case to generate the error trapped on
     // [FoldersWindowController (id)outlineView: outlineView child: (NSInteger)index ofItem: (id)item]
-    @Test func savedFromArrayOutOfBound() throws {
+    @Test
+    func savedFromArrayOutOfBound() throws {
         try removeItem("l")
         try removeItem("r")
 
@@ -27,7 +27,8 @@ final class FoldersWindowControllerTests: BaseTests {
         try createFile("r/folder_one_file_inside/AppDelegate.m", "12345")
     }
 
-    @Test("This isn't a test but a way to prepare the folders for the test") func excludingByName() throws {
+    @Test("This isn't a test but a way to prepare the folders for the test")
+    func excludingByName() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: [.contentTimestamp],
@@ -93,5 +94,3 @@ final class FoldersWindowControllerTests: BaseTests {
         assertItem(child4.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
     }
 }
-
-// swiftlint:enable force_unwrapping

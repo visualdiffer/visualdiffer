@@ -6,7 +6,8 @@
 //  Copyright (c) 2021 visualdiffer.com
 //
 
-@MainActor extension FolderSelectionInfo {
+@MainActor
+extension FolderSelectionInfo {
     func validateShowInFinder() -> Bool {
         !selType.isDisjoint(with: [.folder, .file])
     }

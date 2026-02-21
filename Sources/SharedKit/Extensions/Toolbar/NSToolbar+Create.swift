@@ -8,7 +8,8 @@
 
 import Foundation
 
-@objc extension NSToolbar {
+@objc
+extension NSToolbar {
     convenience init(identifier: String, delegate dele: NSToolbarDelegate) {
         self.init(identifier: identifier)
 

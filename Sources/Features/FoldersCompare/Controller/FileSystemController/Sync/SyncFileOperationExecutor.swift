@@ -132,7 +132,8 @@ extension SyncFileOperationExecutor {
         }
     }
 
-    @MainActor func prepareSyncItemsInfo(
+    @MainActor
+    func prepareSyncItemsInfo(
         items itemsToSync: SyncItemsInfo,
         withSelection useSelection: Bool,
         syncBothSides: Bool,
@@ -213,7 +214,8 @@ extension SyncFileOperationExecutor {
         }
     }
 
-    @MainActor func fillSyncItemsInfo(
+    @MainActor
+    func fillSyncItemsInfo(
         _ syncItems: SyncItemsInfo,
         srcArray: [CompareItem],
         foldersView: FoldersOutlineView

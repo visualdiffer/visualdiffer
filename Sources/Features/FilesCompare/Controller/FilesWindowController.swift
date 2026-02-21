@@ -134,15 +134,18 @@ class FilesWindowController: NSWindowController {
 
     // MARK: - Zoom Font
 
-    @objc func zoomLargerFont(_: AnyObject) {
+    @objc
+    func zoomLargerFont(_: AnyObject) {
         fontZoomFactor += 1
     }
 
-    @objc func zoomSmallerFont(_: AnyObject) {
+    @objc
+    func zoomSmallerFont(_: AnyObject) {
         fontZoomFactor -= 1
     }
 
-    @objc func zoomResetFont(_: AnyObject) {
+    @objc
+    func zoomResetFont(_: AnyObject) {
         fontZoomFactor = 0
     }
 }

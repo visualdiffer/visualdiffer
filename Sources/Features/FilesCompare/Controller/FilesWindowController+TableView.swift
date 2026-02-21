@@ -6,7 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@MainActor extension FilesWindowController: NSTableViewDataSource,
+@MainActor
+extension FilesWindowController: NSTableViewDataSource,
     NSTableViewDelegate,
     FilesTableViewDelegate,
     TableViewContextMenuDelegate {

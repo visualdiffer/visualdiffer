@@ -164,7 +164,8 @@ class SelectEncodingsPanel: NSWindow, NSTableViewDataSource, NSTableViewDelegate
         )
     }
 
-    @objc func closeSheet(_ sender: AnyObject) {
+    @objc
+    func closeSheet(_ sender: AnyObject) {
         let response = NSApplication.ModalResponse(sender.tag)
         var selectedEncodings = [String.Encoding]()
         if response == .OK {

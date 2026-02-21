@@ -6,12 +6,15 @@
 //  Copyright (c) 2020 visualdiffer.com
 //
 
-@MainActor @objc class FilesTableViewFindTextDelegate: NSObject, @preconcurrency FindTextDelegate {
+@objc
+@MainActor
+class FilesTableViewFindTextDelegate: NSObject, @preconcurrency FindTextDelegate {
     let view: FilesTableView
 
     private var lines = [Int]()
 
-    @objc init(view: FilesTableView) {
+    @objc
+    init(view: FilesTableView) {
         self.view = view
     }
 

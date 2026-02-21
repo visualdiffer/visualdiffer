@@ -124,7 +124,8 @@ class UserDefinedRulesBox: PreferencesBox,
     var alignRules: [AlignRule] = []
     private var editedIndex = -1
 
-    @objc override init(title: String) {
+    @objc
+    override init(title: String) {
         super.init(title: title)
 
         setupViews()
@@ -159,7 +160,8 @@ class UserDefinedRulesBox: PreferencesBox,
         ])
     }
 
-    @objc func addAlignRule(_: AnyObject) {
+    @objc
+    func addAlignRule(_: AnyObject) {
         openAlignRuleWindow(
             AlignRule(regExp: AlignRegExp(), template: AlignTemplate()),
             index: -1,
@@ -167,7 +169,8 @@ class UserDefinedRulesBox: PreferencesBox,
         )
     }
 
-    @objc func updateAlignRule(_: AnyObject) {
+    @objc
+    func updateAlignRule(_: AnyObject) {
         if !alignRules.isEmpty {
             openAlignRuleWindow(
                 alignRules[rulesTableView.selectedRow],
@@ -177,7 +180,8 @@ class UserDefinedRulesBox: PreferencesBox,
         }
     }
 
-    @objc func deleteAlignRules(_: AnyObject?) {
+    @objc
+    func deleteAlignRules(_: AnyObject?) {
         for row in rulesTableView.selectedRowIndexes.reversed() {
             alignRules.remove(at: row)
         }
@@ -185,7 +189,8 @@ class UserDefinedRulesBox: PreferencesBox,
         rulesTableView.reloadData()
     }
 
-    @objc func duplicateAlignRule(_: AnyObject) {
+    @objc
+    func duplicateAlignRule(_: AnyObject) {
         let row = rulesTableView.selectedRow
 
         if row != -1 {
@@ -312,7 +317,8 @@ class UserDefinedRulesBox: PreferencesBox,
         return true
     }
 
-    @objc func handleDoubleClick(_ sender: AnyObject) {
+    @objc
+    func handleDoubleClick(_ sender: AnyObject) {
         if rulesTableView.clickedRow != -1 { // make sure double click was not in table header
             updateAlignRule(sender)
         }

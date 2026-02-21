@@ -6,10 +6,12 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-@objc class SyncOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate {
+@objc
+class SyncOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate {
     var items: SyncItemsInfo
 
-    @objc init(items: SyncItemsInfo) {
+    @objc
+    init(items: SyncItemsInfo) {
         self.items = items
         super.init(frame: .zero)
 

@@ -10,7 +10,8 @@ import Testing
 @testable import VisualDiffer
 
 final class SymbolicLinkTests: BaseTests {
-    @Test func symbolicLinkLoop() throws {
+    @Test
+    func symbolicLinkLoop() throws {
         let comparatorDelegate = MockItemComparatorDelegate()
         let comparator = ItemComparator(
             options: .contentTimestamp,
