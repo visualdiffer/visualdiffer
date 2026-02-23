@@ -25,7 +25,10 @@ extension FilesWindowController {
         differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: diffResult))
         cachedLineTextMap.removeAllObjects()
 
-        let selectedRow = selectedRow < 0 ? lastUsedView.selectedRow : selectedRow
+        let selectedRow = min(
+            selectedRow < 0 ? lastUsedView.selectedRow : selectedRow,
+            diffResult.leftSide.lines.count - 1
+        )
 
         leftView.reloadData()
         rightView.reloadData()
@@ -64,6 +67,7 @@ extension FilesWindowController {
         } else {
             if let leftSide = leftView.diffSide,
                let rightSide = rightView.diffSide {
+                let row = min(row, leftSide.lines.count - 1)
                 let oldLine = leftSide.lines[row]
                 let newLine = rightSide.lines[row]
 
