@@ -291,16 +291,4 @@ public extension FoldersWindowController {
             rightView.selectRowIndexes(IndexSet(integer: firstVisibleRow), byExtendingSelection: false)
         }
     }
-
-    private func setProgressHidden(_ hidden: Bool) {
-        if hidden {
-            differenceCounters.isHidden = false
-            statusbarText.isHidden = false
-            progressView.isHidden = true
-        } else {
-            differenceCounters.isHidden = true
-            statusbarText.isHidden = true
-            progressView.isHidden = false
-        }
-    }
 }

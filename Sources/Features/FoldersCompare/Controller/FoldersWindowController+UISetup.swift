@@ -20,6 +20,7 @@ extension FoldersWindowController {
         updateTreeViewFont()
 
         adjustTableColumnsWidth()
+        setProgressHidden(true)
 
         // must be called after setting up all views
         setupWindow()
@@ -303,6 +304,18 @@ extension FoldersWindowController {
 
         if target == .folder {
             fontZoomFactor = 0
+        }
+    }
+
+    func setProgressHidden(_ hidden: Bool) {
+        if hidden {
+            differenceCounters.isHidden = false
+            statusbarText.isHidden = false
+            progressView.isHidden = true
+        } else {
+            differenceCounters.isHidden = true
+            statusbarText.isHidden = true
+            progressView.isHidden = false
         }
     }
 }
