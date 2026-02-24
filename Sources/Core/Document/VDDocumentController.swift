@@ -96,31 +96,30 @@ class VDDocumentController: NSDocumentController {
         var leftPathExists = false
         var rightPathExists = false
 
-        let canOpenDocument = if hasMissingPath {
-            true
-        } else if let leftUrl, let rightUrl, leftUrl.matchesFileType(
-            of: rightUrl,
-            isDir: &isFolder,
-            leftExists: &leftPathExists,
-            rightExists: &rightPathExists
-        ) {
-            true
+        // determine the item type (directory or file) whether one path or both paths are provided
+        let primaryPathUrl = leftUrl ?? rightUrl
+        let secondaryPathUrl = rightUrl ?? leftUrl
+        let canOpenDocument = if let primaryPathUrl, let secondaryPathUrl {
+            primaryPathUrl.matchesFileType(
+                of: secondaryPathUrl,
+                isDir: &isFolder,
+                leftExists: &leftPathExists,
+                rightExists: &rightPathExists
+            )
         } else {
             false
         }
 
         guard canOpenDocument else {
-            if !leftPathExists, let leftUrl {
-                throw SessionTypeError.invalidItem(path: leftUrl.osPath, isFolder: isFolder)
-            }
-            if !rightPathExists, let rightUrl {
-                throw SessionTypeError.invalidItem(path: rightUrl.osPath, isFolder: isFolder)
-            }
-            throw SessionTypeError.unknownError
+            throw SessionTypeError.invalidItem(
+                isDir: isFolder,
+                leftExists: leftPathExists,
+                rightExists: rightPathExists
+            )
         }
         // when comparing folders both paths must be set
         if isFolder, hasMissingPath {
-            throw SessionTypeError.invalidAllItems(isFolder: true)
+            throw SessionTypeError.invalidAllItems(isDir: true)
         }
         return try openDocumentWithBlock { document in
             if let sessionDiff = document.sessionDiff {

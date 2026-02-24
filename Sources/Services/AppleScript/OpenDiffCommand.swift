@@ -41,7 +41,7 @@ class OpenDiffCommand: NSScriptCommand {
                 rightUrl: rightUrl
             )
         } else {
-            let message = invalidPathMessage(
+            let message = SessionTypeError.invalidPathMessage(
                 isDir: isDir,
                 leftExists: leftExists,
                 rightExists: rightExists
@@ -67,20 +67,6 @@ class OpenDiffCommand: NSScriptCommand {
 
             return nil
         }
-    }
-
-    func invalidPathMessage(isDir: Bool, leftExists: Bool, rightExists: Bool) -> String {
-        if leftExists, rightExists {
-            if isDir {
-                return NSLocalizedString("Left path is a folder but the right is a file; both must be folders or files", comment: "")
-            } else {
-                return NSLocalizedString("Left path is a file but the right is a folder; both must be folders or files", comment: "")
-            }
-        }
-        if !leftExists {
-            return NSLocalizedString("Left path doesn't exist", comment: "")
-        }
-        return NSLocalizedString("Right path doesn't exist", comment: "")
     }
 
     func setScriptError(error: CommandError, message: String) {

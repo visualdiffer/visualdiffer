@@ -22,36 +22,28 @@ extension SessionDiff.ItemType {
     func checkFolders(leftPath: String, rightPath: String) throws {
         let fileManager = FileManager.default
         var isDir = ObjCBool(false)
-        var invalidPath: String?
 
         // show error only for last invalid path
         if !fileManager.fileExists(atPath: leftPath, isDirectory: &isDir) || !isDir.boolValue {
-            invalidPath = leftPath
+            throw SessionTypeError.invalidItem(isDir: true, leftExists: false, rightExists: true)
         }
 
         if !fileManager.fileExists(atPath: rightPath, isDirectory: &isDir) || !isDir.boolValue {
-            invalidPath = rightPath
-        }
-
-        if let invalidPath {
-            throw SessionTypeError.invalidItem(path: invalidPath, isFolder: true)
+            throw SessionTypeError.invalidItem(isDir: true, leftExists: true, rightExists: false)
         }
     }
 
     func checkFiles(leftPath: String, rightPath: String) throws {
         let fileManager = FileManager.default
-        var invalidPath: String?
 
+        if leftPath.isEmpty, rightPath.isEmpty {
+            throw SessionTypeError.invalidAllItems(isDir: false)
+        }
         if !leftPath.isEmpty, !fileManager.fileExists(atPath: leftPath) {
-            invalidPath = leftPath
+            throw SessionTypeError.invalidItem(isDir: false, leftExists: false, rightExists: true)
         }
         if !rightPath.isEmpty, !fileManager.fileExists(atPath: rightPath) {
-            invalidPath = rightPath
-        }
-        if let invalidPath {
-            throw SessionTypeError.invalidItem(path: invalidPath, isFolder: false)
-        } else if leftPath.isEmpty, rightPath.isEmpty {
-            throw SessionTypeError.invalidAllItems(isFolder: false)
+            throw SessionTypeError.invalidItem(isDir: false, leftExists: true, rightExists: false)
         }
     }
 }
