@@ -836,7 +836,7 @@ final class EmptyFolderColorTests: BaseTests {
         fileOperation.copy(
             srcRoot: operationElement,
             srcBaseDir: appendFolder("l"),
-            destBaseDir: appendFolder("r")
+            destination: .linkedSide(baseDir: appendFolder("r"))
         )
 
         do {

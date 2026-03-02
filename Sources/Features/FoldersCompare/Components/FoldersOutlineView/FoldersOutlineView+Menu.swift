@@ -17,6 +17,8 @@ protocol FoldersOutlineViewContextMenu: NSObjectProtocol {
     @MainActor
     func copyFiles(_ sender: AnyObject?)
     @MainActor
+    func copyFilesToExternal(_ sender: AnyObject?)
+    @MainActor
     func copyFullPaths(_ sender: AnyObject?)
     @MainActor
     func deleteFiles(_ sender: AnyObject?)
@@ -93,6 +95,11 @@ public extension FoldersOutlineView {
         copyFinderMetadataItem.keyEquivalentModifierMask = [.shift]
         copyFinderMetadataItem.tag = CopyFilesTag.finderMetadataOnly.rawValue
 
+        theMenu.addItem(
+            withTitle: NSLocalizedString("Copy to Folder...", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.copyFilesToExternal),
+            keyEquivalent: ""
+        )
         theMenu.addItem(
             withTitle: NSLocalizedString("Delete...", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.deleteFiles),

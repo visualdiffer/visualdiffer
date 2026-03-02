@@ -197,7 +197,7 @@ final class TagsCopyTests: BaseTests {
         fileOperation.copy(
             srcRoot: operationElement,
             srcBaseDir: appendFolder("l"),
-            destBaseDir: appendFolder("r")
+            destination: .linkedSide(baseDir: appendFolder("r"))
         )
 
         do {
@@ -483,7 +483,7 @@ final class TagsCopyTests: BaseTests {
         fileOperation.copy(
             srcRoot: operationElement,
             srcBaseDir: appendFolder("r"),
-            destBaseDir: appendFolder("l")
+            destination: .linkedSide(baseDir: appendFolder("l"))
         )
 
         do {

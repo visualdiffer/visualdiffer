@@ -69,11 +69,15 @@ class SyncFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
             return
         }
 
+        let destination = FileOperationDestination.linkedSide(
+            baseDir: URL(filePath: destBaseDir, directoryHint: .isDirectory)
+        )
+
         for item in nodes {
             manager.copy(
                 item,
                 srcBaseDir: srcBaseDir,
-                destBaseDir: destBaseDir
+                destination: destination
             )
         }
     }

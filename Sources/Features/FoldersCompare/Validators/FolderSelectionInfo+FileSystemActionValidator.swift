@@ -18,6 +18,10 @@ extension FolderSelectionInfo {
         return isValid && (foldersCount > 0 || filesCount > 0)
     }
 
+    func validateCopyFilesToExternal() -> Bool {
+        foldersCount > 0 || filesCount > 0
+    }
+
     func validateMoveFiles(_ sessionDiff: SessionDiff) -> Bool {
         let isValid = switch view.side {
         case .left:

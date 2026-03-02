@@ -42,6 +42,8 @@ extension FoldersWindowController: NSMenuDelegate,
         } else if action == #selector(copyFiles) {
             menuItem.title = CopyFilesTag.localizedTag(side: fsi.view.side, tag: menuItem.tag)
             return fsi.validateCopyFiles(sessionDiff)
+        } else if action == #selector(copyFilesToExternal) {
+            return fsi.validateCopyFilesToExternal()
         } else if action == #selector(deleteFiles) {
             return fsi.validateDeleteFiles(sessionDiff)
         } else if action == #selector(copyFullPaths)
@@ -191,6 +193,10 @@ extension FoldersWindowController: NSMenuDelegate,
                 if isReadOnly {
                     hide = false
                 }
+            }
+        } else if action == #selector(copyFilesToExternal) {
+            if !isValid {
+                hide = false
             }
         } else if action == #selector(deleteFiles) {
             // make menu visible but disabled only if it's readonly

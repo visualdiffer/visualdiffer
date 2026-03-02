@@ -232,6 +232,12 @@ extension FoldersWindowController {
         copyFinderMetadata.tag = CopyFilesTag.finderMetadataOnly.rawValue
         menu.addItem(copyFinderMetadata)
 
+        menu.addItem(
+            withTitle: NSLocalizedString("Copy to Folder...", comment: ""),
+            action: #selector(copyFilesToExternal),
+            keyEquivalent: ""
+        )
+
         let syncFiles = NSMenuItem(
             title: NSLocalizedString("Sync Files...", comment: ""),
             action: #selector(syncFiles),

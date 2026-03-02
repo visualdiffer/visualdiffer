@@ -1241,7 +1241,7 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         copyCompareItem.copy(
             srcRoot: copyRoot,
             srcBaseDir: appendFolder("l"),
-            destBaseDir: appendFolder("r")
+            destination: .linkedSide(baseDir: appendFolder("r"))
         )
         do {
             let child1 = rootL // l <-> r

@@ -8,7 +8,7 @@
 
 class CopyFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
     var title = NSLocalizedString("Copy", comment: "")
-    var summary = NSLocalizedString("Copy selected files and folders", comment: "")
+    var summary: String
     var image: NSImage?
     var progressLabel = NSLocalizedString("Copying", comment: "")
     var prefName: CommonPrefs.Name? = .confirmCopy
@@ -16,25 +16,30 @@ class CopyFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
     private let side: DisplaySide
 
     private let items: [CompareItem]
+    private let srcBaseDir: String
+    private let destination: FileOperationDestination
 
     var operationOnSingleItem: Bool {
         items.count == 1 && items[0].isFile
     }
 
-    private let srcBaseDir: String
-    private let destBaseDir: String
-
     init(
         srcBaseDir: String,
-        destBaseDir: String,
+        destination: FileOperationDestination,
         items: [CompareItem],
         side: DisplaySide
     ) {
         self.srcBaseDir = srcBaseDir
-        self.destBaseDir = destBaseDir
+        self.destination = destination
         self.side = side
         self.items = items
 
+        summary = switch destination {
+        case .linkedSide:
+            NSLocalizedString("Copy selected files and folders", comment: "")
+        case .external:
+            NSLocalizedString("Copy selected files and folders to external path", comment: "")
+        }
         image = NSImage(named: side == .left ? VDImageNameCopyRight : VDImageNameCopyLeft)
     }
 
@@ -43,7 +48,7 @@ class CopyFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
             manager.copy(
                 item,
                 srcBaseDir: srcBaseDir,
-                destBaseDir: destBaseDir
+                destination: destination
             )
         }
     }

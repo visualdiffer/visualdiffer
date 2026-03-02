@@ -75,7 +75,7 @@ extension FileOperationManager {
 
     func createDestinationDirectory(
         _ srcRoot: CompareItem,
-        destRoot _: CompareItem,
+        destRoot _: CompareItem?,
         srcBaseDir: URL,
         destBaseDir: URL,
         destFullPath: URL

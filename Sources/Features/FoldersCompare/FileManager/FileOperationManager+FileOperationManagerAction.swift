@@ -9,7 +9,11 @@
 import os.log
 
 extension FileOperationManager: FileOperationManagerAction {
-    func copy(_ srcRoot: CompareItem, srcBaseDir: String, destBaseDir: String) {
+    func copy(
+        _ srcRoot: CompareItem,
+        srcBaseDir: String,
+        destination: FileOperationDestination
+    ) {
         let copyItem = CopyCompareItem(
             operationManager: self,
             bigFileSizeThreshold: defaultBigFileSizeThreshold
@@ -18,7 +22,7 @@ extension FileOperationManager: FileOperationManagerAction {
         copyItem.copy(
             srcRoot: srcRoot,
             srcBaseDir: URL(filePath: srcBaseDir, directoryHint: .isDirectory),
-            destBaseDir: URL(filePath: destBaseDir, directoryHint: .isDirectory)
+            destination: destination
         )
     }
 

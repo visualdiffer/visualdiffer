@@ -8,13 +8,16 @@
 
 public enum FolderManagerError: Error {
     case nilPath
+    case destinationContainsSelectedSource
 }
 
-extension FolderManagerError: CustomStringConvertible {
-    public var description: String {
+extension FolderManagerError: LocalizedError {
+    public var errorDescription: String? {
         switch self {
         case .nilPath:
             "Path is not defined"
+        case .destinationContainsSelectedSource:
+            "The destination folder cannot match or be inside a selected source path"
         }
     }
 }

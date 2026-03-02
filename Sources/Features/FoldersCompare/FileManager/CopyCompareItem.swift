@@ -9,7 +9,7 @@
 import os.log
 
 // swiftlint:disable function_parameter_count file_length
-class CopyCompareItem: NSObject {
+class CopyCompareItem {
     let operationManager: FileOperationManager
     private let fm = FileManager.default
     private let deleteCompareItem: DeleteCompareItem
@@ -39,7 +39,21 @@ class CopyCompareItem: NSObject {
     func copy(
         srcRoot: CompareItem,
         srcBaseDir: URL,
-        destBaseDir: URL
+        destination: FileOperationDestination
+    ) {
+        let context = FileDestinationContext(destination: destination)
+
+        copy(
+            srcRoot: srcRoot,
+            srcBaseDir: srcBaseDir,
+            context: context
+        )
+    }
+
+    private func copy(
+        srcRoot: CompareItem,
+        srcBaseDir: URL,
+        context: FileDestinationContext
     ) {
         guard srcRoot.isValidFile else {
             return
@@ -58,16 +72,20 @@ class CopyCompareItem: NSObject {
         doCopy(
             srcRoot,
             srcBaseDir: srcBaseDir,
-            destBaseDir: destBaseDir,
+            context: context,
             parentSrcCount: &srcCount,
             parentDestCount: &destCount,
             volumeType: volumeType
         )
 
+        if context.isExternal {
+            return
+        }
+
         var parent = srcRoot.parent
         while let item = parent,
               let fsUrl = item.toUrl() {
-            let destFullPath = URL.buildDestinationPath(fsUrl, nil, srcBaseDir, destBaseDir)
+            let destFullPath = URL.buildDestinationPath(fsUrl, nil, srcBaseDir, context.baseDir)
 
             item.addOlderFiles(-srcCount.olderFiles)
             item.addChangedFiles(-srcCount.changedFiles)
@@ -105,7 +123,7 @@ class CopyCompareItem: NSObject {
     private func doCopy(
         _ srcRoot: CompareItem,
         srcBaseDir: URL,
-        destBaseDir: URL,
+        context: FileDestinationContext,
         parentSrcCount: inout CompareSummary,
         parentDestCount: inout CompareSummary,
         volumeType: String
@@ -126,17 +144,35 @@ class CopyCompareItem: NSObject {
             return true
         }
         guard let srcRootPath = srcRoot.path,
-              let destRoot = srcRoot.linkedItem else {
+              let srcUrl = srcRoot.toUrl() else {
+            return true
+        }
+
+        let destRoot = context.destinationRoot(for: srcRoot)
+        if context.isLinkedSide, destRoot == nil {
             return true
         }
 
         // skip orphans items when copy metadata
-        guard destRoot.isValidFile || !copyFinderMetadataOnly else {
+        if context.isLinkedSide,
+           copyFinderMetadataOnly,
+           !(destRoot?.isValidFile ?? false) {
             return true
         }
 
         var retVal = true
-        var destFullPath = srcRoot.buildDestinationPath(from: srcBaseDir, to: destBaseDir)
+        let destBaseDir = context.baseDir
+        var destFullPath: URL
+        do {
+            destFullPath = try context.destinationPath(
+                srcRoot: srcRoot,
+                srcBaseDir: srcBaseDir,
+                srcUrl: srcUrl
+            )
+        } catch {
+            delegate.fileManager(operationManager, addError: error, forItem: srcRoot)
+            return true
+        }
 
         do {
             let srcAttrs = try fm.attributesOfItem(atPath: srcRootPath)
@@ -146,7 +182,7 @@ class CopyCompareItem: NSObject {
                     srcRoot,
                     destRoot: destRoot,
                     srcBaseDir: srcBaseDir,
-                    destBaseDir: destBaseDir,
+                    context: context,
                     parentSrcCount: &parentSrcCount,
                     parentDestCount: &parentDestCount,
                     skipFile: &skipFile,
@@ -165,9 +201,8 @@ class CopyCompareItem: NSObject {
                 )
                 retVal = copySubfolders(
                     srcRoot,
-                    destRoot: destRoot,
                     srcBaseDir: srcBaseDir,
-                    destBaseDir: destBaseDir,
+                    context: context,
                     destFullPath: &destFullPath,
                     parentSrcCount: &parentSrcCount,
                     parentDestCount: &parentDestCount,
@@ -181,7 +216,8 @@ class CopyCompareItem: NSObject {
                 destFullPath: destFullPath,
                 parentSrcCount: &parentSrcCount,
                 parentDestCount: &parentDestCount,
-                volumeType: volumeType
+                volumeType: volumeType,
+                context: context
             )
         } catch {
             delegate.fileManager(operationManager, addError: error, forItem: srcRoot)
@@ -189,11 +225,12 @@ class CopyCompareItem: NSObject {
         return retVal
     }
 
-    func copySingleFile(
+    // swiftlint:disable:next function_body_length
+    private func copySingleFile(
         _ srcRoot: CompareItem,
-        destRoot: CompareItem,
+        destRoot: CompareItem?,
         srcBaseDir: URL,
-        destBaseDir: URL,
+        context: FileDestinationContext,
         parentSrcCount: inout CompareSummary,
         parentDestCount: inout CompareSummary,
         skipFile: inout Bool,
@@ -208,11 +245,17 @@ class CopyCompareItem: NSObject {
         }
         let delegate = operationManager.delegate
         var srcCount = srcRoot.summary
-        var destCount = destRoot.summary
+        var destCount = destRoot?.summary ?? .init()
         var fileSize: Int64 = 0
+        let destBaseDir = context.baseDir
         do {
             let srcAttrs = try fm.attributesOfItem(atPath: srcRootPath)
-            let destFullPath = srcRoot.buildDestinationPath(from: srcBaseDir, to: destBaseDir)
+            let srcUrl = srcRoot.toUrl()
+            let destFullPath = try context.destinationPath(
+                srcRoot: srcRoot,
+                srcBaseDir: srcBaseDir,
+                srcUrl: srcUrl
+            )
             var destAttrs: [FileAttributeKey: Any]?
             var destError: NSError?
             do {
@@ -241,13 +284,17 @@ class CopyCompareItem: NSObject {
                 options: operationManager.comparator.options.directoryOptions
             )
             if let destAttrs {
-                destRoot.path = destFullPath.osPath
-                destRoot.setAttributes(destAttrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
-                deleteCompareItem.doDelete(
-                    destRoot,
-                    baseDir: destBaseDir,
-                    informDelegate: false
-                )
+                if context.isLinkedSide, let destRoot {
+                    destRoot.path = destFullPath.osPath
+                    destRoot.setAttributes(destAttrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+                    deleteCompareItem.doDelete(
+                        destRoot,
+                        baseDir: destBaseDir,
+                        informDelegate: false
+                    )
+                } else {
+                    try fm.removeItem(at: destFullPath)
+                }
             }
             delegate.fileManager(operationManager, initForItem: srcRoot)
             if let destError {
@@ -267,6 +314,15 @@ class CopyCompareItem: NSObject {
         #if DEBUG && __VD_SLOW_OP__
             simulateSlowOperation("copy")
         #endif
+
+        if context.isExternal {
+            delegate.fileManager(operationManager, updateForItem: srcRoot)
+            return
+        }
+
+        guard let destRoot else {
+            return
+        }
 
         srcRoot.addMatchedFiles(1)
         srcRoot.updateMetadata(
@@ -318,11 +374,10 @@ class CopyCompareItem: NSObject {
         #endif
     }
 
-    func copySubfolders(
+    private func copySubfolders(
         _ srcRoot: CompareItem,
-        destRoot _: CompareItem,
         srcBaseDir: URL,
-        destBaseDir: URL,
+        context: FileDestinationContext,
         destFullPath: inout URL,
         parentSrcCount: inout CompareSummary,
         parentDestCount: inout CompareSummary,
@@ -337,7 +392,7 @@ class CopyCompareItem: NSObject {
             if !doCopy(
                 item,
                 srcBaseDir: srcBaseDir,
-                destBaseDir: destBaseDir,
+                context: context,
                 parentSrcCount: &srcCount,
                 parentDestCount: &destCount,
                 volumeType: volumeType
@@ -352,45 +407,51 @@ class CopyCompareItem: NSObject {
             operationManager.delegate.fileManager(operationManager, addError: error, forItem: srcRoot)
         }
 
-        if srcRoot.isOrphanFolder {
-            srcRoot.addOrphanFolders(-1)
-        }
-        srcRoot.addOlderFiles(-srcCount.olderFiles)
-        srcRoot.addChangedFiles(-srcCount.changedFiles)
-        srcRoot.addOrphanFiles(-srcCount.orphanFiles)
-        // matched file count increases
-        srcRoot.addMatchedFiles(srcCount.matchedFiles)
-
-        parentSrcCount += srcCount
-        var srcCountDummy = CompareSummary()
-        srcRoot.updateMetadata(with: &parentSrcCount, fileObjectCount: &srcCountDummy)
-
-        if let srcRootLinked = srcRoot.linkedItem {
-            srcRootLinked.addOlderFiles(-destCount.olderFiles)
-            srcRootLinked.addChangedFiles(-destCount.changedFiles)
-            srcRootLinked.addOrphanFiles(-destCount.orphanFiles)
-            srcRootLinked.addSubfoldersSize(destCount.subfoldersSize)
-
+        if context.isLinkedSide {
+            if srcRoot.isOrphanFolder {
+                srcRoot.addOrphanFolders(-1)
+            }
+            srcRoot.addOlderFiles(-srcCount.olderFiles)
+            srcRoot.addChangedFiles(-srcCount.changedFiles)
+            srcRoot.addOrphanFiles(-srcCount.orphanFiles)
             // matched file count increases
-            srcRootLinked.addMatchedFiles(destCount.matchedFiles)
+            srcRoot.addMatchedFiles(srcCount.matchedFiles)
 
-            parentDestCount += destCount
-            var destCountDummy = CompareSummary()
-            srcRootLinked.updateMetadata(with: &parentDestCount, fileObjectCount: &destCountDummy)
+            parentSrcCount += srcCount
+            var srcCountDummy = CompareSummary()
+            srcRoot.updateMetadata(with: &parentSrcCount, fileObjectCount: &srcCountDummy)
+
+            if let srcRootLinked = srcRoot.linkedItem {
+                srcRootLinked.addOlderFiles(-destCount.olderFiles)
+                srcRootLinked.addChangedFiles(-destCount.changedFiles)
+                srcRootLinked.addOrphanFiles(-destCount.orphanFiles)
+                srcRootLinked.addSubfoldersSize(destCount.subfoldersSize)
+
+                // matched file count increases
+                srcRootLinked.addMatchedFiles(destCount.matchedFiles)
+
+                parentDestCount += destCount
+                var destCountDummy = CompareSummary()
+                srcRootLinked.updateMetadata(with: &parentDestCount, fileObjectCount: &destCountDummy)
+            }
         }
         return retVal
     }
 
-    func copyAttributes(
+    private func copyAttributes(
         _ srcRoot: CompareItem,
-        destRoot: CompareItem,
+        destRoot: CompareItem?,
         attributes: [FileAttributeKey: Any],
         destFullPath: URL,
         parentSrcCount: inout CompareSummary,
         parentDestCount: inout CompareSummary,
-        volumeType: String
+        volumeType: String,
+        context: FileDestinationContext
     ) throws {
         if copyFinderMetadataOnly {
+            guard context.isLinkedSide, let destRoot else {
+                return
+            }
             var srcCount = srcRoot.summary
             var destCount = destRoot.summary
             var destFullPath = destFullPath
@@ -427,10 +488,11 @@ class CopyCompareItem: NSObject {
         // here we assign again the copied values
         let destAttrs = try fm.attributesOfItem(atPath: destFullPath.osPath)
 
-        destRoot.path = destFullPath.osPath
-        destRoot.setAttributes(destAttrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
-
-        srcRoot.removeVisibleItems(filterConfig: operationManager.filterConfig)
+        if context.isLinkedSide, let destRoot {
+            destRoot.path = destFullPath.osPath
+            destRoot.setAttributes(destAttrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+            srcRoot.removeVisibleItems(filterConfig: operationManager.filterConfig)
+        }
     }
 }
 

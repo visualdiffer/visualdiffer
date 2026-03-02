@@ -83,4 +83,17 @@ public extension BaseTests {
             throw TestError.onlySetup
         #endif
     }
+
+    func assertFileExists(
+        _ path: String,
+        _ content: String? = nil,
+        sourceLocation: SourceLocation = #_sourceLocation
+    ) throws {
+        #expect(FileManager.default.fileExists(atPath: path), "File does not exist at \(path)", sourceLocation: sourceLocation)
+        guard let content else {
+            return
+        }
+        let foundContent = try String(contentsOfFile: path, encoding: .utf8)
+        #expect(foundContent == content, "File \(path) content does not match, expected \(content) found \(foundContent)", sourceLocation: sourceLocation)
+    }
 }

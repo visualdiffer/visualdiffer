@@ -78,7 +78,7 @@ final class CopyFinderMetadata: BaseTests {
         )
 
         let rootL = try #require(folderReader.leftRoot)
-        let rootR = try #require(folderReader.rightRoot)
+        _ = try #require(folderReader.rightRoot)
         let vi = try #require(rootL.visibleItem)
 
         let child1 = rootL // l <-> r
@@ -259,7 +259,7 @@ final class CopyFinderMetadata: BaseTests {
         fileOperation.copy(
             srcRoot: child2,
             srcBaseDir: appendFolder("l"),
-            destBaseDir: appendFolder("r")
+            destination: .linkedSide(baseDir: appendFolder("r"))
         )
 
         do {

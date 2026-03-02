@@ -133,7 +133,7 @@ final class CopyFilesTests: BaseTests {
         fileOperation.copy(
             srcRoot: child2,
             srcBaseDir: appendFolder("l"),
-            destBaseDir: appendFolder("r")
+            destination: .linkedSide(baseDir: appendFolder("r"))
         )
 
         child1 = rootL.children[0]
@@ -329,7 +329,7 @@ final class CopyFilesTests: BaseTests {
         try fileOperation.copy(
             srcRoot: #require(child1.linkedItem),
             srcBaseDir: appendFolder("r"),
-            destBaseDir: appendFolder("l")
+            destination: .linkedSide(baseDir: appendFolder("l"))
         )
 
         child1 = rootL.children[0]
@@ -518,7 +518,7 @@ final class CopyFilesTests: BaseTests {
         fileOperation.copy(
             srcRoot: child2,
             srcBaseDir: appendFolder("l"),
-            destBaseDir: appendFolder("r")
+            destination: .linkedSide(baseDir: appendFolder("r"))
         )
 
         child1 = rootL.children[0]
@@ -748,7 +748,7 @@ final class CopyFilesTests: BaseTests {
         fileOperation.copy(
             srcRoot: child1,
             srcBaseDir: appendFolder("l"),
-            destBaseDir: appendFolder("r")
+            destination: .linkedSide(baseDir: appendFolder("r"))
         )
 
         child1 = rootL.children[0] // l
@@ -963,7 +963,7 @@ final class CopyFilesTests: BaseTests {
         try fileOperation.copy(
             srcRoot: #require(child2.linkedItem),
             srcBaseDir: appendFolder("r"),
-            destBaseDir: appendFolder("l")
+            destination: .linkedSide(baseDir: appendFolder("l"))
         )
 
         child1 = rootL.children[0] // l
@@ -1217,7 +1217,7 @@ final class CopyFilesTests: BaseTests {
         try fileOperation.copy(
             srcRoot: #require(child2.linkedItem),
             srcBaseDir: appendFolder("r"),
-            destBaseDir: appendFolder("l")
+            destination: .linkedSide(baseDir: appendFolder("l"))
         )
 
         child1 = rootL.children[0] // l
@@ -1420,7 +1420,7 @@ final class CopyFilesTests: BaseTests {
         fileOperation.copy(
             srcRoot: child4,
             srcBaseDir: appendFolder("l"),
-            destBaseDir: appendFolder("r")
+            destination: .linkedSide(baseDir: appendFolder("r"))
         )
 
         child1 = rootL.children[0] // l
@@ -1585,7 +1585,7 @@ final class CopyFilesTests: BaseTests {
         fileOperation.copy(
             srcRoot: child1,
             srcBaseDir: appendFolder("l"),
-            destBaseDir: appendFolder("r")
+            destination: .linkedSide(baseDir: appendFolder("r"))
         )
 
         do {
@@ -1635,6 +1635,212 @@ final class CopyFilesTests: BaseTests {
             assertItem(child4, 0, 0, 0, 1, 0, "file1.txt", .same, 2)
             assertItem(child4.linkedItem, 0, 0, 0, 1, 0, "file1.txt", .same, 2)
         }
+    }
+
+    @Test
+    func copyToExternalPath() throws {
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.timestamp, .size, .content, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: false,
+            isRightCaseSensitive: false
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: false,
+            skipPackages: true,
+            traverseFilteredFolders: true,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .onlyMismatches
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+        try removeItem("external")
+
+        // create folders
+        try createFolder("external")
+        try createFolder("l")
+        try createFolder("r")
+        try createFolder("l/dir1")
+        try createFolder("r/dir1")
+        try createFolder("l/dir1/dir2")
+        try createFolder("r/dir1/dir2")
+
+        // create files
+        try createFile("l/dir1/dir2/big_file", "123456789012")
+        try createFile("r/dir1/dir2/big_file", "1234")
+        try createFile("l/dir1/file.txt", "123456")
+        try createFile("r/dir1/file.txt", "123456")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let rootL = try #require(folderReader.leftRoot)
+        _ = try #require(folderReader.rightRoot)
+        let vi = try #require(rootL.visibleItem)
+
+        let child1 = rootL // l <-> r
+        assertItem(child1, 0, 1, 0, 1, 1, "l", .orphan, 18)
+        #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+        assertItem(child1.linkedItem, 0, 1, 0, 1, 1, "r", .orphan, 10)
+        #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+
+        let child2 = child1.children[0] // l <-> r
+        assertItem(child2, 0, 1, 0, 1, 2, "dir1", .orphan, 18)
+        #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+        assertItem(child2.linkedItem, 0, 1, 0, 1, 2, "dir1", .orphan, 10)
+        #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.linkedItem!.orphanFolders)")
+
+        let child3 = child2.children[0] // dir1 <-> dir1
+        assertItem(child3, 0, 1, 0, 0, 1, "dir2", .orphan, 12)
+        #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+        assertItem(child3.linkedItem, 0, 1, 0, 0, 1, "dir2", .orphan, 4)
+        #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+        let child4 = child3.children[0] // dir2 <-> dir2
+        assertItem(child4, 0, 1, 0, 0, 0, "big_file", .changed, 12)
+        assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "big_file", .changed, 4)
+
+        let child5 = child2.children[1] // dir1 <-> dir1
+        assertItem(child5, 0, 0, 0, 1, 0, "file.txt", .same, 6)
+        assertItem(child5.linkedItem, 0, 0, 0, 1, 0, "file.txt", .same, 6)
+
+        do {
+            // VisibleItems
+            let childVI1 = vi // l <--> r
+            assertArrayCount(childVI1.children, 1)
+            let child1 = childVI1.item // nil <-> nil
+            assertItem(child1, 0, 1, 0, 1, 1, "l", .orphan, 18)
+            #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 0, 1, 0, 1, 1, "r", .orphan, 10)
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+
+            let childVI2 = childVI1.children[0] // l <--> r
+            assertArrayCount(childVI2.children, 1)
+            let child2 = childVI2.item // l <-> r
+            assertItem(child2, 0, 1, 0, 1, 2, "dir1", .orphan, 18)
+            #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+            assertItem(child2.linkedItem, 0, 1, 0, 1, 2, "dir1", .orphan, 10)
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.linkedItem!.orphanFolders)")
+
+            let childVI3 = childVI2.children[0] // dir1 <--> dir1
+            assertArrayCount(childVI3.children, 1)
+            let child3 = childVI3.item // dir1 <-> dir1
+            assertItem(child3, 0, 1, 0, 0, 1, "dir2", .orphan, 12)
+            #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+            assertItem(child3.linkedItem, 0, 1, 0, 0, 1, "dir2", .orphan, 4)
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+            let childVI4 = childVI3.children[0] // dir2 <--> dir2
+            assertArrayCount(childVI4.children, 0)
+            let child4 = childVI4.item // dir2 <-> dir2
+            assertItem(child4, 0, 1, 0, 0, 0, "big_file", .changed, 12)
+            assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "big_file", .changed, 4)
+        }
+
+        try assertOnlySetup()
+
+        // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
+        // otherwise is released to early it the test crashes
+        let fileOperationDelegate = MockFileOperationManagerDelegate()
+        let fileOperationManager = FileOperationManager(
+            filterConfig: filterConfig,
+            comparator: comparator,
+            delegate: fileOperationDelegate,
+            includesFiltered: false
+        )
+        let fileOperation = CopyCompareItem(
+            operationManager: fileOperationManager,
+            bigFileSizeThreshold: 100_000
+        )
+
+        fileOperation.copy(
+            srcRoot: child2,
+            srcBaseDir: appendFolder("l"),
+            destination: FileOperationDestination.external(baseDir: appendFolder("external"))
+        )
+
+        do {
+            let child1 = rootL // l <-> r
+            assertItem(child1, 0, 1, 0, 1, 1, "l", .orphan, 18)
+            #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 0, 1, 0, 1, 1, "r", .orphan, 10)
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+
+            let child2 = child1.children[0] // l <-> r
+            assertItem(child2, 0, 1, 0, 1, 2, "dir1", .orphan, 18)
+            #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+            assertItem(child2.linkedItem, 0, 1, 0, 1, 2, "dir1", .orphan, 10)
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.linkedItem!.orphanFolders)")
+
+            let child3 = child2.children[0] // dir1 <-> dir1
+            assertItem(child3, 0, 1, 0, 0, 1, "dir2", .orphan, 12)
+            #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+            assertItem(child3.linkedItem, 0, 1, 0, 0, 1, "dir2", .orphan, 4)
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+            let child4 = child3.children[0] // dir2 <-> dir2
+            assertItem(child4, 0, 1, 0, 0, 0, "big_file", .changed, 12)
+            assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "big_file", .changed, 4)
+
+            let child5 = child2.children[1] // dir1 <-> dir1
+            assertItem(child5, 0, 0, 0, 1, 0, "file.txt", .same, 6)
+            assertItem(child5.linkedItem, 0, 0, 0, 1, 0, "file.txt", .same, 6)
+        }
+
+        do {
+            // VisibleItems
+            let childVI1 = vi // l <--> r
+            assertArrayCount(childVI1.children, 1)
+            let child1 = childVI1.item // nil <-> nil
+            assertItem(child1, 0, 1, 0, 1, 1, "l", .orphan, 18)
+            #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 0, 1, 0, 1, 1, "r", .orphan, 10)
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+
+            let childVI2 = childVI1.children[0] // l <--> r
+            assertArrayCount(childVI2.children, 1)
+            let child2 = childVI2.item // l <-> r
+            assertItem(child2, 0, 1, 0, 1, 2, "dir1", .orphan, 18)
+            #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+            assertItem(child2.linkedItem, 0, 1, 0, 1, 2, "dir1", .orphan, 10)
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.linkedItem!.orphanFolders)")
+
+            let childVI3 = childVI2.children[0] // dir1 <--> dir1
+            assertArrayCount(childVI3.children, 1)
+            let child3 = childVI3.item // dir1 <-> dir1
+            assertItem(child3, 0, 1, 0, 0, 1, "dir2", .orphan, 12)
+            #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+            assertItem(child3.linkedItem, 0, 1, 0, 0, 1, "dir2", .orphan, 4)
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+            let childVI4 = childVI3.children[0] // dir2 <--> dir2
+            assertArrayCount(childVI4.children, 0)
+            let child4 = childVI4.item // dir2 <-> dir2
+            assertItem(child4, 0, 1, 0, 0, 0, "big_file", .changed, 12)
+            assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "big_file", .changed, 4)
+        }
+
+        let externalURL = appendFolder("external")
+            .appending(component: "dir1/dir2/big_file")
+            .path(percentEncoded: false)
+        try assertFileExists(externalURL, "123456789012")
     }
 }
 

@@ -36,7 +36,12 @@ protocol FileOperationManagerDelegate: AnyObject {
 }
 
 public protocol FileOperationManagerAction: AnyObject {
-    func copy(_ srcRoot: CompareItem, srcBaseDir: String, destBaseDir: String)
+    func copy(
+        _ srcRoot: CompareItem,
+        srcBaseDir: String,
+        destination: FileOperationDestination
+    )
+
     func move(
         _ srcRoot: CompareItem,
         srcBaseDir: String,
