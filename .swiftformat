@@ -19,3 +19,6 @@
 
 --disable docComments
 
+--disable swiftTestingTestCaseNames
+--disable redundantSendable
+
