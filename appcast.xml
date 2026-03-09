@@ -5,36 +5,42 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.5</title>
+            <title>Version 2.1.6</title>
             <description>
                 <![CDATA[
-                <h1 id="v215">v2.1.5</h1>
+                <h1 id="v216">v2.1.6</h1>
 
 <h3 id="features">🚀 Features</h3>
 
 <ul>
+  <li>add “copy to folder…” (<a href="https://github.com/visualdiffer/visualdiffer/commit/6a36e30ccabf127c67694fc6ba0142c68e50da1b">6a36e30</a>)</li>
+</ul>
+
+<h3 id="bug-fixes">🐛 Bug Fixes</h3>
+
+<ul>
   <li>
-    <p>add sandbox warning and –no-warning flag to visdiff (<a href="https://github.com/visualdiffer/visualdiffer/commit/d238fdb292ec9300d2009886296fca37cf4e5325">d238fdb</a>)</p>
+    <p>File Compare: prevent crash when deleting missing section (<a href="https://github.com/visualdiffer/visualdiffer/commit/d1db98504c71ae35f9e7b834a59a8969f97413f5">d1db985</a>)</p>
   </li>
   <li>
-    <p>Folder Compare: normalize size units across compare panes (<a href="https://github.com/visualdiffer/visualdiffer/commit/7c13c6aa3c61a5e899abd2053d139130661b8e57">7c13c6a</a>)</p>
+    <p>Folder Compare: prevent early progress bar display (<a href="https://github.com/visualdiffer/visualdiffer/commit/375143d7eba47faab3d7c3f060365776c1ae1946">375143d</a>)</p>
   </li>
   <li>
-    <p>Folder Compare: copy only Finder metadata, not file contents (<a href="https://github.com/visualdiffer/visualdiffer/commit/663f9fe417c11c2ce72a7f31eb69bb17bc468478">663f9fe</a>)</p>
+    <p>Folder Compare: show modified file count with newer files (<a href="https://github.com/visualdiffer/visualdiffer/commit/d6d35cee457cbabca15f15c839754378c4864133">d6d35ce</a>)</p>
   </li>
 </ul>
 
 
                 ]]>
             </description>
-            <pubDate>Mon, 16 February 2026 00:00:00 +0100</pubDate>
-            <sparkle:version>2.1.5</sparkle:version>
-            <sparkle:shortVersionString>2.1.5</sparkle:shortVersionString>
+            <pubDate>Mon, 9 March 2026 00:00:00 +0100</pubDate>
+            <sparkle:version>2.1.6</sparkle:version>
+            <sparkle:shortVersionString>2.1.6</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.5/VisualDiffer-2.1.5.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.6/VisualDiffer-2.1.6.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="9KYvXt8+xtt6UM9fPpMX15rk/dCdHQdPQkKtacfuxk5bPOo1TWQIIjkstBf6zGx1t4ybORHkNinmffU+PS0JBQ==" length="5506942"
+                sparkle:edSignature="9Q+8l0ECUDGpCvvaOIYxj1LpaRyRZECMOegJmlMJ09K+BABT76A3lITRo8iRJ5PnQqGxAWgB6LtMXOxjur9zDg==" length="5537538"
 
             />
         </item>
