@@ -45,7 +45,7 @@ public protocol FileOperationManagerAction: AnyObject {
     func move(
         _ srcRoot: CompareItem,
         srcBaseDir: String,
-        destBaseDir: String
+        destination: FileOperationDestination
     )
     func delete(_ srcRoot: CompareItem, srcBaseDir: String)
     func touch(_ srcRoot: CompareItem, includeSubfolders: Bool, touch touchDate: Date?)

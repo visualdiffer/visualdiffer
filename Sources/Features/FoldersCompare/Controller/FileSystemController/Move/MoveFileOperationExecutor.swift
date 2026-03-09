@@ -8,7 +8,7 @@
 
 class MoveFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
     var title = NSLocalizedString("Move", comment: "")
-    var summary = NSLocalizedString("Move selected files and folders", comment: "")
+    var summary: String
     var image: NSImage?
     var progressLabel = NSLocalizedString("Moving", comment: "")
     var prefName: CommonPrefs.Name? = .confirmMove
@@ -22,28 +22,38 @@ class MoveFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
     }
 
     private let srcBaseDir: String
-    private let destBaseDir: String
+    private let destination: FileOperationDestination
 
     init(
         srcBaseDir: String,
-        destBaseDir: String,
+        destination: FileOperationDestination,
         items: [CompareItem],
         side: DisplaySide
     ) {
         self.srcBaseDir = srcBaseDir
-        self.destBaseDir = destBaseDir
+        self.destination = destination
         self.side = side
         self.items = items
 
+        summary = switch destination {
+        case .linkedSide:
+            NSLocalizedString("Move selected files and folders", comment: "")
+        case .external:
+            NSLocalizedString("Move selected files and folders to external path", comment: "")
+        }
         image = NSImage(named: side == .left ? VDImageNameMoveRight : VDImageNameMoveLeft)
     }
 
     func execute(_ manager: FileOperationManagerAction, payload _: Sendable?) {
+        let operationBaseDir = destination.resolveOperationBaseDir(
+            items: items,
+            srcBaseDir: srcBaseDir
+        )
         for item in items {
             manager.move(
                 item,
-                srcBaseDir: srcBaseDir,
-                destBaseDir: destBaseDir
+                srcBaseDir: operationBaseDir,
+                destination: destination
             )
         }
     }

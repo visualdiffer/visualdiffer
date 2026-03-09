@@ -11,7 +11,6 @@ extension CompareItem {
      * Eliminate all ancestor elements from the provided array.
      * The resulting array will contain only leaf paths.
      */
-    @objc
     static func findLeafPaths(_ items: [CompareItem]) -> [CompareItem] {
         // The items must be sorted to find correctly the leaves
         let arr = items.sorted {
@@ -36,6 +35,57 @@ extension CompareItem {
         }
 
         return leaves
+    }
+
+    /// Returns the common ancestor path shared by all items' parent directories.
+    ///
+    /// For example, given items with parents `/l/dir/deeper` and `/l/dir/level2`,
+    /// returns `/l/dir`.
+    ///
+    /// - Parameter items: The items whose parent paths are compared.
+    /// - Returns: The longest common ancestor path, or `nil` if any item has no parent
+    ///   or the items list is empty.
+    static func commonAncestorPath(_ items: [CompareItem]) -> String? {
+        let parentUrls = items.compactMap { $0.parent?.toUrl() }
+
+        guard parentUrls.count == items.count,
+              let first = parentUrls.first else {
+            return nil
+        }
+
+        let firstComponents = first.pathComponents
+        var commonCount = firstComponents.count
+
+        for parentUrl in parentUrls.dropFirst() {
+            let components = parentUrl.pathComponents
+            let maxCount = min(commonCount, components.count)
+            var index = 0
+
+            while index < maxCount, firstComponents[index] == components[index] {
+                index += 1
+            }
+
+            guard index > 0 else {
+                return nil
+            }
+            commonCount = index
+        }
+
+        return pathFromComponents(Array(firstComponents.prefix(commonCount)))
+    }
+
+    private static func pathFromComponents(_ components: [String]) -> String? {
+        guard let first = components.first else {
+            return nil
+        }
+
+        let rest = components.dropFirst()
+
+        if first == "/" {
+            return "/" + rest.joined(separator: "/")
+        }
+
+        return rest.isEmpty ? first : components.joined(separator: "/")
     }
 
     func isAncestor(of child: CompareItem) -> Bool {

@@ -31,6 +31,8 @@ protocol FoldersOutlineViewContextMenu: NSObjectProtocol {
     @MainActor
     func moveFiles(_ sender: AnyObject?)
     @MainActor
+    func moveFilesToExternal(_ sender: AnyObject?)
+    @MainActor
     func popupOpenWithApp(_ sender: AnyObject?)
     @MainActor
     func setAsBaseFolder(_ sender: AnyObject?)
@@ -47,114 +49,165 @@ protocol FoldersOutlineViewContextMenu: NSObjectProtocol {
 public extension FoldersOutlineView {
     // MARK: - Menu Definition
 
-    override class var defaultMenu: NSMenu? {
-        let theMenu = NSMenu(title: NSLocalizedString("Contextual Menu", comment: ""))
-        theMenu.autoenablesItems = false
-        theMenu.addItem(
+    private static func addFolderItems(_ menu: NSMenu) {
+        menu.addItem(
             withTitle: NSLocalizedString("Expand all Subfolders", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.expandSelectedSubfolders),
             keyEquivalent: ""
         )
-        theMenu.addItem(
-            withTitle: NSLocalizedString("Set as Base Folder", comment: ""),
-            action: #selector(FoldersOutlineViewContextMenu.setAsBaseFolder),
-            keyEquivalent: ""
-        )
-        theMenu.addItem(
-            withTitle: NSLocalizedString("Set as Base Folder on the Other Side", comment: ""),
-            action: #selector(FoldersOutlineViewContextMenu.setAsBaseFolderOtherSide),
-            keyEquivalent: ""
-        )
-        theMenu.addItem(
-            withTitle: NSLocalizedString("Set as Base Folders Both Sides", comment: ""),
-            action: #selector(FoldersOutlineViewContextMenu.setAsBaseFoldersBothSides),
-            keyEquivalent: ""
-        )
-        theMenu.addItem(
+    }
+
+    private static func addCompareItems(_ menu: NSMenu) {
+        menu.addItem(
             withTitle: NSLocalizedString("Compare Files", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.compareFiles),
             keyEquivalent: ""
         )
-        theMenu.addItem(
+        menu.addItem(
             withTitle: NSLocalizedString("Compare Folders", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.compareFolders),
             keyEquivalent: ""
         )
+    }
 
-        theMenu.addItem(
+    private static func addSetAsBaseItems(_ menu: NSMenu) {
+        menu.addItem(
+            withTitle: NSLocalizedString("Set as Base Folder", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.setAsBaseFolder),
+            keyEquivalent: ""
+        )
+        menu.addItem(
+            withTitle: NSLocalizedString("Set as Base Folder on the Other Side", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.setAsBaseFolderOtherSide),
+            keyEquivalent: ""
+        )
+        menu.addItem(
+            withTitle: NSLocalizedString("Set as Base Folders Both Sides", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.setAsBaseFoldersBothSides),
+            keyEquivalent: ""
+        )
+    }
+
+    private static func addFileSystemItems(_ menu: NSMenu) {
+        menu.addItem(
             withTitle: NSLocalizedString("Copy...", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.copyFiles),
             keyEquivalent: ""
         )
-
-        let copyFinderMetadataItem = theMenu.addItem(
-            withTitle: NSLocalizedString("Copy Metadata...", comment: ""),
-            action: #selector(FoldersOutlineViewContextMenu.copyFiles),
-            keyEquivalent: ""
-        )
-        copyFinderMetadataItem.keyEquivalentModifierMask = [.shift]
-        copyFinderMetadataItem.tag = CopyFilesTag.finderMetadataOnly.rawValue
-
-        theMenu.addItem(
-            withTitle: NSLocalizedString("Copy to Folder...", comment: ""),
-            action: #selector(FoldersOutlineViewContextMenu.copyFilesToExternal),
-            keyEquivalent: ""
-        )
-        theMenu.addItem(
-            withTitle: NSLocalizedString("Delete...", comment: ""),
-            action: #selector(FoldersOutlineViewContextMenu.deleteFiles),
-            keyEquivalent: ""
-        )
-        theMenu.addItem(
+        menu.addItem(
             withTitle: NSLocalizedString("Move...", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.moveFiles),
             keyEquivalent: ""
         )
+        menu.addItem(
+            withTitle: NSLocalizedString("Delete...", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.deleteFiles),
+            keyEquivalent: ""
+        )
+    }
 
-        theMenu.addItem(NSMenuItem.separator())
-
-        theMenu.addItem(
+    private static func addExcludeItems(_ menu: NSMenu) {
+        menu.addItem(
             withTitle: NSLocalizedString("Exclude Items", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.excludeByName),
             keyEquivalent: ""
         )
-        theMenu.addItem(
+        menu.addItem(
             withTitle: NSLocalizedString("Exclude by Ext", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.excludeByExt),
             keyEquivalent: ""
         )
+    }
 
-        theMenu.addItem(NSMenuItem.separator())
-
-        theMenu.addItem(
+    private static func addCopyPathsItems(_ menu: NSMenu) {
+        menu.addItem(
             withTitle: NSLocalizedString("Copy Paths", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.copyFullPaths),
             keyEquivalent: ""
         )
-        let copyFileNamesItem = theMenu.addItem(
+        let copyFileNamesItem = menu.addItem(
             withTitle: NSLocalizedString("Copy File Names", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.copyFileNames),
             keyEquivalent: ""
         )
         copyFileNamesItem.keyEquivalentModifierMask = .option
         copyFileNamesItem.isAlternate = true
+    }
 
-        theMenu.addItem(
+    private static func addFinderItems(_ menu: NSMenu) {
+        menu.addItem(
             withTitle: NSLocalizedString("Show in Finder", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.showInFinder),
             keyEquivalent: ""
         )
-        theMenu.addItem(
+        menu.addItem(
             withTitle: NSLocalizedString("Open With", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.popupOpenWithApp),
             keyEquivalent: ""
         )
-        let quickLookItem = theMenu.addItem(
+        let quickLookItem = menu.addItem(
             withTitle: NSLocalizedString("Quick Look", comment: ""),
             action: #selector(FoldersOutlineViewContextMenu.togglePreviewPanel),
             keyEquivalent: ""
         )
         quickLookItem.image = NSImage(named: NSImage.quickLookTemplateName)
+    }
+
+    private static func addAdvancedItems(_ menu: NSMenu) {
+        let advancedItem = NSMenuItem(
+            title: NSLocalizedString("Advanced...", comment: ""),
+            action: nil,
+            keyEquivalent: ""
+        )
+        let advancedSubmenu = NSMenu(title: NSLocalizedString("Advanced", comment: ""))
+        let copyFinderMetadataItem = NSMenuItem(
+            title: NSLocalizedString("Copy Metadata...", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.copyFiles),
+            keyEquivalent: ""
+        )
+        copyFinderMetadataItem.keyEquivalentModifierMask = [.shift]
+        copyFinderMetadataItem.tag = CopyFilesTag.finderMetadataOnly.rawValue
+        advancedSubmenu.addItem(copyFinderMetadataItem)
+        advancedSubmenu.addItem(
+            withTitle: NSLocalizedString("Copy to Folder...", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.copyFilesToExternal),
+            keyEquivalent: ""
+        )
+        advancedSubmenu.addItem(
+            withTitle: NSLocalizedString("Move to Folder...", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.moveFilesToExternal),
+            keyEquivalent: ""
+        )
+        menu.setSubmenu(advancedSubmenu, for: advancedItem)
+        menu.addItem(advancedItem)
+    }
+
+    override class var defaultMenu: NSMenu? {
+        let theMenu = NSMenu(title: NSLocalizedString("Contextual Menu", comment: ""))
+        theMenu.autoenablesItems = false
+
+        addFolderItems(theMenu)
+
+        theMenu.addItem(NSMenuItem.separator())
+        addCompareItems(theMenu)
+
+        theMenu.addItem(NSMenuItem.separator())
+        addSetAsBaseItems(theMenu)
+
+        theMenu.addItem(NSMenuItem.separator())
+        addFileSystemItems(theMenu)
+
+        theMenu.addItem(NSMenuItem.separator())
+        addExcludeItems(theMenu)
+
+        theMenu.addItem(NSMenuItem.separator())
+        addCopyPathsItems(theMenu)
+
+        theMenu.addItem(NSMenuItem.separator())
+        addFinderItems(theMenu)
+
+        theMenu.addItem(NSMenuItem.separator())
+        addAdvancedItems(theMenu)
 
         return theMenu
     }

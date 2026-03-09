@@ -189,9 +189,20 @@ extension FoldersWindowController {
         return menu
     }
 
-    private static func actionsMenu() -> NSMenu {
-        let menu = NSMenu(title: NSLocalizedString("Actions", comment: ""))
+    private static func addCompareItems(_ menu: NSMenu) {
+        menu.addItem(
+            withTitle: NSLocalizedString("Compare Files", comment: ""),
+            action: #selector(compareFiles),
+            keyEquivalent: ""
+        )
+        menu.addItem(
+            withTitle: NSLocalizedString("Compare Folders", comment: ""),
+            action: #selector(compareFolders),
+            keyEquivalent: ""
+        )
+    }
 
+    private static func addSetAsBaseItems(_ menu: NSMenu) {
         menu.addItem(
             withTitle: NSLocalizedString("Set as Base Folder", comment: ""),
             action: #selector(setAsBaseFolder),
@@ -207,14 +218,9 @@ extension FoldersWindowController {
             action: #selector(setAsBaseFoldersBothSides),
             keyEquivalent: ""
         )
+    }
 
-        menu.addItem(NSMenuItem.separator())
-
-        menu.addItem(
-            withTitle: NSLocalizedString("Compare Files", comment: ""),
-            action: #selector(compareFiles),
-            keyEquivalent: ""
-        )
+    private static func addFileSystemItems(_ menu: NSMenu) {
         let copyFilesItem = NSMenuItem(
             title: NSLocalizedString("Copy Files...", comment: ""),
             action: #selector(copyFiles),
@@ -222,22 +228,19 @@ extension FoldersWindowController {
         )
         copyFilesItem.keyEquivalentModifierMask = []
         menu.addItem(copyFilesItem)
-
-        let copyFinderMetadata = NSMenuItem(
-            title: NSLocalizedString("Copy Metadata...", comment: ""),
-            action: #selector(copyFiles),
-            keyEquivalent: KeyEquivalent.f5
-        )
-        copyFinderMetadata.keyEquivalentModifierMask = [.shift]
-        copyFinderMetadata.tag = CopyFilesTag.finderMetadataOnly.rawValue
-        menu.addItem(copyFinderMetadata)
-
         menu.addItem(
-            withTitle: NSLocalizedString("Copy to Folder...", comment: ""),
-            action: #selector(copyFilesToExternal),
+            withTitle: NSLocalizedString("Move Files...", comment: ""),
+            action: #selector(moveFiles),
             keyEquivalent: ""
         )
+        menu.addItem(
+            withTitle: NSLocalizedString("Delete Files...", comment: ""),
+            action: #selector(deleteFiles),
+            keyEquivalent: KeyEquivalent.deleteBackspace
+        )
+    }
 
+    private static func addExtraFileSystemItems(_ menu: NSMenu) {
         let syncFiles = NSMenuItem(
             title: NSLocalizedString("Sync Files...", comment: ""),
             action: #selector(syncFiles),
@@ -245,25 +248,14 @@ extension FoldersWindowController {
         )
         syncFiles.keyEquivalentModifierMask = []
         menu.addItem(syncFiles)
-
-        menu.addItem(
-            withTitle: NSLocalizedString("Delete Files...", comment: ""),
-            action: #selector(deleteFiles),
-            keyEquivalent: KeyEquivalent.deleteBackspace
-        )
-        menu.addItem(
-            withTitle: NSLocalizedString("Move Files...", comment: ""),
-            action: #selector(moveFiles),
-            keyEquivalent: ""
-        )
         menu.addItem(
             withTitle: NSLocalizedString("Set Modification Date...", comment: ""),
             action: #selector(setModificationDate),
             keyEquivalent: ""
         )
+    }
 
-        menu.addItem(NSMenuItem.separator())
-
+    private static func addFinderItems(_ menu: NSMenu) {
         menu.addItem(
             withTitle: NSLocalizedString("Copy Filenames", comment: ""),
             action: #selector(copyFileNames),
@@ -287,6 +279,56 @@ extension FoldersWindowController {
         )
         quickLook.image = NSImage(named: NSImage.quickLookTemplateName)
         menu.addItem(quickLook)
+    }
+
+    private static func addAdvancedItems(_ menu: NSMenu) {
+        let advancedItem = NSMenuItem(
+            title: NSLocalizedString("Advanced...", comment: ""),
+            action: nil,
+            keyEquivalent: ""
+        )
+        let advancedSubmenu = NSMenu(title: NSLocalizedString("Advanced", comment: ""))
+        let copyFinderMetadata = NSMenuItem(
+            title: NSLocalizedString("Copy Metadata...", comment: ""),
+            action: #selector(copyFiles),
+            keyEquivalent: KeyEquivalent.f5
+        )
+        copyFinderMetadata.keyEquivalentModifierMask = [.shift]
+        copyFinderMetadata.tag = CopyFilesTag.finderMetadataOnly.rawValue
+        advancedSubmenu.addItem(copyFinderMetadata)
+        advancedSubmenu.addItem(
+            withTitle: NSLocalizedString("Copy to Folder...", comment: ""),
+            action: #selector(copyFilesToExternal),
+            keyEquivalent: ""
+        )
+        advancedSubmenu.addItem(
+            withTitle: NSLocalizedString("Move to Folder...", comment: ""),
+            action: #selector(moveFilesToExternal),
+            keyEquivalent: ""
+        )
+        menu.setSubmenu(advancedSubmenu, for: advancedItem)
+        menu.addItem(advancedItem)
+    }
+
+    private static func actionsMenu() -> NSMenu {
+        let menu = NSMenu(title: NSLocalizedString("Actions", comment: ""))
+
+        addCompareItems(menu)
+
+        menu.addItem(NSMenuItem.separator())
+        addSetAsBaseItems(menu)
+
+        menu.addItem(NSMenuItem.separator())
+        addFileSystemItems(menu)
+
+        menu.addItem(NSMenuItem.separator())
+        addExtraFileSystemItems(menu)
+
+        menu.addItem(NSMenuItem.separator())
+        addFinderItems(menu)
+
+        menu.addItem(NSMenuItem.separator())
+        addAdvancedItems(menu)
 
         return menu
     }

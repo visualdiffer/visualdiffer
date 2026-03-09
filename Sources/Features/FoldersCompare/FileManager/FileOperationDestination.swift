@@ -62,6 +62,7 @@ public enum FileOperationDestination: Sendable {
         }
     }
 
+    // periphery:ignore
     var isLinkedSide: Bool {
         if case .linkedSide = self {
             return true
@@ -74,5 +75,20 @@ public enum FileOperationDestination: Sendable {
             return true
         }
         return false
+    }
+}
+
+extension FileOperationDestination {
+    func resolveOperationBaseDir(
+        items: [CompareItem],
+        srcBaseDir: String
+    ) -> String {
+        guard isExternal else {
+            return srcBaseDir
+        }
+        if items.count == 1 {
+            return items[0].parent?.path ?? srcBaseDir
+        }
+        return CompareItem.commonAncestorPath(items) ?? srcBaseDir
     }
 }

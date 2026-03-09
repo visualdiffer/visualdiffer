@@ -166,13 +166,15 @@ public extension URL {
         at startUrl: URL,
         title: String,
         chooseDirectories: Bool,
-        chooseFiles: Bool
+        chooseFiles: Bool,
+        canCreateDirectories: Bool = false
     ) -> URL? {
         let openPanel = NSOpenPanel()
 
         openPanel.title = title
         openPanel.canChooseDirectories = chooseDirectories
         openPanel.canChooseFiles = chooseFiles
+        openPanel.canCreateDirectories = canCreateDirectories
         // since 10.11 the title is no longer shown so we use the message property
         openPanel.message = title
         openPanel.directoryURL = startUrl

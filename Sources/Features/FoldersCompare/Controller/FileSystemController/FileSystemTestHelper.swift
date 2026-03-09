@@ -221,8 +221,8 @@
                 strAssertVisibleItems.append(String(
                     format: "let %@ = vi // %@ <--> %@\n",
                     childVarName,
-                    root.item.fileName!,
-                    root.item.linkedItem!.fileName!
+                    root.item.fileName ?? "",
+                    root.item.linkedItem!.fileName ?? ""
                 ))
             } else {
                 strAssertVisibleItems.append(String(
@@ -230,8 +230,8 @@
                     childVarName,
                     parentVarName,
                     index,
-                    root.item.parent!.fileName!,
-                    root.item.linkedItem!.parent!.fileName!
+                    root.item.parent?.fileName ?? "",
+                    root.item.linkedItem!.parent?.fileName ?? ""
                 ))
             }
             strAssertVisibleItems.append(String(format: "assertArrayCount(%@.children, %ld)\n", childVarName, root.children.count))

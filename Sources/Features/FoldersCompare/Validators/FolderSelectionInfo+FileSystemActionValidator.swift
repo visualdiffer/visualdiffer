@@ -32,6 +32,16 @@ extension FolderSelectionInfo {
         return isValid && (foldersCount > 0 || filesCount > 0)
     }
 
+    func validateMoveFilesToExternal(_ sessionDiff: SessionDiff) -> Bool {
+        let isValid = switch view.side {
+        case .left:
+            !sessionDiff.leftReadOnly
+        case .right:
+            !sessionDiff.rightReadOnly
+        }
+        return isValid && (foldersCount > 0 || filesCount > 0)
+    }
+
     func validateSyncFiles(_ sessionDiff: SessionDiff) -> Bool {
         let isValid = switch view.side {
         case .left:

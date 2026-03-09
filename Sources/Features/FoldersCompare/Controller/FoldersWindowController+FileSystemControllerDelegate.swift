@@ -36,36 +36,36 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
 
     @objc
     func copyFilesToExternal(_: AnyObject?) {
-        guard let vi = lastUsedView.dataSource?.outlineView?(lastUsedView, child: 0, ofItem: nil) as? VisibleItem,
-              let root = vi.item.parent,
-              let srcBaseDir = root.toUrl() else {
-            return
-        }
-
-        guard let destBaseDir = srcBaseDir.promptUrl(
-            at: srcBaseDir,
-            title: NSLocalizedString("Select destination folder", comment: ""),
-            chooseDirectories: true,
-            chooseFiles: false
+        let selectedItems = lastUsedView.selectedItems()
+        guard let externalOperationContext = ExternalFileOperationContext.create(
+            from: lastUsedView,
+            selectedItems: selectedItems
         ) else {
             return
         }
 
+        let executor = CopyFileOperationExecutor(
+            srcBaseDir: externalOperationContext.srcBaseDir.osPath,
+            destination: externalOperationContext.destination,
+            items: selectedItems,
+            side: lastUsedView.side
+        )
+        run(executor)
+    }
+
+    @objc
+    func moveFilesToExternal(_: AnyObject?) {
         let selectedItems = lastUsedView.selectedItems()
-        if containsExternalCopyInvalidPath(
-            selectedItems: selectedItems,
-            srcBasePath: srcBaseDir,
-            destinationPath: destBaseDir
-        ) {
-            NSAlert(
-                error: FolderManagerError.destinationContainsSelectedSource
-            ).runModal()
+        guard let externalOperationContext = ExternalFileOperationContext.create(
+            from: lastUsedView,
+            selectedItems: selectedItems
+        ) else {
             return
         }
 
-        let executor = CopyFileOperationExecutor(
-            srcBaseDir: srcBaseDir.osPath,
-            destination: .external(baseDir: destBaseDir),
+        let executor = MoveFileOperationExecutor(
+            srcBaseDir: externalOperationContext.srcBaseDir.osPath,
+            destination: externalOperationContext.destination,
             items: selectedItems,
             side: lastUsedView.side
         )
@@ -96,7 +96,7 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         }
         let executor = MoveFileOperationExecutor(
             srcBaseDir: srcBaseDir,
-            destBaseDir: destBaseDir,
+            destination: .linkedSide(baseDir: URL(filePath: destBaseDir, directoryHint: .isDirectory)),
             items: lastUsedView.selectedItems(),
             side: lastUsedView.side
         )
@@ -222,39 +222,5 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
             )
         }
         return builder(config, comparator, delegate)
-    }
-
-    private func containsExternalCopyInvalidPath(
-        selectedItems: [CompareItem],
-        srcBasePath: URL,
-        destinationPath: URL
-    ) -> Bool {
-        let normalizedDestinationPath = destinationPath.standardizingPath
-
-        for item in selectedItems {
-            guard let itemPath = item.path else {
-                continue
-            }
-            guard let itemURL = item.toUrl() else {
-                continue
-            }
-            let normalizedItemPath = URL(
-                filePath: itemPath,
-                directoryHint: item.isFolder ? .isDirectory : .notDirectory
-            ).standardizingPath
-
-            if normalizedDestinationPath == normalizedItemPath ||
-                normalizedDestinationPath.hasPrefix("\(normalizedItemPath)/") {
-                return true
-            }
-            let destinationItemPath = URL.buildDestinationPath(
-                itemURL, nil, srcBasePath, destinationPath
-            ).standardizingPath
-
-            if destinationItemPath == normalizedItemPath || destinationItemPath.hasPrefix("\(normalizedItemPath)/") {
-                return true
-            }
-        }
-        return false
     }
 }

@@ -44,10 +44,14 @@ class CopyFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
     }
 
     func execute(_ manager: FileOperationManagerAction, payload _: Sendable?) {
+        let operationBaseDir = destination.resolveOperationBaseDir(
+            items: items,
+            srcBaseDir: srcBaseDir
+        )
         for item in items {
             manager.copy(
                 item,
-                srcBaseDir: srcBaseDir,
+                srcBaseDir: operationBaseDir,
                 destination: destination
             )
         }

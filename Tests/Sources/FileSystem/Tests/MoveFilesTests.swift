@@ -1993,6 +1993,654 @@ final class MoveFilesTests: BaseTests {
             #expect(child2.linkedItem?.isFiltered == true, "\(child2.linkedItem!.fileName!) must be filtered")
         }
     }
+
+    @Test
+    func moveToExternalPath() throws {
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.timestamp, .size, .content, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: false,
+            isRightCaseSensitive: false
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: false,
+            skipPackages: true,
+            traverseFilteredFolders: true,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .onlyMismatches
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+        try removeItem("external")
+
+        // create folders
+        try createFolder("external")
+        try createFolder("l")
+        try createFolder("r")
+        try createFolder("l/dir1")
+        try createFolder("r/dir1")
+        try createFolder("l/dir1/dir2")
+        try createFolder("r/dir1/dir2")
+
+        // create files
+        try createFile("l/dir1/dir2/big_file", "123456789012")
+        try createFile("r/dir1/dir2/big_file", "1234")
+        try createFile("l/dir1/file.txt", "123456")
+        try createFile("r/dir1/file.txt", "123456")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let rootL = try #require(folderReader.leftRoot)
+        _ = try #require(folderReader.rightRoot)
+        let vi = try #require(rootL.visibleItem)
+
+        let child1 = rootL // l <-> r
+        assertItem(child1, 0, 1, 0, 1, 1, "l", .orphan, 18)
+        #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+        assertItem(child1.linkedItem, 0, 1, 0, 1, 1, "r", .orphan, 10)
+        #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+
+        let child2 = child1.children[0] // l <-> r
+        assertItem(child2, 0, 1, 0, 1, 2, "dir1", .orphan, 18)
+        #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+        assertItem(child2.linkedItem, 0, 1, 0, 1, 2, "dir1", .orphan, 10)
+        #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.linkedItem!.orphanFolders)")
+
+        let child3 = child2.children[0] // dir1 <-> dir1
+        assertItem(child3, 0, 1, 0, 0, 1, "dir2", .orphan, 12)
+        #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+        assertItem(child3.linkedItem, 0, 1, 0, 0, 1, "dir2", .orphan, 4)
+        #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+        let child4 = child3.children[0] // dir2 <-> dir2
+        assertItem(child4, 0, 1, 0, 0, 0, "big_file", .changed, 12)
+        assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "big_file", .changed, 4)
+
+        let child5 = child2.children[1] // dir1 <-> dir1
+        assertItem(child5, 0, 0, 0, 1, 0, "file.txt", .same, 6)
+        assertItem(child5.linkedItem, 0, 0, 0, 1, 0, "file.txt", .same, 6)
+
+        do {
+            // VisibleItems
+            let childVI1 = vi // l <--> r
+            assertArrayCount(childVI1.children, 1)
+            let child1 = childVI1.item // nil <-> nil
+            assertItem(child1, 0, 1, 0, 1, 1, "l", .orphan, 18)
+            #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 0, 1, 0, 1, 1, "r", .orphan, 10)
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+
+            let childVI2 = childVI1.children[0] // l <--> r
+            assertArrayCount(childVI2.children, 1)
+            let child2 = childVI2.item // l <-> r
+            assertItem(child2, 0, 1, 0, 1, 2, "dir1", .orphan, 18)
+            #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+            assertItem(child2.linkedItem, 0, 1, 0, 1, 2, "dir1", .orphan, 10)
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.linkedItem!.orphanFolders)")
+
+            let childVI3 = childVI2.children[0] // dir1 <--> dir1
+            assertArrayCount(childVI3.children, 1)
+            let child3 = childVI3.item // dir1 <-> dir1
+            assertItem(child3, 0, 1, 0, 0, 1, "dir2", .orphan, 12)
+            #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+            assertItem(child3.linkedItem, 0, 1, 0, 0, 1, "dir2", .orphan, 4)
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+            let childVI4 = childVI3.children[0] // dir2 <--> dir2
+            assertArrayCount(childVI4.children, 0)
+            let child4 = childVI4.item // dir2 <-> dir2
+            assertItem(child4, 0, 1, 0, 0, 0, "big_file", .changed, 12)
+            assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "big_file", .changed, 4)
+        }
+
+        try assertOnlySetup()
+
+        // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
+        // otherwise is released to early it the test crashes
+        let fileOperationDelegate = MockFileOperationManagerDelegate()
+        let fileOperationManager = FileOperationManager(
+            filterConfig: filterConfig,
+            comparator: comparator,
+            delegate: fileOperationDelegate,
+            includesFiltered: false
+        )
+        let fileOperation = MoveCompareItem(
+            operationManager: fileOperationManager,
+            bigFileSizeThreshold: 100_000
+        )
+
+        fileOperation.move(
+            srcRoot: child2,
+            srcBaseDir: appendFolder("l"),
+            destination: FileOperationDestination.external(baseDir: appendFolder("external"))
+        )
+
+        do {
+            let child1 = rootL // l <-> r
+            assertItem(child1, 0, 0, 0, 1, 1, "l", .orphan, 6)
+            #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 0, 0, 1, 1, 1, "r", .orphan, 10)
+            #expect(child1.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child1.linkedItem!.orphanFolders)")
+
+            let child2 = child1.children[0] // l <-> r
+            assertItem(child2, 0, 0, 0, 1, 2, "dir1", .orphan, 6)
+            #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+            assertItem(child2.linkedItem, 0, 0, 1, 1, 2, "dir1", .orphan, 10)
+            #expect(child2.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child2.linkedItem!.orphanFolders)")
+
+            let child3 = child2.children[0] // dir1 <-> dir1
+            assertItem(child3, 0, 0, 0, 0, 1, nil, .orphan, 0)
+            assertItem(child3.linkedItem, 0, 0, 1, 0, 1, "dir2", .orphan, 4)
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+            let child4 = child3.children[0] // nil <-> dir2
+            assertItem(child4, 0, 0, 0, 0, 0, nil, .orphan, 0)
+            assertItem(child4.linkedItem, 0, 0, 1, 0, 0, "big_file", .orphan, 4)
+
+            let child5 = child2.children[1] // dir1 <-> dir1
+            assertItem(child5, 0, 0, 0, 1, 0, "file.txt", .same, 6)
+            assertItem(child5.linkedItem, 0, 0, 0, 1, 0, "file.txt", .same, 6)
+        }
+        do {
+            // VisibleItems
+            let childVI1 = vi // l <--> r
+            assertArrayCount(childVI1.children, 1)
+            let child1 = childVI1.item // nil <-> nil
+            assertItem(child1, 0, 0, 0, 1, 1, "l", .orphan, 6)
+            #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 0, 0, 1, 1, 1, "r", .orphan, 10)
+            #expect(child1.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child1.linkedItem!.orphanFolders)")
+
+            let childVI2 = childVI1.children[0] // l <--> r
+            assertArrayCount(childVI2.children, 1)
+            let child2 = childVI2.item // l <-> r
+            assertItem(child2, 0, 0, 0, 1, 2, "dir1", .orphan, 6)
+            #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+            assertItem(child2.linkedItem, 0, 0, 1, 1, 2, "dir1", .orphan, 10)
+            #expect(child2.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child2.linkedItem!.orphanFolders)")
+
+            let childVI3 = childVI2.children[0] // dir1 <--> dir1
+            assertArrayCount(childVI3.children, 1)
+            let child3 = childVI3.item // dir1 <-> dir1
+            assertItem(child3, 0, 0, 0, 0, 1, nil, .orphan, 0)
+            assertItem(child3.linkedItem, 0, 0, 1, 0, 1, "dir2", .orphan, 4)
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+            let childVI4 = childVI3.children[0] //  <--> dir2
+            assertArrayCount(childVI4.children, 0)
+            let child4 = childVI4.item // nil <-> dir2
+            assertItem(child4, 0, 0, 0, 0, 0, nil, .orphan, 0)
+            assertItem(child4.linkedItem, 0, 0, 1, 0, 0, "big_file", .orphan, 4)
+        }
+
+        let externalURL = appendFolder("external")
+            .appending(component: "dir1/dir2/big_file")
+            .path(percentEncoded: false)
+        try assertFileExists(externalURL, "123456789012")
+    }
+
+    @Test
+    func moveToExternalPathDeepFolder() throws {
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.timestamp, .size, .content, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: false,
+            isRightCaseSensitive: false
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: false,
+            skipPackages: true,
+            traverseFilteredFolders: true,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .onlyMismatches
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+        try removeItem("external")
+
+        // create folders
+        try createFolder("external")
+        try createFolder("l")
+        try createFolder("r")
+        try createFolder("l/dir")
+        try createFolder("r/dir")
+        try createFolder("l/dir/deeper")
+        try createFolder("r/dir/deeper")
+        try createFolder("l/dir/deeper/level2")
+        try createFolder("r/dir/deeper/level2")
+        try createFolder("l/level1")
+        try createFolder("l/level1/level2")
+
+        // create files
+        try createFile("l/dir/deeper/level2/level2-file5.txt", "12345678901234")
+        try createFile("r/dir/deeper/level2/level2-file5.txt", "123456789012345")
+        try createFile("l/dir/deeper/file5.txt", "12345678901234")
+        try createFile("r/dir/deeper/file5.txt", "123456789012345")
+        try createFile("l/dir/file3.txt", "12345678901234")
+        try createFile("l/dir/file4.txt", "12345678901234")
+        try createFile("r/dir/file4.txt", "123456789012345")
+        try createFile("l/level1/level2/file2-1.txt", "1")
+        try createFile("l/level1/level2/file2-2.txt", "1")
+        try createFile("l/level1/file1-1.txt", "1")
+        try createFile("l/file1.txt", "12345678901234")
+        try createFile("l/file2.txt", "12345678901234")
+        try createFile("r/file2.txt", "123456789012345")
+        try setFileTimestamp("r/file2.txt", "2001-03-24 10:45:32 +0600")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let rootL = try #require(folderReader.leftRoot)
+        _ = try #require(folderReader.rightRoot)
+        let vi = try #require(rootL.visibleItem)
+
+        let child1 = rootL // l <-> r
+        assertItem(child1, 0, 4, 5, 0, 4, "l", .orphan, 87)
+        #expect(child1.orphanFolders == 2, "OrphanFolder: Expected count 2 found \(child1.orphanFolders)")
+        assertItem(child1.linkedItem, 1, 3, 0, 0, 4, "r", .orphan, 60)
+        #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+
+        let child2 = child1.children[0] // l <-> r
+        assertItem(child2, 0, 3, 1, 0, 3, "dir", .orphan, 56)
+        #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+        assertItem(child2.linkedItem, 0, 3, 0, 0, 3, "dir", .orphan, 45)
+        #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.linkedItem!.orphanFolders)")
+
+        let child3 = child2.children[0] // dir <-> dir
+        assertItem(child3, 0, 2, 0, 0, 2, "deeper", .orphan, 28)
+        #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+        assertItem(child3.linkedItem, 0, 2, 0, 0, 2, "deeper", .orphan, 30)
+        #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+        let child4 = child3.children[0] // deeper <-> deeper
+        assertItem(child4, 0, 1, 0, 0, 1, "level2", .orphan, 14)
+        #expect(child4.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child4.orphanFolders)")
+        assertItem(child4.linkedItem, 0, 1, 0, 0, 1, "level2", .orphan, 15)
+        #expect(child4.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child4.linkedItem!.orphanFolders)")
+
+        let child5 = child4.children[0] // level2 <-> level2
+        assertItem(child5, 0, 1, 0, 0, 0, "level2-file5.txt", .changed, 14)
+        assertItem(child5.linkedItem, 0, 1, 0, 0, 0, "level2-file5.txt", .changed, 15)
+
+        let child6 = child3.children[1] // deeper <-> deeper
+        assertItem(child6, 0, 1, 0, 0, 0, "file5.txt", .changed, 14)
+        assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "file5.txt", .changed, 15)
+
+        let child7 = child2.children[1] // dir <-> dir
+        assertItem(child7, 0, 0, 1, 0, 0, "file3.txt", .orphan, 14)
+        assertItem(child7.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+        let child8 = child2.children[2] // dir <-> dir
+        assertItem(child8, 0, 1, 0, 0, 0, "file4.txt", .changed, 14)
+        assertItem(child8.linkedItem, 0, 1, 0, 0, 0, "file4.txt", .changed, 15)
+
+        let child9 = child1.children[1] // l <-> r
+        assertItem(child9, 0, 0, 3, 0, 2, "level1", .orphan, 3)
+        #expect(child9.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child9.orphanFolders)")
+        assertItem(child9.linkedItem, 0, 0, 0, 0, 2, nil, .orphan, 0)
+
+        let child10 = child9.children[0] // level1 <-> nil
+        assertItem(child10, 0, 0, 2, 0, 2, "level2", .orphan, 2)
+        #expect(child10.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child10.orphanFolders)")
+        assertItem(child10.linkedItem, 0, 0, 0, 0, 2, nil, .orphan, 0)
+
+        let child11 = child10.children[0] // level2 <-> nil
+        assertItem(child11, 0, 0, 1, 0, 0, "file2-1.txt", .orphan, 1)
+        assertItem(child11.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+        let child12 = child10.children[1] // level2 <-> nil
+        assertItem(child12, 0, 0, 1, 0, 0, "file2-2.txt", .orphan, 1)
+        assertItem(child12.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+        let child13 = child9.children[1] // level1 <-> nil
+        assertItem(child13, 0, 0, 1, 0, 0, "file1-1.txt", .orphan, 1)
+        assertItem(child13.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+        let child14 = child1.children[2] // l <-> r
+        assertItem(child14, 0, 0, 1, 0, 0, "file1.txt", .orphan, 14)
+        assertItem(child14.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+        let child15 = child1.children[3] // l <-> r
+        assertItem(child15, 0, 1, 0, 0, 0, "file2.txt", .changed, 14)
+        assertItem(child15.linkedItem, 1, 0, 0, 0, 0, "file2.txt", .old, 15)
+
+        do {
+            // VisibleItems
+            let childVI1 = vi // l <--> r
+            assertArrayCount(childVI1.children, 4)
+            let child1 = childVI1.item // nil <-> nil
+            assertItem(child1, 0, 4, 5, 0, 4, "l", .orphan, 87)
+            #expect(child1.orphanFolders == 2, "OrphanFolder: Expected count 2 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 1, 3, 0, 0, 4, "r", .orphan, 60)
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+
+            let childVI2 = childVI1.children[0] // l <--> r
+            assertArrayCount(childVI2.children, 3)
+            let child2 = childVI2.item // l <-> r
+            assertItem(child2, 0, 3, 1, 0, 3, "dir", .orphan, 56)
+            #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+            assertItem(child2.linkedItem, 0, 3, 0, 0, 3, "dir", .orphan, 45)
+            #expect(child2.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.linkedItem!.orphanFolders)")
+
+            let childVI3 = childVI2.children[0] // dir <--> dir
+            assertArrayCount(childVI3.children, 2)
+            let child3 = childVI3.item // dir <-> dir
+            assertItem(child3, 0, 2, 0, 0, 2, "deeper", .orphan, 28)
+            #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+            assertItem(child3.linkedItem, 0, 2, 0, 0, 2, "deeper", .orphan, 30)
+            #expect(child3.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.linkedItem!.orphanFolders)")
+
+            let childVI4 = childVI3.children[0] // deeper <--> deeper
+            assertArrayCount(childVI4.children, 1)
+            let child4 = childVI4.item // deeper <-> deeper
+            assertItem(child4, 0, 1, 0, 0, 1, "level2", .orphan, 14)
+            #expect(child4.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child4.orphanFolders)")
+            assertItem(child4.linkedItem, 0, 1, 0, 0, 1, "level2", .orphan, 15)
+            #expect(child4.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child4.linkedItem!.orphanFolders)")
+
+            let childVI5 = childVI4.children[0] // level2 <--> level2
+            assertArrayCount(childVI5.children, 0)
+            let child5 = childVI5.item // level2 <-> level2
+            assertItem(child5, 0, 1, 0, 0, 0, "level2-file5.txt", .changed, 14)
+            assertItem(child5.linkedItem, 0, 1, 0, 0, 0, "level2-file5.txt", .changed, 15)
+
+            let childVI6 = childVI3.children[1] // deeper <--> deeper
+            assertArrayCount(childVI6.children, 0)
+            let child6 = childVI6.item // deeper <-> deeper
+            assertItem(child6, 0, 1, 0, 0, 0, "file5.txt", .changed, 14)
+            assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "file5.txt", .changed, 15)
+
+            let childVI7 = childVI2.children[1] // dir <--> dir
+            assertArrayCount(childVI7.children, 0)
+            let child7 = childVI7.item // dir <-> dir
+            assertItem(child7, 0, 0, 1, 0, 0, "file3.txt", .orphan, 14)
+            assertItem(child7.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI8 = childVI2.children[2] // dir <--> dir
+            assertArrayCount(childVI8.children, 0)
+            let child8 = childVI8.item // dir <-> dir
+            assertItem(child8, 0, 1, 0, 0, 0, "file4.txt", .changed, 14)
+            assertItem(child8.linkedItem, 0, 1, 0, 0, 0, "file4.txt", .changed, 15)
+
+            let childVI9 = childVI1.children[1] // l <--> r
+            assertArrayCount(childVI9.children, 2)
+            let child9 = childVI9.item // l <-> r
+            assertItem(child9, 0, 0, 3, 0, 2, "level1", .orphan, 3)
+            #expect(child9.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child9.orphanFolders)")
+            assertItem(child9.linkedItem, 0, 0, 0, 0, 2, nil, .orphan, 0)
+
+            let childVI10 = childVI9.children[0] // level1 <-->
+            assertArrayCount(childVI10.children, 2)
+            let child10 = childVI10.item // level1 <-> nil
+            assertItem(child10, 0, 0, 2, 0, 2, "level2", .orphan, 2)
+            #expect(child10.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child10.orphanFolders)")
+            assertItem(child10.linkedItem, 0, 0, 0, 0, 2, nil, .orphan, 0)
+
+            let childVI11 = childVI10.children[0] // level2 <-->
+            assertArrayCount(childVI11.children, 0)
+            let child11 = childVI11.item // level2 <-> nil
+            assertItem(child11, 0, 0, 1, 0, 0, "file2-1.txt", .orphan, 1)
+            assertItem(child11.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI12 = childVI10.children[1] // level2 <-->
+            assertArrayCount(childVI12.children, 0)
+            let child12 = childVI12.item // level2 <-> nil
+            assertItem(child12, 0, 0, 1, 0, 0, "file2-2.txt", .orphan, 1)
+            assertItem(child12.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI13 = childVI9.children[1] // level1 <-->
+            assertArrayCount(childVI13.children, 0)
+            let child13 = childVI13.item // level1 <-> nil
+            assertItem(child13, 0, 0, 1, 0, 0, "file1-1.txt", .orphan, 1)
+            assertItem(child13.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI14 = childVI1.children[2] // l <--> r
+            assertArrayCount(childVI14.children, 0)
+            let child14 = childVI14.item // l <-> r
+            assertItem(child14, 0, 0, 1, 0, 0, "file1.txt", .orphan, 14)
+            assertItem(child14.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI15 = childVI1.children[3] // l <--> r
+            assertArrayCount(childVI15.children, 0)
+            let child15 = childVI15.item // l <-> r
+            assertItem(child15, 0, 1, 0, 0, 0, "file2.txt", .changed, 14)
+            assertItem(child15.linkedItem, 1, 0, 0, 0, 0, "file2.txt", .old, 15)
+        }
+
+        try assertOnlySetup()
+
+        // VDLocalFileManager doesn't hold the delegate so allocate it as local variable
+        // otherwise is released to early it the test crashes
+        let fileOperationDelegate = MockFileOperationManagerDelegate()
+        let fileOperationManager = FileOperationManager(
+            filterConfig: filterConfig,
+            comparator: comparator,
+            delegate: fileOperationDelegate,
+            includesFiltered: false
+        )
+        let fileOperation = MoveCompareItem(
+            operationManager: fileOperationManager,
+            bigFileSizeThreshold: 100_000
+        )
+
+        fileOperation.move(
+            srcRoot: child4,
+            srcBaseDir: appendFolder("l/dir/deeper"),
+            destination: FileOperationDestination.external(baseDir: appendFolder("external"))
+        )
+
+        do {
+            let child1 = rootL // l <-> r
+            assertItem(child1, 0, 3, 5, 0, 4, "l", .orphan, 73)
+            #expect(child1.orphanFolders == 2, "OrphanFolder: Expected count 2 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 1, 2, 1, 0, 4, "r", .orphan, 60)
+            #expect(child1.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child1.linkedItem!.orphanFolders)")
+
+            let child2 = child1.children[0] // l <-> r
+            assertItem(child2, 0, 2, 1, 0, 3, "dir", .orphan, 42)
+            #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+            assertItem(child2.linkedItem, 0, 2, 1, 0, 3, "dir", .orphan, 45)
+            #expect(child2.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child2.linkedItem!.orphanFolders)")
+
+            let child3 = child2.children[0] // dir <-> dir
+            assertItem(child3, 0, 1, 0, 0, 2, "deeper", .orphan, 14)
+            #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+            assertItem(child3.linkedItem, 0, 1, 1, 0, 2, "deeper", .orphan, 30)
+            #expect(child3.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child3.linkedItem!.orphanFolders)")
+
+            let child4 = child3.children[0] // deeper <-> deeper
+            assertItem(child4, 0, 0, 0, 0, 1, nil, .orphan, 0)
+            assertItem(child4.linkedItem, 0, 0, 1, 0, 1, "level2", .orphan, 15)
+            #expect(child4.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child4.linkedItem!.orphanFolders)")
+
+            let child5 = child4.children[0] // nil <-> level2
+            assertItem(child5, 0, 0, 0, 0, 0, nil, .orphan, 0)
+            assertItem(child5.linkedItem, 0, 0, 1, 0, 0, "level2-file5.txt", .orphan, 15)
+
+            let child6 = child3.children[1] // deeper <-> deeper
+            assertItem(child6, 0, 1, 0, 0, 0, "file5.txt", .changed, 14)
+            assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "file5.txt", .changed, 15)
+
+            let child7 = child2.children[1] // dir <-> dir
+            assertItem(child7, 0, 0, 1, 0, 0, "file3.txt", .orphan, 14)
+            assertItem(child7.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let child8 = child2.children[2] // dir <-> dir
+            assertItem(child8, 0, 1, 0, 0, 0, "file4.txt", .changed, 14)
+            assertItem(child8.linkedItem, 0, 1, 0, 0, 0, "file4.txt", .changed, 15)
+
+            let child9 = child1.children[1] // l <-> r
+            assertItem(child9, 0, 0, 3, 0, 2, "level1", .orphan, 3)
+            #expect(child9.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child9.orphanFolders)")
+            assertItem(child9.linkedItem, 0, 0, 0, 0, 2, nil, .orphan, 0)
+
+            let child10 = child9.children[0] // level1 <-> nil
+            assertItem(child10, 0, 0, 2, 0, 2, "level2", .orphan, 2)
+            #expect(child10.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child10.orphanFolders)")
+            assertItem(child10.linkedItem, 0, 0, 0, 0, 2, nil, .orphan, 0)
+
+            let child11 = child10.children[0] // level2 <-> nil
+            assertItem(child11, 0, 0, 1, 0, 0, "file2-1.txt", .orphan, 1)
+            assertItem(child11.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let child12 = child10.children[1] // level2 <-> nil
+            assertItem(child12, 0, 0, 1, 0, 0, "file2-2.txt", .orphan, 1)
+            assertItem(child12.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let child13 = child9.children[1] // level1 <-> nil
+            assertItem(child13, 0, 0, 1, 0, 0, "file1-1.txt", .orphan, 1)
+            assertItem(child13.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let child14 = child1.children[2] // l <-> r
+            assertItem(child14, 0, 0, 1, 0, 0, "file1.txt", .orphan, 14)
+            assertItem(child14.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let child15 = child1.children[3] // l <-> r
+            assertItem(child15, 0, 1, 0, 0, 0, "file2.txt", .changed, 14)
+            assertItem(child15.linkedItem, 1, 0, 0, 0, 0, "file2.txt", .old, 15)
+        }
+        do {
+            // VisibleItems
+            let childVI1 = vi // l <--> r
+            assertArrayCount(childVI1.children, 4)
+            let child1 = childVI1.item // nil <-> nil
+            assertItem(child1, 0, 3, 5, 0, 4, "l", .orphan, 73)
+            #expect(child1.orphanFolders == 2, "OrphanFolder: Expected count 2 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 1, 2, 1, 0, 4, "r", .orphan, 60)
+            #expect(child1.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child1.linkedItem!.orphanFolders)")
+
+            let childVI2 = childVI1.children[0] // l <--> r
+            assertArrayCount(childVI2.children, 3)
+            let child2 = childVI2.item // l <-> r
+            assertItem(child2, 0, 2, 1, 0, 3, "dir", .orphan, 42)
+            #expect(child2.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child2.orphanFolders)")
+            assertItem(child2.linkedItem, 0, 2, 1, 0, 3, "dir", .orphan, 45)
+            #expect(child2.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child2.linkedItem!.orphanFolders)")
+
+            let childVI3 = childVI2.children[0] // dir <--> dir
+            assertArrayCount(childVI3.children, 2)
+            let child3 = childVI3.item // dir <-> dir
+            assertItem(child3, 0, 1, 0, 0, 2, "deeper", .orphan, 14)
+            #expect(child3.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child3.orphanFolders)")
+            assertItem(child3.linkedItem, 0, 1, 1, 0, 2, "deeper", .orphan, 30)
+            #expect(child3.linkedItem?.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child3.linkedItem!.orphanFolders)")
+
+            let childVI4 = childVI3.children[0] // deeper <--> deeper
+            assertArrayCount(childVI4.children, 1)
+            let child4 = childVI4.item // deeper <-> deeper
+            assertItem(child4, 0, 0, 0, 0, 1, nil, .orphan, 0)
+            assertItem(child4.linkedItem, 0, 0, 1, 0, 1, "level2", .orphan, 15)
+            #expect(child4.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child4.linkedItem!.orphanFolders)")
+
+            let childVI5 = childVI4.children[0] //  <--> level2
+            assertArrayCount(childVI5.children, 0)
+            let child5 = childVI5.item // nil <-> level2
+            assertItem(child5, 0, 0, 0, 0, 0, nil, .orphan, 0)
+            assertItem(child5.linkedItem, 0, 0, 1, 0, 0, "level2-file5.txt", .orphan, 15)
+
+            let childVI6 = childVI3.children[1] // deeper <--> deeper
+            assertArrayCount(childVI6.children, 0)
+            let child6 = childVI6.item // deeper <-> deeper
+            assertItem(child6, 0, 1, 0, 0, 0, "file5.txt", .changed, 14)
+            assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "file5.txt", .changed, 15)
+
+            let childVI7 = childVI2.children[1] // dir <--> dir
+            assertArrayCount(childVI7.children, 0)
+            let child7 = childVI7.item // dir <-> dir
+            assertItem(child7, 0, 0, 1, 0, 0, "file3.txt", .orphan, 14)
+            assertItem(child7.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI8 = childVI2.children[2] // dir <--> dir
+            assertArrayCount(childVI8.children, 0)
+            let child8 = childVI8.item // dir <-> dir
+            assertItem(child8, 0, 1, 0, 0, 0, "file4.txt", .changed, 14)
+            assertItem(child8.linkedItem, 0, 1, 0, 0, 0, "file4.txt", .changed, 15)
+
+            let childVI9 = childVI1.children[1] // l <--> r
+            assertArrayCount(childVI9.children, 2)
+            let child9 = childVI9.item // l <-> r
+            assertItem(child9, 0, 0, 3, 0, 2, "level1", .orphan, 3)
+            #expect(child9.orphanFolders == 1, "OrphanFolder: Expected count 1 found \(child9.orphanFolders)")
+            assertItem(child9.linkedItem, 0, 0, 0, 0, 2, nil, .orphan, 0)
+
+            let childVI10 = childVI9.children[0] // level1 <-->
+            assertArrayCount(childVI10.children, 2)
+            let child10 = childVI10.item // level1 <-> nil
+            assertItem(child10, 0, 0, 2, 0, 2, "level2", .orphan, 2)
+            #expect(child10.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child10.orphanFolders)")
+            assertItem(child10.linkedItem, 0, 0, 0, 0, 2, nil, .orphan, 0)
+
+            let childVI11 = childVI10.children[0] // level2 <-->
+            assertArrayCount(childVI11.children, 0)
+            let child11 = childVI11.item // level2 <-> nil
+            assertItem(child11, 0, 0, 1, 0, 0, "file2-1.txt", .orphan, 1)
+            assertItem(child11.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI12 = childVI10.children[1] // level2 <-->
+            assertArrayCount(childVI12.children, 0)
+            let child12 = childVI12.item // level2 <-> nil
+            assertItem(child12, 0, 0, 1, 0, 0, "file2-2.txt", .orphan, 1)
+            assertItem(child12.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI13 = childVI9.children[1] // level1 <-->
+            assertArrayCount(childVI13.children, 0)
+            let child13 = childVI13.item // level1 <-> nil
+            assertItem(child13, 0, 0, 1, 0, 0, "file1-1.txt", .orphan, 1)
+            assertItem(child13.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI14 = childVI1.children[2] // l <--> r
+            assertArrayCount(childVI14.children, 0)
+            let child14 = childVI14.item // l <-> r
+            assertItem(child14, 0, 0, 1, 0, 0, "file1.txt", .orphan, 14)
+            assertItem(child14.linkedItem, 0, 0, 0, 0, 0, nil, .orphan, 0)
+
+            let childVI15 = childVI1.children[3] // l <--> r
+            assertArrayCount(childVI15.children, 0)
+            let child15 = childVI15.item // l <-> r
+            assertItem(child15, 0, 1, 0, 0, 0, "file2.txt", .changed, 14)
+            assertItem(child15.linkedItem, 1, 0, 0, 0, 0, "file2.txt", .old, 15)
+        }
+
+        let externalURL = appendFolder("external")
+            .appending(component: "level2/level2-file5.txt")
+            .path(percentEncoded: false)
+        try assertFileExists(externalURL, "12345678901234")
+    }
 }
 
 // swiftlint:enable file_length force_unwrapping function_body_length

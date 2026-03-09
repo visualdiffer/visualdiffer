@@ -35,10 +35,45 @@ public class MoveCompareItem: NSObject {
         srcBaseDir: URL,
         destBaseDir: URL
     ) {
+        move(
+            srcRoot: srcRoot,
+            srcBaseDir: srcBaseDir,
+            destination: .linkedSide(baseDir: destBaseDir)
+        )
+    }
+
+    public func move(
+        srcRoot: CompareItem,
+        srcBaseDir: URL,
+        destination: FileOperationDestination
+    ) {
         guard srcRoot.isValidFile else {
             return
         }
+        let context = FileDestinationContext(destination: destination)
+        if context.isExternal {
+            moveToExternal(
+                srcRoot: srcRoot,
+                srcBaseDir: srcBaseDir,
+                context: context
+            )
+            return
+        }
+        moveToLinkedSide(
+            srcRoot: srcRoot,
+            srcBaseDir: srcBaseDir,
+            destBaseDir: context.baseDir
+        )
+    }
 
+    private func moveToLinkedSide(
+        srcRoot: CompareItem,
+        srcBaseDir: URL,
+        destBaseDir: URL
+    ) {
+        guard srcRoot.isValidFile else {
+            return
+        }
         guard let volumeType = destBaseDir.volumeType() else {
             delegate.fileManager(
                 operationManager,
@@ -94,6 +129,147 @@ public class MoveCompareItem: NSObject {
             parent = item.parent
         }
     }
+
+    private func moveToExternal(
+        srcRoot: CompareItem,
+        srcBaseDir: URL,
+        context: FileDestinationContext
+    ) {
+        guard let volumeType = context.baseDir.volumeType() else {
+            delegate.fileManager(
+                operationManager,
+                addError: FileError.unknownVolumeType,
+                forItem: srcRoot
+            )
+            return
+        }
+        _ = doMoveToExternal(
+            srcRoot,
+            srcBaseDir: srcBaseDir,
+            context: context,
+            volumeType: volumeType
+        )
+    }
+
+    // swiftlint:disable function_body_length
+    @discardableResult
+    private func doMoveToExternal(
+        _ srcRoot: CompareItem,
+        srcBaseDir: URL,
+        context: FileDestinationContext,
+        volumeType: String
+    ) -> Bool {
+        delegate.waitPause(for: operationManager)
+
+        guard delegate.isRunning(operationManager) else {
+            return false
+        }
+        guard srcRoot.isValidFile else {
+            return true
+        }
+        let isFiltered = srcRoot.isFiltered || !srcRoot.isDisplayed
+        if !operationManager.includesFiltered, isFiltered {
+            return true
+        }
+        guard let srcRootPath = srcRoot.path,
+              let srcUrl = srcRoot.toUrl() else {
+            return false
+        }
+        let destBaseDir = context.baseDir
+        let destFullPath: URL
+        do {
+            destFullPath = try context.destinationPath(
+                srcRoot: srcRoot,
+                srcBaseDir: srcBaseDir,
+                srcUrl: srcUrl
+            )
+        } catch {
+            delegate.fileManager(operationManager, addError: error, forItem: srcRoot)
+            return false
+        }
+        do {
+            let srcAttrs = try fm.attributesOfItem(atPath: srcRootPath)
+            if srcRoot.isFile {
+                var destAttrs: [FileAttributeKey: Any]?
+                do {
+                    destAttrs = try fm.attributesOfItem(atPath: destFullPath.osPath)
+                } catch {}
+                if !delegate.fileManager(
+                    operationManager,
+                    canReplaceFromPath: srcRootPath,
+                    fromAttrs: srcAttrs,
+                    toPath: destFullPath.osPath,
+                    toAttrs: destAttrs
+                ) {
+                    return false
+                }
+                let lastPathTimestamps = try createDirectory(
+                    atPath: destBaseDir,
+                    srcBaseDir: srcBaseDir,
+                    namesFrom: srcRoot,
+                    options: operationManager.comparator.options.directoryOptions
+                )
+                if destAttrs != nil {
+                    try fm.removeItem(at: destFullPath)
+                }
+                delegate.fileManager(operationManager, initForItem: srcRoot)
+                try moveItem(
+                    srcRoot,
+                    isBigFile: srcRoot.fileSize >= bigFileSizeThreshold,
+                    destFullPath: destFullPath,
+                    lastPathTimestamps: lastPathTimestamps,
+                    volumeType: volumeType
+                )
+                delegate.fileManager(operationManager, updateForItem: srcRoot)
+                deleteCompareItem.delete(
+                    srcRoot,
+                    baseDir: srcBaseDir,
+                    skipFileSystemRemoval: true
+                )
+            } else {
+                try operationManager.createDestinationDirectory(
+                    srcRoot,
+                    destRoot: nil,
+                    srcBaseDir: srcBaseDir,
+                    destBaseDir: destBaseDir,
+                    destFullPath: destFullPath
+                )
+                for item in srcRoot.children.reversed() {
+                    // swiftlint:disable:next for_where
+                    if !doMoveToExternal(
+                        item,
+                        srcBaseDir: srcBaseDir,
+                        context: context,
+                        volumeType: volumeType
+                    ) {
+                        return false
+                    }
+                }
+                var destinationWithMetadata = destFullPath
+                try srcRoot.copyMetadata(toPath: &destinationWithMetadata)
+                if operationManager.canRemoveDirectory(srcRoot) {
+                    try fm.removeItem(atPath: srcRootPath)
+                    deleteCompareItem.delete(
+                        srcRoot,
+                        baseDir: srcBaseDir,
+                        skipFileSystemRemoval: true
+                    )
+                }
+            }
+
+            try fm.setFileAttributes(
+                operationManager.timestampAttributesFrom(srcAttrs),
+                ofItemAtPath: destFullPath,
+                volumeType: volumeType
+            )
+        } catch {
+            delegate.fileManager(operationManager, addError: error, forItem: srcRoot)
+            return false
+        }
+        return true
+    }
+
+    // swiftlint:enable function_body_length
 
     @discardableResult
     func doMove(

@@ -25,7 +25,8 @@ class DeleteCompareItem {
 
     func delete(
         _ srcRoot: CompareItem,
-        baseDir: URL
+        baseDir: URL,
+        skipFileSystemRemoval: Bool = false
     ) {
         if !srcRoot.isValidFile {
             return
@@ -39,7 +40,8 @@ class DeleteCompareItem {
             baseDir: baseDir,
             parentSrcCount: &srcCount,
             parentDestCount: &destCount,
-            informDelegate: true
+            informDelegate: true,
+            skipFileSystemRemoval: skipFileSystemRemoval
         )
 
         var parent = srcRoot.parent
@@ -73,7 +75,8 @@ class DeleteCompareItem {
     func doDelete(
         _ srcRoot: CompareItem,
         baseDir: URL,
-        informDelegate: Bool
+        informDelegate: Bool,
+        skipFileSystemRemoval: Bool = false
     ) -> Bool {
         var parentSrcCount = CompareSummary()
         var parentDestCount = CompareSummary()
@@ -83,7 +86,8 @@ class DeleteCompareItem {
             baseDir: baseDir,
             parentSrcCount: &parentSrcCount,
             parentDestCount: &parentDestCount,
-            informDelegate: informDelegate
+            informDelegate: informDelegate,
+            skipFileSystemRemoval: skipFileSystemRemoval
         )
     }
 
@@ -93,7 +97,8 @@ class DeleteCompareItem {
         baseDir: URL,
         parentSrcCount: inout CompareSummary,
         parentDestCount: inout CompareSummary,
-        informDelegate: Bool
+        informDelegate: Bool,
+        skipFileSystemRemoval: Bool = false
     ) -> Bool {
         if informDelegate {
             delegate.waitPause(for: operationManager)
@@ -115,7 +120,8 @@ class DeleteCompareItem {
                 srcRoot,
                 parentSrcCount: &parentSrcCount,
                 parentDestCount: &parentDestCount,
-                informDelegate: informDelegate
+                informDelegate: informDelegate,
+                skipFileSystemRemoval: skipFileSystemRemoval
             )
         } else {
             deleteFolder(
@@ -123,7 +129,8 @@ class DeleteCompareItem {
                 baseDir: baseDir,
                 parentSrcCount: &parentSrcCount,
                 parentDestCount: &parentDestCount,
-                informDelegate: informDelegate
+                informDelegate: informDelegate,
+                skipFileSystemRemoval: skipFileSystemRemoval
             )
         }
         if let result {
@@ -158,12 +165,14 @@ class DeleteCompareItem {
         }
     }
 
+    // swiftlint:disable:next function_parameter_count
     private func deleteFolder(
         _ srcRoot: CompareItem,
         baseDir: URL,
         parentSrcCount: inout CompareSummary,
         parentDestCount: inout CompareSummary,
-        informDelegate: Bool
+        informDelegate: Bool,
+        skipFileSystemRemoval: Bool
     ) -> DeleteResult? {
         var srcCount = CompareSummary()
         var destCount = CompareSummary()
@@ -176,7 +185,8 @@ class DeleteCompareItem {
                 baseDir: baseDir,
                 parentSrcCount: &srcCount,
                 parentDestCount: &destCount,
-                informDelegate: informDelegate
+                informDelegate: informDelegate,
+                skipFileSystemRemoval: skipFileSystemRemoval
             ) {
                 Logger.fs.warning("Stopped at folder process")
                 break
@@ -185,10 +195,18 @@ class DeleteCompareItem {
 
         var result: DeleteResult?
 
-        if operationManager.canRemoveDirectory(srcRoot) {
+        let isAlreadyRemovedFromFileSystem: Bool = if skipFileSystemRemoval, let path = srcRoot.path {
+            !fm.fileExists(atPath: path)
+        } else {
+            false
+        }
+
+        if operationManager.canRemoveDirectory(srcRoot) || isAlreadyRemovedFromFileSystem {
             if let path = srcRoot.path {
                 do {
-                    try fm.removeItem(atPath: path)
+                    if !skipFileSystemRemoval {
+                        try fm.removeItem(atPath: path)
+                    }
                 } catch {
                     if informDelegate {
                         delegate.fileManager(operationManager, addError: error, forItem: srcRoot)
@@ -291,7 +309,8 @@ class DeleteCompareItem {
         _ srcRoot: CompareItem,
         parentSrcCount: inout CompareSummary,
         parentDestCount: inout CompareSummary,
-        informDelegate: Bool
+        informDelegate: Bool,
+        skipFileSystemRemoval: Bool
     ) -> DeleteResult? {
         guard let destRoot = srcRoot.linkedItem else {
             return nil
@@ -303,7 +322,9 @@ class DeleteCompareItem {
         var result: DeleteResult?
 
         do {
-            try remove(item: srcRoot)
+            if !skipFileSystemRemoval {
+                try remove(item: srcRoot)
+            }
 
             parentSrcCount += srcRoot.summary
             parentSrcCount.subfoldersSize += srcRoot.fileSize

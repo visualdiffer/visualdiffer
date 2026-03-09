@@ -29,7 +29,7 @@ extension FileOperationManager: FileOperationManagerAction {
     func move(
         _ srcRoot: CompareItem,
         srcBaseDir: String,
-        destBaseDir: String
+        destination: FileOperationDestination
     ) {
         let moveItem = MoveCompareItem(
             operationManager: self,
@@ -39,7 +39,7 @@ extension FileOperationManager: FileOperationManagerAction {
         moveItem.move(
             srcRoot: srcRoot,
             srcBaseDir: URL(filePath: srcBaseDir, directoryHint: .isDirectory),
-            destBaseDir: URL(filePath: destBaseDir, directoryHint: .isDirectory)
+            destination: destination
         )
     }
 
