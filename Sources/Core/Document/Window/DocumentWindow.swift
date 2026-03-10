@@ -61,7 +61,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         let view = NSButton(
             title: NSLocalizedString("Session Settings", comment: ""),
             target: self,
-            action: #selector(selectSessionPreferences)
+            action: #selector(openSessionSettingsSheet)
         )
         view.translatesAutoresizingMaskIntoConstraints = false
 
@@ -306,7 +306,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
     }
 
     @objc
-    func selectSessionPreferences(_: AnyObject) {
+    func openSessionSettingsSheet(_: AnyObject) {
         sessionPreferencesSheet.beginSheet(
             self,
             sessionDiff: nil,
