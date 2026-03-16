@@ -16,9 +16,9 @@ protocol FileDropImageViewDelegate: AnyObject {
 }
 
 class FileDropView: NSImageView {
-    var filePath = "" {
+    var filePath: String? {
         willSet {
-            if filePath != newValue {
+            if let newValue, filePath != newValue {
                 updateDropImage(newValue)
             }
         }
@@ -102,7 +102,9 @@ class FileDropView: NSImageView {
     // MARK: Private Methods
 
     private func updateDropImage(_ path: String) {
-        if FileManager.default.fileExists(atPath: path) {
+        if path.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            image = IconUtils.shared.icon(forEmptyPath: 100.0)
+        } else if FileManager.default.fileExists(atPath: path) {
             image = NSWorkspace.shared.icon(forFile: path)
         } else {
             image = NSImage(named: NSImage.cautionName)
@@ -127,12 +129,12 @@ class FileDropView: NSImageView {
     }
 
     override func mouseDown(with event: NSEvent) {
-        if event.clickCount == 2 {
+        if let filePath, event.clickCount == 2 {
             if FileManager.default.fileExists(atPath: filePath) {
                 // for some unknown (to me!!) reason mouseDown is called inside a different runloop context
                 // preventing the sandbox to correctly "talk" with Finder so we must explicitly call `show` inside the main thread
                 DispatchQueue.main.async {
-                    NSWorkspace.shared.show(inFinder: [self.filePath])
+                    NSWorkspace.shared.show(inFinder: [filePath])
                 }
             }
         }

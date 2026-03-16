@@ -47,10 +47,14 @@ class HistorySessionManager: @unchecked Sendable {
         document: VDDocument,
         closeDocument: Bool
     ) {
-        // documents loaded from disk aren't handled by history
-        // so they aren't present on self.documents dictionary
-        if documents.contains(document.uuid) {
+        // documents loaded from disk aren't tracked by history
+        // blank documents can still enter history later, once they have at least one non-empty path
+        let isTrackedDocument = documents.contains(document.uuid)
+
+        if isTrackedDocument || documentHasNonEmptyPaths(document) {
             update(session: document, closeDocument: closeDocument)
+        } else if closeDocument {
+            documents.remove(document.uuid)
         }
     }
 
@@ -71,9 +75,12 @@ class HistorySessionManager: @unchecked Sendable {
         MainActor.assumeIsolated {
             guard let sessionDiff = document.sessionDiff,
                   let leftPath = sessionDiff.leftPath,
-                  let rightPath = sessionDiff.rightPath else {
+                  let rightPath = sessionDiff.rightPath,
+                  !leftPath.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
+                  !rightPath.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
                 return
             }
+
             // if we are adding a new document history will be nil
             // if we are updating and left or right path has been changed then history will be nil, too.
             // don't overwrite the session if the paths are changed but create a new one
@@ -91,6 +98,19 @@ class HistorySessionManager: @unchecked Sendable {
         }
     }
 
+    private func documentHasNonEmptyPaths(_ document: VDDocument) -> Bool {
+        MainActor.assumeIsolated {
+            guard let sessionDiff = document.sessionDiff else {
+                return false
+            }
+
+            let leftPath = sessionDiff.leftPath?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let rightPath = sessionDiff.rightPath?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+
+            return !leftPath.isEmpty || !rightPath.isEmpty
+        }
+    }
+
     func createNewHistory() -> HistoryEntity? {
         guard let history = NSEntityDescription.insertNewObject(
             forEntityName: HistoryEntity.name,
@@ -98,6 +118,7 @@ class HistorySessionManager: @unchecked Sendable {
         ) as? HistoryEntity else {
             return nil
         }
+
         return history
     }
 

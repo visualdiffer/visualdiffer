@@ -14,49 +14,27 @@ extension FilesWindowController {
     }
 
     func reloadAllMove(toFirstDifference moveToFirstDifference: Bool) {
-        resolvedLeftPath = sessionDiff.resolvePath(
-            for: .left,
-            chooseFileType: .file,
-            alwaysResolveSymlinks: CommonPrefs.shared.alwaysResolveSymlinks
-        )
-        resolvedRightPath = sessionDiff.resolvePath(
-            for: .right,
-            chooseFileType: .file,
-            alwaysResolveSymlinks: CommonPrefs.shared.alwaysResolveSymlinks
-        )
-
-        let leftContent: String
-        let rightContent: String
-
         do {
-            leftContent = if let resolvedLeftPath {
-                try leftPanelView.readFile(resolvedLeftPath)
-            } else {
-                ""
-            }
-            rightContent = if let resolvedRightPath {
-                try rightPanelView.readFile(resolvedRightPath)
-            } else {
-                ""
-            }
+            resolvedLeftPath = nil
+            resolvedRightPath = nil
+            let (leftURL, leftLines) = try readDiffSource(for: .left)
+            let (rightURL, rightLines) = try readDiffSource(for: .right)
+            resolvedLeftPath = leftURL
+            resolvedRightPath = rightURL
+            let isSameResolvedPath = resolvedLeftPath != nil && resolvedLeftPath == resolvedRightPath
+
+            leftPanelView.isEditAllowed = !isSameResolvedPath
+            rightPanelView.isEditAllowed = !isSameResolvedPath
+
+            compare(
+                leftLines: leftLines,
+                rightLines: rightLines,
+                moveToFirstDifference: moveToFirstDifference
+            )
         } catch let error as NSError {
             showError(error)
             return
         }
-
-        if resolvedLeftPath != nil, resolvedLeftPath == resolvedRightPath {
-            leftPanelView.isEditAllowed = false
-            rightPanelView.isEditAllowed = false
-        } else {
-            leftPanelView.isEditAllowed = true
-            rightPanelView.isEditAllowed = true
-        }
-
-        compare(
-            leftLines: DiffLineComponent.splitLines(leftContent),
-            rightLines: DiffLineComponent.splitLines(rightContent),
-            moveToFirstDifference: moveToFirstDifference
-        )
     }
 
     func compare(
@@ -104,5 +82,43 @@ extension FilesWindowController {
         let alert = NSAlert(error: error)
 
         alert.beginSheetModal(for: window)
+    }
+
+    private func readDiffSource(
+        for side: SessionDiff.Side
+    ) throws -> (resolvedURL: URL?, lines: [DiffLineComponent]) {
+        let path: String?
+        let diffSide: DiffSide?
+        let panel: FilePanelView
+
+        switch side {
+        case .left:
+            path = sessionDiff.leftPath
+            diffSide = diffResult?.leftSide
+            panel = leftPanelView
+        case .right:
+            path = sessionDiff.rightPath
+            diffSide = diffResult?.rightSide
+            panel = rightPanelView
+        }
+
+        if let path,
+           path.isEmpty {
+            return (nil, diffSide?.nonMissingLineComponents() ?? [])
+        }
+
+        let resolvedURL = sessionDiff.resolvePath(
+            for: side,
+            chooseFileType: .file,
+            alwaysResolveSymlinks: CommonPrefs.shared.alwaysResolveSymlinks
+        )
+
+        guard let resolvedURL else {
+            return (nil, [])
+        }
+        let content = try panel.readFile(resolvedURL)
+        let lines = DiffLineComponent.splitLines(content)
+
+        return (resolvedURL, lines)
     }
 }

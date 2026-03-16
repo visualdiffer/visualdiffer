@@ -31,8 +31,8 @@ class HistoryEntity: SessionDiff {
         let request = NSFetchRequest<HistoryEntity>(entityName: HistoryEntity.name)
         request.predicate = NSPredicate(
             format: "leftPath == %@ and rightPath = %@",
-            URL(filePath: leftPath).standardizingPath,
-            URL(filePath: rightPath).standardizingPath
+            leftPath.isEmpty ? "" : URL(filePath: leftPath).standardizingPath,
+            rightPath.isEmpty ? "" : URL(filePath: rightPath).standardizingPath
         )
 
         return request

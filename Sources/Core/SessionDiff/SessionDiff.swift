@@ -52,6 +52,14 @@ public class SessionDiff: NSManagedObject {
 extension SessionDiff {
     static let entityName = "Session"
 
+    var leftURL: URL? {
+        toURL(path: leftPath)
+    }
+
+    var rightURL: URL? {
+        toURL(path: rightPath)
+    }
+
     @nonobjc
     public class func fetchRequest() -> NSFetchRequest<SessionDiff> {
         NSFetchRequest<SessionDiff>(entityName: entityName)
@@ -93,10 +101,12 @@ extension SessionDiff {
     override open func awakeFromFetch() {
         super.awakeFromFetch()
 
-        if let path = leftPath {
+        if let path = leftPath,
+           !path.isEmpty {
             leftPath = URL(filePath: path).standardizingPath
         }
-        if let path = rightPath {
+        if let path = rightPath,
+           !path.isEmpty {
             rightPath = URL(filePath: path).standardizingPath
         }
 
@@ -209,5 +219,21 @@ extension SessionDiff {
                 closure(ComparatorOptions(rawValue: Int(flags)))
             }
         }
+    }
+
+    private func toURL(path: String?) -> URL? {
+        guard let path,
+              !path.isEmpty else {
+            return nil
+        }
+        let isFolder = if let itemType {
+            itemType == .folder
+        } else {
+            false
+        }
+        return URL(
+            filePath: path,
+            directoryHint: isFolder ? .isDirectory : .notDirectory
+        )
     }
 }

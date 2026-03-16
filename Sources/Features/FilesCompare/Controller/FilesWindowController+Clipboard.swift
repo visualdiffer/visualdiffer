@@ -9,7 +9,7 @@
 @MainActor
 extension FilesWindowController {
     @objc
-    func copyUrlsToClipboard(_: AnyObject) {
+    func copyURLsToClipboard(_: AnyObject) {
         if let path = lastUsedView.side == .left ? sessionDiff.leftPath : sessionDiff.rightPath {
             let url = URL(filePath: path, directoryHint: .notDirectory)
 
@@ -46,9 +46,10 @@ extension FilesWindowController {
         guard let diffResult else {
             return
         }
-        let row = lastUsedView.selectedRow
+        let row = max(-1, lastUsedView.selectedRow)
+        let diffSide = diffResult.diffSide(for: lastUsedView.side)
 
-        if row < 0 {
+        if row == -1, !diffSide.lines.isEmpty {
             return
         }
 

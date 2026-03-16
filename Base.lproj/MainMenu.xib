@@ -76,10 +76,28 @@
                 <menuItem title="File" tag="1" id="83">
                     <menu key="submenu" title="File" id="81">
                         <items>
-                            <menuItem title="New" keyEquivalent="n" id="82">
-                                <connections>
-                                    <action selector="newDocument:" target="-1" id="194"/>
-                                </connections>
+                            <menuItem title="New" id="osd-Xv-LQi">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="New" id="pf9-Kp-Joz">
+                                    <items>
+                                        <menuItem title="Open Comparison…" keyEquivalent="n" id="82">
+                                            <connections>
+                                                <action selector="newDocument:" target="-1" id="194"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Blank File Compare…" keyEquivalent="b" id="J6y-mM-pet">
+                                            <connections>
+                                                <action selector="openBlankFileCompare:" target="724" id="Asw-p1-DSm"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Blank Folder Compare…" keyEquivalent="b" id="Te6-3e-Vpb">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openBlankFolderCompare:" target="724" id="5Nz-jE-Qcg"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                             </menuItem>
                             <menuItem title="Open…" keyEquivalent="o" id="72">
                                 <connections>

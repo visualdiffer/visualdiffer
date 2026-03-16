@@ -17,7 +17,8 @@ class PathChooser: NSObject, NSComboBoxDelegate {
         }
 
         set {
-            comboBox.stringValue = URL(filePath: newValue).standardizingPath
+            let trimmed = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
+            comboBox.stringValue = trimmed.isEmpty ? trimmed : URL(filePath: newValue).standardizingPath
             dropView.filePath = comboBox.stringValue
         }
     }
@@ -142,14 +143,14 @@ class PathChooser: NSObject, NSComboBoxDelegate {
     @objc
     func choosePath(_: AnyObject) {
         let url = URL(filePath: currentPath)
-        let selectedUrl = url.selectPath(
+        let selectedURL = url.selectPath(
             panelTitle: NSLocalizedString("Select File or Folder", comment: ""),
             chooseFiles: true,
             chooseDirectories: true
         )
 
-        if let selectedUrl {
-            currentPath = selectedUrl.osPath
+        if let selectedURL {
+            currentPath = selectedURL.osPath
         }
     }
 
@@ -177,6 +178,6 @@ class PathChooser: NSObject, NSComboBoxDelegate {
     }
 
     func addPath(_ newPath: String) {
-        comboBoxPaths.addPath(newPath)
+        comboBoxPaths.addPath(newPath.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 }

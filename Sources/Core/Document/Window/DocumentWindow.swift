@@ -57,13 +57,20 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         action: #selector(openRecent)
     )
 
-    private lazy var sessionPreferencesButton: NSButton = {
-        let view = NSButton(
-            title: NSLocalizedString("Session Settings", comment: ""),
-            target: self,
-            action: #selector(openSessionSettingsSheet)
-        )
+    private lazy var sessionButton: SessionPopupButton = {
+        let view = SessionPopupButton()
         view.translatesAutoresizingMaskIntoConstraints = false
+
+        let settingsItem = NSMenuItem(
+            title: NSLocalizedString("Session Settings…", comment: ""),
+            action: #selector(openSessionSettingsSheet),
+            keyEquivalent: ","
+        )
+        settingsItem.target = self
+        settingsItem.keyEquivalentModifierMask = [.command, .shift]
+
+        view.insertMenuItem(settingsItem, at: 1)
+        view.insertMenuItem(NSMenuItem.separator(), at: 2)
 
         return view
     }()
@@ -110,7 +117,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
             contentView.addSubview(leftPathChooser.chooserView)
             contentView.addSubview(rightPathChooser.chooserView)
 
-            contentView.addSubview(sessionPreferencesButton)
+            contentView.addSubview(sessionButton)
             contentView.addSubview(recentPopup)
             contentView.addSubview(compareButton)
             contentView.addSubview(separator)
@@ -125,6 +132,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         guard let contentView else {
             return
         }
+
         let table = historyController.scrollView
         let leftDropView = leftPathChooser.dropView
         let rightDropView = rightPathChooser.dropView
@@ -148,15 +156,16 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
             rightPathChooser.chooserView.trailingAnchor.constraint(equalTo: leftPathChooser.chooserView.trailingAnchor),
             rightPathChooser.chooserView.topAnchor.constraint(equalTo: leftPathChooser.chooserView.bottomAnchor, constant: 6),
 
-            sessionPreferencesButton.leadingAnchor.constraint(equalTo: separator.leadingAnchor),
-            sessionPreferencesButton.topAnchor.constraint(equalTo: leftDropView.bottomAnchor, constant: 12),
+            sessionButton.leadingAnchor.constraint(equalTo: separator.leadingAnchor),
+            sessionButton.topAnchor.constraint(equalTo: leftDropView.bottomAnchor, constant: 12),
+            sessionButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 110),
 
-            recentPopup.trailingAnchor.constraint(equalTo: compareButton.leadingAnchor, constant: -5),
-            recentPopup.topAnchor.constraint(equalTo: sessionPreferencesButton.topAnchor),
+            recentPopup.leadingAnchor.constraint(equalTo: sessionButton.trailingAnchor, constant: 5),
+            recentPopup.topAnchor.constraint(equalTo: sessionButton.topAnchor),
             recentPopup.widthAnchor.constraint(greaterThanOrEqualToConstant: 130),
 
             compareButton.trailingAnchor.constraint(equalTo: separator.trailingAnchor),
-            compareButton.topAnchor.constraint(equalTo: sessionPreferencesButton.topAnchor),
+            compareButton.topAnchor.constraint(equalTo: sessionButton.topAnchor),
             compareButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 130),
 
             separator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -176,12 +185,12 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
 
     @objc
     func showDiffs(_: AnyObject?) {
-        let leftUrl = URL(filePath: leftPathChooser.currentPath)
-        let rightUrl = URL(filePath: rightPathChooser.currentPath)
+        let leftURL = URL(filePath: leftPathChooser.currentPath)
+        let rightURL = URL(filePath: rightPathChooser.currentPath)
         var leftExists = false
         var rightExists = false
-        let isOk = leftUrl.matchesFileType(
-            of: rightUrl,
+        let isOk = leftURL.matchesFileType(
+            of: rightURL,
             isDir: &isFoldersDiff,
             leftExists: &leftExists,
             rightExists: &rightExists
@@ -203,11 +212,14 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
                 NSDocumentController.shared.newDocument(self)
             }
         } else {
-            var errDesc = NSLocalizedString("Left and right paths must both be folders or files", comment: "")
-            if !leftExists {
-                errDesc = NSLocalizedString("Left file no longer exists", comment: "")
+            let errDesc = if !leftExists, !rightExists {
+                NSLocalizedString("At least one of the paths must exist", comment: "")
+            } else if !leftExists {
+                NSLocalizedString("Left file no longer exists", comment: "")
             } else if !rightExists {
-                errDesc = NSLocalizedString("Right file no longer exists", comment: "")
+                NSLocalizedString("Right file no longer exists", comment: "")
+            } else {
+                NSLocalizedString("Left and right paths must both be folders or files", comment: "")
             }
             let alert = NSAlert()
             alert.messageText = errDesc
@@ -220,6 +232,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         guard let sender = sender as? NSPopUpButton else {
             return
         }
+
         let index = sender.indexOfSelectedItem - 1
         if index < 0 {
             return

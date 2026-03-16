@@ -49,6 +49,7 @@
 		551DE3B62ED42B4E0067AB18 /* FileComparisonBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3B52ED42B4E0067AB18 /* FileComparisonBox.swift */; };
 		551DE3B82ED439AF0067AB18 /* PreferencesBoxDataSource+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3B72ED4399B0067AB18 /* PreferencesBoxDataSource+Default.swift */; };
 		551DEDE1160477CA0014DF88 /* prefs_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 551DEDE0160477CA0014DF88 /* prefs_folder.png */; };
+		552B85082F5FE29A00A9268A /* VDDocumentController+BlankDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B85072F5FE29400A9268A /* VDDocumentController+BlankDocument.swift */; };
 		5532516C2765F06B0092D65F /* mask-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 553251672765F06B0092D65F /* mask-back.png */; };
 		5532516D2765F06B0092D65F /* mask-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 553251682765F06B0092D65F /* mask-full.png */; };
 		5532516E2765F06B0092D65F /* mask-middle.png in Resources */ = {isa = PBXBuildFile; fileRef = 553251692765F06B0092D65F /* mask-middle.png */; };
@@ -186,7 +187,6 @@
 		553741FF2E9372DF00AB56D0 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741582E9372DF00AB56D0 /* ProgressBarView.swift */; };
 		553742002E9372DF00AB56D0 /* FolderManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537403F2E9372DF00AB56D0 /* FolderManagerError.swift */; };
 		553742012E9372DF00AB56D0 /* FolderSelectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537401E2E9372DF00AB56D0 /* FolderSelectionInfo.swift */; };
-		55F4A0032FEE100000A1B2C3 /* ExternalFileOperationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */; };
 		553742022E9372DF00AB56D0 /* SynchroScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537415A2E9372DF00AB56D0 /* SynchroScrollView.swift */; };
 		553742032E9372DF00AB56D0 /* FilesWindowController+Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FD52E9372DF00AB56D0 /* FilesWindowController+Save.swift */; };
 		553742042E9372DF00AB56D0 /* FoldersWindowController+ConsoleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740222E9372DF00AB56D0 /* FoldersWindowController+ConsoleViewDelegate.swift */; };
@@ -462,6 +462,7 @@
 		55BC33402EDAC96F004035A0 /* TiledImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC333F2EDAC96F004035A0 /* TiledImageView.swift */; };
 		55BC33432EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC33412EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift */; };
 		55BC33442EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC33422EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift */; };
+		55BCFE472F627DDF00E704D8 /* SessionPopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BCFE462F627DDF00E704D8 /* SessionPopupButton.swift */; };
 		55C165622EE444050082A24C /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 55C165612EE444050082A24C /* Sparkle */; };
 		55C1CBFD2E8BB6AD004FE322 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1CBF42E8BB6AD004FE322 /* main.swift */; };
 		55C1CC012E8BB755004FE322 /* visdiff in Copy Visdiff to Helpers */ = {isa = PBXBuildFile; fileRef = 55C1CBE22E8BB6A2004FE322 /* visdiff */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -509,6 +510,7 @@
 		55E3A5671826552A002A890B /* lockedbadge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A5651826552A002A890B /* lockedbadge@2x.png */; };
 		55EC0A4B2F3868E4008201E1 /* CopyFilesTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC0A4A2F3868E4008201E1 /* CopyFilesTag.swift */; };
 		55ECD8621476B03400D8BEB4 /* prefs_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 55ECD8611476B03400D8BEB4 /* prefs_text.png */; };
+		55F4A0032FEE100000A1B2C3 /* ExternalFileOperationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */; };
 		55F6B0631AEA93E30096E55E /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0611AEA93E30096E55E /* Localizable.stringsdict */; };
 		55F6B0661AEA99680096E55E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0641AEA99680096E55E /* Localizable.strings */; };
 		55F9E79A2EDD5DBD001218C7 /* DiffResult.Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */; };
@@ -617,6 +619,7 @@
 		551DE3B52ED42B4E0067AB18 /* FileComparisonBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileComparisonBox.swift; sourceTree = "<group>"; };
 		551DE3B72ED4399B0067AB18 /* PreferencesBoxDataSource+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreferencesBoxDataSource+Default.swift"; sourceTree = "<group>"; };
 		551DEDE0160477CA0014DF88 /* prefs_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_folder.png; sourceTree = "<group>"; };
+		552B85072F5FE29400A9268A /* VDDocumentController+BlankDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VDDocumentController+BlankDocument.swift"; sourceTree = "<group>"; };
 		553033AC2E5DBABF0016F101 /* VisualDiffer.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = VisualDiffer.xctestplan; sourceTree = SOURCE_ROOT; };
 		553251672765F06B0092D65F /* mask-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask-back.png"; sourceTree = "<group>"; };
 		553251682765F06B0092D65F /* mask-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask-full.png"; sourceTree = "<group>"; };
@@ -741,7 +744,6 @@
 		5537401B2E9372DF00AB56D0 /* FolderReader+Detached.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FolderReader+Detached.swift"; sourceTree = "<group>"; };
 		5537401C2E9372DF00AB56D0 /* MainThreadFolderReaderDelegateBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainThreadFolderReaderDelegateBridge.swift; sourceTree = "<group>"; };
 		5537401E2E9372DF00AB56D0 /* FolderSelectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSelectionInfo.swift; sourceTree = "<group>"; };
-		55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFileOperationContext.swift; sourceTree = "<group>"; };
 		5537401F2E9372DF00AB56D0 /* FoldersWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersWindowController.swift; sourceTree = "<group>"; };
 		553740202E9372DF00AB56D0 /* FoldersWindowController+BaseFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoldersWindowController+BaseFolder.swift"; sourceTree = "<group>"; };
 		553740212E9372DF00AB56D0 /* FoldersWindowController+Comparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoldersWindowController+Comparison.swift"; sourceTree = "<group>"; };
@@ -1056,6 +1058,7 @@
 		55BC333F2EDAC96F004035A0 /* TiledImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiledImageView.swift; sourceTree = "<group>"; };
 		55BC33412EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesWindowController+RowHeightDataSource.swift"; sourceTree = "<group>"; };
 		55BC33422EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesWindowController+SplitViewDelegate.swift"; sourceTree = "<group>"; };
+		55BCFE462F627DDF00E704D8 /* SessionPopupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPopupButton.swift; sourceTree = "<group>"; };
 		55C1CBE22E8BB6A2004FE322 /* visdiff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = visdiff; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C1CBF32E8BB6AD004FE322 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
 		55C1CBF42E8BB6AD004FE322 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -1116,6 +1119,7 @@
 		55ECD8611476B03400D8BEB4 /* prefs_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_text.png; sourceTree = "<group>"; };
 		55ECD8671476B34600D8BEB4 /* VisualDiffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VisualDiffer.entitlements; sourceTree = "<group>"; };
 		55F013FC27A90C46003EA2D4 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
+		55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFileOperationContext.swift; sourceTree = "<group>"; };
 		55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResult.Options.swift; sourceTree = "<group>"; };
 		55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhitespacesTests.swift; sourceTree = "<group>"; };
 		55FC15F22557CD000075E30D /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
@@ -1418,6 +1422,7 @@
 				55373FA02E9372DF00AB56D0 /* NSArrayController+Paths.swift */,
 				55373FA12E9372DF00AB56D0 /* PathChooser.swift */,
 				55373FA22E9372DF00AB56D0 /* RecentDocumentPopupMenu.swift */,
+				55BCFE462F627DDF00E704D8 /* SessionPopupButton.swift */,
 			);
 			path = Window;
 			sourceTree = "<group>";
@@ -1425,13 +1430,14 @@
 		55373FAA2E9372DF00AB56D0 /* Document */ = {
 			isa = PBXGroup;
 			children = (
-				55373FA32E9372DF00AB56D0 /* Window */,
 				55373FA42E9372DF00AB56D0 /* DiffOpenerDelegate.swift */,
 				55373FA52E9372DF00AB56D0 /* DocumentError.swift */,
 				55373FA62E9372DF00AB56D0 /* SessionDiff.ItemType+Paths.swift */,
 				55373FA72E9372DF00AB56D0 /* SessionTypeError.swift */,
 				55373FA82E9372DF00AB56D0 /* VDDocument.swift */,
 				55373FA92E9372DF00AB56D0 /* VDDocumentController.swift */,
+				552B85072F5FE29400A9268A /* VDDocumentController+BlankDocument.swift */,
+				55373FA32E9372DF00AB56D0 /* Window */,
 			);
 			path = Document;
 			sourceTree = "<group>";
@@ -3517,6 +3523,7 @@
 				553742692E9372DF00AB56D0 /* AttributedMenuItem.swift in Sources */,
 				5537426A2E9372DF00AB56D0 /* URL+StructuredContent.swift in Sources */,
 				5537426B2E9372DF00AB56D0 /* SessionPreferencesComparisonPanel.swift in Sources */,
+				552B85082F5FE29A00A9268A /* VDDocumentController+BlankDocument.swift in Sources */,
 				5537426C2E9372DF00AB56D0 /* FolderCompareInfoWindow.swift in Sources */,
 				5537426D2E9372DF00AB56D0 /* NSToolbarItem+Create.swift in Sources */,
 				5537426E2E9372DF00AB56D0 /* MoveFileOperationExecutor.swift in Sources */,
@@ -3552,6 +3559,7 @@
 				5537428F2E9372DF00AB56D0 /* StandardUserPreferencesBoxDataSource.swift in Sources */,
 				553742902E9372DF00AB56D0 /* SecureBookmark.swift in Sources */,
 				553742912E9372DF00AB56D0 /* FilesScopeBar.swift in Sources */,
+				55BCFE472F627DDF00E704D8 /* SessionPopupButton.swift in Sources */,
 				553742922E9372DF00AB56D0 /* OpenEditorAttribute.swift in Sources */,
 				553742932E9372DF00AB56D0 /* WindowCancelOperation.swift in Sources */,
 				553742942E9372DF00AB56D0 /* VisibleItem+QLPreviewItem.swift in Sources */,

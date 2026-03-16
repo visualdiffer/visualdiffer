@@ -77,6 +77,27 @@ public extension URL {
 
         let leftPath = osPath
         let rightPath = rightUrl.osPath
+        let isLeftEmpty = leftPath == "."
+        let isRightEmpty = rightPath == "."
+
+        // both empty paths
+        if isLeftEmpty, isLeftEmpty == isRightEmpty {
+            return false
+        }
+
+        if isLeftEmpty {
+            rightExists = fileManager.fileExists(atPath: rightPath, isDirectory: &isRightDir)
+            isDir = isRightDir.boolValue
+
+            return rightExists
+        }
+
+        if isRightEmpty {
+            leftExists = fileManager.fileExists(atPath: leftPath, isDirectory: &isLeftDir)
+            isDir = isLeftDir.boolValue
+
+            return leftExists
+        }
 
         leftExists = fileManager.fileExists(atPath: leftPath, isDirectory: &isLeftDir)
         rightExists = fileManager.fileExists(atPath: rightPath, isDirectory: &isRightDir)

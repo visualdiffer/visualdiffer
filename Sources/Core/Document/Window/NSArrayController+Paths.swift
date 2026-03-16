@@ -27,9 +27,12 @@ extension NSArrayController {
 
     @MainActor
     func addPath(_ newPath: String) {
+        let newPath = newPath.trimmingCharacters(in: .whitespacesAndNewlines)
+
         guard let arrangedObjects = arrangedObjects as? [String] else {
             return
         }
+
         // move last used on top
         if let index = arrangedObjects.firstIndex(of: newPath) {
             remove(atArrangedObjectIndex: index)

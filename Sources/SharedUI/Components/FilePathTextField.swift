@@ -7,15 +7,27 @@
 //
 
 class FilePathTextField: NSTextField {
+    private var displayPathText = ""
+
     var path = "" {
         didSet {
+            if path.isEmpty {
+                displayPathText = NSLocalizedString("(Empty Path)", comment: "")
+                stringValue = displayPathText
+                toolTip = NSLocalizedString("No Path Selected", comment: "")
+                fileExists = false
+
+                return
+            }
             fileExists = FileManager.default.fileExists(atPath: path)
 
             if fileExists {
                 stringValue = path
+                displayPathText = path
                 toolTip = path
             } else {
                 stringValue = path
+                displayPathText = path
                 toolTip = NSLocalizedString("Path no longer exists", comment: "")
             }
         }
@@ -41,7 +53,7 @@ class FilePathTextField: NSTextField {
             normalColor = .alternateSelectedControlTextColor
             highlightColor = .alternateSelectedControlTextColor
         } else {
-            if fileExists {
+            if fileExists || path.isEmpty {
                 normalColor = .controlTextColor
                 highlightColor = .controlTextColor
             } else {
@@ -51,7 +63,8 @@ class FilePathTextField: NSTextField {
         }
 
         if let pattern,
-           let font {
+           let font,
+           !path.isEmpty {
             let ranges = path.rangesOfString(pattern, options: [.literal, .caseInsensitive])
             attributedStringValue = path.highlights(
                 ranges,
@@ -60,7 +73,7 @@ class FilePathTextField: NSTextField {
                 font: font
             )
         } else {
-            stringValue = path
+            stringValue = displayPathText
             textColor = normalColor
         }
     }

@@ -28,6 +28,15 @@ class DiffResult {
         self.sections = sections
     }
 
+    func diffSide(for side: DisplaySide) -> DiffSide {
+        switch side {
+        case .left:
+            leftSide
+        case .right:
+            rightSide
+        }
+    }
+
     // currently used only by the unit tests
     // periphery:ignore
     func diff(

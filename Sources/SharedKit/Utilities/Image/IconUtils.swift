@@ -68,6 +68,16 @@ public class IconUtils: @unchecked Sendable {
         return icon
     }
 
+    public func icon(forEmptyPath size: CGFloat) -> NSImage {
+        guard let icon = NSImage(systemSymbolName: "square.dashed", accessibilityDescription: "Empty Path") else {
+            fatalError("Unable to create empty path icon")
+        }
+
+        icon.size = NSSize(width: size, height: size)
+
+        return icon
+    }
+
     // /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AliasBadgeIcon.icns
     public func icon(forSymbolicLink url: URL, size: CGFloat) -> NSImage {
         badge(forPath: url, icon: iconNamed("aliasbadge", size: size), size: size)
@@ -82,6 +92,7 @@ public class IconUtils: @unchecked Sendable {
         guard let iconName = badgeImage.name() else {
             fatalError("Unable to get icon name for \(url) and icon \(badgeImage)")
         }
+
         let name = url
             .appendingPathComponent(iconName)
             .osPath
@@ -122,6 +133,7 @@ public class IconUtils: @unchecked Sendable {
         guard let icon = NSImage(named: name) else {
             fatalError("Unable to find icon \(name)")
         }
+
         addIconByName(name, icon: icon, size: size)
 
         return icon

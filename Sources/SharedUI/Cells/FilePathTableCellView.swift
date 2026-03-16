@@ -63,6 +63,7 @@ class FilePathTableCellView: NSTableCellView {
         guard let imageView, let textField else {
             return
         }
+
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -79,6 +80,7 @@ class FilePathTableCellView: NSTableCellView {
         guard let pathTextField = textField as? FilePathTextField else {
             return
         }
+
         pathTextField.path = path
 
         guard let imageView else {
@@ -91,7 +93,11 @@ class FilePathTableCellView: NSTableCellView {
                 size: 16.0
             )
         } else {
-            imageView.image = NSImage(named: NSImage.cautionName)
+            imageView.image = if path.isEmpty {
+                IconUtils.shared.icon(forEmptyPath: 16.0)
+            } else {
+                NSImage(named: NSImage.cautionName)
+            }
             imageView.image?.size = NSSize(width: 16.0, height: 16.0)
         }
     }
@@ -114,6 +120,7 @@ class FilePathTableCellView: NSTableCellView {
             guard let pathTextField = textField as? FilePathTextField else {
                 return
             }
+
             pathTextField.highlightsPattern(backgroundStyle)
         }
     }

@@ -87,17 +87,17 @@ public class VDDocument: NSPersistentDocument {
         super.save(sender)
 
         // If user drags path ensure it is saved as secure bookmark
-        guard let sessionDiff,
-              let leftPath = sessionDiff.leftPath,
-              let rightPath = sessionDiff.rightPath else {
+        guard let sessionDiff else {
             return
         }
 
-        let leftUrl = URL(filePath: leftPath)
-        let rightUrl = URL(filePath: rightPath)
+        if let leftURL = sessionDiff.leftURL {
+            SecureBookmark.shared.add(leftURL)
+        }
 
-        SecureBookmark.shared.add(leftUrl)
-        SecureBookmark.shared.add(rightUrl)
+        if let rightURL = sessionDiff.rightURL {
+            SecureBookmark.shared.add(rightURL)
+        }
     }
 
     func isReadSessionDiffValid() throws {
@@ -107,15 +107,12 @@ public class VDDocument: NSPersistentDocument {
             throw DocumentError.invalidSessionData
         }
 
-        let leftUrl = URL(filePath: leftPath)
-        let rightUrl = URL(filePath: rightPath)
-
-        let leftSecureUrl = SecureBookmark.shared.secure(fromBookmark: leftUrl, startSecured: true)
+        let leftSecureURL = SecureBookmark.shared.secure(fromBookmark: sessionDiff.leftURL, startSecured: true)
         defer {
-            SecureBookmark.shared.stopAccessing(url: leftSecureUrl)
+            SecureBookmark.shared.stopAccessing(url: leftSecureURL)
         }
 
-        let rightSecureURL = SecureBookmark.shared.secure(fromBookmark: rightUrl, startSecured: true)
+        let rightSecureURL = SecureBookmark.shared.secure(fromBookmark: sessionDiff.rightURL, startSecured: true)
         defer {
             SecureBookmark.shared.stopAccessing(url: rightSecureURL)
         }
