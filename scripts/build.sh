@@ -48,7 +48,7 @@ fi
 
 case "$selected_profile" in
   release)
-    build_command=(bundle exec fastlane release --env env.local)
+    build_command=(bundle exec fastlane release --env local)
     ;;
   test)
     build_command=(bundle exec fastlane release --env test.local)
