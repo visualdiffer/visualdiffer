@@ -55,10 +55,9 @@ public extension FoldersWindowController {
               let rightPath = sessionDiff.rightPath else {
             return
         }
-        let comparatorDelegateBridge = MainThreadComparatorDelegateBridge(self)
 
         let folderReaderComparator = sessionDiff.comparator(
-            withDelegate: comparatorDelegateBridge,
+            withDelegate: self,
             bufferSize: CommonPrefs.shared.comparatorBinaryBufferSize
         )
         comparator = folderReaderComparator
@@ -289,6 +288,16 @@ public extension FoldersWindowController {
         }
         if rightSelection.isEmpty {
             rightView.selectRowIndexes(IndexSet(integer: firstVisibleRow), byExtendingSelection: false)
+        }
+    }
+}
+
+extension FoldersWindowController: ItemComparatorDelegate {
+    public nonisolated func isRunning(_: ItemComparator) -> Bool {
+        DispatchQueue.main.sync { [weak self] in
+            MainActor.assumeIsolated {
+                self?.running ?? false
+            }
         }
     }
 }

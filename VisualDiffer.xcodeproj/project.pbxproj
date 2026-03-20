@@ -330,7 +330,6 @@
 		553742942E9372DF00AB56D0 /* VisibleItem+QLPreviewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740722E9372DF00AB56D0 /* VisibleItem+QLPreviewItem.swift */; };
 		553742952E9372DF00AB56D0 /* FilesWindowController+FilesTableViewContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FCB2E9372DF00AB56D0 /* FilesWindowController+FilesTableViewContextMenu.swift */; };
 		553742962E9372DF00AB56D0 /* FolderSelectionInfo+CompareActionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740692E9372DF00AB56D0 /* FolderSelectionInfo+CompareActionValidator.swift */; };
-		553742972E9372DF00AB56D0 /* MainThreadComparatorDelegateBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FF92E9372DF00AB56D0 /* MainThreadComparatorDelegateBridge.swift */; };
 		553742982E9372DF00AB56D0 /* DiffCountersItem+DiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FE02E9372DF00AB56D0 /* DiffCountersItem+DiffResult.swift */; };
 		553742992E9372DF00AB56D0 /* FileOperationManagerDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740082E9372DF00AB56D0 /* FileOperationManagerDelegateImpl.swift */; };
 		5537429A2E9372DF00AB56D0 /* SessionDiff+AlignRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FAF2E9372DF00AB56D0 /* SessionDiff+AlignRule.swift */; };
@@ -716,7 +715,6 @@
 		55373FF52E9372DF00AB56D0 /* FolderPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPanelView.swift; sourceTree = "<group>"; };
 		55373FF62E9372DF00AB56D0 /* CompareItemTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareItemTableCellView.swift; sourceTree = "<group>"; };
 		55373FF72E9372DF00AB56D0 /* CompareItemTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareItemTableRowView.swift; sourceTree = "<group>"; };
-		55373FF92E9372DF00AB56D0 /* MainThreadComparatorDelegateBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainThreadComparatorDelegateBridge.swift; sourceTree = "<group>"; };
 		55373FFB2E9372DF00AB56D0 /* CopyFileOperationExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyFileOperationExecutor.swift; sourceTree = "<group>"; };
 		55373FFD2E9372DF00AB56D0 /* DeleteFileOperationExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFileOperationExecutor.swift; sourceTree = "<group>"; };
 		55373FFF2E9372DF00AB56D0 /* MoveFileOperationExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveFileOperationExecutor.swift; sourceTree = "<group>"; };
@@ -1612,7 +1610,6 @@
 		55373FFA2E9372DF00AB56D0 /* Comparator */ = {
 			isa = PBXGroup;
 			children = (
-				55373FF92E9372DF00AB56D0 /* MainThreadComparatorDelegateBridge.swift */,
 			);
 			path = Comparator;
 			sourceTree = "<group>";
@@ -3565,7 +3562,6 @@
 				553742942E9372DF00AB56D0 /* VisibleItem+QLPreviewItem.swift in Sources */,
 				553742952E9372DF00AB56D0 /* FilesWindowController+FilesTableViewContextMenu.swift in Sources */,
 				553742962E9372DF00AB56D0 /* FolderSelectionInfo+CompareActionValidator.swift in Sources */,
-				553742972E9372DF00AB56D0 /* MainThreadComparatorDelegateBridge.swift in Sources */,
 				553742982E9372DF00AB56D0 /* DiffCountersItem+DiffResult.swift in Sources */,
 				553742992E9372DF00AB56D0 /* FileOperationManagerDelegateImpl.swift in Sources */,
 				5537429A2E9372DF00AB56D0 /* SessionDiff+AlignRule.swift in Sources */,
