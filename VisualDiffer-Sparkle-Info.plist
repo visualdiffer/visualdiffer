@@ -78,6 +78,9 @@
     <key>SUPublicEDKey</key>
     <string>kuAijnKlIhNOPvlWkldxU/ZRNY2d35Ltwcd1JnO3DzA=</string>
 
+    <key>SUEnableAutomaticChecks</key>
+    <true/>
+
     <key>SUEnableInstallerLauncherService</key>
     <true/>
 
