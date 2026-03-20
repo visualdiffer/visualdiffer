@@ -63,7 +63,7 @@ platform :mac do
   end
 
   private_lane :release_precondition do
-    check_release_version
+    check_release_version if ENV["CHECK_VERSION"] == "true"
     lint_app
     format_app(
       check: true

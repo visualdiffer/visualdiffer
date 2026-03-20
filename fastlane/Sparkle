@@ -21,7 +21,7 @@ lane :sparkle do
   output_appcast_path = File.expand_path(ENV["SPARKLE_APPCAST_UPDATED_PATH"])
   File.write(output_appcast_path, appcast_text)
 
-  upload_appcast
+  upload_appcast if ENV["SPARKLE_APPCAST_UPLOAD"] == "true"
 end
 
 private_lane :upload_appcast do
