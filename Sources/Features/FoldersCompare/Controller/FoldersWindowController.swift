@@ -150,11 +150,6 @@ public class FoldersWindowController: NSWindowController,
     }
 
     @objc
-    func copyUrls(_: AnyObject) {
-        lastUsedView.copySelectedAsUrls()
-    }
-
-    @objc
     func expandAllFolders(_: AnyObject) {
         let selectedVisibleItems = lastUsedView.getSelectedVisibleItems(false)
 

@@ -22,8 +22,6 @@ extension FilesWindowController {
             action: #selector(copy(_:)),
             keyEquivalent: "c"
         )
-        // TODO: copy urls no longer work for some sandbox problem so we disable it entirely
-//        editMenu.addItem(withTitle: NSLocalizedString("Copy URLs", comment: ""), action: #selector(copyUrlsToClipboard),keyEquivalent: "u")
         editMenu.addItem(
             withTitle: NSLocalizedString("Paste", comment: ""),
             action: #selector(paste(_:)),

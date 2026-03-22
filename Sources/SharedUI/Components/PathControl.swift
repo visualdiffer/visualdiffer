@@ -82,8 +82,6 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
         item.keyEquivalentModifierMask = .option
         item.isAlternate = true
 
-        // TODO: copy urls no longer work for some sandbox problem so we disable it entirely
-//        theMenu.addItem(withTitle: NSLocalizedString("Copy URL", comment: ""), action: #selector(copyUrls), keyEquivalent: "")
         theMenu.addItem(
             withTitle: NSLocalizedString("Show in Finder", comment: ""),
             action: #selector(showInFinder),
@@ -159,17 +157,6 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
         }
 
         NSPasteboard.general.copy(lines: [url.osPath])
-    }
-
-    @objc
-    func copyUrls(_: AnyObject) {
-        guard let url = safePathComponentItem?.url else {
-            return
-        }
-        // convert from NSPathCell protocol to file protocol
-        let fileURL = URL(filePath: url.path, directoryHint: .isDirectory)
-
-        NSPasteboard.general.copy(urls: [fileURL])
     }
 
     @objc

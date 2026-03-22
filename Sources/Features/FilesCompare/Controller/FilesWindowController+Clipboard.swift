@@ -9,15 +9,6 @@
 @MainActor
 extension FilesWindowController {
     @objc
-    func copyURLsToClipboard(_: AnyObject) {
-        if let path = lastUsedView.side == .left ? sessionDiff.leftPath : sessionDiff.rightPath {
-            let url = URL(filePath: path, directoryHint: .notDirectory)
-
-            NSPasteboard.general.copy(urls: [url])
-        }
-    }
-
-    @objc
     func copy(_ sender: AnyObject) {
         copyLinesToClipboard(sender)
     }

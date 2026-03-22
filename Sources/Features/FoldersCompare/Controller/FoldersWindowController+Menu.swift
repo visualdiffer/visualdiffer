@@ -32,8 +32,6 @@ extension FoldersWindowController {
         copyFileNames.keyEquivalentModifierMask = [.option, .command]
         menu.addItem(copyFileNames)
 
-        // TODO: copy urls no longer work for some sandbox problem so we disable it entirely
-        //        menu.addItem(withTitle: NSLocalizedString("Copy URLs", comment: ""), action:#selector(copyUrls), keyEquivalent:"u")
         menu.addItem(
             withTitle: NSLocalizedString("Paste", comment: ""),
             action: #selector(NSText.paste),

@@ -37,16 +37,4 @@ extension FoldersOutlineView {
 
         NSPasteboard.general.copy(lines: paths)
     }
-
-    func copySelectedAsUrls() {
-        var urls = [URL]()
-
-        enumerateSelectedValidFiles { item, _ in
-            if let path = item.toUrl() {
-                urls.append(path)
-            }
-        }
-
-        NSPasteboard.general.copy(urls: urls)
-    }
 }
