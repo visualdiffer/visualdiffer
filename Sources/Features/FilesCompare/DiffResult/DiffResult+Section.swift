@@ -33,7 +33,6 @@ extension DiffResult {
 
     func findNextSection(
         by position: Int,
-        wrapAround: Bool,
         didWrap: inout Bool
     ) -> DiffSection? {
         var sectionFound: DiffSection?
@@ -53,16 +52,14 @@ extension DiffResult {
             didWrap = false
             return sectionFound
         }
-        if wrapAround {
-            sectionFound = sections.isEmpty ? nil : sections[0]
-            didWrap = sectionFound != nil
-        }
+        sectionFound = sections.isEmpty ? nil : sections[0]
+        didWrap = sectionFound != nil
+
         return sectionFound
     }
 
     func findPrevSection(
         by position: Int,
-        wrapAround: Bool,
         didWrap: inout Bool
     ) -> DiffSection? {
         var sectionFound: DiffSection?
@@ -82,10 +79,9 @@ extension DiffResult {
             didWrap = false
             return sectionFound
         }
-        if wrapAround {
-            sectionFound = sections.last
-            didWrap = sectionFound != nil
-        }
+        sectionFound = sections.last
+        didWrap = sectionFound != nil
+
         return sectionFound
     }
 
@@ -114,6 +110,7 @@ extension DiffResult {
         guard index >= 0 else {
             return nil
         }
+
         var section = findSection(with: index)
 
         if section == nil {

@@ -33,24 +33,50 @@ extension FilesWindowController {
         var didWrap = false
 
         let section = if gotoNext {
-            currentDiffResult?.findNextSection(by: currentPos, wrapAround: true, didWrap: &didWrap)
+            currentDiffResult?.findNextSection(by: currentPos, didWrap: &didWrap)
         } else {
-            currentDiffResult?.findPrevSection(by: currentPos, wrapAround: true, didWrap: &didWrap)
+            currentDiffResult?.findPrevSection(by: currentPos, didWrap: &didWrap)
         }
-        if let section {
-            let indexes = IndexSet(integer: section.start)
+        guard let section else {
+            return
+        }
 
-            // ensure all sections are visible moving to end but set selection to start
-            leftView.scrollTo(row: section.start, center: true)
-            leftView.selectRowIndexes(indexes, byExtendingSelection: false)
-            rightView.selectRowIndexes(indexes, byExtendingSelection: false)
-            if didWrap, showAnim {
-                scopeBar.findView.showWrapWindow()
+        if didWrap {
+            if CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences {
+                if canNavigateToFile(gotoNext: gotoNext) {
+                    navigateToFile(gotoNext, showAnim: showAnim)
+                    return
+                }
             }
+            guard CommonPrefs.shared.fileWrapsAroundDifferences else {
+                return
+            }
+        }
+
+        let indexes = IndexSet(integer: section.start)
+
+        // ensure all sections are visible moving to end but set selection to start
+        leftView.scrollTo(row: section.start, center: true)
+        leftView.selectRowIndexes(indexes, byExtendingSelection: false)
+        rightView.selectRowIndexes(indexes, byExtendingSelection: false)
+        if didWrap, showAnim {
+            scopeBar.findView.showWrapWindow()
         }
     }
 
-    func navigateToFile(_ navigateToNext: Bool) {
+    private func canNavigateToFile(gotoNext: Bool) -> Bool {
+        guard let document = document as? VDDocument,
+              let parentSession = document.parentSession else {
+            return false
+        }
+
+        if gotoNext {
+            return parentSession.hasNextDifference(from: sessionDiff.leftPath, rightPath: sessionDiff.rightPath)
+        }
+        return parentSession.hasPreviousDifference(from: sessionDiff.leftPath, rightPath: sessionDiff.rightPath)
+    }
+
+    func navigateToFile(_ navigateToNext: Bool, showAnim: Bool = false) {
         guard let document = document as? VDDocument,
               let parentSession = document.parentSession else {
             return
@@ -58,7 +84,7 @@ extension FilesWindowController {
 
         let block: DiffOpenerDelegateBlock = { leftPath, rightPath in
             if leftPath == nil, rightPath == nil {
-                self.showOSDTop(!navigateToNext)
+                self.showNoFileOSD(!navigateToNext)
                 return false
             }
             if !self.alertSaveDirtyFiles() {
@@ -75,14 +101,17 @@ extension FilesWindowController {
             return true
         }
 
+        if showAnim {
+            showMoveToFileOSD(!navigateToNext)
+        }
         if navigateToNext {
-            parentSession.nextDifferenceFiles(
+            parentSession.openNextDifference(
                 from: sessionDiff.leftPath,
                 rightPath: sessionDiff.rightPath,
                 block: block
             )
         } else {
-            parentSession.prevDifferenceFiles(
+            parentSession.openPreviousDifference(
                 from: sessionDiff.leftPath,
                 rightPath: sessionDiff.rightPath,
                 block: block
@@ -90,17 +119,33 @@ extension FilesWindowController {
         }
     }
 
-    func showOSDTop(_ noPrevFile: Bool) {
+    func showNoFileOSD(_ noPrevFile: Bool) {
+        if noPrevFile {
+            showOSD(image: NSImage(named: VDImageNameTop), text: NSLocalizedString("No Previous File", comment: ""))
+        } else {
+            showOSD(image: NSImage(named: VDImageNameBottom), text: NSLocalizedString("No Next File", comment: ""))
+        }
+    }
+
+    func showMoveToFileOSD(_ gotoNext: Bool) {
+        if gotoNext {
+            let icon = NSImage(named: VDImageNamePrevFile)?.copy() as? NSImage
+            icon?.size = NSSize(width: 60, height: 60)
+            showOSD(image: icon, text: NSLocalizedString("Previous File", comment: ""))
+        } else {
+            let icon = NSImage(named: VDImageNameNextFile)?.copy() as? NSImage
+            icon?.size = NSSize(width: 60, height: 60)
+            showOSD(image: icon, text: NSLocalizedString("Next File", comment: ""))
+        }
+    }
+
+    private func showOSD(image: NSImage?, text: String) {
         guard let window else {
             return
         }
-        if noPrevFile {
-            topBottomView.setImage(NSImage(named: VDImageNameTop))
-            topBottomView.setText(NSLocalizedString("No Previous File", comment: ""))
-        } else {
-            topBottomView.setImage(NSImage(named: VDImageNameBottom))
-            topBottomView.setText(NSLocalizedString("No Next File", comment: ""))
-        }
+
+        topBottomView.setImage(image)
+        topBottomView.setText(text)
         topBottomView.animateInside(window.frame)
     }
 }

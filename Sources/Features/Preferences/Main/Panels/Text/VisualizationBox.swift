@@ -79,6 +79,7 @@ class VisualizationBox: PreferencesBox, NSTextFieldDelegate {
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             tabWidthTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             tabWidthTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -89,6 +90,7 @@ class VisualizationBox: PreferencesBox, NSTextFieldDelegate {
 
             tabWidthStepper.leadingAnchor.constraint(equalTo: tabWidthInput.trailingAnchor, constant: 2),
             tabWidthStepper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            tabWidthStepper.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
     }
 

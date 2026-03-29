@@ -52,7 +52,9 @@
 	<integer>3</integer>
 	<key>tabWidth</key>
 	<integer>4</integer>
-	<key>ignoreLineEndings</key>
+    <key>ignoreLineEndings</key>
+    <true/>
+	<key>fileWrapsAroundDifferences</key>
 	<true/>
 </dict>
 </plist>

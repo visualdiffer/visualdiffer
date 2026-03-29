@@ -49,6 +49,7 @@
 		551DE3B62ED42B4E0067AB18 /* FileComparisonBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3B52ED42B4E0067AB18 /* FileComparisonBox.swift */; };
 		551DE3B82ED439AF0067AB18 /* PreferencesBoxDataSource+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3B72ED4399B0067AB18 /* PreferencesBoxDataSource+Default.swift */; };
 		551DEDE1160477CA0014DF88 /* prefs_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 551DEDE0160477CA0014DF88 /* prefs_folder.png */; };
+		552430412F7673F800951F1A /* FileDifferenceNavigatorBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552430402F7673F800951F1A /* FileDifferenceNavigatorBox.swift */; };
 		552B85082F5FE29A00A9268A /* VDDocumentController+BlankDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B85072F5FE29400A9268A /* VDDocumentController+BlankDocument.swift */; };
 		5532516C2765F06B0092D65F /* mask-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 553251672765F06B0092D65F /* mask-back.png */; };
 		5532516D2765F06B0092D65F /* mask-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 553251682765F06B0092D65F /* mask-full.png */; };
@@ -509,6 +510,7 @@
 		55E3A5671826552A002A890B /* lockedbadge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A5651826552A002A890B /* lockedbadge@2x.png */; };
 		55EC0A4B2F3868E4008201E1 /* CopyFilesTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC0A4A2F3868E4008201E1 /* CopyFilesTag.swift */; };
 		55ECD8621476B03400D8BEB4 /* prefs_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 55ECD8611476B03400D8BEB4 /* prefs_text.png */; };
+		55F42EE12F76798A009B211C /* CommonPrefs+FileDifferenceNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F42EDF2F76798A009B211C /* CommonPrefs+FileDifferenceNavigator.swift */; };
 		55F4A0032FEE100000A1B2C3 /* ExternalFileOperationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */; };
 		55F6B0631AEA93E30096E55E /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0611AEA93E30096E55E /* Localizable.stringsdict */; };
 		55F6B0661AEA99680096E55E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0641AEA99680096E55E /* Localizable.strings */; };
@@ -618,6 +620,7 @@
 		551DE3B52ED42B4E0067AB18 /* FileComparisonBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileComparisonBox.swift; sourceTree = "<group>"; };
 		551DE3B72ED4399B0067AB18 /* PreferencesBoxDataSource+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreferencesBoxDataSource+Default.swift"; sourceTree = "<group>"; };
 		551DEDE0160477CA0014DF88 /* prefs_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_folder.png; sourceTree = "<group>"; };
+		552430402F7673F800951F1A /* FileDifferenceNavigatorBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDifferenceNavigatorBox.swift; sourceTree = "<group>"; };
 		552B85072F5FE29400A9268A /* VDDocumentController+BlankDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VDDocumentController+BlankDocument.swift"; sourceTree = "<group>"; };
 		553033AC2E5DBABF0016F101 /* VisualDiffer.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = VisualDiffer.xctestplan; sourceTree = SOURCE_ROOT; };
 		553251672765F06B0092D65F /* mask-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask-back.png"; sourceTree = "<group>"; };
@@ -1117,6 +1120,7 @@
 		55ECD8611476B03400D8BEB4 /* prefs_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_text.png; sourceTree = "<group>"; };
 		55ECD8671476B34600D8BEB4 /* VisualDiffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VisualDiffer.entitlements; sourceTree = "<group>"; };
 		55F013FC27A90C46003EA2D4 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
+		55F42EDF2F76798A009B211C /* CommonPrefs+FileDifferenceNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonPrefs+FileDifferenceNavigator.swift"; sourceTree = "<group>"; };
 		55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFileOperationContext.swift; sourceTree = "<group>"; };
 		55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResult.Options.swift; sourceTree = "<group>"; };
 		55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhitespacesTests.swift; sourceTree = "<group>"; };
@@ -1568,8 +1572,9 @@
 			children = (
 				55373FC42E9372DF00AB56D0 /* Components */,
 				55373FDA2E9372DF00AB56D0 /* Controller */,
-				55373FE22E9372DF00AB56D0 /* Extensions */,
 				554B4A442E9B7B8F0023AAF0 /* DiffResult */,
+				55373FE22E9372DF00AB56D0 /* Extensions */,
+				55F42EE02F76798A009B211C /* Navigator */,
 				55373FE42E9372DF00AB56D0 /* Windows */,
 			);
 			path = FilesCompare;
@@ -1605,13 +1610,6 @@
 				55373FF72E9372DF00AB56D0 /* CompareItemTableRowView.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		55373FFA2E9372DF00AB56D0 /* Comparator */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Comparator;
 			sourceTree = "<group>";
 		};
 		55373FFC2E9372DF00AB56D0 /* Copy */ = {
@@ -1715,7 +1713,6 @@
 			isa = PBXGroup;
 			children = (
 				55EC0A4A2F3868E4008201E1 /* CopyFilesTag.swift */,
-				55373FFA2E9372DF00AB56D0 /* Comparator */,
 				5537401A2E9372DF00AB56D0 /* FileSystemController */,
 				5537401D2E9372DF00AB56D0 /* FolderReader */,
 				5537401E2E9372DF00AB56D0 /* FolderSelectionInfo.swift */,
@@ -1995,6 +1992,7 @@
 			isa = PBXGroup;
 			children = (
 				551DE3B52ED42B4E0067AB18 /* FileComparisonBox.swift */,
+				552430402F7673F800951F1A /* FileDifferenceNavigatorBox.swift */,
 				5537409E2E9372DF00AB56D0 /* TextPreferencesPanel.swift */,
 				55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */,
 				5537409F2E9372DF00AB56D0 /* VisualizationBox.swift */,
@@ -2972,6 +2970,14 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		55F42EE02F76798A009B211C /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				55F42EDF2F76798A009B211C /* CommonPrefs+FileDifferenceNavigator.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3567,6 +3573,7 @@
 				5537429A2E9372DF00AB56D0 /* SessionDiff+AlignRule.swift in Sources */,
 				5537429B2E9372DF00AB56D0 /* FoldersWindowController+MenuDelegate.swift in Sources */,
 				5537429C2E9372DF00AB56D0 /* MGRecessedPopUpButtonCell.m in Sources */,
+				552430412F7673F800951F1A /* FileDifferenceNavigatorBox.swift in Sources */,
 				5537429D2E9372DF00AB56D0 /* FolderSelectionInfo+FilterActionValidator.swift in Sources */,
 				5537429E2E9372DF00AB56D0 /* OpenDiffCommand.swift in Sources */,
 				5537429F2E9372DF00AB56D0 /* RenameCompareItem.swift in Sources */,
@@ -3599,6 +3606,7 @@
 				553742BA2E9372DF00AB56D0 /* VisibleItem+Log.swift in Sources */,
 				553742BB2E9372DF00AB56D0 /* HistoryTableView.swift in Sources */,
 				553742BC2E9372DF00AB56D0 /* SessionDiff+NSSortDescriptor.swift in Sources */,
+				55F42EE12F76798A009B211C /* CommonPrefs+FileDifferenceNavigator.swift in Sources */,
 				553742BD2E9372DF00AB56D0 /* NSPopUpButton+Helper.swift in Sources */,
 				553742BE2E9372DF00AB56D0 /* NSColor+Hex.swift in Sources */,
 				553742BF2E9372DF00AB56D0 /* FileInfoBar.swift in Sources */,

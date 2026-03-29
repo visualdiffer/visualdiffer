@@ -23,7 +23,10 @@ public protocol DiffOpenerDelegate: AnyObject {
     /// - ritghtPath:the right path to search
     /// - block: return true if the passed paths are used, false otherwise.
     /// If paths are not found both `leftPath` and `rightPath` are nil
-    func nextDifferenceFiles(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock)
+    func openNextDifference(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock)
 
-    func prevDifferenceFiles(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock)
+    func openPreviousDifference(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock)
+
+    func hasNextDifference(from leftPath: String?, rightPath: String?) -> Bool
+    func hasPreviousDifference(from leftPath: String?, rightPath: String?) -> Bool
 }

@@ -37,15 +37,27 @@ extension FoldersWindowController: DiffOpenerDelegate {
         sessionChildren.removeAll()
     }
 
-    public func nextDifferenceFiles(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock) {
+    public func openNextDifference(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock) {
         findDifference(from: leftPath, rightPath: rightPath, findNext: true, block: block)
     }
 
-    public func prevDifferenceFiles(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock) {
+    public func openPreviousDifference(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock) {
         findDifference(from: leftPath, rightPath: rightPath, findNext: false, block: block)
     }
 
-    func findDifference(from leftPath: String?, rightPath: String?, findNext: Bool, block: DiffOpenerDelegateBlock) {
+    public func hasNextDifference(from leftPath: String?, rightPath: String?) -> Bool {
+        findNearestDifferenceItem(from: leftPath, rightPath: rightPath, findNext: true) != nil
+    }
+
+    public func hasPreviousDifference(from leftPath: String?, rightPath: String?) -> Bool {
+        findNearestDifferenceItem(from: leftPath, rightPath: rightPath, findNext: false) != nil
+    }
+
+    private func findNearestDifferenceItem(
+        from leftPath: String?,
+        rightPath: String?,
+        findNext: Bool
+    ) -> (CompareItem, Int)? {
         var item: CompareItem?
 
         if let leftPath, !leftPath.isEmpty {
@@ -70,16 +82,27 @@ extension FoldersWindowController: DiffOpenerDelegate {
             }
         }
 
-        var foundItem: (CompareItem, Int)?
-
-        if let item, let parent = item.parent, parent.visibleItem != nil, let vi = item.visibleItem {
-            foundItem = findNearest(
-                vi,
-                parentPath: parent.path,
-                direction: findNext ? 1 : -1,
-                limitToCurrentFolder: false
-            )
+        guard let item,
+              let parent = item.parent,
+              parent.visibleItem != nil,
+              let vi = item.visibleItem else {
+            return nil
         }
+
+        return findNearest(
+            vi,
+            parentPath: parent.path,
+            direction: findNext ? 1 : -1,
+            limitToCurrentFolder: false
+        )
+    }
+
+    private func findDifference(from leftPath: String?, rightPath: String?, findNext: Bool, block: DiffOpenerDelegateBlock) {
+        let foundItem = findNearestDifferenceItem(
+            from: leftPath,
+            rightPath: rightPath,
+            findNext: findNext
+        )
 
         if let (item, row) = foundItem, block(item.path, item.linkedItem?.path) {
             leftView.scrollRowToVisible(row)
@@ -105,6 +128,7 @@ extension FoldersWindowController: DiffOpenerDelegate {
             guard let vi = leftView.item(atRow: row) as? VisibleItem else {
                 break
             }
+
             let fs1 = vi.item
             if limitToCurrentFolder, fs1.isFolder, fs1.path != parentPath {
                 break

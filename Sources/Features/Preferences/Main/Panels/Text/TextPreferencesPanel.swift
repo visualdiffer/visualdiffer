@@ -13,11 +13,17 @@ class TextPreferencesPanel: NSView, PreferencesPanelDataSource {
     private var fileComparisonBox = FileComparisonBox(
         title: NSLocalizedString("Comparison for New File Documents", comment: "")
     )
+    private var fileDifferenceNavigatorBox = FileDifferenceNavigatorBox(
+        title: NSLocalizedString("Difference Navigator", comment: "")
+    )
+
+    private let stackView = NSStackView.preferencesStackView()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
         fileComparisonBox.delegate = self
+
         setupViews()
     }
 
@@ -27,28 +33,31 @@ class TextPreferencesPanel: NSView, PreferencesPanelDataSource {
     }
 
     private func setupViews() {
-        addSubview(visualizationBox)
-        addSubview(fileComparisonBox)
+        addSubview(stackView)
+
+        stackView.addArrangedSubview(visualizationBox)
+        stackView.addArrangedSubview(fileComparisonBox)
+        stackView.addArrangedSubview(fileDifferenceNavigatorBox)
 
         setupConstraints()
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            visualizationBox.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            visualizationBox.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            visualizationBox.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            visualizationBox.heightAnchor.constraint(equalToConstant: 80),
-
-            fileComparisonBox.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            fileComparisonBox.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            fileComparisonBox.topAnchor.constraint(equalTo: visualizationBox.bottomAnchor, constant: 5),
-            fileComparisonBox.heightAnchor.constraint(equalToConstant: 160),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
         ])
+
+        for view in stackView.views {
+            view.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+            view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        }
     }
 
     func reloadData() {
         visualizationBox.reloadData()
         fileComparisonBox.reloadData()
+        fileDifferenceNavigatorBox.reloadData()
     }
 }
