@@ -25,8 +25,8 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
 
     private static let windowWidth: CGFloat = 160.0
     private static let windowHeight: CGFloat = 150.0
-
     private var viewAnimation: NSViewAnimation?
+    private var fadeOutTimer: Timer?
 
     @objc
     init(image: NSImage, parent: NSWindow?) {
@@ -123,18 +123,36 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
             viewAnimation.currentProgress = 1.0
             viewAnimation.stop()
         }
-        alphaValue = 1.0
+        fadeOutTimer?.invalidate()
+
+        alphaValue = 0.0
         orderFront(NSApp)
 
-        viewAnimation = createViewAnimation()
+        viewAnimation = createFadeInAnimation()
     }
 
-    private func createViewAnimation() -> NSViewAnimation {
-        let animateOutDict: [NSViewAnimation.Key: Any] = [
+    private func createFadeInAnimation() -> NSViewAnimation {
+        let fadeInDict: [NSViewAnimation.Key: Any] = [
+            .target: self,
+            .effect: NSViewAnimation.EffectName.fadeIn,
+        ]
+        let animation = NSViewAnimation(viewAnimations: [fadeInDict])
+        animation.duration = 0.15
+        animation.animationCurve = .easeIn
+        animation.delegate = self
+        animation.start()
+
+        return animation
+    }
+
+    private func createFadeOutAnimation() -> NSViewAnimation {
+        let fadeOutDict: [NSViewAnimation.Key: Any] = [
             .target: self,
             .effect: NSViewAnimation.EffectName.fadeOut,
         ]
-        let animation = NSViewAnimation(viewAnimations: [animateOutDict])
+        let animation = NSViewAnimation(viewAnimations: [fadeOutDict])
+        animation.duration = 0.3
+        animation.animationCurve = .easeOut
         animation.delegate = self
         animation.start()
 
@@ -143,7 +161,17 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
 
     func animationDidEnd(_: NSAnimation) {
         Task { @MainActor in
-            self.viewAnimation = nil
+            if self.viewAnimation != nil, self.alphaValue > 0.5 {
+                self.fadeOutTimer?.invalidate()
+                self.fadeOutTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                    Task { @MainActor in
+                        self.viewAnimation = self.createFadeOutAnimation()
+                    }
+                }
+            } else {
+                self.viewAnimation = nil
+                self.fadeOutTimer = nil
+            }
         }
     }
 
@@ -172,6 +200,7 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
               let font = textField.font else {
             return
         }
+
         let height = (text as NSString).size(withAttributes: [.font: font]).height
 
         let windowFrame = frame
@@ -183,6 +212,7 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
         guard let textField = contentView?.subviews[1] as? NSTextField else {
             return
         }
+
         textField.textColor = textColor
     }
 
@@ -190,6 +220,7 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
         guard let textField = contentView?.subviews[1] as? NSTextField else {
             return
         }
+
         textField.font = textFont
     }
 }
