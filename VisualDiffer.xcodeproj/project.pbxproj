@@ -400,6 +400,7 @@
 		55450B172ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */; };
 		55450B192ED47B700048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55450B182ED47B680048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift */; };
 		554750C62F5C0A1100C1747A /* CommonAncestorPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554750C52F5C0A0A00C1747A /* CommonAncestorPathTests.swift */; };
+		5548ABA82F7FE2BB0064B964 /* LineDetailTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5548ABA72F7FE2BB0064B964 /* LineDetailTextView.swift */; };
 		554B4A452E9B7B8F0023AAF0 /* EndOfLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */; };
 		554B4A462E9B7B8F0023AAF0 /* DiffSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4A402E9B7B8F0023AAF0 /* DiffSide.swift */; };
 		554B4A472E9B7B8F0023AAF0 /* DiffSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4A412E9B7B8F0023AAF0 /* DiffSection.swift */; };
@@ -983,6 +984,7 @@
 		55450B162ED4790B0048619F /* TextPreferencesPanel+PreferencesBoxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextPreferencesPanel+PreferencesBoxDataSource.swift"; sourceTree = "<group>"; };
 		55450B182ED47B680048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileSessionPreferencesWindow+PreferencesBoxDataSource.swift"; sourceTree = "<group>"; };
 		554750C52F5C0A0A00C1747A /* CommonAncestorPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonAncestorPathTests.swift; sourceTree = "<group>"; };
+		5548ABA72F7FE2BB0064B964 /* LineDetailTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDetailTextView.swift; sourceTree = "<group>"; };
 		554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfLine.swift; sourceTree = "<group>"; };
 		554B4A3B2E9B7B8F0023AAF0 /* DiffResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResult.swift; sourceTree = "<group>"; };
 		554B4A3D2E9B7B8F0023AAF0 /* DiffResult+Dump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiffResult+Dump.swift"; sourceTree = "<group>"; };
@@ -1498,6 +1500,7 @@
 				55373FBD2E9372DF00AB56D0 /* FilesScopeBar.swift */,
 				55373FB92E9372DF00AB56D0 /* FilesTableView */,
 				55373FBE2E9372DF00AB56D0 /* FileThumbnailView.swift */,
+				5548ABA72F7FE2BB0064B964 /* LineDetailTextView.swift */,
 				55373FBF2E9372DF00AB56D0 /* LineNumberTableCellView.swift */,
 				55373FC02E9372DF00AB56D0 /* LineNumberTableRowView.swift */,
 				55373FC12E9372DF00AB56D0 /* NSAlert+DirtyFiles.swift */,
@@ -3393,6 +3396,7 @@
 				554B4A4E2E9B7B8F0023AAF0 /* DiffLine.swift in Sources */,
 				553741EF2E9372DF00AB56D0 /* BufferedInputStream.swift in Sources */,
 				553741F02E9372DF00AB56D0 /* ComparisonStandardUserDataSource.swift in Sources */,
+				5548ABA82F7FE2BB0064B964 /* LineDetailTextView.swift in Sources */,
 				553741F12E9372DF00AB56D0 /* TextPreferencesPanel.swift in Sources */,
 				553741F22E9372DF00AB56D0 /* AlignPopupButtonCell.swift in Sources */,
 				553741F32E9372DF00AB56D0 /* FolderSelectionInfo+ViewerActionValidator.swift in Sources */,

@@ -20,6 +20,7 @@ extension FilesWindowController {
         guard let diffResult else {
             return
         }
+
         // refresh sections otherwise moving between differences can position to wrong line
         diffResult.refreshSections()
         differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: diffResult))
@@ -77,17 +78,20 @@ extension FilesWindowController {
         }
     }
 
-    func setColor(for diffLine: DiffLine?, view lineView: NSTextView) {
+    func setColor(for diffLine: DiffLine?, view lineView: LineDetailTextView) {
         // set the text to be sure textStorage has a valid length
         guard let diffLine else {
-            lineView.string = ""
+            lineView.clearContent()
             return
         }
-        lineView.string = getLine(diffLine) + (scopeBar.showWhitespaces ? "" : diffLine.component.eol.visibleSymbol)
 
-        if let colors = diffLine.colors {
-            lineView.setTextColor(colors.text, backgroundColor: colors.background)
-        }
+        let lineEnding = scopeBar.showWhitespaces ? "" : diffLine.component.eol.visibleSymbol
+        lineView.updateContent(
+            text: getLine(diffLine),
+            lineEnding: lineEnding,
+            textColor: diffLine.colors?.text,
+            backgroundColor: diffLine.colors?.background
+        )
     }
 
     // MARK: - Cache lines
@@ -112,6 +116,7 @@ extension FilesWindowController {
         guard alertSaveDirtyFiles() else {
             return
         }
+
         let index = leftView.selectedRowIndexes
         let row = leftView.firstVisibleRow
 

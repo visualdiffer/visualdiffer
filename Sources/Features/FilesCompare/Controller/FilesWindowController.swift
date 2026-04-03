@@ -43,9 +43,9 @@ class FilesWindowController: NSWindowController {
     var resolvedLeftPath: URL?
     var resolvedRightPath: URL?
 
-    lazy var linesDetailView: NSView = createLinesDetailViewWith()
-    lazy var leftDetailsTextView: NSTextView = createLineDetailTextView()
-    lazy var rightDetailsTextView: NSTextView = createLineDetailTextView()
+    lazy var linesDetailView = createLinesDetailViewWith()
+    lazy var leftDetailsTextView = createLineDetailTextView()
+    lazy var rightDetailsTextView = createLineDetailTextView()
 
     lazy var topBottomView: WindowOSD = .init(
         // swiftlint:disable:next force_unwrapping

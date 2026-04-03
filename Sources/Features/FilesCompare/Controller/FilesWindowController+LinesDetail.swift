@@ -16,7 +16,7 @@ extension FilesWindowController: NSTextViewDelegate {
 
     public func textView(_ textView: NSTextView, menu: NSMenu, for _: NSEvent, at _: Int) -> NSMenu? {
         if textView === leftDetailsTextView || textView === rightDetailsTextView {
-            // Add items to NSTextField context menu
+            // add items to detail text view context menu
             menu.insertItem(
                 NSMenuItem.separator(),
                 at: 0

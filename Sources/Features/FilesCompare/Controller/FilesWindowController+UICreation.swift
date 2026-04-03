@@ -67,19 +67,24 @@ extension FilesWindowController {
         view.documentView = documentView
         view.borderType = .bezelBorder
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.drawsBackground = false
 
         return view
     }
 
-    func createLineDetailTextView() -> NSTextView {
-        let view = NSTextView(frame: .zero)
+    func createLineDetailTextView() -> LineDetailTextView {
+        let view = LineDetailTextView(frame: .zero)
 
         view.isSelectable = true
         view.isEditable = false
         view.isRichText = true
         view.disableWordWrap()
+        view.textContainerInset = NSSize(width: 0, height: 0)
+        view.textContainer?.lineFragmentPadding = 0
 
         view.delegate = self
+        view.drawsBackground = false
+        view.font = currentFont
 
         return view
     }
