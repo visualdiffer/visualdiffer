@@ -1,5 +1,5 @@
 //
-//  CommonPrefs+DifferenceNavigator.swift
+//  CommonPrefs+FileDifferenceNavigator.swift
 //  VisualDiffer
 //
 //  Created by davide ficano on 13/02/21.
