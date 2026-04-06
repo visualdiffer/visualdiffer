@@ -45,6 +45,12 @@ platform :mac do
     UI.user_error!("App version must be greater than the last tag. You must increase the version before creating a new release.") if app_version <= last_version
   end
 
+  private_lane :check_current_branch do
+    build_branch = ENV['BUILD_BRANCH']
+    current_branch = git_branch
+    UI.user_error!("Build must run from '#{build_branch}' branch but the current is #{current_branch}") unless current_branch == build_branch
+  end
+
   private_lane :build_archive_app do
     UI.header("🧱 Build & Archive")
     clean_build_artifacts
@@ -63,6 +69,7 @@ platform :mac do
   end
 
   private_lane :release_precondition do
+    check_current_branch unless ENV["IGNORE_BUILD_BRANCH"] == "true"
     check_release_version if ENV["CHECK_VERSION"] == "true"
     lint_app
     format_app(
