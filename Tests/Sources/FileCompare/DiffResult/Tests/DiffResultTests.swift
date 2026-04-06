@@ -52,7 +52,7 @@ final class DiffResultTests: DiffResultBaseTests {
 
         var didWrap = false
         // first move
-        if let section = diffResult.findNextSection(by: -1, wrapAround: true, didWrap: &didWrap) {
+        if let section = diffResult.findNextSection(by: -1, didWrap: &didWrap) {
             #expect(section === diffResult.sections[0])
             #expect(didWrap == false)
         } else {
@@ -60,7 +60,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
 
         // second move
-        if let section = diffResult.findNextSection(by: 2, wrapAround: true, didWrap: &didWrap) {
+        if let section = diffResult.findNextSection(by: 2, didWrap: &didWrap) {
             #expect(section === diffResult.sections[1])
             #expect(didWrap == false)
         } else {
@@ -68,7 +68,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
 
         // third move
-        if let section = diffResult.findNextSection(by: 3, wrapAround: true, didWrap: &didWrap) {
+        if let section = diffResult.findNextSection(by: 3, didWrap: &didWrap) {
             #expect(section === diffResult.sections[0])
             #expect(didWrap == true)
         } else {
@@ -96,7 +96,7 @@ final class DiffResultTests: DiffResultBaseTests {
 
         var didWrap = false
         // first move
-        if let section = diffResult.findPrevSection(by: 5, wrapAround: true, didWrap: &didWrap) {
+        if let section = diffResult.findPrevSection(by: 5, didWrap: &didWrap) {
             #expect(section === diffResult.sections[1])
             #expect(didWrap == false)
         } else {
@@ -104,7 +104,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
 
         // second move
-        if let section = diffResult.findPrevSection(by: 3, wrapAround: true, didWrap: &didWrap) {
+        if let section = diffResult.findPrevSection(by: 3, didWrap: &didWrap) {
             #expect(section === diffResult.sections[0])
             #expect(didWrap == false)
         } else {
@@ -112,7 +112,7 @@ final class DiffResultTests: DiffResultBaseTests {
         }
 
         // third move
-        if let section = diffResult.findPrevSection(by: 1, wrapAround: true, didWrap: &didWrap) {
+        if let section = diffResult.findPrevSection(by: 1, didWrap: &didWrap) {
             #expect(section === diffResult.sections[2])
             #expect(didWrap == true)
         } else {
