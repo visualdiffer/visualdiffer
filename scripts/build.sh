@@ -62,6 +62,10 @@ case "$selected_profile" in
     ;;
 esac
 
+echo "Running tests"
+
+bundle exec fastlane tests
+
 echo "Running profile: $selected_profile"
 
 cd "$PROJECT_DIR"

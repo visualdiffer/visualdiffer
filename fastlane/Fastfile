@@ -57,6 +57,7 @@ platform :mac do
     gym(
       project: ENV["PROJECT_PATH"],
       scheme: find_scheme,
+      silent: true,
       archive_path: ENV["ARCHIVE_PATH"],
       export_method: "developer-id",
       export_options: {
@@ -67,6 +68,10 @@ platform :mac do
       output_directory: ENV["EXPORT_PATH"]
     )
   end
+
+  lane :tests do
+    run_tests(scheme: ENV["SCHEME"])
+  end  
 
   private_lane :release_precondition do
     check_current_branch unless ENV["IGNORE_BUILD_BRANCH"] == "true"
