@@ -39,4 +39,16 @@ public class ItemComparator: NSObject {
         self.isRightCaseSensitive = isRightCaseSensitive
         self.fileNameAlignments = fileNameAlignments
     }
+
+    func copy(delegate: ItemComparatorDelegate) -> ItemComparator {
+        .init(
+            options: options,
+            delegate: delegate,
+            bufferSize: bufferSize,
+            timestampToleranceSeconds: timestampToleranceSeconds,
+            isLeftCaseSensitive: isLeftCaseSensitive,
+            isRightCaseSensitive: isRightCaseSensitive,
+            fileNameAlignments: fileNameAlignments
+        )
+    }
 }

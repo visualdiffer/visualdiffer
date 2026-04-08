@@ -8,6 +8,18 @@
 
 import UserNotifications
 
+private final class RefreshItemComparatorDelegate: ItemComparatorDelegate {
+    var isRunning: Bool
+
+    init(isRunning: Bool = true) {
+        self.isRunning = isRunning
+    }
+
+    func isRunning(_: ItemComparator) -> Bool {
+        isRunning
+    }
+}
+
 extension FoldersWindowController {
     @objc
     func initAllViews() {
@@ -47,6 +59,7 @@ extension FoldersWindowController {
         guard let contentView = window?.contentView else {
             return
         }
+
         var leadingMargin: CGFloat = 6
         var trailingMargin: CGFloat = 6
         if #available(macOS 26, *) {
@@ -104,6 +117,7 @@ extension FoldersWindowController {
         guard let window else {
             return
         }
+
         window.delegate = self
         window.toolbar = NSToolbar(identifier: "FoldersToolbar", delegate: self)
         window.makeFirstResponder(leftPanelView.treeView)
@@ -252,15 +266,22 @@ extension FoldersWindowController {
               let comparator else {
             return
         }
+
         let filterConfig = FilterConfig(
             from: sessionDiff,
             showFilteredFiles: showFilteredFiles,
             hideEmptyFolders: hideEmptyFolders
         )
-        item.refresh(
-            filterConfig: filterConfig,
-            comparator: comparator
-        )
+
+        let refreshDelegate = RefreshItemComparatorDelegate()
+        let refreshComparator = comparator.copy(delegate: refreshDelegate)
+
+        withExtendedLifetime(refreshDelegate) {
+            item.refresh(
+                filterConfig: filterConfig,
+                comparator: refreshComparator
+            )
+        }
 
         leftView.reloadData()
         rightView.reloadData()
@@ -288,6 +309,7 @@ extension FoldersWindowController {
         guard let item else {
             return
         }
+
         let items = DiffCountersItem.diffCounter(
             withItem: item,
             options: sessionDiff.comparatorOptions
