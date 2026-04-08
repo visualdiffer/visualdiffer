@@ -5,39 +5,27 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.8</title>
+            <title>Version 2.1.9</title>
             <description>
                 <![CDATA[
-                <h1 id="v218">v2.1.8</h1>
-
-<h3 id="features">🚀 Features</h3>
-
-<ul>
-  <li>File Compare: add auto-advance to another file comparison (<a href="https://github.com/visualdiffer/visualdiffer/commit/c8176fd177110a0e1a18ba82d1a17ad9e22e7059">c8176fd</a>)</li>
-</ul>
+                <h1 id="v219">v2.1.9</h1>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>
-    <p>add fade in (<a href="https://github.com/visualdiffer/visualdiffer/commit/f8c95488c6e56439417380859ba24102f91f3507">f8c9548</a>)</p>
-  </li>
-  <li>
-    <p>File Compare: prevent copying detail line ending marker (<a href="https://github.com/visualdiffer/visualdiffer/commit/ba42ca0dc79b66937002b1eb8f6b8287ed7b122b">ba42ca0</a>)</p>
-  </li>
+  <li>Folder Compare: prevent crash after save refresh with no differences (<a href="https://github.com/visualdiffer/visualdiffer/commit/c948b503949f2f12c7a12a6cf5ae0a10d8391635">c948b50</a>)</li>
 </ul>
-
 
                 ]]>
             </description>
-            <pubDate>Sat, 4 April 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.1.8</sparkle:version>
-            <sparkle:shortVersionString>2.1.8</sparkle:shortVersionString>
+            <pubDate>Wed, 8 April 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.1.9</sparkle:version>
+            <sparkle:shortVersionString>2.1.9</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.8/VisualDiffer-2.1.8.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.9/VisualDiffer-2.1.9.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="B5OLM964OOclX5Bj2G5QSo2Y4aRVmQzCkXCjMpBfyzDcIyxVIsYNaZ1yRzeATztMs41zcQQuWL+wfjlVDQvODw==" length="5560541"
+                sparkle:edSignature="ZVId6eI7+ymi74Mdwn4PhSHPbHYY26fNH6RYI+xtFc+qGNB72v2/VWJ0L3lpCs6Ns9WNZ1xOHqkoWVJaSf2ZBA==" length="5561761"
 
             />
         </item>
