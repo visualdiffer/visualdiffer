@@ -11,18 +11,10 @@ extension FoldersWindowController {
     func setAsBaseFolder(_ sender: AnyObject?) {
         if let sender = sender as? NSMenuItem,
            isPathControlMenu(sender.tag) {
-            let leftUrl = leftPanelView.pathView.pathControl.clickedPath
-            var leftPath: String?
-            var rightPath: String?
-
-            if let leftUrl {
-                leftPath = leftUrl.osPath
-                rightPath = leftVisibleItems?.item.linkedItem?.path
-            } else {
-                leftPath = leftVisibleItems?.item.path
-                rightPath = rightPanelView.pathView.pathControl.clickedPath?.osPath
+            if let pathURLs = baseURLFromPathView(otherSide: false) {
+                setBaseFolders(pathURLs.leftURL?.osPath, rightPath: pathURLs.rightURL?.osPath)
             }
-            setBaseFolders(leftPath, rightPath: rightPath)
+
             return
         }
 
@@ -88,18 +80,9 @@ extension FoldersWindowController {
     func setAsBaseFolderOtherSide(_ sender: AnyObject?) {
         if let sender = sender as? NSMenuItem,
            isPathControlMenu(sender.tag) {
-            let leftUrl = leftPanelView.pathView.pathControl.clickedPath
-            var leftPath: String?
-            var rightPath: String?
-
-            if let leftUrl {
-                leftPath = leftVisibleItems?.item.path
-                rightPath = leftUrl.osPath
-            } else {
-                leftPath = rightPanelView.pathView.pathControl.clickedPath?.osPath
-                rightPath = leftVisibleItems?.item.linkedItem?.path
+            if let pathURLs = baseURLFromPathView(otherSide: true) {
+                setBaseFolders(pathURLs.leftURL?.osPath, rightPath: pathURLs.rightURL?.osPath)
             }
-            setBaseFolders(leftPath, rightPath: rightPath)
             return
         }
 
@@ -135,6 +118,7 @@ extension FoldersWindowController {
               let rightItem else {
             return
         }
+
         if leftItem.isSymbolicLink || rightItem.isSymbolicLink {
             setBaseFolders(leftItem.path, rightPath: rightItem.path)
         } else {
@@ -143,16 +127,16 @@ extension FoldersWindowController {
             leftItemOriginal?.linkedItem = rightItemOriginal
             rightItemOriginal?.linkedItem = leftItemOriginal
 
+            sessionDiff.leftPath = leftItem.path
+            sessionDiff.rightPath = rightItem.path
+            synchronizeWindowTitleWithDocumentName()
+
             let refreshInfo = RefreshInfo(
                 initState: false,
                 realign: true,
                 expandAllFolders: sessionDiff.expandAllFolders
             )
             reloadAll(refreshInfo)
-
-            sessionDiff.leftPath = leftItem.path
-            sessionDiff.rightPath = rightItem.path
-            synchronizeWindowTitleWithDocumentName()
         }
     }
 
@@ -161,13 +145,32 @@ extension FoldersWindowController {
               let rightPath else {
             return
         }
-        reloadAll(RefreshInfo(
-            initState: true,
-            expandAllFolders: sessionDiff.expandAllFolders
-        ))
 
         sessionDiff.leftPath = leftPath
         sessionDiff.rightPath = rightPath
         synchronizeWindowTitleWithDocumentName()
+
+        reloadAll(RefreshInfo(
+            initState: true,
+            expandAllFolders: sessionDiff.expandAllFolders
+        ))
+    }
+
+    private func baseURLFromPathView(otherSide: Bool) -> (leftURL: URL?, rightURL: URL?)? {
+        if let leftClickedURL = leftPanelView.pathView.pathControl.clickedPath {
+            if otherSide {
+                return (leftPanelView.pathView.pathControl.url, leftClickedURL)
+            }
+            return (leftClickedURL, rightPanelView.pathView.pathControl.url)
+        }
+
+        if let rightClickedURL = rightPanelView.pathView.pathControl.clickedPath {
+            if otherSide {
+                return (rightClickedURL, rightPanelView.pathView.pathControl.url)
+            }
+            return (leftPanelView.pathView.pathControl.url, rightClickedURL)
+        }
+
+        return nil
     }
 }
