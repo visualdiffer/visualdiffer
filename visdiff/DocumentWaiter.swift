@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 visualdiffer.com
 //
 
+import AppKit
 import ScriptingBridge
 
 let documentClosedNotification = NSNotification.Name("VDDocumentClosedNotification")
@@ -25,21 +26,26 @@ enum ComparisonLaunchError: Error, LocalizedError {
 }
 
 class DocumentWaiter: NSObject, SBApplicationDelegate {
+    struct Options {
+        let waitClose: Bool
+        let shouldRestoreFocus: Bool
+    }
+
     var leftPath: URL
     var rightPath: URL
     var uuid: String?
 
-    private var waitClose: Bool
+    private let options: Options
     private var error: (any Error)?
 
     init(
         leftPath: URL,
         rightPath: URL,
-        waitClose: Bool
+        options: Options
     ) {
         self.leftPath = leftPath
         self.rightPath = rightPath
-        self.waitClose = waitClose
+        self.options = options
 
         super.init()
 
@@ -61,9 +67,11 @@ class DocumentWaiter: NSObject, SBApplicationDelegate {
     }
 
     func openDocument() throws {
+        let activeApplication = NSWorkspace.shared.frontmostApplication
         guard let app = SBApplication(bundleIdentifier: "com.visualdiffer") else {
             throw ComparisonLaunchError.launch(description: "Unable to find VisualDiffer application")
         }
+
         app.delegate = self
         app.activate()
 
@@ -83,11 +91,25 @@ class DocumentWaiter: NSObject, SBApplicationDelegate {
                 print("UUID is null. Note to myself. If application is launched from XCode this doesn't work. Close the app and launch it from dock")
             }
         #endif
-        if uuid != nil {
-            if waitClose {
-                CFRunLoopRun()
-            }
+
+        guard uuid != nil, options.waitClose else {
+            return
         }
+
+        CFRunLoopRun()
+
+        if options.shouldRestoreFocus {
+            restoreFocus(activeApplication)
+        }
+    }
+
+    private func restoreFocus(_ activeApplication: NSRunningApplication?) {
+        guard let activeApplication,
+              !activeApplication.isTerminated else {
+            return
+        }
+
+        activeApplication.activate()
     }
 
     func eventDidFail(_: UnsafePointer<AppleEvent>, withError error: any Error) -> Any? {

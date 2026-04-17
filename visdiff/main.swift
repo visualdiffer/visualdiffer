@@ -13,6 +13,7 @@ let version = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "n/a"
 enum Flags: String {
     case version = "--version"
     case wait = "--wait"
+    case focus = "--focus"
     case noWarning = "--no-warning"
 
     func isEqual(_ lhs: String) -> Bool {
@@ -26,6 +27,7 @@ func showHelp() {
 
     Arguments:
       \(Flags.wait.rawValue):          wait until the diff window is closed before returning
+      \(Flags.focus.rawValue):         restore the caller app focus after waiting, valid only with \(Flags.wait.rawValue)
       \(Flags.noWarning.rawValue):    suppress the sandbox warning message
       \(Flags.version.rawValue):       show version and exit
 
@@ -77,6 +79,7 @@ func resolvePath(_ path: String, shellWorkingDirectory: String?) throws -> URL {
 
 func main() -> Int32 {
     var waitClose = false
+    var restoreFocus = false
     var showWarning = true
     var positionalArgs: [String] = []
 
@@ -88,6 +91,8 @@ func main() -> Int32 {
             return 1
         } else if Flags.wait.isEqual(arg) {
             waitClose = true
+        } else if Flags.focus.isEqual(arg) {
+            restoreFocus = true
         } else if Flags.noWarning.isEqual(arg) {
             showWarning = false
         } else {
@@ -124,8 +129,16 @@ func main() -> Int32 {
         let shellWorkingDirectory = ProcessInfo.processInfo.environment["PWD"]
         let l = try resolvePath(positionalArgs[0], shellWorkingDirectory: shellWorkingDirectory)
         let r = try resolvePath(positionalArgs[1], shellWorkingDirectory: shellWorkingDirectory)
+        let options = DocumentWaiter.Options(
+            waitClose: waitClose,
+            shouldRestoreFocus: restoreFocus
+        )
 
-        try DocumentWaiter(leftPath: l, rightPath: r, waitClose: waitClose).openDocument()
+        try DocumentWaiter(
+            leftPath: l,
+            rightPath: r,
+            options: options
+        ).openDocument()
     } catch {
         printStdErr("\(error.localizedDescription)\n")
         return 1
