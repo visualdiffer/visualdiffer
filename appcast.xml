@@ -5,27 +5,39 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.9</title>
+            <title>Version 2.1.10</title>
             <description>
                 <![CDATA[
-                <h1 id="v219">v2.1.9</h1>
+                <h1 id="v2110">v2.1.10</h1>
+
+<h3 id="features">🚀 Features</h3>
+
+<ul>
+  <li>add –focus to visdiff (<a href="https://github.com/visualdiffer/visualdiffer/commit/0eebbf8aa1e3287e0c7deb0251bb41d1ec0160e3">0eebbf8</a>)</li>
+</ul>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>Folder Compare: prevent crash after save refresh with no differences (<a href="https://github.com/visualdiffer/visualdiffer/commit/c948b503949f2f12c7a12a6cf5ae0a10d8391635">c948b50</a>)</li>
+  <li>
+    <p>correct argument evaluation order and resolve relative paths (<a href="https://github.com/visualdiffer/visualdiffer/commit/7ca65a639ff91b65b1e75bec60d67cf123ccdd7d">7ca65a6</a>)</p>
+  </li>
+  <li>
+    <p>Folder Compare: make path control base folder commands work (<a href="https://github.com/visualdiffer/visualdiffer/commit/362e9605771aec49b4a4c3670907ef15a1026b5e">362e960</a>)</p>
+  </li>
 </ul>
+
 
                 ]]>
             </description>
-            <pubDate>Wed, 8 April 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.1.9</sparkle:version>
-            <sparkle:shortVersionString>2.1.9</sparkle:shortVersionString>
+            <pubDate>Sat, 18 April 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.1.10</sparkle:version>
+            <sparkle:shortVersionString>2.1.10</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.9/VisualDiffer-2.1.9.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.10/VisualDiffer-2.1.10.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="ZVId6eI7+ymi74Mdwn4PhSHPbHYY26fNH6RYI+xtFc+qGNB72v2/VWJ0L3lpCs6Ns9WNZ1xOHqkoWVJaSf2ZBA==" length="5561761"
+                sparkle:edSignature="GYa6AWCfiBXtOtoWuwA03gVdIYC1o/xIjyDkbcAXpLv57VLmp6kz2U7euzc5IrtDrpq5glPPzFNWVWgeHuOqBA==" length="5567400"
 
             />
         </item>
