@@ -1,0 +1,35 @@
+name: Close old issues
+
+on:
+  schedule:
+    # runs every day at 02:17 utc
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/stale@v10
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          days-before-issue-stale: 90
+          days-before-issue-close: 7
+
+          stale-issue-label: stale
+          exempt-issue-labels: keep-open
+
+          stale-issue-message: >
+            This issue has been inactive for 90 days and is now marked as stale.
+            Add a comment or remove the stale label to keep it open.
+
+          close-issue-message: >
+            This issue was closed after 7 additional days without activity.
+
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
