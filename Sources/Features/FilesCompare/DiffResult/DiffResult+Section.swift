@@ -110,24 +110,20 @@ extension DiffResult {
         guard index >= 0 else {
             return nil
         }
-
-        var section = findSection(with: index)
-
-        if section == nil {
+        guard let firstSection = findSection(with: index) else {
             return nil
         }
+
         var indexes = IndexSet()
 
-        // Store this value because section is overwritten to find previous sections
-        // swiftlint:disable:next force_unwrapping
-        var endRow = section!.end
+        // store this value because currentSection is overwritten to find previous sections
+        var endRow = firstSection.end
+        var currentSection: DiffSection? = firstSection
 
-        repeat {
-            if let tmpSection = section {
-                indexes.insert(integersIn: tmpSection.range)
-                section = findSection(with: tmpSection.start - 1)
-            }
-        } while section != nil
+        while let section = currentSection {
+            indexes.insert(integersIn: section.range)
+            currentSection = findSection(with: section.start - 1)
+        }
 
         while let section = findSection(with: endRow + 1) {
             indexes.insert(integersIn: section.range)
