@@ -25,6 +25,7 @@ extension FilesWindowController: NSTableViewDataSource,
               let diffSide = filesTableView.diffSide else {
             return nil
         }
+
         let arr = diffSide.lines
         let diffLine = arr[row]
 
@@ -34,7 +35,7 @@ extension FilesWindowController: NSTableViewDataSource,
         ) as? LineNumberTableCellView ?? LineNumberTableCellView()
 
         view.diffLine = diffLine
-        view.font = treeViewFont()
+        view.font = currentFont
         view.isSelected = tableView.isRowSelected(row)
         view.formattedText = formattedText(diffLine)
         view.isWordWrapEnabled = rowHeightCalculator.isWordWrapEnabled
@@ -51,6 +52,7 @@ extension FilesWindowController: NSTableViewDataSource,
         guard let tableView = notification.object as? FilesTableView else {
             return
         }
+
         updateDetailLines(tableView.selectedRow)
 
         let visibleRows = tableView.rows(in: tableView.visibleRect)
@@ -119,6 +121,7 @@ extension FilesWindowController: NSTableViewDataSource,
             guard let path = arr.last?.osPath else {
                 return false
             }
+
             if tableView === leftView {
                 sessionDiff.leftPath = path
             } else {
