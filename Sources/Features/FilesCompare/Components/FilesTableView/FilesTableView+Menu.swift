@@ -15,6 +15,7 @@ protocol FilesTableViewContextMenu {
     func popupOpenWithApp(_ sender: AnyObject?)
     func saveFile(_ sender: AnyObject?)
     func selectSection(_ sender: AnyObject?)
+    func selectAdjacentSections(_ sender: AnyObject?)
     func showInFinder(_ sender: AnyObject?)
     func showWhitespaces(_ sender: AnyObject?)
 }
@@ -32,7 +33,12 @@ extension FilesTableView {
         theMenu.addItem(
             withTitle: NSLocalizedString("Select Section", comment: ""),
             action: #selector(FilesTableViewContextMenu.selectSection),
-            keyEquivalent: ""
+            keyEquivalent: "d"
+        )
+        theMenu.addItem(
+            withTitle: NSLocalizedString("Select Adjacent Sections", comment: ""),
+            action: #selector(FilesTableViewContextMenu.selectAdjacentSections),
+            keyEquivalent: "D"
         )
         theMenu.addItem(NSMenuItem.separator())
 

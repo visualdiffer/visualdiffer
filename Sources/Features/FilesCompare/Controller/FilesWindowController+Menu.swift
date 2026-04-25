@@ -48,13 +48,11 @@ extension FilesWindowController {
             keyEquivalent: "d"
         )
 
-        let selectAdjacent = NSMenuItem(
-            title: NSLocalizedString("Select Adjacent Sections", comment: ""),
+        editMenu.addItem(
+            withTitle: NSLocalizedString("Select Adjacent Sections", comment: ""),
             action: #selector(selectAdjacentSections),
             keyEquivalent: "D"
         )
-        selectAdjacent.isAlternate = true
-        editMenu.addItem(selectAdjacent)
 
         editMenu.addItem(NSMenuItem.separator())
 
@@ -229,6 +227,7 @@ extension FilesWindowController {
         guard let mainMenu = NSApp.mainMenu else {
             return
         }
+
         mainMenu.item(withTag: MainMenu.edit.rawValue)?.submenu = StaticMenus.edit
         mainMenu.item(withTag: MainMenu.actions.rawValue)?.submenu = StaticMenus.actions
         mainMenu.item(withTag: MainMenu.view.rawValue)?.submenu = StaticMenus.view
