@@ -452,21 +452,14 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="512">
                         <items>
-                            <menuItem title="VisualDiffer Help" id="717">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="showHelp:" target="-1" id="868"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="710"/>
-                            <menuItem title="VisualDiffer Wiki" keyEquivalent="?" id="866">
+                            <menuItem title="Visit Wiki..." keyEquivalent="?" id="866">
                                 <connections>
                                     <action selector="openWiki:" target="708" id="867"/>
                                 </connections>
                             </menuItem>
                             <menuItem id="713">
                                 <string key="title" base64-UTF8="YES">
-UmVwb3J0IGEgYnVnGw
+UmVwb3J0IGEgYnVnGy4uLg
 </string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

@@ -35,10 +35,6 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleHelpBookFolder</key>
-	<string>VisualDifferHelp</string>
-	<key>CFBundleHelpBookName</key>
-	<string>com.visualdiffer.help</string>
 	<key>CFBundleIconFile</key>
 	<string>vd.icns</string>
 	<key>CFBundleIdentifier</key>
