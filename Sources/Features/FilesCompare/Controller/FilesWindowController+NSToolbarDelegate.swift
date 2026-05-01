@@ -183,7 +183,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         } else if item.itemIdentifier == .Files.nextDifference {
             return canMoveToDifference(
                 gotoNext: true, moveToFile:
-                    CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
+                CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
             )
         } else if item.itemIdentifier == .Files.prevDifferenceFiles
             || item.itemIdentifier == .Files.nextDifferenceFiles {

@@ -49,7 +49,8 @@ extension FoldersOutlineView {
             rows: indexes,
             scrollToFirst: scrollToFirst,
             center: center,
-            selectLinked: selectLinked)
+            selectLinked: selectLinked
+        )
     }
 
     @discardableResult
