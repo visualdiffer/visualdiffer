@@ -21,7 +21,6 @@ private final class RefreshItemComparatorDelegate: ItemComparatorDelegate {
 }
 
 extension FoldersWindowController {
-    @objc
     func initAllViews() {
         setupWindowLayout()
         setupFoldersLayout()
@@ -85,7 +84,6 @@ extension FoldersWindowController {
         ])
     }
 
-    @objc
     func updateTreeViewFont() {
         let font = treeViewFont()
         leftPanelView.treeView.updateFont(font, reloadData: true)
@@ -128,7 +126,6 @@ extension FoldersWindowController {
     /**
      * Setup elements requiring the sessionDiff is correctly defined, this method must be called after setDocument
      */
-    @objc
     func setupUIState() {
         setupObservers()
 
@@ -204,7 +201,6 @@ extension FoldersWindowController {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 
-    @objc
     func updateScopeBar() {
         let displayOptions = sessionDiff.displayOptions
 
@@ -243,6 +239,7 @@ extension FoldersWindowController {
         }
 
         var item: CompareItem?
+        var view: FoldersOutlineView = leftView
 
         if let leftPath = userInfo[FileSavedKey.leftPath] as? String {
             if leftPath.hasPrefix(sessionLeftPath) {
@@ -250,6 +247,7 @@ extension FoldersWindowController {
             }
             if item == nil, leftPath.hasPrefix(sessionRightPath) {
                 item = CompareItem.find(withPath: leftPath, from: rightItemOriginal)
+                view = rightView
             }
         }
 
@@ -259,6 +257,7 @@ extension FoldersWindowController {
             }
             if item == nil, rightPath.hasPrefix(sessionRightPath) {
                 item = CompareItem.find(withPath: rightPath, from: rightItemOriginal)
+                view = rightView
             }
         }
 
@@ -273,6 +272,9 @@ extension FoldersWindowController {
             hideEmptyFolders: hideEmptyFolders
         )
 
+        // capture before refresh - may be filtered out after type changes to .same
+        let anchor = item.visibleItem
+
         let refreshDelegate = RefreshItemComparatorDelegate()
         let refreshComparator = comparator.copy(delegate: refreshDelegate)
 
@@ -285,9 +287,15 @@ extension FoldersWindowController {
 
         leftView.reloadData()
         rightView.reloadData()
+
+        restoreSelectionAfterRefresh(
+            item: item,
+            anchor: anchor,
+            view: view,
+            limitToCurrentFolder: false
+        )
     }
 
-    @objc
     func updateBottomBar(_ view: FoldersOutlineView) {
         if view.side == .left {
             leftPanelView.updateBottomBar()
@@ -296,7 +304,6 @@ extension FoldersWindowController {
         }
     }
 
-    @objc
     func updateStatusBar() {
         let selInfo = lastUsedView.selectionInfo
         let item = if selInfo.foldersCount == 1,
@@ -338,6 +345,49 @@ extension FoldersWindowController {
             differenceCounters.isHidden = true
             statusbarText.isHidden = true
             progressView.isHidden = false
+        }
+    }
+
+    private func restoreSelectionAfterRefresh(
+        item: CompareItem,
+        anchor: VisibleItem?,
+        view: FoldersOutlineView,
+        limitToCurrentFolder: Bool
+    ) {
+        // item still visible after refresh - select it directly
+        if let vi = item.visibleItem, view.row(forItem: vi) >= 0 {
+            view.select(visibleItems: [vi], scrollToFirst: true, center: true, selectLinked: true)
+            return
+        }
+
+        // item filtered out - use anchor as starting point for findNearest
+        guard let vi = anchor else {
+            return
+        }
+
+        // try next first, then fall back to previous
+        let parentPath = item.parent?.path
+        if let found = findNearest(
+            view: view,
+            item: vi,
+            parentPath: parentPath,
+            direction: .next,
+            limitToCurrentFolder: limitToCurrentFolder
+        ),
+            let nextVI = view.item(atRow: found.row) as? VisibleItem {
+            view.select(visibleItems: [nextVI], scrollToFirst: true, center: true, selectLinked: true)
+            return
+        }
+
+        if let found = findNearest(
+            view: view,
+            item: vi,
+            parentPath: parentPath,
+            direction: .previous,
+            limitToCurrentFolder: limitToCurrentFolder
+        ),
+            let prevVI = view.item(atRow: found.row) as? VisibleItem {
+            view.select(visibleItems: [prevVI], scrollToFirst: true, center: true, selectLinked: true)
         }
     }
 }
