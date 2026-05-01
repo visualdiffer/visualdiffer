@@ -51,15 +51,15 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
             item.title = isLeftView ? NSLocalizedString("Save Left File", comment: "") : NSLocalizedString("Save Right File", comment: "")
             return lastUsedView.isDirty
         } else if action == #selector(previousDifference) {
-            if let sections = currentDiffResult?.sections {
-                return !sections.isEmpty
-            }
-            return false
+            return canMoveToDifference(
+                gotoNext: false,
+                moveToFile: CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
+            )
         } else if action == #selector(nextDifference) {
-            if let sections = currentDiffResult?.sections {
-                return !sections.isEmpty
-            }
-            return false
+            return canMoveToDifference(
+                gotoNext: true,
+                moveToFile: CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
+            )
         } else if action == #selector(copyLinesToLeft) {
             if lastUsedView.side == .right {
                 item.isHidden = false

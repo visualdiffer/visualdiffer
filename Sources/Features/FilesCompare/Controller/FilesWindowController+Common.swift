@@ -126,7 +126,7 @@ extension FilesWindowController {
             leftView.scrollTo(row: row, center: false)
             leftView.selectRowIndexes(index, byExtendingSelection: false)
         } else {
-            moveToDifference(true, showAnim: true)
+            moveToDifference(true, showAnim: true, moveToFile: false)
         }
     }
 

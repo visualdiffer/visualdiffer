@@ -6,6 +6,15 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+enum NavigationDirection {
+    case previous
+    case next
+
+    func sign() -> Int {
+        self == .previous ? -1 : 1
+    }
+}
+
 extension FoldersWindowController: DiffOpenerDelegate {
     override open var document: AnyObject? {
         didSet {
@@ -38,26 +47,26 @@ extension FoldersWindowController: DiffOpenerDelegate {
     }
 
     public func openNextDifference(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock) {
-        findDifference(from: leftPath, rightPath: rightPath, findNext: true, block: block)
+        findDifference(from: leftPath, rightPath: rightPath, direction: .next, block: block)
     }
 
     public func openPreviousDifference(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock) {
-        findDifference(from: leftPath, rightPath: rightPath, findNext: false, block: block)
+        findDifference(from: leftPath, rightPath: rightPath, direction: .previous, block: block)
     }
 
     public func hasNextDifference(from leftPath: String?, rightPath: String?) -> Bool {
-        findNearestDifferenceItem(from: leftPath, rightPath: rightPath, findNext: true) != nil
+        findNearestDifferenceItem(from: leftPath, rightPath: rightPath, direction: .next) != nil
     }
 
     public func hasPreviousDifference(from leftPath: String?, rightPath: String?) -> Bool {
-        findNearestDifferenceItem(from: leftPath, rightPath: rightPath, findNext: false) != nil
+        findNearestDifferenceItem(from: leftPath, rightPath: rightPath, direction: .previous) != nil
     }
 
     private func findNearestDifferenceItem(
         from leftPath: String?,
         rightPath: String?,
-        findNext: Bool
-    ) -> (CompareItem, Int)? {
+        direction: NavigationDirection
+    ) -> (item: CompareItem, row: Int)? {
         var item: CompareItem?
 
         if let leftPath, !leftPath.isEmpty {
@@ -83,49 +92,59 @@ extension FoldersWindowController: DiffOpenerDelegate {
         }
 
         guard let item,
-              let parent = item.parent,
-              parent.visibleItem != nil,
               let vi = item.visibleItem else {
             return nil
         }
 
         return findNearest(
-            vi,
-            parentPath: parent.path,
-            direction: findNext ? 1 : -1,
+            view: leftView,
+            item: vi,
+            parentPath: item.parent?.path,
+            direction: direction,
             limitToCurrentFolder: false
         )
     }
 
-    private func findDifference(from leftPath: String?, rightPath: String?, findNext: Bool, block: DiffOpenerDelegateBlock) {
+    private func findDifference(
+        from leftPath: String?,
+        rightPath: String?,
+        direction: NavigationDirection,
+        block: DiffOpenerDelegateBlock
+    ) {
         let foundItem = findNearestDifferenceItem(
             from: leftPath,
             rightPath: rightPath,
-            findNext: findNext
+            direction: direction
         )
 
         if let (item, row) = foundItem, block(item.path, item.linkedItem?.path) {
-            leftView.scrollRowToVisible(row)
-            let indexes = IndexSet(integer: row)
-            leftView.selectRowIndexes(indexes, byExtendingSelection: false)
-            leftView.linkedView?.selectRowIndexes(indexes, byExtendingSelection: false)
+            leftView.select(
+                rows: IndexSet(integer: row),
+                scrollToFirst: true,
+                center: true,
+                selectLinked: true
+            )
         }
     }
 
-    private func findNearest(
-        _ vi: VisibleItem,
+    func findNearest(
+        view: FoldersOutlineView,
+        item vi: VisibleItem,
         parentPath: String?,
-        direction: Int,
+        direction: NavigationDirection,
         limitToCurrentFolder: Bool
-    ) -> (CompareItem, Int)? {
-        var row = leftView.row(forItem: vi)
+    ) -> (item: CompareItem, row: Int)? {
+        var row = view.row(forItem: vi)
 
         if row < 0 {
-            return nil
+            row = anchorRowForFilteredItem(view: view, item: vi, direction: direction)
         }
+
+        let rowDirection = direction.sign()
+
         while true {
-            row += direction
-            guard let vi = leftView.item(atRow: row) as? VisibleItem else {
+            row += rowDirection
+            guard let vi = view.item(atRow: row) as? VisibleItem else {
                 break
             }
 
@@ -138,5 +157,57 @@ extension FoldersWindowController: DiffOpenerDelegate {
             }
         }
         return nil
+    }
+
+    // finds the outline row to use as loop start when vi has been filtered out;
+    // walks up the ancestor chain in case the parent itself was also removed
+    private func anchorRowForFilteredItem(
+        view: FoldersOutlineView,
+        item vi: VisibleItem,
+        direction: NavigationDirection
+    ) -> Int {
+        var currentItem = vi.item
+
+        while let parent = currentItem.parent {
+            let siblings = parent.children
+            if let index = siblings.firstIndex(of: currentItem) {
+                var pos = index + 1
+                while pos < siblings.count {
+                    if siblings[pos].isDisplayed {
+                        break
+                    }
+                    pos += 1
+                }
+                // for "next": start just before nextRow so the loop lands on it
+                // for "prev": start at nextRow so the loop checks the row before it first
+                if pos < siblings.count, let nextVI = siblings[pos].visibleItem {
+                    let nextRow = view.row(forItem: nextVI)
+                    if nextRow >= 0 {
+                        return direction == .next ? nextRow - 1 : nextRow
+                    }
+                }
+                // no visible next sibling — derive anchor from end of parent's visible subtree
+                if let parentVI = parent.visibleItem {
+                    let lastRow = lastVisibleRow(in: parentVI, view: view)
+                    if lastRow >= 0 {
+                        let nextRow = lastRow + 1
+                        return direction == .next ? nextRow - 1 : nextRow
+                    }
+                }
+            }
+            currentItem = parent
+        }
+
+        return -1
+    }
+
+    private func lastVisibleRow(in vi: VisibleItem, view: FoldersOutlineView) -> Int {
+        for child in vi.children.reversed() {
+            let row = lastVisibleRow(in: child, view: view)
+            if row >= 0 {
+                return row
+            }
+        }
+        return view.row(forItem: vi)
     }
 }

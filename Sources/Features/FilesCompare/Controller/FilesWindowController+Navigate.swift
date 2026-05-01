@@ -9,12 +9,12 @@
 extension FilesWindowController {
     @objc
     func previousDifference(_: AnyObject) {
-        moveToDifference(false, showAnim: true)
+        moveToDifference(false, showAnim: true, moveToFile: CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences)
     }
 
     @objc
     func nextDifference(_: AnyObject) {
-        moveToDifference(true, showAnim: true)
+        moveToDifference(true, showAnim: true, moveToFile: CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences)
     }
 
     @objc
@@ -28,7 +28,11 @@ extension FilesWindowController {
     }
 
     @objc
-    func moveToDifference(_ gotoNext: Bool, showAnim: Bool) {
+    func moveToDifference(
+        _ gotoNext: Bool,
+        showAnim: Bool,
+        moveToFile: Bool
+    ) {
         let currentPos = lastUsedView.selectedRow
         var didWrap = false
 
@@ -38,11 +42,15 @@ extension FilesWindowController {
             currentDiffResult?.findPrevSection(by: currentPos, didWrap: &didWrap)
         }
         guard let section else {
+            if moveToFile,
+               canNavigateToFile(gotoNext: gotoNext) {
+                navigateToFile(gotoNext, showAnim: showAnim)
+            }
             return
         }
 
         if didWrap {
-            if CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences {
+            if moveToFile {
                 if canNavigateToFile(gotoNext: gotoNext) {
                     navigateToFile(gotoNext, showAnim: showAnim)
                     return
@@ -147,5 +155,17 @@ extension FilesWindowController {
         topBottomView.setImage(image)
         topBottomView.setText(text)
         topBottomView.animateInside(window.frame)
+    }
+
+    func canMoveToDifference(gotoNext: Bool, moveToFile: Bool) -> Bool {
+        if let sections = currentDiffResult?.sections, !sections.isEmpty {
+            return true
+        }
+
+        guard moveToFile else {
+            return false
+        }
+
+        return canNavigateToFile(gotoNext: gotoNext)
     }
 }

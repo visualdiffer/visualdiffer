@@ -44,14 +44,29 @@ extension FoldersOutlineView {
                 indexes.insert(row)
             }
         }
-        if scrollToFirst, let row = indexes.first {
+
+        return select(
+            rows: indexes,
+            scrollToFirst: scrollToFirst,
+            center: center,
+            selectLinked: selectLinked)
+    }
+
+    @discardableResult
+    func select(
+        rows: IndexSet,
+        scrollToFirst: Bool = false,
+        center: Bool = false,
+        selectLinked: Bool = false
+    ) -> Bool {
+        if scrollToFirst, let row = rows.first {
             scrollTo(row: row, center: center)
         }
-        selectRowIndexes(indexes, byExtendingSelection: false)
+        selectRowIndexes(rows, byExtendingSelection: false)
         if selectLinked {
-            linkedView?.selectRowIndexes(indexes, byExtendingSelection: false)
+            linkedView?.selectRowIndexes(rows, byExtendingSelection: false)
         }
-        return !indexes.isEmpty
+        return !rows.isEmpty
     }
 
     func restoreSelectionAndFocusPosition(_ selectedVisibleItems: [VisibleItem]) {

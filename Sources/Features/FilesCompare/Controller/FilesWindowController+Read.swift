@@ -8,7 +8,6 @@
 
 @MainActor
 extension FilesWindowController {
-    @objc
     func startComparison() {
         reloadAllMove(toFirstDifference: true)
     }
@@ -69,7 +68,7 @@ extension FilesWindowController {
         rightView.deselectAll(nil)
 
         if moveToFirstDifference {
-            moveToDifference(true, showAnim: false)
+            moveToDifference(true, showAnim: false, moveToFile: false)
         }
 
         reloadRowHeights()
@@ -79,6 +78,7 @@ extension FilesWindowController {
         guard let window else {
             return
         }
+
         let alert = NSAlert(error: error)
 
         alert.beginSheetModal(for: window)
@@ -116,6 +116,7 @@ extension FilesWindowController {
         guard let resolvedURL else {
             return (nil, [])
         }
+
         let content = try panel.readFile(resolvedURL)
         let lines = DiffLineComponent.splitLines(content)
 
