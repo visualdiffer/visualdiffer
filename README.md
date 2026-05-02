@@ -66,6 +66,10 @@ brew install visualdiffer
 
 Download from [releases](https://github.com/visualdiffer/visualdiffer/releases/latest), unzip, and drag the app to Applications folder
 
+### Updates
+
+When the app launches, it automatically checks for updates and notifies the user when a new version is available.
+
 ## 🛠️ Build  
 
 See [Contributing](CONTRIBUTING.md)
