@@ -62,11 +62,25 @@ extension FoldersWindowController: DiffOpenerDelegate {
         findNearestDifferenceItem(from: leftPath, rightPath: rightPath, direction: .previous) != nil
     }
 
-    private func findNearestDifferenceItem(
-        from leftPath: String?,
-        rightPath: String?,
-        direction: NavigationDirection
-    ) -> (item: CompareItem, row: Int)? {
+    public func parentPaths(from leftPath: String?, rightPath: String?) -> (leftParentPath: String, rightParentPath: String)? {
+        guard let item = resolveCompareItem(fromLeftPath: leftPath, rightPath: rightPath),
+              let leftParent = item.parent?.path,
+              let rightParent = item.linkedItem?.parent?.path else {
+            return nil
+        }
+
+        return (leftParent, rightParent)
+    }
+
+    /// resolves the compare item associated with one of the provided paths
+    /// - parameters:
+    ///   - leftPath: the candidate path to resolve from the left or right session root
+    ///   - rightPath: the fallback path to resolve when `leftPath` is missing or empty
+    /// - returns: the matching compare item from the left comparison tree, even when the resolved path originates from the right side
+    public func resolveCompareItem(
+        fromLeftPath leftPath: String?,
+        rightPath: String?
+    ) -> CompareItem? {
         var item: CompareItem?
 
         if let leftPath, !leftPath.isEmpty {
@@ -91,7 +105,15 @@ extension FoldersWindowController: DiffOpenerDelegate {
             }
         }
 
-        guard let item,
+        return item
+    }
+
+    private func findNearestDifferenceItem(
+        from leftPath: String?,
+        rightPath: String?,
+        direction: NavigationDirection
+    ) -> (item: CompareItem, row: Int)? {
+        guard let item = resolveCompareItem(fromLeftPath: leftPath, rightPath: rightPath),
               let vi = item.visibleItem else {
             return nil
         }

@@ -69,7 +69,7 @@ extension FilesWindowController {
             secureURL = SecureBookmark.shared.secure(fromBookmark: path, startSecured: true)
             try checkFile(path, side: view.side)
         } else {
-            if let url = choosePath() {
+            if let url = choosePath(suggestedDestination: suggestedPath()) {
                 path = url
                 if isLeftView {
                     resolvedLeftPath = url
@@ -107,11 +107,41 @@ extension FilesWindowController {
         )
     }
 
-    private func choosePath() -> URL? {
+    private func suggestedPath() -> URL? {
+        guard let document = document as? VDDocument,
+              let parentSession = document.parentSession,
+              let parents = parentSession.parentPaths(
+                  from: resolvedLeftPath?.osPath,
+                  rightPath: resolvedRightPath?.osPath
+              ) else {
+            return nil
+        }
+
+        if let resolvedLeftPath {
+            let url = URL(filePath: parents.rightParentPath, directoryHint: .isDirectory)
+
+            return url.appendingPathComponent(resolvedLeftPath.lastPathComponent, isDirectory: false)
+        }
+
+        if let resolvedRightPath {
+            let url = URL(filePath: parents.leftParentPath, directoryHint: .isDirectory)
+
+            return url.appendingPathComponent(resolvedRightPath.lastPathComponent, isDirectory: false)
+        }
+
+        return nil
+    }
+
+    private func choosePath(suggestedDestination: URL?) -> URL? {
         let savePanel = NSSavePanel()
         savePanel.title = NSLocalizedString("Save File As", comment: "")
         // since 10.11 the title is no longer shown so we use the message property
         savePanel.message = NSLocalizedString("Save File As", comment: "")
+
+        if let suggestedDestination {
+            savePanel.directoryURL = suggestedDestination.deletingLastPathComponent()
+            savePanel.nameFieldStringValue = suggestedDestination.lastPathComponent
+        }
 
         if savePanel.runModal() == .OK {
             return savePanel.url

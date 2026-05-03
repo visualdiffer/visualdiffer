@@ -29,4 +29,6 @@ public protocol DiffOpenerDelegate: AnyObject {
 
     func hasNextDifference(from leftPath: String?, rightPath: String?) -> Bool
     func hasPreviousDifference(from leftPath: String?, rightPath: String?) -> Bool
+
+    func parentPaths(from leftPath: String?, rightPath: String?) -> (leftParentPath: String, rightParentPath: String)?
 }
