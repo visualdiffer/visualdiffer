@@ -45,6 +45,7 @@ extension FilesWindowController {
         guard let diffResult else {
             return
         }
+
         var path: URL?
         var diffSide: DiffSide
 
@@ -69,7 +70,7 @@ extension FilesWindowController {
             secureURL = SecureBookmark.shared.secure(fromBookmark: path, startSecured: true)
             try checkFile(path, side: view.side)
         } else {
-            if let url = choosePath(suggestedDestination: suggestedPath()) {
+            if let url = choosePath(suggestedDestination: suggestedDestination()) {
                 path = url
                 if isLeftView {
                     resolvedLeftPath = url
@@ -95,11 +96,14 @@ extension FilesWindowController {
         fileThumbnail.needsDisplay = true
         window?.toolbar?.validateVisibleItems()
 
-        // userInfo contains the modified file paths, here only one path is added
-        let position: FileSavedKey = isLeftView ? .leftPath : .rightPath
-        let userInfo = [
-            position: path.osPath,
-        ]
+        var userInfo = [FileSavedKey: String]()
+
+        if let path = sessionDiff.leftPath {
+            userInfo[.leftPath] = path
+        }
+        if let path = sessionDiff.rightPath {
+            userInfo[.rightPath] = path
+        }
         NotificationCenter.default.post(
             name: .fileSaved,
             object: nil,
@@ -107,40 +111,37 @@ extension FilesWindowController {
         )
     }
 
-    private func suggestedPath() -> URL? {
-        guard let document = document as? VDDocument,
-              let parentSession = document.parentSession,
-              let parents = parentSession.parentPaths(
-                  from: resolvedLeftPath?.osPath,
-                  rightPath: resolvedRightPath?.osPath
-              ) else {
-            return nil
-        }
+    private func suggestedDestination() -> (directoryPath: String?, fileName: String)? {
+        let parents = (document as? VDDocument)?.parentSession?.parentPaths(
+            from: resolvedLeftPath?.osPath,
+            rightPath: resolvedRightPath?.osPath
+        )
 
         if let resolvedLeftPath {
-            let url = URL(filePath: parents.rightParentPath, directoryHint: .isDirectory)
-
-            return url.appendingPathComponent(resolvedLeftPath.lastPathComponent, isDirectory: false)
+            return (parents?.rightParentPath, resolvedLeftPath.lastPathComponent)
         }
 
         if let resolvedRightPath {
-            let url = URL(filePath: parents.leftParentPath, directoryHint: .isDirectory)
-
-            return url.appendingPathComponent(resolvedRightPath.lastPathComponent, isDirectory: false)
+            return (parents?.leftParentPath, resolvedRightPath.lastPathComponent)
         }
 
         return nil
     }
 
-    private func choosePath(suggestedDestination: URL?) -> URL? {
+    private func choosePath(
+        suggestedDestination: (directoryPath: String?, fileName: String)?
+    ) -> URL? {
         let savePanel = NSSavePanel()
         savePanel.title = NSLocalizedString("Save File As", comment: "")
         // since 10.11 the title is no longer shown so we use the message property
         savePanel.message = NSLocalizedString("Save File As", comment: "")
 
         if let suggestedDestination {
-            savePanel.directoryURL = suggestedDestination.deletingLastPathComponent()
-            savePanel.nameFieldStringValue = suggestedDestination.lastPathComponent
+            if let directoryPath = suggestedDestination.directoryPath {
+                savePanel.directoryURL = URL(filePath: directoryPath)
+            }
+            savePanel.nameFieldStringValue = suggestedDestination.fileName
+            savePanel.isExtensionHidden = false
         }
 
         if savePanel.runModal() == .OK {

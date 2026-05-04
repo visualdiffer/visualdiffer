@@ -514,6 +514,7 @@
 		55F4A0032FEE100000A1B2C3 /* ExternalFileOperationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */; };
 		55F6B0631AEA93E30096E55E /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0611AEA93E30096E55E /* Localizable.stringsdict */; };
 		55F6B0661AEA99680096E55E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0641AEA99680096E55E /* Localizable.strings */; };
+		55F9BAF22FA7259B004EA543 /* FoldersWindowController+Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9BAF12FA7259B004EA543 /* FoldersWindowController+Observers.swift */; };
 		55F9E79A2EDD5DBD001218C7 /* DiffResult.Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */; };
 		55F9E79C2EDD6221001218C7 /* WhitespacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */; };
 		55FD7E28180C484500CF473C /* prefs_folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FD7E25180C484500CF473C /* prefs_folder@2x.png */; };
@@ -1122,6 +1123,7 @@
 		55F013FC27A90C46003EA2D4 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
 		55F42EDF2F76798A009B211C /* CommonPrefs+FileDifferenceNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonPrefs+FileDifferenceNavigator.swift"; sourceTree = "<group>"; };
 		55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFileOperationContext.swift; sourceTree = "<group>"; };
+		55F9BAF12FA7259B004EA543 /* FoldersWindowController+Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoldersWindowController+Observers.swift"; sourceTree = "<group>"; };
 		55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResult.Options.swift; sourceTree = "<group>"; };
 		55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhitespacesTests.swift; sourceTree = "<group>"; };
 		55FC15F22557CD000075E30D /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
@@ -1713,10 +1715,10 @@
 			isa = PBXGroup;
 			children = (
 				55EC0A4A2F3868E4008201E1 /* CopyFilesTag.swift */,
+				55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */,
 				5537401A2E9372DF00AB56D0 /* FileSystemController */,
 				5537401D2E9372DF00AB56D0 /* FolderReader */,
 				5537401E2E9372DF00AB56D0 /* FolderSelectionInfo.swift */,
-				55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */,
 				5537401F2E9372DF00AB56D0 /* FoldersWindowController.swift */,
 				553740202E9372DF00AB56D0 /* FoldersWindowController+BaseFolder.swift */,
 				553740212E9372DF00AB56D0 /* FoldersWindowController+Comparison.swift */,
@@ -1732,6 +1734,7 @@
 				5537402B2E9372DF00AB56D0 /* FoldersWindowController+Navigation.swift */,
 				5537402C2E9372DF00AB56D0 /* FoldersWindowController+NSToolbarDelegate.swift */,
 				5537402D2E9372DF00AB56D0 /* FoldersWindowController+NSWindowDelegate.swift */,
+				55F9BAF12FA7259B004EA543 /* FoldersWindowController+Observers.swift */,
 				5537402E2E9372DF00AB56D0 /* FoldersWindowController+PathControlDelegate.swift */,
 				5537402F2E9372DF00AB56D0 /* FoldersWindowController+QLPreviewPanel.swift */,
 				553740302E9372DF00AB56D0 /* FoldersWindowController+Select.swift */,
@@ -3288,6 +3291,7 @@
 				551DE3B82ED439AF0067AB18 /* PreferencesBoxDataSource+Default.swift in Sources */,
 				55D352E72EFD0C5B00C944D5 /* FileSystemTestHelper.swift in Sources */,
 				5537419A2E9372DF00AB56D0 /* FontBox.swift in Sources */,
+				55F9BAF22FA7259B004EA543 /* FoldersWindowController+Observers.swift in Sources */,
 				5537419B2E9372DF00AB56D0 /* FilesTableViewFindTextDelegate.swift in Sources */,
 				5537419C2E9372DF00AB56D0 /* DeleteFileOperationExecutor.swift in Sources */,
 				5537419D2E9372DF00AB56D0 /* DualPaneSplitView.swift in Sources */,
