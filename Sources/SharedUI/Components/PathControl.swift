@@ -53,6 +53,8 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
 
     private func setupViews() {
         menu = Self.defaultMenu
+        target = self
+        doubleAction = #selector(handleDoubleClick(_:))
     }
 
     // MARK: -
@@ -180,6 +182,7 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
         guard let delegate = delegate as? PathControlDelegate else {
             return
         }
+
         let openPanel = NSOpenPanel()
 
         openPanel.directoryURL = safePathComponentItem?.url ?? url
@@ -208,5 +211,16 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
     override public var intrinsicContentSize: NSSize {
         // Let it be flexible when using Auto Layout
         NSSize(width: NSView.noIntrinsicMetric, height: NSView.noIntrinsicMetric)
+    }
+
+    @objc
+    private func handleDoubleClick(_ sender: AnyObject) {
+        let modifiers = NSEvent.modifierFlags.intersection(.deviceIndependentFlagsMask)
+
+        if modifiers.isEmpty {
+            showInFinder(sender)
+        } else if modifiers == .option {
+            copyFullPaths(sender)
+        }
     }
 }
