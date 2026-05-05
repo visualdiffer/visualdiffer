@@ -63,6 +63,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         guard let item = notification.userInfo?["item"] as? NSToolbarItem else {
             return
         }
+
         updateToolbarButton(item)
 
         if item.itemIdentifier == .Files.openWith {
@@ -175,15 +176,15 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         let side = lastUsedView.side
 
         if item.itemIdentifier == .Files.prevDifference {
-            guard let sections = currentDiffResult?.sections else {
-                return false
-            }
-            return !sections.isEmpty
+            return canMoveToDifference(
+                gotoNext: false,
+                moveToFile: CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
+            )
         } else if item.itemIdentifier == .Files.nextDifference {
-            guard let sections = currentDiffResult?.sections else {
-                return false
-            }
-            return !sections.isEmpty
+            return canMoveToDifference(
+                gotoNext: true, moveToFile:
+                CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
+            )
         } else if item.itemIdentifier == .Files.prevDifferenceFiles
             || item.itemIdentifier == .Files.nextDifferenceFiles {
             return (document as? VDDocument)?.parentSession != nil
@@ -235,6 +236,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         guard let items = window?.toolbar?.visibleItems else {
             return
         }
+
         for item in items {
             updateToolbarButton(item)
         }

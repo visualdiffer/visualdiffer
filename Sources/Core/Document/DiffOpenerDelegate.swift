@@ -17,7 +17,7 @@ public protocol DiffOpenerDelegate: AnyObject {
     func removeChildDocument(_ document: VDDocument)
 
     ///
-    /// Open the successive file listed on opener window
+    /// open the successive file listed on opener window
     /// Parameters:
     /// - leftPath: the left path to search
     /// - ritghtPath:the right path to search
@@ -29,4 +29,14 @@ public protocol DiffOpenerDelegate: AnyObject {
 
     func hasNextDifference(from leftPath: String?, rightPath: String?) -> Bool
     func hasPreviousDifference(from leftPath: String?, rightPath: String?) -> Bool
+
+    ///
+    /// returns the parent paths of the two compared items
+    /// if one of the passed paths is nil, the other is used to infer the missing parent.
+    /// This is useful when no information is available for one path and it must be derived from the other
+    /// Parameters:
+    /// - leftPath: the left path, or nil when unknown
+    /// - rightPath: the right path, or nil when unknown
+    /// Returns: a tuple with both parent paths, or nil when neither path is available
+    func parentPaths(from leftPath: String?, rightPath: String?) -> (leftParentPath: String, rightParentPath: String)?
 }

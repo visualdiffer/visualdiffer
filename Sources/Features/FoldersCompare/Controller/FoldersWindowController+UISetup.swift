@@ -6,22 +6,7 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-import UserNotifications
-
-private final class RefreshItemComparatorDelegate: ItemComparatorDelegate {
-    var isRunning: Bool
-
-    init(isRunning: Bool = true) {
-        self.isRunning = isRunning
-    }
-
-    func isRunning(_: ItemComparator) -> Bool {
-        isRunning
-    }
-}
-
 extension FoldersWindowController {
-    @objc
     func initAllViews() {
         setupWindowLayout()
         setupFoldersLayout()
@@ -85,7 +70,6 @@ extension FoldersWindowController {
         ])
     }
 
-    @objc
     func updateTreeViewFont() {
         let font = treeViewFont()
         leftPanelView.treeView.updateFont(font, reloadData: true)
@@ -128,7 +112,6 @@ extension FoldersWindowController {
     /**
      * Setup elements requiring the sessionDiff is correctly defined, this method must be called after setDocument
      */
-    @objc
     func setupUIState() {
         setupObservers()
 
@@ -147,64 +130,6 @@ extension FoldersWindowController {
         rightPanelView.bindControls()
     }
 
-    func setupObservers() {
-        // a register for those notifications on the synchronized content view.
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(fontDidChange),
-            name: .prefsChanged,
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(refreshCompareItem),
-            name: .fileSaved,
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appAppearanceDidChange),
-            name: .appAppearanceDidChange,
-            object: nil
-        )
-
-        let comparatorOptionsObservation = sessionDiff.observeComparatorOptions { flags in
-            Task { @MainActor in
-                self.comparatorMethod = flags.onlyMethodFlags
-            }
-        }
-
-        observations.append(contentsOf: [comparatorOptionsObservation])
-
-        UNUserNotificationCenter.current().delegate = self
-    }
-
-    func removeObservers() {
-        NotificationCenter.default.removeObserver(
-            self,
-            name: .prefsChanged,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: .fileSaved,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: .appAppearanceDidChange,
-            object: nil
-        )
-
-        observations.forEach { $0.invalidate() }
-
-        // don't show notification if this window is closing
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-    }
-
-    @objc
     func updateScopeBar() {
         let displayOptions = sessionDiff.displayOptions
 
@@ -224,70 +149,6 @@ extension FoldersWindowController {
         consoleSplitter.collapseSubview(at: 1)
     }
 
-    @objc
-    func appAppearanceDidChange(_: Notification) {
-        leftView.reloadData()
-        rightView.reloadData()
-
-        updateStatusBar()
-    }
-
-    @objc
-    func refreshCompareItem(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let leftItemOriginal,
-              let rightItemOriginal,
-              let sessionLeftPath = sessionDiff.leftPath,
-              let sessionRightPath = sessionDiff.rightPath else {
-            return
-        }
-
-        var item: CompareItem?
-
-        if let leftPath = userInfo[FileSavedKey.leftPath] as? String {
-            if leftPath.hasPrefix(sessionLeftPath) {
-                item = CompareItem.find(withPath: leftPath, from: leftItemOriginal)
-            }
-            if item == nil, leftPath.hasPrefix(sessionRightPath) {
-                item = CompareItem.find(withPath: leftPath, from: rightItemOriginal)
-            }
-        }
-
-        if let rightPath = userInfo[FileSavedKey.rightPath] as? String {
-            if item == nil, rightPath.hasPrefix(sessionLeftPath) {
-                item = CompareItem.find(withPath: rightPath, from: leftItemOriginal)
-            }
-            if item == nil, rightPath.hasPrefix(sessionRightPath) {
-                item = CompareItem.find(withPath: rightPath, from: rightItemOriginal)
-            }
-        }
-
-        guard let item,
-              let comparator else {
-            return
-        }
-
-        let filterConfig = FilterConfig(
-            from: sessionDiff,
-            showFilteredFiles: showFilteredFiles,
-            hideEmptyFolders: hideEmptyFolders
-        )
-
-        let refreshDelegate = RefreshItemComparatorDelegate()
-        let refreshComparator = comparator.copy(delegate: refreshDelegate)
-
-        withExtendedLifetime(refreshDelegate) {
-            item.refresh(
-                filterConfig: filterConfig,
-                comparator: refreshComparator
-            )
-        }
-
-        leftView.reloadData()
-        rightView.reloadData()
-    }
-
-    @objc
     func updateBottomBar(_ view: FoldersOutlineView) {
         if view.side == .left {
             leftPanelView.updateBottomBar()
@@ -296,7 +157,6 @@ extension FoldersWindowController {
         }
     }
 
-    @objc
     func updateStatusBar() {
         let selInfo = lastUsedView.selectionInfo
         let item = if selInfo.foldersCount == 1,
@@ -315,18 +175,6 @@ extension FoldersWindowController {
             options: sessionDiff.comparatorOptions
         )
         differenceCounters.update(counters: items)
-    }
-
-    @objc
-    func fontDidChange(notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let target = userInfo[PrefChangedKey.target] as? PrefChangedKey.Target else {
-            return
-        }
-
-        if target == .folder {
-            fontZoomFactor = 0
-        }
     }
 
     func setProgressHidden(_ hidden: Bool) {
