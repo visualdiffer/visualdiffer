@@ -1,24 +1,34 @@
 # version
 
 --swiftversion 6.2
---disable sortImports
---disable wrapMultilineStatementBraces
 
 # format options
-
-# rules
-
---enable redundantProperty
---enable wrapConditionalBodies
---enable wrapEnumCases
 
 --wrap-arguments before-first
 --wrap-collections before-first
 
 --trailing-commas collections-only
 
---disable docComments
+--preserve-acronyms kCFStringEncodingInvalidId
 
+# rules - enabled
+
+--enable redundantVariable
+--enable wrapConditionalBodies
+--enable wrapEnumCases
+
+--enable blankLinesAfterGuardStatements
+--enable isEmpty
+--enable noExplicitOwnership
+--enable privateStateVariables
+--enable singlePropertyPerLine
+--enable urlMacro
+--enable validateTestCases
+
+# rules - disabled
+
+--disable sortImports
+--disable wrapMultilineStatementBraces
+--disable docComments
 --disable swiftTestingTestCaseNames
 --disable redundantSendable
-
