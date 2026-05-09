@@ -15,6 +15,7 @@ extension SessionDiff {
               let rightPath else {
             fatalError("Both leftPath and rightPath must be set")
         }
+
         let options = comparatorOptions
         let (isLeftCaseSensitive, isRightCaseSensitive) = options.fileNameCase(
             leftPath: URL(filePath: leftPath),

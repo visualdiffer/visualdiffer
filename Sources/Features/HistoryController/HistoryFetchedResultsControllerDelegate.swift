@@ -96,6 +96,7 @@ class HistoryFetchedResultsControllerDelegate: NSObject, @preconcurrency NSFetch
               !array.isEmpty else {
             return
         }
+
         var indexes = IndexSet()
         for (from, _) in array {
             indexes.insert(from.item)
@@ -115,6 +116,7 @@ class HistoryFetchedResultsControllerDelegate: NSObject, @preconcurrency NSFetch
               !array.isEmpty else {
             return
         }
+
         for (from, _) in array {
             let row = from.item
             let cell = tableView.view(atColumn: 0, row: row, makeIfNecessary: true)
@@ -136,6 +138,7 @@ class HistoryFetchedResultsControllerDelegate: NSObject, @preconcurrency NSFetch
               !array.isEmpty else {
             return
         }
+
         var indexes = IndexSet()
         for (from, _) in array {
             indexes.insert(from.item)
@@ -155,6 +158,7 @@ class HistoryFetchedResultsControllerDelegate: NSObject, @preconcurrency NSFetch
               !array.isEmpty else {
             return
         }
+
         for (fromIndex, toIndex) in array {
             if let toIndex {
                 tableView.removeRows(

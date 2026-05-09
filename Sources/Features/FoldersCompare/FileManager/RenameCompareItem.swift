@@ -21,12 +21,11 @@ class RenameCompareItem {
         srcRoot: CompareItem,
         toName: String
     ) {
-        guard let srcUrl = srcRoot.toUrl(),
+        guard let srcURL = srcRoot.toURL(),
               srcRoot.isValidFile else {
             return
         }
-
-        guard let volumeType = srcUrl.volumeType() else {
+        guard let volumeType = srcURL.volumeType() else {
             operationManager.delegate.fileManager(
                 operationManager,
                 addError: FileError.unknownVolumeType,
@@ -89,22 +88,21 @@ class RenameCompareItem {
             return true
         }
 
-        guard let srcUrl = srcRoot.toUrl() else {
+        guard let srcURL = srcRoot.toURL() else {
             throw FolderManagerError.nilPath
         }
-
         guard let destRoot = srcRoot.linkedItem else {
             throw FolderManagerError.nilPath
         }
 
-        let toPath = srcUrl
+        let toPath = srcURL
             .deletingLastPathComponent()
             .appendingPathComponent(toName)
 
         var renamedSrcRoot: CompareItem?
 
         do {
-            try fm.moveItem(at: srcUrl, to: toPath)
+            try fm.moveItem(at: srcURL, to: toPath)
             // search fileName on other side
             let fileIndex = destRoot.parent?.findChildFileNameIndex(
                 toName,

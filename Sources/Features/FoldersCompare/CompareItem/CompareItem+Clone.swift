@@ -87,7 +87,7 @@ extension CompareItem {
         dupItem.addSubfoldersSize(subfoldersSize)
 
         if recursive {
-            if let url = dupItem.toUrl() {
+            if let url = dupItem.toURL() {
                 for item in children where item.isValidFile {
                     if let fileName = item.fileName {
                         let childPath = url.appendingPathComponent(fileName).osPath

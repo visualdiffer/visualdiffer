@@ -145,6 +145,7 @@ class UserDefinedRulesBox: PreferencesBox,
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             tableScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             tableScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -218,6 +219,7 @@ class UserDefinedRulesBox: PreferencesBox,
         guard let window else {
             return
         }
+
         editedIndex = index
         alignRuleWindow.alignRules = alignRules
         alignRuleWindow.beginSheet(

@@ -54,6 +54,7 @@ extension ItemComparator {
               let rhsName = rhs.fileName else {
             return .orderedSame
         }
+
         if let fileNameAlignments {
             for rule in fileNameAlignments where rule.matches(name: lhsName, with: rhsName) {
                 return .orderedSame

@@ -40,6 +40,7 @@ extension CommonPrefs {
             guard let font = font(forKey: .folderListingFont) else {
                 return defaultFolderListingFont()
             }
+
             return font
         }
 
@@ -57,6 +58,7 @@ extension CommonPrefs {
             guard let font = font(forKey: .fileTextFont) else {
                 return defaultFolderListingFont()
             }
+
             return font
         }
 

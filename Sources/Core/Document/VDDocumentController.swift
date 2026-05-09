@@ -85,23 +85,23 @@ class VDDocumentController: NSDocumentController {
     }
 
     @discardableResult
-    func openDifferDocument(leftUrl: URL?, rightUrl: URL?) throws -> VDDocument? {
+    func openDifferDocument(leftURL: URL?, rightURL: URL?) throws -> VDDocument? {
         // at least one path must be set
-        if leftUrl == nil && rightUrl == nil {
+        if leftURL == nil && rightURL == nil {
             return nil
         }
 
-        let hasMissingPath = leftUrl == nil || rightUrl == nil
+        let hasMissingPath = leftURL == nil || rightURL == nil
         var isFolder = false
         var leftPathExists = false
         var rightPathExists = false
 
         // determine the item type (directory or file) whether one path or both paths are provided
-        let primaryPathUrl = leftUrl ?? rightUrl
-        let secondaryPathUrl = rightUrl ?? leftUrl
-        let canOpenDocument = if let primaryPathUrl, let secondaryPathUrl {
-            primaryPathUrl.matchesFileType(
-                of: secondaryPathUrl,
+        let primaryPathURL = leftURL ?? rightURL
+        let secondaryPathURL = rightURL ?? leftURL
+        let canOpenDocument = if let primaryPathURL, let secondaryPathURL {
+            primaryPathURL.matchesFileType(
+                of: secondaryPathURL,
                 isDir: &isFolder,
                 leftExists: &leftPathExists,
                 rightExists: &rightPathExists
@@ -117,6 +117,7 @@ class VDDocumentController: NSDocumentController {
                 rightExists: rightPathExists
             )
         }
+
         // when comparing folders both paths must be set
         if isFolder, hasMissingPath {
             throw SessionTypeError.invalidAllItems(isDir: true)
@@ -124,9 +125,9 @@ class VDDocumentController: NSDocumentController {
         return try openDocumentWithBlock { document in
             if let sessionDiff = document.sessionDiff {
                 sessionDiff.itemType = isFolder ? .folder : .file
-                sessionDiff.leftPath = leftUrl?.standardizingPath ?? ""
+                sessionDiff.leftPath = leftURL?.standardizingPath ?? ""
                 sessionDiff.leftReadOnly = false
-                sessionDiff.rightPath = rightUrl?.standardizingPath ?? ""
+                sessionDiff.rightPath = rightURL?.standardizingPath ?? ""
                 sessionDiff.rightReadOnly = false
                 sessionDiff.expandAllFolders = CommonPrefs.shared.bool(forKey: .expandAllFolders)
             }

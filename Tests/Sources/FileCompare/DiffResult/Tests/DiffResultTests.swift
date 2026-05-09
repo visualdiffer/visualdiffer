@@ -140,6 +140,7 @@ final class DiffResultTests: DiffResultBaseTests {
             Issue.record("No indexes found")
             return
         }
+
         #expect(indexes == IndexSet(integersIn: 4 ..< 8))
     }
 

@@ -50,6 +50,7 @@ class VisibleWhitespaces: NSObject {
                 dest.append(ch)
                 continue
             }
+
             if ch == "\t" {
                 // subtract from spaces the character representing TAB
                 let spaces = (tabWidth - (dest.count % tabWidth)) - 1

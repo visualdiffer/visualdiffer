@@ -28,7 +28,7 @@ extension FoldersWindowController: PathControlDelegate {
         ).tag = pathControlMenu
     }
 
-    func pathControl(_: PathControl, chosenUrl _: URL) {
+    func pathControl(_: PathControl, chosenURL _: URL) {
         // no need to check witch path is changed (left or right) because
         // the binding value has already set sessionDiff.<left|right>Path
         reloadAll(RefreshInfo(

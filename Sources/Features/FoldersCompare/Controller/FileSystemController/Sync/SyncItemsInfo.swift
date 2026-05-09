@@ -23,6 +23,7 @@ class SyncItemsInfo: NSObject {
               let nodes else {
             return
         }
+
         if !syncDataSource.isEmpty {
             nodes.children.append(syncNode)
         }

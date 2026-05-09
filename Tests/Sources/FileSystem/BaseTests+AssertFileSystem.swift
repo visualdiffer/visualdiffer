@@ -18,15 +18,16 @@ public extension BaseTests {
         functionName: String = #function,
         sourceLocation: SourceLocation = #_sourceLocation
     ) throws {
-        guard let url = item.toUrl() else {
+        guard let url = item.toURL() else {
             try #require(item.path != nil, "Unable to find path for \(item)", sourceLocation: sourceLocation)
             return
         }
+
         do {
             let resolved = try FileManager.default.destinationOfSymbolicLink(atPath: url.osPath)
             let real = URL(filePath: resolved, directoryHint: item.isFolder ? .isDirectory : .notDirectory)
-            let destUrl = appendFolder(destPath, functionName: functionName)
-            #expect(destUrl == real, "symlink dest doesn't match: expected \(destUrl) found \(real)", sourceLocation: sourceLocation)
+            let destURL = appendFolder(destPath, functionName: functionName)
+            #expect(destURL == real, "symlink dest doesn't match: expected \(destURL) found \(real)", sourceLocation: sourceLocation)
             #expect(item.isSymbolicLink, "\(url) must be a symlink", sourceLocation: sourceLocation)
             if isFolder {
                 #expect(item.isFolder, "\(url) must be a folder", sourceLocation: sourceLocation)
@@ -52,6 +53,7 @@ public extension BaseTests {
             try #require(item.path != nil, "Unable to find path for \(item)", sourceLocation: sourceLocation)
             return
         }
+
         do {
             let attrs = try FileManager.default.attributesOfItem(atPath: fsPath)
 
@@ -82,6 +84,7 @@ public extension BaseTests {
             Issue.record("CompareItem is nil", sourceLocation: sourceLocation)
             return
         }
+
         #expect(item.mismatchingTags == oldValue, "Tags for '\(fileName)' expected \(oldValue) found \(item.mismatchingTags)", sourceLocation: sourceLocation)
     }
 
@@ -90,6 +93,7 @@ public extension BaseTests {
             Issue.record("CompareItem is nil", sourceLocation: sourceLocation)
             return
         }
+
         #expect(item.summary.hasMetadataTags == value, "Folder '\(fileName)' tags must be \(value)", sourceLocation: sourceLocation)
     }
 
@@ -98,6 +102,7 @@ public extension BaseTests {
             Issue.record("CompareItem is nil", sourceLocation: sourceLocation)
             return
         }
+
         #expect(item.mismatchingLabels == oldValue, "Labels for '\(fileName!)' expected \(oldValue) found \(item.mismatchingLabels)", sourceLocation: sourceLocation)
     }
 
@@ -106,6 +111,7 @@ public extension BaseTests {
             Issue.record("CompareItem is nil", sourceLocation: sourceLocation)
             return
         }
+
         #expect(item.summary.hasMetadataLabels == value, "Folder '\(fileName!)' labels must be \(value)", sourceLocation: sourceLocation)
     }
 
@@ -114,8 +120,9 @@ public extension BaseTests {
             Issue.record("CompareItem is nil", sourceLocation: sourceLocation)
             return
         }
+
         do {
-            let foundValue = try getLabelNumber(item.toUrl()!)
+            let foundValue = try getLabelNumber(item.toURL()!)
             #expect(foundValue == expectedValue, "Label for '\(path)' expected \(expectedValue) found \(foundValue)", sourceLocation: sourceLocation)
         } catch {
             Issue.record("Found error \(error)", sourceLocation: sourceLocation)

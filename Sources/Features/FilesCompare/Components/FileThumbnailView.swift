@@ -36,6 +36,7 @@ class FileThumbnailView: NSView {
         guard let diffResult else {
             return .zero
         }
+
         let resultLinesCount = diffResult.leftSide.lines.count
         let top = getPositionFromLine(section.start, linesCount: resultLinesCount, bounds: bounds)
         let height = getPositionFromLine(section.end - section.start + 1, linesCount: resultLinesCount, bounds: bounds)
@@ -47,6 +48,7 @@ class FileThumbnailView: NSView {
         guard let view else {
             return
         }
+
         let firstRow = view.firstVisibleRow
         let lastRow = view.lastVisibleRow
 
@@ -69,6 +71,7 @@ class FileThumbnailView: NSView {
             drawPositionBox(bounds)
             return
         }
+
         // draw background
         backgroundColor.setFill()
         bounds.fill()
@@ -107,6 +110,7 @@ class FileThumbnailView: NSView {
               let view else {
             return
         }
+
         let localPoint = convert(event.locationInWindow, from: nil)
         let leftLinesCount = diffResult.leftSide.lines.count
         var line = getLineFromPosition(localPoint, linesCount: leftLinesCount, bounds: bounds)

@@ -54,6 +54,7 @@ extension CompareItem {
         guard let srcRight = linkedItem else {
             return
         }
+
         var leftFileCount = CompareSummary()
         var rightFileCount = CompareSummary()
 
@@ -71,6 +72,7 @@ extension CompareItem {
             guard let right = left.linkedItem else {
                 continue
             }
+
             let isFiltered = isFiltered(
                 leftItem: left,
                 rightItem: right,
@@ -176,6 +178,7 @@ extension CompareItem {
             guard let rhsFileName = $1.fileName else {
                 return .orderedDescending
             }
+
             return insensitiveCompare
                 ? lhsFileName.localizedCaseInsensitiveCompare(rhsFileName)
                 : lhsFileName.localizedCompare(rhsFileName)
@@ -196,6 +199,7 @@ extension CompareItem {
             guard let rhsFileName = $1.fileName else {
                 return .orderedDescending
             }
+
             return lhsFileName.localizedCompare(rhsFileName)
         }
     }
@@ -204,6 +208,7 @@ extension CompareItem {
         guard isValidFile else {
             return false
         }
+
         var dict = [String: Any]()
 
         dict["fileName"] = fileName

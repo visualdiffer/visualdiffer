@@ -1,12 +1,12 @@
 //
-//  PopUpButtonUrl.swift
+//  PopUpButtonURL.swift
 //  VisualDiffer
 //
 //  Created by davide ficano on 25/03/17.
 //  Copyright (c) 2017 visualdiffer.com
 //
 
-class PopUpButtonUrl: NSPopUpButton {
+class PopUpButtonURL: NSPopUpButton {
     init(
         title: String,
         target: AnyObject?,
@@ -38,11 +38,11 @@ class PopUpButtonUrl: NSPopUpButton {
     }
 
     @objc
-    func fill(_ documentUrls: [URL]) {
-        let dict = uniq(documentUrls: documentUrls)
+    func fill(_ documentURLs: [URL]) {
+        let dict = uniq(documentURLs: documentURLs)
 
         // iterate documentURLs instead of dictionary because order is not preserved in dictionary
-        for url in documentUrls {
+        for url in documentURLs {
             let key = url.lastPathComponent
             guard let arr = dict[key] else {
                 continue
@@ -76,10 +76,10 @@ class PopUpButtonUrl: NSPopUpButton {
     // menu label contains the last URL path component
     // It would be present more times (same filename in different disk folders)
     // so we group by last path component
-    private func uniq(documentUrls: [URL]) -> [String: [URL]] {
+    private func uniq(documentURLs: [URL]) -> [String: [URL]] {
         var dict = [String: [URL]]()
 
-        for url in documentUrls {
+        for url in documentURLs {
             let key = url.lastPathComponent
             var arr = dict[key] ?? []
             arr.append(url)

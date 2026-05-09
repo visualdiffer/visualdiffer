@@ -29,8 +29,8 @@ extension FoldersWindowController: FoldersOutlineViewContextMenu {
         }
         do {
             _ = try VDDocumentController.shared.openDifferDocument(
-                leftUrl: leftItem?.toUrl(),
-                rightUrl: rightItem?.toUrl()
+                leftURL: leftItem?.toURL(),
+                rightURL: rightItem?.toURL()
             )
         } catch {
             NSAlert(error: error).runModal()

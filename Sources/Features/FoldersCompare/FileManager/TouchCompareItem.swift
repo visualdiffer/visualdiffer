@@ -22,12 +22,11 @@ class TouchCompareItem {
         includeSubfolders: Bool,
         touchDate: Date?
     ) {
-        guard let srcUrl = srcRoot.toUrl(),
+        guard let srcURL = srcRoot.toURL(),
               srcRoot.isValidFile else {
             return
         }
-
-        guard let volumeType = srcUrl.volumeType() else {
+        guard let volumeType = srcURL.volumeType() else {
             operationManager.delegate.fileManager(
                 operationManager,
                 addError: FileError.unknownVolumeType,
@@ -75,6 +74,7 @@ class TouchCompareItem {
         guard let date else {
             return nil
         }
+
         return [.modificationDate: date]
     }
 
@@ -93,10 +93,10 @@ class TouchCompareItem {
         guard delegate.isRunning(operationManager) else {
             return false
         }
-
         guard srcRoot.isValidFile else {
             return true
         }
+
         let isFiltered = srcRoot.isFiltered || !srcRoot.isDisplayed
         if !operationManager.includesFiltered, isFiltered {
             return true
@@ -107,10 +107,10 @@ class TouchCompareItem {
         guard let dateDict = buildTouchDateAttributes(attrs: attrs, item: linkedItem) else {
             return true
         }
-
         guard let srcRootPath = srcRoot.path else {
             return true
         }
+
         delegate.fileManager(operationManager, initForItem: srcRoot)
         do {
             try fm.setFileAttributes(
@@ -203,6 +203,7 @@ class TouchCompareItem {
         guard let fileFilters = operationManager.filterConfig.predicate else {
             return
         }
+
         let isFiltered = lhs.evaluate(filter: fileFilters) || rhs.evaluate(filter: fileFilters)
         lhs.isFiltered = isFiltered
         rhs.isFiltered = isFiltered
@@ -215,6 +216,7 @@ class TouchCompareItem {
         guard !operationManager.filterConfig.showFilteredFiles, lhs.isFiltered else {
             return
         }
+
         if let parentVI = lhs.parent?.visibleItem,
            let vi = lhs.visibleItem {
             parentVI.remove(vi)
@@ -238,6 +240,7 @@ class TouchCompareItem {
         guard includeSubfolders, srcRoot.isFolder else {
             return true
         }
+
         var srcCount = CompareSummary()
         var destCount = CompareSummary()
         var retVal = true

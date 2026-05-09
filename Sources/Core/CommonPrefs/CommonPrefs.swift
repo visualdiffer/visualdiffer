@@ -80,6 +80,7 @@ public class CommonPrefs: @unchecked Sendable {
         guard let stream = InputStream(fileAtPath: configPath) else {
             throw FileError.openFile(path: configPath)
         }
+
         defer {
             stream.close()
         }

@@ -73,6 +73,7 @@ class SynchroScrollView: NSScrollView {
         guard let synchronizedScrollView else {
             return
         }
+
         let synchronizedContentView = synchronizedScrollView.contentView
 
         // remove any existing notification registration

@@ -18,6 +18,7 @@ extension FilesWindowController {
         guard let diffSide = lastUsedView.diffSide else {
             return
         }
+
         let selectedRows = lastUsedView.selectedRowIndexes
         let arr = diffSide.lines
         var lines = selectedRows.map { arr[$0].text }
@@ -37,6 +38,7 @@ extension FilesWindowController {
         guard let diffResult else {
             return
         }
+
         let row = max(-1, lastUsedView.selectedRow)
         let diffSide = diffResult.diffSide(for: lastUsedView.side)
 

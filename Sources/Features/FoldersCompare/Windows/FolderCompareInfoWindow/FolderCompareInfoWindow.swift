@@ -114,6 +114,7 @@ class FolderCompareInfoWindow: NSWindow, NSOutlineViewDataSource, NSOutlineViewD
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 19),
             title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -19),
@@ -201,6 +202,7 @@ class FolderCompareInfoWindow: NSWindow, NSOutlineViewDataSource, NSOutlineViewD
         guard let range = path.range(of: root) else {
             return nil
         }
+
         // skip path separator
         let startIndex = path.index(after: range.upperBound)
         return String(path[startIndex ..< path.endIndex])
@@ -219,6 +221,7 @@ class FolderCompareInfoWindow: NSWindow, NSOutlineViewDataSource, NSOutlineViewD
         guard let children = node?.children else {
             return 0
         }
+
         return children.count
     }
 
@@ -238,6 +241,7 @@ class FolderCompareInfoWindow: NSWindow, NSOutlineViewDataSource, NSOutlineViewD
         guard let children = node?.children else {
             fatalError("Children cannot be nil")
         }
+
         return children[index]
     }
 

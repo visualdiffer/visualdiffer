@@ -108,6 +108,7 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
         guard let contentView = prefPanel.contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             tabView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             tabView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

@@ -26,6 +26,7 @@ class TouchPickersStackView: NSStackView {
             guard let gregorian = NSCalendar(calendarIdentifier: .gregorian) else {
                 return nil
             }
+
             var dateComponents = datePickers.components(calendar: gregorian)
             let timeComponents = timePickers.components(calendar: gregorian)
 

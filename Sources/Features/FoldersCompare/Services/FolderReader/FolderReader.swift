@@ -210,6 +210,7 @@ public class FolderReader: @unchecked Sendable {
         guard let parentPath else {
             return nil
         }
+
         do {
             // symlink root must be traversed so allocate it after checking for symlink
             let root = try createParentIfNil(path: parentPath, parent: parent)
@@ -247,13 +248,13 @@ public class FolderReader: @unchecked Sendable {
                 throw error
             }
 
-            let secureUrl = SecureBookmark.shared.secure(
+            let secureURL = SecureBookmark.shared.secure(
                 fromBookmark: URL(filePath: destination),
                 startSecured: true
             )
 
             defer {
-                SecureBookmark.shared.stopAccessing(url: secureUrl)
+                SecureBookmark.shared.stopAccessing(url: secureURL)
             }
 
             return try fileManager.contentsOfDirectory(atPath: path)
@@ -343,8 +344,8 @@ public class FolderReader: @unchecked Sendable {
                 readFolders(
                     leftItem: item,
                     rightItem: li,
-                    leftPath: item.toUrl(),
-                    rightPath: li.toUrl()
+                    leftPath: item.toURL(),
+                    rightPath: li.toURL()
                 )
             }
         }

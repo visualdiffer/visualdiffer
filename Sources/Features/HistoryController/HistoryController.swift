@@ -112,6 +112,7 @@ class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, T
               let fetchedObjects = results.fetchedObjects else {
             return
         }
+
         var entities = [HistoryEntity]()
 
         for idx in tableView.selectedRowIndexes {
@@ -125,6 +126,7 @@ class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, T
         guard let fetchedObjects = results.fetchedObjects else {
             return 0
         }
+
         return fetchedObjects.count
     }
 
@@ -133,6 +135,7 @@ class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, T
               let entity = results.fetchedObjects?[row] else {
             return nil
         }
+
         let cell = tableView.makeView(withIdentifier: identifier, owner: nil) as? HistoryEntityTableCellView
             ?? HistoryEntityTableCellView(identifier: identifier)
 
@@ -215,6 +218,7 @@ class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, T
         guard let fetchedObjects = results.fetchedObjects else {
             return
         }
+
         for row in indexes.reversed() {
             HistorySessionManager.shared.historyMOC.delete(fetchedObjects[row])
         }
@@ -240,6 +244,7 @@ class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, T
         guard let fetchedObjects = results.fetchedObjects else {
             return
         }
+
         let fm = FileManager.default
         var indexSet = IndexSet()
 

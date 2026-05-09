@@ -94,7 +94,8 @@ extension FoldersOutlineView {
                 guard let vi = item(atRow: row) as? VisibleItem else {
                     continue
                 }
-                let res = URL.compare(path: vi.item.toUrl(), with: focusItem.toUrl())
+
+                let res = URL.compare(path: vi.item.toURL(), with: focusItem.toURL())
 
                 if res == .orderedSame || res == .orderedDescending {
                     focusRow = row

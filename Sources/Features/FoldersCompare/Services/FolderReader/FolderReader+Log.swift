@@ -26,6 +26,7 @@ import os.log
             guard let fileHandle else {
                 return
             }
+
             defer {
                 fileHandle.closeFile()
             }

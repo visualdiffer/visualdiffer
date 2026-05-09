@@ -32,6 +32,7 @@ extension FilesWindowController: NSWindowDelegate {
         guard let diffResult else {
             return
         }
+
         differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: diffResult))
     }
 

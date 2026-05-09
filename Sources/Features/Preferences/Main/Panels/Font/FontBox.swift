@@ -57,6 +57,7 @@ class FontBox: PreferencesBox {
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             selectFont.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             selectFont.topAnchor.constraint(equalTo: contentView.topAnchor),

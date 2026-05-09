@@ -26,9 +26,9 @@ protocol DisplayFiltersScopeBarDelegate: AnyObject {
     )
 }
 
-private let showFilteredId = "FilteredId"
-private let showEmptyFoldersId = "EmptyFoldersId"
-private let showNoOrphansFoldersId = "NoOrphansFoldersId"
+private let showFilteredID = "FilteredId"
+private let showEmptyFoldersID = "EmptyFoldersId"
+private let showNoOrphansFoldersID = "NoOrphansFoldersId"
 
 private enum ScopeGroupOptions: Int {
     case displayFilters
@@ -85,8 +85,8 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
             .separator: true,
             .selectionMode: MGScopeBarGroupSelectionMode.multiple,
             .items: [
-                mkItem(showEmptyFoldersId, NSLocalizedString("Empty", comment: "")),
-                mkItem(showNoOrphansFoldersId, NSLocalizedString("No Orphans", comment: "")),
+                mkItem(showEmptyFoldersID, NSLocalizedString("Empty", comment: "")),
+                mkItem(showNoOrphansFoldersID, NSLocalizedString("No Orphans", comment: "")),
             ],
         ])
 
@@ -95,7 +95,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
             .separator: true,
             .selectionMode: MGScopeBarGroupSelectionMode.multiple,
             .items: [
-                mkItem(showFilteredId, NSLocalizedString("Filtered", comment: "")),
+                mkItem(showFilteredID, NSLocalizedString("Filtered", comment: "")),
             ],
         ])
 
@@ -138,6 +138,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
               let itemIdentifiers = items as? [[ScopeBarItem: String]] else {
             fatalError("Unexpected data format in groupItems")
         }
+
         return itemIdentifiers.compactMap { $0[.identifier] }
     }
 
@@ -174,6 +175,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
               let group = ScopeGroupOptions(rawValue: groupNumber) else {
             return
         }
+
         switch group {
         case .displayFilters:
             if let filterValue = Int(identifier) {
@@ -184,7 +186,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
                 )
             }
         case .displayFlags:
-            if identifier == showFilteredId {
+            if identifier == showFilteredID {
                 actionDelegate.displayFiltersScopeBar(
                     self,
                     action: .showFiltered,
@@ -192,13 +194,13 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
                 )
             }
         case .displayFolders:
-            if identifier == showNoOrphansFoldersId {
+            if identifier == showNoOrphansFoldersID {
                 actionDelegate.displayFiltersScopeBar(
                     self,
                     action: .showNoOrphansFolders,
                     options: nil
                 )
-            } else if identifier == showEmptyFoldersId {
+            } else if identifier == showEmptyFoldersID {
                 actionDelegate.displayFiltersScopeBar(
                     self,
                     action: .showEmptyFolders,
@@ -215,7 +217,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         // The logic to select the 'empty folders' button is inverted so we pass the negated value
         setSelected(
             !hideEmptyFolders,
-            forItem: showEmptyFoldersId,
+            forItem: showEmptyFoldersID,
             inGroup: ScopeGroupOptions.displayFolders.rawValue,
             informDelegate: false
         )
@@ -225,7 +227,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     func showFilteredFiles(_ showFilteredFiles: Bool, informDelegate: Bool) {
         setSelected(
             showFilteredFiles,
-            forItem: showFilteredId,
+            forItem: showFilteredID,
             inGroup: ScopeGroupOptions.displayFolders.rawValue,
             informDelegate: informDelegate
         )
@@ -244,7 +246,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     func noOrphansFolders(_ noOrphansFolders: Bool, informDelegate: Bool) {
         setSelected(
             noOrphansFolders,
-            forItem: showNoOrphansFoldersId,
+            forItem: showNoOrphansFoldersID,
             inGroup: ScopeGroupOptions.displayFolders.rawValue,
             informDelegate: informDelegate
         )

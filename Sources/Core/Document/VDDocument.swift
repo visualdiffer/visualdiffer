@@ -39,6 +39,7 @@ public class VDDocument: NSPersistentDocument {
             guard let moc = managedObjectContext else {
                 fatalError("managedObjectContext is nil")
             }
+
             let fetchRequest = SessionDiff.fetchRequest()
 
             do {
@@ -65,6 +66,7 @@ public class VDDocument: NSPersistentDocument {
         guard let moc = managedObjectContext else {
             return
         }
+
         moc.rollback()
 
         moc.updateWithoutRecordingModifications {
@@ -120,6 +122,7 @@ public class VDDocument: NSPersistentDocument {
         guard let itemType = sessionDiff.itemType else {
             throw DocumentError.unknownSessionType
         }
+
         try itemType.checkPaths(leftPath: leftPath, rightPath: rightPath)
     }
 
@@ -155,6 +158,7 @@ public class VDDocument: NSPersistentDocument {
         guard let absolutePath else {
             return nil
         }
+
         let dotSet = CharacterSet(charactersIn: ".")
 
         var url = URL(filePath: absolutePath)
@@ -170,6 +174,7 @@ public class VDDocument: NSPersistentDocument {
             super.makeWindowControllers()
             return
         }
+
         switch sessionDiff.itemType {
         case .folder:
             let fwc = FoldersWindowController()
@@ -268,6 +273,7 @@ public class VDDocument: NSPersistentDocument {
                   let rightPath = sessionDiff.rightPath else {
                 return super.displayName
             }
+
             if leftPath.isEmpty, rightPath.isEmpty {
                 return super.displayName
             }

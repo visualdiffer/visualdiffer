@@ -16,6 +16,7 @@
 --enable redundantVariable
 --enable wrapConditionalBodies
 --enable wrapEnumCases
+--enable acronyms
 
 --enable blankLinesAfterGuardStatements
 --enable isEmpty

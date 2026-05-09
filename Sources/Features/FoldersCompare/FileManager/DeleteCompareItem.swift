@@ -315,6 +315,7 @@ class DeleteCompareItem {
         guard let destRoot = srcRoot.linkedItem else {
             return nil
         }
+
         if informDelegate {
             delegate.fileManager(operationManager, initForItem: srcRoot)
         }
@@ -386,6 +387,7 @@ class DeleteCompareItem {
         guard let path = item.path else {
             throw FolderManagerError.nilPath
         }
+
         #if __VD_FAKE_FS_OP__
             Logger.debug.info("Fake delete, no files are really deleted - \(path)")
         #else

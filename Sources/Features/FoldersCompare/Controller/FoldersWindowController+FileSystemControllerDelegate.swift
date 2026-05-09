@@ -18,6 +18,7 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
               let destBaseDir = root.linkedItem?.path else {
             return
         }
+
         let executor = CopyFileOperationExecutor(
             srcBaseDir: srcBaseDir,
             destination: .linkedSide(baseDir: URL(filePath: destBaseDir, directoryHint: .isDirectory)),
@@ -79,6 +80,7 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
               let srcBaseDir = root.path else {
             return
         }
+
         let executor = DeleteFileOperationExecutor(
             srcBaseDir: srcBaseDir,
             items: lastUsedView.selectedItems()
@@ -94,6 +96,7 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
               let destBaseDir = root.linkedItem?.path else {
             return
         }
+
         let executor = MoveFileOperationExecutor(
             srcBaseDir: srcBaseDir,
             destination: .linkedSide(baseDir: URL(filePath: destBaseDir, directoryHint: .isDirectory)),
@@ -188,6 +191,7 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         guard let window else {
             return
         }
+
         let pic = ProgressIndicatorController()
         progressIndicatorController = pic
         let delegate = FileOperationManagerDelegateImpl(progressIndicatorController: pic)
@@ -209,6 +213,7 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
         guard let comparator else {
             fatalError("Comparator not found")
         }
+
         let config = FilterConfig(
             from: sessionDiff,
             showFilteredFiles: showFilteredFiles,
@@ -221,6 +226,7 @@ extension FoldersWindowController: @preconcurrency FileSystemControllerDelegate 
                 delegate: delegate
             )
         }
+
         return builder(config, comparator, delegate)
     }
 }

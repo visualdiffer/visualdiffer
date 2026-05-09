@@ -8,7 +8,7 @@
 
 private let showRecentDocumentsListPrefName = "showRecentDocumentsList"
 
-class RecentDocumentPopupMenu: PopUpButtonUrl, NSMenuDelegate {
+class RecentDocumentPopupMenu: PopUpButtonURL, NSMenuDelegate {
     init(title _: String, target: AnyObject?, action: Selector?) {
         super.init(
             title: NSLocalizedString("Open Recent", comment: ""),

@@ -11,6 +11,7 @@ extension FilesWindowController: PathControlDelegate {
         guard let url = pathControl.url else {
             return
         }
+
         menu.setSubmenu(
             NSMenu.appsMenuForFile(
                 url,
@@ -25,7 +26,7 @@ extension FilesWindowController: PathControlDelegate {
         )
     }
 
-    func pathControl(_: PathControl, chosenUrl _: URL) {
+    func pathControl(_: PathControl, chosenURL _: URL) {
         // no need to check which path is changed (left or right) because
         // the binding value has already set sessionDiff.<left|right>Path
         reloadAllMove(toFirstDifference: false)
@@ -40,6 +41,7 @@ extension FilesWindowController: PathControlDelegate {
         guard let editorData = editorDataFrom(pathControl) else {
             return
         }
+
         openWith(app: app, attributes: [editorData])
     }
 
@@ -47,6 +49,7 @@ extension FilesWindowController: PathControlDelegate {
         guard let editorData = editorDataFrom(pathControl) else {
             return
         }
+
         openWithOtherApp(editorData)
     }
 

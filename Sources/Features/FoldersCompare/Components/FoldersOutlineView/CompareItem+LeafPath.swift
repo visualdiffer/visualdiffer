@@ -46,18 +46,18 @@ extension CompareItem {
     /// - Returns: The longest common ancestor path, or `nil` if any item has no parent
     ///   or the items list is empty.
     static func commonAncestorPath(_ items: [CompareItem]) -> String? {
-        let parentUrls = items.compactMap { $0.parent?.toUrl() }
+        let parentURLs = items.compactMap { $0.parent?.toURL() }
 
-        guard parentUrls.count == items.count,
-              let first = parentUrls.first else {
+        guard parentURLs.count == items.count,
+              let first = parentURLs.first else {
             return nil
         }
 
         let firstComponents = first.pathComponents
         var commonCount = firstComponents.count
 
-        for parentUrl in parentUrls.dropFirst() {
-            let components = parentUrl.pathComponents
+        for parentURL in parentURLs.dropFirst() {
+            let components = parentURL.pathComponents
             let maxCount = min(commonCount, components.count)
             var index = 0
 
@@ -68,6 +68,7 @@ extension CompareItem {
             guard index > 0 else {
                 return nil
             }
+
             commonCount = index
         }
 
@@ -89,15 +90,15 @@ extension CompareItem {
     }
 
     func isAncestor(of child: CompareItem) -> Bool {
-        guard let parentUrl = toUrl(),
-              let childUrl = child.toUrl() else {
+        guard let parentURL = toURL(),
+              let childURL = child.toURL() else {
             return false
         }
 
         // pathComponents returns leading "/" and any extra trailing "/"
         // e.g. /a//b/c/// returns ["/", "a", "b", "c", "/"] so we filter out any "/" manually
-        let parentComponents = parentUrl.pathComponents.filter { $0 != "/" }
-        let childComponents = childUrl.pathComponents.filter { $0 != "/" }
+        let parentComponents = parentURL.pathComponents.filter { $0 != "/" }
+        let childComponents = childURL.pathComponents.filter { $0 != "/" }
 
         return childComponents.starts(with: parentComponents)
     }

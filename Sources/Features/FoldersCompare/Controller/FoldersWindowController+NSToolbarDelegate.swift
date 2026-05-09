@@ -77,6 +77,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         guard let item = notification.userInfo?["item"] as? NSToolbarItem else {
             return
         }
+
         updateToolbarButton(item)
     }
 
@@ -326,6 +327,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
               let visibleItems = toolbar.visibleItems else {
             return
         }
+
         for item in visibleItems {
             // swiftlint:disable:next for_where
             if item.itemIdentifier == .Folders.comparison {

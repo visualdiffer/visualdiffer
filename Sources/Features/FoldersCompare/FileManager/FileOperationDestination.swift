@@ -27,11 +27,12 @@ public struct FileDestinationContext {
         case let .external(baseDir):
             isLinkedSide = false
             isExternal = true
-            resolvePath = { _, srcBaseDir, srcUrl in
-                guard let srcUrl else {
+            resolvePath = { _, srcBaseDir, srcURL in
+                guard let srcURL else {
                     throw FolderManagerError.nilPath
                 }
-                return URL.buildDestinationPath(srcUrl, nil, srcBaseDir, baseDir)
+
+                return URL.buildDestinationPath(srcURL, nil, srcBaseDir, baseDir)
             }
         }
     }
@@ -39,9 +40,9 @@ public struct FileDestinationContext {
     func destinationPath(
         srcRoot: CompareItem,
         srcBaseDir: URL,
-        srcUrl: URL?
+        srcURL: URL?
     ) throws -> URL {
-        try resolvePath(srcRoot, srcBaseDir, srcUrl)
+        try resolvePath(srcRoot, srcBaseDir, srcURL)
     }
 
     func destinationRoot(for srcRoot: CompareItem) -> CompareItem? {
@@ -86,6 +87,7 @@ extension FileOperationDestination {
         guard isExternal else {
             return srcBaseDir
         }
+
         if items.count == 1 {
             return items[0].parent?.path ?? srcBaseDir
         }

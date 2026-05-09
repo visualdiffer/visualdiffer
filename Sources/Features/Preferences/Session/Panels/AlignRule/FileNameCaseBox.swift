@@ -35,6 +35,7 @@ class FileNameCaseBox: PreferencesBox {
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             alignPopup.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
             alignPopup.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
@@ -48,6 +49,7 @@ class FileNameCaseBox: PreferencesBox {
         guard let item = alignPopup.selectedItem else {
             return
         }
+
         let alignFlags = item.tag
         delegate?.preferenceBox(self, setInteger: alignFlags, forKey: .virtualAlignFlags)
     }

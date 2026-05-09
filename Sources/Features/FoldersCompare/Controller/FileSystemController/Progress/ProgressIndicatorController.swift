@@ -202,6 +202,7 @@ class ProgressIndicatorController: NSWindowController {
         guard let sender = sender as? NSButton else {
             return
         }
+
         if !running {
             closeSheet(sender)
             return

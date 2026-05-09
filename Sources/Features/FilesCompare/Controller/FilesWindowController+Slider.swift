@@ -21,6 +21,7 @@ extension FilesWindowController {
         guard let diffResult else {
             return
         }
+
         leftPanelView.setSliderMaxValue(
             diffResult.leftSide.lines,
             right: diffResult.rightSide.lines

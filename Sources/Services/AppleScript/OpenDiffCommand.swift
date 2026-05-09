@@ -21,15 +21,15 @@ class OpenDiffCommand: NSScriptCommand {
             return nil
         }
 
-        let leftUrl = URL(filePath: leftPath)
-        let rightUrl = URL(filePath: rightPath)
+        let leftURL = URL(filePath: leftPath)
+        let rightURL = URL(filePath: rightPath)
 
         var isDir = false
         var leftExists = false
         var rightExists = false
 
-        let matches = leftUrl.matchesFileType(
-            of: rightUrl,
+        let matches = leftURL.matchesFileType(
+            of: rightURL,
             isDir: &isDir,
             leftExists: &leftExists,
             rightExists: &rightExists
@@ -37,8 +37,8 @@ class OpenDiffCommand: NSScriptCommand {
 
         if matches {
             return openDocument(
-                leftUrl: leftUrl,
-                rightUrl: rightUrl
+                leftURL: leftURL,
+                rightURL: rightURL
             )
         } else {
             let message = SessionTypeError.invalidPathMessage(
@@ -52,14 +52,14 @@ class OpenDiffCommand: NSScriptCommand {
     }
 
     func openDocument(
-        leftUrl: URL,
-        rightUrl: URL
+        leftURL: URL,
+        rightURL: URL
     ) -> String? {
         do {
             return try MainActor.assumeIsolated {
                 try VDDocumentController.shared.openDifferDocument(
-                    leftUrl: leftUrl,
-                    rightUrl: rightUrl
+                    leftURL: leftURL,
+                    rightURL: rightURL
                 )?.uuid
             }
         } catch {

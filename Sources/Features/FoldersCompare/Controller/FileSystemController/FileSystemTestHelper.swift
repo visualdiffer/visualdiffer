@@ -167,6 +167,7 @@
                   let fs = vi.item.parent else {
                 return
             }
+
             let testHelper = FileSystemTestHelper(sessionDiff: sessionDiff)
             testHelper.generateTest(fs)
             testHelper.generateTest(fs.visibleItem!)
@@ -356,6 +357,7 @@
             guard fs.isValidFile else {
                 return
             }
+
             let path = fs.path!
             if let labelNumber = URL(filePath: path).labelNumber() {
                 let linkedString = linked ? ".linkedItem" : ""
@@ -386,6 +388,7 @@
                   let path = fs.path else {
                 return
             }
+
             let startIndex = path.index(path.startIndex, offsetBy: pathIndex)
             let subPath = String(path[startIndex ..< path.endIndex])
             if fs.isFolder {
@@ -418,6 +421,7 @@
                   !tags.isEmpty else {
                 return
             }
+
             strFiles.append(String(
                 format: "try add(tags: [%@], fullPath: appendFolder(\"%@\"))\n",
                 tags.joined(separator: ","),
@@ -431,6 +435,7 @@
                   labelNumber != 0 else {
                 return
             }
+
             strFiles.append(String(format: "try add(labelNumber: %ld, fullPath: appendFolder(\"%@\"))\n", labelNumber, subPath))
         }
 

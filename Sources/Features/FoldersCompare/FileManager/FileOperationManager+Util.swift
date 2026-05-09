@@ -81,9 +81,10 @@ extension FileOperationManager {
         destFullPath: URL
     ) throws {
         if !filterConfig.followSymLinks, srcRoot.isSymbolicLink {
-            guard let srcRootPath = srcRoot.toUrl() else {
+            guard let srcRootPath = srcRoot.toURL() else {
                 throw FolderManagerError.nilPath
             }
+
             try createSymLink(
                 atPath: destFullPath,
                 destinationOfSymLinkAtPath: srcRootPath

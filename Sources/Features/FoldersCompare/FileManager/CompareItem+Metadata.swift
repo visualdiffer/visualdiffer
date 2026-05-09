@@ -49,7 +49,7 @@ extension CompareItem {
         toPath destPath: inout URL,
         options: DirectoryOptions = []
     ) throws {
-        guard let url = toUrl() else {
+        guard let url = toURL() else {
             return
         }
 

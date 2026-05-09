@@ -43,6 +43,7 @@ class AppearanceBox: PreferencesBox {
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             appearancePopup.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             appearancePopup.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
@@ -62,6 +63,7 @@ class AppearanceBox: PreferencesBox {
             guard let tag = appearancePopup.selectedItem?.tag else {
                 return
             }
+
             switch tag {
             case 0:
                 if UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark" {

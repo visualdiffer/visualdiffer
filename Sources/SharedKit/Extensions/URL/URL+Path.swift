@@ -66,7 +66,7 @@ public extension URL {
      * Check that self is the same type as the passed item (both are files or both are folders)
      */
     func matchesFileType(
-        of rightUrl: URL,
+        of rightURL: URL,
         isDir: inout Bool,
         leftExists: inout Bool,
         rightExists: inout Bool
@@ -76,7 +76,7 @@ public extension URL {
         var isRightDir = ObjCBool(false)
 
         let leftPath = osPath
-        let rightPath = rightUrl.osPath
+        let rightPath = rightURL.osPath
         let isLeftEmpty = leftPath == "."
         let isRightEmpty = rightPath == "."
 
@@ -107,13 +107,13 @@ public extension URL {
         return leftExists && rightExists && (isLeftDir.boolValue == isRightDir.boolValue)
     }
 
-    func matchesFileType(of rightUrl: URL) -> Bool {
+    func matchesFileType(of rightURL: URL) -> Bool {
         var isDir = false
         var leftExists = false
         var rightExists = false
 
         return matchesFileType(
-            of: rightUrl,
+            of: rightURL,
             isDir: &isDir,
             leftExists: &leftExists,
             rightExists: &rightExists
@@ -126,7 +126,7 @@ public extension URL {
         chooseFiles: Bool,
         chooseDirectories: Bool
     ) -> URL? {
-        let url = promptUrl(
+        let url = promptURL(
             at: findNearestExistingDirectory(),
             title: panelTitle,
             chooseDirectories: chooseDirectories,
@@ -183,8 +183,8 @@ public extension URL {
     }
 
     @MainActor
-    func promptUrl(
-        at startUrl: URL,
+    func promptURL(
+        at startURL: URL,
         title: String,
         chooseDirectories: Bool,
         chooseFiles: Bool,
@@ -198,7 +198,7 @@ public extension URL {
         openPanel.canCreateDirectories = canCreateDirectories
         // since 10.11 the title is no longer shown so we use the message property
         openPanel.message = title
-        openPanel.directoryURL = startUrl
+        openPanel.directoryURL = startURL
 
         if openPanel.runModal() == .OK {
             return openPanel.urls[0]
@@ -220,6 +220,7 @@ public extension URL {
         guard let path2 else {
             return .orderedDescending
         }
+
         let components1 = path1.pathComponents
         let components2 = path2.pathComponents
         let count1 = components1.count

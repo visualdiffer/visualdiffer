@@ -18,6 +18,7 @@ public func invertCase(_ str: inout String, index: Int) {
     guard len > 0 else {
         return
     }
+
     let index = str.index(str.startIndex, offsetBy: index)
     let ch: Character = str[index]
     let inverted = ch.isUppercase ? str[index].lowercased() : str[index].uppercased()

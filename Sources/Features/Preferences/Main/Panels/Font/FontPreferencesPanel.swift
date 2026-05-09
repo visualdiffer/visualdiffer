@@ -89,6 +89,7 @@ class FontPreferencesPanel: NSView, NSFontChanging, PreferencesPanelDataSource {
               let selectedFont = sender.selectedFont else {
             return
         }
+
         let newFont = sender.convert(selectedFont)
 
         if selectedFont == fileFontBox.previewFont {

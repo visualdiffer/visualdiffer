@@ -38,6 +38,7 @@ struct DiffLineComponent {
         guard substringRange.upperBound < wholeRange.upperBound else {
             return .missing
         }
+
         return EndOfLine.from(character: text[substringRange.upperBound])
     }
 }

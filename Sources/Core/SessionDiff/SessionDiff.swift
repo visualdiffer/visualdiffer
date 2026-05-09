@@ -121,6 +121,7 @@ extension SessionDiff {
         guard let exclusionFileFilters else {
             return nil
         }
+
         return NSPredicate(format: exclusionFileFilters)
     }
 
@@ -226,6 +227,7 @@ extension SessionDiff {
               !path.isEmpty else {
             return nil
         }
+
         let isFolder = if let itemType {
             itemType == .folder
         } else {

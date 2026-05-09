@@ -44,6 +44,7 @@ extension OpenEditor {
               let secureURL = SecureBookmark.shared.secure(fromBookmark: item.path, startSecured: true) else {
             return
         }
+
         defer {
             SecureBookmark.shared.stopAccessing(url: secureURL)
         }
@@ -56,6 +57,7 @@ extension OpenEditor {
         guard let application else {
             throw OpenEditorError.applicationNotFound(item.path)
         }
+
         if let scriptURL = fullScriptURL(application) {
             try runUnixScript(scriptURL)
         } else {

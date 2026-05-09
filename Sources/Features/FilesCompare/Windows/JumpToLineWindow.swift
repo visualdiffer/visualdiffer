@@ -114,6 +114,7 @@ class JumpToLineWindow: NSWindow, NSWindowDelegate, NSSearchFieldDelegate {
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             searchField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             searchField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
@@ -143,6 +144,7 @@ class JumpToLineWindow: NSWindow, NSWindowDelegate, NSSearchFieldDelegate {
         guard let side = DisplaySide(rawValue: jumpSide.selectedSegment) else {
             fatalError("invalid jump side \(jumpSide.selectedSegment)")
         }
+
         let value = searchField.intValue
         var isEnabled = false
 
@@ -162,6 +164,7 @@ class JumpToLineWindow: NSWindow, NSWindowDelegate, NSSearchFieldDelegate {
         guard let side = DisplaySide(rawValue: jumpSide.selectedSegment) else {
             fatalError("invalid jump side \(jumpSide.selectedSegment)")
         }
+
         self.side = side
         lineNumber = searchField.integerValue
         sheetParent?.endSheet(self, returnCode: NSApplication.ModalResponse(rawValue: sender.tag))

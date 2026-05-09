@@ -59,6 +59,7 @@ class RowHeightCalculator {
               let text = dataSource.line(at: row, side: side)?.text else {
             return 0
         }
+
         let font = dataSource.tableFont
 
         if !isWordWrapEnabled {

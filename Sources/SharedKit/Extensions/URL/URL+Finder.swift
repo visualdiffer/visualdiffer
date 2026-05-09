@@ -11,6 +11,7 @@ extension URL {
         guard let resources = try? resourceValues(forKeys: [.labelNumberKey]) else {
             return nil
         }
+
         return resources.labelNumber
     }
 

@@ -140,6 +140,7 @@ public class FoldersWindowController: NSWindowController,
         guard let path = sender.representedObject as? String else {
             return
         }
+
         let application = URL(filePath: path)
         lastUsedView.openSelected(with: application)
     }
@@ -194,6 +195,7 @@ public class FoldersWindowController: NSWindowController,
         guard let window else {
             return
         }
+
         let folderCompareInfoWindow = FolderCompareInfoWindow.createSheet()
 
         folderCompareInfoWindow.leftRoot = leftItemOriginal

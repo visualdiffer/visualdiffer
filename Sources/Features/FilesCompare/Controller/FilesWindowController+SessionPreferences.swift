@@ -12,6 +12,7 @@ extension FilesWindowController {
         guard let window else {
             return
         }
+
         sessionPreferencesSheet.beginSheet(
             window,
             preferences: preferences,

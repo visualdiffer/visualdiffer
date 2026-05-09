@@ -80,6 +80,7 @@ class ExpressionBox: NSBox {
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             expression.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             expression.trailingAnchor.constraint(equalTo: popup.leadingAnchor, constant: -4),
@@ -104,6 +105,7 @@ class ExpressionBox: NSBox {
               let editor = expression.currentEditor() else {
             return
         }
+
         let ellipsis = "..."
         let pattern = expression.stringValue
 

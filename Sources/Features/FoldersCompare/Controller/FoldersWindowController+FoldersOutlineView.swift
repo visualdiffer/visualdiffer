@@ -193,7 +193,6 @@ extension FoldersWindowController: NSOutlineViewDelegate,
         guard let leftVisibleItems else {
             return
         }
-
         guard let vi = sessionDiff.currentSortSide == .left ? leftVisibleItems : leftVisibleItems.linkedItem else {
             return
         }
@@ -228,6 +227,7 @@ extension FoldersWindowController: NSOutlineViewDelegate,
         guard let arr = pasteboard.readObjects(forClasses: [NSURL.self]) as? [URL] else {
             return result
         }
+
         let path1 = arr[0].osPath
         var isDir = ObjCBool(false)
         let isValidPath1 = FileManager.default.fileExists(atPath: path1, isDirectory: &isDir) && isDir.boolValue
@@ -260,6 +260,7 @@ extension FoldersWindowController: NSOutlineViewDelegate,
         guard let arr = pasteboard.readObjects(forClasses: [NSURL.self]) as? [URL] else {
             return false
         }
+
         if arr.count < 2 {
             if let path = arr.last?.osPath {
                 if view.side == .left {
@@ -285,7 +286,7 @@ extension FoldersWindowController: NSOutlineViewDelegate,
 
     public func outlineView(_: NSOutlineView, pasteboardWriterForItem item: Any) -> (any NSPasteboardWriting)? {
         guard let vi = item as? VisibleItem,
-              let url = vi.item.toUrl() else {
+              let url = vi.item.toURL() else {
             return nil
         }
 
@@ -298,6 +299,7 @@ extension FoldersWindowController: NSOutlineViewDelegate,
         guard let itemRow = view.item(atRow: clickedRow) as? VisibleItem else {
             return
         }
+
         let leftItem = view.side == .left ? itemRow.item : itemRow.item.linkedItem
         guard let leftItem,
               let rightItem = leftItem.linkedItem else {
@@ -306,8 +308,8 @@ extension FoldersWindowController: NSOutlineViewDelegate,
 
         do {
             if let document = try VDDocumentController.shared.openDifferDocument(
-                leftUrl: leftItem.toUrl(),
-                rightUrl: rightItem.toUrl()
+                leftURL: leftItem.toURL(),
+                rightURL: rightItem.toURL()
             ) {
                 addChildDocument(document)
             }

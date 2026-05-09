@@ -119,6 +119,7 @@ class PathView: NSView {
         guard let image = NSImage(named: VDImageNameBrowse) else {
             fatalError("Unable to create image for \(VDImageNameBrowse)")
         }
+
         let view = NSButton(
             image: image,
             target: pathControl,
@@ -136,6 +137,7 @@ class PathView: NSView {
         guard let image = NSImage(named: VDImageNameSave) else {
             fatalError("Unable to create image for \(VDImageNameSave)")
         }
+
         let view = NSButton(
             image: image,
             target: nil,
@@ -186,6 +188,7 @@ class PathView: NSView {
         guard let delegate = pathControl.delegate else {
             return
         }
+
         // We enable the views ourselves but when NSConditionallySetsEnabledBindingOption is true (the default)
         // they are automagically enabled by the binding system so we turn off the NSConditionallySetsEnabledBindingOption flag
         let pathControlBindOptions = [

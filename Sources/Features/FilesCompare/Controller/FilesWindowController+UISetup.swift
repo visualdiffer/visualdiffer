@@ -41,6 +41,7 @@ extension FilesWindowController {
         guard let contentView = window?.contentView else {
             return
         }
+
         var leadingMargin: CGFloat = 7
         var trailingMargin: CGFloat = 5
         if #available(macOS 26, *) {
@@ -89,6 +90,7 @@ extension FilesWindowController {
         guard let window else {
             return
         }
+
         window.delegate = self
         window.toolbar = NSToolbar(identifier: "FilesToolbar", delegate: self)
         window.makeFirstResponder(leftPanelView.treeView)

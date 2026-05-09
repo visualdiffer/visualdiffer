@@ -7,12 +7,12 @@
 //
 
 // Items for scopebarFileGroupDisplayOptions
-private let showWhitespacesId = "WhiteSpacesId"
+private let showWhitespacesID = "WhiteSpacesId"
 
 // Items for scopebarFileGroupFilterOptions
-private let allId = "AllId"
-private let differencesId = "JustDiffsId"
-private let justMatchesId = "JustMatchesId"
+private let allID = "AllId"
+private let differencesID = "JustDiffsId"
+private let justMatchesID = "JustMatchesId"
 
 @objc
 protocol FilesScopeBarDelegate: AnyObject {
@@ -82,7 +82,7 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         groupItems.append([
             .selectionMode: MGScopeBarGroupSelectionMode.multiple,
             .items: [
-                mkItem(showWhitespacesId, NSLocalizedString("Show Whitespace", comment: "")),
+                mkItem(showWhitespacesID, NSLocalizedString("Show Whitespace", comment: "")),
             ],
         ])
 
@@ -90,9 +90,9 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
             .separator: true,
             .selectionMode: MGScopeBarGroupSelectionMode.radio,
             .items: [
-                mkItem(allId, NSLocalizedString("All", comment: "")),
-                mkItem(differencesId, NSLocalizedString("Just Differences", comment: "")),
-                mkItem(justMatchesId, NSLocalizedString("Just Matches", comment: "")),
+                mkItem(allID, NSLocalizedString("All", comment: "")),
+                mkItem(differencesID, NSLocalizedString("Just Differences", comment: "")),
+                mkItem(justMatchesID, NSLocalizedString("Just Matches", comment: "")),
             ],
         ])
 
@@ -134,6 +134,7 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
               let itemIdentifiers = items as? [[ScopeBarItem: String]] else {
             fatalError("Unexpected data format in groupItems")
         }
+
         return itemIdentifiers.compactMap { $0[.identifier] }
     }
 
@@ -170,20 +171,21 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
               let group = FileScopeGroupOptions(rawValue: groupNumber) else {
             return
         }
+
         switch group {
         case .display:
-            if identifier == showWhitespacesId {
+            if identifier == showWhitespacesID {
                 showWhitespaces.toggle()
                 actionDelegate.filesScopeBar(self, action: .showWhitespaces)
             }
         case .filter:
-            if identifier == allId {
+            if identifier == allID {
                 showLinesFilter = .all
                 actionDelegate.filesScopeBar(self, action: .showAllLines)
-            } else if identifier == justMatchesId {
+            } else if identifier == justMatchesID {
                 showLinesFilter = .matches
                 actionDelegate.filesScopeBar(self, action: .showJustMatchingLines)
-            } else if identifier == differencesId {
+            } else if identifier == differencesID {
                 showLinesFilter = .differences
                 actionDelegate.filesScopeBar(self, action: .showJustDifferentLines)
             }
@@ -211,7 +213,7 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         showWhitespaces = show
         setSelected(
             show,
-            forItem: showWhitespacesId,
+            forItem: showWhitespacesID,
             inGroup: FileScopeGroupOptions.display.rawValue,
             informDelegate: informDelegate
         )
@@ -242,11 +244,11 @@ extension DiffLine.Visibility {
     var identifier: String {
         switch self {
         case .all:
-            allId
+            allID
         case .matches:
-            justMatchesId
+            justMatchesID
         case .differences:
-            differencesId
+            differencesID
         }
     }
 }

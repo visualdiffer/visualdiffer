@@ -20,6 +20,7 @@ extension VisibleItem {
         guard let fileName else {
             return
         }
+
         if regex.firstMatch(
             in: fileName,
             options: [],

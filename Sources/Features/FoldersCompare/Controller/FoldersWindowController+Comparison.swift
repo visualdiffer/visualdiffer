@@ -123,6 +123,7 @@ public extension FoldersWindowController {
         guard let tag = sender?.selectedItem?.tag as? Int else {
             return
         }
+
         var compareFlags = sessionDiff.comparatorOptions.withoutMethodFlags
         compareFlags.insert(ComparatorOptions(rawValue: tag))
         sessionDiff.comparatorOptions = compareFlags

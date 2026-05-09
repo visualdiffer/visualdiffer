@@ -11,6 +11,7 @@ extension CompareItem {
         guard let currentPath = path else {
             return nil
         }
+
         var parent = parent
         var rootPath = currentPath
 
@@ -30,6 +31,7 @@ extension CompareItem {
         guard root.isValidFile else {
             return nil
         }
+
         if root.path == path {
             return root
         }
@@ -61,17 +63,18 @@ extension CompareItem {
     }
 
     func buildDestinationPath(
-        from srcBaseUrl: URL,
-        to destBaseUrl: URL
+        from srcBaseURL: URL,
+        to destBaseURL: URL
     ) -> URL {
-        guard let srcUrl = toUrl() else {
+        guard let srcURL = toURL() else {
             fatalError("Path is not present on \(self)")
         }
-        let linkedUrl = linkedItem?.toUrl()
-        return URL.buildDestinationPath(srcUrl, linkedUrl, srcBaseUrl, destBaseUrl)
+
+        let linkedURL = linkedItem?.toURL()
+        return URL.buildDestinationPath(srcURL, linkedURL, srcBaseURL, destBaseURL)
     }
 
-    func toUrl() -> URL? {
+    func toURL() -> URL? {
         if let path {
             URL(filePath: path, directoryHint: isFolder ? .isDirectory : .notDirectory)
         } else {

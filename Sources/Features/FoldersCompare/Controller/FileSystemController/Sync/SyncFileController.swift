@@ -60,6 +60,7 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
               let root = vi.item.parent else {
             fatalError("Unable to get root")
         }
+
         self.root = root
 
         createEmptyFolders = true
@@ -114,6 +115,7 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
         guard let contentView = window?.contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -207,6 +209,7 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
               nodes.children.isEmpty else {
             return
         }
+
         let text = if view.side == .left {
             NSLocalizedString("No files to copy on the right", comment: "")
         } else {
@@ -229,6 +232,7 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
         guard let progressIndicatorController else {
             return
         }
+
         progressIndicatorController.beginSheetModal(
             for: callerWindow,
             processingItemsCount: 0,
@@ -250,6 +254,7 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
               let rootLinkedPath = root.linkedItem?.path else {
             return
         }
+
         prepareExecute()
 
         let capturedManager = fileOperationManager

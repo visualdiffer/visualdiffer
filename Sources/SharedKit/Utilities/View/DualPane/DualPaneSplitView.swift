@@ -47,6 +47,7 @@ class DualPaneSplitView: NSSplitView {
         guard let num = notification.userInfo?["NSSplitViewUserResizeKey"] as? NSNumber else {
             return
         }
+
         let isUserResize = num.boolValue
         if isUserResize {
             let view = subviews[0]

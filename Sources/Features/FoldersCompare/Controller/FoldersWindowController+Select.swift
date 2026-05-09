@@ -28,6 +28,7 @@ extension FoldersWindowController {
         guard let sender = sender as? NSMenuItem else {
             return
         }
+
         let side = SelectionSide(menuItem: sender)
 
         if side.contains(.left) {
@@ -43,6 +44,7 @@ extension FoldersWindowController {
         guard let sender = sender as? NSMenuItem else {
             return
         }
+
         let side = SelectionSide(menuItem: sender)
 
         if side.contains(.left) {
@@ -64,6 +66,7 @@ extension FoldersWindowController {
         guard let sender = sender as? NSMenuItem else {
             return
         }
+
         let side = SelectionSide(menuItem: sender)
 
         let isShiftDown = NSApp.currentEvent?.modifierFlags.contains(.shift) ?? false
@@ -82,6 +85,7 @@ extension FoldersWindowController {
         guard let sender = sender as? NSMenuItem else {
             return
         }
+
         let side = SelectionSide(menuItem: sender)
 
         let isShiftDown = NSApp.currentEvent?.modifierFlags.contains(.shift) ?? false
@@ -100,6 +104,7 @@ extension FoldersWindowController {
         guard let sender = sender as? NSMenuItem else {
             return
         }
+
         let side = SelectionSide(menuItem: sender)
 
         if side.contains(.both) {

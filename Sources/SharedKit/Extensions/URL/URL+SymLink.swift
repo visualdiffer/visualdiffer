@@ -21,7 +21,6 @@ extension URL {
         guard let cPath = osPath.cString(using: .utf8) else {
             throw EncodingError.conversionFailed(.utf8)
         }
-
         guard let result = realpath(cPath, nil) else {
             throw POSIXError(.init(rawValue: errno) ?? .ENOENT)
         }
@@ -84,6 +83,7 @@ extension URL {
         guard let selectedPath else {
             return nil
         }
+
         return (selectedPath, selectedPath != path)
     }
 
@@ -93,6 +93,7 @@ extension URL {
         guard let contentType = try resourceValues(forKeys: [.contentTypeKey]).contentType else {
             return false
         }
+
         return contentType == .aliasFile
     }
 

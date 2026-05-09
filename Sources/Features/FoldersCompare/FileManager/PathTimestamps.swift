@@ -48,7 +48,7 @@ func createDirectory(
     var directories: [CompareItem] = []
 
     while let localItem = item,
-          let url = localItem.toUrl(),
+          let url = localItem.toURL(),
           url != srcBaseDir {
         directories.insert(localItem, at: 0)
         item = localItem.parent
@@ -63,6 +63,7 @@ func createDirectory(
               let fsFileName = fsDir.fileName else {
             break
         }
+
         path = path.appending(path: fsFileName, directoryHint: fsDir.isFolder ? .isDirectory : .notDirectory)
 
         if fm.fileExists(atPath: path.osPath) {
@@ -77,11 +78,11 @@ func createDirectory(
         try attrs?.applyTo(itemAtPath: path.deletingLastPathComponent())
 
         if options.contains(.copyLabels) {
-            try fsDir.toUrl()?.copyLabel(to: &path)
+            try fsDir.toURL()?.copyLabel(to: &path)
         }
 
         if options.contains(.copyTags) {
-            try fsDir.toUrl()?.copyTags(to: &path)
+            try fsDir.toURL()?.copyTags(to: &path)
         }
 
         attrs = try PathTimestamps(fromFileAttributes: fm.attributesOfItem(atPath: fsPath))

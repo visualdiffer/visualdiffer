@@ -45,6 +45,7 @@ extension FilesWindowController: @preconcurrency FilesScopeBarDelegate {
         guard let diffResult else {
             return
         }
+
         let diffResultInUse: DiffResult?
 
         // always use the current selected filter
@@ -81,6 +82,7 @@ extension FilesWindowController: @preconcurrency FilesScopeBarDelegate {
               let currentDiffResult else {
             return 0
         }
+
         // determine the current line number
         let currentVisibleRow = leftView.firstVisibleRow
 

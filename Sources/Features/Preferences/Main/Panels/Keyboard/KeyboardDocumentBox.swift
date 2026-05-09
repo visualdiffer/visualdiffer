@@ -33,6 +33,7 @@ class KeyboardDocumentBox: PreferencesBox {
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

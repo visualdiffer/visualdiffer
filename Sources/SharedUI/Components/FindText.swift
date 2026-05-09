@@ -129,6 +129,7 @@ class FindText: NSView, NSSearchFieldDelegate {
         guard let delegate else {
             return false
         }
+
         return delegate.numberOfMatches(in: self) > 0
     }
 
@@ -136,6 +137,7 @@ class FindText: NSView, NSSearchFieldDelegate {
         guard let delegate else {
             return
         }
+
         let count = delegate.numberOfMatches(in: self)
         if count > 0 {
             arrows.isEnabled = true
@@ -174,6 +176,7 @@ class FindText: NSView, NSSearchFieldDelegate {
         guard let delegate else {
             return
         }
+
         let foundCount = delegate.numberOfMatches(in: self)
         if foundCount == 0 {
             updateCount()

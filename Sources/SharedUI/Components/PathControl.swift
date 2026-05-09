@@ -13,7 +13,7 @@ protocol PathControlDelegate: NSPathControlDelegate {
     optional func pathControl(_ pathControl: PathControl, willContextMenu menu: NSMenu)
     @objc
     @MainActor
-    optional func pathControl(_ pathControl: PathControl, chosenUrl url: URL)
+    optional func pathControl(_ pathControl: PathControl, chosenURL url: URL)
     @objc
     @MainActor
     optional func pathControl(_ pathControl: PathControl, openWithApp app: URL)
@@ -202,7 +202,7 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
                     )
                 }
             }
-            delegate.pathControl?(self, chosenUrl: URL)
+            delegate.pathControl?(self, chosenURL: URL)
         }
     }
 

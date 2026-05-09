@@ -121,6 +121,7 @@ class SessionPreferencesFiltersBox: PreferencesBox, NSMenuItemValidation {
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             actionMenu.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             actionMenu.topAnchor.constraint(equalTo: contentView.topAnchor),

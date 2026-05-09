@@ -14,6 +14,7 @@ extension SessionDiff {
             guard let fileNameAlignmentsData else {
                 return nil
             }
+
             let allowedClasses: [AnyClass] = [
                 NSArray.self,
                 NSMutableDictionary.self,

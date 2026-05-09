@@ -46,6 +46,7 @@ class HistorySearchField: NSSearchField, NSSearchFieldDelegate {
         guard let historyController else {
             return false
         }
+
         let row = historyController.tableView.selectedRow
 
         if commandSelector == #selector(moveUp) {

@@ -52,6 +52,7 @@ public class VisibleItem: NSObject {
         guard let linkedItem else {
             return
         }
+
         let tempItem = item
         item = linkedItem.item
         linkedItem.item = tempItem
@@ -118,6 +119,7 @@ public class VisibleItem: NSObject {
             guard let li = vi.linkedItem else {
                 fatalError("LinkedItem must be set for all visible items")
             }
+
             linkedItem?.children[index] = li
         }
     }

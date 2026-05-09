@@ -77,6 +77,7 @@ class NoodleCustomImageRep: NSImageRep {
         guard let drawBlock else {
             return false
         }
+
         drawBlock(self)
         return true
     }

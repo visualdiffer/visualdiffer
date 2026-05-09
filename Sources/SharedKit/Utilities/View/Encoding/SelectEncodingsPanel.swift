@@ -129,6 +129,7 @@ class SelectEncodingsPanel: NSWindow, NSTableViewDataSource, NSTableViewDelegate
         guard let contentView else {
             return
         }
+
         let heightConstraint = scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200)
         heightConstraint.priority = .defaultHigh
 
@@ -188,6 +189,7 @@ class SelectEncodingsPanel: NSWindow, NSTableViewDataSource, NSTableViewDelegate
         guard let identifier = tableColumn?.identifier else {
             return nil
         }
+
         let cell = tableView.makeView(
             withIdentifier: identifier,
             owner: self

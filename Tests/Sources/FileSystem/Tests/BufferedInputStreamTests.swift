@@ -164,6 +164,7 @@ final class BufferedInputStreamTests {
                       let bisOldLine = bisOld.readLine() else {
                     break
                 }
+
                 lineCount += 1
                 #expect(bisNewLine == bisOldLine)
             }

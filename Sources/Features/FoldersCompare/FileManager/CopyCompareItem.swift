@@ -20,6 +20,7 @@ class CopyCompareItem {
         guard let value = operationManager.copyFinderMetadataOnly else {
             return false
         }
+
         return value
     }
 
@@ -66,6 +67,7 @@ class CopyCompareItem {
             )
             return
         }
+
         var srcCount = CompareSummary()
         var destCount = CompareSummary()
 
@@ -84,8 +86,8 @@ class CopyCompareItem {
 
         var parent = srcRoot.parent
         while let item = parent,
-              let fsUrl = item.toUrl() {
-            let destFullPath = URL.buildDestinationPath(fsUrl, nil, srcBaseDir, context.baseDir)
+              let fsURL = item.toURL() {
+            let destFullPath = URL.buildDestinationPath(fsURL, nil, srcBaseDir, context.baseDir)
 
             item.addOlderFiles(-srcCount.olderFiles)
             item.addChangedFiles(-srcCount.changedFiles)
@@ -135,16 +137,16 @@ class CopyCompareItem {
         guard delegate.isRunning(operationManager) else {
             return false
         }
-
         guard srcRoot.isValidFile else {
             return true
         }
+
         let isFiltered = srcRoot.isFiltered || !srcRoot.isDisplayed
         if !operationManager.includesFiltered, isFiltered {
             return true
         }
         guard let srcRootPath = srcRoot.path,
-              let srcUrl = srcRoot.toUrl() else {
+              let srcURL = srcRoot.toURL() else {
             return true
         }
 
@@ -167,7 +169,7 @@ class CopyCompareItem {
             destFullPath = try context.destinationPath(
                 srcRoot: srcRoot,
                 srcBaseDir: srcBaseDir,
-                srcUrl: srcUrl
+                srcURL: srcURL
             )
         } catch {
             delegate.fileManager(operationManager, addError: error, forItem: srcRoot)
@@ -243,6 +245,7 @@ class CopyCompareItem {
         guard let srcRootPath = srcRoot.path else {
             return
         }
+
         let delegate = operationManager.delegate
         var srcCount = srcRoot.summary
         var destCount = destRoot?.summary ?? .init()
@@ -250,11 +253,11 @@ class CopyCompareItem {
         let destBaseDir = context.baseDir
         do {
             let srcAttrs = try fm.attributesOfItem(atPath: srcRootPath)
-            let srcUrl = srcRoot.toUrl()
+            let srcURL = srcRoot.toURL()
             let destFullPath = try context.destinationPath(
                 srcRoot: srcRoot,
                 srcBaseDir: srcBaseDir,
-                srcUrl: srcUrl
+                srcURL: srcURL
             )
             var destAttrs: [FileAttributeKey: Any]?
             var destError: NSError?
@@ -353,16 +356,17 @@ class CopyCompareItem {
         lastPathTimestamps: PathTimestamps?,
         volumeType: String
     ) throws {
-        guard let srcUrl = srcRoot.toUrl() else {
+        guard let srcURL = srcRoot.toURL() else {
             return
         }
+
         #if DEBUG && __VD_FAKE_FS_OP__
             Logger.debug.info("Fake copy, no files are really copied - \(path.localPath)")
         #else
             if isBigFile {
                 try bigFileManager.copy(srcRoot, destFullPath: destFullPath.osPath)
             } else {
-                try fm.copyItem(at: srcUrl, to: destFullPath)
+                try fm.copyItem(at: srcURL, to: destFullPath)
             }
             if let lastPathTimestamps {
                 try fm.setFileAttributes(
@@ -452,6 +456,7 @@ class CopyCompareItem {
             guard context.isLinkedSide, let destRoot else {
                 return
             }
+
             var srcCount = srcRoot.summary
             var destCount = destRoot.summary
             var destFullPath = destFullPath
@@ -473,6 +478,7 @@ class CopyCompareItem {
         guard let fsSrcPath = (srcRoot.path as? NSString)?.fileSystemRepresentation else {
             throw FolderManagerError.nilPath
         }
+
         let fsDestPath = (destFullPath.osPath as NSString).fileSystemRepresentation
 
         copyfile(fsSrcPath, fsDestPath, nil, copyfile_flags_t(COPYFILE_METADATA))

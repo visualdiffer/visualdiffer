@@ -97,6 +97,7 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
         guard let contentView = window?.contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             tabView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             tabView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
@@ -121,6 +122,7 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
         guard let window else {
             return
         }
+
         if let sessionDiff {
             fillWithSessionDiff(sessionDiff)
         }
@@ -149,6 +151,7 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
         guard let window else {
             return
         }
+
         let response = NSApplication.ModalResponse(sender.tag)
         if response == .OK {
             updatePendingData()
@@ -345,6 +348,7 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
         guard let window else {
             return 0
         }
+
         let windowFrame = NSWindow.contentRect(forFrameRect: window.frame, styleMask: window.styleMask)
         return windowFrame.size.height - (window.contentView?.frame.size.height ?? 0)
     }
@@ -360,6 +364,7 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
               window.isVisible else {
             return
         }
+
         let newSize = NSSize(
             width: window.contentView?.frame.size.width ?? 0,
             height: minWindowHeight()

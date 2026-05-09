@@ -31,6 +31,7 @@ extension FoldersOutlineView {
         guard let foundItem else {
             return nil
         }
+
         expandParents(of: foundItem)
         select(
             visibleItems: [foundItem],
@@ -56,6 +57,7 @@ extension FoldersOutlineView {
         guard let from = item(atRow: row) as? VisibleItem else {
             return nil
         }
+
         var count: Int
 
         if wrapAround {

@@ -46,6 +46,7 @@ extension NSTableView {
         guard let superview else {
             return -1
         }
+
         let bounds = superview.bounds
 
         return row(at: bounds.origin)
@@ -55,6 +56,7 @@ extension NSTableView {
         guard let superview else {
             return -1
         }
+
         var bounds = superview.bounds
         bounds.origin.y += bounds.size.height - 1
 

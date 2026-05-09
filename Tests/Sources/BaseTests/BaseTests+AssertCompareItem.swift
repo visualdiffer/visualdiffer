@@ -27,6 +27,7 @@ public extension BaseTests {
             Issue.record("CompareItem is nil", sourceLocation: sourceLocation)
             return
         }
+
         let safeName = expectedFileName ?? "(nil filename)"
         if let expectedFileName {
             if let fsFileName = item.fileName {
@@ -66,6 +67,7 @@ public extension BaseTests {
             Issue.record("Error is not a FileError: \(error)", sourceLocation: sourceLocation)
             return
         }
+
         #expect(
             fileError == expected,
             "Error doesn't match: expected '\(expected) found '\(error)'",
@@ -93,6 +95,7 @@ public extension BaseTests {
         guard let content else {
             return
         }
+
         let foundContent = try String(contentsOfFile: path, encoding: .utf8)
         #expect(foundContent == content, "File \(path) content does not match, expected \(content) found \(foundContent)", sourceLocation: sourceLocation)
     }

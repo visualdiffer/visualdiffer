@@ -79,6 +79,7 @@ class HistoryEntityTableCellView: NSTableCellView {
         guard let leftText = leftPath.textField else {
             fatalError("Can't happen")
         }
+
         NSLayoutConstraint.activate([
             leftPath.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
             leftPath.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 4),
@@ -105,6 +106,7 @@ class HistoryEntityTableCellView: NSTableCellView {
             timeDescription.stringValue = ""
             return
         }
+
         leftPath.update(path: entityLeftPath)
         rightPath.update(path: entityRightPath)
 

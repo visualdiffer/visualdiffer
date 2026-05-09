@@ -156,6 +156,7 @@ class TouchController: FileSystemController<TouchFileOperationExecutor> {
               let source = TouchDateFromSource(rawValue: sender.tag) else {
             return
         }
+
         pickers.isEnabled = switch source {
         case .otherSide:
             false

@@ -29,6 +29,7 @@
                 Logger.debug.error("Unable to open file ' \(fullPath)'")
                 return
             }
+
             defer {
                 fileHandle.closeFile()
             }

@@ -16,6 +16,7 @@ extension FolderSelectionInfo {
         guard let itemRow = view.item(atRow: view.selectedRow) as? VisibleItem else {
             return false
         }
+
         let item = itemRow.item
 
         if let path = item.path, outSelectedPath != nil {

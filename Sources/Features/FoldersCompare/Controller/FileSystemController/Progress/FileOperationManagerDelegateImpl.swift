@@ -61,6 +61,7 @@ class FileOperationManagerDelegateImpl: FileOperationManagerDelegate {
         guard let pic = progressIndicatorController else {
             return
         }
+
         let path = item.path ?? ""
 
         DispatchQueue.main.async {
@@ -90,6 +91,7 @@ class FileOperationManagerDelegateImpl: FileOperationManagerDelegate {
         guard let pic = progressIndicatorController else {
             return
         }
+
         let path = item.path ?? ""
 
         DispatchQueue.main.async {
@@ -101,6 +103,7 @@ class FileOperationManagerDelegateImpl: FileOperationManagerDelegate {
         guard let pic = progressIndicatorController else {
             return
         }
+
         let fileSize = item.fileSize
 
         DispatchQueue.main.async {

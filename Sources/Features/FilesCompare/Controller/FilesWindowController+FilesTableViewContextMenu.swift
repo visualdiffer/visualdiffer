@@ -44,6 +44,7 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
         guard let path = lastUsedView.side == .left ? sessionDiff.leftPath : sessionDiff.rightPath else {
             return
         }
+
         NSWorkspace.shared.show(inFinder: [path])
     }
 
@@ -53,6 +54,7 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
               let editorData = lastUsedView.editorData(sessionDiff) else {
             return
         }
+
         openWith(app: URL(filePath: app), attributes: [editorData])
     }
 
@@ -66,6 +68,7 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
         guard let editorData = lastUsedView.editorData(sessionDiff) else {
             return
         }
+
         openWithOtherApp(editorData)
     }
 
@@ -119,6 +122,7 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
         guard let indexes = currentDiffResult?.findSectionIndexSet(with: lastUsedView.selectedRow) else {
             return
         }
+
         lastUsedView.selectRowIndexes(indexes, byExtendingSelection: false)
     }
 

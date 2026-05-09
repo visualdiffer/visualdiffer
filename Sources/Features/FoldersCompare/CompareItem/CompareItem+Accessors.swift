@@ -45,6 +45,7 @@ extension CompareItem {
         guard let linkedItem else {
             return false
         }
+
         return isFolder && !linkedItem.isValidFile
     }
 
@@ -52,6 +53,7 @@ extension CompareItem {
         guard let linkedItem else {
             return false
         }
+
         return type == .changed && linkedItem.type == .old
     }
 

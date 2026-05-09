@@ -68,8 +68,8 @@ extension ItemComparator {
     }
 
     private func compareFinderLabel(_ lhs: CompareItem, _ rhs: CompareItem) -> ComparisonResult {
-        guard let lhsPath = lhs.toUrl(),
-              let rhsPath = rhs.toUrl(),
+        guard let lhsPath = lhs.toURL(),
+              let rhsPath = rhs.toURL(),
               let leftLabelNumber = lhsPath.labelNumber(),
               let rightLabelNumber = rhsPath.labelNumber() else {
             return .orderedSame
@@ -91,8 +91,8 @@ extension ItemComparator {
     }
 
     private func compareFinderTag(_ lhs: CompareItem, _ rhs: CompareItem) -> ComparisonResult {
-        guard let lhsPath = lhs.toUrl(),
-              let rhsPath = rhs.toUrl(),
+        guard let lhsPath = lhs.toURL(),
+              let rhsPath = rhs.toURL(),
               let leftTags = lhsPath.tagNames(sorted: true),
               let rightTags = rhsPath.tagNames(sorted: true) else {
             return .orderedSame
@@ -169,8 +169,8 @@ extension ItemComparator {
                 return lhs.fileSize < rhs.fileSize ? .orderedAscending : .orderedDescending
             }
         }
-        guard let lhsPath = lhs.toUrl(),
-              let rhsPath = rhs.toUrl() else {
+        guard let lhsPath = lhs.toURL(),
+              let rhsPath = rhs.toURL() else {
             return .orderedSame
         }
 
@@ -226,8 +226,8 @@ extension ItemComparator {
     }
 
     private func compareAsText(_ lhs: CompareItem, _ rhs: CompareItem) -> ComparisonResult {
-        guard let lhsPath = lhs.toUrl(),
-              let rhsPath = rhs.toUrl() else {
+        guard let lhsPath = lhs.toURL(),
+              let rhsPath = rhs.toURL() else {
             return .orderedSame
         }
 

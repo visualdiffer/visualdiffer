@@ -24,6 +24,7 @@ extension FoldersWindowController: @preconcurrency DisplayFiltersScopeBarDelegat
         guard let newFlags = newFlags?.intValue else {
             return
         }
+
         let displayOptions = sessionDiff.displayOptions.changeWithoutMethod(newFlags)
         sessionDiff.displayOptions = displayOptions
         let refreshInfo = RefreshInfo(

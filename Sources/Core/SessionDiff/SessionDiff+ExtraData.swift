@@ -55,6 +55,7 @@ extension SessionDiff {
                   let dictionary = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
                 return ExtraData()
             }
+
             return ExtraData(dictionary: dictionary)
         }
         set {

@@ -209,6 +209,7 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         guard let contentView = window?.contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -225,6 +226,7 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         guard let window else {
             return
         }
+
         if itemsCount() == 0 {
             return
         }
@@ -247,6 +249,7 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
               let sheetParent = window.sheetParent else {
             return
         }
+
         let tag = NSApplication.ModalResponse(sender.tag)
         sheetParent.endSheet(window, returnCode: tag)
     }
@@ -266,6 +269,7 @@ public class FileSystemController<TExecutor: FileOperationExecutor>: NSWindowCon
         guard let prefName = executor.prefName else {
             return
         }
+
         let isSuppressed = checkboxSuppressDialog.state == .off
 
         CommonPrefs.shared.set(isSuppressed, forKey: prefName)

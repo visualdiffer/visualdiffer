@@ -53,6 +53,7 @@ extension NSColor {
         guard scanner.scanHexInt64(&hex) else {
             return false
         }
+
         switch hexDigitsCount {
         case 3:
             red = UInt((hex >> 8) & 15)

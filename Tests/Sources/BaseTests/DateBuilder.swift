@@ -23,6 +23,7 @@ public struct DateBuilder {
         guard let date = isoDateFormatter.date(from: strDate) else {
             throw NSError(domain: "Unable to parse date", code: 0, userInfo: nil)
         }
+
         return date
     }
 }

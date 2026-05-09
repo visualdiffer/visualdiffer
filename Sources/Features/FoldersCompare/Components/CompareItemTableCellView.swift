@@ -170,6 +170,7 @@ class CompareItemTableCellView: NSView {
         guard let fileName = item.fileName else {
             return nil
         }
+
         if item.isSymbolicLink,
            let path = item.path,
            let destination = try? FileManager.default.destinationOfSymbolicLink(atPath: path) {

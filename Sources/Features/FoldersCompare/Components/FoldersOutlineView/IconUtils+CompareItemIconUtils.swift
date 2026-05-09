@@ -17,7 +17,7 @@ extension IconUtils {
         var icon: NSImage?
 
         if item.isValidFile,
-           let url = item.toUrl() {
+           let url = item.toURL() {
             if item.isLocked {
                 if item.isFolder {
                     let name = ColoredFoldersManager.shared.iconName(

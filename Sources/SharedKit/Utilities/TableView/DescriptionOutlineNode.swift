@@ -32,6 +32,7 @@ class DescriptionOutlineNode: NSObject {
             guard let path = item.path else {
                 continue
             }
+
             let start = path.index(path.startIndex, offsetBy: rootPathLen)
             let relativePath = String(path[start ..< path.endIndex])
             let node = DescriptionOutlineNode(text: relativePath)

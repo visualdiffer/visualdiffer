@@ -118,6 +118,7 @@ class FolderComparisonBox: PreferencesBox {
         guard let comparatorFlags = comparisonPopup.selectedItem?.tag else {
             return
         }
+
         delegate?.preferenceBox(
             self,
             setInteger: comparatorFlags,
@@ -131,6 +132,7 @@ class FolderComparisonBox: PreferencesBox {
         guard let tag = displayFiltersPopup.selectedItem?.tag else {
             return
         }
+
         delegate?.preferenceBox(
             self,
             setInteger: tag,

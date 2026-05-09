@@ -54,6 +54,7 @@ class PreferredEditorPopupCell: NSPopUpButtonCell {
         guard let defaultAppPath = NSWorkspace.shared.urlForApplication(toOpen: path) else {
             return
         }
+
         // get the localized display name for the app
         if let values = try? defaultAppPath.resourceValues(forKeys: [URLResourceKey.localizedNameKey]),
            let defaultAppName = values.localizedName {

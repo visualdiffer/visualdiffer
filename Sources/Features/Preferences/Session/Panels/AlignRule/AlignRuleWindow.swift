@@ -82,6 +82,7 @@ class AlignRuleWindow: NSWindow, NSTextFieldDelegate {
         guard let contentView else {
             return
         }
+
         NSLayoutConstraint.activate([
             leftExpressionBox.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             leftExpressionBox.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
@@ -190,6 +191,7 @@ class AlignRuleWindow: NSWindow, NSTextFieldDelegate {
         guard let sender = sender as? NSButton else {
             return
         }
+
         editedRule = nil
         if sender === standardButtons.primaryButton {
             do {

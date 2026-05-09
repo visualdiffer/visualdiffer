@@ -93,6 +93,7 @@ class EncodingManager: NSObject, @unchecked Sendable {
         guard let encodingPanel else {
             return
         }
+
         if encodingPanel.isVisible {
             encodingPanel.makeKeyAndOrderFront(sender)
             return
@@ -124,6 +125,7 @@ class EncodingManager: NSObject, @unchecked Sendable {
         guard let cfEncodings = CFStringGetListOfAvailableEncodings() else {
             return []
         }
+
         var index = 0
 
         while true {
@@ -245,6 +247,7 @@ class EncodingManager: NSObject, @unchecked Sendable {
         guard let encs = UserDefaults.standard.array(forKey: encodingsPrefName) as? [NSNumber] else {
             return nil
         }
+
         return encs.map {
             String.Encoding(rawValue: $0.uintValue)
         }

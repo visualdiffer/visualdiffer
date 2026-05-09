@@ -25,6 +25,7 @@ extension FilesWindowController: RowHeightDataSource {
         guard let currentDiffResult else {
             return nil
         }
+
         let diffSide = side == .left ? currentDiffResult.leftSide : currentDiffResult.rightSide
 
         return diffSide.lines[row]

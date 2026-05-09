@@ -31,6 +31,7 @@ private class PowerItem {
         guard pmAssertion == kIOPMNullAssertionID else {
             return kIOReturnError
         }
+
         return IOPMAssertionCreateWithName(
             type as CFString,
             IOPMAssertionLevel(kIOPMAssertionLevelOn),

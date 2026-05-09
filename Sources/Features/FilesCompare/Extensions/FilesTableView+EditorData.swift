@@ -17,6 +17,7 @@ extension FilesTableView {
         guard let path else {
             return nil
         }
+
         var editorData = OpenEditorAttribute(path: path)
 
         if let diffSide, selectedRow >= 0 {

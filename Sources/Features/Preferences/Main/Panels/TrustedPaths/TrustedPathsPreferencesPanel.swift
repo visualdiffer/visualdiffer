@@ -266,6 +266,7 @@ class TrustedPathsPreferencesPanel: NSView, NSTableViewDataSource, NSTableViewDe
         guard let arr = SecureBookmark.shared.securedPaths?.keys else {
             return
         }
+
         trustedPaths = arr.map(\.self)
         trustedPaths.sort { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
 
@@ -286,6 +287,7 @@ class TrustedPathsPreferencesPanel: NSView, NSTableViewDataSource, NSTableViewDe
         guard let identifier = tableColumn?.identifier else {
             return nil
         }
+
         let cell = tableView.makeView(
             withIdentifier: identifier,
             owner: self

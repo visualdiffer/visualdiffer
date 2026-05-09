@@ -160,7 +160,7 @@ extension FoldersWindowController: NSMenuDelegate,
             if row >= 0,
                let vi = lastUsedView.item(atRow: row) as? VisibleItem {
                 menu.addMenuItemsForFile(
-                    vi.item.toUrl(),
+                    vi.item.toURL(),
                     openAppAction: #selector(openWithApp),
                     openOtherAppAction: #selector(openWithOther)
                 )
@@ -177,6 +177,7 @@ extension FoldersWindowController: NSMenuDelegate,
         guard let folderView = tableView as? FoldersOutlineView else {
             return false
         }
+
         let action = menuItem.action
 
         hide = true

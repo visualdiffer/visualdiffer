@@ -69,6 +69,7 @@ public extension NSImage {
               let colorFilter = CIFilter(name: "CIColorControls") else {
             return nil
         }
+
         colorGenerator.setValue(color, forKey: kCIInputColorKey)
 
         colorFilter.setValue(colorGenerator.value(forKey: kCIOutputImageKey), forKey: kCIInputImageKey)
@@ -119,6 +120,7 @@ public extension NSImage {
         guard let image = copy() as? NSImage else {
             return self
         }
+
         image.lockFocus()
         color.set()
         let imageRect = NSRect(origin: .zero, size: image.size)

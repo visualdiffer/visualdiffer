@@ -93,6 +93,7 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
         guard var itemRow = view.item(atRow: selectedRow) as? VisibleItem else {
             return
         }
+
         var item = itemRow.item
 
         if !item.isValidFile {
@@ -100,6 +101,7 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
                   let linkedItemRow = linkedView.item(atRow: selectedRow) as? VisibleItem else {
                 return
             }
+
             view = linkedView
             itemRow = linkedItemRow
             item = itemRow.item
@@ -128,6 +130,7 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
             super.keyDown(with: event)
             return
         }
+
         let key = str[str.startIndex].asciiValue ?? 0
 
         if key == NSCarriageReturnCharacter || key == NSEnterCharacter {
@@ -219,6 +222,7 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
         guard let delegate = delegate as? OutlineViewItemDelegate else {
             return
         }
+
         if lockExpand {
             return
         }
@@ -238,6 +242,7 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
         guard let delegate = delegate as? OutlineViewItemDelegate else {
             return
         }
+
         if lockExpand {
             return
         }

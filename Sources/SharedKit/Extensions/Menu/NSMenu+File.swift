@@ -116,36 +116,36 @@ extension NSMenu {
     ) -> [AppNameAttributeKey: String] {
         var appNames = [AppNameAttributeKey: String]()
 
-        let (defaultAppUrl, defaultAppName) = getSystemDefaultAppForFile(path)
-        let (preferredAppUrl, preferredAppName) = getPreferredAppForFile(path)
+        let (defaultAppURL, defaultAppName) = getSystemDefaultAppForFile(path)
+        let (preferredAppURL, preferredAppName) = getPreferredAppForFile(path)
 
-        if let defaultAppUrl, let preferredAppUrl, defaultAppUrl == preferredAppUrl {
+        if let defaultAppURL, let preferredAppURL, defaultAppURL == preferredAppURL {
             addItem(
                 defaultAppName ?? "",
                 description: NSLocalizedString(" (System Default)", comment: ""),
                 descriptionColor: descriptionColor,
-                appPath: defaultAppUrl,
+                appPath: defaultAppURL,
                 openAppAction: openAppAction
             )
             appNames[.preferred] = preferredAppName
             appNames[.system] = defaultAppName
         } else {
-            if let preferredAppName, let preferredAppUrl {
+            if let preferredAppName, let preferredAppURL {
                 addItem(
                     preferredAppName,
                     description: NSLocalizedString(" (App Default)", comment: ""),
                     descriptionColor: descriptionColor,
-                    appPath: preferredAppUrl,
+                    appPath: preferredAppURL,
                     openAppAction: openAppAction
                 )
                 appNames[.preferred] = preferredAppName
             }
-            if let defaultAppName, let defaultAppUrl {
+            if let defaultAppName, let defaultAppURL {
                 addItem(
                     defaultAppName,
                     description: NSLocalizedString(" (System Default)", comment: ""),
                     descriptionColor: descriptionColor,
-                    appPath: defaultAppUrl,
+                    appPath: defaultAppURL,
                     openAppAction: openAppAction
                 )
                 appNames[.system] = defaultAppName
@@ -201,40 +201,40 @@ extension NSMenu {
         return item
     }
 
-    func getSystemDefaultAppForFile(_ path: URL) -> (appUrl: URL?, appName: String?) {
-        guard let appUrl = NSWorkspace.shared.urlForApplication(toOpen: path) else {
+    func getSystemDefaultAppForFile(_ path: URL) -> (appURL: URL?, appName: String?) {
+        guard let appURL = NSWorkspace.shared.urlForApplication(toOpen: path) else {
             return (nil, nil)
         }
-        guard let values = try? appUrl.resourceValues(forKeys: [URLResourceKey.localizedNameKey]),
+        guard let values = try? appURL.resourceValues(forKeys: [URLResourceKey.localizedNameKey]),
               let appName = values.localizedName else {
-            return (appUrl, nil)
+            return (appURL, nil)
         }
 
-        return (appUrl, appName)
+        return (appURL, appName)
     }
 
-    func getPreferredAppForFile(_: URL) -> (appUrl: URL?, appName: String?) {
+    func getPreferredAppForFile(_: URL) -> (appURL: URL?, appName: String?) {
         guard let appPath = UserDefaults.standard.string(forKey: Self.preferredEditorPrefName) else {
             return (nil, nil)
         }
 
-        let appUrl = URL(filePath: appPath)
+        let appURL = URL(filePath: appPath)
 
-        guard let values = try? appUrl.resourceValues(forKeys: [URLResourceKey.localizedNameKey]),
+        guard let values = try? appURL.resourceValues(forKeys: [URLResourceKey.localizedNameKey]),
               let appName = values.localizedName else {
-            return (appUrl, nil)
+            return (appURL, nil)
         }
 
-        return (appUrl, appName)
+        return (appURL, appName)
     }
 
     func mapAppNameToPath(
-        _ appUrls: [URL],
+        _ appURLs: [URL],
         excludeAppNames: [String]
     ) -> [String: URL] {
         var dictAppNames = [String: URL]()
 
-        for url in appUrls {
+        for url in appURLs {
             if let values = try? url.resourceValues(forKeys: [.localizedNameKey]),
                let displayName = values.localizedName {
                 dictAppNames[displayName] = url

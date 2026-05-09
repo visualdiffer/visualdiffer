@@ -174,7 +174,6 @@
 		553741F12E9372DF00AB56D0 /* TextPreferencesPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537409E2E9372DF00AB56D0 /* TextPreferencesPanel.swift */; };
 		553741F22E9372DF00AB56D0 /* AlignPopupButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741642E9372DF00AB56D0 /* AlignPopupButtonCell.swift */; };
 		553741F32E9372DF00AB56D0 /* FolderSelectionInfo+ViewerActionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537406D2E9372DF00AB56D0 /* FolderSelectionInfo+ViewerActionValidator.swift */; };
-		553741F42E9372DF00AB56D0 /* PopUpButtonUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741722E9372DF00AB56D0 /* PopUpButtonUrl.swift */; };
 		553741F52E9372DF00AB56D0 /* OpenEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741392E9372DF00AB56D0 /* OpenEditor.swift */; };
 		553741F62E9372DF00AB56D0 /* NSMenu+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740F72E9372DF00AB56D0 /* NSMenu+File.swift */; };
 		553741F72E9372DF00AB56D0 /* FilesWindowController+FileInfoBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FC92E9372DF00AB56D0 /* FilesWindowController+FileInfoBarDelegate.swift */; };
@@ -423,6 +422,7 @@
 		557315B12551307800CF4372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 557315B02551307800CF4372 /* Images.xcassets */; };
 		55740BF512D710EC004BF6CC /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55740BF412D710EC004BF6CC /* IOKit.framework */; };
 		55740BF912D71103004BF6CC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55740BF812D71103004BF6CC /* Security.framework */; };
+		5577FFE82FAF2FC30084FB06 /* PopUpButtonURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5577FFE72FAF2FC30084FB06 /* PopUpButtonURL.swift */; };
 		557BBB0E2ED1BBB00016CBD4 /* DiffLineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */; };
 		557C18182E7E6E0100381A3A /* big_file_5000_lines.txt in Resources */ = {isa = PBXBuildFile; fileRef = 557C18162E7E6E0100381A3A /* big_file_5000_lines.txt */; };
 		557C18232E7E8C0D00381A3A /* Signing.local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 557C18212E7E8C0D00381A3A /* Signing.local.xcconfig */; };
@@ -972,7 +972,6 @@
 		5537416F2E9372DF00AB56D0 /* NSTextField+CenterVertically.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+CenterVertically.swift"; sourceTree = "<group>"; };
 		553741702E9372DF00AB56D0 /* PathControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathControl.swift; sourceTree = "<group>"; };
 		553741712E9372DF00AB56D0 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
-		553741722E9372DF00AB56D0 /* PopUpButtonUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonUrl.swift; sourceTree = "<group>"; };
 		553741732E9372DF00AB56D0 /* TablePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePanelView.swift; sourceTree = "<group>"; };
 		553741742E9372DF00AB56D0 /* TimeToleranceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeToleranceView.swift; sourceTree = "<group>"; };
 		5537434A2E937B7F00AB56D0 /* colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = colors.json; path = AppDefaults/colors.json; sourceTree = "<group>"; };
@@ -1010,6 +1009,7 @@
 		557315B02551307800CF4372 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = assets/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		55740BF412D710EC004BF6CC /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		55740BF812D71103004BF6CC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		5577FFE72FAF2FC30084FB06 /* PopUpButtonURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonURL.swift; sourceTree = "<group>"; };
 		557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffLineComponent.swift; sourceTree = "<group>"; };
 		557C18162E7E6E0100381A3A /* big_file_5000_lines.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = big_file_5000_lines.txt; sourceTree = "<group>"; };
 		557C181B2E7E8BDD00381A3A /* Signing.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.local.xcconfig; sourceTree = "<group>"; };
@@ -2712,7 +2712,7 @@
 				5537416F2E9372DF00AB56D0 /* NSTextField+CenterVertically.swift */,
 				553741702E9372DF00AB56D0 /* PathControl.swift */,
 				553741712E9372DF00AB56D0 /* PathView.swift */,
-				553741722E9372DF00AB56D0 /* PopUpButtonUrl.swift */,
+				5577FFE72FAF2FC30084FB06 /* PopUpButtonURL.swift */,
 				553741732E9372DF00AB56D0 /* TablePanelView.swift */,
 				553741742E9372DF00AB56D0 /* TimeToleranceView.swift */,
 			);
@@ -3404,7 +3404,6 @@
 				553741F12E9372DF00AB56D0 /* TextPreferencesPanel.swift in Sources */,
 				553741F22E9372DF00AB56D0 /* AlignPopupButtonCell.swift in Sources */,
 				553741F32E9372DF00AB56D0 /* FolderSelectionInfo+ViewerActionValidator.swift in Sources */,
-				553741F42E9372DF00AB56D0 /* PopUpButtonUrl.swift in Sources */,
 				553741F52E9372DF00AB56D0 /* OpenEditor.swift in Sources */,
 				553741F62E9372DF00AB56D0 /* NSMenu+File.swift in Sources */,
 				553741F72E9372DF00AB56D0 /* FilesWindowController+FileInfoBarDelegate.swift in Sources */,
@@ -3603,6 +3602,7 @@
 				553742AF2E9372DF00AB56D0 /* TouchController.swift in Sources */,
 				553742B02E9372DF00AB56D0 /* CompletionIndicator.swift in Sources */,
 				553742B12E9372DF00AB56D0 /* FoldersWindowController+UISetup.swift in Sources */,
+				5577FFE82FAF2FC30084FB06 /* PopUpButtonURL.swift in Sources */,
 				553742B22E9372DF00AB56D0 /* NSTableView+Font.swift in Sources */,
 				553742B32E9372DF00AB56D0 /* ActionBarView.swift in Sources */,
 				553742B42E9372DF00AB56D0 /* TouchCompareItem.swift in Sources */,

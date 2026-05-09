@@ -12,6 +12,7 @@ extension FoldersWindowController {
         guard let window else {
             return
         }
+
         sessionPreferencesSheet.beginSheet(
             window,
             sessionDiff: sessionDiff,
@@ -26,6 +27,7 @@ extension FoldersWindowController {
         guard let window else {
             return
         }
+
         sessionPreferencesSheet.beginSheet(
             window,
             sessionDiff: sessionDiff,

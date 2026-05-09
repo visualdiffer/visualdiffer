@@ -50,7 +50,7 @@ extension FoldersWindowController {
         let predicateTemplate = NSPredicate(format: "fileName ENDSWITH $name")
         lastUsedView.enumerateSelectedValidFiles { item, _ in
             // use extension
-            if let path = item.toUrl() {
+            if let path = item.toURL() {
                 let pathExtension = String(format: ".%@", path.pathExtension)
                 let bindVariables = ["name": pathExtension]
                 let result = predicateTemplate.withSubstitutionVariables(bindVariables)

@@ -39,19 +39,19 @@ extension SessionDiff {
                 alwaysResolveSymlinks: alwaysResolveSymlinks
             )
         // assign to sessionDiff only if path differs otherwise the document is considered dirty
-        guard let (resolvedUrl, selectedAnotherPath) = resolvedInfo else {
+        guard let (resolvedURL, selectedAnotherPath) = resolvedInfo else {
             return nil
         }
 
         if selectedAnotherPath {
             if resolveLeft {
-                leftPath = resolvedUrl.osPath
+                leftPath = resolvedURL.osPath
             } else {
-                rightPath = resolvedUrl.osPath
+                rightPath = resolvedURL.osPath
             }
         }
 
-        return resolvedUrl
+        return resolvedURL
     }
 }
 

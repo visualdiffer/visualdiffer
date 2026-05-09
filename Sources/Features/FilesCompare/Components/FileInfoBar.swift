@@ -172,6 +172,7 @@ class FileInfoBar: NSView {
             setLabel("")
             return
         }
+
         let dateFormatter = DateFormatter()
 
         dateFormatter.dateFormat = DateFormatter.dateFormat(
@@ -196,6 +197,7 @@ class FileInfoBar: NSView {
         guard FileManager.default.fileExists(atPath: path) else {
             return changed
         }
+
         let attrs = try? FileManager.default.attributesOfItem(atPath: path)
         if let attrs,
            let updatedDate = attrs[.modificationDate] as? Date,

@@ -50,6 +50,7 @@ public class MoveCompareItem: NSObject {
         guard srcRoot.isValidFile else {
             return
         }
+
         let context = FileDestinationContext(destination: destination)
         if context.isExternal {
             moveToExternal(
@@ -97,9 +98,9 @@ public class MoveCompareItem: NSObject {
 
         var parent = srcRoot.parent
         while let item = parent,
-              let itemUrl = item.toUrl() {
-            let destUrl = URL.buildDestinationPath(itemUrl, nil, srcBaseDir, destBaseDir)
-            let destFullPath = destUrl.osPath
+              let itemURL = item.toURL() {
+            let destURL = URL.buildDestinationPath(itemURL, nil, srcBaseDir, destBaseDir)
+            let destFullPath = destURL.osPath
 
             item.addOlderFiles(-srcCount.olderFiles)
             item.addChangedFiles(-srcCount.changedFiles)
@@ -143,6 +144,7 @@ public class MoveCompareItem: NSObject {
             )
             return
         }
+
         _ = doMoveToExternal(
             srcRoot,
             srcBaseDir: srcBaseDir,
@@ -167,21 +169,23 @@ public class MoveCompareItem: NSObject {
         guard srcRoot.isValidFile else {
             return true
         }
+
         let isFiltered = srcRoot.isFiltered || !srcRoot.isDisplayed
         if !operationManager.includesFiltered, isFiltered {
             return true
         }
         guard let srcRootPath = srcRoot.path,
-              let srcUrl = srcRoot.toUrl() else {
+              let srcURL = srcRoot.toURL() else {
             return false
         }
+
         let destBaseDir = context.baseDir
         let destFullPath: URL
         do {
             destFullPath = try context.destinationPath(
                 srcRoot: srcRoot,
                 srcBaseDir: srcBaseDir,
-                srcUrl: srcUrl
+                srcURL: srcURL
             )
         } catch {
             delegate.fileManager(operationManager, addError: error, forItem: srcRoot)
@@ -285,11 +289,9 @@ public class MoveCompareItem: NSObject {
         guard delegate.isRunning(operationManager) else {
             return false
         }
-
         guard srcRoot.isValidFile else {
             return true
         }
-
         guard let destRoot = srcRoot.linkedItem else {
             throw FolderManagerError.nilPath
         }
@@ -487,9 +489,10 @@ public class MoveCompareItem: NSObject {
         #if DEBUG && __VD_FAKE_FS_OP__
             Logger.debug.info("Fake move, no files are really moved - \(srcRoot.path)")
         #else
-            guard let url = srcRoot.toUrl() else {
+            guard let url = srcRoot.toURL() else {
                 throw FolderManagerError.nilPath
             }
+
             if isBigFile {
                 try bigFileManager.move(srcRoot, destFullPath: destFullPath.osPath)
             } else {
@@ -575,10 +578,10 @@ public class MoveCompareItem: NSObject {
         guard operationManager.canRemoveDirectory(srcRoot) else {
             return
         }
-
         guard let srcPath = srcRoot.path else {
             throw FolderManagerError.nilPath
         }
+
         let fsSrcPath = (srcPath as NSString).fileSystemRepresentation
         let fsDestPath = (destFullPath.osPath as NSString).fileSystemRepresentation
 

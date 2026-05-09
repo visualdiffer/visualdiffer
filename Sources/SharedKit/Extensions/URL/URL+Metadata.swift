@@ -7,13 +7,13 @@
 //
 
 public extension URL {
-    func copyTags(to toUrl: inout URL) throws {
+    func copyTags(to toURL: inout URL) throws {
         let resources = try resourceValues(forKeys: [.tagNamesKey])
-        try toUrl.setResourceValues(resources)
+        try toURL.setResourceValues(resources)
     }
 
-    func copyLabel(to toUrl: inout URL) throws {
+    func copyLabel(to toURL: inout URL) throws {
         let resources = try resourceValues(forKeys: [.labelNumberKey])
-        try toUrl.setResourceValues(resources)
+        try toURL.setResourceValues(resources)
     }
 }

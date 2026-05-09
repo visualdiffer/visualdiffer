@@ -67,6 +67,7 @@ extension CommonPrefs {
               let colorSet = scheme[name.rawValue] else {
             return nil
         }
+
         return colorSet
     }
 }

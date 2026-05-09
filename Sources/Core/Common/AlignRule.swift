@@ -44,6 +44,7 @@ public struct AlignRule {
               let template = AlignTemplate(dictionary) else {
             return nil
         }
+
         self.init(regExp: regExp, template: template)
     }
 }
@@ -73,6 +74,7 @@ extension AlignRule {
         ) else {
             return false
         }
+
         let replaced = lhs.replace(
             template: template.pattern,
             result: result
@@ -95,6 +97,7 @@ extension AlignRule.Pair where T == NSRegularExpression.Options {
         guard let pattern = dictionary[AlignRule.Key.regExp.rawValue] as? String else {
             return nil
         }
+
         let options = if let rawValue = dictionary[AlignRule.Key.regExpOptions.rawValue] as? UInt {
             NSRegularExpression.Options(rawValue: rawValue)
         } else {
@@ -132,6 +135,7 @@ extension AlignRule.Pair where T == AlignTemplateOptions {
         guard let pattern = dictionary[AlignRule.Key.template.rawValue] as? String else {
             return nil
         }
+
         let options = if let rawValue = dictionary[AlignRule.Key.templateOptions.rawValue] as? UInt {
             AlignTemplateOptions(rawValue: rawValue)
         } else {

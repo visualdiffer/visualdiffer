@@ -22,6 +22,7 @@
                   let applicationMenu = mainMenu.item(withTag: MainMenu.application.rawValue)?.submenu else {
                 return
             }
+
             let checkForUpdatesItem = NSMenuItem(
                 title: NSLocalizedString("Check for Updates…", comment: ""),
                 action: #selector(SPUStandardUpdaterController.checkForUpdates(_:)),

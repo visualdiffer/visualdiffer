@@ -65,6 +65,7 @@ class SyncOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDele
               let identifier = tableColumn?.identifier else {
             return nil
         }
+
         let cell = outlineView.makeView(
             withIdentifier: identifier,
             owner: self

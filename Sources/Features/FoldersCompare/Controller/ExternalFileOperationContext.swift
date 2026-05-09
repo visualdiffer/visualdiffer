@@ -21,11 +21,10 @@ struct ExternalFileOperationContext {
     ) -> ExternalFileOperationContext? {
         guard let vi = view.dataSource?.outlineView?(view, child: 0, ofItem: nil) as? VisibleItem,
               let root = vi.item.parent,
-              let srcBaseDir = root.toUrl() else {
+              let srcBaseDir = root.toURL() else {
             return nil
         }
-
-        guard let destBaseDir = srcBaseDir.promptUrl(
+        guard let destBaseDir = srcBaseDir.promptURL(
             at: srcBaseDir,
             title: NSLocalizedString("Select destination folder", comment: ""),
             chooseDirectories: true,
@@ -71,9 +70,10 @@ struct ExternalFileOperationContext {
             guard let itemPath = item.path else {
                 continue
             }
-            guard let itemURL = item.toUrl() else {
+            guard let itemURL = item.toURL() else {
                 continue
             }
+
             let normalizedItemPath = URL(
                 filePath: itemPath,
                 directoryHint: item.isFolder ? .isDirectory : .notDirectory

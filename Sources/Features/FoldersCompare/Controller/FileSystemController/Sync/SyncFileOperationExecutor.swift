@@ -60,6 +60,7 @@ class SyncFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
         guard let payload else {
             fatalError("Missing payload")
         }
+
         let srcBaseDir = payload.srcBaseDir
         let destBaseDir = payload.destBaseDir
         let items = payload.copyDestFiles ? itemsInfo.linkedInfo : itemsInfo

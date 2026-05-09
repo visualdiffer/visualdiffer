@@ -66,6 +66,7 @@ class PreferencesBox: NSBox {
         guard let delegate else {
             return
         }
+
         for checkbox in checkboxes.values {
             let value = delegate.preferenceBox(self, boolForKey: checkbox.prefName)
             checkbox.state = value ? .on : .off

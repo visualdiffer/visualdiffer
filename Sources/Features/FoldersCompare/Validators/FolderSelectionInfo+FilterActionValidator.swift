@@ -39,9 +39,10 @@ extension FolderSelectionInfo {
               let vi = view.item(atRow: row) as? VisibleItem else {
             return false
         }
+
         let item = vi.item
 
-        guard let path = item.toUrl() else {
+        guard let path = item.toURL() else {
             return false
         }
 
@@ -51,7 +52,7 @@ extension FolderSelectionInfo {
         for row in indexes.dropFirst() where allFilesWithSameExt {
             if let viAtRow = view.item(atRow: row) as? VisibleItem {
                 let itemAtRow = viAtRow.item
-                if let path = itemAtRow.toUrl() {
+                if let path = itemAtRow.toURL() {
                     let tempExt = path.pathExtension
                     allFilesWithSameExt = tempExt == fileExt
                 }

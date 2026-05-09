@@ -13,6 +13,7 @@ extension FilesWindowController {
               let currentDiffResult else {
             return
         }
+
         let jumpToLineWindow = JumpToLineWindow.createSheet()
 
         jumpToLineWindow.lineNumber = findStartJumpLine()
@@ -35,6 +36,7 @@ extension FilesWindowController {
         guard let arr = lastUsedView.diffSide?.lines else {
             return 1
         }
+
         let lineNumber = arr[row].number
 
         if lineNumber < 0 {
@@ -51,6 +53,7 @@ extension FilesWindowController {
               returnCode == .OK else {
             return
         }
+
         var row = -1
         var view: FilesTableView
         switch jumpToLineWindow.side {

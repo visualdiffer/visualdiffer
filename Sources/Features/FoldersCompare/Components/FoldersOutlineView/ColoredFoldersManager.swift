@@ -60,7 +60,6 @@ class ColoredFoldersManager: NSObject, @unchecked Sendable {
               let mismatchingLabelsColor = prefs.changeTypeColor(.mismatchingLabels)?.text else {
             fatalError("Unable to get colors for colored folders")
         }
-
         guard let maskFull = NSImage(named: "mask-full"),
               let maskBackWhite = NSImage(named: "mask-back-white"),
               let maskBack = NSImage(named: "mask-back"),

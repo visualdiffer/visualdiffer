@@ -33,6 +33,7 @@ extension VisibleItem {
             guard let date2 = fs2.fileModificationDate else {
                 return .orderedAscending
             }
+
             return date1.compare(date2)
         }
     }

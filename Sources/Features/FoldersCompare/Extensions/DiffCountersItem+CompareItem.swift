@@ -118,6 +118,7 @@ extension DiffCountersItem {
         guard fileCount > 0 else {
             return
         }
+
         let text = String.localizedStringWithFormat(format, fileCount, side.rawValue)
         if let color = CommonPrefs.shared.changeTypeColor(type)?.text {
             items.append(diffCounterItem(withText: text, color: color))

@@ -16,6 +16,7 @@ extension NSTextView {
             ?? NSParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle else {
             return
         }
+
         let charWidth = (" " as NSString).size(withAttributes: [.font: font]).width
 
         paragraphStyle.defaultTabInterval = charWidth * Double(tabSpaces)
@@ -41,6 +42,7 @@ extension NSTextView {
         guard let textContainer else {
             return
         }
+
         let largeNumberForText = 1.0e7
 
         textContainer.containerSize = NSSize(width: largeNumberForText, height: largeNumberForText)
@@ -56,6 +58,7 @@ extension NSTextView {
         guard let textStorage else {
             return
         }
+
         let string = textStorage.string
         let length = string.count
 

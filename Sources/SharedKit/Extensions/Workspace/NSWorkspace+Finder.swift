@@ -38,9 +38,9 @@ extension NSWorkspace {
             var secureURLs = [URL]()
 
             for p in paths {
-                let pUrl = URL(filePath: p)
-                urls.append(pUrl)
-                if let secureURL = SecureBookmark.shared.secure(fromBookmark: pUrl, startSecured: true) {
+                let pURL = URL(filePath: p)
+                urls.append(pURL)
+                if let secureURL = SecureBookmark.shared.secure(fromBookmark: pURL, startSecured: true) {
                     secureURLs.append(secureURL)
                 }
             }

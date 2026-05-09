@@ -65,6 +65,7 @@ class SecureBookmark: @unchecked Sendable {
               let data = dict[bookmarkPath] else {
             return nil
         }
+
         var isStale = false
         do {
             let url = try URL(
@@ -91,6 +92,7 @@ class SecureBookmark: @unchecked Sendable {
         guard var dict = securedPaths else {
             return
         }
+
         for path in paths {
             dict.removeValue(forKey: path)
         }
