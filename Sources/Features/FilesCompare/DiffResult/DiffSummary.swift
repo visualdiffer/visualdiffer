@@ -11,12 +11,14 @@ struct DiffSummary {
     var added = 0
     var deleted = 0
     var changed = 0
+    var ignored = 0
 
     mutating func reset() {
         matching = 0
         added = 0
         deleted = 0
         changed = 0
+        ignored = 0
     }
 
     mutating func refresh(_ lines: [DiffLine]) {
@@ -26,6 +28,9 @@ struct DiffSummary {
             switch line.type {
             case .matching:
                 matching += 1
+                if line.hasIgnoredDifferences {
+                    ignored += 1
+                }
             case .changed:
                 changed += 1
             case .deleted:
@@ -46,6 +51,7 @@ extension DiffSummary: Equatable {
         lhs.matching == rhs.matching &&
             lhs.added == rhs.added &&
             lhs.deleted == rhs.deleted &&
-            lhs.changed == rhs.changed
+            lhs.changed == rhs.changed &&
+            lhs.ignored == rhs.ignored
     }
 }

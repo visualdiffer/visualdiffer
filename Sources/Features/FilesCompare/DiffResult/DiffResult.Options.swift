@@ -72,4 +72,24 @@ extension DiffResult.Options {
         }
         return stripped + component.eol.stringValue
     }
+
+    func containsIgnoreFor(
+        differenceBetween leftLine: DiffLineComponent,
+        and rightLine: DiffLineComponent
+    ) -> Bool {
+        if isEmpty {
+            return false
+        }
+        if contains(.ignoreLineEndings),
+           leftLine.eol != rightLine.eol {
+            return true
+        }
+
+        // only ignoreLineEndings set: EOLs match here, so texts are equal too
+        if self == [.ignoreLineEndings] {
+            return false
+        }
+
+        return leftLine.text != rightLine.text
+    }
 }

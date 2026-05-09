@@ -42,9 +42,11 @@ extension DiffResult {
                 current.removeLine(at: row)
             } else {
                 srcLine.type = .matching
+                srcLine.hasIgnoredDifferences = false
 
                 destLine.mode = .merged
                 destLine.type = .matching
+                destLine.hasIgnoredDifferences = false
                 destLine.component = srcLine.component
 
                 // now lines match so remove them from view

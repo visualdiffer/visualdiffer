@@ -56,201 +56,30 @@ class DiffResult {
         rightLines: [DiffLineComponent],
         options: Options = []
     ) {
-        sections = []
-        summary.reset()
-
-        leftSide.eol = leftLines.detectEOL()
-        rightSide.eol = rightLines.detectEOL()
-
         // swiftlint:disable force_cast
         let stringifier: (Any) -> String = {
             options.applyTransformations(component: $0 as! DiffLineComponent)
         }
         // swiftlint:enable force_cast
 
-        let udiff = UnifiedDiff(originalLines: leftLines, revisedLines: rightLines, stringifier: stringifier)
-        var script = udiff.diff_2(false)
+        let udiff = UnifiedDiff(
+            originalLines: leftLines,
+            revisedLines: rightLines,
+            stringifier: stringifier
+        )
+        let script = udiff.diff_2(false)
 
-        var leftIndex = 0
-        var rightIndex = 0
-
-        while let localScript = script {
-            updateMatchingLines(
-                leftCount: Int(localScript.line0),
-                rightCount: Int(localScript.line1),
-                leftLines: leftLines,
-                rightLines: rightLines,
-                leftIndex: &leftIndex,
-                rightIndex: &rightIndex
-            )
-
-            let commonLines = Int(min(localScript.deleted, localScript.inserted))
-            let diffLines = Int(localScript.deleted - localScript.inserted)
-
-            var start = leftSide.lines.count
-
-            // Create a new section to distinguish adjacent
-            // .deleted from .added lines
-            if commonLines > 0, localScript.deleted != localScript.inserted {
-                sections.append(DiffSection(
-                    start: start,
-                    end: leftSide.lines.count + commonLines - 1
-                ))
-                start = leftSide.lines.count + commonLines
-            }
-
-            updateChangedLines(
-                lineCount: commonLines,
-                leftLines: leftLines,
-                rightLines: rightLines,
-                leftIndex: &leftIndex,
-                rightIndex: &rightIndex
-            )
-
-            if diffLines > 0 {
-                updateDeletedLines(
-                    lineCount: diffLines,
-                    leftLines: leftLines,
-                    rightLines: rightLines,
-                    leftIndex: &leftIndex,
-                    rightIndex: &rightIndex
-                )
-            } else {
-                updateAddedLines(
-                    lineCount: -diffLines,
-                    leftLines: leftLines,
-                    rightLines: rightLines,
-                    leftIndex: &leftIndex,
-                    rightIndex: &rightIndex
-                )
-            }
-
-            sections.append(DiffSection(
-                start: start,
-                end: leftSide.lines.count - 1
-            ))
-
-            script = localScript.link
-        }
-
-        updateMatchingLines(
-            leftCount: leftLines.count,
-            rightCount: rightLines.count,
+        var processor = DiffProcessor(
             leftLines: leftLines,
             rightLines: rightLines,
-            leftIndex: &leftIndex,
-            rightIndex: &rightIndex
+            options: options
         )
-    }
+        processor.process(changes: script)
 
-    // swiftlint:disable:next function_parameter_count
-    private func updateMatchingLines(
-        leftCount: Int,
-        rightCount: Int,
-        leftLines: [DiffLineComponent],
-        rightLines: [DiffLineComponent],
-        leftIndex: inout Int,
-        rightIndex: inout Int
-    ) {
-        summary.matching += leftCount - leftIndex
-
-        while leftIndex < leftCount {
-            let line = DiffLine(
-                with: .matching,
-                number: leftIndex + 1,
-                component: leftLines[leftIndex]
-            )
-            leftSide.add(line: line)
-            leftIndex += 1
-        }
-
-        while rightIndex < rightCount {
-            let line = DiffLine(
-                with: .matching,
-                number: rightIndex + 1,
-                component: rightLines[rightIndex]
-            )
-            rightSide.add(line: line)
-            rightIndex += 1
-        }
-    }
-
-    private func updateChangedLines(
-        lineCount: Int,
-        leftLines: [DiffLineComponent],
-        rightLines: [DiffLineComponent],
-        leftIndex: inout Int,
-        rightIndex: inout Int
-    ) {
-        // update changed lines
-        summary.changed += lineCount
-
-        for _ in 0 ..< lineCount {
-            let leftLine = DiffLine(
-                with: .changed,
-                number: leftIndex + 1,
-                component: leftLines[leftIndex]
-            )
-            leftSide.add(line: leftLine)
-
-            let rightLine = DiffLine(
-                with: .changed,
-                number: rightIndex + 1,
-                component: rightLines[rightIndex]
-            )
-            rightSide.add(line: rightLine)
-            leftIndex += 1
-            rightIndex += 1
-        }
-    }
-
-    private func updateDeletedLines(
-        lineCount: Int,
-        leftLines: [DiffLineComponent],
-        rightLines _: [DiffLineComponent],
-        leftIndex: inout Int,
-        rightIndex _: inout Int
-    ) {
-        summary.deleted += lineCount
-
-        for _ in 0 ..< lineCount {
-            let line = DiffLine(
-                with: .deleted,
-                number: leftIndex + 1,
-                component: leftLines[leftIndex]
-            )
-            leftSide.add(line: line)
-            leftIndex += 1
-        }
-        for _ in 0 ..< lineCount {
-            let line = DiffLine.missingLine()
-            rightSide.add(line: line)
-        }
-    }
-
-    private func updateAddedLines(
-        lineCount: Int,
-        leftLines _: [DiffLineComponent],
-        rightLines: [DiffLineComponent],
-        leftIndex _: inout Int,
-        rightIndex: inout Int
-    ) {
-        for _ in 0 ..< lineCount {
-            let line = DiffLine.missingLine()
-            leftSide.add(line: line)
-        }
-
-        summary.added += lineCount
-
-        for _ in 0 ..< lineCount {
-            let line = DiffLine(
-                with: .added,
-                number: rightIndex + 1,
-                component: rightLines[rightIndex]
-            )
-            rightSide.add(line: line)
-            rightIndex += 1
-        }
+        leftSide = processor.leftSide
+        rightSide = processor.rightSide
+        sections = processor.sections
+        summary = processor.summary
     }
 
     @discardableResult

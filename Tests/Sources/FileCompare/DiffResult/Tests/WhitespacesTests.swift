@@ -30,7 +30,7 @@ final class WhitespacesTests: DiffResultBaseTests {
         assert(sectionSeparators: diffResult.leftSide.lines, isSeparator: false)
         assert(sectionSeparators: diffResult.rightSide.lines, isSeparator: false)
 
-        #expect(diffResult.summary == DiffSummary(matching: 2, added: 0, deleted: 0, changed: 0))
+        #expect(diffResult.summary == DiffSummary(matching: 2, added: 0, deleted: 0, changed: 0, ignored: 2))
 
         assertArrayCount(diffResult.sections, 0)
     }
@@ -55,7 +55,7 @@ final class WhitespacesTests: DiffResultBaseTests {
         assert(sectionSeparators: diffResult.leftSide.lines, isSeparator: false)
         assert(sectionSeparators: diffResult.rightSide.lines, isSeparator: false)
 
-        #expect(diffResult.summary == DiffSummary(matching: 1, added: 0, deleted: 0, changed: 1))
+        #expect(diffResult.summary == DiffSummary(matching: 1, added: 0, deleted: 0, changed: 1, ignored: 1))
 
         assertArrayCount(diffResult.sections, 1)
     }
@@ -82,7 +82,7 @@ final class WhitespacesTests: DiffResultBaseTests {
         assert(sectionSeparators: diffResult.leftSide.lines, isSeparator: false)
         assert(sectionSeparators: diffResult.rightSide.lines, isSeparator: false)
 
-        #expect(diffResult.summary == DiffSummary(matching: 3, added: 0, deleted: 0, changed: 0))
+        #expect(diffResult.summary == DiffSummary(matching: 3, added: 0, deleted: 0, changed: 0, ignored: 3))
 
         assertArrayCount(diffResult.sections, 0)
     }
@@ -109,7 +109,7 @@ final class WhitespacesTests: DiffResultBaseTests {
         assert(sectionSeparators: diffResult.leftSide.lines, isSeparator: false)
         assert(sectionSeparators: diffResult.rightSide.lines, isSeparator: false)
 
-        #expect(diffResult.summary == DiffSummary(matching: 2, added: 0, deleted: 0, changed: 1))
+        #expect(diffResult.summary == DiffSummary(matching: 2, added: 0, deleted: 0, changed: 1, ignored: 2))
 
         assertArrayCount(diffResult.sections, 1)
     }
@@ -134,8 +134,60 @@ final class WhitespacesTests: DiffResultBaseTests {
         assert(sectionSeparators: diffResult.leftSide.lines, isSeparator: false)
         assert(sectionSeparators: diffResult.rightSide.lines, isSeparator: false)
 
-        #expect(diffResult.summary == DiffSummary(matching: 2, added: 0, deleted: 0, changed: 0))
+        #expect(diffResult.summary == DiffSummary(matching: 2, added: 0, deleted: 0, changed: 0, ignored: 2))
 
         assertArrayCount(diffResult.sections, 0)
+    }
+
+    @Test
+    func ignoreLeadingWhitespacesAfterRightInsertion() {
+        let leftText =
+            "line1\n" +
+            "  spaced line"
+        let rightText =
+            "line1\n" +
+            "inserted line 1\n" +
+            "inserted line\n" +
+            " spaced line"
+
+        let diffResult = DiffResult()
+        diffResult.diff(leftText: leftText, rightText: rightText, options: .ignoreLeadingWhitespaces)
+
+        let leftChangeType: [DiffChangeType] = [.matching, .missing, .missing, .matching]
+        assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
+        let rightChangeType: [DiffChangeType] = [.matching, .added, .added, .matching]
+        assert(lines: diffResult.rightSide.lines, expectedValue: rightChangeType)
+
+        #expect(diffResult.leftSide.lines[1].hasIgnoredDifferences == false)
+        #expect(diffResult.rightSide.lines[1].hasIgnoredDifferences == false)
+        #expect(diffResult.leftSide.lines[2].hasIgnoredDifferences == false)
+        #expect(diffResult.rightSide.lines[2].hasIgnoredDifferences == false)
+        #expect(diffResult.leftSide.lines[3].hasIgnoredDifferences == true)
+        #expect(diffResult.rightSide.lines[3].hasIgnoredDifferences == true)
+
+        #expect(diffResult.summary == DiffSummary(matching: 2, added: 2, deleted: 0, changed: 0, ignored: 1))
+    }
+
+    @Test
+    func refreshSummaryAfterDeletingFilteredMatch() {
+        let diffResult = DiffResult()
+        diffResult.diff(
+            leftText: " leading spaces",
+            rightText: "leading spaces",
+            options: .ignoreLeadingWhitespaces
+        )
+
+        let filtered = DiffResult.justMatchingLines(diffResult)
+
+        DiffResult.deleteLines(
+            all: diffResult,
+            current: filtered,
+            rows: IndexSet(integer: 0),
+            side: .right,
+            visibility: .matches
+        )
+        diffResult.refreshSections()
+
+        #expect(diffResult.summary == DiffSummary(matching: 0, added: 0, deleted: 1, changed: 0, ignored: 0))
     }
 }

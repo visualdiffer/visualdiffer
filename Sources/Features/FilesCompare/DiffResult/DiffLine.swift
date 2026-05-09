@@ -27,6 +27,7 @@ class DiffLine {
     var component: DiffLineComponent
     var isSectionSeparator = false
     var filteredIndex = 0
+    var hasIgnoredDifferences: Bool
 
     var text: String {
         component.text
@@ -35,11 +36,13 @@ class DiffLine {
     init(
         with type: DiffChangeType,
         number: Int,
-        component: DiffLineComponent
+        component: DiffLineComponent,
+        hasIgnoredDifferences: Bool = false
     ) {
         self.type = type
         self.number = number
         self.component = component
+        self.hasIgnoredDifferences = hasIgnoredDifferences
     }
 
     static func missingLine() -> DiffLine {
@@ -54,6 +57,7 @@ class DiffLine {
         type = .missing
         component = DiffLineComponent(text: "", eol: .missing)
         number = Self.invalidLineNumber
+        hasIgnoredDifferences = false
     }
 }
 

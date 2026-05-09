@@ -457,6 +457,7 @@
 		55B1CE322E9934F800426FEC /* DiffResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1CE2C2E9934F800426FEC /* DiffResultTests.swift */; };
 		55B6760018956D90000D5A0D /* prefs_keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B675FE18956D90000D5A0D /* prefs_keyboard.png */; };
 		55B6760118956D90000D5A0D /* prefs_keyboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B675FF18956D90000D5A0D /* prefs_keyboard@2x.png */; };
+		55B93A452FAC42950024AEC0 /* DiffProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B93A442FAC42910024AEC0 /* DiffProcessor.swift */; };
 		55B9B73E2F5C26F800DB8326 /* BaseTests+CompareItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B9B73D2F5C26F800DB8326 /* BaseTests+CompareItem.swift */; };
 		55BC333E2EDAC69C004035A0 /* RowHeightCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC333D2EDAC69C004035A0 /* RowHeightCalculator.swift */; };
 		55BC33402EDAC96F004035A0 /* TiledImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC333F2EDAC96F004035A0 /* TiledImageView.swift */; };
@@ -1055,6 +1056,7 @@
 		55B2120C2490AB3B001717DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		55B675FE18956D90000D5A0D /* prefs_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_keyboard.png; sourceTree = "<group>"; };
 		55B675FF18956D90000D5A0D /* prefs_keyboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prefs_keyboard@2x.png"; sourceTree = "<group>"; };
+		55B93A442FAC42910024AEC0 /* DiffProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffProcessor.swift; sourceTree = "<group>"; };
 		55B9B73D2F5C26F800DB8326 /* BaseTests+CompareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseTests+CompareItem.swift"; sourceTree = "<group>"; };
 		55BC333D2EDAC69C004035A0 /* RowHeightCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowHeightCalculator.swift; sourceTree = "<group>"; };
 		55BC333F2EDAC96F004035A0 /* TiledImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiledImageView.swift; sourceTree = "<group>"; };
@@ -2746,6 +2748,7 @@
 				55373FDE2E9372DF00AB56D0 /* DiffChangeType.swift */,
 				554B4A432E9B7B8F0023AAF0 /* DiffLine.swift */,
 				557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */,
+				55B93A442FAC42910024AEC0 /* DiffProcessor.swift */,
 				554B4A3B2E9B7B8F0023AAF0 /* DiffResult.swift */,
 				55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */,
 				554B4A3D2E9B7B8F0023AAF0 /* DiffResult+Dump.swift */,
@@ -3322,6 +3325,7 @@
 				553741B42E9372DF00AB56D0 /* NSApplication.ModalResponse+ReplaceFile.swift in Sources */,
 				553741B52E9372DF00AB56D0 /* DiffOpenerDelegate.swift in Sources */,
 				553741B62E9372DF00AB56D0 /* MGScopeBar.m in Sources */,
+				55B93A452FAC42950024AEC0 /* DiffProcessor.swift in Sources */,
 				553741B72E9372DF00AB56D0 /* PreferencesCheckbox.swift in Sources */,
 				553741B82E9372DF00AB56D0 /* FileManager+Attributes.swift in Sources */,
 				553741B92E9372DF00AB56D0 /* MainThreadFolderReaderDelegateBridge.swift in Sources */,

@@ -30,7 +30,11 @@ extension DiffCountersItem {
             }
         }
         if summary.matching > 0 {
-            let count = String.localizedStringWithFormat(NSLocalizedString("%ld identical", comment: ""), summary.matching)
+            var count = String.localizedStringWithFormat(NSLocalizedString("%ld identical", comment: ""), summary.matching)
+            if summary.ignored > 0 {
+                let ignored = String.localizedStringWithFormat(NSLocalizedString("%ld differences ignored", comment: ""), summary.ignored)
+                count = "\(count) (\(ignored))"
+            }
             if let color = DiffChangeType.matching.colors?.text {
                 items.append(diffCounterItem(withText: count, color: color))
             }
