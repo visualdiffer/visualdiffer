@@ -42,8 +42,7 @@ public extension NSImage {
 
             return tintedImage
         }
-        // swiftlint:disable:next force_cast
-        return copy() as! NSImage
+        return copy() as? NSImage ?? self
     }
 
     /**

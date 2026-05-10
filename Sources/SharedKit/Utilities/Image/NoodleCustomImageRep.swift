@@ -64,8 +64,9 @@ class NoodleCustomImageRep: NSImageRep {
     }
 
     override func copy(with zone: NSZone? = nil) -> Any {
-        // swiftlint:disable:next force_cast
-        let copy = super.copy(with: zone) as! NoodleCustomImageRep
+        guard let copy = super.copy(with: zone) as? NoodleCustomImageRep else {
+            preconditionFailure("NSImageRep copy should preserve NoodleCustomImageRep")
+        }
 
         // NSImageRep uses NSCopyObject so we have to force a copy here
         copy.drawBlock = drawBlock

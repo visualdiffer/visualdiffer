@@ -23,8 +23,11 @@ class VDDocumentController: NSDocumentController {
     private let documentWindow: DocumentWindow
 
     override class var shared: VDDocumentController {
-        // swiftlint:disable:next force_cast
-        NSDocumentController.shared as! VDDocumentController
+        guard let controller = NSDocumentController.shared as? VDDocumentController else {
+            preconditionFailure("NSDocumentController.shared is not VDDocumentController — check the nib")
+        }
+
+        return controller
     }
 
     override init() {

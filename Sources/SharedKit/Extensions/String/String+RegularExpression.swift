@@ -20,13 +20,16 @@ private struct GlobConverter {
         ]
 
         for (regexString, templateString) in globs {
-            // swiftlint:disable:next force_try
-            let re = try! NSRegularExpression(
-                pattern: regexString,
-                options: .caseInsensitive
-            )
-            regex.append(re)
-            templates.append(templateString)
+            do {
+                let re = try NSRegularExpression(
+                    pattern: regexString,
+                    options: .caseInsensitive
+                )
+                regex.append(re)
+                templates.append(templateString)
+            } catch {
+                preconditionFailure("invalid static regex pattern '\(regexString)': \(error)")
+            }
         }
     }
 

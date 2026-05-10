@@ -56,11 +56,13 @@ class DiffResult {
         rightLines: [DiffLineComponent],
         options: Options = []
     ) {
-        // swiftlint:disable force_cast
         let stringifier: (Any) -> String = {
-            options.applyTransformations(component: $0 as! DiffLineComponent)
+            guard let component = $0 as? DiffLineComponent else {
+                preconditionFailure("Excepted a DiffLineComponent")
+            }
+
+            return options.applyTransformations(component: component)
         }
-        // swiftlint:enable force_cast
 
         let udiff = UnifiedDiff(
             originalLines: leftLines,
