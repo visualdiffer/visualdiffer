@@ -273,10 +273,11 @@ extension AlignRuleWindow {
         var errorDescription: String? {
             switch self {
             case let .emptyExpression(isLeft):
-                isLeft
-                    // swiftlint:disable:next void_function_in_ternary
-                    ? NSLocalizedString("Left expression can't be empty", comment: "")
-                    : NSLocalizedString("Right expression can't be empty", comment: "")
+                if isLeft {
+                    NSLocalizedString("Left expression can't be empty", comment: "")
+                } else {
+                    NSLocalizedString("Right expression can't be empty", comment: "")
+                }
             case .ruleAlreadyExists:
                 NSLocalizedString("An identical rule already exists", comment: "")
             case let .invalidRegularExpression(error):

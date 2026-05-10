@@ -33,10 +33,9 @@ public class FoldersWindowController: NSWindowController,
     var hideEmptyFolders = false
     var showFilteredFiles = false
 
-    // swiftlint:disable:next implicitly_unwrapped_optional
-    var lastUsedView: FoldersOutlineView!
+    lazy var lastUsedView = leftPanelView.treeView
 
-    // ComparatorPopUpButtonCell uses the tag property to select item but
+    // comparatorPopUpButtonCell uses the tag property to select the item, but
     // sessionDiff.comparatorFlags bitmask should not match the tag value, so
     // sessionDiff.comparatorFlags is bit-masked with comparatorMethod in selection action methods
     var comparatorMethod: ComparatorOptions = [] {
@@ -48,8 +47,7 @@ public class FoldersWindowController: NSWindowController,
         }
     }
 
-    // swiftlint:disable:next implicitly_unwrapped_optional
-    var currentFont: NSFont!
+    var currentFont = CommonPrefs.shared.folderListingFont
 
     var comparator: ItemComparator?
     lazy var sessionPreferencesSheet: SessionPreferencesWindow = .init()
@@ -124,9 +122,9 @@ public class FoldersWindowController: NSWindowController,
         initAllViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init()")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     public nonisolated func userNotificationCenter(_: UNUserNotificationCenter, willPresent _: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -279,7 +277,7 @@ public class FoldersWindowController: NSWindowController,
 
     #if DEBUG
         override public func keyDown(with event: NSEvent) {
-            // Cmd + F12 pressed, create the test code
+            // cmd + F12 pressed, create the test code
             if event.modifierFlags.contains(.command),
                event.charactersIgnoringModifiers?.unicodeScalars.first?.value == UInt32(NSF12FunctionKey) {
                 FileSystemTestHelper.createTestCode(leftView, sessionDiff: sessionDiff)

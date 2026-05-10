@@ -10,21 +10,22 @@ enum CopyFilesTag: Int {
     case fileContents = 0
     case finderMetadataOnly = 1
 
-    // swiftlint:disable void_function_in_ternary
     static func localizedTag(side: DisplaySide, tag: Int) -> String {
         switch side {
         case .left:
-            tag == finderMetadataOnly.rawValue
-                ? NSLocalizedString("Copy Metadata to Right...", comment: "")
-                : NSLocalizedString("Copy to Right...", comment: "")
+            if tag == finderMetadataOnly.rawValue {
+                NSLocalizedString("Copy Metadata to Right...", comment: "")
+            } else {
+                NSLocalizedString("Copy to Right...", comment: "")
+            }
         case .right:
-            tag == finderMetadataOnly.rawValue
-                ? NSLocalizedString("Copy Metadata to Left...", comment: "")
-                : NSLocalizedString("Copy to Left...", comment: "")
+            if tag == finderMetadataOnly.rawValue {
+                NSLocalizedString("Copy Metadata to Left...", comment: "")
+            } else {
+                NSLocalizedString("Copy to Left...", comment: "")
+            }
         }
     }
-
-    // swiftlint:enable void_function_in_ternary
 
     @MainActor
     static func isCopyFinderMetadataOnly(sender: AnyObject?) -> Bool {
