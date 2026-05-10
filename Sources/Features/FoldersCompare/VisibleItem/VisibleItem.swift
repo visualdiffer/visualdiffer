@@ -101,11 +101,7 @@ public class VisibleItem: NSObject {
                 var result = comparator(fs1, fs2)
 
                 if result == .orderedSame {
-                    // swiftlint:disable force_unwrapping
-                    result = ignoreCase
-                        ? fs1.fileName!.localizedCaseInsensitiveCompare(fs2.fileName!)
-                        : fs1.fileName!.localizedCompare(fs2.fileName!)
-                    // swiftlint:enable force_unwrapping
+                    result = compareFileName(lhs: fs1, rhs: fs2, ignoreCase: ignoreCase)
                 }
                 if !ascending, result != .orderedSame {
                     result = result == .orderedAscending ? .orderedDescending : .orderedAscending
@@ -122,5 +118,22 @@ public class VisibleItem: NSObject {
 
             linkedItem?.children[index] = li
         }
+    }
+
+    private func compareFileName(
+        lhs: CompareItem,
+        rhs: CompareItem,
+        ignoreCase: Bool
+    ) -> ComparisonResult {
+        guard let lhsFileName = lhs.fileName else {
+            return .orderedDescending
+        }
+        guard let rhsFileName = rhs.fileName else {
+            return .orderedAscending
+        }
+
+        return ignoreCase
+            ? lhsFileName.localizedCaseInsensitiveCompare(rhsFileName)
+            : lhsFileName.localizedCompare(rhsFileName)
     }
 }

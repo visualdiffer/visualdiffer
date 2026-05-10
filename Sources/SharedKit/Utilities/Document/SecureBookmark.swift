@@ -17,8 +17,8 @@ class SecureBookmark: @unchecked Sendable {
     private init() {}
 
     /**
-     * Add a new url to the secure bookmarks
-     * @return true if the url is bookmarked with success, false otherwise
+     * Add a new URL to the secure bookmarks
+     * @return true if the URL is bookmarked successfully, false otherwise
      */
     @discardableResult
     func add(_ path: URL, searchClosestPath: Bool = true) -> Bool {
@@ -40,13 +40,8 @@ class SecureBookmark: @unchecked Sendable {
                     includingResourceValuesForKeys: nil,
                     relativeTo: nil
                 )
-                var dict = securedPaths
-
-                if dict == nil {
-                    dict = [String: Data]()
-                }
-                // swiftlint:disable:next force_unwrapping
-                dict![path.osPath] = bookmark
+                var dict = securedPaths ?? [String: Data]()
+                dict[path.osPath] = bookmark
                 UserDefaults.standard.set(dict, forKey: sandboxedPaths)
             } catch {
                 Logger.general.error("Secure bookmark failed \(error)")
@@ -104,10 +99,10 @@ class SecureBookmark: @unchecked Sendable {
     }
 
     func findClosestPath(to path: URL, searchPaths: [String]) -> String? {
-        // don't matter if path is a file or a directory, add the separator in any case
-        // so hasPrefix works fine with last path component
-        // eg "/Users/app 2 3" has prefix "/Users/app 2" but
-        // "/Users/app 2 3/" hasn't prefix "/Users/app 2/" and this is the correct result
+        // it does not matter whether path is a file or a directory, add the separator in any case
+        // so hasPrefix works correctly with the last path component
+        // for example "/Users/app 2 3" has prefix "/Users/app 2" but
+        // "/Users/app 2 3/" does not have prefix "/Users/app 2/" and that is the correct result
         let pathWithSep = path.osPath + "/"
         let sorted = searchPaths.sorted {
             $0.caseInsensitiveCompare($1) == .orderedDescending

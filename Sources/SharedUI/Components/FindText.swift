@@ -19,17 +19,14 @@ class FindText: NSView, NSSearchFieldDelegate {
     var delegate: FindTextDelegate?
 
     private lazy var rewindView: WindowOSD = .init(
-        // swiftlint:disable:next force_unwrapping
-        image: NSImage(named: VDImageNameRewind)!,
+        image: NSImage.required(named: VDImageNameRewind),
         parent: window
     )
 
     private lazy var arrows: NSSegmentedControl = {
         let images = [
-            // swiftlint:disable:next force_unwrapping
-            NSImage(named: NSImage.goLeftTemplateName)!,
-            // swiftlint:disable:next force_unwrapping
-            NSImage(named: NSImage.goRightTemplateName)!,
+            NSImage.required(named: NSImage.goLeftTemplateName),
+            NSImage.required(named: NSImage.goRightTemplateName),
         ]
         let view = NSSegmentedControl(
             images: images,

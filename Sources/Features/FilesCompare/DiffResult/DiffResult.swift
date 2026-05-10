@@ -58,7 +58,7 @@ class DiffResult {
     ) {
         let stringifier: (Any) -> String = {
             guard let component = $0 as? DiffLineComponent else {
-                preconditionFailure("Excepted a DiffLineComponent")
+                preconditionFailure("Expected a DiffLineComponent")
             }
 
             return options.applyTransformations(component: component)

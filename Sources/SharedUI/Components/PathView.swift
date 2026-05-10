@@ -61,9 +61,9 @@ class PathView: NSView {
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     func setupViews() {
@@ -72,7 +72,7 @@ class PathView: NSView {
         addSubview(stackView)
         setupConstraints()
 
-        // enable iterates the views so we must set it only after all views are added to self
+        // isEnabled iterates the views, so set it only after all views are added to self
         isEnabled = true
     }
 
@@ -116,12 +116,8 @@ class PathView: NSView {
     }
 
     private func createBrowseButton() -> NSButton {
-        guard let image = NSImage(named: VDImageNameBrowse) else {
-            fatalError("Unable to create image for \(VDImageNameBrowse)")
-        }
-
         let view = NSButton(
-            image: image,
+            image: NSImage.required(named: VDImageNameBrowse),
             target: pathControl,
             action: #selector(PathControl.choosePath)
         )
@@ -134,12 +130,8 @@ class PathView: NSView {
     }
 
     private func createSaveButton() -> NSButton {
-        guard let image = NSImage(named: VDImageNameSave) else {
-            fatalError("Unable to create image for \(VDImageNameSave)")
-        }
-
         let view = NSButton(
-            image: image,
+            image: NSImage.required(named: VDImageNameSave),
             target: nil,
             action: nil
         )
@@ -189,8 +181,8 @@ class PathView: NSView {
             return
         }
 
-        // We enable the views ourselves but when NSConditionallySetsEnabledBindingOption is true (the default)
-        // they are automagically enabled by the binding system so we turn off the NSConditionallySetsEnabledBindingOption flag
+        // we enable the views ourselves, but when NSConditionallySetsEnabledBindingOption is true, which is the default,
+        // they are automatically enabled by the binding system so we turn off the NSConditionallySetsEnabledBindingOption flag
         let pathControlBindOptions = [
             NSBindingOption.conditionallySetsEnabled: false,
         ]

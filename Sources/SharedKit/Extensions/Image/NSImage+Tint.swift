@@ -127,4 +127,12 @@ public extension NSImage {
         image.unlockFocus()
         return image
     }
+
+    static func required(named name: NSImage.Name) -> NSImage {
+        guard let image = NSImage(named: name) else {
+            preconditionFailure("missing required image '\(name)'")
+        }
+
+        return image
+    }
 }

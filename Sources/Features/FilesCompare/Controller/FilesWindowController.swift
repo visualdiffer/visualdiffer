@@ -48,8 +48,7 @@ class FilesWindowController: NSWindowController {
     lazy var rightDetailsTextView = createLineDetailTextView()
 
     lazy var topBottomView: WindowOSD = .init(
-        // swiftlint:disable:next force_unwrapping
-        image: NSImage(named: VDImageNameBottom)!,
+        image: NSImage.required(named: VDImageNameBottom),
         parent: window
     )
 

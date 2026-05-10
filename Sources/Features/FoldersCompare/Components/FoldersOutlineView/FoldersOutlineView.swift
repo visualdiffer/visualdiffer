@@ -19,11 +19,12 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
     private var _selectionInfo: FolderSelectionInfo?
 
     var selectionInfo: FolderSelectionInfo {
-        if _selectionInfo == nil {
-            _selectionInfo = FolderSelectionInfo(view: self)
+        if let selectionInfo = _selectionInfo {
+            return selectionInfo
         }
-        // swiftlint:disable:next force_unwrapping
-        return _selectionInfo!
+        let selectionInfo = FolderSelectionInfo(view: self)
+        _selectionInfo = selectionInfo
+        return selectionInfo
     }
 
     private var lockExpand = false
@@ -37,9 +38,9 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     private func setupViews() {
@@ -61,7 +62,7 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
         intercellSpacing = NSSize(width: 3, height: 2)
         allowsMultipleSelection = true
 
-        // Needed by drop
+        // needed by drag and drop
         registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
         setDraggingSourceOperationMask(.every, forLocal: true)
         setDraggingSourceOperationMask(.every, forLocal: false)
