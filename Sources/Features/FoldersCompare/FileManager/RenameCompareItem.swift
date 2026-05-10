@@ -255,11 +255,12 @@ class RenameCompareItem {
 
         renamedSrcRoot.linkedItem = item
         item.linkedItem = renamedSrcRoot
-        operationManager.comparator.alignItem(
-            renamedSrcRoot,
+        let context = AlignContext(
+            leftRoot: renamedSrcRoot,
             rightRoot: item,
-            alignConfig: AlignConfig(recursive: true, followSymLinks: operationManager.filterConfig.followSymLinks)
+            config: AlignConfig(recursive: true, followSymLinks: operationManager.filterConfig.followSymLinks)
         )
+        operationManager.comparator.alignItem(context)
 
         // TODO: expensive
         renamedSrcRoot.applyComparison(
@@ -311,11 +312,12 @@ class RenameCompareItem {
 
         renamedSrcRoot.linkedItem = item
         item.linkedItem = renamedSrcRoot
-        operationManager.comparator.alignItem(
-            renamedSrcRoot,
+        let context = AlignContext(
+            leftRoot: renamedSrcRoot,
             rightRoot: item,
-            alignConfig: AlignConfig(recursive: true, followSymLinks: operationManager.filterConfig.followSymLinks)
+            config: AlignConfig(recursive: true, followSymLinks: operationManager.filterConfig.followSymLinks)
         )
+        operationManager.comparator.alignItem(context)
 
         parentSrcCount.orphanFiles -= renamedSrcRoot.orphanFiles
 

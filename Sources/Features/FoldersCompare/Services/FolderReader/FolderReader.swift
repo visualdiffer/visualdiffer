@@ -115,11 +115,12 @@ public class FolderReader: @unchecked Sendable {
                 recursive: false,
                 followSymLinks: filterConfig.followSymLinks
             )
-            comparator.alignItem(
-                leftItem,
+            let context = AlignContext(
+                leftRoot: leftItem,
                 rightRoot: rightItem,
-                alignConfig: alignConfig
+                config: alignConfig
             )
+            comparator.alignItem(context)
         }
 
         leftItem.applyComparison(

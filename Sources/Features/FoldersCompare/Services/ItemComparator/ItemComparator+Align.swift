@@ -13,6 +13,25 @@ public struct AlignConfig {
     let followSymLinks: Bool
 }
 
+public struct AlignContext {
+    let leftRoot: CompareItem
+    let rightRoot: CompareItem
+    let config: AlignConfig
+}
+
+public struct AlignPosition {
+    var leftIndex = 0
+    var rightIndex = 0
+
+    func leftChild(in context: AlignContext) -> CompareItem {
+        context.leftRoot.child(at: leftIndex)
+    }
+
+    func rightChild(in context: AlignContext) -> CompareItem {
+        context.rightRoot.child(at: rightIndex)
+    }
+}
+
 // Both files are invalid but their path string contains a valid value
 @inline(__always)
 func bothInvalidWithPath(_ lfs: CompareItem, _ rfs: CompareItem) -> Bool {
@@ -40,93 +59,87 @@ public extension ComparatorOptions {
     }
 }
 
-// swiftlint:disable function_parameter_count
 public extension ItemComparator {
     func alignItem(
-        _ leftRoot: CompareItem,
-        rightRoot: CompareItem,
-        alignConfig: AlignConfig
+        _ context: AlignContext
     ) {
-        var lIndex = 0
-        var rIndex = 0
-        var leftChildrenCount = leftRoot.children.count
-        var rightChildrenCount = rightRoot.children.count
+        var position = AlignPosition()
+        var leftChildrenCount = context.leftRoot.children.count
+        var rightChildrenCount = context.rightRoot.children.count
 
-        while (lIndex < leftChildrenCount) || (rIndex < rightChildrenCount) {
+        while (position.leftIndex < leftChildrenCount) || (position.rightIndex < rightChildrenCount) {
             var pos: ComparisonResult
 
-            if lIndex >= leftChildrenCount {
+            if position.leftIndex >= leftChildrenCount {
                 pos = .orderedDescending
-            } else if rIndex >= rightChildrenCount {
+            } else if position.rightIndex >= rightChildrenCount {
                 pos = .orderedAscending
-            } else if (leftRoot.child(at: lIndex).isValidFile && rightRoot.child(at: rIndex).isValidFile)
-                || bothInvalidWithPath(leftRoot.child(at: lIndex), rightRoot.child(at: rIndex)) {
-                pos = align(
-                    leftRoot,
-                    rightRoot: rightRoot,
-                    alignConfig: alignConfig,
-                    leftIndex: &lIndex,
-                    rightIndex: &rIndex
-                )
             } else {
-                if !leftRoot.child(at: lIndex).isValidFile {
-                    lIndex += 1
+                let lChild = position.leftChild(in: context)
+                let rChild = position.rightChild(in: context)
+
+                if (lChild.isValidFile && rChild.isValidFile) || bothInvalidWithPath(lChild, rChild) {
+                    pos = align(context, position: &position)
+                } else {
+                    if !lChild.isValidFile {
+                        position.leftIndex += 1
+                    }
+                    if !rChild.isValidFile {
+                        position.rightIndex += 1
+                    }
+                    continue
                 }
-                if !rightRoot.child(at: rIndex).isValidFile {
-                    rIndex += 1
-                }
-                continue
             }
             if pos == .orderedSame {
-                if leftRoot.child(at: lIndex).isFile, rightRoot.child(at: rIndex).isFile {
+                // both indices are valid here: orderedSame is only set from the else branch above
+                let lChild = position.leftChild(in: context)
+                let rChild = position.rightChild(in: context)
+                if lChild.isFile, rChild.isFile {
                     // ignore this case
                 } else {
-                    if alignConfig.recursive {
-                        alignItem(
-                            leftRoot.child(at: lIndex),
-                            rightRoot: rightRoot.child(at: rIndex),
-                            alignConfig: alignConfig
-                        )
+                    if context.config.recursive {
+                        alignItem(AlignContext(
+                            leftRoot: lChild,
+                            rightRoot: rChild,
+                            config: context.config
+                        ))
                     }
                 }
 
-                leftRoot.child(at: lIndex).linkedItem = rightRoot.child(at: rIndex)
-                rightRoot.child(at: rIndex).linkedItem = leftRoot.child(at: lIndex)
+                lChild.linkedItem = rChild
+                rChild.linkedItem = lChild
 
-                lIndex += 1
-                rIndex += 1
+                position.leftIndex += 1
+                position.rightIndex += 1
             } else if pos == .orderedAscending {
                 // insert left orphan
                 insert(
-                    orphan: leftRoot.child(at: lIndex),
-                    otherSide: rightRoot,
-                    alignConfig: alignConfig,
-                    leftIndex: &lIndex,
-                    rightIndex: &rIndex
+                    orphan: position.leftChild(in: context),
+                    otherSide: context.rightRoot,
+                    context: context,
+                    position: &position
                 )
             } else if pos == .orderedDescending {
                 // insert right orphan
                 insert(
-                    orphan: rightRoot.child(at: rIndex),
-                    otherSide: leftRoot,
-                    alignConfig: alignConfig,
-                    leftIndex: &lIndex,
-                    rightIndex: &rIndex
+                    orphan: position.rightChild(in: context),
+                    otherSide: context.leftRoot,
+                    context: context,
+                    position: &position
                 )
             } else {
                 Logger.general.error("Invalid pos value \(pos.rawValue)")
             }
-            leftChildrenCount = leftRoot.children.count
-            rightChildrenCount = rightRoot.children.count
+            leftChildrenCount = context.leftRoot.children.count
+            rightChildrenCount = context.rightRoot.children.count
         }
     }
 
     func insert(
         orphan: CompareItem,
         otherSide: CompareItem,
-        alignConfig: AlignConfig,
-        leftIndex: inout Int,
-        rightIndex: inout Int
+        context: AlignContext,
+        position: inout AlignPosition
     ) {
         let newItem = CompareItem(
             path: nil,
@@ -138,146 +151,119 @@ public extension ItemComparator {
         orphan.linkedItem = newItem
         newItem.linkedItem = orphan
         newItem.linkedItemIsFolder(orphan.isFolder)
-        otherSide.insert(child: newItem, at: leftIndex)
+        otherSide.insert(child: newItem, at: position.leftIndex)
 
-        if alignConfig.recursive {
-            alignItem(
-                orphan,
-                rightRoot: otherSide.child(at: leftIndex),
-                alignConfig: alignConfig
-            )
+        if context.config.recursive {
+            alignItem(AlignContext(
+                leftRoot: orphan,
+                rightRoot: otherSide.child(at: position.leftIndex),
+                config: context.config
+            ))
         }
-        leftIndex += 1
-        rightIndex += 1
+        position.leftIndex += 1
+        position.rightIndex += 1
     }
 
     func align(
-        _ leftRoot: CompareItem,
-        rightRoot: CompareItem,
-        alignConfig: AlignConfig,
-        leftIndex: inout Int,
-        rightIndex: inout Int
+        _ context: AlignContext,
+        position: inout AlignPosition
     ) -> ComparisonResult {
         if let fileNameAlignments, !fileNameAlignments.isEmpty {
             return alignByRegularExpression(
-                leftRoot,
-                rightRoot: rightRoot,
-                alignConfig: alignConfig,
-                leftIndex: &leftIndex,
-                rightIndex: &rightIndex
+                context,
+                position: &position
             )
         }
         return alignByFileName(
-            leftRoot,
-            rightRoot: rightRoot,
-            alignConfig: alignConfig,
-            leftIndex: &leftIndex,
-            rightIndex: &rightIndex
+            context,
+            position: &position
         )
     }
 
     // MARK: - Filenames alignment
 
     func alignByFileName(
-        _ leftRoot: CompareItem,
-        rightRoot: CompareItem,
-        alignConfig: AlignConfig,
-        leftIndex: inout Int,
-        rightIndex: inout Int
+        _ context: AlignContext,
+        position: inout AlignPosition
     ) -> ComparisonResult {
         var pos: ComparisonResult = .orderedSame
-        var l = leftIndex
-        var r = rightIndex
-        let rightChildren = rightRoot.children
-        let followSymLinks = alignConfig.followSymLinks
+        let rightChildren = context.rightRoot.children
+        let followSymLinks = context.config.followSymLinks
 
         if isLeftCaseSensitive, isRightCaseSensitive {
-            pos = leftRoot.child(at: l).compare(
-                forAlign: rightRoot.child(at: r),
+            pos = position.leftChild(in: context).compare(
+                forAlign: position.rightChild(in: context),
                 followSymLinks: followSymLinks,
                 insensitiveCompare: false
             )
         } else if !isLeftCaseSensitive, !isRightCaseSensitive {
-            pos = leftRoot.child(at: l).compare(
-                forAlign: rightRoot.child(at: r),
+            pos = position.leftChild(in: context).compare(
+                forAlign: position.rightChild(in: context),
                 followSymLinks: followSymLinks,
                 insensitiveCompare: true
             )
         } else {
-            let leftChild = leftRoot.child(at: l)
+            let leftChild = position.leftChild(in: context)
             let index = findInsertIndex(
                 left: leftChild,
-                right: rightRoot,
-                startIndex: r,
+                right: context.rightRoot,
+                startIndex: position.rightIndex,
                 followSymLinks: followSymLinks
             )
             // left name doesn't exist on right so determine the insertion point using a match case
             if index == -1 {
                 pos = leftChild.compare(
-                    forAlign: rightRoot.child(at: r),
+                    forAlign: position.rightChild(in: context),
                     followSymLinks: followSymLinks,
                     insensitiveCompare: false
                 )
             } else {
-                while r < index {
+                while position.rightIndex < index {
                     insert(
-                        orphan: rightRoot.child(at: r),
-                        otherSide: leftRoot,
-                        alignConfig: alignConfig,
-                        leftIndex: &l,
-                        rightIndex: &r
+                        orphan: position.rightChild(in: context),
+                        otherSide: context.leftRoot,
+                        context: context,
+                        position: &position
                     )
                 }
-                let leftFileName = leftRoot.child(at: l).fileName ?? ""
-                let (isExactlyMatch, rightIndex) = findExactlyMatchIndex(
+                let leftFileName = position.leftChild(in: context).fileName ?? ""
+                let (isExactlyMatch, matchIndex) = findExactlyMatchIndex(
                     leftFileName,
                     subfolders: rightChildren,
                     followSymLinks: followSymLinks,
-                    startIndex: r
+                    startIndex: position.rightIndex
                 )
 
                 if isExactlyMatch {
                     pos = insertOrphans(
-                        atExactIndex: rightIndex,
-                        leftRoot: leftRoot,
-                        rightRoot: rightRoot,
-                        alignConfig: alignConfig,
-                        leftIndex: &l,
-                        rightIndex: &r
+                        atExactIndex: matchIndex,
+                        context: context,
+                        position: &position
                     )
                 } else {
                     pos = insertOrphans(
-                        atClosestIndex: rightIndex,
-                        leftRoot: leftRoot,
-                        rightRoot: rightRoot,
-                        alignConfig: alignConfig,
-                        leftIndex: &l,
-                        rightIndex: &r
+                        atClosestIndex: matchIndex,
+                        context: context,
+                        position: &position
                     )
                 }
             }
         }
-        leftIndex = l
-        rightIndex = r
 
         return pos
     }
 
     func insertOrphans(
         atExactIndex exactMatchRightIndex: Int,
-        leftRoot: CompareItem,
-        rightRoot: CompareItem,
-        alignConfig: AlignConfig,
-        leftIndex l: inout Int,
-        rightIndex r: inout Int
+        context: AlignContext,
+        position: inout AlignPosition
     ) -> ComparisonResult {
-        while r < exactMatchRightIndex {
+        while position.rightIndex < exactMatchRightIndex {
             insert(
-                orphan: rightRoot.child(at: r),
-                otherSide: leftRoot,
-                alignConfig: alignConfig,
-                leftIndex: &l,
-                rightIndex: &r
+                orphan: position.rightChild(in: context),
+                otherSide: context.leftRoot,
+                context: context,
+                position: &position
             )
         }
         return .orderedSame
@@ -285,30 +271,27 @@ public extension ItemComparator {
 
     func insertOrphans(
         atClosestIndex closestRightIndex: Int,
-        leftRoot: CompareItem,
-        rightRoot: CompareItem,
-        alignConfig: AlignConfig,
-        leftIndex l: inout Int,
-        rightIndex r: inout Int
+        context: AlignContext,
+        position: inout AlignPosition
     ) -> ComparisonResult {
-        let leftChildren = leftRoot.children
+        let leftChildren = context.leftRoot.children
+        let l = position.leftIndex
         let hasLeftMoreSameNames = (l + 1) < leftChildren.count
             && leftChildren[l].compare(
                 forAlign: leftChildren[l + 1],
-                followSymLinks: alignConfig.followSymLinks,
+                followSymLinks: context.config.followSymLinks,
                 insensitiveCompare: true
             ) == .orderedSame
 
         if hasLeftMoreSameNames {
             return .orderedAscending
         }
-        while r < closestRightIndex {
+        while position.rightIndex < closestRightIndex {
             insert(
-                orphan: rightRoot.child(at: r),
-                otherSide: leftRoot,
-                alignConfig: alignConfig,
-                leftIndex: &l,
-                rightIndex: &r
+                orphan: position.rightChild(in: context),
+                otherSide: context.leftRoot,
+                context: context,
+                position: &position
             )
         }
         return .orderedSame
@@ -390,5 +373,3 @@ func enumerateWithSameFileName(
             insensitiveCompare: true
         ) == .orderedSame
 }
-
-// swiftlint:enable function_parameter_count

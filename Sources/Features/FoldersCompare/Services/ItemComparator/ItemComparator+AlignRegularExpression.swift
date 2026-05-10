@@ -8,47 +8,30 @@
 
 extension ItemComparator {
     func alignByRegularExpression(
-        _ leftRoot: CompareItem,
-        rightRoot: CompareItem,
-        alignConfig: AlignConfig,
-        leftIndex: inout Int,
-        rightIndex: inout Int
+        _ context: AlignContext,
+        position: inout AlignPosition
     ) -> ComparisonResult {
-        let leftChild = leftRoot.child(at: leftIndex)
-        let rightChild = rightRoot.child(at: rightIndex)
+        let leftChild = position.leftChild(in: context)
+        let rightChild = position.rightChild(in: context)
 
-        var lIndex = leftIndex
-        var rIndex = rightIndex
-
-        let result = leftChild.compare(
+        return leftChild.compare(
             rightChild,
-            followSymLinks: alignConfig.followSymLinks
-        ) { self.compareByRegularExpression(
-            lhs: $0,
-            rhs: $1,
-            leftRoot: leftRoot,
-            rightRoot: rightRoot,
-            alignConfig: alignConfig,
-            leftIndex: &lIndex,
-            rightIndex: &rIndex
-        )
+            followSymLinks: context.config.followSymLinks
+        ) {
+            self.compareByRegularExpression(
+                lhs: $0,
+                rhs: $1,
+                context: context,
+                position: &position
+            )
         }
-
-        leftIndex = lIndex
-        rightIndex = rIndex
-
-        return result
     }
 
-    // swiftlint:disable:next function_parameter_count
     private func compareByRegularExpression(
         lhs: CompareItem,
         rhs: CompareItem,
-        leftRoot: CompareItem,
-        rightRoot: CompareItem,
-        alignConfig: AlignConfig,
-        leftIndex: inout Int,
-        rightIndex: inout Int
+        context: AlignContext,
+        position: inout AlignPosition
     ) -> ComparisonResult {
         guard let lhsName = lhs.fileName,
               let rhsName = rhs.fileName else {
@@ -61,11 +44,8 @@ extension ItemComparator {
             }
         }
         return alignByFileName(
-            leftRoot,
-            rightRoot: rightRoot,
-            alignConfig: alignConfig,
-            leftIndex: &leftIndex,
-            rightIndex: &rightIndex
+            context,
+            position: &position
         )
     }
 }
