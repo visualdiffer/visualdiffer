@@ -12,11 +12,11 @@ extension FoldersWindowController: NSOutlineViewDelegate,
     NSOutlineViewDataSource,
     FoldersOutlineViewDelegate,
     OutlineViewItemDelegate {
-    @objc var leftView: FoldersOutlineView {
+    var leftView: FoldersOutlineView {
         leftPanelView.treeView
     }
 
-    @objc var rightView: FoldersOutlineView {
+    var rightView: FoldersOutlineView {
         rightPanelView.treeView
     }
 
@@ -188,7 +188,6 @@ extension FoldersWindowController: NSOutlineViewDelegate,
         rightView.reloadData()
     }
 
-    @objc
     func sortBySessionColumn() {
         guard let leftVisibleItems else {
             return

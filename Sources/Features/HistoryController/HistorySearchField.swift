@@ -8,9 +8,8 @@
 
 import Foundation
 
-@objc
 class HistorySearchField: NSSearchField, NSSearchFieldDelegate {
-    @objc var historyController: HistoryController?
+    var historyController: HistoryController?
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)

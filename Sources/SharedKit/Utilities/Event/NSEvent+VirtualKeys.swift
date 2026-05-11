@@ -8,7 +8,6 @@
 
 // swiftformat:disable wrapPropertyBodies
 // swiftlint:disable identifier_name
-@objc
 enum KeyCode: UInt16 {
     case ansi_A = 0x00
     case ansi_S = 0x01
@@ -270,7 +269,6 @@ extension KeyCode {
 // swiftlint:enable identifier_name
 
 extension NSEvent {
-    @objc
     func isDeleteShortcutKey(_ checkCommandDeleteKey: Bool) -> Bool {
         if checkCommandDeleteKey, modifierFlags.contains(.command), keyCode == KeyCode.deleteCharacter {
             return true

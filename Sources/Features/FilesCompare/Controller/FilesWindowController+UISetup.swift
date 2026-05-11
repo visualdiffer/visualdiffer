@@ -7,7 +7,6 @@
 //
 
 extension FilesWindowController {
-    @objc
     func initAllViews() {
         setupWindowLayout()
 
@@ -98,7 +97,6 @@ extension FilesWindowController {
         window.collectionBehavior = [window.collectionBehavior, .fullScreenPrimary]
     }
 
-    @objc
     func updateUI() {
         updateTreeViewFont()
 
@@ -235,11 +233,11 @@ extension FilesWindowController {
         leftView.reloadData()
         rightView.reloadData()
 
-        if let diffResult {
-            differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: diffResult))
-        } else {
-            fatalError("diffResult is nil, why???")
+        guard let diffResult else {
+            return
         }
+
+        differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: diffResult))
     }
 
     // MARK: - File and view scroll

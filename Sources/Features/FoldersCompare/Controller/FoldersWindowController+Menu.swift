@@ -439,7 +439,6 @@ extension FoldersWindowController {
         return menu
     }
 
-    @objc
     static func switchMenu() {
         @MainActor
         enum StaticMenus {

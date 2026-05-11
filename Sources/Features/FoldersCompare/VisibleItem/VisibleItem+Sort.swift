@@ -10,7 +10,6 @@ func compare<T: Comparable>(_ lhs: T, _ rhs: T) -> ComparisonResult {
     lhs == rhs ? .orderedSame : lhs < rhs ? .orderedAscending : .orderedDescending
 }
 
-@objc
 extension VisibleItem {
     func sort(
         byFileName ascending: Bool,

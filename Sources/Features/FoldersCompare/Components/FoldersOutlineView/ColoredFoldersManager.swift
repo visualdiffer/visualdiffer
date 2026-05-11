@@ -10,7 +10,7 @@ class ColoredFoldersManager: NSObject, @unchecked Sendable {
     private let queue = DispatchQueue(label: "com.visualdiffer.colored.folders", attributes: .concurrent)
     private var foldersColors: [String: NSImage]
 
-    @objc static let shared = ColoredFoldersManager()
+    static let shared = ColoredFoldersManager()
 
     override private init() {
         foldersColors = Self.buildColoredFolders()
@@ -35,7 +35,6 @@ class ColoredFoldersManager: NSObject, @unchecked Sendable {
         return icon(folderName: imageFileName)
     }
 
-    @objc
     func refresh() {
         queue.async(flags: .barrier) {
             self.foldersColors = Self.buildColoredFolders()

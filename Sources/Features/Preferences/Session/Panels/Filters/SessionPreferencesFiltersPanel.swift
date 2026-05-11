@@ -49,7 +49,6 @@ class SessionPreferencesFiltersPanel: NSView, PreferencesPanelDataSource {
         filterBox.reloadData()
     }
 
-    @objc
     func updatePendingData() {
         filterBox.updatePendingData()
     }

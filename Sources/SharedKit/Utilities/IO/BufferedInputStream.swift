@@ -10,7 +10,6 @@ import Foundation
 import AppKit
 
 /// A line-by-line `InputStream` supporting `\n`, `\r`, and `\r\n` terminators.
-// swiftlint:disable force_unwrapping
 public class BufferedInputStream: InputStream {
     public enum Constants {
         public static let invalidated = -2
@@ -162,13 +161,16 @@ public class BufferedInputStream: InputStream {
             startChar = nextChar
             nextChar = i
             if eol {
+                if data == nil {
+                    data = Data()
+                }
                 dataBuffer.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
-                    let ptr = bytes.baseAddress!.assumingMemoryBound(to: UInt8.self).advanced(by: startChar)
-                    if data == nil {
-                        data = Data(bytes: ptr, count: i - startChar)
-                    } else {
-                        data!.append(ptr, count: i - startChar)
+                    guard let baseAddress = bytes.baseAddress else {
+                        return
                     }
+
+                    let ptr = baseAddress.assumingMemoryBound(to: UInt8.self).advanced(by: startChar)
+                    data?.append(ptr, count: i - startChar)
                 }
 
                 nextChar += 1
@@ -181,8 +183,12 @@ public class BufferedInputStream: InputStream {
                 data = Data(capacity: Constants.defaultExpectedLineLength)
             }
             dataBuffer.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
-                let ptr = bytes.baseAddress!.assumingMemoryBound(to: UInt8.self).advanced(by: startChar)
-                data!.append(ptr, count: i - startChar)
+                guard let baseAddress = bytes.baseAddress else {
+                    return
+                }
+
+                let ptr = baseAddress.assumingMemoryBound(to: UInt8.self).advanced(by: startChar)
+                data?.append(ptr, count: i - startChar)
             }
         }
     }
@@ -221,7 +227,11 @@ public class BufferedInputStream: InputStream {
         }
 
         let bytesRead = dataBuffer.withUnsafeMutableBytes { (bytes: UnsafeMutableRawBufferPointer) -> Int in
-            let ptr = bytes.baseAddress!.assumingMemoryBound(to: UInt8.self).advanced(by: dst)
+            guard let baseAddress = bytes.baseAddress else {
+                return 0
+            }
+
+            let ptr = baseAddress.assumingMemoryBound(to: UInt8.self).advanced(by: dst)
             return stream.read(ptr, maxLength: dataBufferLen - dst)
         }
 
@@ -265,5 +275,3 @@ public class BufferedInputStream: InputStream {
         }
     }
 }
-
-// swiftlint:enable force_unwrapping

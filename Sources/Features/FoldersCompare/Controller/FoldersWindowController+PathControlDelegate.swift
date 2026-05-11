@@ -44,7 +44,6 @@ extension FoldersWindowController: PathControlDelegate {
         openPanel.canChooseFiles = false
     }
 
-    @objc
     func isPathControlMenu(_ tag: Int) -> Bool {
         (tag & pathControlMenu) == pathControlMenu
     }

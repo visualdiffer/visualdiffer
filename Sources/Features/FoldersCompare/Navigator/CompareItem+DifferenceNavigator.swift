@@ -6,7 +6,6 @@
 //  Copyright (c) 2021 visualdiffer.com
 //
 
-@objc
 extension CompareItem {
     var hasDifferences: Bool {
         !isValidFile ||

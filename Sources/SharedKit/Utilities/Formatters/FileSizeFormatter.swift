@@ -6,15 +6,13 @@
 //  Copyright (c) 2013 visualdiffer.com
 //
 
-@objc
 class FileSizeFormatter: NumberFormatter, @unchecked Sendable {
     private(set) var showInBytes = false
     private(set) var showUnitForBytes = true
     private(set) var useGibiBytes = false
 
-    @objc static let `default` = FileSizeFormatter()
+    static let `default` = FileSizeFormatter()
 
-    @objc
     override init() {
         super.init()
 
@@ -22,7 +20,6 @@ class FileSizeFormatter: NumberFormatter, @unchecked Sendable {
         maximumFractionDigits = 2
     }
 
-    @objc
     convenience init(
         showInBytes: Bool,
         showUnitForBytes: Bool,

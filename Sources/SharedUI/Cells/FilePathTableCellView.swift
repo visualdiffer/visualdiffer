@@ -7,7 +7,6 @@
 //
 
 class FilePathTableCellView: NSTableCellView {
-    @objc
     convenience init(identifier: NSUserInterfaceItemIdentifier) {
         self.init(frame: .zero)
         self.identifier = identifier
@@ -111,7 +110,7 @@ class FilePathTableCellView: NSTableCellView {
     }
 
     /**
-     * This is called by the parent as discussed on
+     * This is called by the parent as discussed at
      * https://developer.apple.com/documentation/appkit/nstablecellview/1483206-backgroundstyle?language=objc
      * "The default implementation automatically forwards calls to all subviews that implement setBackgroundStyle"
      */

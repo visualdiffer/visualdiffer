@@ -45,7 +45,7 @@ public extension ComparatorOptions {
 
     func changeAlign(_ newValue: Self) -> Self {
         guard newValue.isSubset(of: .alignMask) else {
-            fatalError("Invalid options: \(newValue)")
+            return self
         }
 
         var changed = withoutAlignFlags

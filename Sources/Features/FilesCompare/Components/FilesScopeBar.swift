@@ -6,21 +6,18 @@
 //  Copyright (c) 2011 visualdiffer.com
 //
 
-// Items for scopebarFileGroupDisplayOptions
+// items for scopebarFileGroupDisplayOptions
 private let showWhitespacesID = "WhiteSpacesId"
 
-// Items for scopebarFileGroupFilterOptions
+// items for scopebarFileGroupFilterOptions
 private let allID = "AllId"
 private let differencesID = "JustDiffsId"
 private let justMatchesID = "JustMatchesId"
 
-@objc
 protocol FilesScopeBarDelegate: AnyObject {
-    @objc
     func filesScopeBar(_ filesScopeBar: FilesScopeBar, action: FilesScopeBarAction)
 }
 
-@objc
 enum FilesScopeBarAction: Int {
     case showWhitespaces
     case showAllLines
@@ -51,7 +48,7 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     }
 
     var actionDelegate: FilesScopeBarDelegate?
-    @objc var findView: FindText
+    var findView: FindText
 
     override init(frame frameRect: NSRect) {
         findView = FindText(frame: NSRect(x: 0, y: 0, width: 400, height: 25))
@@ -70,7 +67,6 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         fontSize = 11.0
     }
 
-    @objc
     func initScopeBar(_ actionDelegate: FilesScopeBarDelegate) {
         showLinesFilter = DiffLine.Visibility.loadFromUserDefaults()
         showWhitespaces = CommonPrefs.shared.bool(forKey: .FileScope.showWhitespaces)
@@ -96,8 +92,8 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
             ],
         ])
 
-        // Dictionary doesn't preserve order so we can't use it to fill the array
-        // So first fill the array then labels
+        // dictionaries do not preserve order, so we cannot use one to fill the array
+        // so we fill the array first, then the labels
         labels.removeAll()
         for group in groupItems {
             if let groupItems = group[.items] as? [[ScopeBarItem: String]] {
@@ -132,7 +128,7 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     func scopeBar(_: MGScopeBar, itemIdentifiersForGroup groupNumber: Int) -> [Any] {
         guard let items = groupItems[groupNumber][.items],
               let itemIdentifiers = items as? [[ScopeBarItem: String]] else {
-            fatalError("Unexpected data format in groupItems")
+            return []
         }
 
         return itemIdentifiers.compactMap { $0[.identifier] }
@@ -154,7 +150,7 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     }
 
     func scopeBar(_: MGScopeBar, showSeparatorBeforeGroup groupNumber: Int) -> Bool {
-        // Optional method. If not implemented, all groups except the first will have a separator before them.
+        // optional method, if not implemented all groups except the first have a separator before them
         groupItems[groupNumber][.separator] as? Bool ?? false
     }
 

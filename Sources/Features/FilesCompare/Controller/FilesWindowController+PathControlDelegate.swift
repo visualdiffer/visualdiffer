@@ -59,6 +59,6 @@ extension FilesWindowController: PathControlDelegate {
         } else if pathControl === rightPanelView.pathView.pathControl {
             return rightView.editorData(sessionDiff)
         }
-        fatalError("Unable to determine which editor data to return")
+        return nil
     }
 }

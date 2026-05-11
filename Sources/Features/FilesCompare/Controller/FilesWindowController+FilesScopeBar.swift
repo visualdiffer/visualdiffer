@@ -25,22 +25,18 @@ extension FilesWindowController: @preconcurrency FilesScopeBarDelegate {
         }
     }
 
-    @objc
     func showAllLines(_: AnyObject) {
         refreshLinesStatus()
     }
 
-    @objc
     func showJustMatchingLines(_: AnyObject) {
         refreshLinesStatus()
     }
 
-    @objc
     func showJustDifferentLines(_: AnyObject) {
         refreshLinesStatus()
     }
 
-    @objc
     func refreshLinesStatus() {
         guard let diffResult else {
             return

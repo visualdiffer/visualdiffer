@@ -35,7 +35,6 @@ class DifferenceCounters: NSTextField {
         cell = counter
     }
 
-    @objc
     func update(counters: [DiffCountersItem]) {
         stringValue = ""
         counter.counterItems = counters

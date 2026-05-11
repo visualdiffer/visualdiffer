@@ -16,7 +16,6 @@ extension FilesWindowController {
         rightView.reloadData(restoreSelection: true)
     }
 
-    @objc
     func setSliderMaxValue() {
         guard let diffResult else {
             return

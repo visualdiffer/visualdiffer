@@ -13,7 +13,7 @@ let kStrokelineWidth: CGFloat = 1.0
 let kDotBlendFraction: CGFloat = 0.5
 
 class DiffCountersTextFieldCell: NSTextFieldCell {
-    @objc var counterItems = [DiffCountersItem]()
+    var counterItems = [DiffCountersItem]()
 
     override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
         if !stringValue.isEmpty {
@@ -39,17 +39,17 @@ class DiffCountersTextFieldCell: NSTextFieldCell {
             var textOrigin = NSPoint(x: rect.origin.x + dotRect.size.width + kDotPaddingEnd, y: rect.origin.y)
             let offset = (textSize.height - dotRect.size.height) / 2
 
-            // the dot height is smaller than the text so center it
+            // the dot height is smaller than the text, so center it
             if offset > 0 {
                 dotRect.origin.y += offset
             } else {
-                // the dot height is taller than the text so center the text
+                // the dot height is taller than the text, so center the text
                 textOrigin.y -= offset
             }
             drawDot(item.color, rect: dotRect, strokeLineWidth: kStrokelineWidth)
 
             item.text.draw(at: textOrigin, withAttributes: attrs)
-            // move to next dot position
+            // move to the next dot position
             rect.origin.x = textOrigin.x + textSize.width + kTextPaddingEnd
         }
     }

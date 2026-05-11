@@ -7,7 +7,7 @@
 //
 
 extension ExpressionBox {
-    @objc static var defaultRightExpressionMenu: NSMenu {
+    static var defaultRightExpressionMenu: NSMenu {
         let menu = NSMenu()
 
         // the button title image
@@ -44,7 +44,7 @@ extension ExpressionBox {
         return menu
     }
 
-    @objc static var defaultRegExpMenu: NSMenu {
+    static var defaultRegExpMenu: NSMenu {
         let menu = NSMenu()
 
         // the button title image

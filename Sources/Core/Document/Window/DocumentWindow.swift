@@ -329,7 +329,6 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         }
     }
 
-    @objc
     func fillSessionDiff(_ sessionDiff: SessionDiff) -> Bool {
         // Update all properties handled by preference sheet
         sessionPreferencesSheet.updateSessionDiff(sessionDiff)

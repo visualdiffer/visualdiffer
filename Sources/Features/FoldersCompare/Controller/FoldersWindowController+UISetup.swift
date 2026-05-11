@@ -12,7 +12,6 @@ extension FoldersWindowController {
         setupFoldersLayout()
 
         leftPanelView.treeView.nextKeyView = rightView
-        lastUsedView = leftPanelView.treeView
 
         updateTreeViewFont()
 

@@ -28,7 +28,7 @@ protocol PathControlDelegate: NSPathControlDelegate {
 
 public class PathControl: NSPathControl, NSMenuItemValidation {
     var safePathComponentItem: NSPathControlItem? {
-        // click is out any cell so clickedPathItem returned nil
+        // click is outside any cell so clickedPathItem returns nil
         guard let item = clickedPathItem else {
             return pathItems.last
         }
@@ -36,7 +36,7 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
         return item
     }
 
-    @objc var clickedPath: URL? {
+    var clickedPath: URL? {
         clickedPathItem?.url
     }
 
@@ -114,7 +114,7 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
             if action == #selector(choosePath) {
                 return true
             } else if action == #selector(copyFileNames) {
-                // otherwise the item "Copy Path" is always visible
+                // otherwise the item "Copy File Name" is always visible
                 menuItem.isAlternate = false
             }
             menuItem.isHidden = true
@@ -138,7 +138,7 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
             return
         }
 
-        // URL returns by pathCell can't be resolved but Finder so with get the file path
+        // the URL returned by pathCell cannot be resolved by Finder, so we pass the file path
         let paths = [url.osPath]
         NSWorkspace.shared.show(inFinder: paths)
     }
@@ -193,7 +193,7 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
             let URL = openPanel.urls[0]
 
             if let bindingsInfo = infoForBinding(.value) {
-                // Note that we set the value with an NSString not an URL
+                // note that we set the value with a path string, not a URL
                 if let object = bindingsInfo[NSBindingInfoKey.observedObject] as? NSObject,
                    let bindingsPath = bindingsInfo[NSBindingInfoKey.observedKeyPath] as? String {
                     object.setValue(
@@ -209,7 +209,7 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
     // MARK: - overridden
 
     override public var intrinsicContentSize: NSSize {
-        // Let it be flexible when using Auto Layout
+        // keep it flexible when using Auto Layout
         NSSize(width: NSView.noIntrinsicMetric, height: NSView.noIntrinsicMetric)
     }
 

@@ -10,7 +10,6 @@ enum DisplayFiltersScopeBarAttributeKey: String {
     case filterFlagsDisplayFilters = "filterFlags"
 }
 
-@objc
 enum DisplayFiltersScopeBarAction: Int {
     case selectFilter
     case showFiltered
@@ -36,14 +35,13 @@ private enum ScopeGroupOptions: Int {
     case displayFlags
 }
 
-@objc
 @MainActor
 class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     private var groupItems = [[ScopeBarGroupKey: Any]]()
     private var labels = [String: String]()
 
     var actionDelegate: DisplayFiltersScopeBarDelegate?
-    @objc var findView: FindText
+    var findView: FindText
 
     override init(frame frameRect: NSRect) {
         findView = FindText(frame: NSRect(x: 0, y: 0, width: 400, height: 25))
@@ -79,7 +77,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
             ],
         ])
 
-        // Folders related group
+        // folders related group
         groupItems.append([
             .label: NSLocalizedString("Folders:", comment: ""),
             .separator: true,
@@ -90,7 +88,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
             ],
         ])
 
-        // Filtered group
+        // filtered group
         groupItems.append([
             .separator: true,
             .selectionMode: MGScopeBarGroupSelectionMode.multiple,
@@ -99,8 +97,8 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
             ],
         ])
 
-        // Dictionary doesn't preserve order so we can't use it to fill the array
-        // So first fill the array then labels
+        // dictionaries do not preserve order, so we cannot use one to fill the array
+        // so we fill the array first, then the labels
         labels.removeAll()
         for group in groupItems {
             if let groupItems = group[.items] as? [[ScopeBarItem: String]] {
@@ -136,7 +134,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     func scopeBar(_: MGScopeBar, itemIdentifiersForGroup groupNumber: Int) -> [Any] {
         guard let items = groupItems[groupNumber][.items],
               let itemIdentifiers = items as? [[ScopeBarItem: String]] else {
-            fatalError("Unexpected data format in groupItems")
+            return []
         }
 
         return itemIdentifiers.compactMap { $0[.identifier] }
@@ -158,7 +156,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     }
 
     func scopeBar(_: MGScopeBar, showSeparatorBeforeGroup groupNumber: Int) -> Bool {
-        // Optional method. If not implemented, all groups except the first will have a separator before them.
+        // optional method, if not implemented all groups except the first have a separator before them
         groupItems[groupNumber][.separator] as? Bool ?? false
     }
 
@@ -212,9 +210,8 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
 
     // MARK: - Actions
 
-    @objc
     func hideEmptyFolders(_ hideEmptyFolders: Bool, informDelegate _: Bool) {
-        // The logic to select the 'empty folders' button is inverted so we pass the negated value
+        // the logic to select the 'empty folders' button is inverted, so we pass the negated value
         setSelected(
             !hideEmptyFolders,
             forItem: showEmptyFoldersID,
@@ -223,7 +220,6 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         )
     }
 
-    @objc
     func showFilteredFiles(_ showFilteredFiles: Bool, informDelegate: Bool) {
         setSelected(
             showFilteredFiles,
@@ -242,7 +238,6 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         )
     }
 
-    @objc
     func noOrphansFolders(_ noOrphansFolders: Bool, informDelegate: Bool) {
         setSelected(
             noOrphansFolders,

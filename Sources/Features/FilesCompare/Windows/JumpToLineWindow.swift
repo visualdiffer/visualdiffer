@@ -142,7 +142,9 @@ class JumpToLineWindow: NSWindow, NSWindowDelegate, NSSearchFieldDelegate {
 
     private func enableJumpButton() {
         guard let side = DisplaySide(rawValue: jumpSide.selectedSegment) else {
-            fatalError("invalid jump side \(jumpSide.selectedSegment)")
+            maxLineNumber.stringValue = ""
+            standardButtons.primaryButton.isEnabled = false
+            return
         }
 
         let value = searchField.intValue
@@ -162,7 +164,7 @@ class JumpToLineWindow: NSWindow, NSWindowDelegate, NSSearchFieldDelegate {
     @objc
     func closeSheet(_ sender: AnyObject) {
         guard let side = DisplaySide(rawValue: jumpSide.selectedSegment) else {
-            fatalError("invalid jump side \(jumpSide.selectedSegment)")
+            return
         }
 
         self.side = side

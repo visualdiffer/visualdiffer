@@ -10,14 +10,12 @@ import os.log
 
 typealias IndexPathPair = (IndexPath, IndexPath?)
 
-@objc
 class HistoryFetchedResultsControllerDelegate: NSObject, @preconcurrency NSFetchedResultsControllerDelegate {
     private(set) var tableView: NSTableView
-    @objc var pattern: String?
+    var pattern: String?
 
     private var objectChanges = [NSFetchedResultsChangeType: [IndexPathPair]]()
 
-    @objc
     init(tableView: NSTableView) {
         self.tableView = tableView
 

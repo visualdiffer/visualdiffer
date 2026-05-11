@@ -37,11 +37,10 @@ class PopUpButtonURL: NSPopUpButton {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc
     func fill(_ documentURLs: [URL]) {
         let dict = uniq(documentURLs: documentURLs)
 
-        // iterate documentURLs instead of dictionary because order is not preserved in dictionary
+        // iterate documentURLs instead of the dictionary because dictionary order is not preserved
         for url in documentURLs {
             let key = url.lastPathComponent
             guard let arr = dict[key] else {
@@ -65,17 +64,16 @@ class PopUpButtonURL: NSPopUpButton {
         }
     }
 
-    @objc
     func clear() {
-        // leave the button title and remove all other menu items
+        // keep the button title and remove all other menu items
         for i in stride(from: numberOfItems - 1, through: 1, by: -1) {
             removeItem(at: i)
         }
     }
 
-    // menu label contains the last URL path component
-    // It would be present more times (same filename in different disk folders)
-    // so we group by last path component
+    // menu labels contain the last URL path component
+    // it can appear multiple times for the same filename in different folders
+    // so group by the last path component
     private func uniq(documentURLs: [URL]) -> [String: [URL]] {
         var dict = [String: [URL]]()
 

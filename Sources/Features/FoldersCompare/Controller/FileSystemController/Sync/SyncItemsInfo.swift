@@ -7,17 +7,15 @@
 //
 
 class SyncItemsInfo: NSObject {
-    @objc var totalSize: Int64 = 0
-    @objc var nodes: DescriptionOutlineNode?
-    @objc var emptyFoldersNodes: DescriptionOutlineNode?
-    @objc var linkedInfo: SyncItemsInfo?
+    var totalSize: Int64 = 0
+    var nodes: DescriptionOutlineNode?
+    var emptyFoldersNodes: DescriptionOutlineNode?
+    var linkedInfo: SyncItemsInfo?
 
-    @objc
     func removeAll() {
         nodes?.children.removeAll()
     }
 
-    @objc
     func add(_ syncNode: DescriptionOutlineNode) {
         guard let syncDataSource = syncNode.items,
               let nodes else {

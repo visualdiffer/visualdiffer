@@ -7,7 +7,6 @@
 //
 
 extension FilesWindowController {
-    @objc
     func alertSaveDirtyFiles() -> Bool {
         if !leftView.isDirty, !rightView.isDirty {
             return true
