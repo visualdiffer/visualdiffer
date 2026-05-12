@@ -55,6 +55,11 @@ extension FilesWindowController {
                     navigateToFile(gotoNext, showAnim: showAnim)
                     return
                 }
+                if showAnim,
+                   !CommonPrefs.shared.fileWrapsAroundDifferences,
+                   (document as? VDDocument)?.parentSession != nil {
+                    showNoFileOSD(gotoNext)
+                }
             }
             guard CommonPrefs.shared.fileWrapsAroundDifferences else {
                 return
@@ -92,7 +97,7 @@ extension FilesWindowController {
 
         let block: DiffOpenerDelegateBlock = { leftPath, rightPath in
             if leftPath == nil, rightPath == nil {
-                self.showNoFileOSD(!navigateToNext)
+                self.showNoFileOSD(navigateToNext)
                 return false
             }
             if !self.alertSaveDirtyFiles() {
@@ -127,11 +132,11 @@ extension FilesWindowController {
         }
     }
 
-    func showNoFileOSD(_ noPrevFile: Bool) {
-        if noPrevFile {
-            showOSD(image: NSImage(named: VDImageNameTop), text: NSLocalizedString("No Previous File", comment: ""))
-        } else {
+    func showNoFileOSD(_ noNextFile: Bool) {
+        if noNextFile {
             showOSD(image: NSImage(named: VDImageNameBottom), text: NSLocalizedString("No Next File", comment: ""))
+        } else {
+            showOSD(image: NSImage(named: VDImageNameTop), text: NSLocalizedString("No Previous File", comment: ""))
         }
     }
 
