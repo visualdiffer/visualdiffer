@@ -33,7 +33,7 @@ extension FoldersWindowController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(refreshCompareItem),
-            name: .fileSaved,
+            name: .fileUpdated,
             object: nil
         )
 
@@ -63,7 +63,7 @@ extension FoldersWindowController {
         )
         NotificationCenter.default.removeObserver(
             self,
-            name: .fileSaved,
+            name: .fileUpdated,
             object: nil
         )
         NotificationCenter.default.removeObserver(
@@ -89,7 +89,7 @@ extension FoldersWindowController {
     @objc
     func refreshCompareItem(_ notification: Notification) {
         guard let comparator,
-              let userInfo = notification.userInfo as? [FileSavedKey: String],
+              let userInfo = notification.userInfo as? [FileUpdatedKey: String],
               let (item, itemSide) = resolveCompareItem(fromUserInfo: userInfo) else {
             return
         }
@@ -134,7 +134,7 @@ extension FoldersWindowController {
     }
 
     private func resolveCompareItem(
-        fromUserInfo userInfo: [FileSavedKey: String?]
+        fromUserInfo userInfo: [FileUpdatedKey: String?]
     ) -> (item: CompareItem, itemSide: DisplaySide)? {
         guard let leftItemOriginal,
               let rightItemOriginal,

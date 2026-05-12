@@ -95,18 +95,9 @@ extension FilesWindowController {
         fileThumbnail.needsDisplay = true
         window?.toolbar?.validateVisibleItems()
 
-        var userInfo = [FileSavedKey: String]()
-
-        if let path = sessionDiff.leftPath {
-            userInfo[.leftPath] = path
-        }
-        if let path = sessionDiff.rightPath {
-            userInfo[.rightPath] = path
-        }
-        NotificationCenter.default.post(
-            name: .fileSaved,
-            object: nil,
-            userInfo: userInfo
+        NotificationCenter.default.postFileUpdated(
+            leftPath: sessionDiff.leftPath,
+            rightPath: sessionDiff.rightPath
         )
     }
 

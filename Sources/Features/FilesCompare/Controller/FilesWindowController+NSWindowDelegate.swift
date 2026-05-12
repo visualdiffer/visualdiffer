@@ -50,6 +50,10 @@ extension FilesWindowController: NSWindowDelegate {
                 leftView.isDirty = false
                 rightView.isDirty = false
                 reload(nil)
+                NotificationCenter.default.postFileUpdated(
+                    leftPath: sessionDiff.leftPath,
+                    rightPath: sessionDiff.rightPath
+                )
                 if leftChanged, rightChanged {
                     differenceCounters.stringValue = NSLocalizedString("Reloaded left and right files", comment: "")
                 } else if leftChanged {

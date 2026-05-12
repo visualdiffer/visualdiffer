@@ -6,7 +6,7 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-enum FileSavedKey: String, Hashable {
+enum FileUpdatedKey: String, Hashable {
     case leftPath
     case rightPath
 }
@@ -28,13 +28,29 @@ enum PrefChangedKey: String, Hashable {
 extension Notification.Name {
     static let prefsChanged = NSNotification.Name("com.visualdiffer.notification.prefsChanges")
     static let appAppearanceDidChange = NSNotification.Name("com.visualdiffer.notification.appAppearanceDidChange")
-    static let fileSaved = NSNotification.Name("com.visualdiffer.notification.fileSaved")
+    static let fileUpdated = NSNotification.Name("com.visualdiffer.notification.fileUpdated")
 }
 
 extension NotificationCenter {
     func postPrefsChanged(userInfo: [AnyHashable: Any]? = nil) {
         post(
             name: .prefsChanged,
+            object: nil,
+            userInfo: userInfo
+        )
+    }
+
+    func postFileUpdated(leftPath: String?, rightPath: String?) {
+        var userInfo = [FileUpdatedKey: String]()
+
+        if let path = leftPath {
+            userInfo[.leftPath] = path
+        }
+        if let path = rightPath {
+            userInfo[.rightPath] = path
+        }
+        NotificationCenter.default.post(
+            name: .fileUpdated,
             object: nil,
             userInfo: userInfo
         )
