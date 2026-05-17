@@ -13,11 +13,15 @@ extension CompareItem {
         }
 
         var parent = parent
-        var rootPath = currentPath
+        var rootPath: String?
 
         while let p = parent, let parentPath = p.path {
             rootPath = parentPath
             parent = p.parent
+        }
+
+        guard let rootPath else {
+            return nil
         }
         // skip path separator
         let start = currentPath.index(currentPath.startIndex, offsetBy: rootPath.count + 1)
