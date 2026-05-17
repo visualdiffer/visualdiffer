@@ -28,7 +28,7 @@ extension NSTextView {
         typingAttributes[NSAttributedString.Key.font] = font
         self.typingAttributes = typingAttributes
 
-        let rangeOfChange = NSRange(location: 0, length: string.count)
+        let rangeOfChange = NSRange(location: 0, length: string.utf16.count)
         shouldChangeText(in: rangeOfChange, replacementString: nil)
         textStorage?.setAttributes(
             typingAttributes,
@@ -59,11 +59,8 @@ extension NSTextView {
             return
         }
 
-        let string = textStorage.string
-        let length = string.count
-
         // remove the old colors
-        let area = NSRange(location: 0, length: length)
+        let area = NSRange(location: 0, length: textStorage.string.utf16.count)
         textStorage.removeAttribute(NSAttributedString.Key.foregroundColor, range: area)
         textStorage.removeAttribute(NSAttributedString.Key.backgroundColor, range: area)
 
@@ -88,6 +85,6 @@ extension NSTextView {
         if let textStorage {
             textStorage.append(attrString)
         }
-        scrollRangeToVisible(NSRange(location: string.count, length: 0))
+        scrollRangeToVisible(NSRange(location: string.utf16.count, length: 0))
     }
 }

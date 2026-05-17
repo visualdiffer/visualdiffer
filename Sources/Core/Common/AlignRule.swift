@@ -6,6 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+import os
+
 struct AlignTemplateOptions: OptionSet {
     let rawValue: UInt
 
@@ -70,7 +72,7 @@ extension AlignRule {
         guard let result = regExp.regularExpression()?.firstMatch(
             in: lhs,
             options: [],
-            range: NSRange(location: 0, length: lhs.count)
+            range: NSRange(location: 0, length: lhs.utf16.count)
         ) else {
             return false
         }
@@ -87,7 +89,9 @@ extension AlignRule {
 }
 
 extension AlignRule.Pair where T == NSRegularExpression.Options {
-    private nonisolated(unsafe) static var cachedRegExpressions = [String: NSRegularExpression]()
+    private static let cachedRegExpressions = OSAllocatedUnfairLock(
+        initialState: [String: NSRegularExpression]()
+    )
 
     init() {
         self.init(pattern: "", options: [])
@@ -111,18 +115,26 @@ extension AlignRule.Pair where T == NSRegularExpression.Options {
     }
 
     func regularExpression() -> NSRegularExpression? {
-        let key = String(format: "%@%ld", pattern, options.rawValue)
-        var cachedRE = Self.cachedRegExpressions[key]
-        if cachedRE == nil {
-            cachedRE = try? NSRegularExpression(
+        let pattern = pattern
+        let options = options
+        let key = "\(pattern)|\(options.rawValue)"
+
+        return Self.cachedRegExpressions.withLock { values in
+            if let value = values[key] {
+                return value
+            }
+
+            guard let value = try? NSRegularExpression(
                 pattern: pattern,
                 options: options
-            )
-            if let cachedRE {
-                Self.cachedRegExpressions[key] = cachedRE
+            ) else {
+                return nil
             }
+
+            values[key] = value
+
+            return value
         }
-        return cachedRE
     }
 }
 

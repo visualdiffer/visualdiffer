@@ -40,7 +40,7 @@ private struct GlobConverter {
         return re.stringByReplacingMatches(
             in: str,
             options: [],
-            range: NSRange(location: 0, length: str.count),
+            range: NSRange(location: 0, length: str.utf16.count),
             withTemplate: template
         )
     }

@@ -32,14 +32,14 @@ class FilesTableViewFindTextDelegate: NSObject, @preconcurrency FindTextDelegate
             var range = re.rangeOfFirstMatch(
                 in: line,
                 options: [],
-                range: NSRange(location: 0, length: line.count)
+                range: NSRange(location: 0, length: line.utf16.count)
             )
             if range.location == NSNotFound {
                 line = right[i].text
                 range = re.rangeOfFirstMatch(
                     in: line,
                     options: [],
-                    range: NSRange(location: 0, length: line.count)
+                    range: NSRange(location: 0, length: line.utf16.count)
                 )
             }
 

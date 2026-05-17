@@ -124,7 +124,7 @@ class AlignTestResultBox: NSBox, NSTextFieldDelegate {
             let result = re.firstMatch(
                 in: fileName.stringValue,
                 options: [],
-                range: NSRange(location: 0, length: fileName.stringValue.count)
+                range: NSRange(location: 0, length: fileName.stringValue.utf16.count)
             )
             if let result {
                 let rightExpr = rightExpression

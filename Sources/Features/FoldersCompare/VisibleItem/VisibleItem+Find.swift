@@ -24,7 +24,7 @@ extension VisibleItem {
         if regex.firstMatch(
             in: fileName,
             options: [],
-            range: NSRange(location: 0, length: fileName.count)
+            range: NSRange(location: 0, length: fileName.utf16.count)
         ) != nil {
             items.append(self)
         }
