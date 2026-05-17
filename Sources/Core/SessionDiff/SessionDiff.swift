@@ -122,7 +122,7 @@ extension SessionDiff {
             return nil
         }
 
-        return NSPredicate(format: exclusionFileFilters)
+        return try? NSPredicate.createSafe(withFormat: exclusionFileFilters)
     }
 
     var leftPath: String? {

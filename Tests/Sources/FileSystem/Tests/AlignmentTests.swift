@@ -1667,84 +1667,82 @@ final class AlignmentTests: CaseSensitiveBaseTest {
         try createFile("l/photo𝄞.txt", "l-astral-plane-chr")
         try createFile("r/photo𝄞.doc", "r-astral-plane-chr")
 
-                folderReader.start(
-                    withLeftRoot: nil,
-                    rightRoot: nil,
-                    leftPath: appendFolder("l"),
-                    rightPath: appendFolder("r")
-                )
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
 
-                let rootL = folderReader.leftRoot!
-                let vi = rootL.visibleItem!
+        let rootL = try #require(folderReader.leftRoot)
+        let vi = try #require(rootL.visibleItem)
 
         do {
-        let child1 = rootL // l <-> r
-        assertItem(child1, 0, 5, 0, 0, 5, "l", .orphan, 45)
-        #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
-        assertItem(child1.linkedItem, 0, 5, 0, 0, 5, "r", .orphan, 45)
-        #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+            let child1 = rootL // l <-> r
+            assertItem(child1, 0, 5, 0, 0, 5, "l", .orphan, 45)
+            #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 0, 5, 0, 0, 5, "r", .orphan, 45)
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem?.orphanFolders)")
 
-        let child2 = child1.children[0] // l <-> r
-        assertItem(child2, 0, 1, 0, 0, 0, "a.txt", .changed, 3)
-        assertItem(child2.linkedItem, 0, 1, 0, 0, 0, "a.doc", .changed, 3)
+            let child2 = child1.children[0] // l <-> r
+            assertItem(child2, 0, 1, 0, 0, 0, "a.txt", .changed, 3)
+            assertItem(child2.linkedItem, 0, 1, 0, 0, 0, "a.doc", .changed, 3)
 
-        let child3 = child1.children[1] // l <-> r
-        assertItem(child3, 0, 1, 0, 0, 0, "b.txt", .changed, 3)
-        assertItem(child3.linkedItem, 0, 1, 0, 0, 0, "b.doc", .changed, 3)
+            let child3 = child1.children[1] // l <-> r
+            assertItem(child3, 0, 1, 0, 0, 0, "b.txt", .changed, 3)
+            assertItem(child3.linkedItem, 0, 1, 0, 0, 0, "b.doc", .changed, 3)
 
-        let child4 = child1.children[2] // l <-> r
-        assertItem(child4, 0, 1, 0, 0, 0, "c.txt", .changed, 3)
-        assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "c.doc", .changed, 3)
+            let child4 = child1.children[2] // l <-> r
+            assertItem(child4, 0, 1, 0, 0, 0, "c.txt", .changed, 3)
+            assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "c.doc", .changed, 3)
 
-        let child5 = child1.children[3] // l <-> r
-        assertItem(child5, 0, 1, 0, 0, 0, "photo𝄞_thumb.txt", .changed, 18)
-        assertItem(child5.linkedItem, 0, 1, 0, 0, 0, "photo𝄞_thumb.doc", .changed, 18)
+            let child5 = child1.children[3] // l <-> r
+            assertItem(child5, 0, 1, 0, 0, 0, "photo𝄞_thumb.txt", .changed, 18)
+            assertItem(child5.linkedItem, 0, 1, 0, 0, 0, "photo𝄞_thumb.doc", .changed, 18)
 
-        let child6 = child1.children[4] // l <-> r
-        assertItem(child6, 0, 1, 0, 0, 0, "photo𝄞.txt", .changed, 18)
-        assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "photo𝄞.doc", .changed, 18)
-
-
+            let child6 = child1.children[4] // l <-> r
+            assertItem(child6, 0, 1, 0, 0, 0, "photo𝄞.txt", .changed, 18)
+            assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "photo𝄞.doc", .changed, 18)
         }
         do {
-        // VisibleItems
-        let childVI1 = vi // l <--> r
-        assertArrayCount(childVI1.children, 5)
-        let child1 = childVI1.item // nil <-> nil
-        assertItem(child1, 0, 5, 0, 0, 5, "l", .orphan, 45)
-        #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
-        assertItem(child1.linkedItem, 0, 5, 0, 0, 5, "r", .orphan, 45)
-        #expect(child1.linkedItem!.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem!.orphanFolders)")
+            // VisibleItems
+            let childVI1 = vi // l <--> r
+            assertArrayCount(childVI1.children, 5)
+            let child1 = childVI1.item // nil <-> nil
+            assertItem(child1, 0, 5, 0, 0, 5, "l", .orphan, 45)
+            #expect(child1.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.orphanFolders)")
+            assertItem(child1.linkedItem, 0, 5, 0, 0, 5, "r", .orphan, 45)
+            #expect(child1.linkedItem?.orphanFolders == 0, "OrphanFolder: Expected count 0 found \(child1.linkedItem?.orphanFolders)")
 
-        let childVI2 = childVI1.children[0] // l <--> r
-        assertArrayCount(childVI2.children, 0)
-        let child2 = childVI2.item // l <-> r
-        assertItem(child2, 0, 1, 0, 0, 0, "a.txt", .changed, 3)
-        assertItem(child2.linkedItem, 0, 1, 0, 0, 0, "a.doc", .changed, 3)
+            let childVI2 = childVI1.children[0] // l <--> r
+            assertArrayCount(childVI2.children, 0)
+            let child2 = childVI2.item // l <-> r
+            assertItem(child2, 0, 1, 0, 0, 0, "a.txt", .changed, 3)
+            assertItem(child2.linkedItem, 0, 1, 0, 0, 0, "a.doc", .changed, 3)
 
-        let childVI3 = childVI1.children[1] // l <--> r
-        assertArrayCount(childVI3.children, 0)
-        let child3 = childVI3.item // l <-> r
-        assertItem(child3, 0, 1, 0, 0, 0, "b.txt", .changed, 3)
-        assertItem(child3.linkedItem, 0, 1, 0, 0, 0, "b.doc", .changed, 3)
+            let childVI3 = childVI1.children[1] // l <--> r
+            assertArrayCount(childVI3.children, 0)
+            let child3 = childVI3.item // l <-> r
+            assertItem(child3, 0, 1, 0, 0, 0, "b.txt", .changed, 3)
+            assertItem(child3.linkedItem, 0, 1, 0, 0, 0, "b.doc", .changed, 3)
 
-        let childVI4 = childVI1.children[2] // l <--> r
-        assertArrayCount(childVI4.children, 0)
-        let child4 = childVI4.item // l <-> r
-        assertItem(child4, 0, 1, 0, 0, 0, "c.txt", .changed, 3)
-        assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "c.doc", .changed, 3)
+            let childVI4 = childVI1.children[2] // l <--> r
+            assertArrayCount(childVI4.children, 0)
+            let child4 = childVI4.item // l <-> r
+            assertItem(child4, 0, 1, 0, 0, 0, "c.txt", .changed, 3)
+            assertItem(child4.linkedItem, 0, 1, 0, 0, 0, "c.doc", .changed, 3)
 
-        let childVI5 = childVI1.children[3] // l <--> r
-        assertArrayCount(childVI5.children, 0)
-        let child5 = childVI5.item // l <-> r
-        assertItem(child5, 0, 1, 0, 0, 0, "photo𝄞_thumb.txt", .changed, 18)
-        assertItem(child5.linkedItem, 0, 1, 0, 0, 0, "photo𝄞_thumb.doc", .changed, 18)
+            let childVI5 = childVI1.children[3] // l <--> r
+            assertArrayCount(childVI5.children, 0)
+            let child5 = childVI5.item // l <-> r
+            assertItem(child5, 0, 1, 0, 0, 0, "photo𝄞_thumb.txt", .changed, 18)
+            assertItem(child5.linkedItem, 0, 1, 0, 0, 0, "photo𝄞_thumb.doc", .changed, 18)
 
-        let childVI6 = childVI1.children[4] // l <--> r
-        assertArrayCount(childVI6.children, 0)
-        let child6 = childVI6.item // l <-> r
-        assertItem(child6, 0, 1, 0, 0, 0, "photo𝄞.txt", .changed, 18)
-        assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "photo𝄞.doc", .changed, 18)
+            let childVI6 = childVI1.children[4] // l <--> r
+            assertArrayCount(childVI6.children, 0)
+            let child6 = childVI6.item // l <-> r
+            assertItem(child6, 0, 1, 0, 0, 0, "photo𝄞.txt", .changed, 18)
+            assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "photo𝄞.doc", .changed, 18)
         }
     }
 }
