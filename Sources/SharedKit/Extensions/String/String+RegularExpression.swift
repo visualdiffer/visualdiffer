@@ -82,8 +82,11 @@ public extension String {
                     inString.append(chars[position])
                     i += 1
                 } else {
+                    let maxSupportedCaptureGroupIndex = 100
                     while i < size, let num = chars[position].wholeNumberValue {
-                        value = value * 10 + num
+                        if value < maxSupportedCaptureGroupIndex {
+                            value = value * 10 + num
+                        }
                         i += 1
                         position = chars.index(chars.startIndex, offsetBy: i)
                     }
