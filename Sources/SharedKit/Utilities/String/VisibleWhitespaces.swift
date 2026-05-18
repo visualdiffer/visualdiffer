@@ -27,6 +27,10 @@ class VisibleWhitespaces: NSObject {
     }
 
     static func tabs2space(_ line: String, tabWidth: Int) -> String {
+        guard tabWidth > 0 else {
+            return line
+        }
+
         var dest = ""
 
         for ch in line {
@@ -41,6 +45,10 @@ class VisibleWhitespaces: NSObject {
     }
 
     func showWhitespaces(_ line: String) -> String {
+        guard tabWidth > 0 else {
+            return line
+        }
+
         let whitespaces = CharacterSet.whitespaces
         var dest = ""
 
