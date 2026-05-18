@@ -23,6 +23,7 @@ extension CompareItem {
         guard let rootPath else {
             return nil
         }
+
         // skip path separator
         let start = currentPath.index(currentPath.startIndex, offsetBy: rootPath.count + 1)
         return String(currentPath[start...])
