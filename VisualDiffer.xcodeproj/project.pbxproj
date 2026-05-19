@@ -451,6 +451,7 @@
 		559E927E1514A63100B76349 /* dropzone.png in Resources */ = {isa = PBXBuildFile; fileRef = 559E927D1514A63100B76349 /* dropzone.png */; };
 		55A027D4158242310004583F /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A027D3158242310004583F /* Quartz.framework */; };
 		55A4DF322E9A49B000ED11BB /* EndOfLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4DF312E9A49A700ED11BB /* EndOfLineTests.swift */; };
+		55A4DF342FFD200100ED11BB /* DiffSideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4DF332FFD1FFF00ED11BB /* DiffSideTests.swift */; };
 		55A585772F52BD8A006DD544 /* FileOperationDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A585762F52BD88006DD544 /* FileOperationDestination.swift */; };
 		55B1CE2B2E9934E900426FEC /* DateBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1CE2A2E9934E900426FEC /* DateBuilder.swift */; };
 		55B1CE312E9934F800426FEC /* DiffResultBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1CE2E2E9934F800426FEC /* DiffResultBaseTests.swift */; };
@@ -1045,6 +1046,7 @@
 		559E927D1514A63100B76349 /* dropzone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropzone.png; sourceTree = "<group>"; };
 		55A027D3158242310004583F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		55A4DF312E9A49A700ED11BB /* EndOfLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfLineTests.swift; sourceTree = "<group>"; };
+		55A4DF332FFD1FFF00ED11BB /* DiffSideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffSideTests.swift; sourceTree = "<group>"; };
 		55A585762F52BD88006DD544 /* FileOperationDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileOperationDestination.swift; sourceTree = "<group>"; };
 		55A67B5113FF95B5006DD5BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55B1CE2A2E9934E900426FEC /* DateBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBuilder.swift; sourceTree = "<group>"; };
@@ -2822,9 +2824,10 @@
 		55B1CE2D2E9934F800426FEC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				55B1CE2C2E9934F800426FEC /* DiffResultTests.swift */,
+				55A4DF332FFD1FFF00ED11BB /* DiffSideTests.swift */,
 				55A4DF312E9A49A700ED11BB /* EndOfLineTests.swift */,
 				55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */,
-				55B1CE2C2E9934F800426FEC /* DiffResultTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -3213,6 +3216,7 @@
 				55D8812E2F3DA332008DE497 /* CopyFinderMetadata.swift in Sources */,
 				55DF3DDD2E924BB10044CC0C /* CaseSensitiveBaseTest.swift in Sources */,
 				55DF3DDE2E924BB10044CC0C /* BaseTests+AssertCompareItem.swift in Sources */,
+				55A4DF342FFD200100ED11BB /* DiffSideTests.swift in Sources */,
 				55A4DF322E9A49B000ED11BB /* EndOfLineTests.swift in Sources */,
 				55DF3DDF2E924BB10044CC0C /* AlignmentTests.swift in Sources */,
 				554750C62F5C0A1100C1747A /* CommonAncestorPathTests.swift in Sources */,

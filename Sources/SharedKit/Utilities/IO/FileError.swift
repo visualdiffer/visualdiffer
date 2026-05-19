@@ -12,6 +12,7 @@ public enum FileError: Error, Equatable {
     case openFile(path: String)
     case fileNotExists(path: URL, side: DisplaySide)
     case unknownVolumeType
+    case encodingFailed(encoding: String.Encoding)
 }
 
 extension FileError: LocalizedError {
@@ -36,6 +37,8 @@ extension FileError: LocalizedError {
             return String.localizedStringWithFormat(message, path.osPath)
         case .unknownVolumeType:
             return NSLocalizedString("Unable to determine the disk volume type", comment: "")
+        case .encodingFailed:
+            return NSLocalizedString("Some characters cannot be represented in the current encoding", comment: "")
         }
     }
 

@@ -1,3 +1,5 @@
+--exclude build
+
 # version
 
 --swiftversion 6.2

@@ -38,21 +38,17 @@ class DiffSide {
         path: URL,
         encoding: String.Encoding
     ) throws {
-        let fm = FileManager.default
-        let osPath = path.osPath
-
-        if !fm.fileExists(atPath: osPath) {
-            // NSFileHandle needs an existing file
-            fm.createFile(atPath: osPath, contents: nil)
+        // validate that all lines can be encoded before truncating the file;
+        // temp-file approach was discarded due to symlink and sandbox issues
+        for line in lines where line.type != .missing {
+            _ = try encodedData(for: line, encoding: encoding)
         }
-        let fileHandle = try FileHandle(forWritingTo: path)
+
+        let fileHandle = try openFileHandle(forWritingTo: path)
         defer { fileHandle.closeFile() }
-        fileHandle.truncateFile(atOffset: 0)
 
         for line in lines where line.type != .missing {
-            if let data = line.component.withEol.data(using: encoding) {
-                fileHandle.write(data)
-            }
+            try fileHandle.write(encodedData(for: line, encoding: encoding))
         }
     }
 
@@ -69,5 +65,30 @@ class DiffSide {
         lines.compactMap { line in
             line.type == .missing ? nil : line.component
         }
+    }
+
+    private func encodedData(
+        for line: DiffLine,
+        encoding: String.Encoding
+    ) throws -> Data {
+        guard let data = line.component.withEol.data(using: encoding) else {
+            throw FileError.encodingFailed(encoding: encoding)
+        }
+
+        return data
+    }
+
+    private func openFileHandle(forWritingTo url: URL) throws -> FileHandle {
+        let fm = FileManager.default
+        let osPath = url.osPath
+
+        if !fm.fileExists(atPath: osPath) {
+            // FileHandle needs an existing file
+            fm.createFile(atPath: osPath, contents: nil)
+        }
+        let fileHandle = try FileHandle(forWritingTo: url)
+        fileHandle.truncateFile(atOffset: 0)
+
+        return fileHandle
     }
 }
