@@ -60,18 +60,18 @@ final class DiffSideTests: DiffResultBaseTests {
             )
         )
 
-        let linkUrl = appendFolder("link.txt", false)
-        let targetUrl = appendFolder("target.txt", false)
+        let linkURL = appendFolder("link.txt", false)
+        let targetURL = appendFolder("target.txt", false)
 
         try diffSide.write(
-            path: linkUrl,
+            path: linkURL,
             encoding: .utf8
         )
 
-        let targetText = try String(contentsOf: targetUrl, encoding: .utf8)
+        let targetText = try String(contentsOf: targetURL, encoding: .utf8)
         #expect(targetText == "updated")
 
-        let destination = try fm.destinationOfSymbolicLink(atPath: linkUrl.osPath)
-        #expect(destination == targetUrl.osPath)
+        let destination = try fm.destinationOfSymbolicLink(atPath: linkURL.osPath)
+        #expect(destination == targetURL.osPath)
     }
 }
