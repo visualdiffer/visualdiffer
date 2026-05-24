@@ -223,4 +223,25 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
 
         textField.font = textFont
     }
+
+    /// returns a white-tinted copy of `image` scaled to `size`; use for icons displayed on the OSD dark background
+    /// - Parameters:
+    ///   - image: the source image to tint
+    ///   - size: the output size
+    /// - Returns: a white-tinted image, or `nil` if `image` is `nil`
+    static func iconForOSD(
+        image: NSImage?,
+        size: NSSize
+    ) -> NSImage? {
+        guard let image else {
+            return nil
+        }
+
+        return NSImage(size: size, flipped: false) { rect in
+            image.draw(in: rect)
+            NSColor.white.setFill()
+            rect.fill(using: .sourceAtop)
+            return true
+        }
+    }
 }

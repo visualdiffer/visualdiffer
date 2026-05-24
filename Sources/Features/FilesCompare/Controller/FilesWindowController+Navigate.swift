@@ -141,15 +141,14 @@ extension FilesWindowController {
     }
 
     func showMoveToFileOSD(_ gotoNext: Bool) {
-        if gotoNext {
-            let icon = NSImage(named: VDImageNamePrevFile)?.copy() as? NSImage
-            icon?.size = NSSize(width: 60, height: 60)
-            showOSD(image: icon, text: NSLocalizedString("Previous File", comment: ""))
-        } else {
-            let icon = NSImage(named: VDImageNameNextFile)?.copy() as? NSImage
-            icon?.size = NSSize(width: 60, height: 60)
-            showOSD(image: icon, text: NSLocalizedString("Next File", comment: ""))
-        }
+        let iconSize = NSSize(width: 60, height: 60)
+        let iconName = gotoNext ? VDImageNamePrevFile : VDImageNameNextFile
+        let text = gotoNext
+            ? NSLocalizedString("Previous File", comment: "")
+            : NSLocalizedString("Next File", comment: "")
+
+        let icon = WindowOSD.iconForOSD(image: NSImage(named: iconName), size: iconSize)
+        showOSD(image: icon, text: text)
     }
 
     private func showOSD(image: NSImage?, text: String) {
