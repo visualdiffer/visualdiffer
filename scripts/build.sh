@@ -13,6 +13,7 @@ fi
 profile_entries=(
   "Release:release"
   "Test:test"
+  "Pre-release:prerelease"
   "Sparkle (no upload appcast):sparkle"
 )
 
@@ -55,6 +56,9 @@ case "$selected_profile" in
     ;;
   sparkle)
     build_command=(bundle exec fastlane release --env sparkle.local)
+    ;;
+  prerelease)
+    build_command=(bundle exec fastlane release --env prerelease.local)
     ;;
   *)
     echo "Unsupported profile: $selected_profile" >&2

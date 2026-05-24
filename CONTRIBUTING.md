@@ -28,10 +28,24 @@ To contribute:
 
 ## Deploy
 
+### Automatic build
+
+Run the script `./scripts/build.sh` and select the env from the list.
+
+Unit Tests will be executed, too.
+
+### Manual build
+
+The script `./scripts/build.sh` simply runs the following commands
+
 Build the release version to deploy on GitHub
 
     bundle exec fastlane release --env local
 
 Build the version used for pre-release test
+
+    bundle exec fastlane release --env prerelease.local
+
+Build the version used for tart
 
     bundle exec fastlane release --env test.local
