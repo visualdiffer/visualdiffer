@@ -68,10 +68,11 @@ extension FilesWindowController {
         rightView.deselectAll(nil)
 
         if moveToFirstDifference {
+            // force layout before scrolling, this is necessary on some "slow" machine
+            leftView.enclosingScrollView?.layoutSubtreeIfNeeded()
+            rightView.enclosingScrollView?.layoutSubtreeIfNeeded()
             moveToDifference(true, showAnim: false, moveToFile: false)
         }
-
-        reloadRowHeights()
     }
 
     func showError(_ error: NSError) {
