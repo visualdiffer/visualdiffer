@@ -5,65 +5,57 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.11</title>
+            <title>Version 2.1.12</title>
             <description>
                 <![CDATA[
-                <h1 id="v2111">v2.1.11</h1>
+                <h1 id="v2112">v2.1.12</h1>
 
 <h3 id="features">🚀 Features</h3>
 
 <ul>
-  <li>
-    <p>open finder or copy paths on path double-click (<a href="https://github.com/visualdiffer/visualdiffer/commit/064c9523cad77bbec8bcd3a83264e69306ba23ef">064c952</a>)</p>
-  </li>
-  <li>
-    <p>File Compare: show ignored differences count in diff counters (<a href="https://github.com/visualdiffer/visualdiffer/commit/b13e34b89ba86f27935e02d3f3da0e76eeaafc62">b13e34b</a>)</p>
-  </li>
+  <li>File Compare: refresh folder view when file reloads after external change (<a href="https://github.com/visualdiffer/visualdiffer/commit/20209acd2cfb281403a6e81210efad0c96cfce8e">20209ac</a>)</li>
 </ul>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
   <li>
-    <p>pass a suggested destination for missing compared files (<a href="https://github.com/visualdiffer/visualdiffer/commit/38ce8cbe118990ff1ef3e0a5088554d84b0f58fd">38ce8cb</a>)</p>
+    <p>change OSD icon contrast (<a href="https://github.com/visualdiffer/visualdiffer/commit/fda5c429c64877c1f3524c47a39cf5745dd6733d">fda5c42</a>)</p>
   </li>
   <li>
-    <p>restore “Select Adjacent Sections” menu item (<a href="https://github.com/visualdiffer/visualdiffer/commit/c55b4a2added428417fa8c0cf13f165a93e61332">c55b4a2</a>)</p>
+    <p>make regex ranges unicode-safe (<a href="https://github.com/visualdiffer/visualdiffer/commit/9e30e8b6710973bfabc8ab435248304dbff031ac">9e30e8b</a>)</p>
   </li>
   <li>
-    <p>File Compare: navigate to next diff pair when current becomes equal after save (<a href="https://github.com/visualdiffer/visualdiffer/commit/608fefdfaec444025207bdd6d16eea1a86ef0234">608fefd</a>)</p>
+    <p>resolve crash on invalid predicates (<a href="https://github.com/visualdiffer/visualdiffer/commit/95f0ff6d89d13ce40daece3b880ba5c333f61b90">95f0ff6</a>)</p>
   </li>
   <li>
-    <p>Folder Compare: keep selection on adjacent row after saved file becomes equal (<a href="https://github.com/visualdiffer/visualdiffer/commit/b9edae223b7c633dd7a6b5b5418344995ac26263">b9edae2</a>)</p>
+    <p>resolve crash when called on root item (<a href="https://github.com/visualdiffer/visualdiffer/commit/d02b3aeee89588e945cd099d740320aa319306db">d02b3ae</a>)</p>
   </li>
   <li>
-    <p>Folder Compare: refresh row when item is no longer orphan after save (<a href="https://github.com/visualdiffer/visualdiffer/commit/4099d9c8db8748bb322226d54c79f1c9a891a08a">4099d9c</a>)</p>
+    <p>resolve crash when group index overflows Int (<a href="https://github.com/visualdiffer/visualdiffer/commit/712e5701f1016353b67d79417fb459996c9de4ee">712e570</a>)</p>
   </li>
-</ul>
-
-<h3 id="performance">✨ Performance</h3>
-
-<ul>
-  <li>File Compare: avoid repeated treeViewFont() calls by using currentFont (<a href="https://github.com/visualdiffer/visualdiffer/commit/f3dfc3dfeed4794feb9b2df9813dd06c3c5f3700">f3dfc3d</a>)</li>
-</ul>
-
-<h3 id="documentation">📚 Documentation</h3>
-
-<ul>
-  <li>document automatic app updates (<a href="https://github.com/visualdiffer/visualdiffer/commit/19772859f26b4d5983f19a5e82f810c2ad608d83">1977285</a>)</li>
+  <li>
+    <p>skip invalid tab width (<a href="https://github.com/visualdiffer/visualdiffer/commit/0db363d961596f63d83e5abf8c3287f6b47d1e78">0db363d</a>)</p>
+  </li>
+  <li>
+    <p>File Compare: move to first difference on slow machines (<a href="https://github.com/visualdiffer/visualdiffer/commit/0eb8c73fc7fa1b19b5fe35933c30a741237f82ab">0eb8c73</a>)</p>
+  </li>
+  <li>
+    <p>File Compare: show correct OSD when navigating past file boundaries (<a href="https://github.com/visualdiffer/visualdiffer/commit/5410793c2dd1b792f887d4f0fe41f9571dd325b0">5410793</a>)</p>
+  </li>
 </ul>
 
 
                 ]]>
             </description>
-            <pubDate>Sat, 9 May 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.1.11</sparkle:version>
-            <sparkle:shortVersionString>2.1.11</sparkle:shortVersionString>
+            <pubDate>Sun, 24 May 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.1.12</sparkle:version>
+            <sparkle:shortVersionString>2.1.12</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.11/VisualDiffer-2.1.11.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.12/VisualDiffer-2.1.12.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="Q8QTV+GlRmJ+3Wp+TgnzSgsDFor/bvKK5zCTZrVB7XFGJdxsUCOEdfLxobgNYd7EJDRGi37Me9+fLg1BXWNnDA==" length="5328704"
+                sparkle:edSignature="C9W1u+25oJ6xnWParndrSbTvTORhMG79q0uEwLt7CGAnVHojushUDT5DDiMWn6yKfEYVev4smXoB0Zlg1UaMDA==" length="5322570"
 
             />
         </item>
