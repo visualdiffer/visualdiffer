@@ -9,6 +9,10 @@
 class DifferenceCounters: NSTextField {
     private var counter: DiffCountersTextFieldCell
 
+    override var intrinsicContentSize: NSSize {
+        counter.cellSize(forBounds: .infinite)
+    }
+
     override init(frame frameRect: NSRect) {
         counter = DiffCountersTextFieldCell(textCell: "")
 
@@ -17,9 +21,9 @@ class DifferenceCounters: NSTextField {
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     func setupViews() {
@@ -39,5 +43,6 @@ class DifferenceCounters: NSTextField {
         stringValue = ""
         counter.counterItems = counters
         counter.controlView?.needsDisplay = true
+        invalidateIntrinsicContentSize()
     }
 }

@@ -6,18 +6,12 @@
 //  Copyright (c) 2015 visualdiffer.com
 //
 
-class DiffCountersItem: NSObject {
+class DiffCountersItem {
     var text: NSString
     var color: NSColor
 
     init(withText text: String, color: NSColor) {
         self.text = text as NSString
         self.color = color
-
-        super.init()
-    }
-
-    static func diffCounterItem(withText text: String, color: NSColor) -> DiffCountersItem {
-        DiffCountersItem(withText: text, color: color)
     }
 }

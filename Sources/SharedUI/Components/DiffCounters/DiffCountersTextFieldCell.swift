@@ -15,17 +15,41 @@ let kDotBlendFraction: CGFloat = 0.5
 class DiffCountersTextFieldCell: NSTextFieldCell {
     var counterItems = [DiffCountersItem]()
 
+    override func cellSize(forBounds rect: NSRect) -> NSSize {
+        guard stringValue.isEmpty else {
+            return super.cellSize(forBounds: rect)
+        }
+
+        let attrs: [NSAttributedString.Key: Any]? = if let font {
+            [.font: font]
+        } else {
+            nil
+        }
+
+        var width = kStrokelineWidth
+        var height = kDotWidth
+
+        for item in counterItems {
+            let textSize = item.text.size(withAttributes: attrs)
+            width += kDotWidth + kDotPaddingEnd + textSize.width + kTextPaddingEnd
+            height = max(height, textSize.height)
+        }
+
+        return NSSize(width: width, height: height)
+    }
+
     override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
-        if !stringValue.isEmpty {
+        guard stringValue.isEmpty else {
             super.draw(withFrame: cellFrame, in: controlView)
             return
         }
+
         var attrs: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.foregroundColor: NSColor.controlTextColor,
+            .foregroundColor: NSColor.controlTextColor,
         ]
 
         if let font {
-            attrs[NSAttributedString.Key.font] = font
+            attrs[.font] = font
         }
 
         var rect = cellFrame
