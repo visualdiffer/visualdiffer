@@ -115,9 +115,7 @@ platform :mac do
     
     notarize(
       package: ENV["APP_PATH"],
-      api_key: api_key,
-      use_notarytool: true,
-      try_early_stapling: true
+      api_key: api_key
     )
     UI.success("✅ App notarized and stapled")
   end
