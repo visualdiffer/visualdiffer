@@ -48,8 +48,11 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
             )
             return true
         } else if action == #selector(saveFile) {
-            item.title = isLeftView ? NSLocalizedString("Save Left File", comment: "") : NSLocalizedString("Save Right File", comment: "")
             return lastUsedView.isDirty
+        } else if action == #selector(saveLeftFile) {
+            return leftView.isDirty
+        } else if action == #selector(saveRightFile) {
+            return rightView.isDirty
         } else if action == #selector(previousDifference) {
             return canMoveToDifference(
                 gotoNext: false,

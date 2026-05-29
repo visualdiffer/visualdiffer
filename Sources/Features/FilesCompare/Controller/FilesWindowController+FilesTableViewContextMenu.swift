@@ -144,21 +144,7 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
         } else {
             lastUsedView
         }
-        if view.isDirty {
-            do {
-                try saveView(view)
-                // remove mode
-                if let diffSide = view.diffSide {
-                    for line in diffSide.lines {
-                        line.mode = .normal
-                    }
-                }
-                view.reloadData()
-                updateDetailLines(lastUsedView.selectedRow)
-            } catch {
-                NSAlert(error: error).runModal()
-            }
-        }
+        saveViewAndRefreshUI(view)
     }
 
     // MARK: - Open with external applications

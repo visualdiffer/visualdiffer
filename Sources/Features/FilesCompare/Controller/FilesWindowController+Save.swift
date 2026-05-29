@@ -40,6 +40,31 @@ extension FilesWindowController {
         }
     }
 
+    @IBAction
+    func saveLeftFile(_: Any) {
+        saveViewAndRefreshUI(leftView)
+    }
+
+    @IBAction
+    func saveRightFile(_: Any) {
+        saveViewAndRefreshUI(rightView)
+    }
+
+    func saveViewAndRefreshUI(_ view: FilesTableView) {
+        guard view.isDirty else {
+            return
+        }
+
+        do {
+            try saveView(view)
+            view.diffSide?.resetLineModes()
+            view.reloadData()
+            updateDetailLines(lastUsedView.selectedRow)
+        } catch {
+            NSAlert(error: error).runModal()
+        }
+    }
+
     func saveView(_ view: FilesTableView) throws {
         guard let diffResult else {
             return

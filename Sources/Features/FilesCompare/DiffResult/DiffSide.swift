@@ -67,6 +67,12 @@ class DiffSide {
         }
     }
 
+    func resetLineModes() {
+        for line in lines {
+            line.mode = .normal
+        }
+    }
+
     private func encodedData(
         for line: DiffLine,
         encoding: String.Encoding

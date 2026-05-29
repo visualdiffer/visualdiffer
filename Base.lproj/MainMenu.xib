@@ -133,16 +133,22 @@
                                     <action selector="saveDocumentAs:" target="-1" id="197"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Save File" keyEquivalent="s" id="1241">
-                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                            <menuItem title="Save Left File" keyEquivalent="l" id="1241">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
-                                    <action selector="saveFile:" target="-1" id="1245"/>
+                                    <action selector="saveLeftFile:" target="-1" id="Bjo-qa-zhW"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save Right File" keyEquivalent="r" id="3EH-xs-XDT">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                <connections>
+                                    <action selector="saveRightFile:" target="-1" id="ezL-hy-twC"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="857">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Session Preferences..." keyEquivalent="," id="1640">
+                            <menuItem title="Session Preferences…" keyEquivalent="," id="1640">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="openSessionSettingsSheet:" target="-1" id="1642"/>
