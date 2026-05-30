@@ -317,7 +317,8 @@ extension SyncFileOperationExecutor {
         if root.isFolder,
            let linkedItem = root.linkedItem,
            !linkedItem.isValidFile {
-            if filteredCount == root.children.count {
+            if filteredCount == root.children.count,
+               !emptyFoldersList.contains(where: { $0.path == root.path }) {
                 emptyFoldersList.append(root)
             }
         }
