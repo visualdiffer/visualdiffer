@@ -40,13 +40,11 @@ extension FilesWindowController {
         }
     }
 
-    @IBAction
-    func saveLeftFile(_: Any) {
+    @IBAction func saveLeftFile(_: Any) {
         saveViewAndRefreshUI(leftView)
     }
 
-    @IBAction
-    func saveRightFile(_: Any) {
+    @IBAction func saveRightFile(_: Any) {
         saveViewAndRefreshUI(rightView)
     }
 
