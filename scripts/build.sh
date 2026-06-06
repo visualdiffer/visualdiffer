@@ -66,9 +66,35 @@ case "$selected_profile" in
     ;;
 esac
 
-echo "Running tests"
+generate_release_notes() {
+  local xcconfig_file="$PROJECT_DIR/Versions.local.xcconfig"
+  local app_version
+  app_version="$(sed -nE "s/^[[:space:]]*APP_VERSION[[:space:]]*=[[:space:]]*(.*)/\1/p" "$xcconfig_file" | tr -d '[:space:]')"
 
-bundle exec fastlane tests
+  if [ -z "$app_version" ]; then
+    echo "Unable to read APP_VERSION from $xcconfig_file" >&2
+    exit 1
+  fi
+
+  local notes_dir="$PROJECT_DIR/build/notes"
+  local notes_file="$notes_dir/${app_version}.md"
+
+  mkdir -p "$notes_dir"
+  echo "Generating release notes: $notes_file"
+  (cd "$PROJECT_DIR" && "$SCRIPT_DIR/changelog.sh" prod) > "$notes_file"
+
+  echo "Opening release notes, close the file to continue..."
+  open -W "$notes_file"
+}
+
+run_tests() {
+  echo "Running tests"
+
+  bundle exec fastlane tests
+}
+
+generate_release_notes
+run_tests
 
 echo "Running profile: $selected_profile"
 
