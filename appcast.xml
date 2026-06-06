@@ -5,34 +5,28 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.13</title>
+            <title>Version 2.1.14</title>
             <description>
                 <![CDATA[
-                <h1 id="v2113">v2.1.13</h1>
-
-<h3 id="features">🚀 Features</h3>
-
-<ul>
-  <li>add “Save Left/Right File” menu items with independent shortcuts (<a href="https://github.com/visualdiffer/visualdiffer/commit/9d188e20b0aef0e0174afb61568e8217852aa29e">9d188e2</a>)</li>
-</ul>
+                <h1 id="v2114">v2.1.14</h1>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>Folder Compare: remove duplicated items when from the sync function the selection is only on empty folders (<a href="https://github.com/visualdiffer/visualdiffer/commit/18246fd5c2b73a37e3fe4c911f67ea01adaafbd6">18246fd</a>)</li>
+  <li>Folder Compare: restore expanded folders after refresh operation (<a href="https://github.com/visualdiffer/visualdiffer/commit/b3f8c36ffe41385c17abfa31966d64e0aafad5d9">b3f8c36</a>)</li>
 </ul>
 
 
                 ]]>
             </description>
-            <pubDate>Sat, 30 May 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.1.13</sparkle:version>
-            <sparkle:shortVersionString>2.1.13</sparkle:shortVersionString>
+            <pubDate>Sat, 6 June 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.1.14</sparkle:version>
+            <sparkle:shortVersionString>2.1.14</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.13/VisualDiffer-2.1.13.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.14/VisualDiffer-2.1.14.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="sh1eL787HJlKigQd+YGUC0ORnsGHXLVTlfS0Pqh0sBaaPgVDkBNeKcm/f4HeKiH+zz0bf27uHp3aRYLRxIMQAg==" length="5323214"
+                sparkle:edSignature="oa6gy8Pmu7L5DYLdUM+tM8wwQgc5tcwdG0k6dVJuBdmmlJAQHNjcTTw6wEM5MyAGy4snqgZvomI7Ngu7pK/NBQ==" length="5328883"
 
             />
         </item>
