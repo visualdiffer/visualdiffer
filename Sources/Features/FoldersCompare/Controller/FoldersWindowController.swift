@@ -35,6 +35,8 @@ public class FoldersWindowController: NSWindowController,
 
     lazy var lastUsedView = leftPanelView.treeView
 
+    var expandedFolderPaths = Set<String>()
+
     // comparatorPopUpButtonCell uses the tag property to select the item, but
     // sessionDiff.comparatorFlags bitmask should not match the tag value, so
     // sessionDiff.comparatorFlags is bit-masked with comparatorMethod in selection action methods

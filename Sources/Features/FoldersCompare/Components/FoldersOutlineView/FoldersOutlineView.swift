@@ -17,6 +17,7 @@ protocol FoldersOutlineViewDelegate: NSOutlineViewDelegate {
 
 public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositionable, ViewLinkable {
     private var _selectionInfo: FolderSelectionInfo?
+    var selectionRestorePaths = [String]()
 
     var selectionInfo: FolderSelectionInfo {
         if let selectionInfo = _selectionInfo {

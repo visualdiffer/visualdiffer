@@ -38,6 +38,15 @@ public extension FoldersWindowController {
         leftSecureURL = SecureBookmark.shared.secure(fromBookmark: leftPath, startSecured: true)
         rightSecureURL = SecureBookmark.shared.secure(fromBookmark: rightPath, startSecured: true)
 
+        if refreshInfo.expandAllFolders {
+            expandedFolderPaths.removeAll()
+        } else {
+            expandedFolderPaths = leftView.expandedFolderPaths()
+        }
+
+        leftView.captureSelectionForRestore(preserveExistingWhenEmpty: false)
+        rightView.captureSelectionForRestore(preserveExistingWhenEmpty: false)
+
         if refreshInfo.refreshFolders {
             leftItemOriginal = nil
             rightItemOriginal = nil
@@ -197,6 +206,8 @@ public extension FoldersWindowController {
 
         if folderReader.refreshInfo.expandAllFolders {
             leftView.expandItem(nil, expandChildren: true)
+        } else {
+            restoreExpandedFolders()
         }
     }
 
@@ -219,18 +230,19 @@ public extension FoldersWindowController {
         leftView.linkedView?.reloadItem(item.visibleItem?.linkedItem, reloadChildren: true)
         if folderReader.refreshInfo.expandAllFolders {
             leftView.expandItem(item.visibleItem, expandChildren: true)
+        } else {
+            restoreExpandedFolders(from: item.visibleItem)
         }
     }
 
     func didComparisonCompleted(_ elapsedTimeText: String) {
-        let leftSelection = leftView.getSelectedVisibleItems(true)
-        let rightSelection = rightView.getSelectedVisibleItems(true)
-
         leftView.reloadData()
         rightView.reloadData()
 
-        leftView.select(visibleItems: leftSelection)
-        rightView.select(visibleItems: rightSelection)
+        restoreExpandedFolders()
+
+        leftView.restoreCapturedSelection()
+        rightView.restoreCapturedSelection()
 
 //        selectFirstRow(leftSelection: leftSelection,
 //                       rightSelection: rightSelection)
@@ -290,6 +302,14 @@ public extension FoldersWindowController {
         if rightSelection.isEmpty {
             rightView.selectRowIndexes(IndexSet(integer: firstVisibleRow), byExtendingSelection: false)
         }
+    }
+
+    private func restoreExpandedFolders(from item: VisibleItem? = nil) {
+        if expandedFolderPaths.isEmpty {
+            return
+        }
+
+        leftView.expandFolders(with: expandedFolderPaths, from: item)
     }
 }
 

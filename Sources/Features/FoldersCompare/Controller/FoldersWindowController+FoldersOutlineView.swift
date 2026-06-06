@@ -318,9 +318,13 @@ extension FoldersWindowController: NSOutlineViewDelegate,
     }
 
     public func selectionChanged(in view: FoldersOutlineView) {
+        if running {
+            view.captureSelectionForRestore(preserveExistingWhenEmpty: true)
+        }
+
         // we can't use outlineViewSelectionDidChange because it is called
         // before the notification declared into outline subclass
-        // So we use our notification sent from outline subclass
+        // so we use our notification sent from outline subclass
         updateBottomBar(view)
         updateStatusBar()
         previewPanel?.reloadData()
