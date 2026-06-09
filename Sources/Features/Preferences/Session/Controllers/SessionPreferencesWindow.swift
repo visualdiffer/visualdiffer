@@ -17,6 +17,7 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
 
     private var loadedTabs = Set<NSUserInterfaceItemIdentifier>()
     private var currentPreferences = Data()
+    private var oldPreferences = Data()
 
     // used to retrieve pending data not updated on every modification
     private var sessionPreferencesFiltersPanel: SessionPreferencesFiltersPanel?
@@ -125,7 +126,10 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
 
         if let sessionDiff {
             fillWithSessionDiff(sessionDiff)
+        } else {
+            reloadAllTabs()
         }
+        oldPreferences = currentPreferences
 
         tabView.selectTabViewItem(at: selectedTab.rawValue)
 
@@ -138,12 +142,18 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
 
     func fillWithSessionDiff(_ sessionDiff: SessionDiff) {
         currentPreferences = Data.fromSessionDiff(sessionDiff)
-        reload(tabItem: tabView.selectedTabViewItem)
+        reloadAllTabs()
     }
 
     func fillWithUserDefaults() {
         currentPreferences = Data.fromUserDefaults()
-        reload(tabItem: tabView.selectedTabViewItem)
+        reloadAllTabs()
+    }
+
+    private func reloadAllTabs() {
+        for tabItem in tabView.tabViewItems {
+            reload(tabItem: tabItem)
+        }
     }
 
     @objc
@@ -156,6 +166,8 @@ class SessionPreferencesWindow: NSWindowController, NSTabViewDelegate, @preconcu
         if response == .OK {
             updatePendingData()
             window.endEditing()
+        } else {
+            currentPreferences = oldPreferences
         }
         window.sheetParent?.endSheet(window, returnCode: response)
     }
