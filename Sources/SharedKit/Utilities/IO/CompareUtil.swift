@@ -37,37 +37,35 @@ public func compareTextFiles(
     leftBis.open()
     rightBis.open()
 
-    var ret: ComparisonResult = .orderedSame
+    var result = ComparisonResult.orderedSame
     var eof = false
 
     repeat {
         autoreleasepool {
-            ret = compareLine(leftBis, rightBis, &eof)
+            (eof, result) = compareLine(leftBis, rightBis)
         }
-    } while !eof && ret == .orderedSame && isRunning()
+    } while !eof && result == .orderedSame && isRunning()
 
-    return ret
+    return result
 }
 
 func compareLine(
     _ leftBis: BufferedInputStream,
-    _ rightBis: BufferedInputStream,
-    _ eof: inout Bool
-) -> ComparisonResult {
+    _ rightBis: BufferedInputStream
+) -> (eof: Bool, result: ComparisonResult) {
     let leftLine = leftBis.readLine()
     let rightLine = rightBis.readLine()
     if let leftLine,
        let rightLine {
-        return leftLine.compare(rightLine)
+        return (false, leftLine.compare(rightLine))
     }
-    eof = true
     if leftLine == nil, rightLine == nil {
-        return .orderedSame
+        return (true, .orderedSame)
     }
     if leftLine == nil {
-        return .orderedAscending
+        return (true, .orderedAscending)
     }
-    return .orderedDescending
+    return (true, .orderedDescending)
 }
 
 public func compareDates(
@@ -123,19 +121,29 @@ public func compareBinaryFiles(
         rightFile.closeFile()
     }
 
-    var result: ComparisonResult = .orderedSame
+    var result = ComparisonResult.orderedSame
+    var eof = false
 
     repeat {
-        if let leftData = try? leftFile.read(upToCount: bufferSize),
-           let rightData = try? rightFile.read(upToCount: bufferSize) {
-            if leftData.isEmpty || rightData.isEmpty {
-                break
-            }
-            result = compareData(leftData, rightData)
-        } else {
-            break
+        autoreleasepool {
+            (eof, result) = compareBinaryChunk(leftFile, rightFile, bufferSize)
         }
-    } while result == .orderedSame && isRunning()
+    } while !eof && result == .orderedSame && isRunning()
 
     return result
+}
+
+private func compareBinaryChunk(
+    _ leftFile: FileHandle,
+    _ rightFile: FileHandle,
+    _ bufferSize: Int
+) -> (eof: Bool, result: ComparisonResult) {
+    guard let leftData = try? leftFile.read(upToCount: bufferSize),
+          let rightData = try? rightFile.read(upToCount: bufferSize),
+          !leftData.isEmpty,
+          !rightData.isEmpty else {
+        return (true, .orderedSame)
+    }
+
+    return (false, compareData(leftData, rightData))
 }
