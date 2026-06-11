@@ -21,6 +21,7 @@ extension FilesWindowController: NSTableViewDataSource,
               row < diffSide.lines.count else {
             return tableView.rowHeight
         }
+
         return rowHeightCalculator.height(for: row)
     }
 
