@@ -45,7 +45,7 @@ extension FilesWindowController: RowHeightDataSource {
     private func calculateLineNumberWidth() -> CGFloat {
         // count is indentical on left and right so we can use only the left lines count
         // no matters if the missing lines increase the count
-        let maxLineCount = currentDiffResult?.leftSide.lines.count ?? 0
+        let maxLineCount = diffResult?.leftSide.lines.count ?? 0
 
         var attributes = [NSAttributedString.Key: Any]()
         attributes[.font] = currentFont
