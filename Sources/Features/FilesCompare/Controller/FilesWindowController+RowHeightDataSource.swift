@@ -28,6 +28,11 @@ extension FilesWindowController: RowHeightDataSource {
 
         let diffSide = side == .left ? currentDiffResult.leftSide : currentDiffResult.rightSide
 
+        // row may be stale during a SynchroScrollView cascade while reloadData updates the row-count cache
+        guard row < diffSide.lines.count else {
+            return nil
+        }
+
         return diffSide.lines[row]
     }
 

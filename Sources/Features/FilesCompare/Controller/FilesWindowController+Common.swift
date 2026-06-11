@@ -69,8 +69,8 @@ extension FilesWindowController {
             if let leftSide = leftView.diffSide,
                let rightSide = rightView.diffSide {
                 let row = min(row, leftSide.lines.count - 1)
-                let oldLine = leftSide.lines[row]
-                let newLine = rightSide.lines[row]
+                let oldLine = row < 0 ? nil : leftSide.lines[row]
+                let newLine = row < 0 ? nil : rightSide.lines[row]
 
                 setColor(for: oldLine, view: leftDetailsTextView)
                 setColor(for: newLine, view: rightDetailsTextView)

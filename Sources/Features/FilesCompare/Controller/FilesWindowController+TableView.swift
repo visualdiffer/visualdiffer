@@ -15,19 +15,26 @@ extension FilesWindowController: NSTableViewDataSource,
         (tableView as? FilesTableView)?.diffSide?.lines.count ?? 0
     }
 
-    func tableView(_: NSTableView, heightOfRow row: Int) -> CGFloat {
-        rowHeightCalculator.height(for: row)
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        guard let filesTableView = tableView as? FilesTableView,
+              let diffSide = filesTableView.diffSide,
+              row < diffSide.lines.count else {
+            return tableView.rowHeight
+        }
+        return rowHeightCalculator.height(for: row)
     }
 
     public func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        // row may exceed diffSide.lines.count during a SynchroScrollView cascade
+        // while this view's NSTableView row-count cache is being updated by reloadData
         guard let filesTableView = tableView as? FilesTableView,
               let identifier = tableColumn?.identifier,
-              let diffSide = filesTableView.diffSide else {
+              let diffSide = filesTableView.diffSide,
+              row < diffSide.lines.count else {
             return nil
         }
 
-        let arr = diffSide.lines
-        let diffLine = arr[row]
+        let diffLine = diffSide.lines[row]
 
         let view = tableView.makeView(
             withIdentifier: identifier,
