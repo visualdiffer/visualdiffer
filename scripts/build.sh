@@ -15,6 +15,7 @@ profile_entries=(
   "Test:test"
   "Pre-release:prerelease"
   "Sparkle (no upload appcast):sparkle"
+  "Create Changelog:changelog"
 )
 
 selected_entry="$(
@@ -47,25 +48,6 @@ if [ -z "$selected_profile" ]; then
   exit 1
 fi
 
-case "$selected_profile" in
-  release)
-    build_command=(bundle exec fastlane release --env local)
-    ;;
-  test)
-    build_command=(bundle exec fastlane release --env test.local)
-    ;;
-  sparkle)
-    build_command=(bundle exec fastlane release --env sparkle.local)
-    ;;
-  prerelease)
-    build_command=(bundle exec fastlane release --env prerelease.local)
-    ;;
-  *)
-    echo "Unsupported profile: $selected_profile" >&2
-    exit 1
-    ;;
-esac
-
 generate_release_notes() {
   local xcconfig_file="$PROJECT_DIR/Versions.local.xcconfig"
   local app_version
@@ -93,10 +75,35 @@ run_tests() {
   bundle exec fastlane tests
 }
 
-generate_release_notes
-run_tests
+case "$selected_profile" in
+  release)
+    build_command=(bundle exec fastlane release --env local)
+    ;;
+  test)
+    build_command=(bundle exec fastlane release --env test.local)
+    ;;
+  sparkle)
+    build_command=(bundle exec fastlane release --env sparkle.local)
+    ;;
+  prerelease)
+    build_command=(bundle exec fastlane release --env prerelease.local)
+    ;;
+  changelog)
+    generate_release_notes
+    exit 0
+    ;;
+  *)
+    echo "Unsupported profile: $selected_profile" >&2
+    exit 1
+    ;;
+esac
 
-echo "Running profile: $selected_profile"
+if [ ${#build_command[@]} -gt 0 ]; then
+  generate_release_notes
+  run_tests
 
-cd "$PROJECT_DIR"
-"${build_command[@]}"
+  echo "Running profile: $selected_profile"
+
+  cd "$PROJECT_DIR"
+  "${build_command[@]}"
+fi
