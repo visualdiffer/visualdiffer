@@ -13,7 +13,8 @@
     extension VisibleItem {
         // periphery:ignore
         func log(indent: Int) {
-            let line = String(format: "%*c%@         %@", indent, " ", item.fileName ?? "", item.linkedItem?.fileName ?? "")
+            let spaces = String(repeating: " ", count: indent)
+            let line = "\(spaces)\(item.fileName ?? "")         \(item.linkedItem?.fileName ?? "")"
             Logger.debug.info("\(line)")
 
             for vi in children {
