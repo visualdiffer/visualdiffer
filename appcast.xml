@@ -5,33 +5,33 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.16</title>
+            <title>Version 2.1.17</title>
             <description>
                 <![CDATA[
-                <h1 id="v2116">v2.1.16</h1>
+                <h1 id="v2117">v2.1.17</h1>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
   <li>
-    <p>File Compare: avoid truncating line numbers in “Just Differences” view (<a href="https://github.com/visualdiffer/visualdiffer/commit/e7e289a8118b3bad74e8d77cb5b82ea0e158a91f">e7e289a</a>)</p>
+    <p>remove dynamic width not supported in Swift (<a href="https://github.com/visualdiffer/visualdiffer/commit/7324facff2fa4ab0693d06c858fd0d3cecf095a9">7324fac</a>)</p>
   </li>
   <li>
-    <p>File Compare: prevent copy lines crash in “Just Differences” mode (<a href="https://github.com/visualdiffer/visualdiffer/commit/e4948812f79acb66b0b990ac4730e981ed947f47">e494881</a>)</p>
+    <p>File Compare: keep destination line endings when copying lines (<a href="https://github.com/visualdiffer/visualdiffer/commit/5283c105f8c5ebdd4c67b6f50aa7cd54a5384425">5283c10</a>)</p>
   </li>
 </ul>
 
 
                 ]]>
             </description>
-            <pubDate>Sat, 13 June 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.1.16</sparkle:version>
-            <sparkle:shortVersionString>2.1.16</sparkle:shortVersionString>
+            <pubDate>Sat, 20 June 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.1.17</sparkle:version>
+            <sparkle:shortVersionString>2.1.17</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.16/VisualDiffer-2.1.16.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.17/VisualDiffer-2.1.17.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="kjiCKhY2kUwzJ8eK0Fgz5Hc32J2KpuSZWslKExcn0/oceTsesOT5OGtSyrBfn3osyuDhBsctx6wyA4gWdKstAg==" length="5332659"
+                sparkle:edSignature="BuOxH2HfTT7q8CZzZNTJLYXanBxxY3bHh28dRROHFg0Rql9JKGHjdmppkEz5cjAg/5lB00lbzPdUcVWaQVS8DA==" length="5334828"
 
             />
         </item>
