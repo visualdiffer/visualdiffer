@@ -39,6 +39,10 @@ public extension URL {
         let srcBaseDir = srcBaseURL.osPath
         let srcPath = srcURL.osPath
 
+        if srcPath == srcBaseDir {
+            return destBaseURL
+        }
+
         if let destURL {
             // use destination file name if it is present so
             // file names using a not match-case alignment works fine

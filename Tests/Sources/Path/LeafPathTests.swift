@@ -24,6 +24,17 @@ final class LeafPathTests: BaseTests {
     }
 
     @Test
+    func rootDestinationUsesBasePath() {
+        let srcBaseURL = URL(filePath: "/tmp/source", directoryHint: .isDirectory)
+        let destBaseURL = URL(filePath: "/tmp/dest", directoryHint: .isDirectory)
+        let linkedURL = URL(filePath: "/tmp/dest", directoryHint: .isDirectory)
+
+        let result = URL.buildDestinationPath(srcBaseURL, linkedURL, srcBaseURL, destBaseURL)
+
+        #expect(result.osPath == destBaseURL.osPath)
+    }
+
+    @Test
     func findLeafPaths1() {
         let paths = [
             "/Users/dave/trash/test_suite/createDir/l/dir1/dir2/dir3/test_date",
