@@ -179,13 +179,14 @@ final class WhitespacesTests: DiffResultBaseTests {
 
         let filtered = DiffResult.justMatchingLines(diffResult)
 
-        DiffResult.deleteLines(
+        let lineEditOperation = LineEditOperation(
             all: diffResult,
-            current: filtered,
+            filtered: filtered,
             rows: IndexSet(integer: 0),
-            side: .right,
+            sourceSide: .right,
             visibility: .matches
         )
+        lineEditOperation.deleteLines()
         diffResult.refreshSections()
 
         #expect(diffResult.summary == DiffSummary(matching: 0, added: 0, deleted: 1, changed: 0, ignored: 0))

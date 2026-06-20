@@ -269,13 +269,14 @@ final class DiffResultTests: DiffResultBaseTests {
 
         let rowsToCopy = IndexSet([3, 6])
 
-        DiffResult.copyLines(
+        let lineEditOperation = LineEditOperation(
             all: diffResult,
-            current: diffResult,
+            filtered: diffResult,
             rows: rowsToCopy,
-            source: .left,
+            sourceSide: .left,
             visibility: .all
         )
+        lineEditOperation.copyLines(useDestinationEOL: false)
 
         let leftChangeTypeCopied: [DiffChangeType] = [.matching, .deleted, .matching, .matching, .deleted, .deleted, .matching, .deleted]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeTypeCopied)
@@ -291,6 +292,29 @@ final class DiffResultTests: DiffResultBaseTests {
         for (index, line) in linesStatus.enumerated() {
             #expect(line.number == lineNumbers[index])
         }
+    }
+
+    @Test
+    func copyLinesUsesDestinationEOL() {
+        let leftText = "line1\nline2\n"
+        let rightText = "line1\r\nline3\r\n"
+
+        let diffResult = DiffResult()
+        diffResult.diff(leftText: leftText, rightText: rightText)
+
+        let rowsToCopy = IndexSet(integer: 1)
+
+        let lineEditOperation = LineEditOperation(
+            all: diffResult,
+            filtered: diffResult,
+            rows: rowsToCopy,
+            sourceSide: .left,
+            visibility: .all
+        )
+        lineEditOperation.copyLines(useDestinationEOL: true)
+
+        #expect(diffResult.rightSide.lines[1].component.text == "line2")
+        #expect(diffResult.rightSide.lines[1].component.eol == .pcCRLF)
     }
 
     @Test
@@ -315,13 +339,14 @@ final class DiffResultTests: DiffResultBaseTests {
 
         let filteredDiffResult = DiffResult.justDifferentLines(diffResult)
 
-        DiffResult.copyLines(
+        let lineEditOperation = LineEditOperation(
             all: diffResult,
-            current: filteredDiffResult,
+            filtered: filteredDiffResult,
             rows: rowsToCopy,
-            source: .right,
+            sourceSide: .right,
             visibility: .differences
         )
+        lineEditOperation.copyLines(useDestinationEOL: false)
 
         let leftChangeTypeCopied: [DiffChangeType] = [.deleted, .deleted, .deleted, .deleted]
         assert(lines: filteredDiffResult.leftSide.lines, expectedValue: leftChangeTypeCopied)
@@ -359,13 +384,14 @@ final class DiffResultTests: DiffResultBaseTests {
 
         let rowsToDelete = IndexSet([3, 5, 6, 7])
 
-        DiffResult.deleteLines(
+        let lineEditOperation = LineEditOperation(
             all: diffResult,
-            current: diffResult,
+            filtered: diffResult,
             rows: rowsToDelete,
-            side: .left,
+            sourceSide: .left,
             visibility: .all
         )
+        lineEditOperation.deleteLines()
 
         let leftChangeTypeDeleted: [DiffChangeType] = [.matching, .deleted, .matching, .missing, .deleted]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeTypeDeleted)
@@ -402,13 +428,14 @@ final class DiffResultTests: DiffResultBaseTests {
 
         let filteredDiffResult = DiffResult.justDifferentLines(diffResult)
 
-        DiffResult.deleteLines(
+        let lineEditOperation = LineEditOperation(
             all: diffResult,
-            current: filteredDiffResult,
+            filtered: filteredDiffResult,
             rows: rowsToDelete,
-            side: .right,
+            sourceSide: .right,
             visibility: .differences
         )
+        lineEditOperation.deleteLines()
 
         let leftChangeTypeDeleted: [DiffChangeType] = [.deleted, .changed, .deleted, .deleted, .deleted, .deleted]
         assert(lines: filteredDiffResult.leftSide.lines, expectedValue: leftChangeTypeDeleted)
@@ -445,13 +472,14 @@ final class DiffResultTests: DiffResultBaseTests {
 
         let filteredDiffResult = DiffResult.justMatchingLines(diffResult)
 
-        DiffResult.deleteLines(
+        let lineEditOperation = LineEditOperation(
             all: diffResult,
-            current: filteredDiffResult,
+            filtered: filteredDiffResult,
             rows: rowsToDelete,
-            side: .right,
+            sourceSide: .right,
             visibility: .matches
         )
+        lineEditOperation.deleteLines()
 
         let leftChangeTypeDeleted: [DiffChangeType] = [.matching]
         assert(lines: filteredDiffResult.leftSide.lines, expectedValue: leftChangeTypeDeleted)

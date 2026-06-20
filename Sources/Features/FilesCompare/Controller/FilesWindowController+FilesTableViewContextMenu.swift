@@ -83,13 +83,14 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
             return
         }
 
-        DiffResult.copyLines(
+        let lineEditOperation = LineEditOperation(
             all: diffResult,
-            current: currentDiffResult,
+            filtered: currentDiffResult,
             rows: selectedRows,
-            source: lastUsedView.side,
+            sourceSide: lastUsedView.side,
             visibility: scopeBar.showLinesFilter == .differences ? .differences : .all
         )
+        lineEditOperation.copyLines(useDestinationEOL: true)
 
         linkedView.isDirty = true
         refreshAfterTextEdit()
@@ -105,13 +106,14 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
             return
         }
 
-        DiffResult.deleteLines(
+        let lineEditOperation = LineEditOperation(
             all: diffResult,
-            current: currentDiffResult,
+            filtered: currentDiffResult,
             rows: selectedRows,
-            side: lastUsedView.side,
+            sourceSide: lastUsedView.side,
             visibility: scopeBar.showLinesFilter
         )
+        lineEditOperation.deleteLines()
 
         lastUsedView.isDirty = true
         refreshAfterTextEdit()

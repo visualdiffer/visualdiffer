@@ -9,6 +9,10 @@
 public enum DisplaySide: Int, Sendable {
     case left
     case right
+
+    var opposite: DisplaySide {
+        self == .left ? .right : .left
+    }
 }
 
 protocol DisplayPositionable: AnyObject {

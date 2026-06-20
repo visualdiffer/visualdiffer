@@ -6,120 +6,143 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-extension DiffResult {
+/// describes the context needed to edit selected diff lines
+struct LineEditOperation {
+    /// the diff result with all lines visible
+    let all: DiffResult
+
+    /// the diff result containing filtered lines, could be the same of all if no filter is applied
+    let filtered: DiffResult
+
+    /// the visible rows to copy or delete
+    let rows: IndexSet
+
+    /// the side used as the source of the edit
+    let sourceSide: DisplaySide
+
+    /// the active visibility mode used to keep the filtered diff result in sync
+    let visibility: DiffLine.Visibility
+
+    var sourceLines: [DiffLine] {
+        filtered.diffSide(for: sourceSide).lines
+    }
+
+    var destinationLines: [DiffLine] {
+        filtered.diffSide(for: sourceSide.opposite).lines
+    }
+
+    var destinationEOL: EndOfLine {
+        all.diffSide(for: sourceSide.opposite).eol
+    }
+
+    var sourceAllSide: DiffSide {
+        all.diffSide(for: sourceSide)
+    }
+
+    var destinationAllSide: DiffSide {
+        all.diffSide(for: sourceSide.opposite)
+    }
+}
+
+extension LineEditOperation {
     ///
-    /// Copy lines from source to destination.
+    /// copy lines from source to destination
     /// - Parameters:
-    ///   - all: the DiffResult with all lines visible
-    ///   - current: the DiffResult currently used, contains the filtered lines, could be the same of allResult if no filter is applied
-    ///   - rows: the rows to copy
-    ///   - source: the source side used to copy line
-    ///   - visibility: used to update the filtered DiffResult
+    ///   - useDestinationEOL: true when copied text should keep the destination line ending
     ///
-    static func copyLines(
-        all: DiffResult,
-        current: DiffResult,
-        rows: IndexSet,
-        source side: DisplaySide,
-        visibility: DiffLine.Visibility
+    func copyLines(
+        useDestinationEOL: Bool
     ) {
-        let fromLeft = side == .left
-        let srcLines = fromLeft ? current.leftSide.lines : current.rightSide.lines
-        let destLines = fromLeft ? current.rightSide.lines : current.leftSide.lines
+        let fromLeft = sourceSide == .left
 
         for row in rows.reversed() {
-            let srcLine = srcLines[row]
-            let destLine = destLines[row]
+            let sourceLine = sourceLines[row]
+            let destinationLine = destinationLines[row]
 
-            if srcLine.type == .missing {
+            if sourceLine.type == .missing {
                 if visibility == .differences {
                     if fromLeft {
-                        all.remove(line: srcLine)
+                        all.remove(line: sourceLine)
                     } else {
-                        all.remove(line: destLine)
+                        all.remove(line: destinationLine)
                     }
                 }
-                current.removeLine(at: row)
+                filtered.removeLine(at: row)
             } else {
-                srcLine.type = .matching
-                srcLine.hasIgnoredDifferences = false
+                sourceLine.type = .matching
+                sourceLine.hasIgnoredDifferences = false
 
-                destLine.mode = .merged
-                destLine.type = .matching
-                destLine.hasIgnoredDifferences = false
-                destLine.component = srcLine.component
+                destinationLine.mode = .merged
+                destinationLine.type = .matching
+                destinationLine.hasIgnoredDifferences = false
+
+                if useDestinationEOL,
+                   destinationEOL != .mixed,
+                   sourceLine.component.eol != .missing {
+                    destinationLine.component = DiffLineComponent(text: sourceLine.text, eol: destinationEOL)
+                } else {
+                    destinationLine.component = sourceLine.component
+                }
 
                 // now lines match so remove them from view
                 if visibility == .differences {
-                    current.removeLine(at: row)
+                    filtered.removeLine(at: row)
                 }
             }
         }
 
-        let diffSide = fromLeft ? all.rightSide : all.leftSide
-        diffSide.renumberLines()
+        destinationAllSide.renumberLines()
     }
 
     ///
-    /// Delete lines from source.
-    /// - Parameters:
-    ///   - all: the DiffResult with all lines visible
-    ///   - current: the DiffResult currently used, contains the filtered lines, could be the same of allDiffResult if no filter is applied
-    ///   - rows: the rows to delete
-    ///   - side: the side used to delete lines
-    ///   - visibility: used to update the filtered DiffResult
+    /// delete lines from source
     ///
-    static func deleteLines(
-        all: DiffResult,
-        current: DiffResult,
-        rows: IndexSet,
-        side: DisplaySide,
-        visibility: DiffLine.Visibility
-    ) {
-        let fromLeft = side == .left
-        let srcLines = fromLeft ? current.leftSide.lines : current.rightSide.lines
-        let destLines = fromLeft ? current.rightSide.lines : current.leftSide.lines
+    func deleteLines() {
+        let fromLeft = sourceSide == .left
 
         for row in rows.reversed() {
-            let srcLine = srcLines[row]
-            let destLine = destLines[row]
+            let sourceLine = sourceLines[row]
+            let destinationLine = destinationLines[row]
 
             // can't delete an already missing line
-            if srcLine.type == .missing {
+            if sourceLine.type == .missing {
                 continue
             }
 
-            if destLine.type == .missing {
+            if destinationLine.type == .missing {
                 if visibility == .differences {
                     if fromLeft {
-                        all.remove(line: srcLine)
+                        all.remove(line: sourceLine)
                     } else {
-                        all.remove(line: destLine)
+                        all.remove(line: destinationLine)
                     }
                 }
-                current.removeLine(at: row)
+                filtered.removeLine(at: row)
             } else {
-                srcLine.makeMissing()
+                sourceLine.makeMissing()
 
                 if fromLeft {
-                    destLine.type = .added
+                    destinationLine.type = .added
                 } else {
-                    destLine.type = .deleted
+                    destinationLine.type = .deleted
                 }
 
                 // now lines differ so remove them from view
                 if visibility == .matches {
-                    current.removeLine(at: row)
+                    filtered.removeLine(at: row)
                 }
             }
         }
-        let destAllLinesStatus = fromLeft ? all.leftSide : all.rightSide
 
-        destAllLinesStatus.renumberLines()
+        sourceAllSide.renumberLines()
     }
+}
 
+extension DiffResult {
     static func justDifferentLines(_ result: DiffResult) -> DiffResult {
         let onlyMismatches = DiffResult(sections: DiffSection.compact(sections: result.sections))
+        onlyMismatches.leftSide.eol = result.leftSide.eol
+        onlyMismatches.rightSide.eol = result.rightSide.eol
 
         let leftSide = onlyMismatches.leftSide
         let rightSide = onlyMismatches.rightSide
@@ -170,8 +193,10 @@ extension DiffResult {
     }
 
     static func justMatchingLines(_ result: DiffResult) -> DiffResult {
-        // Difference sections are not visible
+        // difference sections are not visible
         let onlyMatches = DiffResult()
+        onlyMatches.leftSide.eol = result.leftSide.eol
+        onlyMatches.rightSide.eol = result.rightSide.eol
 
         let leftSide = onlyMatches.leftSide
         let rightSide = onlyMatches.rightSide
