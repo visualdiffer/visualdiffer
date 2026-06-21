@@ -17,7 +17,11 @@ protocol HistoryControllerDelegate: AnyObject {
 }
 
 @MainActor
-class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, TableViewCommonDelegate {
+class HistoryController: NSObject,
+    NSTableViewDelegate,
+    NSTableViewDataSource,
+    NSMenuItemValidation,
+    TableViewCommonDelegate {
     lazy var scrollView: NSScrollView = {
         let view = NSScrollView(frame: .zero)
 
@@ -68,14 +72,7 @@ class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, T
 
     func contextMenu() -> NSMenu {
         let menu = NSMenu(title: NSLocalizedString("Contextual Menu", comment: ""))
-        menu.autoenablesItems = false
 
-        menu.addItem(
-            withTitle: NSLocalizedString("Remove", comment: ""),
-            action: #selector(removeHistory),
-            keyEquivalent: ""
-        )
-        .target = self
         menu.addItem(
             withTitle: NSLocalizedString("Select Invalid Paths", comment: ""),
             action: #selector(selectInvalidPaths),
@@ -83,7 +80,36 @@ class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, T
         )
         .target = self
 
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(
+            withTitle: NSLocalizedString("Remove Selected Items", comment: ""),
+            action: #selector(removeHistory),
+            keyEquivalent: ""
+        )
+        .target = self
+
+        menu.addItem(
+            withTitle: NSLocalizedString("Remove All Items", comment: ""),
+            action: #selector(removeAllHistory),
+            keyEquivalent: ""
+        )
+        .target = self
+
         return menu
+    }
+
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        let action = menuItem.action
+
+        if action == #selector(removeHistory) {
+            return !tableView.selectedRowIndexes.isEmpty
+        } else if action == #selector(selectInvalidPaths) {
+            return tableView.numberOfRows > 0
+        } else if action == #selector(removeAllHistory) {
+            return tableView.numberOfRows > 0
+        }
+
+        return true
     }
 
     @MainActor
@@ -258,6 +284,23 @@ class HistoryController: NSObject, NSTableViewDelegate, NSTableViewDataSource, T
 
         tableView.selectRowIndexes(indexSet, byExtendingSelection: false)
         tableView.window?.makeFirstResponder(tableView)
+    }
+
+    @objc
+    @MainActor
+    func removeAllHistory(_: AnyObject) {
+        guard tableView.numberOfRows > 0 else {
+            return
+        }
+
+        let retVal = NSAlert.showModalConfirm(
+            messageText: NSLocalizedString("Are you sure you want to remove all history items?", comment: ""),
+            informativeText: NSLocalizedString("This action cannot be undone.", comment: "")
+        )
+
+        if retVal {
+            removeEntity(indexes: IndexSet(integersIn: 0 ..< tableView.numberOfRows))
+        }
     }
 
     @MainActor
