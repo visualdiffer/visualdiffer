@@ -47,8 +47,8 @@ class ComparatorPopUpButtonCell: NSPopUpButtonCell {
 
         let flags: [ComparatorOptions] = [
             .filename,
-            .asText,
             .content,
+            .asText,
             .size,
             .timestamp,
             [.timestamp, .size],

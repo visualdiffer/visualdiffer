@@ -10,19 +10,19 @@ extension ComparatorOptions: CustomStringConvertible, CustomDebugStringConvertib
     public var description: String {
         switch self {
         case .filename:
-            NSLocalizedString("Compare file names only", comment: "")
+            NSLocalizedString("Name", comment: "")
         case .asText:
-            NSLocalizedString("Compare file content ignoring line ending differences", comment: "")
+            NSLocalizedString("Content (Ignore Line Endings)", comment: "")
         case .content:
-            NSLocalizedString("Compare file content only", comment: "")
+            NSLocalizedString("Content", comment: "")
         case .size:
-            NSLocalizedString("Compare file sizes", comment: "")
+            NSLocalizedString("Size", comment: "")
         case .timestamp:
-            NSLocalizedString("Compare file timestamps", comment: "")
+            NSLocalizedString("Timestamp", comment: "")
         case [.timestamp, .size]:
-            NSLocalizedString("Compare file timestamps and sizes", comment: "")
+            NSLocalizedString("Timestamp + Size", comment: "")
         case [.timestamp, .content, .size]:
-            NSLocalizedString("Compare file timestamp, size and content", comment: "")
+            NSLocalizedString("Timestamp + Size + Content", comment: "")
         default:
             "\(rawValue)"
         }
