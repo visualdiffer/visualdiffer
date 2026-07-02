@@ -1489,6 +1489,408 @@ final class AlignmentTests: CaseSensitiveBaseTest {
     }
 
     @Test
+    func regularExpressionAlignsCrossedRules() throws {
+        try assertVolumeMounted()
+
+        let fileNameAlignments = [
+            AlignRule(
+                regExp: AlignRegExp(pattern: "a_left", options: []),
+                template: AlignTemplate(pattern: "z_right", options: [])
+            ),
+            AlignRule(
+                regExp: AlignRegExp(pattern: "b_left", options: []),
+                template: AlignTemplate(pattern: "a_right", options: [])
+            ),
+        ]
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.contentTimestamp, .size, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: true,
+            isRightCaseSensitive: true,
+            fileNameAlignments: fileNameAlignments
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: true,
+            skipPackages: false,
+            traverseFilteredFolders: false,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .showAll
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+
+        try createFolder("l")
+        try createFolder("r")
+
+        try createFolder("l/a_left")
+        try createFile("l/a_left/file.txt", "a")
+        try createFolder("l/b_left")
+        try createFile("l/b_left/file.txt", "b")
+
+        try createFolder("r/a_right")
+        try createFile("r/a_right/file.txt", "a")
+        try createFolder("r/z_right")
+        try createFile("r/z_right/file.txt", "z")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let leftRoot = try #require(folderReader.leftRoot)
+        let leftA = try #require(leftRoot.children.first { $0.fileName == "a_left" })
+        let leftB = try #require(leftRoot.children.first { $0.fileName == "b_left" })
+
+        #expect(leftA.linkedItem?.fileName == "z_right")
+        #expect(leftB.linkedItem?.fileName == "a_right")
+
+        let rightRoot = try #require(folderReader.rightRoot)
+        let rightA = try #require(rightRoot.children.first { $0.fileName == "a_right" })
+        let rightZ = try #require(rightRoot.children.first { $0.fileName == "z_right" })
+
+        #expect(rightA.linkedItem?.fileName == "b_left")
+        #expect(rightZ.linkedItem?.fileName == "a_left")
+    }
+
+    @Test
+    func regularExpressionSkipsFileNameMatchReservedForLaterLeft() throws {
+        try assertVolumeMounted()
+
+        let fileNameAlignments = [
+            AlignRule(
+                regExp: AlignRegExp(pattern: "n_later", options: []),
+                template: AlignTemplate(pattern: "m_current", options: [])
+            ),
+            AlignRule(
+                regExp: AlignRegExp(pattern: "z_later", options: []),
+                template: AlignTemplate(pattern: "a_reserved", options: [])
+            ),
+        ]
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.contentTimestamp, .size, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: true,
+            isRightCaseSensitive: true,
+            fileNameAlignments: fileNameAlignments
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: true,
+            skipPackages: false,
+            traverseFilteredFolders: false,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .showAll
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+
+        try createFolder("l")
+        try createFolder("r")
+
+        try createFolder("l/m_current")
+        try createFile("l/m_current/file.txt", "m")
+        try createFolder("l/n_later")
+        try createFile("l/n_later/file.txt", "n")
+        try createFolder("l/z_later")
+        try createFile("l/z_later/file.txt", "z")
+
+        try createFolder("r/a_reserved")
+        try createFile("r/a_reserved/file.txt", "a")
+        try createFolder("r/m_current")
+        try createFile("r/m_current/file.txt", "m")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let leftRoot = try #require(folderReader.leftRoot)
+        let leftCurrent = try #require(leftRoot.children.first { $0.fileName == "m_current" })
+        let leftNameRule = try #require(leftRoot.children.first { $0.fileName == "n_later" })
+        let leftReserved = try #require(leftRoot.children.first { $0.fileName == "z_later" })
+
+        #expect(leftCurrent.linkedItem?.path == nil)
+        #expect(leftNameRule.linkedItem?.fileName == "m_current")
+        #expect(leftReserved.linkedItem?.fileName == "a_reserved")
+
+        let rightRoot = try #require(folderReader.rightRoot)
+        let rightNameRule = try #require(rightRoot.children.first { $0.fileName == "m_current" })
+        let rightReserved = try #require(rightRoot.children.first { $0.fileName == "a_reserved" })
+
+        #expect(rightNameRule.linkedItem?.fileName == "n_later")
+        #expect(rightReserved.linkedItem?.fileName == "z_later")
+    }
+
+    @Test
+    func regularExpressionUsesClosestRightMatchAcrossRules() throws {
+        try assertVolumeMounted()
+
+        let fileNameAlignments = [
+            AlignRule(
+                regExp: AlignRegExp(pattern: "m_left", options: []),
+                template: AlignTemplate(pattern: "z_far", options: [])
+            ),
+            AlignRule(
+                regExp: AlignRegExp(pattern: "m_left", options: []),
+                template: AlignTemplate(pattern: "b_near", options: [])
+            ),
+        ]
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.contentTimestamp, .size, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: true,
+            isRightCaseSensitive: true,
+            fileNameAlignments: fileNameAlignments
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: true,
+            skipPackages: false,
+            traverseFilteredFolders: false,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .showAll
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+
+        try createFolder("l")
+        try createFolder("r")
+
+        try createFolder("l/m_left")
+        try createFile("l/m_left/file.txt", "m")
+
+        try createFolder("r/a_orphan")
+        try createFile("r/a_orphan/file.txt", "a")
+        try createFolder("r/b_near")
+        try createFile("r/b_near/file.txt", "b")
+        try createFolder("r/z_far")
+        try createFile("r/z_far/file.txt", "z")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let leftRoot = try #require(folderReader.leftRoot)
+        let leftItem = try #require(leftRoot.children.first { $0.fileName == "m_left" })
+
+        #expect(leftItem.linkedItem?.fileName == "b_near")
+
+        let rightRoot = try #require(folderReader.rightRoot)
+        let rightOrphan = try #require(rightRoot.children.first { $0.fileName == "a_orphan" })
+        let rightNear = try #require(rightRoot.children.first { $0.fileName == "b_near" })
+        let rightFar = try #require(rightRoot.children.first { $0.fileName == "z_far" })
+
+        #expect(rightOrphan.linkedItem?.path == nil)
+        #expect(rightNear.linkedItem?.fileName == "m_left")
+        #expect(rightFar.linkedItem?.path == nil)
+    }
+
+    @Test
+    func regularExpressionAlignsLaterRightDirectory() throws {
+        try assertVolumeMounted()
+
+        let fileNameAlignments = [
+            AlignRule(
+                regExp: AlignRegExp(pattern: ".template-docker", options: []),
+                template: AlignTemplate(pattern: "docker", options: [])
+            ),
+            AlignRule(
+                regExp: AlignRegExp(pattern: "img_bad", options: []),
+                template: AlignTemplate(pattern: "a_img_good", options: [])
+            ),
+        ]
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.contentTimestamp, .size, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: true,
+            isRightCaseSensitive: true,
+            fileNameAlignments: fileNameAlignments
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: true,
+            skipPackages: false,
+            traverseFilteredFolders: false,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .showAll
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+
+        try createFolder("l")
+        try createFolder("r")
+
+        try createFile("l/file1.txt", "123456")
+        try createFolder("l/img_bad")
+        try createFile("l/img_bad/img01.txt", "123456")
+        try createFile("l/img_bad/img02.txt", "123456")
+        try createFolder("l/.template-docker/docker")
+        try createFile("l/.template-docker/docker/file1.txt", "1234")
+
+        try createFile("r/file1.txt", "1236")
+        try createFolder("r/a_img_good")
+        try createFile("r/a_img_good/img01.txt", "1234")
+        try createFile("r/a_img_good/img02.txt", "12346")
+        try createFolder("r/docker")
+        try createFile("r/docker/file2.txt", "12346")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let leftRoot = try #require(folderReader.leftRoot)
+        let templateItem = try #require(leftRoot.children.first { $0.fileName == ".template-docker" })
+        let imageItem = try #require(leftRoot.children.first { $0.fileName == "img_bad" })
+        let fileItem = try #require(leftRoot.children.first { $0.fileName == "file1.txt" })
+
+        #expect(templateItem.linkedItem?.fileName == "docker")
+        #expect(imageItem.linkedItem?.fileName == "a_img_good")
+        #expect(fileItem.linkedItem?.fileName == "file1.txt")
+
+        let rightRoot = try #require(folderReader.rightRoot)
+        let goodImageItem = try #require(rightRoot.children.first { $0.fileName == "a_img_good" })
+        let dockerItem = try #require(rightRoot.children.first { $0.fileName == "docker" })
+
+        #expect(goodImageItem.linkedItem?.fileName == "img_bad")
+        #expect(dockerItem.linkedItem?.fileName == ".template-docker")
+    }
+
+    @Test
+    func regularExpressionYieldsRuleMatchToLaterExactFileName() throws {
+        try assertVolumeMounted()
+
+        let fileNameAlignments = [
+            AlignRule(
+                regExp: AlignRegExp(pattern: "a_dup", options: []),
+                template: AlignTemplate(pattern: "m_target", options: [])
+            ),
+        ]
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.contentTimestamp, .size, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: true,
+            isRightCaseSensitive: true,
+            fileNameAlignments: fileNameAlignments
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: true,
+            skipPackages: false,
+            traverseFilteredFolders: false,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .showAll
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+
+        try createFolder("l")
+        try createFolder("r")
+
+        try createFolder("l/a_dup")
+        try createFile("l/a_dup/file.txt", "a")
+        try createFolder("l/m_target")
+        try createFile("l/m_target/file.txt", "m")
+
+        try createFolder("r/a_other")
+        try createFile("r/a_other/file.txt", "o")
+        try createFolder("r/m_target")
+        try createFile("r/m_target/file.txt", "m")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let leftRoot = try #require(folderReader.leftRoot)
+        let leftDup = try #require(leftRoot.children.first { $0.fileName == "a_dup" })
+        let leftTarget = try #require(leftRoot.children.first { $0.fileName == "m_target" })
+
+        // the exact file-name match wins over the rule-derived prefix match
+        #expect(leftTarget.linkedItem?.fileName == "m_target")
+        #expect(leftDup.linkedItem?.path == nil)
+
+        let rightRoot = try #require(folderReader.rightRoot)
+        let rightTarget = try #require(rightRoot.children.first { $0.fileName == "m_target" })
+        let rightOther = try #require(rightRoot.children.first { $0.fileName == "a_other" })
+
+        #expect(rightTarget.linkedItem?.fileName == "m_target")
+        #expect(rightOther.linkedItem?.path == nil)
+    }
+
+    @Test
     func regNoMatchButIgnoreCaseMatch() throws {
         try assertVolumeMounted()
 
@@ -1744,6 +2146,167 @@ final class AlignmentTests: CaseSensitiveBaseTest {
             assertItem(child6, 0, 1, 0, 0, 0, "photo𝄞.txt", .changed, 18)
             assertItem(child6.linkedItem, 0, 1, 0, 0, 0, "photo𝄞.doc", .changed, 18)
         }
+    }
+
+    @Test
+    func regularExpressionAdjacentRuleYieldsToExactFileName() throws {
+        try assertVolumeMounted()
+
+        let fileNameAlignments = [
+            AlignRule(
+                regExp: AlignRegExp(pattern: "a_dup", options: []),
+                template: AlignTemplate(pattern: "m_target", options: [])
+            ),
+        ]
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.contentTimestamp, .size, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: true,
+            isRightCaseSensitive: true,
+            fileNameAlignments: fileNameAlignments
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: true,
+            skipPackages: false,
+            traverseFilteredFolders: false,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .showAll
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+
+        try createFolder("l")
+        try createFolder("r")
+
+        try createFolder("l/a_dup")
+        try createFile("l/a_dup/file.txt", "a")
+        try createFolder("l/m_target")
+        try createFile("l/m_target/file.txt", "m")
+
+        // no right item sorts before m_target, so a_dup meets m_target at the
+        // current position and must still yield it to the exact-name left
+        try createFolder("r/m_target")
+        try createFile("r/m_target/file.txt", "m")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let leftRoot = try #require(folderReader.leftRoot)
+        let leftDup = try #require(leftRoot.children.first { $0.fileName == "a_dup" })
+        let leftTarget = try #require(leftRoot.children.first { $0.fileName == "m_target" })
+
+        let rightRoot = try #require(folderReader.rightRoot)
+        let rightTarget = try #require(rightRoot.children.first { $0.fileName == "m_target" })
+
+        // the exact file-name match wins even when the rule match is adjacent
+        #expect(leftTarget.linkedItem === rightTarget)
+        #expect(rightTarget.linkedItem === leftTarget)
+        #expect(leftDup.linkedItem?.path == nil)
+    }
+
+    @Test
+    func emptyTemplateProducesNoRuleMatch() {
+        // a template expanding to nothing (e.g. a backreference to a missing
+        // capture group) must not prefix-match every right name
+        let emptyRule = AlignRule(
+            regExp: AlignRegExp(pattern: "a_dup", options: []),
+            template: AlignTemplate(pattern: "$1", options: [])
+        )
+        #expect(emptyRule.match(leftName: "a_dup") == nil)
+
+        let validRule = AlignRule(
+            regExp: AlignRegExp(pattern: "a_dup", options: []),
+            template: AlignTemplate(pattern: "m_target", options: [])
+        )
+        #expect(validRule.match(leftName: "a_dup")?.replacedName == "m_target")
+    }
+
+    @Test
+    func regularExpressionMixedCasePrefersExactSibling() throws {
+        try assertVolumeMounted()
+
+        // a rule that does not match any of the items below
+        let fileNameAlignments = [
+            AlignRule(
+                regExp: AlignRegExp(pattern: "no_match", options: []),
+                template: AlignTemplate(pattern: "no_match", options: [])
+            ),
+        ]
+        let comparatorDelegate = MockItemComparatorDelegate()
+        // mixed case sensitivity: left case-sensitive, right case-insensitive
+        let comparator = ItemComparator(
+            options: [.contentTimestamp, .size, .alignFileSystemCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: true,
+            isRightCaseSensitive: false,
+            fileNameAlignments: fileNameAlignments
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: true,
+            followSymLinks: true,
+            skipPackages: false,
+            traverseFilteredFolders: false,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .showAll
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+
+        try createFolder("l")
+        try createFolder("r")
+
+        // the case-sensitive left keeps both siblings, the right has only the
+        // exact-case one; the case-variant left must stay an orphan
+        try createFile("l/foo.txt", "a")
+        try createFile("l/Foo.txt", "b")
+        try createFile("r/Foo.txt", "b")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let leftRoot = try #require(folderReader.leftRoot)
+        let leftLower = try #require(leftRoot.children.first { $0.fileName == "foo.txt" })
+        let leftExact = try #require(leftRoot.children.first { $0.fileName == "Foo.txt" })
+
+        let rightRoot = try #require(folderReader.rightRoot)
+        let rightExact = try #require(rightRoot.children.first { $0.fileName == "Foo.txt" })
+
+        // the exact-case sibling matches; the case-variant left stays an orphan
+        #expect(leftExact.linkedItem === rightExact)
+        #expect(rightExact.linkedItem === leftExact)
+        #expect(leftLower.linkedItem?.path == nil)
     }
 }
 

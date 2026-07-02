@@ -17,6 +17,20 @@ struct AlignTemplateOptions: OptionSet {
 typealias AlignRegExp = AlignRule.Pair<NSRegularExpression.Options>
 typealias AlignTemplate = AlignRule.Pair<AlignTemplateOptions>
 
+struct AlignRuleMatch {
+    let replacedName: String
+    let templateOptions: AlignTemplateOptions
+
+    func matches(
+        rightName: String
+    ) -> Bool {
+        rightName.hasPrefix(
+            replacedName,
+            ignoreCase: templateOptions.contains(.caseInsensitive)
+        )
+    }
+}
+
 public struct AlignRule {
     struct Pair<T> {
         let pattern: String
@@ -61,30 +75,33 @@ extension AlignRule {
         ]
     }
 
-    /// Check if the `lhs` string matches the `rhs` using this rule
-    /// - lhs: the left string
-    /// - rhs: the right string
-    /// - Returns: `true` if the strings match,`false` otherwise
-    func matches(
-        name lhs: String,
-        with rhs: String
-    ) -> Bool {
+    /// create a match for the left string using this rule
+    /// - parameter leftName: the left string
+    /// - returns: the match if the left string matches the regular expression
+    func match(
+        leftName: String
+    ) -> AlignRuleMatch? {
         guard let result = regExp.regularExpression()?.firstMatch(
-            in: lhs,
+            in: leftName,
             options: [],
-            range: NSRange(location: 0, length: lhs.utf16.count)
+            range: NSRange(location: 0, length: leftName.utf16.count)
         ) else {
-            return false
+            return nil
         }
 
-        let replaced = lhs.replace(
+        let replacedName = leftName.replace(
             template: template.pattern,
             result: result
         )
-        if template.options.contains(.caseInsensitive) {
-            return rhs.hasPrefix(replaced, ignoreCase: true)
+        // an empty replacement would prefix-match every right name
+        guard !replacedName.isEmpty else {
+            return nil
         }
-        return rhs.hasPrefix(replaced)
+
+        return AlignRuleMatch(
+            replacedName: replacedName,
+            templateOptions: template.options
+        )
     }
 }
 

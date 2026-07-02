@@ -17,6 +17,8 @@ public struct AlignContext {
     let leftRoot: CompareItem
     let rightRoot: CompareItem
     let config: AlignConfig
+    // per-directory cache, shared across all positions of one alignItem
+    let ruleMatchCache = AlignRuleMatchCache()
 }
 
 public struct AlignPosition {
@@ -29,6 +31,25 @@ public struct AlignPosition {
 
     func rightChild(in context: AlignContext) -> CompareItem {
         context.rightRoot.child(at: rightIndex)
+    }
+}
+
+// caches rule matches per left file name to avoid re-running the
+// regular expressions for the same name during alignment
+final class AlignRuleMatchCache {
+    private var matchesByLeftName = [String: [AlignRuleMatch]]()
+
+    func matches(for leftName: String, rules: [AlignRule]) -> [AlignRuleMatch] {
+        if let cached = matchesByLeftName[leftName] {
+            return cached
+        }
+
+        let matches = rules.compactMap {
+            $0.match(leftName: leftName)
+        }
+        matchesByLeftName[leftName] = matches
+
+        return matches
     }
 }
 
