@@ -89,8 +89,8 @@ class HistoryController: NSObject,
         .target = self
 
         menu.addItem(
-            withTitle: NSLocalizedString("Remove All Items", comment: ""),
-            action: #selector(removeAllHistory),
+            withTitle: NSLocalizedString("Remove Visible Items", comment: ""),
+            action: #selector(removeVisibleHistory),
             keyEquivalent: ""
         )
         .target = self
@@ -105,7 +105,7 @@ class HistoryController: NSObject,
             return !tableView.selectedRowIndexes.isEmpty
         } else if action == #selector(selectInvalidPaths) {
             return tableView.numberOfRows > 0
-        } else if action == #selector(removeAllHistory) {
+        } else if action == #selector(removeVisibleHistory) {
             return tableView.numberOfRows > 0
         }
 
@@ -288,18 +288,19 @@ class HistoryController: NSObject,
 
     @objc
     @MainActor
-    func removeAllHistory(_: AnyObject) {
-        guard tableView.numberOfRows > 0 else {
+    func removeVisibleHistory(_: AnyObject) {
+        guard let fetchedObjects = results.fetchedObjects,
+              !fetchedObjects.isEmpty else {
             return
         }
 
         let retVal = NSAlert.showModalConfirm(
-            messageText: NSLocalizedString("Are you sure you want to remove all history items?", comment: ""),
-            informativeText: NSLocalizedString("This action cannot be undone.", comment: "")
+            messageText: NSLocalizedString("Remove all visible history items?", comment: ""),
+            informativeText: NSLocalizedString("Only the items currently shown will be removed. This can't be undone.", comment: "")
         )
 
         if retVal {
-            removeEntity(indexes: IndexSet(integersIn: 0 ..< tableView.numberOfRows))
+            removeEntity(indexes: IndexSet(fetchedObjects.indices))
         }
     }
 
