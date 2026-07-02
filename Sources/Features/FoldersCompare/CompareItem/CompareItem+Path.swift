@@ -70,13 +70,22 @@ extension CompareItem {
     func buildDestinationPath(
         from srcBaseURL: URL,
         to destBaseURL: URL
-    ) -> URL {
+    ) -> URL? {
         guard let srcURL = toURL() else {
-            fatalError("Path is not present on \(self)")
+            return nil
         }
 
-        let linkedURL = linkedItem?.toURL()
-        return URL.buildDestinationPath(srcURL, linkedURL, srcBaseURL, destBaseURL)
+        if let linkedURL = linkedItem?.toURL() {
+            return linkedURL
+        }
+
+        guard let anchor = nearestLinkedAnchor(includingSelf: false),
+              let anchorSrcURL = anchor.toURL(),
+              let anchorDestURL = anchor.linkedItem?.toURL() else {
+            return URL.buildDestinationPath(srcURL, nil, srcBaseURL, destBaseURL)
+        }
+
+        return URL.buildDestinationPath(srcURL, nil, anchorSrcURL, anchorDestURL)
     }
 
     func toURL() -> URL? {
@@ -85,5 +94,33 @@ extension CompareItem {
         } else {
             nil
         }
+    }
+
+    /// returns the closest linked base for creating destination directories
+    func linkedDestinationDirectoryBase(
+        from srcBaseURL: URL,
+        to destBaseURL: URL
+    ) -> DirectoryBase {
+        guard let anchor = nearestLinkedAnchor(includingSelf: true),
+              let anchorSrcURL = anchor.toURL(),
+              let anchorDestURL = anchor.linkedItem?.toURL() else {
+            return (srcBaseURL, destBaseURL)
+        }
+
+        return (anchorSrcURL, anchorDestURL)
+    }
+
+    /// walks up the tree until a linked item has a real path
+    /// includes this item when includingSelf is true and it is a folder
+    private func nearestLinkedAnchor(includingSelf: Bool) -> CompareItem? {
+        var currentItem = includingSelf && isFolder ? self : parent
+
+        while let current = currentItem {
+            if current.linkedItem?.toURL() != nil {
+                return current
+            }
+            currentItem = current.parent
+        }
+        return nil
     }
 }

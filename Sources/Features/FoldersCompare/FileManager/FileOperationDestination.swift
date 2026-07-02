@@ -6,6 +6,9 @@
 //  Copyright (c) 2026 visualdiffer.com
 //
 
+// source/destination base pair used to create destination directories
+typealias DirectoryBase = (srcBaseDir: URL, destBaseDir: URL)
+
 public struct FileDestinationContext {
     let baseDir: URL
     let isLinkedSide: Bool
@@ -22,7 +25,11 @@ public struct FileDestinationContext {
             isLinkedSide = true
             isExternal = false
             resolvePath = { srcRoot, srcBaseDir, _ in
-                srcRoot.buildDestinationPath(from: srcBaseDir, to: baseDir)
+                guard let destURL = srcRoot.buildDestinationPath(from: srcBaseDir, to: baseDir) else {
+                    throw FolderManagerError.nilPath
+                }
+
+                return destURL
             }
         case let .external(baseDir):
             isLinkedSide = false
@@ -47,6 +54,21 @@ public struct FileDestinationContext {
 
     func destinationRoot(for srcRoot: CompareItem) -> CompareItem? {
         isLinkedSide ? srcRoot.linkedItem : nil
+    }
+
+    /// resolves the source and destination bases used to create directories
+    func directoryBase(
+        for srcRoot: CompareItem,
+        srcBaseDir: URL
+    ) -> DirectoryBase {
+        guard isLinkedSide else {
+            return (srcBaseDir, baseDir)
+        }
+
+        return srcRoot.linkedDestinationDirectoryBase(
+            from: srcBaseDir,
+            to: baseDir
+        )
     }
 }
 

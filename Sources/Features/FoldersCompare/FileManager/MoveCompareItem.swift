@@ -98,8 +98,7 @@ public class MoveCompareItem: NSObject {
 
         var parent = srcRoot.parent
         while let item = parent,
-              let itemURL = item.toURL() {
-            let destURL = URL.buildDestinationPath(itemURL, nil, srcBaseDir, destBaseDir)
+              let destURL = item.buildDestinationPath(from: srcBaseDir, to: destBaseDir) {
             let destFullPath = destURL.osPath
 
             item.addOlderFiles(-srcCount.olderFiles)
@@ -233,9 +232,7 @@ public class MoveCompareItem: NSObject {
             } else {
                 try operationManager.createDestinationDirectory(
                     srcRoot,
-                    destRoot: nil,
-                    srcBaseDir: srcBaseDir,
-                    destBaseDir: destBaseDir,
+                    directoryBase: context.directoryBase(for: srcRoot, srcBaseDir: srcBaseDir),
                     destFullPath: destFullPath
                 )
                 for item in srcRoot.children.reversed() {
@@ -301,15 +298,19 @@ public class MoveCompareItem: NSObject {
             return true
         }
 
-        guard let srcRootPath = srcRoot.path else {
+        guard let srcRootPath = srcRoot.path,
+              var destFullPath = srcRoot.buildDestinationPath(from: srcBaseDir, to: destBaseDir) else {
             throw FolderManagerError.nilPath
         }
 
         var destAttrs: [FileAttributeKey: Any]?
-        var destFullPath = srcRoot.buildDestinationPath(from: srcBaseDir, to: destBaseDir)
 
         do {
             let srcAttrs = try fm.attributesOfItem(atPath: srcRootPath)
+            let directoryBase = srcRoot.linkedDestinationDirectoryBase(
+                from: srcBaseDir,
+                to: destBaseDir
+            )
 
             if srcRoot.isFile {
                 do {
@@ -331,7 +332,7 @@ public class MoveCompareItem: NSObject {
                     srcAttrs: srcAttrs,
                     destAttrs: destAttrs,
                     destFullPath: destFullPath,
-                    srcBaseDir: srcBaseDir,
+                    directoryBase: directoryBase,
                     destBaseDir: destBaseDir,
                     parentSrcCount: &parentSrcCount,
                     parentDestCount: &parentDestCount,
@@ -340,9 +341,7 @@ public class MoveCompareItem: NSObject {
             } else {
                 try operationManager.createDestinationDirectory(
                     srcRoot,
-                    destRoot: destRoot,
-                    srcBaseDir: srcBaseDir,
-                    destBaseDir: destBaseDir,
+                    directoryBase: directoryBase,
                     destFullPath: destFullPath
                 )
                 try moveSubfolders(
@@ -382,7 +381,7 @@ public class MoveCompareItem: NSObject {
         srcAttrs _: [FileAttributeKey: Any],
         destAttrs: [FileAttributeKey: Any]?,
         destFullPath: URL,
-        srcBaseDir: URL,
+        directoryBase: DirectoryBase,
         destBaseDir: URL,
         parentSrcCount: inout CompareSummary,
         parentDestCount: inout CompareSummary,
@@ -393,8 +392,8 @@ public class MoveCompareItem: NSObject {
 
         do {
             let lastPathTimestamps = try createDirectory(
-                atPath: destBaseDir,
-                srcBaseDir: srcBaseDir,
+                atPath: directoryBase.destBaseDir,
+                srcBaseDir: directoryBase.srcBaseDir,
                 namesFrom: srcRoot,
                 options: operationManager.comparator.options.directoryOptions
             )

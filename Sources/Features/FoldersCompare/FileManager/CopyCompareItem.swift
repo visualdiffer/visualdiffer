@@ -86,9 +86,7 @@ class CopyCompareItem {
 
         var parent = srcRoot.parent
         while let item = parent,
-              let fsURL = item.toURL() {
-            let destFullPath = URL.buildDestinationPath(fsURL, nil, srcBaseDir, context.baseDir)
-
+              let destFullPath = item.buildDestinationPath(from: srcBaseDir, to: context.baseDir) {
             item.addOlderFiles(-srcCount.olderFiles)
             item.addChangedFiles(-srcCount.changedFiles)
             item.addOrphanFiles(-srcCount.orphanFiles)
@@ -163,7 +161,6 @@ class CopyCompareItem {
         }
 
         var retVal = true
-        let destBaseDir = context.baseDir
         var destFullPath: URL
         do {
             destFullPath = try context.destinationPath(
@@ -196,9 +193,7 @@ class CopyCompareItem {
             } else {
                 try operationManager.createDestinationDirectory(
                     srcRoot,
-                    destRoot: destRoot,
-                    srcBaseDir: srcBaseDir,
-                    destBaseDir: destBaseDir,
+                    directoryBase: context.directoryBase(for: srcRoot, srcBaseDir: srcBaseDir),
                     destFullPath: destFullPath
                 )
                 retVal = copySubfolders(
@@ -280,9 +275,13 @@ class CopyCompareItem {
                 skipFile = true
                 return
             }
+            let directoryBase = context.directoryBase(
+                for: srcRoot,
+                srcBaseDir: srcBaseDir
+            )
             let lastPathTimestamps = try createDirectory(
-                atPath: destBaseDir,
-                srcBaseDir: srcBaseDir,
+                atPath: directoryBase.destBaseDir,
+                srcBaseDir: directoryBase.srcBaseDir,
                 namesFrom: srcRoot,
                 options: operationManager.comparator.options.directoryOptions
             )

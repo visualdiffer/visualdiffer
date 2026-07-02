@@ -75,9 +75,7 @@ extension FileOperationManager {
 
     func createDestinationDirectory(
         _ srcRoot: CompareItem,
-        destRoot _: CompareItem?,
-        srcBaseDir: URL,
-        destBaseDir: URL,
+        directoryBase: DirectoryBase,
         destFullPath: URL
     ) throws {
         if !filterConfig.followSymLinks, srcRoot.isSymbolicLink {
@@ -92,8 +90,8 @@ extension FileOperationManager {
         } else {
             // Directory can be empty so we ensure it is created
             try createDirectory(
-                atPath: destBaseDir,
-                srcBaseDir: srcBaseDir,
+                atPath: directoryBase.destBaseDir,
+                srcBaseDir: directoryBase.srcBaseDir,
                 namesFrom: srcRoot,
                 options: comparator.options.directoryOptions
             )

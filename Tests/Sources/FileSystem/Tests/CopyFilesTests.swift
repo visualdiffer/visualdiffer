@@ -1842,6 +1842,103 @@ final class CopyFilesTests: BaseTests {
             .path(percentEncoded: false)
         try assertFileExists(externalURL, "123456789012")
     }
+
+    @Test
+    func copyFileInsideAlignedDirectoryUsesLinkedDirectoryPath() throws {
+        let fileNameAlignments = [
+            AlignRule(
+                regExp: AlignRegExp(pattern: "p-template", options: []),
+                template: AlignTemplate(pattern: "b-template", options: [])
+            ),
+        ]
+        let comparatorDelegate = MockItemComparatorDelegate()
+        let comparator = ItemComparator(
+            options: [.contentTimestamp, .size, .alignMatchCase],
+            delegate: comparatorDelegate,
+            bufferSize: 8192,
+            isLeftCaseSensitive: true,
+            isRightCaseSensitive: true,
+            fileNameAlignments: fileNameAlignments
+        )
+        let filterConfig = FilterConfig(
+            showFilteredFiles: false,
+            hideEmptyFolders: false,
+            followSymLinks: false,
+            skipPackages: false,
+            traverseFilteredFolders: false,
+            predicate: defaultPredicate,
+            fileExtraOptions: [],
+            displayOptions: .showAll
+        )
+        let folderReaderDelegate = MockFolderReaderDelegate(isRunning: true)
+        let folderReader = FolderReader(
+            with: folderReaderDelegate,
+            comparator: comparator,
+            filterConfig: filterConfig,
+            refreshInfo: RefreshInfo(initState: true)
+        )
+
+        try removeItem("l")
+        try removeItem("r")
+
+        try createFolder("l")
+        try createFolder("r")
+
+        try createFile("l/file1.txt", "123456")
+        try createFolder("l/img_bad")
+        try createFile("l/img_bad/img01.txt", "123456")
+        try createFile("l/img_bad/img02.txt", "123456")
+        try createFolder("l/p-template/docs")
+        try createFile("l/p-template/docs/file1.txt", "1234")
+
+        try createFile("r/file1.txt", "1236")
+        try createFolder("r/a_img_good")
+        try createFile("r/a_img_good/img01.txt", "1234")
+        try createFile("r/a_img_good/img02.txt", "12346")
+        try createFolder("r/b-template")
+        try createFile("r/b-template/file2.txt", "12346")
+
+        folderReader.start(
+            withLeftRoot: nil,
+            rightRoot: nil,
+            leftPath: appendFolder("l"),
+            rightPath: appendFolder("r")
+        )
+
+        let rootL = try #require(folderReader.leftRoot)
+        let templateItem = try #require(rootL.children.first { $0.fileName == "p-template" })
+        let docsItem = try #require(templateItem.children.first { $0.fileName == "docs" })
+        let fileItem = try #require(docsItem.children.first { $0.fileName == "file1.txt" })
+
+        #expect(templateItem.linkedItem?.fileName == "b-template")
+
+        let fileOperationDelegate = MockFileOperationManagerDelegate()
+        let fileOperationManager = FileOperationManager(
+            filterConfig: filterConfig,
+            comparator: comparator,
+            delegate: fileOperationDelegate,
+            includesFiltered: false
+        )
+        let fileOperation = CopyCompareItem(
+            operationManager: fileOperationManager,
+            bigFileSizeThreshold: 100_000
+        )
+
+        fileOperation.copy(
+            srcRoot: fileItem,
+            srcBaseDir: appendFolder("l"),
+            destination: .linkedSide(baseDir: appendFolder("r"))
+        )
+
+        let expectedPath = appendFolder("r/b-template/docs/file1.txt", false).osPath
+        let wrongNestedPath = appendFolder("r/b-template/p-template/docs/file1.txt", false).osPath
+        let wrongSourcePath = appendFolder("r/p-template/docs/file1.txt", false).osPath
+
+        #expect(fileOperationDelegate.errors.isEmpty, "Copy errors: \(fileOperationDelegate.errors)")
+        try assertFileExists(expectedPath, "1234")
+        #expect(!fm.fileExists(atPath: wrongNestedPath), "File should not exist at \(wrongNestedPath)")
+        #expect(!fm.fileExists(atPath: wrongSourcePath), "File should not exist at \(wrongSourcePath)")
+    }
 }
 
 // swiftlint:enable file_length force_unwrapping function_body_length
