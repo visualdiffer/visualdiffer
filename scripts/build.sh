@@ -12,8 +12,8 @@ fi
 
 profile_entries=(
   "Release:release"
-  "Test:test"
-  "Pre-release:prerelease"
+  "Test (use with VM to test on other OS versions):test"
+  "Pre-release (use with beta testers):prerelease"
   "Sparkle (no upload appcast):sparkle"
   "Create Changelog:changelog"
 )
