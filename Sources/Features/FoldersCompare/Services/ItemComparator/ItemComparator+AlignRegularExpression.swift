@@ -33,18 +33,21 @@ extension ItemComparator {
 
         // a current rule match must yield the right to a later left
         // that matches it by exact file name
+        var reservedRight: Bool?
         if matchesByRegularExpression(
             leftChild: leftChild,
             rightChild: rightChild,
             followSymLinks: followSymLinks,
             ruleMatches: ruleMatches
-        ),
-            !rightReservedForLaterLeftFileName(
+        ) {
+            reservedRight = rightReservedForLaterLeftFileName(
                 rightChild: rightChild,
                 context: context,
                 position: position
-            ) {
-            return .orderedSame
+            )
+            if reservedRight == false {
+                return .orderedSame
+            }
         }
 
         if matchesByFileName(
@@ -80,7 +83,7 @@ extension ItemComparator {
             context: context,
             leftMatches: laterRuleMatches
         )
-        let rightHeldByName = rightReservedForLaterLeftFileName(
+        let rightHeldByName = reservedRight ?? rightReservedForLaterLeftFileName(
             rightChild: rightChild,
             context: context,
             position: position
@@ -145,33 +148,16 @@ extension ItemComparator {
         followSymLinks: Bool,
         ruleMatches: [AlignRuleMatch]
     ) -> Bool {
-        matchesByRegularExpression(
-            leftChild: leftChild,
-            rightChild: rightChild,
-            followSymLinks: followSymLinks
-        ) { _, rhsName in
-            ruleMatches.contains {
-                $0.matches(rightName: rhsName)
-            }
-        }
-    }
-
-    private func matchesByRegularExpression(
-        leftChild: CompareItem,
-        rightChild: CompareItem,
-        followSymLinks: Bool,
-        matcher: (String, String) -> Bool
-    ) -> Bool {
         leftChild.compare(
             rightChild,
             followSymLinks: followSymLinks
         ) { lhs, rhs in
-            guard let lhsName = lhs.fileName,
+            guard lhs.fileName != nil,
                   let rhsName = rhs.fileName else {
                 return .orderedAscending
             }
 
-            if matcher(lhsName, rhsName) {
+            if ruleMatches.contains(where: { $0.matches(rightName: rhsName) }) {
                 return .orderedSame
             }
             return .orderedAscending
@@ -235,17 +221,9 @@ extension ItemComparator {
         position: AlignPosition,
         rules: [AlignRule]
     ) -> [LeftRuleMatches] {
-        let nextLeftIndex = position.leftIndex + 1
-
-        guard nextLeftIndex < context.leftRoot.children.count else {
-            return []
-        }
-
         var leftMatches = [LeftRuleMatches]()
 
-        for leftIndex in nextLeftIndex ..< context.leftRoot.children.count {
-            let leftChild = context.leftRoot.child(at: leftIndex)
-
+        for leftChild in context.leftRoot.children.dropFirst(position.leftIndex + 1) {
             guard let leftName = leftChild.fileName else {
                 continue
             }
@@ -271,7 +249,7 @@ extension ItemComparator {
         context: AlignContext
     ) {
         let child = context.rightRoot.child(at: sourceIndex)
-        context.rightRoot.remove(child: child)
+        context.rightRoot.removeChild(at: sourceIndex)
         context.rightRoot.insert(child: child, at: destinationIndex)
     }
 
@@ -280,16 +258,9 @@ extension ItemComparator {
         context: AlignContext,
         where predicate: (CompareItem) -> Bool
     ) -> Int? {
-        let nextRightIndex = position.rightIndex + 1
-        guard nextRightIndex < context.rightRoot.children.count else {
-            return nil
-        }
-
-        for rightIndex in nextRightIndex ..< context.rightRoot.children.count
-            where predicate(context.rightRoot.child(at: rightIndex)) {
-            return rightIndex
-        }
-        return nil
+        let rightChildren = context.rightRoot.children
+        // slice indices are absolute so the returned index is directly usable
+        return rightChildren[(position.rightIndex + 1)...].firstIndex(where: predicate)
     }
 
     // a right child is reserved when a later left matches it by exact file name,
@@ -299,20 +270,12 @@ extension ItemComparator {
         context: AlignContext,
         position: AlignPosition
     ) -> Bool {
-        let nextLeftIndex = position.leftIndex + 1
-
-        guard nextLeftIndex < context.leftRoot.children.count else {
-            return false
-        }
-
-        for leftIndex in nextLeftIndex ..< context.leftRoot.children.count
-            where matchesByFileName(
-                leftChild: context.leftRoot.child(at: leftIndex),
+        context.leftRoot.children.dropFirst(position.leftIndex + 1).contains {
+            matchesByFileName(
+                leftChild: $0,
                 rightChild: rightChild,
                 followSymLinks: context.config.followSymLinks
-            ) {
-            return true
+            )
         }
-        return false
     }
 }
