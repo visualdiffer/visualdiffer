@@ -74,6 +74,36 @@ extension FoldersWindowController: FoldersOutlineViewContextMenu {
     func showInFinder(_: AnyObject?) {
         lastUsedView.showSelectedInFinder()
     }
+
+    @objc
+    func selectAllFilesInSelection(_: AnyObject?) {
+        selectInSelection { $0.findFiles() }
+    }
+
+    @objc
+    func selectAllFoldersInSelection(_: AnyObject?) {
+        selectInSelection { $0.findFolders() }
+    }
+
+    @objc
+    func selectNewerInSelection(_: AnyObject?) {
+        selectInSelection { $0.findFiles(ofType: .changed) }
+    }
+
+    @objc
+    func selectOrphansInSelection(_: AnyObject?) {
+        selectInSelection { $0.findFiles(ofType: .orphan) }
+    }
+
+    private func selectInSelection(
+        matching: (VisibleItem) -> [VisibleItem]
+    ) {
+        let items = lastUsedView.selectedItems(findLeafPaths: false)
+            .compactMap(\.visibleItem)
+            .flatMap(matching)
+
+        lastUsedView.select(visibleItems: items)
+    }
 }
 
 extension FoldersOutlineView {

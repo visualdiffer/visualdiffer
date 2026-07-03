@@ -20,22 +20,25 @@ public struct SelectionSide: OptionSet, Sendable {
     public init(menuItem: NSMenuItem) {
         rawValue = menuItem.tag
     }
+
+    public init(displaySide: DisplaySide) {
+        rawValue = (displaySide == .left ? Self.left : Self.right).rawValue
+    }
 }
 
 extension FoldersWindowController {
+    private var isShiftKeyDown: Bool {
+        NSApp.currentEvent?.modifierFlags.contains(.shift) ?? false
+    }
+
     @objc
     func selectNewer(_ sender: AnyObject) {
         guard let sender = sender as? NSMenuItem else {
             return
         }
 
-        let side = SelectionSide(menuItem: sender)
-
-        if side.contains(.left) {
-            leftView.selectBy(type: .changed)
-        }
-        if side.contains(.right) {
-            rightView.selectBy(type: .changed)
+        select(side: SelectionSide(menuItem: sender), byExtendingSelection: isShiftKeyDown) {
+            $0.findFiles(ofType: .changed)
         }
     }
 
@@ -45,13 +48,8 @@ extension FoldersWindowController {
             return
         }
 
-        let side = SelectionSide(menuItem: sender)
-
-        if side.contains(.left) {
-            leftView.selectBy(type: .orphan)
-        }
-        if side.contains(.right) {
-            rightView.selectBy(type: .orphan)
+        select(side: SelectionSide(menuItem: sender), byExtendingSelection: isShiftKeyDown) {
+            $0.findFiles(ofType: .orphan)
         }
     }
 
@@ -67,16 +65,8 @@ extension FoldersWindowController {
             return
         }
 
-        let side = SelectionSide(menuItem: sender)
-
-        let isShiftDown = NSApp.currentEvent?.modifierFlags.contains(.shift) ?? false
-
-        if side.contains(.both) {
-            leftView.selectAll(files: true, folders: false, byExtendingSelection: isShiftDown)
-            rightView.selectAll(files: true, folders: false, byExtendingSelection: isShiftDown)
-        } else {
-            // use the lastUsedView not a specific side
-            lastUsedView.selectAll(files: true, folders: false, byExtendingSelection: isShiftDown)
+        select(side: resolvedSide(from: sender), byExtendingSelection: isShiftKeyDown) {
+            $0.findFiles()
         }
     }
 
@@ -86,16 +76,8 @@ extension FoldersWindowController {
             return
         }
 
-        let side = SelectionSide(menuItem: sender)
-
-        let isShiftDown = NSApp.currentEvent?.modifierFlags.contains(.shift) ?? false
-
-        if side.contains(.both) {
-            leftView.selectAll(files: false, folders: true, byExtendingSelection: isShiftDown)
-            rightView.selectAll(files: false, folders: true, byExtendingSelection: isShiftDown)
-        } else {
-            // use the lastUsedView not a specific side
-            lastUsedView.selectAll(files: false, folders: true, byExtendingSelection: isShiftDown)
+        select(side: resolvedSide(from: sender), byExtendingSelection: isShiftKeyDown) {
+            $0.findFolders()
         }
     }
 
@@ -114,5 +96,26 @@ extension FoldersWindowController {
             // use the lastUsedView not a specific side
             lastUsedView.invertSelection()
         }
+    }
+
+    private func select(
+        side: SelectionSide,
+        byExtendingSelection: Bool,
+        matching: (VisibleItem) -> [VisibleItem]
+    ) {
+        let leftRoot = leftVisibleItems
+
+        if side.contains(.left),
+           let leftRoot {
+            leftView.select(visibleItems: matching(leftRoot), byExtendingSelection: byExtendingSelection)
+        }
+        if side.contains(.right),
+           let rightRoot = leftRoot?.linkedItem {
+            rightView.select(visibleItems: matching(rightRoot), byExtendingSelection: byExtendingSelection)
+        }
+    }
+
+    private func resolvedSide(from sender: NSMenuItem) -> SelectionSide {
+        SelectionSide(menuItem: sender) == .both ? .both : SelectionSide(displaySide: lastUsedView.side)
     }
 }

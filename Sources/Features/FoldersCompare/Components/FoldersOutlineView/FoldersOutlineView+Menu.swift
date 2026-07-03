@@ -44,6 +44,14 @@ protocol FoldersOutlineViewContextMenu: NSObjectProtocol {
     func showInFinder(_ sender: AnyObject?)
     @MainActor
     func togglePreviewPanel(_ sender: AnyObject?)
+    @MainActor
+    func selectAllFilesInSelection(_ sender: AnyObject?)
+    @MainActor
+    func selectAllFoldersInSelection(_ sender: AnyObject?)
+    @MainActor
+    func selectNewerInSelection(_ sender: AnyObject?)
+    @MainActor
+    func selectOrphansInSelection(_ sender: AnyObject?)
 }
 
 public extension FoldersOutlineView {
@@ -182,6 +190,42 @@ public extension FoldersOutlineView {
         menu.addItem(advancedItem)
     }
 
+    private static func addSelectItems(_ menu: NSMenu) {
+        let selectItem = NSMenuItem(
+            title: NSLocalizedString("Select", comment: ""),
+            action: nil,
+            keyEquivalent: ""
+        )
+        let selectSubmenu = NSMenu(title: NSLocalizedString("Select", comment: ""))
+
+        selectSubmenu.addItem(
+            withTitle: NSLocalizedString("All Files", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.selectAllFilesInSelection),
+            keyEquivalent: ""
+        )
+
+        selectSubmenu.addItem(
+            withTitle: NSLocalizedString("All Folders", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.selectAllFoldersInSelection),
+            keyEquivalent: ""
+        )
+
+        selectSubmenu.addItem(
+            withTitle: NSLocalizedString("Newer", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.selectNewerInSelection),
+            keyEquivalent: ""
+        )
+
+        selectSubmenu.addItem(
+            withTitle: NSLocalizedString("Orphans", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.selectOrphansInSelection),
+            keyEquivalent: ""
+        )
+
+        menu.setSubmenu(selectSubmenu, for: selectItem)
+        menu.addItem(selectItem)
+    }
+
     override class var defaultMenu: NSMenu? {
         let theMenu = NSMenu(title: NSLocalizedString("Contextual Menu", comment: ""))
         theMenu.autoenablesItems = false
@@ -205,6 +249,9 @@ public extension FoldersOutlineView {
 
         theMenu.addItem(NSMenuItem.separator())
         addFinderItems(theMenu)
+
+        theMenu.addItem(NSMenuItem.separator())
+        addSelectItems(theMenu)
 
         theMenu.addItem(NSMenuItem.separator())
         addAdvancedItems(theMenu)

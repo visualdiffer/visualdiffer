@@ -33,4 +33,36 @@ extension VisibleItem {
             vi.findFileName(regex: regex, searchFullPath: usePath, items: &items)
         }
     }
+
+    func findItems(_ isIncluded: (VisibleItem) -> Bool) -> [VisibleItem] {
+        var foundItems = [VisibleItem]()
+        findItems(isIncluded, into: &foundItems)
+        return foundItems
+    }
+
+    func findFiles(ofType type: CompareChangeType) -> [VisibleItem] {
+        findItems { $0.item.isFile && $0.item.type == type }
+    }
+
+    func findFiles() -> [VisibleItem] {
+        findItems { $0.item.isFile }
+    }
+
+    func findFolders() -> [VisibleItem] {
+        findItems { $0.item.isFolder }
+    }
+
+    private func findItems(
+        _ isIncluded: (VisibleItem) -> Bool,
+        into foundItems: inout [VisibleItem]
+    ) {
+        for vi in children where vi.item.isValidFile {
+            if isIncluded(vi) {
+                foundItems.append(vi)
+            }
+            if vi.item.isFolder {
+                vi.findItems(isIncluded, into: &foundItems)
+            }
+        }
+    }
 }

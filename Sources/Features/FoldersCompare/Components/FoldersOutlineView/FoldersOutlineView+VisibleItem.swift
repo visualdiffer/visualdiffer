@@ -33,7 +33,8 @@ extension FoldersOutlineView {
         visibleItems items: [VisibleItem],
         scrollToFirst: Bool = false,
         center: Bool = false,
-        selectLinked: Bool = false
+        selectLinked: Bool = false,
+        byExtendingSelection: Bool = false
     ) -> Bool {
         var indexes = IndexSet()
 
@@ -48,7 +49,8 @@ extension FoldersOutlineView {
             rows: indexes,
             scrollToFirst: scrollToFirst,
             center: center,
-            selectLinked: selectLinked
+            selectLinked: selectLinked,
+            byExtendingSelection: byExtendingSelection
         )
     }
 
@@ -57,14 +59,15 @@ extension FoldersOutlineView {
         rows: IndexSet,
         scrollToFirst: Bool = false,
         center: Bool = false,
-        selectLinked: Bool = false
+        selectLinked: Bool = false,
+        byExtendingSelection: Bool = false
     ) -> Bool {
         if scrollToFirst, let row = rows.first {
             scrollTo(row: row, center: center)
         }
-        selectRowIndexes(rows, byExtendingSelection: false)
+        selectRowIndexes(rows, byExtendingSelection: byExtendingSelection)
         if selectLinked {
-            linkedView?.selectRowIndexes(rows, byExtendingSelection: false)
+            linkedView?.selectRowIndexes(rows, byExtendingSelection: byExtendingSelection)
         }
         return !rows.isEmpty
     }

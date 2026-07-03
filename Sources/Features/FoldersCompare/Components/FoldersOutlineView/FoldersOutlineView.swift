@@ -154,34 +154,6 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
 
     // MARK: - Menu Actions
 
-    func selectBy(type: CompareChangeType) {
-        var indexes = IndexSet()
-
-        for row in 0 ..< numberOfRows {
-            if let vi = item(atRow: row) as? VisibleItem {
-                let item = vi.item
-                if item.isFile, item.isValidFile, item.type == type {
-                    indexes.insert(row)
-                }
-            }
-        }
-        selectRowIndexes(indexes, byExtendingSelection: false)
-    }
-
-    func selectAll(files: Bool, folders: Bool, byExtendingSelection: Bool) {
-        var indexes = IndexSet()
-
-        for row in 0 ..< numberOfRows {
-            if let vi = item(atRow: row) as? VisibleItem {
-                let item = vi.item
-                if item.isValidFile, files && item.isFile || (folders && item.isFolder) {
-                    indexes.insert(row)
-                }
-            }
-        }
-        selectRowIndexes(indexes, byExtendingSelection: byExtendingSelection)
-    }
-
     func invertSelection() {
         var indexes = IndexSet()
 
@@ -196,7 +168,7 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
         selectRowIndexes(indexes, byExtendingSelection: false)
     }
 
-    func selectedItems() -> [CompareItem] {
+    func selectedItems(findLeafPaths: Bool = true) -> [CompareItem] {
         let indexes = selectedRowIndexes
         var arr = [CompareItem]()
         arr.reserveCapacity(indexes.count)
@@ -210,7 +182,7 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
             }
         }
 
-        return CompareItem.findLeafPaths(arr)
+        return findLeafPaths ? CompareItem.findLeafPaths(arr) : arr
     }
 
     override public func becomeFirstResponder() -> Bool {
