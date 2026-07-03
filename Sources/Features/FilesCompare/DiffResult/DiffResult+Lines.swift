@@ -31,10 +31,6 @@ struct LineEditOperation {
         filtered.diffSide(for: sourceSide.opposite).lines
     }
 
-    var destinationEOL: EndOfLine {
-        all.diffSide(for: sourceSide.opposite).eol
-    }
-
     var sourceAllSide: DiffSide {
         all.diffSide(for: sourceSide)
     }
@@ -54,6 +50,11 @@ extension LineEditOperation {
         useDestinationEOL: Bool
     ) {
         let fromLeft = sourceSide == .left
+        // shadow the computed properties to evaluate them once and keep a
+        // stable snapshot while removeLine mutates the filtered sides
+        let sourceLines = sourceLines
+        let destinationLines = destinationLines
+        let destinationEOL = destinationAllSide.eol
 
         for row in rows.reversed() {
             let sourceLine = sourceLines[row]
@@ -99,6 +100,10 @@ extension LineEditOperation {
     ///
     func deleteLines() {
         let fromLeft = sourceSide == .left
+        // shadow the computed properties to evaluate them once and keep a
+        // stable snapshot while removeLine mutates the filtered sides
+        let sourceLines = sourceLines
+        let destinationLines = destinationLines
 
         for row in rows.reversed() {
             let sourceLine = sourceLines[row]
