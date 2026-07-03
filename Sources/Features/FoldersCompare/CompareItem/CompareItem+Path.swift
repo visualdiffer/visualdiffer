@@ -79,13 +79,8 @@ extension CompareItem {
             return linkedURL
         }
 
-        guard let anchor = nearestLinkedAnchor(includingSelf: false),
-              let anchorSrcURL = anchor.toURL(),
-              let anchorDestURL = anchor.linkedItem?.toURL() else {
-            return URL.buildDestinationPath(srcURL, nil, srcBaseURL, destBaseURL)
-        }
-
-        return URL.buildDestinationPath(srcURL, nil, anchorSrcURL, anchorDestURL)
+        let base = nearestLinkedAnchorBase(includingSelf: false) ?? (srcBaseURL, destBaseURL)
+        return URL.buildDestinationPath(srcURL, nil, base.srcBaseDir, base.destBaseDir)
     }
 
     func toURL() -> URL? {
@@ -101,23 +96,20 @@ extension CompareItem {
         from srcBaseURL: URL,
         to destBaseURL: URL
     ) -> DirectoryBase {
-        guard let anchor = nearestLinkedAnchor(includingSelf: true),
-              let anchorSrcURL = anchor.toURL(),
-              let anchorDestURL = anchor.linkedItem?.toURL() else {
-            return (srcBaseURL, destBaseURL)
-        }
-
-        return (anchorSrcURL, anchorDestURL)
+        nearestLinkedAnchorBase(includingSelf: true) ?? (srcBaseURL, destBaseURL)
     }
 
     /// walks up the tree until a linked item has a real path
     /// includes this item when includingSelf is true and it is a folder
-    private func nearestLinkedAnchor(includingSelf: Bool) -> CompareItem? {
+    private func nearestLinkedAnchorBase(includingSelf: Bool) -> DirectoryBase? {
         var currentItem = includingSelf && isFolder ? self : parent
 
         while let current = currentItem {
-            if current.linkedItem?.toURL() != nil {
-                return current
+            if let anchorDestURL = current.linkedItem?.toURL() {
+                guard let anchorSrcURL = current.toURL() else {
+                    return nil
+                }
+                return (anchorSrcURL, anchorDestURL)
             }
             currentItem = current.parent
         }
