@@ -2,275 +2,95 @@
   "sourceLanguage" : "en",
   "strings" : {
     " (App Default)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " (App Default)"
-          }
-        }
-      }
+
     },
     " (System Default)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " (System Default)"
-          }
-        }
-      }
+
     },
     "? : zero or one of the preceding block" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "? : zero or one of the preceding block"
-          }
-        }
-      }
+
     },
     "?? : zero or one of the preceding block (non-greedy)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "?? : zero or one of the preceding block (non-greedy)"
-          }
-        }
-      }
+
     },
     ". : any character except a newline" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ". : any character except a newline"
-          }
-        }
-      }
+
     },
     "'%@' completed in %@" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "'%1$@' completed in %2$@"
           }
         }
       }
     },
     "(...) : group" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(...) : group"
-          }
-        }
-      }
+
     },
     "(Empty Path)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(Empty Path)"
-          }
-        }
-      }
+
+    },
+    "(Multiple)" : {
+
+    },
+    "(None)" : {
+
     },
     "(Reverting will lose any unsaved changes.)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(Reverting will lose any unsaved changes.)"
-          }
-        }
-      }
+
     },
     "{m,n} : 'm' to 'n' copies of the preceding block" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "{m,n} : 'm' to 'n' copies of the preceding block"
-          }
-        }
-      }
+
     },
     "{m,n}? : 'm' to 'n' copies of the preceding block (non-greedy)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "{m,n}? : 'm' to 'n' copies of the preceding block (non-greedy)"
-          }
-        }
-      }
+
     },
     "{m} : exactly 'm' copies of the preceding block" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "{m} : exactly 'm' copies of the preceding block"
-          }
-        }
-      }
+
     },
     "* : zero or more of the preceding block" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "* : zero or more of the preceding block"
-          }
-        }
-      }
+
     },
     "*? : zero or more of the preceding block (non-greedy)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "*? : zero or more of the preceding block (non-greedy)"
-          }
-        }
-      }
+
     },
     "\\A : beginning of the string" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\A : beginning of the string"
-          }
-        }
-      }
+
     },
     "\\B : anything BUT the beginning or end of a word" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\B : anything BUT the beginning or end of a word"
-          }
-        }
-      }
+
     },
     "\\b : the beginning or end of a word" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\b : the beginning or end of a word"
-          }
-        }
-      }
+
     },
     "\\d : any decimal digit" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\d : any decimal digit"
-          }
-        }
-      }
+
     },
     "\\D : any non-digit" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\D : any non-digit"
-          }
-        }
-      }
+
     },
     "\\S : any non-whitespace character" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\S : any non-whitespace character"
-          }
-        }
-      }
+
     },
     "\\s : any whitespace character" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\s : any whitespace character"
-          }
-        }
-      }
+
     },
     "\\w : any alphanumeric character" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\w : any alphanumeric character"
-          }
-        }
-      }
+
     },
     "\\W : any non-alphanumeric character" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\W : any non-alphanumeric character"
-          }
-        }
-      }
+
     },
     "%.2f seconds" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%.2f seconds"
-          }
-        }
-      }
+
     },
     "%@ - %@ bytes" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "%1$@ - %2$@ bytes"
           }
         }
@@ -278,22 +98,20 @@
     },
     "%@ %@ Not Accessible (Maybe required by sandbox)" : {
       "comment" : "Message when a folder or file is not accessible",
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "%1$@ %2$@ Not Accessible (Maybe required by sandbox)"
           }
         }
       }
     },
     "%@ for '%@'" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "%1$@ for '%2$@'"
           }
         }
@@ -301,7 +119,6 @@
     },
     "%ld %lu newer" : {
       "comment" : "4 left/right newer",
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -353,7 +170,6 @@
     },
     "%ld %lu orphans" : {
       "comment" : "4 left/right orphans",
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -404,18 +220,9 @@
       }
     },
     "%ld added" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%ld added"
-          }
-        }
-      }
+
     },
     "%ld changed" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -444,18 +251,9 @@
       }
     },
     "%ld deleted" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%ld deleted"
-          }
-        }
-      }
+
     },
     "%ld differences ignored" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -478,7 +276,6 @@
       }
     },
     "%ld different" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -507,7 +304,7 @@
       }
     },
     "%ld different sections" : {
-      "extractionState" : "migrated",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -536,7 +333,6 @@
       }
     },
     "%ld files" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -566,7 +362,6 @@
     },
     "%ld files, %@" : {
       "comment" : "3 files, 4.1GB",
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -598,7 +393,6 @@
       }
     },
     "%ld folders" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -627,7 +421,6 @@
       }
     },
     "%ld hours" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -650,18 +443,9 @@
       }
     },
     "%ld identical" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%ld identical"
-          }
-        }
-      }
+
     },
     "%ld minutes" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -684,7 +468,6 @@
       }
     },
     "%ld mismatching labels" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -713,7 +496,6 @@
       }
     },
     "%ld mismatching tags" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -742,7 +524,6 @@
       }
     },
     "%ld same" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -771,7 +552,6 @@
       }
     },
     "%ld seconds" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -794,844 +574,249 @@
       }
     },
     "^ : beginning of line" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "^ : beginning of line"
-          }
-        }
-      }
+
     },
     "+ : one or more of the preceding block" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+ : one or more of the preceding block"
-          }
-        }
-      }
+
     },
     "+? : one or more of the preceding block (non-greedy)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+? : one or more of the preceding block (non-greedy)"
-          }
-        }
-      }
+
     },
     "<None>" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "<None>"
-          }
-        }
-      }
+
     },
     "$ : end of line" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "$ : end of line"
-          }
-        }
-      }
+
     },
     "Access to paths without showing file selection dialog every time" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Access to paths without showing file selection dialog every time"
-          }
-        }
-      }
+
     },
     "Actions" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actions"
-          }
-        }
-      }
+
     },
     "Add" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add"
-          }
-        }
-      }
+
     },
     "Add a folder to trusted paths" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add a folder to trusted paths"
-          }
-        }
-      }
+
     },
     "Advanced" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Advanced"
-          }
-        }
-      }
+
     },
     "Advanced..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Advanced..."
-          }
-        }
-      }
+
     },
     "after" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "after"
-          }
-        }
-      }
+
     },
     "Alignment" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alignment"
-          }
-        }
-      }
+
     },
     "All" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All"
-          }
-        }
-      }
+
     },
     "All Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All Files"
-          }
-        }
-      }
+
     },
     "All Folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All Folders"
-          }
-        }
-      }
+
     },
     "An identical rule already exists" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "An identical rule already exists"
-          }
-        }
-      }
+
     },
     "Another application has made changes to the file for this document." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Another application has made changes to the file for this document."
-          }
-        }
-      }
+
     },
     "Appearance" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Appearance"
-          }
-        }
-      }
+
     },
     "Application '%@' not found" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Application '%@' not found"
-          }
-        }
-      }
+
     },
     "Apply to all folder contents" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apply to all folder contents"
-          }
-        }
-      }
+
     },
     "Are you sure to stop the operation?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Are you sure to stop the operation?"
-          }
-        }
-      }
+
     },
     "Are you sure you want to open %lu Finder windows?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Are you sure you want to open %lu Finder windows?"
-          }
-        }
-      }
+
     },
     "At least one of the paths must exist" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "At least one of the paths must exist"
-          }
-        }
-      }
+
     },
     "Auto search wrap around" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto search wrap around"
-          }
-        }
-      }
+
     },
     "Auto-advance to another file comparison" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto-advance to another file comparison"
-          }
-        }
-      }
+
     },
     "Be careful, any changes will be lost (filters, alignment rules, ...)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Be careful, any changes will be lost (filters, alignment rules, ...)"
-          }
-        }
-      }
+
     },
     "before" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "before"
-          }
-        }
-      }
+
     },
     "begins with" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "begins with"
-          }
-        }
-      }
+
     },
     "Blank File Compare…" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Blank File Compare…"
-          }
-        }
-      }
+
     },
     "Blank Folder Compare…" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Blank Folder Compare…"
-          }
-        }
-      }
+
     },
     "Both Sides" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Both Sides"
-          }
-        }
-      }
+
     },
     "Can't convert to encoding: %ld" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Can't convert to encoding: %ld"
-          }
-        }
-      }
+
     },
     "Cancel" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        }
-      }
+
     },
     "Capture Group $%ld" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Capture Group $%ld"
-          }
-        }
-      }
+
     },
     "Change date/time" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Change date/time"
-          }
-        }
-      }
+
     },
     "Change Fonts" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Change Fonts"
-          }
-        }
-      }
+
     },
     "Check for Updates…" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check for Updates…"
-          }
-        }
-      }
+
     },
     "Check Resource Forks" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check Resource Forks"
-          }
-        }
-      }
+
     },
     "Choose Path" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose Path"
-          }
-        }
-      }
+
     },
     "Choose..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose..."
-          }
-        }
-      }
+
     },
     "Clear" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear"
-          }
-        }
-      }
+
     },
     "Click + or drag a folder onto the list" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Click + or drag a folder onto the list"
-          }
-        }
-      }
+
     },
     "Close" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Close"
-          }
-        }
-      }
+
     },
     "Close Quick Look" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Close Quick Look"
-          }
-        }
-      }
+
     },
     "Collapse All" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Collapse All"
-          }
-        }
-      }
+
     },
     "Collapse All Folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Collapse All Folders"
-          }
-        }
-      }
+
     },
     "Compare" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compare"
-          }
-        }
-      }
+
     },
     "Compare Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compare Files"
-          }
-        }
-      }
+
     },
     "Compare Finder Label" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compare Finder Label"
-          }
-        }
-      }
+
     },
     "Compare Finder Tags" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compare Finder Tags"
-          }
-        }
-      }
+
     },
     "Compare Folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compare Folders"
-          }
-        }
-      }
+
     },
     "Compare Folders or Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compare Folders or Files"
-          }
-        }
-      }
+
     },
     "Comparison" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comparison"
-          }
-        }
-      }
+
     },
     "Comparison and Display Defaults for New Folder Documents" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comparison and Display Defaults for New Folder Documents"
-          }
-        }
-      }
+
     },
     "Comparison completed in %@" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comparison completed in %@"
-          }
-        }
-      }
+
     },
     "Comparison for New File Documents" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comparison for New File Documents"
-          }
-        }
-      }
+
     },
     "Confirm Copy" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm Copy"
-          }
-        }
-      }
+
     },
     "Confirm Delete" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm Delete"
-          }
-        }
-      }
+
     },
     "Confirm Move" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm Move"
-          }
-        }
-      }
+
     },
     "Confirm opening a large number of windows in Finder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm opening a large number of windows in Finder"
-          }
-        }
-      }
+
     },
     "Confirm reloading files changed on the file system by another application" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm reloading files changed on the file system by another application"
-          }
-        }
-      }
+
     },
     "Confirm stopping the operation in progress" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm stopping the operation in progress"
-          }
-        }
-      }
+
     },
     "Confirmation and Warning Messages for Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirmation and Warning Messages for Files"
-          }
-        }
-      }
+
     },
     "Confirmation and Warning Messages for Folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirmation and Warning Messages for Folders"
-          }
-        }
-      }
+
     },
     "Confirmation for Documents" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirmation for Documents"
-          }
-        }
-      }
+
     },
     "Confirmations" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirmations"
-          }
-        }
-      }
+
     },
     "Confirmations and Warnings" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirmations and Warnings"
-          }
-        }
-      }
+
     },
     "contains" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "contains"
-          }
-        }
-      }
+
     },
     "Content" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Content"
-          }
-        }
-      }
+
     },
     "Content (Ignore Line Endings)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Content (Ignore Line Endings)"
-          }
-        }
-      }
+
     },
     "Contextual Menu" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Contextual Menu"
-          }
-        }
-      }
+
     },
     "Copied %@ of %@" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Copied %1$@ of %2$@"
           }
         }
       }
     },
     "Copied %@ of %@ at %@/s" : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Copied %1$@ of %2$@ at %3$@/s"
           }
         }
       }
     },
     "Copies Finder metadata (tags, labels), not file contents" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copies Finder metadata (tags, labels), not file contents"
-          }
-        }
-      }
+
     },
     "Copy" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy"
-          }
-        }
-      }
+
     },
     "Copy %ld files (%@) to %lu" : {
       "comment" : "Copy 3 files (10.4MB) to left/right",
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1682,305 +867,88 @@
       }
     },
     "Copy Date from the other side" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Date from the other side"
-          }
-        }
-      }
+
     },
     "Copy File Name" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy File Name"
-          }
-        }
-      }
+
     },
     "Copy File Names" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy File Names"
-          }
-        }
-      }
+
     },
     "Copy Filenames" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Filenames"
-          }
-        }
-      }
+
     },
     "Copy Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Files"
-          }
-        }
-      }
+
     },
     "Copy Files..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Files..."
-          }
-        }
-      }
+
     },
     "Copy Finder metadata" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Finder metadata"
-          }
-        }
-      }
+
     },
     "Copy Lines" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Lines"
-          }
-        }
-      }
+
     },
     "Copy Lines to Left" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Lines to Left"
-          }
-        }
-      }
+
     },
     "Copy Lines to Right" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Lines to Right"
-          }
-        }
-      }
+
     },
     "Copy Metadata to Left..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Metadata to Left..."
-          }
-        }
-      }
+
     },
     "Copy Metadata to Right..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Metadata to Right..."
-          }
-        }
-      }
+
     },
     "Copy Metadata..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Metadata..."
-          }
-        }
-      }
+
     },
     "Copy newer and orphan files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy newer and orphan files"
-          }
-        }
-      }
+
     },
     "Copy newer and orphan files to left" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy newer and orphan files to left"
-          }
-        }
-      }
+
     },
     "Copy newer and orphan files to right" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy newer and orphan files to right"
-          }
-        }
-      }
+
     },
     "Copy newer and orphan files to the other side" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy newer and orphan files to the other side"
-          }
-        }
-      }
+
     },
     "Copy Path" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Path"
-          }
-        }
-      }
+
     },
     "Copy Paths" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Paths"
-          }
-        }
-      }
+
     },
     "Copy selected files and folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy selected files and folders"
-          }
-        }
-      }
+
     },
     "Copy selected files and folders to external path" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy selected files and folders to external path"
-          }
-        }
-      }
+
     },
     "Copy to Clipboard" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy to Clipboard"
-          }
-        }
-      }
+
     },
     "Copy to Folder..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy to Folder..."
-          }
-        }
-      }
+
     },
     "Copy to Left..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy to Left..."
-          }
-        }
-      }
+
     },
     "Copy to Right..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy to Right..."
-          }
-        }
-      }
+
     },
     "Copy..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy..."
-          }
-        }
-      }
+
     },
     "Copying" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copying"
-          }
-        }
-      }
+
     },
     "Create %ld empty folders on %lu" : {
       "comment" : "Create 1 empty folder on left/right",
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2031,2730 +999,755 @@
       }
     },
     "Creating empty folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Creating empty folders"
-          }
-        }
-      }
+
     },
     "Customize Toolbar…" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Customize Toolbar…"
-          }
-        }
-      }
+
     },
     "Cut" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cut"
-          }
-        }
-      }
+
     },
     "d" : {
-      "comment" : "The key equivalent for No",
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "d"
-          }
-        }
-      }
+      "comment" : "The key equivalent for No"
     },
     "Dark" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dark"
-          }
-        }
-      }
+
     },
     "Defaults" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Defaults"
-          }
-        }
-      }
+
     },
     "Delete" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete"
-          }
-        }
-      }
+
     },
     "Delete Files..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete Files..."
-          }
-        }
-      }
+
     },
     "Delete Lines" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete Lines"
-          }
-        }
-      }
+
     },
     "Delete Lines from Left" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete Lines from Left"
-          }
-        }
-      }
+
     },
     "Delete Lines from Right" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete Lines from Right"
-          }
-        }
-      }
+
     },
     "Delete selected files and folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete selected files and folders"
-          }
-        }
-      }
+
     },
     "Delete..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete..."
-          }
-        }
-      }
+
     },
     "Deleting" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deleting"
-          }
-        }
-      }
+
     },
     "Detected recursive loop for symbolic link '%@'" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Detected recursive loop for symbolic link '%@'"
-          }
-        }
-      }
+
     },
     "Difference Navigator" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Difference Navigator"
-          }
-        }
-      }
+
     },
     "Do not show files matching the criteria below" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do not show files matching the criteria below"
-          }
-        }
-      }
+
     },
     "Do not show this message again" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do not show this message again"
-          }
-        }
-      }
+
     },
     "Do you want to replace the current custom defaults?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do you want to replace the current custom defaults?"
-          }
-        }
-      }
+
     },
     "Document" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Document"
-          }
-        }
-      }
+
     },
     "Don't ask to save the document with changes when closing" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Don't ask to save the document with changes when closing"
-          }
-        }
-      }
+
     },
     "Don't Save" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Don't Save"
-          }
-        }
-      }
+
     },
     "Drag items to change evaluation order (topmost first)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag items to change evaluation order (topmost first)"
-          }
-        }
-      }
+
     },
     "Duplicate Rule..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Duplicate Rule..."
-          }
-        }
-      }
+
     },
     "Edit" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit"
-          }
-        }
-      }
+
     },
     "Edit Exclusion File Filters" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Exclusion File Filters"
-          }
-        }
-      }
+
     },
     "Edit Rule..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Rule..."
-          }
-        }
-      }
+
     },
     "Edit Session Settings" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Session Settings"
-          }
-        }
-      }
+
     },
     "Empty" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Empty"
-          }
-        }
-      }
+
     },
     "ends with" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ends with"
-          }
-        }
-      }
+
     },
     "Enter a file name to test the rule" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter a file name to test the rule"
-          }
-        }
-      }
+
     },
     "equals" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "equals"
-          }
-        }
-      }
+
     },
     "ESC key closes documents/application" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ESC key closes documents/application"
-          }
-        }
-      }
+
     },
     "exactly" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "exactly"
-          }
-        }
-      }
+
     },
     "Exclude '%@'" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exclude '%@'"
-          }
-        }
-      }
+
     },
     "Exclude all '*.%@'" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exclude all '*.%@'"
-          }
-        }
-      }
+
     },
     "Exclude by Ext" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exclude by Ext"
-          }
-        }
-      }
+
     },
     "Exclude Items" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exclude Items"
-          }
-        }
-      }
+
     },
     "Exclusion Filters" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exclusion Filters"
-          }
-        }
-      }
+
     },
     "Expand All" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Expand All"
-          }
-        }
-      }
+
     },
     "Expand All Folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Expand All Folders"
-          }
-        }
-      }
+
     },
     "Expand All Folders After Session Load" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Expand All Folders After Session Load"
-          }
-        }
-      }
+
     },
     "Expand all Subfolders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Expand all Subfolders"
-          }
-        }
-      }
+
     },
     "Expand Selected Subfolders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Expand Selected Subfolders"
-          }
-        }
-      }
+
     },
     "File" : {
-      "comment" : "File type",
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "File"
-          }
-        }
-      }
+      "comment" : "File type"
     },
     "File Filters" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "File Filters"
-          }
-        }
-      }
+
     },
     "File Modification Date" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "File Modification Date"
-          }
-        }
-      }
+
     },
     "File name" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "File name"
-          }
-        }
-      }
+
     },
     "File Name Case Alignment" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "File Name Case Alignment"
-          }
-        }
-      }
+
     },
     "File Size" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "File Size"
-          }
-        }
-      }
+
     },
     "File Viewer Text" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "File Viewer Text"
-          }
-        }
-      }
+
     },
     "filename.ext" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "filename.ext"
-          }
-        }
-      }
+
     },
     "Fill with Defaults" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fill with Defaults"
-          }
-        }
-      }
+
     },
     "Filtered" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtered"
-          }
-        }
-      }
+
     },
     "Filtered files will be skipped.\nTo include them select 'Show Filtered Files' from View menu" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtered files will be skipped.\nTo include them select 'Show Filtered Files' from View menu"
-          }
-        }
-      }
+
     },
     "Find" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find"
-          }
-        }
-      }
+
     },
     "Find File Name <⌘F>" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find File Name <⌘F>"
-          }
-        }
-      }
+
     },
     "Find Next" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find Next"
-          }
-        }
-      }
+
     },
     "Find Previous" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find Previous"
-          }
-        }
-      }
+
     },
     "Find..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find..."
-          }
-        }
-      }
+
     },
     "Finder doesn't show files starting with a . (period) character" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finder doesn't show files starting with a . (period) character"
-          }
-        }
-      }
+
     },
     "Folder" : {
-      "comment" : "Folder type",
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder"
-          }
-        }
-      }
+      "comment" : "Folder type"
     },
     "Folder Compare Info" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder Compare Info"
-          }
-        }
-      }
+
     },
     "Folder comparison completed" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder comparison completed"
-          }
-        }
-      }
+
     },
     "Folder Traversal" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder Traversal"
-          }
-        }
-      }
+
     },
     "Folder View" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder View"
-          }
-        }
-      }
+
     },
     "Folder Viewer Listing" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder Viewer Listing"
-          }
-        }
-      }
+
     },
     "Folders:" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folders:"
-          }
-        }
-      }
+
     },
     "Follow Symbolic Links" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Follow Symbolic Links"
-          }
-        }
-      }
+
     },
     "Font" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Font"
-          }
-        }
-      }
+
     },
     "Fonts" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fonts"
-          }
-        }
-      }
+
     },
     "From Root" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "From Root"
-          }
-        }
-      }
+
     },
     "General" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "General"
-          }
-        }
-      }
+
     },
     "General Settings" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "General Settings"
-          }
-        }
-      }
+
     },
     "Go to next difference" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Go to next difference"
-          }
-        }
-      }
+
     },
     "Go to next file with differences" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Go to next file with differences"
-          }
-        }
-      }
+
     },
     "Go to previous difference" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Go to previous difference"
-          }
-        }
-      }
+
     },
     "Go to previous file with differences" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Go to previous file with differences"
-          }
-        }
-      }
+
     },
     "Hide" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide"
-          }
-        }
-      }
+
     },
     "Hide Details" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide Details"
-          }
-        }
-      }
+
     },
     "Hide Empty Folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide Empty Folders"
-          }
-        }
-      }
+
     },
     "Hide Filtered Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide Filtered Files"
-          }
-        }
-      }
+
     },
     "Hide Log Console" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide Log Console"
-          }
-        }
-      }
+
     },
     "Hide Whitespace" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide Whitespace"
-          }
-        }
-      }
+
     },
     "History" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "History"
-          }
-        }
-      }
+
     },
     "Hold down ⌥ key (ALT) to override confirmation flag and show dialog" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hold down ⌥ key (ALT) to override confirmation flag and show dialog"
-          }
-        }
-      }
+
     },
     "Horizontal synchronized scroll" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Horizontal synchronized scroll"
-          }
-        }
-      }
+
     },
     "If the operation takes a long time to run, you can stop it, but the results could be inaccurate" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If the operation takes a long time to run, you can stop it, but the results could be inaccurate"
-          }
-        }
-      }
+
     },
     "Ignore Case" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignore Case"
-          }
-        }
-      }
+
     },
     "Ignore Character Case" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignore Character Case"
-          }
-        }
-      }
+
     },
     "Ignore differences of" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignore differences of"
-          }
-        }
-      }
+
     },
     "Ignore File Name Case" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignore File Name Case"
-          }
-        }
-      }
+
     },
     "Ignore Internal Whitespace" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignore Internal Whitespace"
-          }
-        }
-      }
+
     },
     "Ignore Leading Whitespace" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignore Leading Whitespace"
-          }
-        }
-      }
+
     },
     "Ignore Line Endings (DOS/Mac)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignore Line Endings (DOS/Mac)"
-          }
-        }
-      }
+
     },
     "Ignore Trailing Whitespace" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignore Trailing Whitespace"
-          }
-        }
-      }
+
     },
     "Include Filtered Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Include Filtered Files"
-          }
-        }
-      }
+
     },
     "Include Filtered Items By Default" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Include Filtered Items By Default"
-          }
-        }
-      }
+
     },
     "Invalid session data; maybe the file is corrupted" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invalid session data; maybe the file is corrupted"
-          }
-        }
-      }
+
     },
     "Invert Selection" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invert Selection"
-          }
-        }
-      }
+
     },
     "Invert Selection Both Sides" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invert Selection Both Sides"
-          }
-        }
-      }
+
     },
     "is" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "is"
-          }
-        }
-      }
+
     },
     "is greater than" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "is greater than"
-          }
-        }
-      }
+
     },
     "is less than" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "is less than"
-          }
-        }
-      }
+
     },
     "is like" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "is like"
-          }
-        }
-      }
+
     },
     "is not" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "is not"
-          }
-        }
-      }
+
     },
     "Items left" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Items left"
-          }
-        }
-      }
+
     },
     "Jump" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jump"
-          }
-        }
-      }
+
     },
     "Just Differences" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Just Differences"
-          }
-        }
-      }
+
     },
     "Just Matches" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Just Matches"
-          }
-        }
-      }
+
     },
     "Keep" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keep"
-          }
-        }
-      }
+
     },
     "Keyboard" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard"
-          }
-        }
-      }
+
     },
     "Keyboard shortcuts" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard shortcuts"
-          }
-        }
-      }
+
     },
     "Larger" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Larger"
-          }
-        }
-      }
+
     },
     "Left" : {
-      "comment" : "Left",
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left"
-          }
-        }
-      }
+      "comment" : "Left"
     },
     "Left and right paths must both be folders or files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left and right paths must both be folders or files"
-          }
-        }
-      }
+
     },
     "Left expression can't be empty" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left expression can't be empty"
-          }
-        }
-      }
+
     },
     "Left file '%@' no longer exists" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left file '%@' no longer exists"
-          }
-        }
-      }
+
     },
     "Left file name matches regular expression" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left file name matches regular expression"
-          }
-        }
-      }
+
     },
     "Left file no longer exists" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left file no longer exists"
-          }
-        }
-      }
+
     },
     "Left path is a file but the right is a folder; both must be folders or files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left path is a file but the right is a folder; both must be folders or files"
-          }
-        }
-      }
+
     },
     "Left path is a folder but the right is a file; both must be folders or files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left path is a folder but the right is a file; both must be folders or files"
-          }
-        }
-      }
+
     },
     "Left path no longer exists or isn't a valid file" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left path no longer exists or isn't a valid file"
-          }
-        }
-      }
+
     },
     "Left path no longer exists or isn't a valid folder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left path no longer exists or isn't a valid folder"
-          }
-        }
-      }
+
     },
     "Left Regular Expression" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left Regular Expression"
-          }
-        }
-      }
+
     },
     "Left Side" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left Side"
-          }
-        }
-      }
+
     },
     "Left..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left..."
-          }
-        }
-      }
+
     },
     "Light" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Light"
-          }
-        }
-      }
+
     },
     "Make read-only" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Make read-only"
-          }
-        }
-      }
+
     },
     "Match File Name Case" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Match File Name Case"
-          }
-        }
-      }
+
     },
     "Matched Range $0" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Matched Range $0"
-          }
-        }
-      }
+
     },
     "Maybe it was located in a temporary directory and another process deleted it" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maybe it was located in a temporary directory and another process deleted it"
-          }
-        }
-      }
+
     },
     "Modified" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modified"
-          }
-        }
-      }
+
     },
     "Move" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move"
-          }
-        }
-      }
+
     },
     "Move Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move Files"
-          }
-        }
-      }
+
     },
     "Move Files..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move Files..."
-          }
-        }
-      }
+
     },
     "Move selected files and folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move selected files and folders"
-          }
-        }
-      }
+
     },
     "Move selected files and folders to external path" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move selected files and folders to external path"
-          }
-        }
-      }
+
     },
     "Move to Folder..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move to Folder..."
-          }
-        }
-      }
+
     },
     "Move to Left..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move to Left..."
-          }
-        }
-      }
+
     },
     "Move to Right..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move to Right..."
-          }
-        }
-      }
+
     },
     "Move..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move..."
-          }
-        }
-      }
+
     },
     "Moving" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moving"
-          }
-        }
-      }
+
     },
     "Name" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Name"
-          }
-        }
-      }
+
     },
     "Name (Ignore Case)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Name (Ignore Case)"
-          }
-        }
-      }
+
     },
     "Newer" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Newer"
-          }
-        }
-      }
+
     },
     "Next Difference" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next Difference"
-          }
-        }
-      }
+
     },
     "Next File" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next File"
-          }
-        }
-      }
+
     },
     "No" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        }
-      }
+
     },
     "No actions for current selection" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No actions for current selection"
-          }
-        }
-      }
+
     },
     "No errors." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No errors."
-          }
-        }
-      }
+
     },
     "No files to copy on the left" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No files to copy on the left"
-          }
-        }
-      }
+
     },
     "No files to copy on the right" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No files to copy on the right"
-          }
-        }
-      }
+
     },
     "No Next File" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Next File"
-          }
-        }
-      }
+
     },
     "No Orphans" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Orphans"
-          }
-        }
-      }
+
     },
     "No Path Selected" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Path Selected"
-          }
-        }
-      }
+
     },
     "No Previous File" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Previous File"
-          }
-        }
-      }
+
     },
     "No to All" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No to All"
-          }
-        }
-      }
+
     },
     "Not found" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not found"
-          }
-        }
-      }
+
     },
     "OK" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        }
-      }
+
     },
     "Only Matches" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only Matches"
-          }
-        }
-      }
+
     },
     "Only Mismatches" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only Mismatches"
-          }
-        }
-      }
+
     },
     "Only Orphans" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only Orphans"
-          }
-        }
-      }
+
     },
     "Only the items currently shown will be removed. This can't be undone." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only the items currently shown will be removed. This can't be undone."
-          }
-        }
-      }
+
     },
     "Open Recent" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Recent"
-          }
-        }
-      }
+
     },
     "Open Script Folder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Script Folder"
-          }
-        }
-      }
+
     },
     "Open using the selected application" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open using the selected application"
-          }
-        }
-      }
+
     },
     "Open With" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open With"
-          }
-        }
-      }
+
     },
     "Orphans" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Orphans"
-          }
-        }
-      }
+
     },
     "Other..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Other..."
-          }
-        }
-      }
+
     },
     "Paste" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Paste"
-          }
-        }
-      }
+
     },
     "Paste from Clipboard" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Paste from Clipboard"
-          }
-        }
-      }
+
     },
     "Path" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Path"
-          }
-        }
-      }
+
     },
     "Path (Ignore Case)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Path (Ignore Case)"
-          }
-        }
-      }
+
     },
     "Path no longer exists" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Path no longer exists"
-          }
-        }
-      }
+
     },
     "Paths granted access to VisualDiffer" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Paths granted access to VisualDiffer"
-          }
-        }
-      }
+
     },
     "Permission denied: symbolic link at %@ points to destination %@. Add the destination to 'Trusted Paths' to allow access." : {
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Permission denied: symbolic link at %1$@ points to destination %2$@. Add the destination to 'Trusted Paths' to allow access."
           }
         }
       }
     },
     "Preferred Viewer/Editor" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preferred Viewer/Editor"
-          }
-        }
-      }
+
     },
     "Press '%@'" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Press '%@'"
-          }
-        }
-      }
+
     },
     "Prev Difference" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prev Difference"
-          }
-        }
-      }
+
     },
     "Previous File" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Previous File"
-          }
-        }
-      }
+
     },
     "Problems" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Problems"
-          }
-        }
-      }
+
     },
     "Problems (%lu)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Problems (%lu)"
-          }
-        }
-      }
+
     },
     "Quick Look" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quick Look"
-          }
-        }
-      }
+
     },
     "Reading and comparing folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reading and comparing folders"
-          }
-        }
-      }
+
     },
     "Recompare" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recompare"
-          }
-        }
-      }
+
     },
     "Refresh" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Refresh"
-          }
-        }
-      }
+
     },
     "Regexp error: %@" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Regexp error: %@"
-          }
-        }
-      }
+
     },
     "Regular expression doesn't compile: %@" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Regular expression doesn't compile: %@"
-          }
-        }
-      }
+
     },
     "Regular Expression Special Characters" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Regular Expression Special Characters"
-          }
-        }
-      }
+
     },
     "Reload" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        }
-      }
+
     },
     "Reload Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload Files"
-          }
-        }
-      }
+
     },
     "Reloaded left and right files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reloaded left and right files"
-          }
-        }
-      }
+
     },
     "Reloaded left file" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reloaded left file"
-          }
-        }
-      }
+
     },
     "Reloaded right file" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reloaded right file"
-          }
-        }
-      }
+
     },
     "Remove" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove"
-          }
-        }
-      }
+
     },
     "Remove all visible history items?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove all visible history items?"
-          }
-        }
-      }
+
     },
     "Remove Selected Items" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove Selected Items"
-          }
-        }
-      }
+
     },
     "Remove selected items from the list" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove selected items from the list"
-          }
-        }
-      }
+
     },
     "Remove Visible Items" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove Visible Items"
-          }
-        }
-      }
+
     },
     "Replace Custom Defaults" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Replace Custom Defaults"
-          }
-        }
-      }
+
     },
     "Replace existing file?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Replace existing file?"
-          }
-        }
-      }
+
     },
     "Reset" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reset"
-          }
-        }
-      }
+
     },
     "Restore Defaults" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Defaults"
-          }
-        }
-      }
+
     },
     "Restore Factory Defaults" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Factory Defaults"
-          }
-        }
-      }
+
     },
     "Result" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Result"
-          }
-        }
-      }
+
     },
     "Right" : {
-      "comment" : "Right",
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right"
-          }
-        }
-      }
+      "comment" : "Right"
     },
     "Right expression can't be empty" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right expression can't be empty"
-          }
-        }
-      }
+
     },
     "Right file '%@' no longer exists" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right file '%@' no longer exists"
-          }
-        }
-      }
+
     },
     "Right file name matches pattern (this is not a regular expression)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right file name matches pattern (this is not a regular expression)"
-          }
-        }
-      }
+
     },
     "Right file no longer exists" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right file no longer exists"
-          }
-        }
-      }
+
     },
     "Right path no longer exists or isn't a valid file" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right path no longer exists or isn't a valid file"
-          }
-        }
-      }
+
     },
     "Right path no longer exists or isn't a valid folder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right path no longer exists or isn't a valid folder"
-          }
-        }
-      }
+
     },
     "Right Pattern Expression" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right Pattern Expression"
-          }
-        }
-      }
+
     },
     "Right Side" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right Side"
-          }
-        }
-      }
+
     },
     "Right..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Right..."
-          }
-        }
-      }
+
     },
     "Rule cannot be saved" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rule cannot be saved"
-          }
-        }
-      }
+
     },
     "Run" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Run"
-          }
-        }
-      }
+
     },
     "Save" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save"
-          }
-        }
-      }
+
     },
     "Save ^S" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save ^S"
-          }
-        }
-      }
+
     },
     "Save Checked" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save Checked"
-          }
-        }
-      }
+
     },
     "Save File As" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save File As"
-          }
-        }
-      }
+
     },
     "Save Left File?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save Left File?"
-          }
-        }
-      }
+
     },
     "Save Modified Files?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save Modified Files?"
-          }
-        }
-      }
+
     },
     "Save Right File?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save Right File?"
-          }
-        }
-      }
+
     },
     "Search History <⌘F>" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search History <⌘F>"
-          }
-        }
-      }
+
     },
     "seconds or less" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "seconds or less"
-          }
-        }
-      }
+
     },
     "Select" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select"
-          }
-        }
-      }
+
     },
     "Select Adjacent Sections" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Adjacent Sections"
-          }
-        }
-      }
+
     },
     "Select All" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select All"
-          }
-        }
-      }
+
     },
     "Select All Both Sides" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select All Both Sides"
-          }
-        }
-      }
+
     },
     "Select All Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select All Files"
-          }
-        }
-      }
+
     },
     "Select All Files Both Sides" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select All Files Both Sides"
-          }
-        }
-      }
+
     },
     "Select All Folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select All Folders"
-          }
-        }
-      }
+
     },
     "Select All Folders Both Sides" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select All Folders Both Sides"
-          }
-        }
-      }
+
     },
     "Select Application" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Application"
-          }
-        }
-      }
+
     },
     "Select destination folder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select destination folder"
-          }
-        }
-      }
+
     },
     "Select encodings to show on the main list" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select encodings to show on the main list"
-          }
-        }
-      }
+
     },
     "Select File or Folder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select File or Folder"
-          }
-        }
-      }
+
     },
     "Select Font..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Font..."
-          }
-        }
-      }
+
     },
     "Select invalid paths" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select invalid paths"
-          }
-        }
-      }
+
     },
     "Select Invalid Paths" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Invalid Paths"
-          }
-        }
-      }
+
     },
     "Select Newer" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Newer"
-          }
-        }
-      }
+
     },
     "Select Orphans" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Orphans"
-          }
-        }
-      }
+
     },
     "Select Preferred Editor" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Preferred Editor"
-          }
-        }
-      }
+
     },
     "Select Section" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Section"
-          }
-        }
-      }
+
     },
     "Select Trusted Paths" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Trusted Paths"
-          }
-        }
-      }
+
     },
     "Selected %ld files, %@" : {
       "comment" : "Selected 3 files, 4.1GB",
-      "extractionState" : "migrated",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4786,983 +1779,271 @@
       }
     },
     "Selection already contains Filtered Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selection already contains Filtered Files"
-          }
-        }
-      }
+
     },
     "Session" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Session"
-          }
-        }
-      }
+
     },
     "Session Settings" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Session Settings"
-          }
-        }
-      }
+
     },
     "Session Settings…" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Session Settings…"
-          }
-        }
-      }
+
     },
     "Session type is unknown" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Session type is unknown"
-          }
-        }
-      }
+
     },
     "Session…" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Session…"
-          }
-        }
-      }
+
     },
     "Set as Base Folder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set as Base Folder"
-          }
-        }
-      }
+
     },
     "Set as Base Folder Both Sides" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set as Base Folder Both Sides"
-          }
-        }
-      }
+
     },
     "Set as Base Folder on the Other Side" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set as Base Folder on the Other Side"
-          }
-        }
-      }
+
     },
     "Set as Base Folders Both Sides" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set as Base Folders Both Sides"
-          }
-        }
-      }
+
     },
     "Set Current as Defaults" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set Current as Defaults"
-          }
-        }
-      }
+
     },
     "Set Date" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set Date"
-          }
-        }
-      }
+
     },
     "Set Date to" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set Date to"
-          }
-        }
-      }
+
     },
     "Set Left Read-Only" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set Left Read-Only"
-          }
-        }
-      }
+
     },
     "Set Modification Date for files and folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set Modification Date for files and folders"
-          }
-        }
-      }
+
     },
     "Set Modification Date..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set Modification Date..."
-          }
-        }
-      }
+
     },
     "Set Right Read-Only" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set Right Read-Only"
-          }
-        }
-      }
+
     },
     "Setting modification date" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Setting modification date"
-          }
-        }
-      }
+
     },
     "Settings" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
-          }
-        }
-      }
+
     },
     "Show All" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show All"
-          }
-        }
-      }
+
     },
     "Show Details" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Details"
-          }
-        }
-      }
+
     },
     "Show Empty Folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Empty Folders"
-          }
-        }
-      }
+
     },
     "Show Filtered Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Filtered Files"
-          }
-        }
-      }
+
     },
     "Show in Finder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show in Finder"
-          }
-        }
-      }
+
     },
     "Show Log Console" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Console"
-          }
-        }
-      }
+
     },
     "Show Toolbar" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Toolbar"
-          }
-        }
-      }
+
     },
     "Show Whitespace" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Whitespace"
-          }
-        }
-      }
+
     },
     "Size" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Size"
-          }
-        }
-      }
+
     },
     "Size left" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Size left"
-          }
-        }
-      }
+
     },
     "Size: %@" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Size: %@"
-          }
-        }
-      }
+
     },
     "Skip Packages (Applications, Frameworks, ...)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skip Packages (Applications, Frameworks, ...)"
-          }
-        }
-      }
+
     },
     "Smaller" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Smaller"
-          }
-        }
-      }
+
     },
     "Some characters cannot be represented in the current encoding" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Some characters cannot be represented in the current encoding"
-          }
-        }
-      }
+
     },
     "Some selected file(s) may not be visible in Finder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Some selected file(s) may not be visible in Finder"
-          }
-        }
-      }
+
     },
     "Start Comparison ⌘↩︎" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start Comparison ⌘↩︎"
-          }
-        }
-      }
+
     },
     "Stop" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop"
-          }
-        }
-      }
+
     },
     "Stopped comparison" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stopped comparison"
-          }
-        }
-      }
+
     },
     "Stopping comparison can take a while, please wait..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stopping comparison can take a while, please wait..."
-          }
-        }
-      }
+
     },
     "Swap Sides" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Swap Sides"
-          }
-        }
-      }
+
     },
     "Sync" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync"
-          }
-        }
-      }
+
     },
     "Sync both sides" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync both sides"
-          }
-        }
-      }
+
     },
     "Sync Files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync Files"
-          }
-        }
-      }
+
     },
     "Sync Files..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync Files..."
-          }
-        }
-      }
+
     },
     "Sync to Left..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync to Left..."
-          }
-        }
-      }
+
     },
     "Sync to Right..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync to Right..."
-          }
-        }
-      }
+
     },
     "Syncing" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Syncing"
-          }
-        }
-      }
+
     },
     "System" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "System"
-          }
-        }
-      }
+
     },
     "Tab Width" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tab Width"
-          }
-        }
-      }
+
     },
     "Tab Width: %ld" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tab Width: %ld"
-          }
-        }
-      }
+
     },
     "Test Rule" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Test Rule"
-          }
-        }
-      }
+
     },
     "Text" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Text"
-          }
-        }
-      }
+
     },
     "Text Differences" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Text Differences"
-          }
-        }
-      }
+
     },
     "The app is using a custom color scheme that will continue to be used when changing appearance. Colors may not be suitable for the new appearance. Are you sure?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The app is using a custom color scheme that will continue to be used when changing appearance. Colors may not be suitable for the new appearance. Are you sure?"
-          }
-        }
-      }
+
     },
     "The custom-defined defaults will be replaced with the application defaults. Are you sure?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The custom-defined defaults will be replaced with the application defaults. Are you sure?"
-          }
-        }
-      }
+
     },
     "The document could not be opened." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The document could not be opened."
-          }
-        }
-      }
+
     },
     "The file filter expression contains errors" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The file filter expression contains errors"
-          }
-        }
-      }
+
     },
     "The file(s) have been changed on the file system. Do you want to reload all modified files?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The file(s) have been changed on the file system. Do you want to reload all modified files?"
-          }
-        }
-      }
+
     },
     "The specified paths no longer exist or aren't both files" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The specified paths no longer exist or aren't both files"
-          }
-        }
-      }
+
     },
     "The specified paths no longer exist or aren't both folders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The specified paths no longer exist or aren't both folders"
-          }
-        }
-      }
+
     },
     "The Unix task '%@' must have the executable flag set (e.g., chmod +x)" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Unix task '%@' must have the executable flag set (e.g., chmod +x)"
-          }
-        }
-      }
+
     },
     "This folder contains a newer file named %@" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This folder contains a newer file named %@"
-          }
-        }
-      }
+
     },
     "Timestamp" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Timestamp"
-          }
-        }
-      }
+
     },
     "Timestamp + Size" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Timestamp + Size"
-          }
-        }
-      }
+
     },
     "Timestamp + Size + Content" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Timestamp + Size + Content"
-          }
-        }
-      }
+
     },
     "ToolbarOpenWith" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ToolbarOpenWith"
-          }
-        }
-      }
+
     },
     "Total Size: %@" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Total Size: %@"
-          }
-        }
-      }
+
     },
     "Traverse collapsed subfolders" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traverse collapsed subfolders"
-          }
-        }
-      }
+
     },
     "Traverse the folders that match the 'File Filters'" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traverse the folders that match the 'File Filters'"
-          }
-        }
-      }
+
     },
     "Trusted Paths" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trusted Paths"
-          }
-        }
-      }
+
     },
     "Unable to create symbolic link to destination '%@' because the existing file isn't a symbolic link" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unable to create symbolic link to destination '%@' because the existing file isn't a symbolic link"
-          }
-        }
-      }
+
     },
     "Unable to determine the disk volume type" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unable to determine the disk volume type"
-          }
-        }
-      }
+
     },
     "Unable to open file '%@'" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unable to open file '%@'"
-          }
-        }
-      }
+
     },
     "Update" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Update"
-          }
-        }
-      }
+
     },
     "Use Filesystem Case" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use Filesystem Case"
-          }
-        }
-      }
+
     },
     "Use selection" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use selection"
-          }
-        }
-      }
+
     },
     "User Defined Alignment Rules" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "User Defined Alignment Rules"
-          }
-        }
-      }
+
     },
     "View" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "View"
-          }
-        }
-      }
+
     },
     "Visualization" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visualization"
-          }
-        }
-      }
+
     },
     "Waiting..." : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waiting..."
-          }
-        }
-      }
+
     },
     "Warn that opened files may not be visible in Finder" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Warn that opened files may not be visible in Finder"
-          }
-        }
-      }
+
     },
     "while (a < b) {}" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "while (a < b) {}"
-          }
-        }
-      }
+
     },
     "With this one?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "With this one?"
-          }
-        }
-      }
+
     },
     "Word Wrap" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Word Wrap"
-          }
-        }
-      }
+
     },
     "Would you like to replace the existing file?" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Would you like to replace the existing file?"
-          }
-        }
-      }
+
     },
     "Wrap around to the next difference" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wrap around to the next difference"
-          }
-        }
-      }
+
     },
     "Yes" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes"
-          }
-        }
-      }
+
     },
     "Yes to All" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes to All"
-          }
-        }
-      }
+
     },
     "You can choose to compare using the modified version on the file system, or keep the existing one" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can choose to compare using the modified version on the file system, or keep the existing one"
-          }
-        }
-      }
+
     },
     "You have chosen to open a large number of windows. This can take a long time" : {
-      "extractionState" : "migrated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You have chosen to open a large number of windows. This can take a long time"
-          }
-        }
-      }
+
     }
   },
   "version" : "1.1"
