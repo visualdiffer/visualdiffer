@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -423,6 +423,7 @@
 		55740BF512D710EC004BF6CC /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55740BF412D710EC004BF6CC /* IOKit.framework */; };
 		55740BF912D71103004BF6CC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55740BF812D71103004BF6CC /* Security.framework */; };
 		5577FFE82FAF2FC30084FB06 /* PopUpButtonURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5577FFE72FAF2FC30084FB06 /* PopUpButtonURL.swift */; };
+		557A47F22FF7DE3800D0F6B4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 557A47F12FF7DE3800D0F6B4 /* Localizable.xcstrings */; };
 		557BBB0E2ED1BBB00016CBD4 /* DiffLineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */; };
 		557C18182E7E6E0100381A3A /* big_file_5000_lines.txt in Resources */ = {isa = PBXBuildFile; fileRef = 557C18162E7E6E0100381A3A /* big_file_5000_lines.txt */; };
 		557C18232E7E8C0D00381A3A /* Signing.local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 557C18212E7E8C0D00381A3A /* Signing.local.xcconfig */; };
@@ -514,8 +515,6 @@
 		55ECD8621476B03400D8BEB4 /* prefs_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 55ECD8611476B03400D8BEB4 /* prefs_text.png */; };
 		55F42EE12F76798A009B211C /* CommonPrefs+FileDifferenceNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F42EDF2F76798A009B211C /* CommonPrefs+FileDifferenceNavigator.swift */; };
 		55F4A0032FEE100000A1B2C3 /* ExternalFileOperationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F4A0012FEE100000A1B2C3 /* ExternalFileOperationContext.swift */; };
-		55F6B0631AEA93E30096E55E /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0611AEA93E30096E55E /* Localizable.stringsdict */; };
-		55F6B0661AEA99680096E55E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B0641AEA99680096E55E /* Localizable.strings */; };
 		55F9BAF22FA7259B004EA543 /* FoldersWindowController+Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9BAF12FA7259B004EA543 /* FoldersWindowController+Observers.swift */; };
 		55F9E79A2EDD5DBD001218C7 /* DiffResult.Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */; };
 		55F9E79C2EDD6221001218C7 /* WhitespacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9E79B2EDD6221001218C7 /* WhitespacesTests.swift */; };
@@ -523,7 +522,6 @@
 		55FE894A2F054B260003864A /* FlagSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE89492F054B260003864A /* FlagSet.swift */; };
 		775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
-		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1011,6 +1009,8 @@
 		55740BF412D710EC004BF6CC /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		55740BF812D71103004BF6CC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5577FFE72FAF2FC30084FB06 /* PopUpButtonURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonURL.swift; sourceTree = "<group>"; };
+		557A47F12FF7DE3800D0F6B4 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		557A47F32FF7DE3800D0F6B4 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/MainMenu.xcstrings; sourceTree = "<group>"; };
 		557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffLineComponent.swift; sourceTree = "<group>"; };
 		557C18162E7E6E0100381A3A /* big_file_5000_lines.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = big_file_5000_lines.txt; sourceTree = "<group>"; };
 		557C181B2E7E8BDD00381A3A /* Signing.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.local.xcconfig; sourceTree = "<group>"; };
@@ -1053,9 +1053,6 @@
 		55B1CE2C2E9934F800426FEC /* DiffResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResultTests.swift; sourceTree = "<group>"; };
 		55B1CE2E2E9934F800426FEC /* DiffResultBaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResultBaseTests.swift; sourceTree = "<group>"; };
 		55B212092490AB3B001717DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		55B2120A2490AB3B001717DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		55B2120B2490AB3B001717DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		55B2120C2490AB3B001717DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		55B675FE18956D90000D5A0D /* prefs_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_keyboard.png; sourceTree = "<group>"; };
 		55B675FF18956D90000D5A0D /* prefs_keyboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prefs_keyboard@2x.png"; sourceTree = "<group>"; };
 		55B93A442FAC42910024AEC0 /* DiffProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffProcessor.swift; sourceTree = "<group>"; };
@@ -1237,9 +1234,7 @@
 				5537434D2E937B7F00AB56D0 /* VisualDiffer.sdef */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				55157D5C12898F8800826FF8 /* images */,
-				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
-				55F6B0641AEA99680096E55E /* Localizable.strings */,
-				55F6B0611AEA93E30096E55E /* Localizable.stringsdict */,
+				557A47F12FF7DE3800D0F6B4 /* Localizable.xcstrings */,
 				2F7446A70DB6BCF400F9684A /* MainMenu.xib */,
 				5542D19516317DAC00F801AA /* vd.iconset */,
 				8D15AC360486D014006FF6A4 /* VisualDiffer-Info.plist */,
@@ -3117,7 +3112,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
-				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				2F7446AB0DB6BCF400F9684A /* MainMenu.xib in Resources */,
 				55157D7512898F8800826FF8 /* folder-000-open.png in Resources */,
 				5532516D2765F06B0092D65F /* mask-full.png in Resources */,
@@ -3139,7 +3133,6 @@
 				55157D8312898F8800826FF8 /* folder-111-open.png in Resources */,
 				55157D8412898F8800826FF8 /* folder-111.png in Resources */,
 				555392621889732900D26258 /* deleteRed.png in Resources */,
-				55F6B0661AEA99680096E55E /* Localizable.strings in Resources */,
 				5560823F12AD0EF8003DC79D /* folder-999-open.png in Resources */,
 				5560824012AD0EF8003DC79D /* folder-999.png in Resources */,
 				55E3A5661826552A002A890B /* lockedbadge.png in Resources */,
@@ -3161,7 +3154,6 @@
 				5542D19616317DAC00F801AA /* vd.iconset in Resources */,
 				553D10D9163BD0BC008D3F65 /* prefs_confirmations.png in Resources */,
 				55B6760018956D90000D5A0D /* prefs_keyboard.png in Resources */,
-				55F6B0631AEA93E30096E55E /* Localizable.stringsdict in Resources */,
 				55B6760118956D90000D5A0D /* prefs_keyboard@2x.png in Resources */,
 				554E0EB2163EFD51001418EA /* prefs_confirmations@2x.png in Resources */,
 				554E0EB3163EFD51001418EA /* prefs_paths@2x.png in Resources */,
@@ -3177,6 +3169,7 @@
 				5537434E2E937B7F00AB56D0 /* VDDefaults.plist in Resources */,
 				5537434F2E937B7F00AB56D0 /* colors.json in Resources */,
 				553743502E937B7F00AB56D0 /* colorsDark.json in Resources */,
+				557A47F22FF7DE3800D0F6B4 /* Localizable.xcstrings in Resources */,
 				553743512E937B7F00AB56D0 /* VisualDiffer.sdef in Resources */,
 				551BF0DE1643B91B009CC9D1 /* folder-010-open@2x.png in Resources */,
 				551BF0DF1643B91B009CC9D1 /* folder-010@2x.png in Resources */,
@@ -3665,14 +3658,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		089C165FFE840EACC02AAC07 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55B2120A2490AB3B001717DD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3685,24 +3670,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				55E3EF3524C2D06800F7A95A /* Base */,
+				557A47F32FF7DE3800D0F6B4 /* mul */,
 			);
 			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		55F6B0611AEA93E30096E55E /* Localizable.stringsdict */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55B2120C2490AB3B001717DD /* en */,
-			);
-			name = Localizable.stringsdict;
-			sourceTree = "<group>";
-		};
-		55F6B0641AEA99680096E55E /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55B2120B2490AB3B001717DD /* en */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -3832,6 +3802,7 @@
 				PROVISIONING_PROFILE = "59d2fc6b-4fa7-4828-8895-d3d003484da9";
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Debug;
 		};
@@ -3874,6 +3845,7 @@
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
@@ -3918,6 +3890,7 @@
 				PROVISIONING_PROFILE = "59d2fc6b-4fa7-4828-8895-d3d003484da9";
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = DebugNoSandbox;
 		};
@@ -4298,6 +4271,7 @@
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Sparkle;
 		};
