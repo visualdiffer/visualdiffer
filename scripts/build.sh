@@ -65,8 +65,10 @@ generate_release_notes() {
   echo "Generating release notes: $notes_file"
   (cd "$PROJECT_DIR" && "$SCRIPT_DIR/changelog.sh" prod) > "$notes_file"
 
-  echo "Opening release notes, close the file to continue..."
-  open -W "$notes_file"
+  if [ "$selected_profile" != "test" ]; then
+    echo "Opening release notes, close the file to continue..."
+    open -W "$notes_file"
+  fi
 }
 
 run_tests() {
