@@ -37,8 +37,8 @@ class ErrorsView: NSStackView {
         addArrangedSubview(title)
         addArrangedSubview(errorTextContainer)
 
-        // gives the text a default height
-        errorsText.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+        // gives the errors scroll view a default height
+        errorTextContainer.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
     }
 
     @objc
