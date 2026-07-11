@@ -23,14 +23,6 @@ struct LineEditOperation {
     /// the active visibility mode used to keep the filtered diff result in sync
     let visibility: DiffLine.Visibility
 
-    var sourceLines: [DiffLine] {
-        filtered.diffSide(for: sourceSide).lines
-    }
-
-    var destinationLines: [DiffLine] {
-        filtered.diffSide(for: sourceSide.opposite).lines
-    }
-
     var sourceAllSide: DiffSide {
         all.diffSide(for: sourceSide)
     }
@@ -50,10 +42,9 @@ extension LineEditOperation {
         useDestinationEOL: Bool
     ) {
         let fromLeft = sourceSide == .left
-        // shadow the computed properties to evaluate them once and keep a
-        // stable snapshot while removeLine mutates the filtered sides
-        let sourceLines = sourceLines
-        let destinationLines = destinationLines
+        // keep a stable snapshot of the lines while removeLine mutates the filtered sides
+        let sourceLines = filtered.diffSide(for: sourceSide).lines
+        let destinationLines = filtered.diffSide(for: sourceSide.opposite).lines
         let destinationEOL = destinationAllSide.eol
 
         for row in rows.reversed() {
@@ -100,10 +91,9 @@ extension LineEditOperation {
     ///
     func deleteLines() {
         let fromLeft = sourceSide == .left
-        // shadow the computed properties to evaluate them once and keep a
-        // stable snapshot while removeLine mutates the filtered sides
-        let sourceLines = sourceLines
-        let destinationLines = destinationLines
+        // keep a stable snapshot of the lines while removeLine mutates the filtered sides
+        let sourceLines = filtered.diffSide(for: sourceSide).lines
+        let destinationLines = filtered.diffSide(for: sourceSide.opposite).lines
 
         for row in rows.reversed() {
             let sourceLine = sourceLines[row]
@@ -146,8 +136,7 @@ extension LineEditOperation {
 extension DiffResult {
     static func justDifferentLines(_ result: DiffResult) -> DiffResult {
         let onlyMismatches = DiffResult(sections: DiffSection.compact(sections: result.sections))
-        onlyMismatches.leftSide.eol = result.leftSide.eol
-        onlyMismatches.rightSide.eol = result.rightSide.eol
+        onlyMismatches.inheritSideMetadata(from: result)
 
         let leftSide = onlyMismatches.leftSide
         let rightSide = onlyMismatches.rightSide
@@ -200,8 +189,7 @@ extension DiffResult {
     static func justMatchingLines(_ result: DiffResult) -> DiffResult {
         // difference sections are not visible
         let onlyMatches = DiffResult()
-        onlyMatches.leftSide.eol = result.leftSide.eol
-        onlyMatches.rightSide.eol = result.rightSide.eol
+        onlyMatches.inheritSideMetadata(from: result)
 
         let leftSide = onlyMatches.leftSide
         let rightSide = onlyMatches.rightSide
@@ -238,5 +226,11 @@ extension DiffResult {
         }
 
         return onlyMatches
+    }
+
+    // a filtered result must inherit the per-side metadata of its source result
+    private func inheritSideMetadata(from result: DiffResult) {
+        leftSide.eol = result.leftSide.eol
+        rightSide.eol = result.rightSide.eol
     }
 }
