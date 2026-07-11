@@ -5,33 +5,64 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.17</title>
+            <title>Version 2.1.18</title>
             <description>
                 <![CDATA[
-                <h1 id="v2117">v2.1.17</h1>
+                <h1 id="v2118">v2.1.18</h1>
+
+<h3 id="features">🚀 Features</h3>
+
+<ul>
+  <li>
+    <p>add menu item to remove all history items (<a href="https://github.com/visualdiffer/visualdiffer/commit/6f0dd6f775e03559880f6e50a5c70266bf41a6e6">6f0dd6f</a>)</p>
+  </li>
+  <li>
+    <p>Folder Compare: add “Select” submenu to filter items within the current selection (<a href="https://github.com/visualdiffer/visualdiffer/commit/4bde131095fe1e0684afdbb68f5738a1877ea19d">4bde131</a>)</p>
+  </li>
+</ul>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
   <li>
-    <p>remove dynamic width not supported in Swift (<a href="https://github.com/visualdiffer/visualdiffer/commit/7324facff2fa4ab0693d06c858fd0d3cecf095a9">7324fac</a>)</p>
+    <p>resolve crash on macOS 13.x occurring when the dialog is open (<a href="https://github.com/visualdiffer/visualdiffer/commit/f5b97167a3cca52010a6eae274c99adf24bb06eb">f5b9716</a>)</p>
   </li>
   <li>
-    <p>File Compare: keep destination line endings when copying lines (<a href="https://github.com/visualdiffer/visualdiffer/commit/5283c105f8c5ebdd4c67b6f50aa7cd54a5384425">5283c10</a>)</p>
+    <p>Folder Compare: copies to the correct destination when files use a directory alignment rule (<a href="https://github.com/visualdiffer/visualdiffer/commit/9bd41934107a67a1133f2d6686e72f7874a57513">9bd4193</a>)</p>
+  </li>
+  <li>
+    <p>Folder Compare: correct regexp alignment against directories names (<a href="https://github.com/visualdiffer/visualdiffer/commit/aa220da39df02d26de6dafb572fe1180e36013fa">aa220da</a>)</p>
+  </li>
+  <li>
+    <p>Folder Compare: use shorter menu item text (<a href="https://github.com/visualdiffer/visualdiffer/commit/11b01f896a3899cc1870e6dcbed2af6eff62c7ea">11b01f8</a>)</p>
+  </li>
+</ul>
+
+<h3 id="performance">✨ Performance</h3>
+
+<ul>
+  <li>
+    <p>File Compare: avoid recomputing line properties in copy/delete loops (<a href="https://github.com/visualdiffer/visualdiffer/commit/22e41a37ccab367ba3cc909057c9b5159542cbec">22e41a3</a>)</p>
+  </li>
+  <li>
+    <p>Folder Compare: resolve linked anchor base in a single pass (<a href="https://github.com/visualdiffer/visualdiffer/commit/0449c197ab37ec90ce27ad7f7ec790e386031afd">0449c19</a>)</p>
+  </li>
+  <li>
+    <p>Folder Compare: reuse reserved-right lookup during alignment (<a href="https://github.com/visualdiffer/visualdiffer/commit/3ed902547d421590153f2b8929da0cb4e54c7a72">3ed9025</a>)</p>
   </li>
 </ul>
 
 
                 ]]>
             </description>
-            <pubDate>Sat, 20 June 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.1.17</sparkle:version>
-            <sparkle:shortVersionString>2.1.17</sparkle:shortVersionString>
+            <pubDate>Sat, 11 July 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.1.18</sparkle:version>
+            <sparkle:shortVersionString>2.1.18</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.17/VisualDiffer-2.1.17.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.18/VisualDiffer-2.1.18.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="BuOxH2HfTT7q8CZzZNTJLYXanBxxY3bHh28dRROHFg0Rql9JKGHjdmppkEz5cjAg/5lB00lbzPdUcVWaQVS8DA==" length="5334828"
+                sparkle:edSignature="y3SecEgx8DUDVAxaLx2CGbaRcHtNh0PROU6icqa4/RMX2QSJgeNJg8UdHQrTQgvrRF/8jS20XlxnnlVWrumeAg==" length="5128693"
 
             />
         </item>
