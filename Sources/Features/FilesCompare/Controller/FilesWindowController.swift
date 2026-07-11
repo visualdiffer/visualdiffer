@@ -48,7 +48,7 @@ class FilesWindowController: NSWindowController {
     lazy var rightDetailsTextView = createLineDetailTextView()
 
     lazy var topBottomView: WindowOSD = .init(
-        image: NSImage.required(named: VDImageNameBottom),
+        image: VDSymbol.Asset.bottom.image(),
         parent: window
     )
 

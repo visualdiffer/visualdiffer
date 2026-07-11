@@ -14,6 +14,7 @@ extension NSToolbarItem.Identifier {
         static let refresh = NSToolbarItem.Identifier("Refresh")
         static let expandAllFolders = NSToolbarItem.Identifier("ExpandAllFolders")
         static let collapseAllFolders = NSToolbarItem.Identifier("CollapseAllFolders")
+        static let folderExpansion = NSToolbarItem.Identifier("FolderExpansion")
         static let copy = NSToolbarItem.Identifier("Copy")
         static let move = NSToolbarItem.Identifier("Move")
         static let sync = NSToolbarItem.Identifier("Sync")
@@ -21,6 +22,7 @@ extension NSToolbarItem.Identifier {
         static let sessionPreferences = NSToolbarItem.Identifier("SessionPreferences")
         static let nextDifference = NSToolbarItem.Identifier("NextDifference")
         static let prevDifference = NSToolbarItem.Identifier("PrevDifference")
+        static let differenceNavigation = NSToolbarItem.Identifier("DifferenceNavigation")
         static let openWith = NSToolbarItem.Identifier("OpenWith")
         static let showInFinder = NSToolbarItem.Identifier("ShowInFinder")
     }
@@ -36,8 +38,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
     public func toolbarDefaultItemIdentifiers(_: NSToolbar) -> [NSToolbarItem.Identifier] {
         [
             .Folders.comparison,
-            .Folders.expandAllFolders,
-            .Folders.collapseAllFolders,
+            .Folders.folderExpansion,
             .Folders.refresh,
             .space,
             .Folders.copy,
@@ -59,15 +60,13 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             .flexibleSpace,
             .Folders.exclusionFilters,
             .Folders.refresh,
-            .Folders.expandAllFolders,
-            .Folders.collapseAllFolders,
+            .Folders.folderExpansion,
             .Folders.copy,
             .Folders.move,
             .Folders.sync,
             .Folders.touch,
             .Folders.sessionPreferences,
-            .Folders.nextDifference,
-            .Folders.prevDifference,
+            .Folders.differenceNavigation,
             .Folders.openWith,
             .Folders.showInFinder,
         ]
@@ -82,66 +81,31 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
     }
 
     // swiftlint:disable:next function_body_length
-    public func toolbar(_: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar _: Bool) -> NSToolbarItem? {
-        if itemIdentifier == .Folders.comparisonList {
-            let cell = ComparatorPopUpButtonCell(textCell: "", pullsDown: false)
-
-            let popupButton = NSPopUpButton(frame: .zero, pullsDown: false)
-            popupButton.cell = cell
-            popupButton.bezelStyle = .texturedRounded
-            popupButton.setButtonType(.momentaryPushIn)
-            popupButton.alignment = .left
-            popupButton.lineBreakMode = .byTruncatingTail
-            popupButton.state = .off
-            popupButton.imagePosition = .noImage
-            popupButton.imageScaling = .scaleProportionallyDown
-            popupButton.target = self
-            popupButton.action = #selector(selectComparison)
-            popupButton.select(popupButton.menu?.item(withTag: comparatorMethod.rawValue))
-
-            let item = CustomValidationToolbarItem(itemIdentifier: itemIdentifier)
-            item.label = NSLocalizedString("Comparison", comment: "")
-            item.paletteLabel = NSLocalizedString("Comparison", comment: "")
-            item.view = popupButton
-
-            return item
+    public func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        if itemIdentifier == .Folders.differenceNavigation {
+            return toolbar.makeSegmentedItemGroup(
+                identifier: itemIdentifier,
+                label: NSLocalizedString("Differences", comment: ""),
+                subitemIdentifiers: [.Folders.nextDifference, .Folders.prevDifference],
+                willBeInsertedIntoToolbar: flag
+            )
+        } else if itemIdentifier == .Folders.folderExpansion {
+            return toolbar.makeSegmentedItemGroup(
+                identifier: itemIdentifier,
+                label: NSLocalizedString("Expand/Collapse", comment: ""),
+                subitemIdentifiers: [.Folders.expandAllFolders, .Folders.collapseAllFolders],
+                willBeInsertedIntoToolbar: flag
+            )
+        } else if itemIdentifier == .Folders.comparisonList {
+            return createComparisonListToolbarPopup(identifier: itemIdentifier)
         } else if itemIdentifier == .Folders.comparison {
-            let menuItem = NSMenuItem()
-            menuItem.state = .on
-            menuItem.image = NSImage(named: VDImageNameComparisonMethod)
-            menuItem.isHidden = true
-            let cell = ComparatorPopUpButtonCell(textCell: "", pullsDown: true)
-            cell.menu?.insertItem(menuItem, at: 0)
-            cell.arrowPosition = .arrowAtCenter
-
-            let popupButton = NSPopUpButton(frame: .zero, pullsDown: true)
-            popupButton.cell = cell
-            popupButton.image = NSImage(named: VDImageNameComparisonMethod)
-            popupButton.imagePosition = .imageOnly
-            popupButton.bezelStyle = .texturedRounded
-            popupButton.setButtonType(.momentaryPushIn)
-            popupButton.alignment = .center
-            popupButton.lineBreakMode = .byTruncatingTail
-            popupButton.state = .on
-            popupButton.isBordered = true
-            popupButton.imageScaling = .scaleProportionallyDown
-            popupButton.target = self
-            popupButton.action = #selector(selectComparison)
-            popupButton.select(popupButton.menu?.item(withTag: comparatorMethod.rawValue))
-
-            let item = CustomValidationToolbarItem(itemIdentifier: itemIdentifier)
-            item.label = NSLocalizedString("Comparison", comment: "")
-            item.paletteLabel = NSLocalizedString("Comparison", comment: "")
-            item.toolTip = comparatorMethod.description
-            item.view = popupButton
-
-            return item
+            return createComparisonToolbarPopup(identifier: itemIdentifier)
         } else if itemIdentifier == .Folders.exclusionFilters {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Exclusion Filters", comment: ""),
                 tooltip: NSLocalizedString("Edit Exclusion File Filters", comment: ""),
-                image: NSImage(named: VDImageNameFilter),
+                image: VDSymbol.Toolbar.filter.image(),
                 target: self,
                 action: #selector(openFileFilters)
             )
@@ -150,7 +114,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Refresh", comment: ""),
                 tooltip: NSLocalizedString("Refresh", comment: ""),
-                image: NSImage(named: VDImageNameRefresh),
+                image: VDSymbol.Toolbar.refresh.image(),
                 target: self,
                 action: #selector(refresh)
             )
@@ -159,7 +123,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Expand All", comment: ""),
                 tooltip: NSLocalizedString("Expand All Folders", comment: ""),
-                image: NSImage(named: VDImageNameExpand),
+                image: VDSymbol.Toolbar.expand.image(),
                 target: self,
                 action: #selector(expandAllFolders)
             )
@@ -168,7 +132,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Collapse All", comment: ""),
                 tooltip: NSLocalizedString("Collapse All Folders", comment: ""),
-                image: NSImage(named: VDImageNameCollapse),
+                image: VDSymbol.Toolbar.collapse.image(),
                 target: self,
                 action: #selector(collapseAllFolders)
             )
@@ -177,7 +141,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Copy Files", comment: ""),
                 tooltip: NSLocalizedString("Copy Files", comment: ""),
-                image: NSImage(named: VDImageNameCopyRight),
+                image: VDSymbol.Toolbar.copyRight.image(),
                 target: self,
                 action: #selector(copyFiles)
             )
@@ -188,7 +152,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Move Files", comment: ""),
                 tooltip: NSLocalizedString("Move Files", comment: ""),
-                image: NSImage(named: VDImageNameMoveRight),
+                image: VDSymbol.Toolbar.moveRight.image(),
                 target: self,
                 action: #selector(moveFiles)
             )
@@ -197,7 +161,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Sync Files", comment: ""),
                 tooltip: NSLocalizedString("Copy newer and orphan files", comment: ""),
-                image: NSImage(named: VDImageNameSyncRight),
+                image: VDSymbol.Toolbar.syncRight.image(),
                 target: self,
                 action: #selector(syncFiles)
             )
@@ -206,7 +170,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Set Date", comment: ""),
                 tooltip: NSLocalizedString("Change date/time", comment: ""),
-                image: NSImage(named: VDImageNameDateTime),
+                image: VDSymbol.Toolbar.dateTime.image(),
                 target: self,
                 action: #selector(setModificationDate)
             )
@@ -215,7 +179,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Session Settings", comment: ""),
                 tooltip: NSLocalizedString("Edit Session Settings", comment: ""),
-                image: NSImage(named: VDImageNamePreferences),
+                image: VDSymbol.Toolbar.sessionPreferences.image(),
                 target: self,
                 action: #selector(openSessionSettingsSheet)
             )
@@ -224,7 +188,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Next Difference", comment: ""),
                 tooltip: NSLocalizedString("Go to next difference", comment: ""),
-                image: NSImage(named: VDImageNameNext),
+                image: VDSymbol.Toolbar.nextDifference.image(),
                 target: self,
                 action: #selector(nextDifference)
             )
@@ -233,37 +197,24 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Prev Difference", comment: ""),
                 tooltip: NSLocalizedString("Go to previous difference", comment: ""),
-                image: NSImage(named: VDImageNamePrev),
+                image: VDSymbol.Toolbar.prevDifference.image(),
                 target: self,
                 action: #selector(previousDifference)
             )
         } else if itemIdentifier == .Folders.openWith {
-            let popupButton = NSPopUpButton(
-                identifier: .Folders.openWithToolbarMenu,
-                menuTitle: NSLocalizedString("ToolbarOpenWith", comment: ""),
-                menuImage: NSImage(named: VDImageNameOpenWith)
-            )
-            popupButton.target = self
-            popupButton.action = #selector(popupOpenWithApp)
-            popupButton.menu?.delegate = self
-
-            let item = CustomValidationToolbarItem(
+            return .createOpenWithPopup(
                 identifier: itemIdentifier,
-                label: NSLocalizedString("Open With", comment: ""),
-                tooltip: NSLocalizedString("Open using the selected application", comment: ""),
-                image: NSImage(named: VDImageNameFinder),
-                target: nil,
-                action: nil
+                menuIdentifier: .Folders.openWithToolbarMenu,
+                target: self,
+                action: #selector(popupOpenWithApp),
+                menuDelegate: self
             )
-            item.view = popupButton
-
-            return item
         } else if itemIdentifier == .Folders.showInFinder {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Show in Finder", comment: ""),
                 tooltip: NSLocalizedString("Show in Finder", comment: ""),
-                image: NSImage(named: VDImageNameFinder),
+                image: VDSymbol.Toolbar.showInFinder.image(),
                 target: self,
                 action: #selector(showInFinder)
             )
@@ -305,19 +256,19 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         switch lastUsedView.side {
         case .left:
             if item.itemIdentifier == .Folders.copy {
-                item.image = NSImage(named: VDImageNameCopyRight)
+                item.image = VDSymbol.Toolbar.copyRight.image()
             } else if item.itemIdentifier == .Folders.sync {
-                item.image = NSImage(named: VDImageNameSyncRight)
+                item.image = VDSymbol.Toolbar.syncRight.image()
             } else if item.itemIdentifier == .Folders.move {
-                item.image = NSImage(named: VDImageNameMoveRight)
+                item.image = VDSymbol.Toolbar.moveRight.image()
             }
         case .right:
             if item.itemIdentifier == .Folders.copy {
-                item.image = NSImage(named: VDImageNameCopyLeft)
+                item.image = VDSymbol.Toolbar.copyLeft.image()
             } else if item.itemIdentifier == .Folders.sync {
-                item.image = NSImage(named: VDImageNameSyncLeft)
+                item.image = VDSymbol.Toolbar.syncLeft.image()
             } else if item.itemIdentifier == .Folders.move {
-                item.image = NSImage(named: VDImageNameMoveLeft)
+                item.image = VDSymbol.Toolbar.moveLeft.image()
             }
         }
     }
@@ -355,5 +306,66 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                     popupButton.select(popupButton.menu?.item(withTag: method.rawValue))
                 }
             }
+    }
+
+    private func createComparisonListToolbarPopup(
+        identifier: NSToolbarItem.Identifier
+    ) -> NSToolbarItem {
+        let cell = ComparatorPopUpButtonCell(textCell: "", pullsDown: false)
+
+        let popupButton = NSPopUpButton(frame: .zero, pullsDown: false)
+        popupButton.cell = cell
+        popupButton.alignment = .left
+        popupButton.state = .off
+        popupButton.imagePosition = .noImage
+
+        return makeComparisonToolbarItem(identifier: identifier, popupButton: popupButton)
+    }
+
+    private func createComparisonToolbarPopup(
+        identifier: NSToolbarItem.Identifier
+    ) -> NSToolbarItem {
+        let menuItem = NSMenuItem()
+        menuItem.state = .on
+        menuItem.image = VDSymbol.Toolbar.comparisonMethod.image()
+        menuItem.isHidden = true
+        let cell = ComparatorPopUpButtonCell(textCell: "", pullsDown: true)
+        cell.menu?.insertItem(menuItem, at: 0)
+        cell.arrowPosition = .arrowAtCenter
+
+        let popupButton = NSPopUpButton(frame: .zero, pullsDown: true)
+        popupButton.cell = cell
+        popupButton.image = VDSymbol.Toolbar.comparisonMethod.image()
+        popupButton.imagePosition = .imageOnly
+        popupButton.alignment = .center
+        popupButton.state = .on
+        popupButton.isBordered = true
+
+        let item = makeComparisonToolbarItem(identifier: identifier, popupButton: popupButton)
+        item.toolTip = comparatorMethod.description
+
+        return item
+    }
+
+    // shared popup/toolbar-item setup for both comparison variants,
+    // the caller configures only the properties that differ between them
+    private func makeComparisonToolbarItem(
+        identifier: NSToolbarItem.Identifier,
+        popupButton: NSPopUpButton
+    ) -> CustomValidationToolbarItem {
+        popupButton.bezelStyle = .texturedRounded
+        popupButton.setButtonType(.momentaryPushIn)
+        popupButton.lineBreakMode = .byTruncatingTail
+        popupButton.imageScaling = .scaleProportionallyDown
+        popupButton.target = self
+        popupButton.action = #selector(selectComparison)
+        popupButton.select(popupButton.menu?.item(withTag: comparatorMethod.rawValue))
+
+        let item = CustomValidationToolbarItem(itemIdentifier: identifier)
+        item.label = NSLocalizedString("Comparison", comment: "")
+        item.paletteLabel = NSLocalizedString("Comparison", comment: "")
+        item.view = popupButton
+
+        return item
     }
 }

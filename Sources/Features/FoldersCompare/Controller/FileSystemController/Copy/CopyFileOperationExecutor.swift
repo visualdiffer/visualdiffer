@@ -40,7 +40,7 @@ class CopyFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
         case .external:
             NSLocalizedString("Copy selected files and folders to external path", comment: "")
         }
-        image = NSImage(named: side == .left ? VDImageNameCopyRight : VDImageNameCopyLeft)
+        image = (side == .left ? VDSymbol.Toolbar.copyRight : VDSymbol.Toolbar.copyLeft).summaryImage()
     }
 
     func execute(_ manager: FileOperationManagerAction, payload _: Sendable?) {

@@ -41,7 +41,7 @@ class MoveFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
         case .external:
             NSLocalizedString("Move selected files and folders to external path", comment: "")
         }
-        image = NSImage(named: side == .left ? VDImageNameMoveRight : VDImageNameMoveLeft)
+        image = (side == .left ? VDSymbol.Toolbar.moveRight : VDSymbol.Toolbar.moveLeft).summaryImage()
     }
 
     func execute(_ manager: FileOperationManagerAction, payload _: Sendable?) {

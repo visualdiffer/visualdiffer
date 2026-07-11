@@ -116,6 +116,7 @@ extension FoldersWindowController {
     }
 
     private func resolvedSide(from sender: NSMenuItem) -> SelectionSide {
-        SelectionSide(menuItem: sender) == .both ? .both : SelectionSide(displaySide: lastUsedView.side)
+        let side = SelectionSide(menuItem: sender)
+        return side == .both ? side : SelectionSide(displaySide: lastUsedView.side)
     }
 }

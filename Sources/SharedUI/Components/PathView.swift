@@ -117,7 +117,7 @@ class PathView: NSView {
 
     private func createBrowseButton() -> NSButton {
         let view = NSButton(
-            image: NSImage.required(named: VDImageNameBrowse),
+            image: VDSymbol.Button.browse.image(accessibilityDescription: NSLocalizedString("Choose Path", comment: "")),
             target: pathControl,
             action: #selector(PathControl.choosePath)
         )
@@ -131,7 +131,7 @@ class PathView: NSView {
 
     private func createSaveButton() -> NSButton {
         let view = NSButton(
-            image: NSImage.required(named: VDImageNameSave),
+            image: VDSymbol.Button.save.image(accessibilityDescription: NSLocalizedString("Save", comment: "")),
             target: nil,
             action: nil
         )

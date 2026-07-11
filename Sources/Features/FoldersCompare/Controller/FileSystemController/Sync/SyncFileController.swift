@@ -164,14 +164,14 @@ class SyncFileController: FileSystemController<SyncFileOperationExecutor> {
         let syncBothSides = checkboxSyncBothSides.state == .on
 
         if syncBothSides {
-            operationSummary.icon.image = NSImage(named: VDImageNameSyncBoth)
+            operationSummary.icon.image = VDSymbol.Toolbar.syncBoth.summaryImage()
             operationDescription.stringValue = NSLocalizedString("Copy newer and orphan files to the other side", comment: "")
         } else {
             if view.side == .left {
-                operationSummary.icon.image = NSImage(named: VDImageNameSyncRight)
+                operationSummary.icon.image = VDSymbol.Toolbar.syncRight.summaryImage()
                 operationDescription.stringValue = NSLocalizedString("Copy newer and orphan files to right", comment: "")
             } else {
-                operationSummary.icon.image = NSImage(named: VDImageNameSyncLeft)
+                operationSummary.icon.image = VDSymbol.Toolbar.syncLeft.summaryImage()
                 operationDescription.stringValue = NSLocalizedString("Copy newer and orphan files to left", comment: "")
             }
         }

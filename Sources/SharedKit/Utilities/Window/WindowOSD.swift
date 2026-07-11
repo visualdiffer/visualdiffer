@@ -7,6 +7,7 @@
 //
 
 class WindowOSD: NSWindow, NSAnimationDelegate {
+    static let defaultOSDImageSize = NSSize(width: 56, height: 94)
     private static let textColor = NSColor.white
     private static let backgroundColor = NSColor(
         calibratedRed: 83.0 / 255,
@@ -28,7 +29,6 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
     private var viewAnimation: NSViewAnimation?
     private var fadeOutTimer: Timer?
 
-    @objc
     init(image: NSImage, parent: NSWindow?) {
         let windowFrame = NSRect(x: 0, y: 0, width: Self.windowWidth, height: Self.windowHeight)
 
@@ -40,7 +40,7 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
         )
 
         let content = Self.createContent(frame: windowFrame)
-        content.addSubview(Self.createImageView(image: image, windowFrame: windowFrame))
+        content.addSubview(Self.createImageView(image: Self.iconForOSD(image: image), windowFrame: windowFrame))
         content.addSubview(Self.createTextField())
 
         contentView = content
@@ -110,7 +110,6 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
         false
     }
 
-    @objc
     func animateInside(_ areaFrame: NSRect) {
         let frame = frame
         setFrameOrigin(NSPoint(
@@ -177,15 +176,12 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
 
     // MARK: - Image
 
-    @objc
-    func setImage(_ image: NSImage?) {
+    func setImage(_ image: NSImage?, size: NSSize? = nil) {
         guard let imageView = contentView?.subviews[0] as? NSImageView else {
             return
         }
 
-        if imageView.image != image {
-            imageView.image = image
-        }
+        imageView.image = image.map { Self.iconForOSD(image: $0, size: size) }
     }
 
     func setBackgroundColor(_ backgroundColor: NSColor) {
@@ -194,7 +190,6 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
 
     // MARK: - Text
 
-    @objc
     func setText(_ text: String) {
         guard let textField = contentView?.subviews[1] as? NSTextField,
               let font = textField.font else {
@@ -227,15 +222,13 @@ class WindowOSD: NSWindow, NSAnimationDelegate {
     /// returns a white-tinted copy of `image` scaled to `size`; use for icons displayed on the OSD dark background
     /// - Parameters:
     ///   - image: the source image to tint
-    ///   - size: the output size
-    /// - Returns: a white-tinted image, or `nil` if `image` is `nil`
-    static func iconForOSD(
-        image: NSImage?,
-        size: NSSize
-    ) -> NSImage? {
-        guard let image else {
-            return nil
-        }
+    ///   - size: the output size, defaults to `defaultOSDImageSize` when `nil`
+    /// - Returns: a white-tinted image
+    private static func iconForOSD(
+        image: NSImage,
+        size: NSSize? = nil
+    ) -> NSImage {
+        let size = size ?? defaultOSDImageSize
 
         return NSImage(size: size, flipped: false) { rect in
             image.draw(in: rect)

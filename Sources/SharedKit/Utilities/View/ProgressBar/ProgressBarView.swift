@@ -47,7 +47,7 @@ class ProgressBarView: NSView {
         view.isBordered = false
         view.state = .off
         view.alignment = .center
-        view.image = NSImage(named: VDImageNameStop)
+        view.image = VDSymbol.Button.stop.image(accessibilityDescription: NSLocalizedString("Stop", comment: ""))
         view.imagePosition = .imageOnly
         view.imageScaling = .scaleProportionallyDown
         view.keyEquivalent = KeyEquivalent.escape

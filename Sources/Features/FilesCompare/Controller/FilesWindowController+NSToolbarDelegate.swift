@@ -11,8 +11,10 @@ extension NSToolbarItem.Identifier {
         static let copyLines = NSToolbarItem.Identifier("CopyLines")
         static let prevDifference = NSToolbarItem.Identifier("PrevDifference")
         static let nextDifference = NSToolbarItem.Identifier("NextDifference")
+        static let differenceNavigation = NSToolbarItem.Identifier("DifferenceNavigation")
         static let prevDifferenceFiles = NSToolbarItem.Identifier("PrevDifferenceFiles")
         static let nextDifferenceFiles = NSToolbarItem.Identifier("NextDifferenceFiles")
+        static let fileNavigation = NSToolbarItem.Identifier("FileNavigation")
         static let openWith = NSToolbarItem.Identifier("OpenWith")
         static let showInFinder = NSToolbarItem.Identifier("ShowInFinder")
         static let sessionPreferences = NSToolbarItem.Identifier("SessionPreferences")
@@ -30,13 +32,11 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
     @objc
     public func toolbarDefaultItemIdentifiers(_: NSToolbar) -> [NSToolbarItem.Identifier] {
         [
-            .Files.nextDifference,
-            .Files.prevDifference,
+            .Files.differenceNavigation,
             .space,
             .Files.copyLines,
             .space,
-            .Files.nextDifferenceFiles,
-            .Files.prevDifferenceFiles,
+            .Files.fileNavigation,
             .Files.sessionPreferences,
         ]
     }
@@ -46,11 +46,9 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         [
             .space,
             .flexibleSpace,
-            .Files.nextDifference,
-            .Files.prevDifference,
+            .Files.differenceNavigation,
             .Files.copyLines,
-            .Files.nextDifferenceFiles,
-            .Files.prevDifferenceFiles,
+            .Files.fileNavigation,
             .Files.openWith,
             .Files.showInFinder,
             .Files.wordWrap,
@@ -72,13 +70,27 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
     }
 
     @objc
-    public func toolbar(_: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar _: Bool) -> NSToolbarItem? {
-        if itemIdentifier == .Files.copyLines {
+    public func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        if itemIdentifier == .Files.differenceNavigation {
+            return toolbar.makeSegmentedItemGroup(
+                identifier: itemIdentifier,
+                label: NSLocalizedString("Differences", comment: ""),
+                subitemIdentifiers: [.Files.nextDifference, .Files.prevDifference],
+                willBeInsertedIntoToolbar: flag
+            )
+        } else if itemIdentifier == .Files.fileNavigation {
+            return toolbar.makeSegmentedItemGroup(
+                identifier: itemIdentifier,
+                label: NSLocalizedString("Files with Differences", comment: ""),
+                subitemIdentifiers: [.Files.nextDifferenceFiles, .Files.prevDifferenceFiles],
+                willBeInsertedIntoToolbar: flag
+            )
+        } else if itemIdentifier == .Files.copyLines {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Copy Lines", comment: ""),
                 tooltip: NSLocalizedString("Copy Lines", comment: ""),
-                image: NSImage(named: VDImageNameCopyLinesLeft),
+                image: VDSymbol.Toolbar.copyLinesLeft.image(),
                 target: self,
                 action: #selector(copyLines)
             )
@@ -87,7 +99,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Prev Difference", comment: ""),
                 tooltip: NSLocalizedString("Go to previous difference", comment: ""),
-                image: NSImage(named: VDImageNamePrev),
+                image: VDSymbol.Toolbar.prevDifference.image(),
                 target: self,
                 action: #selector(previousDifference)
             )
@@ -96,7 +108,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Next Difference", comment: ""),
                 tooltip: NSLocalizedString("Go to next difference", comment: ""),
-                image: NSImage(named: VDImageNameNext),
+                image: VDSymbol.Toolbar.nextDifference.image(),
                 target: self,
                 action: #selector(nextDifference)
             )
@@ -105,7 +117,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Previous File", comment: ""),
                 tooltip: NSLocalizedString("Go to previous file with differences", comment: ""),
-                image: NSImage(named: VDImageNamePrevFile),
+                image: VDSymbol.Asset.prevFile.image(),
                 target: self,
                 action: #selector(previousDifferenceFiles)
             )
@@ -114,37 +126,24 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Next File", comment: ""),
                 tooltip: NSLocalizedString("Go to next file with differences", comment: ""),
-                image: NSImage(named: VDImageNameNextFile),
+                image: VDSymbol.Asset.nextFile.image(),
                 target: self,
                 action: #selector(nextDifferenceFiles)
             )
         } else if itemIdentifier == .Files.openWith {
-            let popupButton = NSPopUpButton(
-                identifier: .Files.openWithToolbarMenu,
-                menuTitle: NSLocalizedString("ToolbarOpenWith", comment: ""),
-                menuImage: NSImage(named: VDImageNameOpenWith)
+            return .createOpenWithPopup(
+                identifier: itemIdentifier,
+                menuIdentifier: .Files.openWithToolbarMenu,
+                target: self,
+                action: #selector(popupOpenWithApp),
+                menuDelegate: self
             )
-            popupButton.target = self
-            popupButton.action = #selector(popupOpenWithApp)
-            popupButton.menu?.delegate = self
-
-            let item = CustomValidationToolbarItem(itemIdentifier: itemIdentifier)
-                .with(
-                    label: NSLocalizedString("Open With", comment: ""),
-                    tooltip: NSLocalizedString("Open using the selected application", comment: ""),
-                    image: NSImage(named: VDImageNameFinder),
-                    target: nil,
-                    action: nil
-                )
-            item.view = popupButton
-
-            return item
         } else if itemIdentifier == .Files.showInFinder {
             return NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Show in Finder", comment: ""),
                 tooltip: NSLocalizedString("Show in Finder", comment: ""),
-                image: NSImage(named: VDImageNameFinder),
+                image: VDSymbol.Toolbar.showInFinder.image(),
                 target: self,
                 action: #selector(showInFinder)
             )
@@ -153,7 +152,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Session Settings", comment: ""),
                 tooltip: NSLocalizedString("Edit Session Settings", comment: ""),
-                image: NSImage(named: VDImageNamePreferences),
+                image: VDSymbol.Toolbar.sessionPreferences.image(),
                 target: self,
                 action: #selector(openSessionSettingsSheet)
             )
@@ -162,7 +161,7 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Word Wrap", comment: ""),
                 tooltip: NSLocalizedString("Word Wrap", comment: ""),
-                image: NSImage(named: VDImageNameWordWrapOff),
+                image: VDSymbol.Toolbar.wordWrapOff.image(),
                 target: self,
                 action: #selector(toggleWordWrap)
             )
@@ -214,19 +213,18 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
     @MainActor
     func updateToolbarButton(_ item: NSToolbarItem) {
         if item.itemIdentifier == .Files.wordWrap {
-            item.image = NSImage(
-                named: rowHeightCalculator.isWordWrapEnabled ? VDImageNameWordWrapOn : VDImageNameWordWrapOff
-            )
+            let symbol: VDSymbol.Toolbar = rowHeightCalculator.isWordWrapEnabled ? .wordWrapOn : .wordWrapOff
+            item.image = symbol.image()
             return
         }
         switch lastUsedView.side {
         case .left:
             if item.itemIdentifier == .Files.copyLines {
-                item.image = NSImage(named: VDImageNameCopyLinesRight)
+                item.image = VDSymbol.Toolbar.copyLinesRight.image()
             }
         case .right:
             if item.itemIdentifier == .Files.copyLines {
-                item.image = NSImage(named: VDImageNameCopyLinesLeft)
+                item.image = VDSymbol.Toolbar.copyLinesLeft.image()
             }
         }
     }
