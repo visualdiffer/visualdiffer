@@ -109,6 +109,7 @@ extension CompareItem {
                 guard let anchorSrcURL = current.toURL() else {
                     return nil
                 }
+
                 return (anchorSrcURL, anchorDestURL)
             }
             currentItem = current.parent

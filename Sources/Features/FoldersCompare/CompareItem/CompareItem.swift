@@ -179,7 +179,6 @@ public class CompareItem: NSObject {
         }
     }
 
-    // periphery:ignore
     func removeChild(at index: Int) {
         children.remove(at: index)
     }

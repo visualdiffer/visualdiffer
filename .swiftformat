@@ -16,7 +16,9 @@
 # rules - enabled
 
 --enable redundantVariable
---enable wrapConditionalBodies
+--enable wrapIfStatementBodies
+--enable wrapIfExpressionBodies
+--enable wrapGuardStatementBodies
 --enable wrapEnumCases
 --enable acronyms
 
