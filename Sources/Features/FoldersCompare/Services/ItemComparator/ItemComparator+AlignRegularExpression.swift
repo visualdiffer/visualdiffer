@@ -33,21 +33,19 @@ extension ItemComparator {
 
         // a current rule match must yield the right to a later left
         // that matches it by exact file name
-        var reservedRight: Bool?
-        if matchesByRegularExpression(
-            leftChild: leftChild,
-            rightChild: rightChild,
-            followSymLinks: followSymLinks,
-            ruleMatches: ruleMatches
-        ) {
-            reservedRight = rightReservedForLaterLeftFileName(
-                rightChild: rightChild,
-                context: context,
-                position: position
-            )
-            if reservedRight == false {
-                return .orderedSame
-            }
+        if !ruleMatches.isEmpty,
+           matchesByRegularExpression(
+               leftChild: leftChild,
+               rightChild: rightChild,
+               followSymLinks: followSymLinks,
+               ruleMatches: ruleMatches
+           ),
+           !rightReservedForLaterLeftFileName(
+               rightChild: rightChild,
+               context: context,
+               position: position
+           ) {
+            return .orderedSame
         }
 
         if matchesByFileName(
@@ -83,7 +81,7 @@ extension ItemComparator {
             context: context,
             leftMatches: laterRuleMatches
         )
-        let rightHeldByName = reservedRight ?? rightReservedForLaterLeftFileName(
+        let rightHeldByName = rightReservedForLaterLeftFileName(
             rightChild: rightChild,
             context: context,
             position: position
@@ -184,18 +182,19 @@ extension ItemComparator {
         leftMatches: [LeftRuleMatches]
     ) -> Int? {
         firstRightIndex(after: position, context: context) { rightChild in
-            if rightMatchesLaterLeftRegularExpression(
-                rightChild: rightChild,
-                context: context,
-                leftMatches: leftMatches
-            ) {
-                return false
-            }
-
-            return matchesByFileName(
+            // check the cheap file name comparison before scanning the later left rule matches
+            guard matchesByFileName(
                 leftChild: leftChild,
                 rightChild: rightChild,
                 followSymLinks: context.config.followSymLinks
+            ) else {
+                return false
+            }
+
+            return !rightMatchesLaterLeftRegularExpression(
+                rightChild: rightChild,
+                context: context,
+                leftMatches: leftMatches
             )
         }
     }
