@@ -19,7 +19,7 @@ class FindText: NSView, NSSearchFieldDelegate {
     var delegate: FindTextDelegate?
 
     private lazy var rewindView: WindowOSD = .init(
-        image: NSImage.required(named: VDImageNameRewind),
+        image: VDSymbol.Asset.rewind.image(),
         parent: window
     )
 

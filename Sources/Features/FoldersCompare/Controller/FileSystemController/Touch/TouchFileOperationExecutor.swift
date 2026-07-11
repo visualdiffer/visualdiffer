@@ -24,7 +24,7 @@ class TouchFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
     init(items: [CompareItem]) {
         self.items = items
 
-        image = NSImage(named: VDImageNameDateTime)
+        image = VDSymbol.Toolbar.dateTime.summaryImage()
     }
 
     func execute(_ manager: FileOperationManagerAction, payload _: Sendable?) {

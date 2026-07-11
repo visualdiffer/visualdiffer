@@ -29,6 +29,8 @@ class Preferences: BasePreferences {
         itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
         willBeInsertedIntoToolbar _: Bool
     ) -> NSToolbarItem? {
+        // preferences tabs use the .preference style, bordered would shrink the symbol glyph
+        // so all the items are created with isBordered set to false
         var toolbarItem: NSToolbarItem?
 
         if itemIdentifier == .generalPrefs {
@@ -36,65 +38,73 @@ class Preferences: BasePreferences {
                 identifier: itemIdentifier,
                 label: NSLocalizedString("General", comment: ""),
                 tooltip: NSLocalizedString("General Settings", comment: ""),
-                image: NSImage.imageSymbolCompat(NSImage.preferencesGeneralName),
+                image: VDSymbol.Preference.general.image(),
                 target: self,
-                action: #selector(selectPrefTab)
+                action: #selector(selectPrefTab),
+                isBordered: false
             )
         } else if itemIdentifier == .fontsPrefs {
             toolbarItem = NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Fonts", comment: ""),
                 tooltip: NSLocalizedString("Change Fonts", comment: ""),
-                image: NSImage.imageSymbolCompat(NSImage.fontPanelName),
+                image: VDSymbol.Preference.font.image(),
                 target: self,
-                action: #selector(selectPrefTab)
+                action: #selector(selectPrefTab),
+                isBordered: false
             )
         } else if itemIdentifier == .textPrefs {
             toolbarItem = NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Text", comment: ""),
                 tooltip: NSLocalizedString("Text Differences", comment: ""),
-                image: NSImage.imageSymbolCompat("prefs_text"),
+                image: VDSymbol.Preference.text.image(),
                 target: self,
-                action: #selector(selectPrefTab)
+                action: #selector(selectPrefTab),
+                isBordered: false
             )
         } else if itemIdentifier == .trustedPathsPrefs {
             toolbarItem = NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Trusted Paths", comment: ""),
                 tooltip: NSLocalizedString("Paths granted access to VisualDiffer", comment: ""),
-                image: NSImage.imageSymbolCompat("prefs_paths"),
+                image: VDSymbol.Preference.paths.image(),
                 target: self,
-                action: #selector(selectPrefTab)
+                action: #selector(selectPrefTab),
+                isBordered: false
             )
         } else if itemIdentifier == .folderPrefs {
             toolbarItem = NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Folder", comment: ""),
                 tooltip: NSLocalizedString("Folder View", comment: ""),
-                image: NSImage.imageSymbolCompat("prefs_folder"),
+                image: VDSymbol.Preference.folder.image(),
                 target: self,
-                action: #selector(selectPrefTab)
+                action: #selector(selectPrefTab),
+                isBordered: false
             )
         } else if itemIdentifier == .confirmationsPrefs {
             toolbarItem = NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Confirmations", comment: ""),
                 tooltip: NSLocalizedString("Confirmations and Warnings", comment: ""),
-                image: NSImage.imageSymbolCompat("prefs_confirmations"),
+                image: VDSymbol.Preference.confirmations.image(),
                 target: self,
-                action: #selector(selectPrefTab)
+                action: #selector(selectPrefTab),
+                isBordered: false
             )
         } else if itemIdentifier == .keyboardPrefs {
             toolbarItem = NSToolbarItem(
                 identifier: itemIdentifier,
                 label: NSLocalizedString("Keyboard", comment: ""),
                 tooltip: NSLocalizedString("Keyboard shortcuts", comment: ""),
-                image: NSImage.imageSymbolCompat("prefs_keyboard"),
+                image: VDSymbol.Preference.keyboard.image(),
                 target: self,
-                action: #selector(selectPrefTab)
+                action: #selector(selectPrefTab),
+                isBordered: false
             )
         }
+
         return toolbarItem
     }
 

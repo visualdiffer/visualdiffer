@@ -27,7 +27,7 @@ class DeleteFileOperationExecutor: FileOperationExecutor, @unchecked Sendable {
         self.srcBaseDir = srcBaseDir
         self.items = items
 
-        image = NSImage(named: VDImageNameDelete)
+        image = VDSymbol.Toolbar.delete.summaryImage(tint: .systemRed)
     }
 
     func execute(_ manager: FileOperationManagerAction, payload _: Sendable?) {

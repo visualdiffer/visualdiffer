@@ -7,6 +7,8 @@
 //
 
 extension FilesWindowController {
+    private static let moveToFileOSDIconSize = NSSize(width: 60, height: 60)
+
     @objc
     func previousDifference(_: AnyObject) {
         moveToDifference(false, showAnim: true, moveToFile: CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences)
@@ -133,30 +135,25 @@ extension FilesWindowController {
     }
 
     func showNoFileOSD(_ noNextFile: Bool) {
-        if noNextFile {
-            showOSD(image: NSImage(named: VDImageNameBottom), text: NSLocalizedString("No Next File", comment: ""))
-        } else {
-            showOSD(image: NSImage(named: VDImageNameTop), text: NSLocalizedString("No Previous File", comment: ""))
-        }
+        let (symbol, text) = noNextFile
+            ? (VDSymbol.Asset.bottom, NSLocalizedString("No Next File", comment: ""))
+            : (VDSymbol.Asset.top, NSLocalizedString("No Previous File", comment: ""))
+        showOSD(image: symbol.image(), text: text)
     }
 
     func showMoveToFileOSD(_ gotoNext: Bool) {
-        let iconSize = NSSize(width: 60, height: 60)
-        let iconName = gotoNext ? VDImageNamePrevFile : VDImageNameNextFile
-        let text = gotoNext
-            ? NSLocalizedString("Previous File", comment: "")
-            : NSLocalizedString("Next File", comment: "")
-
-        let icon = WindowOSD.iconForOSD(image: NSImage(named: iconName), size: iconSize)
-        showOSD(image: icon, text: text)
+        let (symbol, text) = gotoNext
+            ? (VDSymbol.Asset.prevFile, NSLocalizedString("Previous File", comment: ""))
+            : (VDSymbol.Asset.nextFile, NSLocalizedString("Next File", comment: ""))
+        showOSD(image: symbol.image(), text: text, size: Self.moveToFileOSDIconSize)
     }
 
-    private func showOSD(image: NSImage?, text: String) {
+    private func showOSD(image: NSImage, text: String, size: NSSize? = nil) {
         guard let window else {
             return
         }
 
-        topBottomView.setImage(image)
+        topBottomView.setImage(image, size: size)
         topBottomView.setText(text)
         topBottomView.animateInside(window.frame)
     }
