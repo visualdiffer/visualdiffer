@@ -26,10 +26,11 @@ else
     then
         swiftformat . && swiftlint --quiet --config $SWIFT_CONFIG
     else
-        (git diff --name-only --diff-filter=ACM; git diff --cached --name-only --diff-filter=ACM) \
+        FILES=$( (git diff --name-only --diff-filter=ACM; git diff --cached --name-only --diff-filter=ACM) \
         | sort -u \
-        | grep '\.swift$' \
-        | xargs swiftformat && swiftlint --quiet --config $SWIFT_CONFIG
+        | grep '\.swift$' )
+        echo "$FILES" | xargs swiftformat \
+        && echo "$FILES" | xargs swiftlint --quiet --config $SWIFT_CONFIG
         echo "Applied format only to modified files, pass 'a' to format all"
     fi
     echo using $SWIFT_CONFIG
