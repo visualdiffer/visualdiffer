@@ -27,11 +27,10 @@ class FoldersOutlineViewFindTextDelegate: @preconcurrency FindTextDelegate {
         return false
     }
 
-    func find(findText _: FindText, searchPattern pattern1: String) -> Bool {
-        // use the String standardizing (NSString) instead of URL(filePath:) which
-        // starting from macOS 26 Tahoe resolves a relative pattern against the container
-        // directory, wrongly turning a bare file name into an absolute path (works on Sequoia)
-        let pathPattern = pattern1.standardizingPath
+    func find(findText _: FindText, searchPattern pathPattern: String) -> Bool {
+        // use the search pattern exactly as entered because path normalization changes
+        // components such as the current and parent directories and can turn a bare file
+        // name into an absolute path
         let globPattern = pathPattern.convertGlobMetaCharsToRegexpMetaChars()
         let re = try? NSRegularExpression(
             pattern: globPattern,
