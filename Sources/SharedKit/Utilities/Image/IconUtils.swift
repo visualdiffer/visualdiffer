@@ -46,26 +46,17 @@ public class IconUtils: @unchecked Sendable {
     }
 
     public func icon(forType type: UTType, size: CGFloat) -> NSImage {
-        if let icon = icons[type.identifier] {
-            return icon
+        cachedIcon(for: type.identifier, size: size) {
+            NSWorkspace.shared.icon(for: type)
         }
-
-        let icon = NSWorkspace.shared.icon(for: type)
-        addIconByName(type.identifier, icon: icon, size: size)
-
-        return icon
     }
 
     public func icon(forFile url: URL, size: CGFloat) -> NSImage {
         let fullPath = url.osPath
-        if let icon = icons[fullPath] {
-            return icon
+
+        return cachedIcon(for: fullPath, size: size) {
+            NSWorkspace.shared.icon(forFile: fullPath)
         }
-
-        let icon = NSWorkspace.shared.icon(forFile: fullPath)
-        addIconByName(fullPath, icon: icon, size: size)
-
-        return icon
     }
 
     public func icon(forEmptyPath size: CGFloat) -> NSImage {
@@ -78,41 +69,31 @@ public class IconUtils: @unchecked Sendable {
         return icon
     }
 
-    // /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AliasBadgeIcon.icns
-    public func icon(forSymbolicLink url: URL, size: CGFloat) -> NSImage {
-        badge(forPath: url, icon: iconNamed("aliasbadge", size: size), size: size)
-    }
+    private func iconNamed(_ name: String, size: CGFloat) -> NSImage {
+        cachedIcon(for: name, size: size) {
+            guard let icon = NSImage(named: name) else {
+                fatalError("Unable to find icon \(name)")
+            }
 
-    // /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/LockedBadgeIcon.icns
-    public func icon(forLockedFile url: URL, size: CGFloat) -> NSImage {
-        badge(forPath: url, icon: iconNamed("lockedbadge", size: size), size: size)
-    }
-
-    public func badge(forPath url: URL, icon badgeImage: NSImage, size: CGFloat) -> NSImage {
-        guard let iconName = badgeImage.name() else {
-            fatalError("Unable to get icon name for \(url) and icon \(badgeImage)")
+            return icon
         }
+    }
 
-        let name = url
-            .appendingPathComponent(iconName)
-            .osPath
+    private func cachedIcon(
+        for name: String,
+        size: CGFloat,
+        createIcon: () -> NSImage
+    ) -> NSImage {
+        lock.lock()
+        defer { lock.unlock() }
+
         if let icon = icons[name] {
             return icon
         }
 
-        let path = url.osPath
-        let isAbsolute = path.hasPrefix("/")
-        let fileIcon = isAbsolute ? icon(forFile: url, size: size) : iconNamed(path, size: size)
-        let icon = badge(badgeImage, icon: fileIcon, size: size)
+        let icon = createIcon()
 
-        addIconByName(name, icon: icon, size: size)
-
-        return icon
-    }
-
-    private func addIconByName(_ name: String, icon: NSImage, size: CGFloat) {
-        lock.lock()
-        // Cache only images size x size
+        // cache only images size x size
         let reps = icon.representations
         for rep in reps where rep.pixelsHigh != Int(size) {
             if reps.count > 1 {
@@ -122,20 +103,40 @@ public class IconUtils: @unchecked Sendable {
 
         icon.size = NSSize(width: size, height: size)
         icons[name] = icon
-        lock.unlock()
-    }
-
-    private func iconNamed(_ name: String, size: CGFloat) -> NSImage {
-        if let icon = icons[name] {
-            return icon
-        }
-
-        guard let icon = NSImage(named: name) else {
-            fatalError("Unable to find icon \(name)")
-        }
-
-        addIconByName(name, icon: icon, size: size)
 
         return icon
+    }
+
+    // /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AliasBadgeIcon.icns
+    func symbolicLinkBadge(size: CGFloat) -> NSImage {
+        iconNamed("aliasbadge", size: size)
+    }
+
+    // /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/LockedBadgeIcon.icns
+    func lockedBadge(size: CGFloat) -> NSImage {
+        iconNamed("lockedbadge", size: size)
+    }
+
+    func refresh() {
+        lock.lock()
+        defer { lock.unlock() }
+
+        icons.removeAll(keepingCapacity: true)
+    }
+
+    public func badge(
+        forName name: String,
+        source: NSImage,
+        icon badgeImage: NSImage,
+        size: CGFloat
+    ) -> NSImage {
+        guard let badgeName = badgeImage.name() else {
+            fatalError("Unable to get icon name for \(name) and icon \(badgeImage)")
+        }
+
+        let cacheName = "\(name)/\(badgeName)"
+        return cachedIcon(for: cacheName, size: size) {
+            badge(badgeImage, icon: source, size: size)
+        }
     }
 }

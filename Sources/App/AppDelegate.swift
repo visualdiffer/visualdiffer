@@ -27,8 +27,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_: Notification) {
         appearanceObservation = NSApp.observe(\.effectiveAppearance, options: [.new]) { app, _ in
-            CommonPrefs.shared.appearanceChanged(postNotification: true, app)
+            CommonPrefs.shared.appearanceChanged(postNotification: false)
+
             ColoredFoldersManager.shared.refresh()
+            IconUtils.shared.refresh()
+
+            // notify change only after the cache is cleared
+            NotificationCenter.default.postAppAppearanceDidChange(object: app)
         }
         #if SPARKLE_ENABLED
             appUpdater.configure()

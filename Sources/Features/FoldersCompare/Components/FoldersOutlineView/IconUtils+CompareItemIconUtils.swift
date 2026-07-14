@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 visualdiffer.com
 //
 
+import os.log
+
 @MainActor
 extension IconUtils {
     func icon(
@@ -14,50 +16,56 @@ extension IconUtils {
         isExpanded: Bool,
         hideEmptyFolders: Bool
     ) -> NSImage? {
-        var icon: NSImage?
-
-        if item.isValidFile,
-           let url = item.toURL() {
-            if item.isLocked {
-                if item.isFolder {
-                    let name = ColoredFoldersManager.shared.iconName(
-                        item,
-                        isExpanded: isExpanded,
-                        hideEmptyFolders: hideEmptyFolders
-                    )
-                    let url = URL(filePath: name)
-                    icon = self.icon(forLockedFile: url, size: size)
-                } else {
-                    icon = self.icon(forLockedFile: url, size: size)
-                }
-            } else if item.isSymbolicLink {
-                if item.isFolder {
-                    let name = ColoredFoldersManager.shared.iconName(
-                        item,
-                        isExpanded: isExpanded,
-                        hideEmptyFolders: hideEmptyFolders
-                    )
-                    let url = URL(filePath: name)
-                    icon = self.icon(forSymbolicLink: url, size: size)
-                } else {
-                    icon = self.icon(forSymbolicLink: url, size: size)
-                }
-            } else {
-                if item.isFolder {
-                    icon = ColoredFoldersManager.shared.icon(
-                        forFolder: item,
-                        size: size,
-                        isExpanded: isExpanded,
-                        hideEmptyFolders: hideEmptyFolders
-                    )
-                } else {
-                    // get the icon from path because for some files (eg resource forks)
-                    // the file type should be irrelevant
-                    // This means caching every single path
-                    icon = self.icon(forFile: url, size: size)
-                }
-            }
+        guard item.isValidFile,
+              let url = item.toURL() else {
+            return nil
         }
-        return icon
+
+        let (name, baseIcon) = if item.isFolder {
+            coloredFolder(
+                for: item,
+                isExpanded: isExpanded,
+                hideEmptyFolders: hideEmptyFolders
+            )
+        } else {
+            // get the icon from path because for some files (eg resource forks)
+            // the file type should be irrelevant
+            // This means caching every single path
+            (url.osPath, icon(forFile: url, size: size))
+        }
+
+        guard let baseIcon else {
+            Logger.ui.error("Unable to find icon for \(name, privacy: .public)")
+            return nil
+        }
+
+        guard let badgeImage = badgeImage(for: item, size: size) else {
+            return baseIcon
+        }
+
+        return badge(forName: name, source: baseIcon, icon: badgeImage, size: size)
+    }
+
+    private func badgeImage(for item: CompareItem, size: CGFloat) -> NSImage? {
+        if item.isLocked {
+            lockedBadge(size: size)
+        } else if item.isSymbolicLink {
+            symbolicLinkBadge(size: size)
+        } else {
+            nil
+        }
+    }
+
+    private func coloredFolder(
+        for item: CompareItem,
+        isExpanded: Bool,
+        hideEmptyFolders: Bool
+    ) -> (name: String, folderIcon: NSImage?) {
+        let name = ColoredFoldersManager.shared.iconName(
+            item,
+            isExpanded: isExpanded,
+            hideEmptyFolders: hideEmptyFolders
+        )
+        return (name, ColoredFoldersManager.shared.icon(folderName: name))
     }
 }

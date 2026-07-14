@@ -26,10 +26,7 @@ public class CommonPrefs: @unchecked Sendable {
     ) {
         loadColors()
         if postNotification {
-            NotificationCenter.default.post(
-                name: .appAppearanceDidChange,
-                object: object
-            )
+            NotificationCenter.default.postAppAppearanceDidChange(object: object)
         }
     }
 

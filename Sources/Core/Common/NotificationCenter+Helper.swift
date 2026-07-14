@@ -32,6 +32,13 @@ extension Notification.Name {
 }
 
 extension NotificationCenter {
+    func postAppAppearanceDidChange(object: Any? = nil) {
+        post(
+            name: .appAppearanceDidChange,
+            object: object
+        )
+    }
+
     func postPrefsChanged(userInfo: [AnyHashable: Any]? = nil) {
         post(
             name: .prefsChanged,

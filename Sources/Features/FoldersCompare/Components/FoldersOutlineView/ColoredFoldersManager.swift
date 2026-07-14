@@ -25,23 +25,13 @@ class ColoredFoldersManager: NSObject, @unchecked Sendable {
         return String(format: "folder-%03d%@", icon(sequenceFor: item, hideEmptyFolders: hideEmptyFolders), openSuffix)
     }
 
-    func icon(
-        forFolder item: CompareItem,
-        size _: CGFloat,
-        isExpanded: Bool,
-        hideEmptyFolders: Bool
-    ) -> NSImage? {
-        let imageFileName = iconName(item, isExpanded: isExpanded, hideEmptyFolders: hideEmptyFolders)
-        return icon(folderName: imageFileName)
-    }
-
     func refresh() {
-        queue.async(flags: .barrier) {
+        queue.sync(flags: .barrier) {
             self.foldersColors = Self.buildColoredFolders()
         }
     }
 
-    private func icon(folderName: String) -> NSImage? {
+    func icon(folderName: String) -> NSImage? {
         queue.sync {
             foldersColors[folderName]
         }
