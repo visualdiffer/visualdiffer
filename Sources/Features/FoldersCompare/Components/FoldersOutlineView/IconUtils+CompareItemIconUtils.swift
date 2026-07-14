@@ -38,7 +38,6 @@ extension IconUtils {
             Logger.ui.error("Unable to find icon for \(name, privacy: .public)")
             return nil
         }
-
         guard let badgeImage = badgeImage(for: item, size: size) else {
             return baseIcon
         }
