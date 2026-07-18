@@ -63,6 +63,7 @@ extension FilesWindowController {
         window?.toolbar?.validateVisibleItems()
 
         synchronizeWindowTitleWithDocumentName()
+        window?.subtitle = preferences.diffResultOptions.description
 
         leftView.deselectAll(nil)
         rightView.deselectAll(nil)
