@@ -30,11 +30,7 @@ enum FileScopeGroupOptions: Int {
     case filter
 }
 
-@MainActor
-class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
-    private var groupItems = [[ScopeBarGroupKey: Any]]()
-    private var labels = [String: String]()
-
+class FilesScopeBar: ScopeBarView {
     var showLinesFilter: DiffLine.Visibility = .all {
         didSet {
             showLinesFilter.saveToUserDefaults()
@@ -48,130 +44,45 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
     }
 
     var actionDelegate: FilesScopeBarDelegate?
-    var findView: FindText
 
-    override init(frame frameRect: NSRect) {
-        findView = FindText(frame: NSRect(x: 0, y: 0, width: 400, height: 25))
-
-        super.init(frame: frameRect)
-
-        setupViews()
-    }
-
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupViews() {
-        fontSize = 11.0
-    }
+    let findView = FindText(frame: .zero)
 
     func initScopeBar(_ actionDelegate: FilesScopeBarDelegate) {
         showLinesFilter = DiffLine.Visibility.loadFromUserDefaults()
         showWhitespaces = CommonPrefs.shared.bool(forKey: .FileScope.showWhitespaces)
         self.actionDelegate = actionDelegate
-        delegate = self
+        findView.placeholder = NSLocalizedString("Find Text <⌘F>", comment: "")
+        accessoryView = findView
 
-        groupItems.removeAll()
-
-        groupItems.append([
-            .selectionMode: MGScopeBarGroupSelectionMode.multiple,
-            .items: [
-                mkItem(showWhitespacesID, NSLocalizedString("Show Whitespace", comment: "")),
-            ],
+        reload(groups: [
+            ScopeBarGroup(
+                selectionMode: .multiple,
+                items: [
+                    item(showWhitespacesID, NSLocalizedString("Show Whitespace", comment: "")),
+                ]
+            ),
+            ScopeBarGroup(
+                selectionMode: .radio,
+                items: [
+                    item(allID, NSLocalizedString("All", comment: "")),
+                    item(differencesID, NSLocalizedString("Just Differences", comment: "")),
+                    item(justMatchesID, NSLocalizedString("Just Matches", comment: "")),
+                ],
+                showsSeparator: true
+            ),
         ])
-
-        groupItems.append([
-            .separator: true,
-            .selectionMode: MGScopeBarGroupSelectionMode.radio,
-            .items: [
-                mkItem(allID, NSLocalizedString("All", comment: "")),
-                mkItem(differencesID, NSLocalizedString("Just Differences", comment: "")),
-                mkItem(justMatchesID, NSLocalizedString("Just Matches", comment: "")),
-            ],
-        ])
-
-        // dictionaries do not preserve order, so we cannot use one to fill the array
-        // so we fill the array first, then the labels
-        labels.removeAll()
-        for group in groupItems {
-            if let groupItems = group[.items] as? [[ScopeBarItem: String]] {
-                for dict in groupItems {
-                    if let identifier = dict[.identifier],
-                       let name = dict[.name] {
-                        labels[identifier] = name
-                    }
-                }
-            }
-        }
-
-        notifyDefaultSelections = false
-        smartResizeEnabled = true
-
-        reloadData()
     }
 
-    private func mkItem(_ identifier: String, _ name: String) -> [ScopeBarItem: String] {
-        [
-            .identifier: identifier,
-            .name: name,
-        ]
-    }
-
-    // MARK: - MGScopeBarDelegate methods
-
-    func numberOfGroups(in _: MGScopeBar) -> Int {
-        groupItems.count
-    }
-
-    func scopeBar(_: MGScopeBar, itemIdentifiersForGroup groupNumber: Int) -> [Any] {
-        guard let items = groupItems[groupNumber][.items],
-              let itemIdentifiers = items as? [[ScopeBarItem: String]] else {
-            return []
-        }
-
-        return itemIdentifiers.compactMap { $0[.identifier] }
-    }
-
-    func scopeBar(_: MGScopeBar, labelForGroup groupNumber: Int) -> String? {
-        groupItems[groupNumber][.label] as? String // might be nil, which is fine (nil means no label).
-    }
-
-    func scopeBar(_: MGScopeBar, titleOfItem identifier: String, inGroup groupNumber: Int) -> String? {
-        if groupItems[groupNumber][.items] != nil {
-            return labels[identifier]
-        }
-        return nil
-    }
-
-    func scopeBar(_: MGScopeBar, selectionModeForGroup groupNumber: Int) -> MGScopeBarGroupSelectionMode {
-        (groupItems[groupNumber][.selectionMode] as? MGScopeBarGroupSelectionMode) ?? .radio
-    }
-
-    func scopeBar(_: MGScopeBar, showSeparatorBeforeGroup groupNumber: Int) -> Bool {
-        // optional method, if not implemented all groups except the first have a separator before them
-        groupItems[groupNumber][.separator] as? Bool ?? false
-    }
-
-    func scopeBar(_: MGScopeBar, imageForItem _: String, inGroup _: Int) -> NSImage? {
-        nil
-    }
-
-    func accessoryView(for _: MGScopeBar) -> NSView? {
-        findView
-    }
-
-    func scopeBar(_: MGScopeBar, selectedStateChanged _: Bool, forItem identifier: String, inGroup groupNumber: Int) {
+    override func itemSelectionChanged(_ isSelected: Bool, identifier: String, groupIndex: Int) {
         guard let actionDelegate,
-              let group = FileScopeGroupOptions(rawValue: groupNumber) else {
+              let group = FileScopeGroupOptions(rawValue: groupIndex) else {
             return
         }
 
         switch group {
         case .display:
             if identifier == showWhitespacesID {
-                showWhitespaces.toggle()
+                showWhitespaces = isSelected
                 actionDelegate.filesScopeBar(self, action: .showWhitespaces)
             }
         case .filter:
@@ -197,7 +108,6 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         setSelected(
             true,
             forItem: showLinesFilter.identifier,
-            inGroup: FileScopeGroupOptions.filter.rawValue,
             informDelegate: informDelegate
         )
     }
@@ -210,14 +120,8 @@ class FilesScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         setSelected(
             show,
             forItem: showWhitespacesID,
-            inGroup: FileScopeGroupOptions.display.rawValue,
             informDelegate: informDelegate
         )
-    }
-
-    @discardableResult
-    override func becomeFirstResponder() -> Bool {
-        findView.becomeFirstResponder()
     }
 }
 

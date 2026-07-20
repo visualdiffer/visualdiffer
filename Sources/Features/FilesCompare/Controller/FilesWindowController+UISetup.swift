@@ -92,6 +92,7 @@ extension FilesWindowController {
 
         window.delegate = self
         window.toolbar = NSToolbar(identifier: "FilesToolbar", delegate: self)
+
         window.makeFirstResponder(leftPanelView.treeView)
 
         window.collectionBehavior = [window.collectionBehavior, .fullScreenPrimary]

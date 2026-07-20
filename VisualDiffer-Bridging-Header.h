@@ -3,8 +3,6 @@
 //
 
 #import "BigFileFileOperationManager.h"
-#import "MGScopeBar.h"
-#import "MGScopeBarDelegateProtocol.h"
 #import "NSPredicate+Objc.h"
 #import "TitlePredicateEditorRowTemplate.h"
 #import "TOPFileSizePredicateEditorRowTemplate.h"

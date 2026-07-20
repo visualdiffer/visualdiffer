@@ -14,6 +14,8 @@ protocol FindTextDelegate: AnyObject {
 }
 
 class FindText: NSView, NSSearchFieldDelegate {
+    private static let viewHeight: CGFloat = 25
+
     private var lastIndexFound = -1
 
     var delegate: FindTextDelegate?
@@ -36,6 +38,7 @@ class FindText: NSView, NSSearchFieldDelegate {
         )
 
         view.segmentStyle = .roundRect
+        view.controlSize = .small
         view.isEnabled = false
         view.setWidth(16, forSegment: 0)
         view.setWidth(16, forSegment: 1)
@@ -51,6 +54,7 @@ class FindText: NSView, NSSearchFieldDelegate {
         view.isBordered = false
         view.drawsBackground = false
         view.controlSize = .small
+        view.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         view.alignment = .right
         view.focusRingType = .none
         view.isEditable = false
@@ -64,9 +68,9 @@ class FindText: NSView, NSSearchFieldDelegate {
     private lazy var searchField: NSSearchField = {
         let view = NSSearchField(frame: .zero)
 
-        view.placeholderString = NSLocalizedString("Find File Name <⌘F>", comment: "")
         view.bezelStyle = .roundedBezel
         view.controlSize = .small
+        view.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         view.translatesAutoresizingMaskIntoConstraints = false
 
         // allow to scroll when the text
@@ -83,15 +87,20 @@ class FindText: NSView, NSSearchFieldDelegate {
         return view
     }()
 
+    var placeholder: String {
+        get { searchField.placeholderString ?? "" }
+        set { searchField.placeholderString = newValue }
+    }
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
         setupView()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     private func setupView() {
@@ -104,6 +113,8 @@ class FindText: NSView, NSSearchFieldDelegate {
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: Self.viewHeight),
+
             searchField.topAnchor.constraint(equalTo: topAnchor, constant: 2),
             searchField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
             searchField.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -113,8 +124,7 @@ class FindText: NSView, NSSearchFieldDelegate {
             arrows.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
             arrows.trailingAnchor.constraint(equalTo: searchField.leadingAnchor, constant: -2),
 
-            countLabel.topAnchor.constraint(equalTo: topAnchor, constant: 2),
-            countLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
+            countLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             countLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             countLabel.trailingAnchor.constraint(equalTo: arrows.leadingAnchor, constant: -4),
         ])

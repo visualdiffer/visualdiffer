@@ -92,9 +92,7 @@ extension FilesWindowController {
     func createFilesScopeBar() -> FilesScopeBar {
         let view = FilesScopeBar(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-
         view.initScopeBar(self)
-        view.reloadData()
 
         return view
     }

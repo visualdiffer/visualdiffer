@@ -103,6 +103,7 @@ extension FoldersWindowController {
 
         window.delegate = self
         window.toolbar = NSToolbar(identifier: "FoldersToolbar", delegate: self)
+
         window.makeFirstResponder(leftPanelView.treeView)
 
         window.collectionBehavior = [window.collectionBehavior, .fullScreenPrimary]

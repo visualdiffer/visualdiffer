@@ -71,9 +71,7 @@ extension FoldersWindowController {
     func createDisplayFiltersScopeBar() -> DisplayFiltersScopeBar {
         let view = DisplayFiltersScopeBar(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-
         view.initScopeBar(self)
-        view.reloadData()
 
         return view
     }

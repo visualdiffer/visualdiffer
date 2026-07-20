@@ -35,142 +35,51 @@ private enum ScopeGroupOptions: Int {
     case displayFlags
 }
 
-@MainActor
-class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
-    private var groupItems = [[ScopeBarGroupKey: Any]]()
-    private var labels = [String: String]()
-
+class DisplayFiltersScopeBar: ScopeBarView {
     var actionDelegate: DisplayFiltersScopeBarDelegate?
-    var findView: FindText
 
-    override init(frame frameRect: NSRect) {
-        findView = FindText(frame: NSRect(x: 0, y: 0, width: 400, height: 25))
-
-        super.init(frame: frameRect)
-
-        setupViews()
-    }
-
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func setupViews() {
-        fontSize = 11.0
-    }
+    let findView = FindText(frame: .zero)
 
     func initScopeBar(_ actionDelegate: DisplayFiltersScopeBarDelegate) {
         self.actionDelegate = actionDelegate
-        delegate = self
+        findView.placeholder = NSLocalizedString("Find File Name <⌘F>", comment: "")
+        accessoryView = findView
 
-        groupItems.removeAll()
-
-        groupItems.append([
-            .selectionMode: MGScopeBarGroupSelectionMode.radio,
-            .items: [
-                mkItem(String(format: "%ld", DisplayOptions.showAll.rawValue), NSLocalizedString("All", comment: "")),
-                mkItem(String(format: "%ld", DisplayOptions.onlyMismatches.rawValue), NSLocalizedString("Only Mismatches", comment: "")),
-                mkItem(String(format: "%ld", DisplayOptions.onlyMatches.rawValue), NSLocalizedString("Only Matches", comment: "")),
-                mkItem(String(format: "%ld", DisplayOptions.noOrphan.rawValue), NSLocalizedString("No Orphans", comment: "")),
-                mkItem(String(format: "%ld", DisplayOptions.onlyOrphans.rawValue), NSLocalizedString("Only Orphans", comment: "")),
-            ],
+        reload(groups: [
+            ScopeBarGroup(
+                selectionMode: .radio,
+                items: [
+                    item(String(format: "%ld", DisplayOptions.showAll.rawValue), NSLocalizedString("All", comment: "")),
+                    item(String(format: "%ld", DisplayOptions.onlyMismatches.rawValue), NSLocalizedString("Only Mismatches", comment: "")),
+                    item(String(format: "%ld", DisplayOptions.onlyMatches.rawValue), NSLocalizedString("Only Matches", comment: "")),
+                    item(String(format: "%ld", DisplayOptions.noOrphan.rawValue), NSLocalizedString("No Orphans", comment: "")),
+                    item(String(format: "%ld", DisplayOptions.onlyOrphans.rawValue), NSLocalizedString("Only Orphans", comment: "")),
+                ]
+            ),
+            // folders related group
+            ScopeBarGroup(
+                selectionMode: .selectAny,
+                items: [
+                    item(showEmptyFoldersID, NSLocalizedString("Empty", comment: "")),
+                    item(showNoOrphansFoldersID, NSLocalizedString("No Orphans", comment: "")),
+                ],
+                label: NSLocalizedString("Folders:", comment: ""),
+                showsSeparator: true
+            ),
+            // filtered group
+            ScopeBarGroup(
+                selectionMode: .multiple,
+                items: [
+                    item(showFilteredID, NSLocalizedString("Filtered", comment: "")),
+                ],
+                showsSeparator: true
+            ),
         ])
-
-        // folders related group
-        groupItems.append([
-            .label: NSLocalizedString("Folders:", comment: ""),
-            .separator: true,
-            .selectionMode: MGScopeBarGroupSelectionMode.multiple,
-            .items: [
-                mkItem(showEmptyFoldersID, NSLocalizedString("Empty", comment: "")),
-                mkItem(showNoOrphansFoldersID, NSLocalizedString("No Orphans", comment: "")),
-            ],
-        ])
-
-        // filtered group
-        groupItems.append([
-            .separator: true,
-            .selectionMode: MGScopeBarGroupSelectionMode.multiple,
-            .items: [
-                mkItem(showFilteredID, NSLocalizedString("Filtered", comment: "")),
-            ],
-        ])
-
-        // dictionaries do not preserve order, so we cannot use one to fill the array
-        // so we fill the array first, then the labels
-        labels.removeAll()
-        for group in groupItems {
-            if let groupItems = group[.items] as? [[ScopeBarItem: String]] {
-                for dict in groupItems {
-                    if let identifier = dict[.identifier],
-                       let name = dict[.name] {
-                        labels[identifier] = name
-                    }
-                }
-            }
-        }
-
-        // scopeBar automatically select first item and then we set selected but this causes unnecessary folder reload
-        notifyDefaultSelections = false
-        smartResizeEnabled = true
-
-        reloadData()
     }
 
-    private func mkItem(_ identifier: String, _ name: String) -> [ScopeBarItem: String] {
-        [
-            .identifier: identifier,
-            .name: name,
-        ]
-    }
-
-    // MARK: - MGScopeBarDelegate methods
-
-    func numberOfGroups(in _: MGScopeBar) -> Int {
-        groupItems.count
-    }
-
-    func scopeBar(_: MGScopeBar, itemIdentifiersForGroup groupNumber: Int) -> [Any] {
-        guard let items = groupItems[groupNumber][.items],
-              let itemIdentifiers = items as? [[ScopeBarItem: String]] else {
-            return []
-        }
-
-        return itemIdentifiers.compactMap { $0[.identifier] }
-    }
-
-    func scopeBar(_: MGScopeBar, labelForGroup groupNumber: Int) -> String? {
-        groupItems[groupNumber][.label] as? String // might be nil, which is fine (nil means no label).
-    }
-
-    func scopeBar(_: MGScopeBar, titleOfItem identifier: String, inGroup groupNumber: Int) -> String? {
-        if groupItems[groupNumber][.items] != nil {
-            return labels[identifier]
-        }
-        return nil
-    }
-
-    func scopeBar(_: MGScopeBar, selectionModeForGroup groupNumber: Int) -> MGScopeBarGroupSelectionMode {
-        (groupItems[groupNumber][.selectionMode] as? MGScopeBarGroupSelectionMode) ?? .radio
-    }
-
-    func scopeBar(_: MGScopeBar, showSeparatorBeforeGroup groupNumber: Int) -> Bool {
-        // optional method, if not implemented all groups except the first have a separator before them
-        groupItems[groupNumber][.separator] as? Bool ?? false
-    }
-
-    func scopeBar(_: MGScopeBar, imageForItem _: String, inGroup _: Int) -> NSImage? {
-        nil
-    }
-
-    func accessoryView(for _: MGScopeBar) -> NSView? {
-        findView
-    }
-
-    func scopeBar(_: MGScopeBar, selectedStateChanged _: Bool, forItem identifier: String, inGroup groupNumber: Int) {
+    override func itemSelectionChanged(_: Bool, identifier: String, groupIndex: Int) {
         guard let actionDelegate,
-              let group = ScopeGroupOptions(rawValue: groupNumber) else {
+              let group = ScopeGroupOptions(rawValue: groupIndex) else {
             return
         }
 
@@ -215,7 +124,6 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         setSelected(
             !hideEmptyFolders,
             forItem: showEmptyFoldersID,
-            inGroup: ScopeGroupOptions.displayFolders.rawValue,
             informDelegate: false
         )
     }
@@ -224,7 +132,6 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         setSelected(
             showFilteredFiles,
             forItem: showFilteredID,
-            inGroup: ScopeGroupOptions.displayFolders.rawValue,
             informDelegate: informDelegate
         )
     }
@@ -233,7 +140,6 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         setSelected(
             true,
             forItem: String(format: "%ld", displayOptions.onlyMethodFlags.rawValue),
-            inGroup: ScopeGroupOptions.displayFilters.rawValue,
             informDelegate: informDelegate
         )
     }
@@ -242,12 +148,7 @@ class DisplayFiltersScopeBar: MGScopeBar, @preconcurrency MGScopeBarDelegate {
         setSelected(
             noOrphansFolders,
             forItem: showNoOrphansFoldersID,
-            inGroup: ScopeGroupOptions.displayFolders.rawValue,
             informDelegate: informDelegate
         )
-    }
-
-    override func becomeFirstResponder() -> Bool {
-        findView.becomeFirstResponder()
     }
 }
