@@ -37,9 +37,14 @@ update_json_property() {
     return 1
   fi
 
-  sed -i '' -E \
+  # write through a temp file because sed -i cannot edit symlinks in place
+  local tmp_file
+  tmp_file="$(mktemp)"
+  sed -E \
     's/^([[:space:]]*"'$property'":[[:space:]]*")[^"]*(")/\1'"$prop_value"'\2/' \
-    "$json_file"
+    "$json_file" > "$tmp_file"
+  cat "$tmp_file" > "$json_file"
+  rm -f "$tmp_file"
 }
 
 rename_json_property() {
@@ -52,9 +57,14 @@ rename_json_property() {
     return 1
   fi
 
-  sed -i '' -E \
+  # write through a temp file because sed -i cannot edit symlinks in place
+  local tmp_file
+  tmp_file="$(mktemp)"
+  sed -E \
     's/^([[:space:]]*")'$old_name'(":)/\1'"$new_name"'\2/' \
-    "$json_file"
+    "$json_file" > "$tmp_file"
+  cat "$tmp_file" > "$json_file"
+  rm -f "$tmp_file"
 }
 
 
@@ -70,4 +80,6 @@ else
   exit 1
 fi
 
-npx conventional-changelog -p visualdiffer -c $CONTEXT_JSON
+conventional-changelog --stdout \
+ --infile /dev/null \
+ -p visualdiffer -c $CONTEXT_JSON

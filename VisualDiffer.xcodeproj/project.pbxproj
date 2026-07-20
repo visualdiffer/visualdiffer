@@ -382,6 +382,7 @@
 		557C18232E7E8C0D00381A3A /* Signing.local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 557C18212E7E8C0D00381A3A /* Signing.local.xcconfig */; };
 		557C18242E7E8C0D00381A3A /* Versions.local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 557C18222E7E8C0D00381A3A /* Versions.local.xcconfig */; };
 		557C18252E7E8C0D00381A3A /* AppConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 557C18202E7E8C0D00381A3A /* AppConfig.xcconfig */; };
+		55858304300DD8B100EDC56C /* DiffResult.Options+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55858303300DD8B100EDC56C /* DiffResult.Options+Description.swift */; };
 		558DEAC62EA263DE00F05A10 /* CFStringEncoding+StringEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DEAC42EA263DE00F05A10 /* CFStringEncoding+StringEncoding.swift */; };
 		558DEACB2EA263F500F05A10 /* EncodingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DEAC72EA263F500F05A10 /* EncodingManager.swift */; };
 		558DEACC2EA263F500F05A10 /* SelectEncodingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DEAC92EA263F500F05A10 /* SelectEncodingsPanel.swift */; };
@@ -915,6 +916,7 @@
 		557C18212E7E8C0D00381A3A /* Signing.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.local.xcconfig; sourceTree = "<group>"; };
 		557C18222E7E8C0D00381A3A /* Versions.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Versions.local.xcconfig; sourceTree = "<group>"; };
 		5580A6E32E5D7B19008D3D3A /* NoSandbox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NoSandbox.entitlements; sourceTree = "<group>"; };
+		55858303300DD8B100EDC56C /* DiffResult.Options+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiffResult.Options+Description.swift"; sourceTree = "<group>"; };
 		558DEAC42EA263DE00F05A10 /* CFStringEncoding+StringEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CFStringEncoding+StringEncoding.swift"; sourceTree = "<group>"; };
 		558DEAC72EA263F500F05A10 /* EncodingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodingManager.swift; sourceTree = "<group>"; };
 		558DEAC82EA263F500F05A10 /* EncodingPopUpButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodingPopUpButtonCell.swift; sourceTree = "<group>"; };
@@ -2569,6 +2571,7 @@
 				55B93A442FAC42910024AEC0 /* DiffProcessor.swift */,
 				554B4A3B2E9B7B8F0023AAF0 /* DiffResult.swift */,
 				55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */,
+				55858303300DD8B100EDC56C /* DiffResult.Options+Description.swift */,
 				554B4A3D2E9B7B8F0023AAF0 /* DiffResult+Dump.swift */,
 				554B4A3E2E9B7B8F0023AAF0 /* DiffResult+Lines.swift */,
 				554B4A3F2E9B7B8F0023AAF0 /* DiffResult+Section.swift */,
@@ -3252,6 +3255,7 @@
 				559590272EABB06100B5AB0B /* ItemComparator+Align.swift in Sources */,
 				559590282EABB06100B5AB0B /* ItemComparator+Compare.swift in Sources */,
 				559590292EABB06100B5AB0B /* ItemComparator.swift in Sources */,
+				55858304300DD8B100EDC56C /* DiffResult.Options+Description.swift in Sources */,
 				553742432E9372DF00AB56D0 /* ExpressionBox+Menu.swift in Sources */,
 				553742442E9372DF00AB56D0 /* FilesWindowController+PathControlDelegate.swift in Sources */,
 				553742452E9372DF00AB56D0 /* VisibleItem.swift in Sources */,
