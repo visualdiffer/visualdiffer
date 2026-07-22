@@ -138,7 +138,9 @@ public extension URL {
         )
 
         if let url {
-            SecureBookmark.shared.add(url)
+            // the user just granted access through the panel, so persist a fresh bookmark for
+            // the exact path, overwriting any stale cached entry (see forceUpdate: docs)
+            SecureBookmark.shared.add(url, forceUpdate: true)
         }
 
         return url

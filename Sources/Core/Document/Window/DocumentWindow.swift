@@ -259,7 +259,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
     // MARK: - FileDropImageViewDelegate delegate methods
 
     func fileDropImageViewUpdatePath(_ view: FileDropView, paths: [URL]) -> Bool {
-        if paths.count < 2 {
+        if paths.count == 1 {
             if view === leftPathChooser.dropView {
                 leftPathChooser.currentPath = paths[0].path
                 SecureBookmark.shared.add(paths[0])
@@ -267,7 +267,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
                 rightPathChooser.currentPath = paths[0].path
                 SecureBookmark.shared.add(paths[0])
             }
-        } else {
+        } else if paths.count > 1 {
             leftPathChooser.currentPath = paths[0].path
             rightPathChooser.currentPath = paths[1].path
 
