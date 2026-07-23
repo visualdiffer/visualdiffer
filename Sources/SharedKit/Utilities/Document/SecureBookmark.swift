@@ -14,6 +14,8 @@ private let sandboxedPaths = "sandboxedPaths"
 class SecureBookmark: @unchecked Sendable {
     static let shared = SecureBookmark()
 
+    private let lock = NSLock()
+
     private init() {}
 
     /// Adds a new URL to the secure bookmarks.
@@ -21,7 +23,8 @@ class SecureBookmark: @unchecked Sendable {
     ///   - path: the URL to bookmark
     ///   - searchClosestPath: when `true`, reuses an ancestor bookmark if one already covers `path`
     ///   - forceUpdate: when `true`, skips the cache lookup and always (re)creates and stores the bookmark
-    ///     for the exact path, overwriting any stale entry already cached under that path
+    ///     for the exact path, overwriting any stale entry already cached under that path and dropping any
+    ///     cached descendant bookmarks, which the freshly stored bookmark already covers
     /// - Returns: `true` if the URL is bookmarked successfully, `false` otherwise
     @discardableResult
     func add(
@@ -29,13 +32,11 @@ class SecureBookmark: @unchecked Sendable {
         searchClosestPath: Bool = true,
         forceUpdate: Bool = false
     ) -> Bool {
-        let bookmark = findBookmark(path, searchClosestPath: searchClosestPath, forceUpdate: forceUpdate)
-
-        guard bookmark == nil else {
+        if findBookmark(path, searchClosestPath: searchClosestPath, forceUpdate: forceUpdate) != nil {
             return true
         }
 
-        return storeBookmark(for: path, key: path.osPath)
+        return storeBookmark(for: path, key: path.osPath, forceUpdate: forceUpdate)
     }
 
     func secure(fromBookmark path: URL?, startSecured: Bool) -> URL? {
@@ -56,17 +57,18 @@ class SecureBookmark: @unchecked Sendable {
                 relativeTo: nil,
                 bookmarkDataIsStale: &isStale
             )
-            // a security scope must be active both to keep the caller accessing and to
-            // regenerate a stale bookmark, so open it when either reason applies
-            var didStartAccessing = false
-            if startSecured || isStale {
-                didStartAccessing = url.startAccessingSecurityScopedResource()
-            }
-            if isStale {
+            if startSecured {
+                _ = url.startAccessingSecurityScopedResource()
+                if isStale {
+                    storeBookmark(for: url, key: bookmarkPath)
+                }
+            } else if isStale {
+                // a security scope must be active to regenerate a stale bookmark, so open a
+                // transient one and release it once refreshed, but only if the start actually
+                // succeeded so the reference count stays balanced
+                let didStartAccessing = url.startAccessingSecurityScopedResource()
                 storeBookmark(for: url, key: bookmarkPath)
-                // release the scope that was opened only to refresh the stale bookmark,
-                // but only if the start actually succeeded so the reference count stays balanced
-                if !startSecured, didStartAccessing {
+                if didStartAccessing {
                     url.stopAccessingSecurityScopedResource()
                 }
             }
@@ -82,6 +84,8 @@ class SecureBookmark: @unchecked Sendable {
     }
 
     func removePaths(_ paths: [String]) {
+        lock.lock()
+        defer { lock.unlock() }
         guard var dict = securedPaths else {
             return
         }
@@ -97,15 +101,11 @@ class SecureBookmark: @unchecked Sendable {
     }
 
     func findClosestPath(to path: URL, searchPaths: [String]) -> String? {
-        // it does not matter whether path is a file or a directory, add the separator in any case
-        // so hasPrefix works correctly with the last path component
-        // for example "/Users/app 2 3" has prefix "/Users/app 2" but
-        // "/Users/app 2 3/" does not have prefix "/Users/app 2/" and that is the correct result
-        let pathWithSep = path.osPath + "/"
+        let pathWithSep = withPathSeparator(path.osPath)
         let sorted = searchPaths.sorted {
             $0.caseInsensitiveCompare($1) == .orderedDescending
         }
-        for key in sorted where pathWithSep.hasPrefix(key + "/") {
+        for key in sorted where pathWithSep.hasPrefix(withPathSeparator(key)) {
             return key
         }
         return nil
@@ -116,11 +116,7 @@ class SecureBookmark: @unchecked Sendable {
         searchClosestPath: Bool,
         forceUpdate: Bool
     ) -> Data? {
-        if forceUpdate {
-            return nil
-        }
-
-        guard let securedPaths else {
+        guard !forceUpdate, let securedPaths else {
             return nil
         }
 
@@ -136,14 +132,26 @@ class SecureBookmark: @unchecked Sendable {
     }
 
     @discardableResult
-    private func storeBookmark(for url: URL, key: String) -> Bool {
+    private func storeBookmark(
+        for url: URL,
+        key: String,
+        forceUpdate: Bool = false
+    ) -> Bool {
         do {
             let bookmark = try url.bookmarkData(
                 options: .withSecurityScope,
                 includingResourceValuesForKeys: nil,
                 relativeTo: nil
             )
+            lock.lock()
+            defer { lock.unlock() }
             var dict = securedPaths ?? [String: Data]()
+            if forceUpdate {
+                // a freshly granted bookmark covers its whole subtree, so any cached
+                // descendant is now redundant and safe to drop
+                let prefix = withPathSeparator(key)
+                dict = dict.filter { !$0.key.hasPrefix(prefix) }
+            }
             dict[key] = bookmark
             UserDefaults.standard.set(dict, forKey: sandboxedPaths)
             return true
@@ -151,5 +159,13 @@ class SecureBookmark: @unchecked Sendable {
             Logger.general.error("Secure bookmark failed \(error)")
             return false
         }
+    }
+
+    private func withPathSeparator(_ path: String) -> String {
+        // it does not matter whether path is a file or a directory, add the separator in any case
+        // so hasPrefix works correctly with the last path component
+        // for example "/Users/app 2 3" has prefix "/Users/app 2" but
+        // "/Users/app 2 3/" does not have prefix "/Users/app 2/" and that is the correct result
+        path + "/"
     }
 }
