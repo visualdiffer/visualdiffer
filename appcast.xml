@@ -5,33 +5,34 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.19</title>
+            <title>Version 2.1.20</title>
             <description>
                 <![CDATA[
-                <h1 id="v2119">v2.1.19</h1>
+                <h1 id="v2120">v2.1.20</h1>
+
+<h3 id="features">🚀 Features</h3>
+
+<ul>
+  <li>replace the old objc scopebar with something more modern (<a href="https://github.com/visualdiffer/visualdiffer/commit/2571d8a18457edf3c0f6a5eb02dd0ef919cae786">2571d8a</a>)</li>
+</ul>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>
-    <p>Folder Compare: crashes when displaying locked or symbolic-link folders (<a href="https://github.com/visualdiffer/visualdiffer/commit/30d864ec12db8767dae7e9ed2e841362cafa4ec7">30d864e</a>)</p>
-  </li>
-  <li>
-    <p>Folder Compare: restore file name search on macOS Tahoe (<a href="https://github.com/visualdiffer/visualdiffer/commit/33b56e44d1fed10e7c8eb9abc29047ad62042af6">33b56e4</a>)</p>
-  </li>
+  <li>protect against concurrent access (<a href="https://github.com/visualdiffer/visualdiffer/commit/fbd1ef685626cc6dd25976e6e9670adba204e33a">fbd1ef6</a>)</li>
+  <li>refresh stale secure bookmarks and force update on granted paths (<a href="https://github.com/visualdiffer/visualdiffer/commit/e589128ace697eb32b9705115b227fff5a16f1e2">e589128</a>)</li>
 </ul>
-
 
                 ]]>
             </description>
-            <pubDate>Tue, 14 July 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.1.19</sparkle:version>
-            <sparkle:shortVersionString>2.1.19</sparkle:shortVersionString>
+            <pubDate>Fri, 24 July 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.1.20</sparkle:version>
+            <sparkle:shortVersionString>2.1.20</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.19/VisualDiffer-2.1.19.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.20/VisualDiffer-2.1.20.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="rGsiUM59nX0GTLaTAC+2QzKt5xXUep0klY6m9ZT1VXs40K2YIQhPIViomQbsjBsW0tgmv7AqkdfDnUID7CoGDg==" length="5129804"
+                sparkle:edSignature="bErecqv4WKW6nFKWm29QUR+hKrh0hEY+khpQzzhZHI2mft32LUbA1Jx5cM2p9umLHUzvg9tXu9gCUUhHrmVqCw==" length="5110525"
 
             />
         </item>
