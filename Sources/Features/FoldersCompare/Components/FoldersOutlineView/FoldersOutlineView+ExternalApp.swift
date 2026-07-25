@@ -58,7 +58,7 @@ extension FoldersOutlineView {
         var editorData = [OpenEditorAttribute]()
 
         enumerateSelectedValidFiles { item, _ in
-            if item.isFile, let path = item.path {
+            if let path = item.path {
                 editorData.append(OpenEditorAttribute(path: path))
             }
         }
