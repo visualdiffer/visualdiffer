@@ -84,10 +84,8 @@ extension FoldersWindowController {
     }
 
     func createConsoleSplitter() -> DualPaneSplitView {
-        let frame = window?.contentView?.bounds ?? .zero
         let view = DualPaneSplitView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.firstViewSize = frame.height * 3 / 4
 
         return view
     }

@@ -6,29 +6,37 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-class DualPaneSplitView: NSSplitView {
-    var isSubviewCollapsed = false
+// size used until the user resizes the collapsable pane
+private let defaultCollapsablePaneSize: CGFloat = 120
 
-    @objc var firstViewSize: CGFloat = 0
+private let userResizeKey = "NSSplitViewUserResizeKey"
+
+class DualPaneSplitView: NSSplitView {
+    var collapsablePaneSize: CGFloat = defaultCollapsablePaneSize
+
+    // the collapsed state is owned by the app through isHidden because
+    // NSSplitView.isSubviewCollapsed(_:) reports true also for a pane not laid out yet
+    @objc var hasSubviewCollapsed: Bool {
+        subviews.isEmpty || subviews.contains { $0.isHidden }
+    }
+
+    // the collapsable pane is the one the delegate allows to collapse
+    private var collapsablePaneIndex: Int? {
+        subviews.firstIndex { delegate?.splitView?(self, canCollapseSubview: $0) == true }
+    }
+
+    override var dividerThickness: CGFloat {
+        hasSubviewCollapsed ? 0.0 : super.dividerThickness
+    }
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(subviewResized),
-            name: NSSplitView.didResizeSubviewsNotification,
-            object: self
-        )
+        observeUserResize()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(subviewResized),
-            name: NSSplitView.didResizeSubviewsNotification,
-            object: self
-        )
+        observeUserResize()
     }
 
     deinit {
@@ -41,28 +49,19 @@ class DualPaneSplitView: NSSplitView {
 
     @objc
     func subviewResized(_ notification: Notification) {
-        if hasSubviewCollapsed {
-            return
-        }
-        guard let num = notification.userInfo?["NSSplitViewUserResizeKey"] as? NSNumber else {
+        // only a manual drag defines the size to remember; on a window
+        // resize NSSplitView scales the panes proportionally and that size is not a user choice
+        guard let userResize = notification.userInfo?[userResizeKey] as? NSNumber,
+              userResize.boolValue,
+              !hasSubviewCollapsed,
+              let index = collapsablePaneIndex else {
             return
         }
 
-        let isUserResize = num.boolValue
-        if isUserResize {
-            let view = subviews[0]
-            firstViewSize = isVertical ? view.frame.width : view.frame.height
+        let currentSize = paneSize(of: subviews[index])
+        if currentSize > 0 {
+            collapsablePaneSize = currentSize
         }
-    }
-
-    @objc var hasSubviewCollapsed: Bool {
-        if subviews.isEmpty {
-            return true
-        }
-        for view in subviews where isSubviewCollapsed(view) {
-            return true
-        }
-        return false
     }
 
     @objc
@@ -76,45 +75,46 @@ class DualPaneSplitView: NSSplitView {
 
     @objc
     func collapseSubview(at index: Int) {
-        if hasSubviewCollapsed {
+        let collapseView = subviews[index]
+        if collapseView.isHidden {
             return
         }
-        if index == 0 {
-            let collapseView = subviews[0]
-            collapseView.isHidden = true
-            setPosition(0, ofDividerAt: 0)
-        } else if index == 1 {
-            let expandView = subviews[0]
-            let collapseView = subviews[1]
-            collapseView.isHidden = true
-            let position = isVertical ? expandView.frame.width : expandView.frame.height
-            setPosition(position, ofDividerAt: 0)
-        } else {
-            return
-        }
+        collapseView.isHidden = true
         adjustSubviews()
     }
 
     @objc
     func expandSubview(at index: Int) {
-        if !hasSubviewCollapsed {
+        let expandView = subviews[index]
+        if !expandView.isHidden {
             return
         }
-        if index == 0 {
-            let collapseView = subviews[0]
-            collapseView.isHidden = false
-            setPosition(firstViewSize, ofDividerAt: 0)
-        } else if index == 1 {
-            let collapseView = subviews[1]
-            collapseView.isHidden = false
-            setPosition(firstViewSize, ofDividerAt: 0)
-        } else {
-            return
-        }
+        expandView.isHidden = false
+        // the position is derived from the current size and kept inside the
+        // range allowed by the delegate, otherwise NSSplitView collapses the pane again
+        let available = paneSize(of: self)
+        let position = index == 0 ? collapsablePaneSize : available - collapsablePaneSize - dividerThickness
+        setPosition(constrain(position: position, available: available), ofDividerAt: 0)
         adjustSubviews()
     }
 
-    override var dividerThickness: CGFloat {
-        hasSubviewCollapsed ? 0.0 : super.dividerThickness
+    private func observeUserResize() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(subviewResized),
+            name: NSSplitView.didResizeSubviewsNotification,
+            object: self
+        )
+    }
+
+    private func paneSize(of view: NSView) -> CGFloat {
+        isVertical ? view.frame.width : view.frame.height
+    }
+
+    private func constrain(position: CGFloat, available: CGFloat) -> CGFloat {
+        let minPosition = delegate?.splitView?(self, constrainMinCoordinate: 0, ofSubviewAt: 0) ?? 0
+        let maxPosition = delegate?.splitView?(self, constrainMaxCoordinate: available, ofSubviewAt: 0) ?? available
+
+        return min(max(position, minPosition), maxPosition)
     }
 }
