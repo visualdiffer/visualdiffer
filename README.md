@@ -23,7 +23,7 @@ The app helps developers, designers, and anyone managing multiple versions of pr
 - 🧩 **File-level diff view** — inspect detailed content changes line-by-line (for supported file types).  
 - 🧹 **Powerful filters** — exclude version control, backup, or temporary files (e.g., `.git`, `.svn`, `.zip`, `.DS_Store`).  
 - 🖱️ **Drag & drop support** — compare folders by simply dragging them into the app window.  
-- 📦 **Export and automation** — integrate comparisons into scripts or workflows using CLI tools (if available).  
+- 📦 **Command line & automation** — compare from the shell with the bundled [`visdiff`](https://wiki.visualdiffer.com/unixshell.html) tool, or drive the app from your own scripts with [AppleScript](https://wiki.visualdiffer.com/externalApps.html#applescript).  
 - ⚡ **Fast comparison engine** — optimized to handle large folder structures efficiently.  
 
 For more information, visit the [VisualDiffer Wiki](https://wiki.visualdiffer.com/).
@@ -66,6 +66,17 @@ brew install visualdiffer
 ### From GitHub Releases
 
 Download from [releases](https://github.com/visualdiffer/visualdiffer/releases/latest), unzip, and drag the app to Applications folder
+
+### Command line tool
+
+The app bundles `visdiff`, a CLI tool to start a comparison from the shell.
+It is not installed in the PATH automatically (sandbox restriction), create a symlink:
+
+```bash
+sudo ln -s /Applications/VisualDiffer.app/Contents/Helpers/visdiff /usr/local/bin/visdiff
+```
+
+See the [visdiff documentation](https://wiki.visualdiffer.com/unixshell.html) for the available options.
 
 ### Updates
 
