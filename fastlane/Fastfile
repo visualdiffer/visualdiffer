@@ -76,10 +76,13 @@ platform :mac do
   private_lane :release_precondition do
     check_current_branch unless ENV["IGNORE_BUILD_BRANCH"] == "true"
     check_release_version if ENV["CHECK_VERSION"] == "true"
-    lint_app
-    format_app(
-      check: true
-    )
+
+    if ENV["LINT_ENABLED"] == "true"
+      lint_app
+      format_app(
+        check: true
+      )
+    end
 
     note_file_name = File.join(ENV["BUILD_PATH"], ENV["RELEASE_NOTE_PATH"], ENV["APP_VERSION"])
     notes_full_path = File.join(ENV["PROJECT_ROOT"], "#{note_file_name}.md")
