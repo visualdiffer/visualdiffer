@@ -19,8 +19,8 @@ final class WhitespacesTests: DiffResultBaseTests {
             " leading spaces\n" +
             "another line"
 
-        let diffResult = DiffResult()
-        diffResult.diff(leftText: leftText, rightText: rightText, options: .ignoreLeadingWhitespaces)
+        let diffResult = DiffResult(options: .ignoreLeadingWhitespaces)
+        diffResult.diff(leftText: leftText, rightText: rightText)
 
         let leftChangeType: [DiffChangeType] = [.matching, .matching]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
@@ -44,8 +44,8 @@ final class WhitespacesTests: DiffResultBaseTests {
             "line1\n" +
             "another text tabs and spaces"
 
-        let diffResult = DiffResult()
-        diffResult.diff(leftText: leftText, rightText: rightText, options: .ignoreInternalWhitespaces)
+        let diffResult = DiffResult(options: .ignoreInternalWhitespaces)
+        diffResult.diff(leftText: leftText, rightText: rightText)
 
         let leftChangeType: [DiffChangeType] = [.changed, .matching]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
@@ -71,8 +71,8 @@ final class WhitespacesTests: DiffResultBaseTests {
             "another text tabs and spaces\n" +
             "    last line"
 
-        let diffResult = DiffResult()
-        diffResult.diff(leftText: leftText, rightText: rightText, options: [.allIgnoreWhitespaces, .ignoreLineEndings])
+        let diffResult = DiffResult(options: [.allIgnoreWhitespaces, .ignoreLineEndings])
+        diffResult.diff(leftText: leftText, rightText: rightText)
 
         let leftChangeType: [DiffChangeType] = [.matching, .matching, .matching]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
@@ -98,8 +98,8 @@ final class WhitespacesTests: DiffResultBaseTests {
             "another text tabs and spaces\n" +
             "    last line"
 
-        let diffResult = DiffResult()
-        diffResult.diff(leftText: leftText, rightText: rightText, options: [.allIgnoreWhitespaces])
+        let diffResult = DiffResult(options: [.allIgnoreWhitespaces])
+        diffResult.diff(leftText: leftText, rightText: rightText)
 
         let leftChangeType: [DiffChangeType] = [.matching, .changed, .matching]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
@@ -123,8 +123,8 @@ final class WhitespacesTests: DiffResultBaseTests {
             "line One\n" +
             "another line"
 
-        let diffResult = DiffResult()
-        diffResult.diff(leftText: leftText, rightText: rightText, options: .ignoreCharacterCase)
+        let diffResult = DiffResult(options: .ignoreCharacterCase)
+        diffResult.diff(leftText: leftText, rightText: rightText)
 
         let leftChangeType: [DiffChangeType] = [.matching, .matching]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
@@ -150,8 +150,8 @@ final class WhitespacesTests: DiffResultBaseTests {
             "inserted line\n" +
             " spaced line"
 
-        let diffResult = DiffResult()
-        diffResult.diff(leftText: leftText, rightText: rightText, options: .ignoreLeadingWhitespaces)
+        let diffResult = DiffResult(options: .ignoreLeadingWhitespaces)
+        diffResult.diff(leftText: leftText, rightText: rightText)
 
         let leftChangeType: [DiffChangeType] = [.matching, .missing, .missing, .matching]
         assert(lines: diffResult.leftSide.lines, expectedValue: leftChangeType)
@@ -170,11 +170,10 @@ final class WhitespacesTests: DiffResultBaseTests {
 
     @Test
     func refreshSummaryAfterDeletingFilteredMatch() {
-        let diffResult = DiffResult()
+        let diffResult = DiffResult(options: .ignoreLeadingWhitespaces)
         diffResult.diff(
             leftText: " leading spaces",
-            rightText: "leading spaces",
-            options: .ignoreLeadingWhitespaces
+            rightText: "leading spaces"
         )
 
         let filtered = DiffResult.justMatchingLines(diffResult)

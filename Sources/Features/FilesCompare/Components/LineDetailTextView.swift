@@ -87,12 +87,16 @@ final class LineDetailTextView: NSTextView {
     }
 
     func updateContent(
+        _ diffLine: DiffLine,
         text: String,
         lineEnding: String,
-        textColor: NSColor?,
-        backgroundColor: NSColor?
+        highlightRanges: [Range<Int>]
     ) {
-        string = text + lineEnding
+        let textColor = diffLine.colors?.text
+        let backgroundColor = diffLine.colors?.background
+        let content = text + lineEnding
+
+        string = content
         // use the NSString length because NSTextView selection ranges are NSRange-based
         protectedSuffixLength = (lineEnding as NSString).length
 
@@ -102,6 +106,7 @@ final class LineDetailTextView: NSTextView {
             setTextColor(.controlTextColor, backgroundColor: .clear)
         }
 
+        applyInlineHighlight(in: content, ranges: highlightRanges, colors: diffLine.inlineColors)
         applyLineEndingStyle(textColor: textColor, backgroundColor: backgroundColor)
     }
 
@@ -182,6 +187,21 @@ final class LineDetailTextView: NSTextView {
         let darkerColor = min(firstLuminance, secondLuminance)
 
         return (lighterColor + Self.contrastRatioBias) / (darkerColor + Self.contrastRatioBias)
+    }
+
+    private func applyInlineHighlight(in content: String, ranges: [Range<Int>], colors: ColorSet?) {
+        guard !ranges.isEmpty,
+              let textStorage,
+              let inlineColors = colors else {
+            return
+        }
+
+        for range in content.characterRanges(from: ranges) {
+            let highlightRange = NSRange(range, in: content)
+
+            textStorage.addAttribute(.foregroundColor, value: inlineColors.text, range: highlightRange)
+            textStorage.addAttribute(.backgroundColor, value: inlineColors.background, range: highlightRange)
+        }
     }
 }
 

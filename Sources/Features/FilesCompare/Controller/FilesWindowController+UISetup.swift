@@ -102,13 +102,13 @@ extension FilesWindowController {
         updateTreeViewFont()
 
         // invalidate the line text cache
-        cachedLineTextMap.removeAllObjects()
+        cachedLineTextMap.removeAll()
 
         reloadRowHeights()
 
         updateTabWidth()
 
-        updateDetailLines(leftView.selectedRow)
+        updateDetailLines(lastUsedView.selectedRow)
 
         updateStatusbarText()
     }
@@ -231,14 +231,15 @@ extension FilesWindowController {
 
     @objc
     func appAppearanceDidChange(_: Notification) {
-        leftView.reloadData()
-        rightView.reloadData()
+        leftView.reloadData(restoreSelection: true)
+        rightView.reloadData(restoreSelection: true)
 
         guard let diffResult else {
             return
         }
 
         differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: diffResult))
+        updateDetailLines(lastUsedView.selectedRow)
     }
 
     // MARK: - File and view scroll

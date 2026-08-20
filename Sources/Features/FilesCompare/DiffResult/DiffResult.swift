@@ -22,8 +22,16 @@ class DiffResult {
     private(set) var sections = [DiffSection]()
     private(set) var summary = DiffSummary()
 
-    convenience init(sections: [DiffSection]) {
-        self.init()
+    // the options the comparison ran with, the editing paths must classify a pair
+    // of lines with the same equality the engine used
+    let options: Options
+
+    init(options: Options = []) {
+        self.options = options
+    }
+
+    convenience init(sections: [DiffSection], options: Options) {
+        self.init(options: options)
 
         self.sections = sections
     }
@@ -41,42 +49,29 @@ class DiffResult {
     // periphery:ignore
     func diff(
         leftText: String,
-        rightText: String,
-        options: Options = []
+        rightText: String
     ) {
         diff(
             leftLines: DiffLineComponent.splitLines(leftText),
-            rightLines: DiffLineComponent.splitLines(rightText),
-            options: options
+            rightLines: DiffLineComponent.splitLines(rightText)
         )
     }
 
     func diff(
         leftLines: [DiffLineComponent],
-        rightLines: [DiffLineComponent],
-        options: Options = []
+        rightLines: [DiffLineComponent]
     ) {
-        let stringifier: (Any) -> String = {
-            guard let component = $0 as? DiffLineComponent else {
-                preconditionFailure("Expected a DiffLineComponent")
-            }
-
-            return options.applyTransformations(component: component)
-        }
-
-        let udiff = UnifiedDiff(
-            originalLines: leftLines,
-            revisedLines: rightLines,
-            stringifier: stringifier
+        let changes = SequenceDiff.changes(
+            left: leftLines.map { options.key(for: $0) },
+            right: rightLines.map { options.key(for: $0) }
         )
-        let script = udiff.diff_2(false)
 
         var processor = DiffProcessor(
             leftLines: leftLines,
             rightLines: rightLines,
             options: options
         )
-        processor.process(changes: script)
+        processor.process(changes: changes)
 
         leftSide = processor.leftSide
         rightSide = processor.rightSide
@@ -123,26 +118,36 @@ class DiffResult {
         }
         var index = startIndex
 
-        DiffLineComponent.enumerateLines(text: text) { component in
+        DiffLineComponent.enumerateLines(text: text) { pastedComponent in
             // adds missing lines to both diff sides to accommodate insertion at the specified index
             if index == destination.lines.count {
                 destination.insert(DiffLine.missingLine(), at: index)
                 otherSide.insert(DiffLine.missingLine(), at: index)
             }
+            let component = self.adoptingEOL(of: destination, for: pastedComponent)
             let destLine = destination.lines[index]
             if destLine.type == .missing {
                 destLine.component = component
                 let otherLine = otherSide.lines[index]
-                // simple comparison
-                if otherLine.text == component.text {
+
+                if self.matches(otherLine.component, component) {
                     otherLine.type = .matching
                     destLine.type = .matching
+
+                    let hasIgnored = self.options.containsIgnoreFor(
+                        differenceBetween: otherLine.component,
+                        and: component
+                    )
+                    otherLine.hasIgnoredDifferences = hasIgnored
+                    destLine.hasIgnoredDifferences = hasIgnored
                 } else {
                     if otherLine.type == .missing {
                         destLine.type = type
                     } else {
                         otherLine.type = .changed
                         destLine.type = .changed
+
+                        InlineDiff.apply(to: otherLine, and: destLine, options: self.options)
                     }
                 }
             } else {
@@ -178,5 +183,26 @@ class DiffResult {
 
     func refreshSummary() {
         summary.refresh(leftSide.lines)
+    }
+
+    // a weaker comparison than the engine one would show a pair as matching while the
+    // two lines differ, and the difference would appear out of nowhere on the next comparison
+    private func matches(_ leftLine: DiffLineComponent, _ rightLine: DiffLineComponent) -> Bool {
+        options.key(for: leftLine) == options.key(for: rightLine)
+    }
+
+    // pasted text always carries a unix line ending, the destination one must win,
+    // as it does when copying lines between the two sides
+    private func adoptingEOL(
+        of destination: DiffSide,
+        for component: DiffLineComponent
+    ) -> DiffLineComponent {
+        guard destination.eol != .mixed,
+              destination.eol != .missing,
+              component.eol != .missing else {
+            return component
+        }
+
+        return DiffLineComponent(text: component.text, eol: destination.eol)
     }
 }

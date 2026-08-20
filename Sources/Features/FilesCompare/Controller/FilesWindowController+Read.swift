@@ -41,15 +41,14 @@ extension FilesWindowController {
         rightLines: [DiffLineComponent],
         moveToFirstDifference: Bool
     ) {
-        let newDiffResult = DiffResult()
+        let newDiffResult = DiffResult(options: preferences.diffResultOptions)
 
         diffResult = newDiffResult
         currentDiffResult = nil
 
         newDiffResult.diff(
             leftLines: leftLines,
-            rightLines: rightLines,
-            options: preferences.diffResultOptions
+            rightLines: rightLines
         )
         setSliderMaxValue()
         differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: newDiffResult))

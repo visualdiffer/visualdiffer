@@ -14,7 +14,8 @@ class FilesWindowController: NSWindowController {
     // swiftlint:disable:next implicitly_unwrapped_optional
     @objc var sessionDiff: SessionDiff!
 
-    let cachedLineTextMap: NSMapTable<DiffLine, NSString>
+    // keyed by line identity, the dictionary keeps the lines alive as long as they are cached
+    var cachedLineTextMap = [DiffLine: String]()
 
     var currentFont: NSFont
     var fontZoomFactor: CGFloat = 0 {
@@ -76,11 +77,6 @@ class FilesWindowController: NSWindowController {
         visibleWhitespaces = VisibleWhitespaces()
         visibleWhitespaces.tabWidth = CommonPrefs.shared.tabWidth
 
-        cachedLineTextMap = NSMapTable<DiffLine, NSString>(
-            keyOptions: .objectPointerPersonality,
-            valueOptions: .strongMemory
-        )
-
         // panels
         leftPanelView = FilePanelView(side: .left)
         rightPanelView = FilePanelView(side: .right)
@@ -126,9 +122,9 @@ class FilesWindowController: NSWindowController {
         filePanel.setSliderChangeAction(target, action: action)
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init()")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     // MARK: - Zoom Font

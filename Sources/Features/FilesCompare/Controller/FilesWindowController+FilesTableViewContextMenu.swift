@@ -26,17 +26,17 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
 
     @objc
     func showWhitespaces(_ sender: AnyObject?) {
-        cachedLineTextMap.removeAllObjects()
+        cachedLineTextMap.removeAll()
 
         // the scopeBar button toggles automatically but when this method is called
         // from the menu we set it manually
         if sender !== scopeBar {
             scopeBar.showWhitespaces(!scopeBar.showWhitespaces, informDelegate: false)
         }
-        updateDetailLines(leftView.selectedRow)
-
         leftView.reloadData(restoreSelection: true)
         rightView.reloadData(restoreSelection: true)
+
+        updateDetailLines(lastUsedView.selectedRow)
     }
 
     @objc

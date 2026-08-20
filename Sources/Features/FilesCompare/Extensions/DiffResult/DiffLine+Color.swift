@@ -12,6 +12,20 @@ extension DiffLine {
         return CommonPrefs.shared.fileColor(color)
     }
 
+    // a color file without the changedInline entry falls back to the swapped line colors,
+    // so the highlight keeps working instead of silently disappearing, the swap contrasts
+    // by construction because the two colors already contrast
+    var inlineColors: ColorSet? {
+        if let inlineColors = CommonPrefs.shared.fileColor(.changedInline) {
+            return inlineColors
+        }
+        guard let colors else {
+            return nil
+        }
+
+        return ColorSet(text: colors.background, background: colors.text)
+    }
+
     func color(for colorKey: ColorSet.Key, isSelected: Bool) -> NSColor {
         var color: NSColor?
 

@@ -58,4 +58,26 @@ extension String {
             highlightStyle: hightlightStyle
         )
     }
+
+    // the offsets must be ascending and non overlapping, the string is walked once,
+    // the offsets starting past the end are dropped and the others are clamped
+    func characterRanges(from offsets: [Range<Int>]) -> [Range<Self.Index>] {
+        let length = count
+        var ranges = [Range<Self.Index>]()
+        var start = startIndex
+        var startOffset = 0
+
+        for offsetRange in offsets where offsetRange.lowerBound < length {
+            let clampedUpper = min(offsetRange.upperBound, length)
+            let lower = index(start, offsetBy: offsetRange.lowerBound - startOffset)
+            let upper = index(lower, offsetBy: clampedUpper - offsetRange.lowerBound)
+
+            ranges.append(lower ..< upper)
+
+            start = upper
+            startOffset = clampedUpper
+        }
+
+        return ranges
+    }
 }

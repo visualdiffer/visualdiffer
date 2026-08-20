@@ -87,7 +87,11 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
                 item.title = NSLocalizedString("Delete Lines from Right", comment: "")
                 return !sessionDiff.rightReadOnly && rightView.isEditAllowed
             }
-        } else if action == #selector(pasteLinesToClipboard) || action == #selector(cutToClipboard) {
+        } else if action == #selector(pasteLinesToClipboard)
+            || action == #selector(cutToClipboard)
+            // the Edit menu binds the public actions, they must not skip these checks
+            || action == #selector(paste(_:))
+            || action == #selector(cut(_:)) {
             if scopeBar.showLinesFilter == .all {
                 if isLeftView {
                     return !sessionDiff.leftReadOnly && leftView.isEditAllowed

@@ -709,6 +709,64 @@ final class DiffResultTests: DiffResultBaseTests {
             #expect(rightLine == diffRightLine.text)
         }
     }
+
+    @Test
+    func insertKeepsDestinationEOL() {
+        let leftText = "alpha\r\nbeta\r\ngamma"
+        let rightText = "alpha\r\ngamma"
+
+        let diffResult = DiffResult()
+        diffResult.diff(leftText: leftText, rightText: rightText)
+
+        assert(lines: diffResult.leftSide.lines, expectedValue: [.matching, .deleted, .matching])
+        assert(lines: diffResult.rightSide.lines, expectedValue: [.matching, .missing, .matching])
+
+        // pasted text always carries a unix line ending, the destination one must win
+        diffResult.insert(text: "beta\n", at: 1, side: .right)
+
+        assert(lines: diffResult.leftSide.lines, expectedValue: [.matching, .matching, .matching])
+        assert(lines: diffResult.rightSide.lines, expectedValue: [.matching, .matching, .matching])
+        #expect(diffResult.rightSide.lines[1].component.eol == .pcCRLF)
+    }
+
+    @Test
+    func insertOfCanonicallyEquivalentLineIsChanged() {
+        let leftText = "caf\u{00E9}\nsecond"
+        let rightText = "second"
+
+        let diffResult = DiffResult()
+        diffResult.diff(leftText: leftText, rightText: rightText)
+
+        assert(lines: diffResult.leftSide.lines, expectedValue: [.deleted, .matching])
+        assert(lines: diffResult.rightSide.lines, expectedValue: [.missing, .matching])
+
+        // String considers the two spellings equal, the paste must not
+        diffResult.insert(text: "cafe\u{0301}\n", at: 0, side: .right)
+
+        assert(lines: diffResult.leftSide.lines, expectedValue: [.changed, .matching])
+        assert(lines: diffResult.rightSide.lines, expectedValue: [.changed, .matching])
+        #expect(diffResult.leftSide.lines[0].inlineRanges == [3 ..< 4])
+        #expect(diffResult.rightSide.lines[0].inlineRanges == [3 ..< 4])
+    }
+
+    @Test
+    func insertHonoursTheComparisonOptions() {
+        let leftText = "ALPHA\nsecond"
+        let rightText = "second"
+
+        let diffResult = DiffResult(options: [.ignoreCharacterCase])
+        diffResult.diff(leftText: leftText, rightText: rightText)
+
+        assert(lines: diffResult.leftSide.lines, expectedValue: [.deleted, .matching])
+        assert(lines: diffResult.rightSide.lines, expectedValue: [.missing, .matching])
+
+        diffResult.insert(text: "alpha\n", at: 0, side: .right)
+
+        assert(lines: diffResult.leftSide.lines, expectedValue: [.matching, .matching])
+        assert(lines: diffResult.rightSide.lines, expectedValue: [.matching, .matching])
+        #expect(diffResult.leftSide.lines[0].hasIgnoredDifferences)
+        #expect(diffResult.rightSide.lines[0].hasIgnoredDifferences)
+    }
 }
 
 // swiftlint:enable file_length line_length

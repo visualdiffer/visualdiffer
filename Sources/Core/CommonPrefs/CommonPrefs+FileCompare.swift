@@ -11,6 +11,7 @@ let defaultTabWidth = 4
 enum FileColorAttribute: String {
     case added
     case changed
+    case changedInline
     case deleted
     case lineNumber
     case lineNumberSeparator

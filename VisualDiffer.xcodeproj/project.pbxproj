@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2F7446AB0DB6BCF400F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446A70DB6BCF400F9684A /* MainMenu.xib */; };
+		55183967302C926400F4190C /* DisplayLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55183966302C926400F4190C /* DisplayLine.swift */; };
+		5518396A302C928D00F4190C /* InlineDiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55183968302C928D00F4190C /* InlineDiffTests.swift */; };
+		5518396B302C928D00F4190C /* SequenceDiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55183969302C928D00F4190C /* SequenceDiffTests.swift */; };
 		551DE39F2ED422820067AB18 /* FilesWindowController+SessionPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE39E2ED422820067AB18 /* FilesWindowController+SessionPreferences.swift */; };
 		551DE3A62ED4237B0067AB18 /* FileSessionPreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3A42ED4237B0067AB18 /* FileSessionPreferencesWindow.swift */; };
 		551DE3AA2ED428B40067AB18 /* FilePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DE3A92ED428A50067AB18 /* FilePreferences.swift */; };
@@ -55,7 +58,6 @@
 		5537419F2E9372DF00AB56D0 /* ConfirmationsFoldersBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537408B2E9372DF00AB56D0 /* ConfirmationsFoldersBox.swift */; };
 		553741A02E9372DF00AB56D0 /* DifferenceNavigatorBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537408E2E9372DF00AB56D0 /* DifferenceNavigatorBox.swift */; };
 		553741A12E9372DF00AB56D0 /* FolderReaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740602E9372DF00AB56D0 /* FolderReaderDelegate.swift */; };
-		553741A22E9372DF00AB56D0 /* UDiffScriptBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 553740BD2E9372DF00AB56D0 /* UDiffScriptBuilder.m */; };
 		553741A32E9372DF00AB56D0 /* String+RegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741072E9372DF00AB56D0 /* String+RegularExpression.swift */; };
 		553741A42E9372DF00AB56D0 /* FileSystemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740182E9372DF00AB56D0 /* FileSystemController.swift */; };
 		553741A52E9372DF00AB56D0 /* ComparatorOptions+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740482E9372DF00AB56D0 /* ComparatorOptions+Helper.swift */; };
@@ -168,7 +170,6 @@
 		553742182E9372DF00AB56D0 /* ComparatorOptions+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740472E9372DF00AB56D0 /* ComparatorOptions+Description.swift */; };
 		553742192E9372DF00AB56D0 /* FoldersOutlineView+Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FE82E9372DF00AB56D0 /* FoldersOutlineView+Clipboard.swift */; };
 		5537421A2E9372DF00AB56D0 /* DatePickersStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740112E9372DF00AB56D0 /* DatePickersStackView.swift */; };
-		5537421B2E9372DF00AB56D0 /* UnifiedDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 553740BF2E9372DF00AB56D0 /* UnifiedDiff.m */; };
 		5537421C2E9372DF00AB56D0 /* SyncOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537400F2E9372DF00AB56D0 /* SyncOutlineView.swift */; };
 		5537421D2E9372DF00AB56D0 /* CompareItem+Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740522E9372DF00AB56D0 /* CompareItem+Comparison.swift */; };
 		5537421E2E9372DF00AB56D0 /* NSError+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740EF2E9372DF00AB56D0 /* NSError+Format.swift */; };
@@ -406,6 +407,11 @@
 		55B1CE2B2E9934E900426FEC /* DateBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1CE2A2E9934E900426FEC /* DateBuilder.swift */; };
 		55B1CE312E9934F800426FEC /* DiffResultBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1CE2E2E9934F800426FEC /* DiffResultBaseTests.swift */; };
 		55B1CE322E9934F800426FEC /* DiffResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1CE2C2E9934F800426FEC /* DiffResultTests.swift */; };
+		55B5338A302D9C3F008A065B /* InlineDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B53389302D9C3F008A065B /* InlineDiff.swift */; };
+		55B53390302D9C52008A065B /* DiffFileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5338C302D9C52008A065B /* DiffFileData.swift */; };
+		55B53391302D9C52008A065B /* EquivalenceTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5338D302D9C52008A065B /* EquivalenceTable.swift */; };
+		55B53392302D9C52008A065B /* SequenceDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5338E302D9C52008A065B /* SequenceDiff.swift */; };
+		55B53393302D9C52008A065B /* DiffChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5338B302D9C52008A065B /* DiffChange.swift */; };
 		55B93A452FAC42950024AEC0 /* DiffProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B93A442FAC42910024AEC0 /* DiffProcessor.swift */; };
 		55B9B73E2F5C26F800DB8326 /* BaseTests+CompareItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B9B73D2F5C26F800DB8326 /* BaseTests+CompareItem.swift */; };
 		55BC333E2EDAC69C004035A0 /* RowHeightCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC333D2EDAC69C004035A0 /* RowHeightCalculator.swift */; };
@@ -522,6 +528,9 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* VisualDiffer_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualDiffer_Prefix.pch; sourceTree = "<group>"; };
 		550A2CC113FF973B00981A9B /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		55183966302C926400F4190C /* DisplayLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLine.swift; sourceTree = "<group>"; };
+		55183968302C928D00F4190C /* InlineDiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineDiffTests.swift; sourceTree = "<group>"; };
+		55183969302C928D00F4190C /* SequenceDiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceDiffTests.swift; sourceTree = "<group>"; };
 		551DE39E2ED422820067AB18 /* FilesWindowController+SessionPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesWindowController+SessionPreferences.swift"; sourceTree = "<group>"; };
 		551DE3A42ED4237B0067AB18 /* FileSessionPreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSessionPreferencesWindow.swift; sourceTree = "<group>"; };
 		551DE3A92ED428A50067AB18 /* FilePreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePreferences.swift; sourceTree = "<group>"; };
@@ -762,10 +771,6 @@
 		553740B42E9372DF00AB56D0 /* SessionPreferencesFiltersBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPreferencesFiltersBox.swift; sourceTree = "<group>"; };
 		553740B52E9372DF00AB56D0 /* SessionPreferencesFiltersPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPreferencesFiltersPanel.swift; sourceTree = "<group>"; };
 		553740B92E9372DF00AB56D0 /* PreferencesPanelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesPanelDataSource.swift; sourceTree = "<group>"; };
-		553740BC2E9372DF00AB56D0 /* UDiffScriptBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UDiffScriptBuilder.h; sourceTree = "<group>"; };
-		553740BD2E9372DF00AB56D0 /* UDiffScriptBuilder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UDiffScriptBuilder.m; sourceTree = "<group>"; };
-		553740BE2E9372DF00AB56D0 /* UnifiedDiff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnifiedDiff.h; sourceTree = "<group>"; };
-		553740BF2E9372DF00AB56D0 /* UnifiedDiff.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnifiedDiff.m; sourceTree = "<group>"; };
 		553740C72E9372DF00AB56D0 /* BigFileFileOperationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigFileFileOperationManager.h; sourceTree = "<group>"; };
 		553740C82E9372DF00AB56D0 /* BigFileFileOperationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigFileFileOperationManager.m; sourceTree = "<group>"; };
 		553740D42E9372DF00AB56D0 /* NSPredicate+Objc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+Objc.h"; sourceTree = "<group>"; };
@@ -941,6 +946,11 @@
 		55B1CE2C2E9934F800426FEC /* DiffResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResultTests.swift; sourceTree = "<group>"; };
 		55B1CE2E2E9934F800426FEC /* DiffResultBaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffResultBaseTests.swift; sourceTree = "<group>"; };
 		55B212092490AB3B001717DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		55B53389302D9C3F008A065B /* InlineDiff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineDiff.swift; sourceTree = "<group>"; };
+		55B5338B302D9C52008A065B /* DiffChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffChange.swift; sourceTree = "<group>"; };
+		55B5338C302D9C52008A065B /* DiffFileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffFileData.swift; sourceTree = "<group>"; };
+		55B5338D302D9C52008A065B /* EquivalenceTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquivalenceTable.swift; sourceTree = "<group>"; };
+		55B5338E302D9C52008A065B /* SequenceDiff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceDiff.swift; sourceTree = "<group>"; };
 		55B93A442FAC42910024AEC0 /* DiffProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffProcessor.swift; sourceTree = "<group>"; };
 		55B9B73D2F5C26F800DB8326 /* BaseTests+CompareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseTests+CompareItem.swift"; sourceTree = "<group>"; };
 		55BC333D2EDAC69C004035A0 /* RowHeightCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowHeightCalculator.swift; sourceTree = "<group>"; };
@@ -1920,17 +1930,6 @@
 			path = Features;
 			sourceTree = "<group>";
 		};
-		553740C02E9372DF00AB56D0 /* DiffEngine */ = {
-			isa = PBXGroup;
-			children = (
-				553740BC2E9372DF00AB56D0 /* UDiffScriptBuilder.h */,
-				553740BD2E9372DF00AB56D0 /* UDiffScriptBuilder.m */,
-				553740BE2E9372DF00AB56D0 /* UnifiedDiff.h */,
-				553740BF2E9372DF00AB56D0 /* UnifiedDiff.m */,
-			);
-			path = DiffEngine;
-			sourceTree = "<group>";
-		};
 		553740C92E9372DF00AB56D0 /* FileManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1958,7 +1957,6 @@
 		553740E12E9372DF00AB56D0 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
-				553740C02E9372DF00AB56D0 /* DiffEngine */,
 				553740C92E9372DF00AB56D0 /* FileManager */,
 				553740DC2E9372DF00AB56D0 /* Predicate */,
 			);
@@ -2313,6 +2311,7 @@
 		553741402E9372DF00AB56D0 /* String */ = {
 			isa = PBXGroup;
 			children = (
+				55183966302C926400F4190C /* DisplayLine.swift */,
 				5537413F2E9372DF00AB56D0 /* VisibleWhitespaces.swift */,
 			);
 			path = String;
@@ -2545,6 +2544,7 @@
 		554B4A442E9B7B8F0023AAF0 /* DiffResult */ = {
 			isa = PBXGroup;
 			children = (
+				55B5338F302D9C52008A065B /* Engine */,
 				55373FDE2E9372DF00AB56D0 /* DiffChangeType.swift */,
 				554B4A432E9B7B8F0023AAF0 /* DiffLine.swift */,
 				557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */,
@@ -2559,6 +2559,7 @@
 				554B4A402E9B7B8F0023AAF0 /* DiffSide.swift */,
 				559186402E9B821B00A30620 /* DiffSummary.swift */,
 				554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */,
+				55B53389302D9C3F008A065B /* InlineDiff.swift */,
 			);
 			path = DiffResult;
 			sourceTree = "<group>";
@@ -2623,6 +2624,8 @@
 		55B1CE2D2E9934F800426FEC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				55183968302C928D00F4190C /* InlineDiffTests.swift */,
+				55183969302C928D00F4190C /* SequenceDiffTests.swift */,
 				55B1CE2C2E9934F800426FEC /* DiffResultTests.swift */,
 				55A4DF332FFD1FFF00ED11BB /* DiffSideTests.swift */,
 				55A4DF312E9A49A700ED11BB /* EndOfLineTests.swift */,
@@ -2646,6 +2649,17 @@
 				55B1CE2F2E9934F800426FEC /* DiffResult */,
 			);
 			path = FileCompare;
+			sourceTree = "<group>";
+		};
+		55B5338F302D9C52008A065B /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				55B5338B302D9C52008A065B /* DiffChange.swift */,
+				55B5338C302D9C52008A065B /* DiffFileData.swift */,
+				55B5338D302D9C52008A065B /* EquivalenceTable.swift */,
+				55B5338E302D9C52008A065B /* SequenceDiff.swift */,
+			);
+			path = Engine;
 			sourceTree = "<group>";
 		};
 		55C1CBFC2E8BB6AD004FE322 /* visdiff */ = {
@@ -2803,8 +2817,6 @@
 				55944CCC2E5C8D9F00FB1F8C /* PBXTargetDependency */,
 			);
 			name = VisualDifferTests;
-			packageProductDependencies = (
-			);
 			productName = VisualDifferTests;
 			productReference = 55944CC72E5C8D9F00FB1F8C /* VisualDifferTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -2822,8 +2834,6 @@
 			dependencies = (
 			);
 			name = visdiff;
-			packageProductDependencies = (
-			);
 			productName = visdiff;
 			productReference = 55C1CBE22E8BB6A2004FE322 /* visdiff */;
 			productType = "com.apple.product-type.tool";
@@ -2889,6 +2899,7 @@
 			packageReferences = (
 				55C165602EE444050082A24C /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
+			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -2961,6 +2972,8 @@
 				55A4DF322E9A49B000ED11BB /* EndOfLineTests.swift in Sources */,
 				55DF3DDF2E924BB10044CC0C /* AlignmentTests.swift in Sources */,
 				554750C62F5C0A1100C1747A /* CommonAncestorPathTests.swift in Sources */,
+				5518396A302C928D00F4190C /* InlineDiffTests.swift in Sources */,
+				5518396B302C928D00F4190C /* SequenceDiffTests.swift in Sources */,
 				55E381C12EEFFD0500CB2F00 /* SymbolicLinkTests.swift in Sources */,
 				55B1CE312E9934F800426FEC /* DiffResultBaseTests.swift in Sources */,
 				55B1CE322E9934F800426FEC /* DiffResultTests.swift in Sources */,
@@ -3048,7 +3061,6 @@
 				553741A02E9372DF00AB56D0 /* DifferenceNavigatorBox.swift in Sources */,
 				55BC33402EDAC96F004035A0 /* TiledImageView.swift in Sources */,
 				553741A12E9372DF00AB56D0 /* FolderReaderDelegate.swift in Sources */,
-				553741A22E9372DF00AB56D0 /* UDiffScriptBuilder.m in Sources */,
 				553741A32E9372DF00AB56D0 /* String+RegularExpression.swift in Sources */,
 				553741A42E9372DF00AB56D0 /* FileSystemController.swift in Sources */,
 				553741A52E9372DF00AB56D0 /* ComparatorOptions+Helper.swift in Sources */,
@@ -3188,7 +3200,6 @@
 				553742192E9372DF00AB56D0 /* FoldersOutlineView+Clipboard.swift in Sources */,
 				5536ADBA2EF169820019EFBF /* SessionDiff+ExtraData.swift in Sources */,
 				5537421A2E9372DF00AB56D0 /* DatePickersStackView.swift in Sources */,
-				5537421B2E9372DF00AB56D0 /* UnifiedDiff.m in Sources */,
 				5537421C2E9372DF00AB56D0 /* SyncOutlineView.swift in Sources */,
 				5537421D2E9372DF00AB56D0 /* CompareItem+Comparison.swift in Sources */,
 				5537421E2E9372DF00AB56D0 /* NSError+Format.swift in Sources */,
@@ -3326,12 +3337,14 @@
 				552430412F7673F800951F1A /* FileDifferenceNavigatorBox.swift in Sources */,
 				5537429D2E9372DF00AB56D0 /* FolderSelectionInfo+FilterActionValidator.swift in Sources */,
 				5537429E2E9372DF00AB56D0 /* OpenDiffCommand.swift in Sources */,
+				55B5338A302D9C3F008A065B /* InlineDiff.swift in Sources */,
 				5537429F2E9372DF00AB56D0 /* RenameCompareItem.swift in Sources */,
 				553742A02E9372DF00AB56D0 /* DisplayOptions+Helper.swift in Sources */,
 				553742A12E9372DF00AB56D0 /* SessionPreferencesWindow+Data.swift in Sources */,
 				553742A22E9372DF00AB56D0 /* FolderReader+Log.swift in Sources */,
 				553742A32E9372DF00AB56D0 /* NSArrayController+Paths.swift in Sources */,
 				553742A42E9372DF00AB56D0 /* NSPredicateEditor+Fix.swift in Sources */,
+				55183967302C926400F4190C /* DisplayLine.swift in Sources */,
 				553742A52E9372DF00AB56D0 /* FoldersWindowController+NSToolbarDelegate.swift in Sources */,
 				553742A62E9372DF00AB56D0 /* NSAlert+Helper.swift in Sources */,
 				553742A72E9372DF00AB56D0 /* FoldersWindowController+NSWindowDelegate.swift in Sources */,
@@ -3347,6 +3360,10 @@
 				553742B12E9372DF00AB56D0 /* FoldersWindowController+UISetup.swift in Sources */,
 				5577FFE82FAF2FC30084FB06 /* PopUpButtonURL.swift in Sources */,
 				553742B22E9372DF00AB56D0 /* NSTableView+Font.swift in Sources */,
+				55B53390302D9C52008A065B /* DiffFileData.swift in Sources */,
+				55B53391302D9C52008A065B /* EquivalenceTable.swift in Sources */,
+				55B53392302D9C52008A065B /* SequenceDiff.swift in Sources */,
+				55B53393302D9C52008A065B /* DiffChange.swift in Sources */,
 				553742B32E9372DF00AB56D0 /* ActionBarView.swift in Sources */,
 				553742B42E9372DF00AB56D0 /* TouchCompareItem.swift in Sources */,
 				553742B52E9372DF00AB56D0 /* HistoryFetchedResultsControllerDelegate.swift in Sources */,

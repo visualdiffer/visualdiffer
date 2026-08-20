@@ -24,10 +24,20 @@ class DiffLine {
     var number: Int
     // mode is used by UI to determine how to draw line
     var mode: DisplayMode = .normal
-    var component: DiffLineComponent
+    var component: DiffLineComponent {
+        didSet {
+            // the offsets belong to the replaced text, they cannot survive it
+            inlineRanges = []
+        }
+    }
+
     var isSectionSeparator = false
     var filteredIndex = 0
     var hasIgnoredDifferences: Bool
+
+    // character offsets, relative to component.text, that differ from the paired line,
+    // meaningful only when type is .changed
+    var inlineRanges = [Range<Int>]()
 
     var text: String {
         component.text
@@ -64,5 +74,17 @@ class DiffLine {
 extension DiffLine: CustomStringConvertible {
     var description: String {
         String(format: "%ld %@ : %@", number, type.description, text)
+    }
+}
+
+/// identity semantics, a line is a mutable reference and two distinct lines stay
+/// distinct even while they hold the same text
+extension DiffLine: Hashable {
+    static func == (lhs: DiffLine, rhs: DiffLine) -> Bool {
+        lhs === rhs
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
     }
 }

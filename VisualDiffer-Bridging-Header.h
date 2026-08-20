@@ -7,5 +7,3 @@
 #import "TitlePredicateEditorRowTemplate.h"
 #import "TOPFileSizePredicateEditorRowTemplate.h"
 #import "TOPTimestampPredicateEditorRowTemplate.h"
-#import "UnifiedDiff.h"
-#import "UDiffScriptBuilder.h"

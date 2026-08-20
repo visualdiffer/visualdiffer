@@ -92,4 +92,10 @@ extension DiffResult.Options {
 
         return leftLine.text != rightLine.text
     }
+
+    /// the key the comparison engine compares, every path classifying a pair of lines
+    /// must build it the same way or the same pair would be classified differently
+    func key(for component: DiffLineComponent) -> SequenceDiff.TextKey {
+        SequenceDiff.TextKey(applyTransformations(component: component))
+    }
 }

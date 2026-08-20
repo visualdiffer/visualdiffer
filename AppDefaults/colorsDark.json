@@ -1,9 +1,4 @@
 {
-    "menuColorsMap": {
-        "openWithDefaultAppContext": {
-            "textColor":"#FF9300"
-        }
-    },
     "consoleLogColorsMap":
     {
         "info": {
@@ -80,7 +75,12 @@
     {
         "changed": {
             "textColor": "#C4EFB7",
-            "backgroundColor":"#5B8B6D"
+            "backgroundColor":"#2E4A38"
+            },
+
+        "changedInline": {
+            "textColor": "#2E4A38",
+            "backgroundColor":"#FFC24B"
             },
 
         "added": {

@@ -24,7 +24,7 @@ extension FilesWindowController {
         // refresh sections otherwise moving between differences can position to wrong line
         diffResult.refreshSections()
         differenceCounters.update(counters: DiffCountersItem.diffCounter(withResult: diffResult))
-        cachedLineTextMap.removeAllObjects()
+        cachedLineTextMap.removeAll()
 
         let selectedRow = min(
             selectedRow < 0 ? lastUsedView.selectedRow : selectedRow,
@@ -87,26 +87,62 @@ extension FilesWindowController {
 
         let lineEnding = scopeBar.showWhitespaces ? "" : diffLine.component.eol.visibleSymbol
         lineView.updateContent(
+            diffLine,
             text: getLine(diffLine),
             lineEnding: lineEnding,
-            textColor: diffLine.colors?.text,
-            backgroundColor: diffLine.colors?.background
+            highlightRanges: inlineDisplayRanges(diffLine)
         )
     }
 
     // MARK: - Cache lines
 
-    func getLine(_ diffLine: DiffLine) -> String {
-        if let line = cachedLineTextMap.object(forKey: diffLine) as? String {
-            return line as String
-        }
-        let line = visibleWhitespaces.getString(
+    // only the text is cached, the offset mapping costs an array per line and is needed
+    // by the few changed lines carrying inline differences, so it is rebuilt on demand
+    func displayLine(_ diffLine: DiffLine) -> DisplayLine {
+        visibleWhitespaces.getString(
             diffLine.component,
             isWhitespacesVisible: scopeBar.showWhitespaces
         )
-        cachedLineTextMap.setObject(line as NSString, forKey: diffLine)
+    }
+
+    func getLine(_ diffLine: DiffLine) -> String {
+        if let line = cachedLineTextMap[diffLine] {
+            return line
+        }
+        let line = displayLine(diffLine).text
+
+        cachedLineTextMap[diffLine] = line
 
         return line
+    }
+
+    // the offsets are relative to the text drawn from the given column, so the highlight
+    // follows the horizontal scrolling of the panels
+    func inlineDisplayRanges(_ diffLine: DiffLine, startingColumn: Int = 0) -> [Range<Int>] {
+        guard diffLine.type == .changed, !diffLine.inlineRanges.isEmpty else {
+            return []
+        }
+
+        let display = displayLine(diffLine)
+        let visibleCount = display.text.count - startingColumn
+
+        if visibleCount < 0 {
+            return []
+        }
+        var ranges = [Range<Int>]()
+
+        ranges.reserveCapacity(diffLine.inlineRanges.count)
+
+        for range in diffLine.inlineRanges {
+            let lower = max(0, display.displayOffset(for: range.lowerBound) - startingColumn)
+            let upper = min(visibleCount, display.displayOffset(for: range.upperBound) - startingColumn)
+
+            if lower < upper {
+                ranges.append(lower ..< upper)
+            }
+        }
+
+        return ranges
     }
 
     // MARK: - Actions

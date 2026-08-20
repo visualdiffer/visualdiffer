@@ -84,6 +84,7 @@
             DiffResult.writeLine(fileHandle, line: "type = \(type) number = \(number) mode = \(mode)")
 //        DiffResult.writeLine(fileHandle, line: "text = \(text)")
             DiffResult.writeLine(fileHandle, line: "isSectionSeparator = \(isSectionSeparator) filteredIndex = \(filteredIndex)")
+            DiffResult.writeLine(fileHandle, line: "inlineRanges = \(inlineRanges)")
         }
     }
 

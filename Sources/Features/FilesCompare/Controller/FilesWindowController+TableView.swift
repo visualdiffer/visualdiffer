@@ -45,6 +45,7 @@ extension FilesWindowController: NSTableViewDataSource,
         view.diffLine = diffLine
         view.font = currentFont
         view.isSelected = tableView.isRowSelected(row)
+        view.inlineRanges = inlineDisplayRanges(diffLine, startingColumn: leftPanelView.columnSlider.integerValue)
         view.formattedText = formattedText(diffLine)
         view.isWordWrapEnabled = rowHeightCalculator.isWordWrapEnabled
         view.lineNumberWidth = lineNumberWidth

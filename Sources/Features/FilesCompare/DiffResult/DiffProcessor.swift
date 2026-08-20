@@ -29,7 +29,7 @@ struct DiffProcessor {
         self.options = options
     }
 
-    mutating func process(changes: UDiffChange?) {
+    mutating func process(changes: [DiffChange]) {
         sections.removeAll(keepingCapacity: true)
         summary.reset()
 
@@ -39,22 +39,20 @@ struct DiffProcessor {
         leftIndex = 0
         rightIndex = 0
 
-        var script = changes
-
-        while let localScript = script {
+        for change in changes {
             updateMatchingLines(
-                leftCount: Int(localScript.line0),
-                rightCount: Int(localScript.line1)
+                leftCount: change.line0,
+                rightCount: change.line1
             )
 
-            let commonLines = Int(min(localScript.deleted, localScript.inserted))
-            let diffLines = Int(localScript.deleted - localScript.inserted)
+            let commonLines = min(change.deleted, change.inserted)
+            let diffLines = change.deleted - change.inserted
 
             var start = leftSide.lines.count
 
             // Create a new section to distinguish adjacent
             // .deleted from .added lines
-            if commonLines > 0, localScript.deleted != localScript.inserted {
+            if commonLines > 0, change.deleted != change.inserted {
                 sections.append(DiffSection(
                     start: start,
                     end: leftSide.lines.count + commonLines - 1
@@ -80,8 +78,6 @@ struct DiffProcessor {
                 start: start,
                 end: leftSide.lines.count - 1
             ))
-
-            script = localScript.link
         }
 
         updateMatchingLines(
@@ -156,6 +152,9 @@ struct DiffProcessor {
                 component: rightLines[rightIndex]
             )
             rightSide.add(line: rightLine)
+
+            InlineDiff.apply(to: leftLine, and: rightLine, options: options)
+
             leftIndex += 1
             rightIndex += 1
         }

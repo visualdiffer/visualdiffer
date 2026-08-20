@@ -87,31 +87,48 @@ class LineNumberTableCellView: NSTableCellView {
         }
     }
 
+    // character offsets relative to formattedText
+    var inlineRanges = [Range<Int>]() {
+        didSet {
+            if inlineRanges != oldValue {
+                updateContent()
+            }
+        }
+    }
+
     var font: NSFont? {
         didSet {
             lineNumberTextField.font = font
             contentTextField.font = font
-            updateContent()
+
+            // a recycled cell keeps the font of the panel, redrawing it again would
+            // rebuild the whole content for nothing
+            if font != oldValue {
+                updateContent()
+            }
         }
     }
 
     var isWordWrapEnabled: Bool = false {
         didSet {
             updateWordWrapSettings()
-            updateContent()
+
+            if isWordWrapEnabled != oldValue {
+                updateContent()
+            }
         }
     }
 
     var isHighlighted = false {
         didSet {
-            updateColors()
+            updateColorsAndText()
         }
     }
 
     dynamic var isSelected: Bool = false {
         didSet {
             if oldValue != isSelected {
-                updateColors()
+                updateColorsAndText()
             }
         }
     }
@@ -123,9 +140,9 @@ class LineNumberTableCellView: NSTableCellView {
         setupConstraints()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     // MARK: - Setup
@@ -204,12 +221,60 @@ class LineNumberTableCellView: NSTableCellView {
         if diffLine.number > 0 {
             showLineNumberAndText()
             lineNumberTextField.stringValue = String(format: "%ld", diffLine.number)
-            contentTextField.stringValue = formattedText ?? diffLine.text
             updateColors()
+            updateText(diffLine)
             updateSectionSeparator()
         } else {
             showMissingLineImage()
         }
+    }
+
+    /// the highlighted text has to be rebuilt together with the colors, because textColor
+    /// does not override the foreground attributes of an attributed string, a plain text
+    /// follows textColor and can be left alone
+    private func updateColorsAndText() {
+        updateColors()
+
+        if !inlineRanges.isEmpty, let diffLine, diffLine.number > 0 {
+            updateText(diffLine)
+        }
+    }
+
+    private func updateText(_ diffLine: DiffLine) {
+        guard let text = formattedText,
+              !inlineRanges.isEmpty,
+              let font,
+              let inlineColors = diffLine.inlineColors else {
+            contentTextField.stringValue = formattedText ?? diffLine.text
+            return
+        }
+
+        let paragraphStyle = NSMutableParagraphStyle()
+
+        paragraphStyle.lineBreakMode = contentTextField.lineBreakMode
+
+        // the highlight changes colors only, a bolder font would change the glyph
+        // advances and break the alignment between the two panels
+        let normalStyle: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: diffLine.color(for: .text, isSelected: isSelected),
+            .paragraphStyle: paragraphStyle,
+        ]
+        // the background is painted over the selection too, whitespace has no ink to
+        // colour, so without the patch a difference made of spaces or tabs would show
+        // nothing on a selected row
+        let highlightStyle: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: inlineColors.text,
+            .paragraphStyle: paragraphStyle,
+            .backgroundColor: inlineColors.background,
+        ]
+
+        contentTextField.attributedStringValue = text.highlights(
+            text.characterRanges(from: inlineRanges),
+            normalStyle: normalStyle,
+            highlightStyle: highlightStyle
+        )
     }
 
     private func showLineNumberAndText() {

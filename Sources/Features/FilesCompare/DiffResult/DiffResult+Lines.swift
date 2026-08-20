@@ -135,7 +135,10 @@ extension LineEditOperation {
 
 extension DiffResult {
     static func justDifferentLines(_ result: DiffResult) -> DiffResult {
-        let onlyMismatches = DiffResult(sections: DiffSection.compact(sections: result.sections))
+        let onlyMismatches = DiffResult(
+            sections: DiffSection.compact(sections: result.sections),
+            options: result.options
+        )
         onlyMismatches.inheritSideMetadata(from: result)
 
         let leftSide = onlyMismatches.leftSide
@@ -188,7 +191,7 @@ extension DiffResult {
 
     static func justMatchingLines(_ result: DiffResult) -> DiffResult {
         // difference sections are not visible
-        let onlyMatches = DiffResult()
+        let onlyMatches = DiffResult(options: result.options)
         onlyMatches.inheritSideMetadata(from: result)
 
         let leftSide = onlyMatches.leftSide
@@ -228,7 +231,6 @@ extension DiffResult {
         return onlyMatches
     }
 
-    // a filtered result must inherit the per-side metadata of its source result
     private func inheritSideMetadata(from result: DiffResult) {
         leftSide.eol = result.leftSide.eol
         rightSide.eol = result.rightSide.eol
