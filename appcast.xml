@@ -5,34 +5,39 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.20</title>
+            <title>Version 2.1.21</title>
             <description>
                 <![CDATA[
-                <h1 id="v2120">v2.1.20</h1>
+                <h1 id="v2121">v2.1.21</h1>
 
 <h3 id="features">🚀 Features</h3>
 
 <ul>
-  <li>replace the old objc scopebar with something more modern (<a href="https://github.com/visualdiffer/visualdiffer/commit/2571d8a18457edf3c0f6a5eb02dd0ef919cae786">2571d8a</a>)</li>
+  <li>File Compare: highlight character differences inside changed lines (<a href="https://github.com/visualdiffer/visualdiffer/commit/46fef90c9010bb1937a9dd15638b5ee00c677e65">46fef90</a>)</li>
 </ul>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>protect against concurrent access (<a href="https://github.com/visualdiffer/visualdiffer/commit/fbd1ef685626cc6dd25976e6e9670adba204e33a">fbd1ef6</a>)</li>
-  <li>refresh stale secure bookmarks and force update on granted paths (<a href="https://github.com/visualdiffer/visualdiffer/commit/e589128ace697eb32b9705115b227fff5a16f1e2">e589128</a>)</li>
+  <li>Folder Compare: avoid a too tall console pane on tall windows (<a href="https://github.com/visualdiffer/visualdiffer/commit/fb7e7f9a6f5945d92746fd6ca5ea4e40156918f0">fb7e7f9</a>)</li>
+</ul>
+
+<h3 id="documentation">📚 Documentation</h3>
+
+<ul>
+  <li>improve command line usage (<a href="https://github.com/visualdiffer/visualdiffer/commit/427bba0f9f835866d74e382357bb0375dc7dbc13">427bba0</a>)</li>
 </ul>
 
                 ]]>
             </description>
-            <pubDate>Fri, 24 July 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.1.20</sparkle:version>
-            <sparkle:shortVersionString>2.1.20</sparkle:shortVersionString>
+            <pubDate>Fri, 21 August 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.1.21</sparkle:version>
+            <sparkle:shortVersionString>2.1.21</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.20/VisualDiffer-2.1.20.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.21/VisualDiffer-2.1.21.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="bErecqv4WKW6nFKWm29QUR+hKrh0hEY+khpQzzhZHI2mft32LUbA1Jx5cM2p9umLHUzvg9tXu9gCUUhHrmVqCw==" length="5110525"
+                sparkle:edSignature="jF/5m6nU4mphdVncZXxtg7wal+tCrrORp3Zy9c7wI0LNGycQAL7VSqD5Z00PIlllAEH250A5NGAIAzkQmqVTAg==" length="5127280"
 
             />
         </item>
