@@ -15,11 +15,11 @@ extension FolderSelectionInfo {
         case .right:
             !sessionDiff.leftReadOnly
         }
-        return isValid && (foldersCount > 0 || filesCount > 0)
+        return isValid && hasFilesOrFolders
     }
 
     func validateCopyFilesToExternal() -> Bool {
-        foldersCount > 0 || filesCount > 0
+        hasFilesOrFolders
     }
 
     func validateMoveFiles(_ sessionDiff: SessionDiff) -> Bool {
@@ -29,7 +29,7 @@ extension FolderSelectionInfo {
         case .right:
             !sessionDiff.leftReadOnly && !sessionDiff.rightReadOnly
         }
-        return isValid && (foldersCount > 0 || filesCount > 0)
+        return isValid && hasFilesOrFolders
     }
 
     func validateMoveFilesToExternal(_ sessionDiff: SessionDiff) -> Bool {
@@ -39,7 +39,7 @@ extension FolderSelectionInfo {
         case .right:
             !sessionDiff.rightReadOnly
         }
-        return isValid && (foldersCount > 0 || filesCount > 0)
+        return isValid && hasFilesOrFolders
     }
 
     func validateSyncFiles(_ sessionDiff: SessionDiff) -> Bool {
@@ -49,7 +49,7 @@ extension FolderSelectionInfo {
         case .right:
             !sessionDiff.leftReadOnly
         }
-        return isValid && (foldersCount > 0 || filesCount > 0)
+        return isValid && hasFilesOrFolders
     }
 
     func validateDeleteFiles(_ sessionDiff: SessionDiff) -> Bool {
@@ -59,7 +59,7 @@ extension FolderSelectionInfo {
         case .right:
             !sessionDiff.rightReadOnly
         }
-        return isValid && (foldersCount > 0 || filesCount > 0)
+        return isValid && hasFilesOrFolders
     }
 
     func validateFileTouch(_ sessionDiff: SessionDiff) -> Bool {
@@ -69,10 +69,10 @@ extension FolderSelectionInfo {
         case .right:
             !sessionDiff.rightReadOnly
         }
-        return isValid && (foldersCount > 0 || filesCount > 0)
+        return isValid && hasFilesOrFolders
     }
 
     func validateClipboardCopy() -> Bool {
-        !selType.isDisjoint(with: [.folder, .file]) || hasValidPaths
+        hasFilesOrFolders || hasValidPaths
     }
 }

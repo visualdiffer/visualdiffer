@@ -189,13 +189,8 @@ extension FoldersWindowController {
 
     private static func addCompareItems(_ menu: NSMenu) {
         menu.addItem(
-            withTitle: NSLocalizedString("Compare Files", comment: ""),
-            action: #selector(compareFiles),
-            keyEquivalent: ""
-        )
-        menu.addItem(
-            withTitle: NSLocalizedString("Compare Folders", comment: ""),
-            action: #selector(compareFolders),
+            withTitle: NSLocalizedString("Compare", comment: ""),
+            action: #selector(compareItems),
             keyEquivalent: ""
         )
     }

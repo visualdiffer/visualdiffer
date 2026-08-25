@@ -25,6 +25,7 @@ extension NSToolbarItem.Identifier {
         static let differenceNavigation = NSToolbarItem.Identifier("DifferenceNavigation")
         static let openWith = NSToolbarItem.Identifier("OpenWith")
         static let showInFinder = NSToolbarItem.Identifier("ShowInFinder")
+        static let compareItems = NSToolbarItem.Identifier("CompareItems")
     }
 }
 
@@ -69,6 +70,7 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
             .Folders.differenceNavigation,
             .Folders.openWith,
             .Folders.showInFinder,
+            .Folders.compareItems,
         ]
     }
 
@@ -218,6 +220,15 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
                 target: self,
                 action: #selector(showInFinder)
             )
+        } else if itemIdentifier == .Folders.compareItems {
+            return NSToolbarItem(
+                identifier: itemIdentifier,
+                label: NSLocalizedString("Compare", comment: ""),
+                tooltip: NSLocalizedString("Compare selected files or folders", comment: ""),
+                image: VDSymbol.Toolbar.compareItems.image(),
+                target: self,
+                action: #selector(compareItems)
+            )
         }
 
         return nil
@@ -248,6 +259,9 @@ extension FoldersWindowController: NSToolbarDelegate, NSToolbarItemValidation {
         if item.itemIdentifier == .Folders.openWith {
             var path: String?
             return fsi.validateOpen(withApp: &path)
+        }
+        if item.itemIdentifier == .Folders.compareItems {
+            return fsi.comparableType != nil
         }
         return true
     }

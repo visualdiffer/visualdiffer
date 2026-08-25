@@ -8,9 +8,9 @@
 
 extension FoldersWindowController: FoldersOutlineViewContextMenu {
     @objc
-    func compareFiles(_: AnyObject?) {
-        let leftSelItems = leftView.selectedItems()
-        let rightSelItems = rightView.selectedItems()
+    func compareItems(_: AnyObject?) {
+        let leftSelItems = leftView.selectedItems(findLeafPaths: false)
+        let rightSelItems = rightView.selectedItems(findLeafPaths: false)
         var leftItem: CompareItem?
         var rightItem: CompareItem?
 
@@ -22,6 +22,10 @@ extension FoldersWindowController: FoldersOutlineViewContextMenu {
             leftItem = leftSelItems.last
             rightItem = rightSelItems.last
         case 0:
+            guard rightSelItems.count == 2 else {
+                return
+            }
+
             leftItem = rightSelItems[0]
             rightItem = rightSelItems[1]
         default:
@@ -35,11 +39,6 @@ extension FoldersWindowController: FoldersOutlineViewContextMenu {
         } catch {
             NSAlert(error: error).runModal()
         }
-    }
-
-    @objc
-    func compareFolders(_ sender: AnyObject?) {
-        compareFiles(sender)
     }
 
     @objc

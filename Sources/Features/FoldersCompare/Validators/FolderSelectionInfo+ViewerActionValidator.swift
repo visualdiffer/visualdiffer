@@ -9,7 +9,7 @@
 @MainActor
 extension FolderSelectionInfo {
     func validateShowInFinder() -> Bool {
-        !selType.isDisjoint(with: [.folder, .file])
+        hasFilesOrFolders
     }
 
     func validateOpen(withApp outSelectedPath: inout String?) -> Bool {
@@ -27,6 +27,6 @@ extension FolderSelectionInfo {
     }
 
     func validatePreviewPanel() -> Bool {
-        foldersCount > 0 || filesCount > 0
+        hasFilesOrFolders
     }
 }

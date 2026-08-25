@@ -9,13 +9,13 @@
 @MainActor
 extension FolderSelectionInfo {
     func validateExclude(byName outExcludedFileName: inout String?) -> Bool {
-        if selType.isEmpty || selType == .nullfile {
+        if !hasFilesOrFolders {
             return false
         }
         if outExcludedFileName != nil {
             // Only one element selected
             if filesCount + foldersCount == 1 {
-                if let row = filesCount > 0 ? filesIndexes.first : foldersIndexes.first,
+                if let row = hasFiles ? filesIndexes.first : foldersIndexes.first,
                    let vi = view.item(atRow: row) as? VisibleItem {
                     let item = vi.item
                     outExcludedFileName = foldersCount == 1 ? item.pathRelativeToRoot : item.fileName
@@ -30,7 +30,7 @@ extension FolderSelectionInfo {
 
     func validateExclude(byExt outExcludedExt: inout String?) -> Bool {
         // Only valid for selection containing only files (null files are skipped)
-        if filesCount == 0 || foldersCount > 0 {
+        if !hasFiles || hasFolders {
             return false
         }
         let indexes = filesIndexes

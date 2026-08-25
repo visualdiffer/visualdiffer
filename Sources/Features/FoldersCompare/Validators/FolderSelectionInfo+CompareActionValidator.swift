@@ -8,31 +8,13 @@
 
 @MainActor
 extension FolderSelectionInfo {
-    func validateCompareFiles() -> Bool {
-        guard let linkedSelInfo = view.linkedView?.selectionInfo else {
-            return false
+    var comparableType: SelectionType? {
+        if hasFilePair {
+            return .file
         }
-
-        if selType == .file, linkedSelInfo.selType.isEmpty {
-            return filesCount == 2
+        if hasFolderPair {
+            return .folder
         }
-        if selType == .file, linkedSelInfo.selType == .file {
-            return filesCount == 1 && linkedSelInfo.filesCount == 1
-        }
-        return false
-    }
-
-    func validateCompareFolders() -> Bool {
-        guard let linkedSelInfo = view.linkedView?.selectionInfo else {
-            return false
-        }
-
-        if selType == .folder, linkedSelInfo.selType.isEmpty {
-            return foldersCount == 2
-        }
-        if selType == .folder, linkedSelInfo.selType == .folder {
-            return foldersCount == 1 && linkedSelInfo.foldersCount == 1
-        }
-        return false
+        return nil
     }
 }

@@ -9,9 +9,7 @@
 @objc
 protocol FoldersOutlineViewContextMenu: NSObjectProtocol {
     @MainActor
-    func compareFiles(_ sender: AnyObject?)
-    @MainActor
-    func compareFolders(_ sender: AnyObject?)
+    func compareItems(_ sender: AnyObject?)
     @MainActor
     func copyFileNames(_ sender: AnyObject?)
     @MainActor
@@ -67,13 +65,8 @@ public extension FoldersOutlineView {
 
     private static func addCompareItems(_ menu: NSMenu) {
         menu.addItem(
-            withTitle: NSLocalizedString("Compare Files", comment: ""),
-            action: #selector(FoldersOutlineViewContextMenu.compareFiles),
-            keyEquivalent: ""
-        )
-        menu.addItem(
-            withTitle: NSLocalizedString("Compare Folders", comment: ""),
-            action: #selector(FoldersOutlineViewContextMenu.compareFolders),
+            withTitle: NSLocalizedString("Compare", comment: ""),
+            action: #selector(FoldersOutlineViewContextMenu.compareItems),
             keyEquivalent: ""
         )
     }

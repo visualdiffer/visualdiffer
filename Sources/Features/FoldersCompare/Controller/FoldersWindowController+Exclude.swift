@@ -17,7 +17,7 @@ extension FoldersWindowController {
         }
 
         let fsi = lastUsedView.selectionInfo
-        let containsFolders = fsi.foldersCount > 0
+        let containsFolders = fsi.hasFolders
 
         var predicateTemplate: NSPredicate
         var propertyKey: (CompareItem) -> String?

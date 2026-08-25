@@ -58,8 +58,17 @@ extension FoldersWindowController: NSMenuDelegate,
             return fsi.validateSetAsBaseFolderOtherSide()
         } else if action == #selector(setAsBaseFoldersBothSides) {
             return fsi.validateSetAsBaseFoldersBothSides()
-        } else if action == #selector(compareFiles) {
-            return fsi.validateCompareFiles()
+        } else if action == #selector(compareItems) {
+            switch fsi.comparableType {
+            case .file?:
+                menuItem.title = NSLocalizedString("Compare Files", comment: "")
+            case .folder?:
+                menuItem.title = NSLocalizedString("Compare Folders", comment: "")
+            default:
+                menuItem.title = NSLocalizedString("Compare", comment: "")
+                return false
+            }
+            return true
         } else if action == #selector(excludeByName) {
             var fileName: String? = ""
             if !fsi.validateExclude(byName: &fileName) {
@@ -116,8 +125,6 @@ extension FoldersWindowController: NSMenuDelegate,
             return scopeBar.findView.hasMatches
         } else if action == #selector(findPrevious) {
             return scopeBar.findView.hasMatches
-        } else if action == #selector(compareFolders) {
-            return fsi.validateCompareFolders()
         } else if action == #selector(moveFiles) {
             switch fsi.view.side {
             case .left:

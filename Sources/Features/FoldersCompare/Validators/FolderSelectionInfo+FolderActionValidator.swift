@@ -17,20 +17,10 @@ extension FolderSelectionInfo {
     }
 
     func validateSetAsBaseFoldersBothSides() -> Bool {
-        guard let linkedSelInfo = view.linkedView?.selectionInfo else {
-            return false
-        }
-
-        if selType == .folder, linkedSelInfo.selType.isEmpty {
-            return foldersCount == 2
-        }
-        if selType == .folder, linkedSelInfo.selType == .folder {
-            return foldersCount == 1 && linkedSelInfo.foldersCount == 1
-        }
-        return false
+        hasFolderPair
     }
 
     func validateExpandSelectedSubfolders() -> Bool {
-        filesCount == 0 && foldersCount > 0
+        !hasFiles && hasFolders
     }
 }

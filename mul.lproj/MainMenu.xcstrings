@@ -505,18 +505,6 @@
         }
       }
     },
-    "608.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"Compare Files\"; ObjectID = \"608\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Compare Files"
-          }
-        }
-      }
-    },
     "609.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Copy Files...\"; ObjectID = \"609\";",
       "extractionState" : "extracted_with_value",

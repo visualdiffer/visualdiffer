@@ -48,6 +48,7 @@ enum VDSymbol {
         case comparisonMethod = "list.bullet.rectangle"
         case wordWrapOn = "vd.wordWrapOn"
         case wordWrapOff = "vd.wordWrapOff"
+        case compareItems = "vd.compareItems"
     }
 
     enum Button: String, VDSymbolImage {
