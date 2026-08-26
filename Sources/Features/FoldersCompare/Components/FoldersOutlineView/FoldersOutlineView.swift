@@ -142,6 +142,10 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
             (delegate as? FoldersOutlineViewContextMenu)?.deleteFiles(nil)
         } else if str == " " {
             QLPreviewPanel.toggle()
+        } else if event.keyCode == KeyCode.tabCharacter, let linkedView {
+            // tab moves the focus between the two panels
+            // the key view loop is not used because it walks out of the panels
+            window?.makeFirstResponder(linkedView)
         } else {
             super.keyDown(with: event)
         }

@@ -12,7 +12,6 @@ extension FilesWindowController {
 
         // must be called after setting up all views
         setupWindow()
-        leftPanelView.treeView.nextKeyView = rightView
     }
 
     func setupWindowLayout() {

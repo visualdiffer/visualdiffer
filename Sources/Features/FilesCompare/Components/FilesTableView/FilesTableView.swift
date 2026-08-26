@@ -109,6 +109,10 @@ class FilesTableView: NSTableView, @preconcurrency DisplayPositionable, ViewLink
             filesTableDelegate?.filesTableView(self, scrollHorizontally: true)
         } else if keyCode == .rightArrow, !isArrowKeyDownWithModifiers {
             filesTableDelegate?.filesTableView(self, scrollHorizontally: false)
+        } else if keyCode == .tab, let linkedView {
+            // tab moves the focus between the two panels
+            // the key view loop is not used because it walks out of the panels
+            window?.makeFirstResponder(linkedView)
         } else {
             super.keyDown(with: event)
         }

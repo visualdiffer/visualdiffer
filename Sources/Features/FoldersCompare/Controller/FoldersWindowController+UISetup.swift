@@ -11,8 +11,6 @@ extension FoldersWindowController {
         setupWindowLayout()
         setupFoldersLayout()
 
-        leftPanelView.treeView.nextKeyView = rightView
-
         updateTreeViewFont()
 
         adjustTableColumnsWidth()
