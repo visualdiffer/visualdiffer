@@ -717,6 +717,12 @@
     "Compare Files" : {
 
     },
+    "Compare Files on Left" : {
+
+    },
+    "Compare Files on Right" : {
+
+    },
     "Compare Finder Label" : {
 
     },
@@ -726,7 +732,19 @@
     "Compare Folders" : {
 
     },
+    "Compare Folders on Left" : {
+
+    },
+    "Compare Folders on Right" : {
+
+    },
     "Compare Folders or Files" : {
+
+    },
+    "Compare on Left" : {
+
+    },
+    "Compare on Right" : {
 
     },
     "Compare selected files or folders" : {

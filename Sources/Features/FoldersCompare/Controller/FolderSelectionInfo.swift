@@ -50,6 +50,10 @@ struct FolderSelectionInfo: @preconcurrency CustomDebugStringConvertible {
         hasPair(of: .folder)
     }
 
+    var hasPairOnSingleSide: Bool {
+        validObjectsIndexes.count == 2
+    }
+
     init(view: FoldersOutlineView) {
         self.view = view
         let indexes = view.selectedRowIndexes

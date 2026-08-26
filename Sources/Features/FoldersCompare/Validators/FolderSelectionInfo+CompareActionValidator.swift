@@ -17,4 +17,25 @@ extension FolderSelectionInfo {
         }
         return nil
     }
+
+    var compareItemsTitle: String {
+        switch (comparableType, hasPairOnSingleSide, view.side) {
+        case (.file?, false, _):
+            NSLocalizedString("Compare Files", comment: "")
+        case (.file?, true, .left):
+            NSLocalizedString("Compare Files on Left", comment: "")
+        case (.file?, true, .right):
+            NSLocalizedString("Compare Files on Right", comment: "")
+        case (.folder?, false, _):
+            NSLocalizedString("Compare Folders", comment: "")
+        case (.folder?, true, .left):
+            NSLocalizedString("Compare Folders on Left", comment: "")
+        case (.folder?, true, .right):
+            NSLocalizedString("Compare Folders on Right", comment: "")
+        case (_, _, .left):
+            NSLocalizedString("Compare on Left", comment: "")
+        case (_, _, .right):
+            NSLocalizedString("Compare on Right", comment: "")
+        }
+    }
 }

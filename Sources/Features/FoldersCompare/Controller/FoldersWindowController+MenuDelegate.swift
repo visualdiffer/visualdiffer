@@ -59,16 +59,8 @@ extension FoldersWindowController: NSMenuDelegate,
         } else if action == #selector(setAsBaseFoldersBothSides) {
             return fsi.validateSetAsBaseFoldersBothSides()
         } else if action == #selector(compareItems) {
-            switch fsi.comparableType {
-            case .file?:
-                menuItem.title = NSLocalizedString("Compare Files", comment: "")
-            case .folder?:
-                menuItem.title = NSLocalizedString("Compare Folders", comment: "")
-            default:
-                menuItem.title = NSLocalizedString("Compare", comment: "")
-                return false
-            }
-            return true
+            menuItem.title = fsi.compareItemsTitle
+            return fsi.comparableType != nil
         } else if action == #selector(excludeByName) {
             var fileName: String? = ""
             if !fsi.validateExclude(byName: &fileName) {
