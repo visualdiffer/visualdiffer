@@ -232,4 +232,39 @@ extension FoldersWindowController: DiffOpenerDelegate {
         }
         return view.row(forItem: vi)
     }
+
+    func compareSelectedItems() {
+        let leftSelItems = leftView.selectedItems(findLeafPaths: false)
+        let rightSelItems = rightView.selectedItems(findLeafPaths: false)
+        var leftItem: CompareItem?
+        var rightItem: CompareItem?
+
+        switch leftSelItems.count {
+        case 2:
+            leftItem = leftSelItems[0]
+            rightItem = leftSelItems[1]
+        case 1:
+            leftItem = leftSelItems.last
+            rightItem = rightSelItems.last
+        case 0:
+            guard rightSelItems.count == 2 else {
+                return
+            }
+
+            leftItem = rightSelItems[0]
+            rightItem = rightSelItems[1]
+        default:
+            return
+        }
+        do {
+            if let document = try VDDocumentController.shared.openDifferDocument(
+                leftURL: leftItem?.toURL(),
+                rightURL: rightItem?.toURL()
+            ) {
+                addChildDocument(document)
+            }
+        } catch {
+            NSAlert(error: error).runModal()
+        }
+    }
 }

@@ -340,6 +340,15 @@ extension FoldersWindowController: NSOutlineViewDelegate,
         }
     }
 
+    public func execute(_ view: FoldersOutlineView) {
+        guard !running,
+              view.selectionInfo.comparableType != nil else {
+            return
+        }
+
+        compareSelectedItems()
+    }
+
     // MARK: - OutlineViewExpandItemDelegate implementation
 
     public func itemDidExpand(_ item: Any?, outlineView: NSOutlineView) {

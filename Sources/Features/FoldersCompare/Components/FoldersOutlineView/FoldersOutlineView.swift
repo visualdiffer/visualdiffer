@@ -13,6 +13,7 @@ protocol FoldersOutlineViewDelegate: NSOutlineViewDelegate {
     func foldersOutlineView(_ view: FoldersOutlineView, doubleClickFileObject clickedRow: Int)
     func selectionChanged(in view: FoldersOutlineView)
     func setLastUsedViewResponder(_ view: FoldersOutlineView)
+    func execute(_ view: FoldersOutlineView)
 }
 
 public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositionable, ViewLinkable {
@@ -136,7 +137,11 @@ public class FoldersOutlineView: NSOutlineView, @preconcurrency DisplayPositiona
         let key = str[str.startIndex].asciiValue ?? 0
 
         if key == NSCarriageReturnCharacter || key == NSEnterCharacter {
-            handleEnterKeypressed(selectedRow)
+            if event.modifierFlags.contains(.option) {
+                (delegate as? FoldersOutlineViewDelegate)?.execute(self)
+            } else {
+                handleEnterKeypressed(selectedRow)
+            }
         } else if event.keyCode == KeyCode.forwardDeleteCharacter {
             // see http://www.evernote.com/shard/s106/sh/1ed6fa73-10bd-445e-a086-0c8fcdf1af43/0285d57405aa350a98fcb5c6ffc09067
             (delegate as? FoldersOutlineViewContextMenu)?.deleteFiles(nil)
