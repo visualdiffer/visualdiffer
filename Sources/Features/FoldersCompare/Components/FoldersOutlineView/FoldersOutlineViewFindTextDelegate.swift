@@ -27,25 +27,22 @@ class FoldersOutlineViewFindTextDelegate: @preconcurrency FindTextDelegate {
         return false
     }
 
-    func find(findText _: FindText, searchPattern pathPattern: String) -> Bool {
-        // use the search pattern exactly as entered because path normalization changes
-        // components such as the current and parent directories and can turn a bare file
-        // name into an absolute path
-        let globPattern = pathPattern.convertGlobMetaCharsToRegexpMetaChars()
-        let re = try? NSRegularExpression(
-            pattern: globPattern,
-            options: .caseInsensitive
-        )
+    func find(findText: FindText, searchPattern pattern: String) -> Bool {
+        let options = findText.findOptions
 
-        guard let re,
+        guard let matcher = options.matcher(for: pattern),
               let firstChild = view.dataSource?.outlineView?(view, child: 0, ofItem: nil) as? VisibleItem,
               let rootVisibleItem = firstChild.item.parent?.visibleItem else {
             return false
         }
 
-        // enable the search full path if the pattern contains a path separator
-        let searchFullPath = pathPattern.contains("/")
-        rootVisibleItem.findFileName(regex: re, searchFullPath: searchFullPath, items: &fileNames)
+        let filter = FileNameFilter(
+            matches: matcher,
+            includesFiles: options.matchFiles,
+            includesFolders: options.matchFolders
+        )
+
+        fileNames = rootVisibleItem.findItems(matching: filter)
 
         return true
     }
@@ -56,5 +53,25 @@ class FoldersOutlineViewFindTextDelegate: @preconcurrency FindTextDelegate {
 
     func clearMatches(in _: FindText) {
         fileNames.removeAll()
+    }
+
+    func selectAllMatches(in _: FindText, side: DisplaySide) {
+        var expandedParents = Set<ObjectIdentifier>()
+
+        // expand every parent first because the rows to select are known only when all matches are visible
+        for vi in fileNames {
+            // items sharing the parent share the whole ancestor chain, expanding it once is enough
+            guard let parent = vi.item.parent,
+                  expandedParents.insert(ObjectIdentifier(parent)).inserted else {
+                continue
+            }
+
+            view.expandParents(of: vi)
+        }
+
+        // the matches belong to the tree of view, the rows of the two sides are aligned
+        let target = side == view.side ? view : view.linkedView
+
+        target?.select(rows: view.rows(forItems: fileNames), scrollToFirst: true, center: true)
     }
 }

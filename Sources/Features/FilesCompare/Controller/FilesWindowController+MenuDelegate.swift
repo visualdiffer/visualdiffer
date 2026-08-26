@@ -47,6 +47,8 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
                 for: item
             )
             return true
+        } else if action == #selector(selectAllFound) {
+            return scopeBar.findView.hasMatches
         } else if action == #selector(saveFile) {
             return lastUsedView.isDirty
         } else if action == #selector(saveLeftFile) {

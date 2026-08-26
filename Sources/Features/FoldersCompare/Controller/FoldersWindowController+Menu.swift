@@ -181,6 +181,31 @@ extension FoldersWindowController {
             action: #selector(findPrevious),
             keyEquivalent: "G"
         )
+
+        let selectAllFoundItem = NSMenuItem(
+            title: NSLocalizedString("Select All Found", comment: ""),
+            action: nil,
+            keyEquivalent: ""
+        )
+        let selectAllFoundSub = NSMenu(title: NSLocalizedString("Select All Found", comment: ""))
+        selectAllFoundSub.addItem(
+            withTitle: NSLocalizedString("Left Side", comment: ""),
+            action: #selector(selectAllFound),
+            keyEquivalent: ""
+        ).tag = SelectionSide.left.rawValue
+        selectAllFoundSub.addItem(
+            withTitle: NSLocalizedString("Right Side", comment: ""),
+            action: #selector(selectAllFound),
+            keyEquivalent: ""
+        ).tag = SelectionSide.right.rawValue
+        selectAllFoundSub.addItem(
+            withTitle: NSLocalizedString("Both Sides", comment: ""),
+            action: #selector(selectAllFound),
+            keyEquivalent: ""
+        ).tag = SelectionSide.both.rawValue
+        findSub.setSubmenu(selectAllFoundSub, for: selectAllFoundItem)
+        findSub.addItem(selectAllFoundItem)
+
         menu.setSubmenu(findSub, for: findItem)
         menu.addItem(findItem)
 

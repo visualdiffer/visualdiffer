@@ -117,6 +117,8 @@ extension FoldersWindowController: NSMenuDelegate,
             return scopeBar.findView.hasMatches
         } else if action == #selector(findPrevious) {
             return scopeBar.findView.hasMatches
+        } else if action == #selector(selectAllFound) {
+            return scopeBar.findView.hasMatches
         } else if action == #selector(moveFiles) {
             switch fsi.view.side {
             case .left:

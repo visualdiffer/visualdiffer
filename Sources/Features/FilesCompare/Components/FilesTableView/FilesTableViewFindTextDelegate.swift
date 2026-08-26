@@ -16,37 +16,20 @@ class FilesTableViewFindTextDelegate: NSObject, @preconcurrency FindTextDelegate
         self.view = view
     }
 
-    func find(findText _: FindText, searchPattern pattern: String) -> Bool {
-        let globPattern = pattern.convertGlobMetaCharsToRegexpMetaChars()
-        guard let re = try? NSRegularExpression(
-            pattern: globPattern,
-            options: .caseInsensitive
-        ),
-            let left = view.diffSide?.lines,
-            let right = view.linkedView?.diffSide?.lines else {
+    func find(findText: FindText, searchPattern pattern: String) -> Bool {
+        guard let matcher = findText.findOptions.matcher(for: pattern),
+              let left = view.diffSide?.lines,
+              let right = view.linkedView?.diffSide?.lines else {
             return false
         }
 
+        // a line matches when the text is found on any of the two sides
         for i in 0 ..< left.count {
-            var line = left[i].text
-            var range = re.rangeOfFirstMatch(
-                in: line,
-                options: [],
-                range: NSRange(location: 0, length: line.utf16.count)
-            )
-            if range.location == NSNotFound {
-                line = right[i].text
-                range = re.rangeOfFirstMatch(
-                    in: line,
-                    options: [],
-                    range: NSRange(location: 0, length: line.utf16.count)
-                )
-            }
-
-            if range.location != NSNotFound {
+            if matcher(left[i].text) || matcher(right[i].text) {
                 lines.append(i)
             }
         }
+
         return true
     }
 
@@ -59,10 +42,7 @@ class FilesTableViewFindTextDelegate: NSObject, @preconcurrency FindTextDelegate
         }
 
         if row < count {
-            view.scrollRowToVisible(row)
-            let indexes = IndexSet(integer: row)
-            view.selectRowIndexes(indexes, byExtendingSelection: false)
-            view.linkedView?.selectRowIndexes(indexes, byExtendingSelection: false)
+            select(rows: IndexSet(integer: row))
 
             return true
         }
@@ -77,5 +57,30 @@ class FilesTableViewFindTextDelegate: NSObject, @preconcurrency FindTextDelegate
 
     func clearMatches(in _: FindText) {
         lines.removeAll()
+    }
+
+    func selectAllMatches(in _: FindText, side: DisplaySide) {
+        guard let dataSource = view.dataSource,
+              let count = dataSource.numberOfRows?(in: view) else {
+            return
+        }
+
+        select(rows: IndexSet(lines.filter { $0 < count }), side: side)
+    }
+
+    private func select(rows: IndexSet) {
+        select(rows: rows, side: view.side)
+        select(rows: rows, side: view.side.opposite)
+    }
+
+    private func select(rows: IndexSet, side: DisplaySide) {
+        // the rows of the two sides are aligned
+        guard let firstRow = rows.first,
+              let target = side == view.side ? view : view.linkedView else {
+            return
+        }
+
+        target.scrollRowToVisible(firstRow)
+        target.selectRowIndexes(rows, byExtendingSelection: false)
     }
 }

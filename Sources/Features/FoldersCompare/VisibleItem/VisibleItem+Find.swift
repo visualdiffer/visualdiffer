@@ -6,32 +6,17 @@
 //  Copyright (c) 2010 visualdiffer.com
 //
 
+struct FileNameFilter {
+    let matches: (String) -> Bool
+    let includesFiles: Bool
+    let includesFolders: Bool
+}
+
 extension VisibleItem {
-    func findFileName(
-        regex: NSRegularExpression,
-        searchFullPath usePath: Bool,
-        items: inout [VisibleItem]
-    ) {
-        let fileName = if usePath {
-            item.path ?? item.linkedItem?.path
-        } else {
-            item.fileName ?? item.linkedItem?.fileName
-        }
-        guard let fileName else {
-            return
-        }
-
-        if regex.firstMatch(
-            in: fileName,
-            options: [],
-            range: NSRange(location: 0, length: fileName.utf16.count)
-        ) != nil {
-            items.append(self)
-        }
-
-        for vi in children {
-            vi.findFileName(regex: regex, searchFullPath: usePath, items: &items)
-        }
+    func findItems(matching filter: FileNameFilter) -> [VisibleItem] {
+        var foundItems = [VisibleItem]()
+        findItems(matching: filter, into: &foundItems)
+        return foundItems
     }
 
     func findItems(_ isIncluded: (VisibleItem) -> Bool) -> [VisibleItem] {
@@ -50,6 +35,26 @@ extension VisibleItem {
 
     func findFolders() -> [VisibleItem] {
         findItems { $0.item.isFolder }
+    }
+
+    private func findItems(
+        matching filter: FileNameFilter,
+        into foundItems: inout [VisibleItem]
+    ) {
+        guard let fileName = item.fileName ?? item.linkedItem?.fileName else {
+            return
+        }
+
+        let isIncluded = item.isFolder ? filter.includesFolders : filter.includesFiles
+
+        if isIncluded, filter.matches(fileName) {
+            foundItems.append(self)
+        }
+
+        // the children are always visited, a folder excluded from the search can contain matching files
+        for vi in children {
+            vi.findItems(matching: filter, into: &foundItems)
+        }
     }
 
     private func findItems(

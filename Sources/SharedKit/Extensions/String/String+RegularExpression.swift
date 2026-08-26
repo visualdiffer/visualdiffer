@@ -8,53 +8,6 @@
 
 import Foundation
 
-private struct GlobConverter {
-    private var regex = [NSRegularExpression]()
-    private var templates = [String]()
-
-    init() {
-        let globs = [
-            ("([.^$+(){}\\[\\]\\\\|])", "\\\\$1"),
-            ("\\?", "(.|[\r\n])"),
-            ("\\*", "(.|[\r\n])*"),
-        ]
-
-        for (regexString, templateString) in globs {
-            do {
-                let re = try NSRegularExpression(
-                    pattern: regexString,
-                    options: .caseInsensitive
-                )
-                regex.append(re)
-                templates.append(templateString)
-            } catch {
-                preconditionFailure("invalid static regex pattern '\(regexString)': \(error)")
-            }
-        }
-    }
-
-    private func replace(index: Int, in str: String) -> String {
-        let re = regex[index]
-        let template = templates[index]
-
-        return re.stringByReplacingMatches(
-            in: str,
-            options: [],
-            range: NSRange(location: 0, length: str.utf16.count),
-            withTemplate: template
-        )
-    }
-
-    func convert(_ str: String) -> String {
-        var re = str
-
-        for i in 0 ..< regex.count {
-            re = replace(index: i, in: re)
-        }
-        return re
-    }
-}
-
 public extension String {
     /**
      * Replace tagged expressions ($1, $2, ...) present in template
@@ -123,22 +76,5 @@ public extension String {
             }
         }
         return inString
-    }
-
-    /**
-      * Convert a glob string to a valid regular expression string
-      * Strings like "*m" are converted to ".*m"
-      * Brackets and "?" are correctly escaped
-     */
-    private func _convertGlobMetaCharsToRegexpMetaChars() -> String {
-        enum Static {
-            static let converter: GlobConverter = .init()
-        }
-
-        return Static.converter.convert(self)
-    }
-
-    func convertGlobMetaCharsToRegexpMetaChars() -> String {
-        _convertGlobMetaCharsToRegexpMetaChars()
     }
 }

@@ -219,6 +219,23 @@ extension FilesWindowController {
     }
 
     @objc
+    func selectAllFound(_ sender: AnyObject) {
+        guard let sender = sender as? NSMenuItem else {
+            return
+        }
+
+        let side = SelectionSide(menuItem: sender)
+        let findView = scopeBar.findView
+
+        if side.contains(.left) {
+            findView.delegate?.selectAllMatches(in: findView, side: .left)
+        }
+        if side.contains(.right) {
+            findView.delegate?.selectAllMatches(in: findView, side: .right)
+        }
+    }
+
+    @objc
     func setLeftReadOnly(_: AnyObject) {
         sessionDiff.leftReadOnly.toggle()
     }

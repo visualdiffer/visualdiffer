@@ -11,14 +11,24 @@ protocol FindTextDelegate: AnyObject {
     func find(findText: FindText, moveToMatchIndex index: Int) -> Bool
     func numberOfMatches(in findText: FindText) -> Int
     func clearMatches(in findText: FindText)
+    func selectAllMatches(in findText: FindText, side: DisplaySide)
 }
 
-class FindText: NSView, NSSearchFieldDelegate {
+class FindText: NSView, NSSearchFieldDelegate, NSMenuItemValidation {
     private static let viewHeight: CGFloat = 25
 
     private var lastIndexFound = -1
 
     var delegate: FindTextDelegate?
+
+    // files and folders can be matched separately only when searching a folders comparison
+    var showsFileFilters = false {
+        didSet {
+            updateSearchMenu()
+        }
+    }
+
+    private(set) var findOptions = FindOptions()
 
     private lazy var rewindView: WindowOSD = .init(
         image: VDSymbol.Asset.rewind.image(),
@@ -87,6 +97,48 @@ class FindText: NSView, NSSearchFieldDelegate {
         return view
     }()
 
+    private lazy var matchCaseItem = menuItem(
+        NSLocalizedString("Match Case", comment: ""),
+        action: #selector(toggleMatchCase)
+    )
+
+    private lazy var matchFilesItem = menuItem(
+        NSLocalizedString("Match Files", comment: ""),
+        action: #selector(toggleMatchFiles)
+    )
+
+    private lazy var matchFoldersItem = menuItem(
+        NSLocalizedString("Match Folders", comment: ""),
+        action: #selector(toggleMatchFolders)
+    )
+
+    private lazy var modeItems: [NSMenuItem] = FindMode.allCases.map { mode in
+        let item = NSMenuItem(
+            title: mode.title,
+            action: #selector(selectFindMode),
+            keyEquivalent: ""
+        )
+
+        item.target = self
+        // the tag is the only way to know the clicked mode because the menu shown
+        // by the search field is a copy of this template
+        item.tag = mode.rawValue
+
+        return item
+    }
+
+    private lazy var searchMenu: NSMenu = {
+        let menu = NSMenu()
+
+        modeItems.forEach { menu.addItem($0) }
+        menu.addItem(.separator())
+        menu.addItem(matchCaseItem)
+        menu.addItem(matchFilesItem)
+        menu.addItem(matchFoldersItem)
+
+        return menu
+    }()
+
     var placeholder: String {
         get { searchField.placeholderString ?? "" }
         set { searchField.placeholderString = newValue }
@@ -107,6 +159,8 @@ class FindText: NSView, NSSearchFieldDelegate {
         addSubview(searchField)
         addSubview(arrows)
         addSubview(countLabel)
+
+        updateSearchMenu()
 
         setupConstraints()
     }
@@ -174,6 +228,8 @@ class FindText: NSView, NSSearchFieldDelegate {
 
         if delegate.find(findText: self, searchPattern: pattern) {
             moveToMatch(true)
+        } else {
+            updateCount()
         }
     }
 
@@ -245,5 +301,73 @@ class FindText: NSView, NSSearchFieldDelegate {
     override func becomeFirstResponder() -> Bool {
         // doesn't expose searchField field but allow to set first responder
         searchField.becomeFirstResponder()
+    }
+
+    @objc
+    private func toggleMatchCase(_: AnyObject) {
+        findOptions.matchCase.toggle()
+        optionsChanged()
+    }
+
+    @objc
+    private func toggleMatchFiles(_: AnyObject) {
+        findOptions.matchFiles.toggle()
+        optionsChanged()
+    }
+
+    @objc
+    private func toggleMatchFolders(_: AnyObject) {
+        findOptions.matchFolders.toggle()
+        optionsChanged()
+    }
+
+    @objc
+    private func selectFindMode(_ sender: NSMenuItem) {
+        guard let mode = FindMode(rawValue: sender.tag),
+              mode != findOptions.mode else {
+            return
+        }
+
+        findOptions.mode = mode
+        optionsChanged()
+    }
+
+    private func optionsChanged() {
+        // the matches found with the previous options are no longer valid
+        search(self)
+    }
+
+    private func updateSearchMenu() {
+        matchFilesItem.isHidden = !showsFileFilters
+        matchFoldersItem.isHidden = !showsFileFilters
+
+        // the template is copied when it is assigned, so it must be assigned again to show the changes
+        searchField.searchMenuTemplate = searchMenu
+    }
+
+    // the shown items are copies of the template ones, their state is set while the menu is validated
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(toggleMatchCase) {
+            menuItem.state = findOptions.matchCase ? .on : .off
+        } else if menuItem.action == #selector(selectFindMode) {
+            menuItem.state = menuItem.tag == findOptions.mode.rawValue ? .on : .off
+        } else if menuItem.action == #selector(toggleMatchFiles) {
+            menuItem.state = findOptions.matchFiles ? .on : .off
+            // the last checked file type cannot be turned off, nothing could be found anymore
+            return findOptions.matchFolders || !findOptions.matchFiles
+        } else if menuItem.action == #selector(toggleMatchFolders) {
+            menuItem.state = findOptions.matchFolders ? .on : .off
+            return findOptions.matchFiles || !findOptions.matchFolders
+        }
+
+        return true
+    }
+
+    private func menuItem(_ title: String, action: Selector) -> NSMenuItem {
+        let item = NSMenuItem(title: title, action: action, keyEquivalent: "")
+
+        item.target = self
+
+        return item
     }
 }

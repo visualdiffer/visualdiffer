@@ -43,6 +43,7 @@ class DisplayFiltersScopeBar: ScopeBarView {
     func initScopeBar(_ actionDelegate: DisplayFiltersScopeBarDelegate) {
         self.actionDelegate = actionDelegate
         findView.placeholder = NSLocalizedString("Find File Name <⌘F>", comment: "")
+        findView.showsFileFilters = true
         accessoryView = findView
 
         reload(groups: [

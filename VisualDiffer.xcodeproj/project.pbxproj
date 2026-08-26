@@ -98,6 +98,7 @@
 		553741CC2E9372DF00AB56D0 /* FilesWindowController+UICreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FD82E9372DF00AB56D0 /* FilesWindowController+UICreation.swift */; };
 		553741CD2E9372DF00AB56D0 /* NSTableView+Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537410A2E9372DF00AB56D0 /* NSTableView+Row.swift */; };
 		553741CE2E9372DF00AB56D0 /* FindText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537416E2E9372DF00AB56D0 /* FindText.swift */; };
+		55A1B2C12F0A100100AB56D0 /* FindOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A1B2C02F0A100100AB56D0 /* FindOptions.swift */; };
 		553741CF2E9372DF00AB56D0 /* FoldersTraversalBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740902E9372DF00AB56D0 /* FoldersTraversalBox.swift */; };
 		553741D02E9372DF00AB56D0 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741342E9372DF00AB56D0 /* FileError.swift */; };
 		553741D12E9372DF00AB56D0 /* OpenEditorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537413B2E9372DF00AB56D0 /* OpenEditorError.swift */; };
@@ -866,6 +867,7 @@
 		5537416A2E9372DF00AB56D0 /* DiffCountersTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffCountersTextFieldCell.swift; sourceTree = "<group>"; };
 		5537416B2E9372DF00AB56D0 /* DifferenceCounters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceCounters.swift; sourceTree = "<group>"; };
 		5537416D2E9372DF00AB56D0 /* FilePathTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePathTextField.swift; sourceTree = "<group>"; };
+		55A1B2C02F0A100100AB56D0 /* FindOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindOptions.swift; sourceTree = "<group>"; };
 		5537416E2E9372DF00AB56D0 /* FindText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindText.swift; sourceTree = "<group>"; };
 		5537416F2E9372DF00AB56D0 /* NSTextField+CenterVertically.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+CenterVertically.swift"; sourceTree = "<group>"; };
 		553741702E9372DF00AB56D0 /* PathControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathControl.swift; sourceTree = "<group>"; };
@@ -2494,6 +2496,7 @@
 			children = (
 				5537416C2E9372DF00AB56D0 /* DiffCounters */,
 				5537416D2E9372DF00AB56D0 /* FilePathTextField.swift */,
+				55A1B2C02F0A100100AB56D0 /* FindOptions.swift */,
 				5537416E2E9372DF00AB56D0 /* FindText.swift */,
 				5537416F2E9372DF00AB56D0 /* NSTextField+CenterVertically.swift */,
 				553741702E9372DF00AB56D0 /* PathControl.swift */,
@@ -3106,6 +3109,7 @@
 				557BBB0E2ED1BBB00016CBD4 /* DiffLineComponent.swift in Sources */,
 				553741CD2E9372DF00AB56D0 /* NSTableView+Row.swift in Sources */,
 				553741CE2E9372DF00AB56D0 /* FindText.swift in Sources */,
+				55A1B2C12F0A100100AB56D0 /* FindOptions.swift in Sources */,
 				553741CF2E9372DF00AB56D0 /* FoldersTraversalBox.swift in Sources */,
 				553741D02E9372DF00AB56D0 /* FileError.swift in Sources */,
 				55450B192ED47B700048619F /* FileSessionPreferencesWindow+PreferencesBoxDataSource.swift in Sources */,

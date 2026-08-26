@@ -28,14 +28,7 @@ extension FoldersOutlineView {
         return arr
     }
 
-    @discardableResult
-    func select(
-        visibleItems items: [VisibleItem],
-        scrollToFirst: Bool = false,
-        center: Bool = false,
-        selectLinked: Bool = false,
-        byExtendingSelection: Bool = false
-    ) -> Bool {
+    func rows(forItems items: [VisibleItem]) -> IndexSet {
         var indexes = IndexSet()
 
         for vi in items {
@@ -45,8 +38,19 @@ extension FoldersOutlineView {
             }
         }
 
-        return select(
-            rows: indexes,
+        return indexes
+    }
+
+    @discardableResult
+    func select(
+        visibleItems items: [VisibleItem],
+        scrollToFirst: Bool = false,
+        center: Bool = false,
+        selectLinked: Bool = false,
+        byExtendingSelection: Bool = false
+    ) -> Bool {
+        select(
+            rows: rows(forItems: items),
             scrollToFirst: scrollToFirst,
             center: center,
             selectLinked: selectLinked,
@@ -107,7 +111,7 @@ extension FoldersOutlineView {
             parent = parent?.parent
         }
 
-        for parent in parents.reversed() {
+        for parent in parents.reversed() where !isItemExpanded(parent) {
             expandItem(parent)
         }
     }
