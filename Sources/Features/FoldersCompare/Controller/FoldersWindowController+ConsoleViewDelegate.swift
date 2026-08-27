@@ -9,9 +9,12 @@
 extension FoldersWindowController: @preconcurrency ConsoleViewDelegate {
     // MARK: - Delegate
 
-    func hide(console: ConsoleView) {
-        consoleSplitter.toggleSubview(at: 1)
-        console.focus()
+    func hide(console _: ConsoleView) {
+        if consoleSplitter.hasSubviewCollapsed {
+            showConsoleView()
+        } else {
+            hideConsoleView()
+        }
     }
 
     // MARK: - ConsoleSplitView
@@ -24,6 +27,13 @@ extension FoldersWindowController: @preconcurrency ConsoleViewDelegate {
     func showConsoleView() {
         consoleSplitter.expandSubview(at: 1)
         consoleView.focus()
+    }
+
+    func hideConsoleView() {
+        consoleSplitter.collapseSubview(at: 1)
+        // focus lost on console hide, AppKit leaves the first responder on the
+        // hidden text view and the window moves it to the toolbar
+        window?.makeFirstResponder(lastUsedView)
     }
 
     @objc
