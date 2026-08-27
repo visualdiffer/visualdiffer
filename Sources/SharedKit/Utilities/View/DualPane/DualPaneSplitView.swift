@@ -81,6 +81,8 @@ class DualPaneSplitView: NSSplitView {
         }
         collapseView.isHidden = true
         adjustSubviews()
+        // force a layout pass so AppKit removes the collapsed divider layer
+        needsLayout = true
     }
 
     @objc
