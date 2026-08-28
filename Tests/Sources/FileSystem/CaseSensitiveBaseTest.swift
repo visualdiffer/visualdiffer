@@ -28,7 +28,7 @@ open class CaseSensitiveBaseTest: BaseTests {
             if !FileManager.default.fileExists(atPath: volumePath.osPath) {
                 let process = Process()
                 process.executableURL = URL(filePath: "/bin/sh")
-                process.arguments = ["-c", "diskutil erasevolume 'Case-sensitive HFS+' '\(volumeName)' `hdiutil attach -nomount ram://1048576`"]
+                process.arguments = ["-c", "diskutil erasevolume 'Case-sensitive HFS+' '\(volumeName)' $(diskutil image attach ram://1048576)"]
                 do {
                     try process.run()
                 } catch {
