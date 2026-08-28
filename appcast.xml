@@ -5,39 +5,42 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.21</title>
+            <title>Version 2.1.22</title>
             <description>
                 <![CDATA[
-                <h1 id="v2121">v2.1.21</h1>
+                <h1 id="v2122">v2.1.22</h1>
 
 <h3 id="features">🚀 Features</h3>
 
 <ul>
-  <li>File Compare: highlight character differences inside changed lines (<a href="https://github.com/visualdiffer/visualdiffer/commit/46fef90c9010bb1937a9dd15638b5ee00c677e65">46fef90</a>)</li>
+  <li>allow selecting all search results (<a href="https://github.com/visualdiffer/visualdiffer/commit/b6468570aed2a039ba5dd7081651c05516432d4f">b646857</a>)</li>
+  <li>compare items using the [Option]+[Enter] key combination (<a href="https://github.com/visualdiffer/visualdiffer/commit/4387b6199531adcfc7171940d4372d58ff262fd2">4387b61</a>)</li>
 </ul>
 
 <h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>Folder Compare: avoid a too tall console pane on tall windows (<a href="https://github.com/visualdiffer/visualdiffer/commit/fb7e7f9a6f5945d92746fd6ca5ea4e40156918f0">fb7e7f9</a>)</li>
+  <li>move focus on last use panel when console hides (<a href="https://github.com/visualdiffer/visualdiffer/commit/791c88c80a6704dc3f668577126970e8aec77b79">791c88c</a>)</li>
+  <li>move focus to next/prev panel with TAB is pressed (<a href="https://github.com/visualdiffer/visualdiffer/commit/5f226a075ffc0b302d5e3028d014a4ea18b07dfc">5f226a0</a>)</li>
+  <li>hide stale divider knob (<a href="https://github.com/visualdiffer/visualdiffer/commit/034865829a962eeec185f0f3f62de6df5626491a">0348658</a>)</li>
 </ul>
 
-<h3 id="documentation">📚 Documentation</h3>
+<h3 id="refactoring">♻️ Refactoring</h3>
 
 <ul>
-  <li>improve command line usage (<a href="https://github.com/visualdiffer/visualdiffer/commit/427bba0f9f835866d74e382357bb0375dc7dbc13">427bba0</a>)</li>
+  <li>merge ‘Compare Files’ and ‘Compare Folders’ menus, add ‘Compare’ toolbar icon (<a href="https://github.com/visualdiffer/visualdiffer/commit/539373498384934b48e0f772c4b9a23caa251eb5">5393734</a>)</li>
 </ul>
 
                 ]]>
             </description>
-            <pubDate>Fri, 21 August 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.1.21</sparkle:version>
-            <sparkle:shortVersionString>2.1.21</sparkle:shortVersionString>
+            <pubDate>Fri, 28 August 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.1.22</sparkle:version>
+            <sparkle:shortVersionString>2.1.22</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.21/VisualDiffer-2.1.21.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.1.22/VisualDiffer-2.1.22.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="jF/5m6nU4mphdVncZXxtg7wal+tCrrORp3Zy9c7wI0LNGycQAL7VSqD5Z00PIlllAEH250A5NGAIAzkQmqVTAg==" length="5127280"
+                sparkle:edSignature="Xmnr/1zqjbbE5K0G8nrv8IQBCEANn3j8jKffUlfXy/R1mPLzFytrtD3chTYaQIp4xwCT7zC4reWZJuD/UvwtCQ==" length="5145173"
 
             />
         </item>
