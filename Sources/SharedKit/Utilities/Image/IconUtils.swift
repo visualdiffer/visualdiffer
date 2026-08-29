@@ -60,13 +60,12 @@ public class IconUtils: @unchecked Sendable {
     }
 
     public func icon(forEmptyPath size: CGFloat) -> NSImage {
-        guard let icon = NSImage(systemSymbolName: "square.dashed", accessibilityDescription: "Empty Path") else {
-            fatalError("Unable to create empty path icon")
+        cachedIcon(for: "emptyPath", size: size) {
+            let icon = VDSymbol.Asset.emptyPath.image()
+            icon.size = NSSize(width: size, height: size)
+
+            return icon
         }
-
-        icon.size = NSSize(width: size, height: size)
-
-        return icon
     }
 
     private func iconNamed(_ name: String, size: CGFloat) -> NSImage {
@@ -87,7 +86,11 @@ public class IconUtils: @unchecked Sendable {
         lock.lock()
         defer { lock.unlock() }
 
-        if let icon = icons[name] {
+        // the cached image is resized to the requested size, so the size belongs to the key,
+        // otherwise the first caller decides the size for every other one
+        let key = "\(name)@\(size)"
+
+        if let icon = icons[key] {
             return icon
         }
 
@@ -102,7 +105,7 @@ public class IconUtils: @unchecked Sendable {
         }
 
         icon.size = NSSize(width: size, height: size)
-        icons[name] = icon
+        icons[key] = icon
 
         return icon
     }

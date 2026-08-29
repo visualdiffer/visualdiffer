@@ -22,6 +22,7 @@ enum VDSymbol {
         case prevFile = "vd.file_prev"
         case top = "vd.top"
         case bottom = "vd.bottom"
+        case emptyPath = "square.dashed"
     }
 
     enum Toolbar: String, VDSymbolImage {
