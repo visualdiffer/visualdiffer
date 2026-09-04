@@ -19,7 +19,7 @@ class FileInfoBar: NSView {
     private lazy var encodingPopup: NSPopUpButton = createEncodingPopup()
     private lazy var eolText: NSTextField = createEolText()
 
-    var delegate: FileInfoBarDelegate?
+    weak var delegate: FileInfoBarDelegate?
 
     var encoding: String.Encoding? {
         get {

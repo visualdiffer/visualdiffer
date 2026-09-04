@@ -129,4 +129,8 @@ class TablePanelView<T: NSTableView & DisplayPositionable & ViewLinkable<T>, Bot
     }
 
     func updateBottomBar() {}
+
+    func unbindControls() {
+        pathView.unbindControls()
+    }
 }

@@ -36,7 +36,7 @@ private enum ScopeGroupOptions: Int {
 }
 
 class DisplayFiltersScopeBar: ScopeBarView {
-    var actionDelegate: DisplayFiltersScopeBarDelegate?
+    weak var actionDelegate: DisplayFiltersScopeBarDelegate?
 
     let findView = FindText(frame: .zero)
 

@@ -15,6 +15,9 @@ extension FilesWindowController: NSWindowDelegate {
         if let document = document as? VDDocument {
             document.parentSession?.removeChildDocument(document)
         }
+
+        leftPanelView.unbindControls()
+        rightPanelView.unbindControls()
     }
 
     public func windowDidBecomeMain(_: Notification) {

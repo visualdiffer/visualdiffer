@@ -231,4 +231,10 @@ class PathView: NSView {
             }
         }
     }
+
+    func unbindControls() {
+        lockButton.unbind(.value)
+        pathControl.unbind(.value)
+        saveButton.unbind(.enabled)
+    }
 }

@@ -43,7 +43,7 @@ class FilesScopeBar: ScopeBarView {
         }
     }
 
-    var actionDelegate: FilesScopeBarDelegate?
+    weak var actionDelegate: FilesScopeBarDelegate?
 
     let findView = FindText(frame: .zero)
 

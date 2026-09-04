@@ -19,6 +19,9 @@ extension FoldersWindowController: NSWindowDelegate {
         removeObservers()
 
         removeAllChildrenDocuments()
+
+        leftPanelView.unbindControls()
+        rightPanelView.unbindControls()
     }
 
     public func window(_: NSWindow, willUseFullScreenPresentationOptions proposedOptions: NSApplication.PresentationOptions = []) -> NSApplication.PresentationOptions {

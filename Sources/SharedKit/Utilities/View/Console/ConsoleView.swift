@@ -11,7 +11,7 @@ protocol ConsoleViewDelegate: AnyObject {
 }
 
 class ConsoleView: NSView, NSTextViewDelegate {
-    var delegate: ConsoleViewDelegate?
+    weak var delegate: ConsoleViewDelegate?
 
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
