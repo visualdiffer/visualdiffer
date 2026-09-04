@@ -158,7 +158,8 @@ class FolderComparisonBox: PreferencesBox {
         makeFirstResponder: Bool
     ) {
         let supportTolerance = ComparatorOptions(rawValue: comparatorOptions).contains(.timestamp)
-        timeToleranceView.isHidden = !supportTolerance
+        // hiding the row made the stack view reclaim its space, changing the height with no resize
+        timeToleranceView.isEnabled = supportTolerance
 
         if supportTolerance, makeFirstResponder {
             timeToleranceView.becomeFirstResponder()

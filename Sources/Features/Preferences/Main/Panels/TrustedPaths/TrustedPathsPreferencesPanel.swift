@@ -161,7 +161,7 @@ class TrustedPathsPreferencesPanel: NSView, NSTableViewDataSource, NSTableViewDe
             pathTableScrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             pathTableScrollView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             pathTableScrollView.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 2),
-            pathTableScrollView.heightAnchor.constraint(equalToConstant: 200),
+            pathTableScrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
             pathTableScrollView.bottomAnchor.constraint(equalTo: actionBar.topAnchor, constant: -2),
 
             actionBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),

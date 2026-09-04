@@ -13,9 +13,9 @@ class ConfirmationsPreferencesPanel: NSView, PreferencesPanelDataSource {
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     private func setupViews() {
@@ -33,6 +33,7 @@ class ConfirmationsPreferencesPanel: NSView, PreferencesPanelDataSource {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             stackView.topAnchor.constraint(equalTo: topAnchor),
+            panelBottomConstraint(stackView),
         ])
 
         for view in views {

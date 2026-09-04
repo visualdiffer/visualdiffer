@@ -7,6 +7,8 @@
 //
 
 class PreferencesBox: NSBox {
+    static let minPopupWidth: CGFloat = 140
+
     private var defaultDelegate: StandardUserPreferencesBoxDataSource
     private var checkboxes: [CommonPrefs.Name: PreferencesCheckbox]
 
@@ -23,9 +25,9 @@ class PreferencesBox: NSBox {
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     private func setupViews() {
@@ -72,5 +74,15 @@ class PreferencesBox: NSBox {
             checkbox.state = value ? .on : .off
             checkbox.isEnabled = delegate.preferenceBox(self, isEnabled: checkbox.prefName)
         }
+    }
+
+    // a popup carries no minimum of its own, this is what makes the box declare the width it
+    // needs, defaultHigh because NSTabView lays the panel out at 20 points while still detached
+    // and a required minimum could not hold there
+    func popupMinWidthConstraint(_ popup: NSPopUpButton) -> NSLayoutConstraint {
+        let constraint = popup.widthAnchor.constraint(greaterThanOrEqualToConstant: Self.minPopupWidth)
+        constraint.priority = .defaultHigh
+
+        return constraint
     }
 }

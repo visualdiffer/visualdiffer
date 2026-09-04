@@ -27,9 +27,9 @@ class FontPreferencesPanel: NSView, NSFontChanging, PreferencesPanelDataSource {
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     private func setupViews() {
@@ -54,6 +54,7 @@ class FontPreferencesPanel: NSView, NSFontChanging, PreferencesPanelDataSource {
 
             restoreDefaults.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             restoreDefaults.topAnchor.constraint(equalTo: fileFontBox.bottomAnchor, constant: 5),
+            panelBottomConstraint(restoreDefaults, constant: -5),
         ])
     }
 

@@ -48,7 +48,6 @@ class ActionBarView: NSStackView {
             secondButton.widthAnchor.constraint(equalToConstant: 24),
             secondButton.heightAnchor.constraint(equalToConstant: 24),
 
-            popup.widthAnchor.constraint(equalToConstant: 32),
             popup.heightAnchor.constraint(equalToConstant: 24),
         ])
     }

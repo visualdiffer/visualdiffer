@@ -17,6 +17,11 @@ class FolderPreferencesPanel: NSView, PreferencesPanelDataSource {
         setupViews()
     }
 
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
+    }
+
     private func setupViews() {
         let views = [
             FolderComparisonBox(title: NSLocalizedString("Comparison and Display Defaults for New Folder Documents", comment: "")),
@@ -33,6 +38,7 @@ class FolderPreferencesPanel: NSView, PreferencesPanelDataSource {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             stackView.topAnchor.constraint(equalTo: topAnchor),
+            panelBottomConstraint(stackView),
         ])
 
         for view in views {
@@ -40,11 +46,6 @@ class FolderPreferencesPanel: NSView, PreferencesPanelDataSource {
             view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
             view.delegate = comparisonDelegate
         }
-    }
-
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     func reloadData() {

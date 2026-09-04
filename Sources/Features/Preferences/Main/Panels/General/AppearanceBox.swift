@@ -47,7 +47,8 @@ class AppearanceBox: PreferencesBox {
         NSLayoutConstraint.activate([
             appearancePopup.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             appearancePopup.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            appearancePopup.widthAnchor.constraint(greaterThanOrEqualToConstant: 140),
+            popupMinWidthConstraint(appearancePopup),
+            appearancePopup.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -5),
         ])
     }
 

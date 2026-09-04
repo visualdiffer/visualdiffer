@@ -66,6 +66,9 @@ class PreferredEditorBox: PreferencesBox {
             editorPopup.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             editorPopup.trailingAnchor.constraint(equalTo: removeButton.leadingAnchor, constant: -5),
             editorPopup.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            // the popup has a low compression resistance so it can fill the box, without a
+            // floor the box declares no width at all and the panel reports less than it needs
+            popupMinWidthConstraint(editorPopup),
 
             removeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             removeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),

@@ -9,8 +9,20 @@
 class TimeToleranceView: NSView, NSTextFieldDelegate {
     private lazy var inputText: NSTextField = createInputText()
     private lazy var stepper: NSStepper = createStepper()
+    private lazy var stackView: NSStackView = createStackView()
 
     var onTextChanged: ((TimeToleranceView) -> Void)?
+
+    // the row is disabled instead of hidden, hiding it changes the height the panel requires
+    var isEnabled = true {
+        didSet {
+            for view in stackView.views {
+                if let control = view as? NSControl {
+                    control.isEnabled = isEnabled
+                }
+            }
+        }
+    }
 
     var tolerance = 0 {
         didSet {
@@ -29,7 +41,7 @@ class TimeToleranceView: NSView, NSTextFieldDelegate {
     }
 
     private func setupViews() {
-        addSubview(createStackView())
+        addSubview(stackView)
     }
 
     @available(*, unavailable)

@@ -27,9 +27,9 @@ class TextPreferencesPanel: NSView, PreferencesPanelDataSource {
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     private func setupViews() {
@@ -47,6 +47,7 @@ class TextPreferencesPanel: NSView, PreferencesPanelDataSource {
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            panelBottomConstraint(stackView, constant: -5),
         ])
 
         for view in stackView.views {

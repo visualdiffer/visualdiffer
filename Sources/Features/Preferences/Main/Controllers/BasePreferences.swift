@@ -10,6 +10,13 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
     static let prefsToolbarIdentifier = NSToolbar.Identifier("PreferencesToolbar")
     static let lastVisiblePrefTab = "lastVisiblePrefTab"
 
+    // the widest panel needs 513 points and the full toolbar 479, this covers both, the panels
+    // declare their own width so minWindowWidth() enlarges the window if one ever needs more
+    private static let defaultContentWidth: CGFloat = 520
+
+    // the inset a noTabsBezelBorder tab view keeps above and below its content
+    private static let tabViewVerticalBorder: CGFloat = 20
+
     private lazy var tabView: NSTabView = createTabView()
     private lazy var prefPanel: NSWindow = createPrefPanel()
 
@@ -24,9 +31,9 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     private func setupViews() {
@@ -45,7 +52,7 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
         ]
 
         let view = NSPanel(
-            contentRect: .zero,
+            contentRect: NSRect(origin: .zero, size: NSSize(width: Self.defaultContentWidth, height: 0)),
             styleMask: styleMask,
             backing: .buffered,
             defer: false
@@ -118,15 +125,13 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
     }
 
     func selectLastUsedTab() {
-        var selectedItemItenIdentifier: NSToolbarItem.Identifier?
-        var selectedItemIndex = NSNotFound
+        // the first tab is the default, on the first run there is no stored tab to restore
+        var selectedItemItenIdentifier = toolbarIdentifiers.first
+        var selectedItemIndex = 0
 
         if let lastPrefTab = UserDefaults.standard.string(forKey: Self.lastVisiblePrefTab) {
             let index = tabView.indexOfTabViewItem(withIdentifier: lastPrefTab)
-            if index == NSNotFound {
-                selectedItemItenIdentifier = toolbarIdentifiers.first
-                selectedItemIndex = 0
-            } else {
+            if index != NSNotFound {
                 selectedItemItenIdentifier = NSToolbarItem.Identifier(lastPrefTab)
                 selectedItemIndex = index
             }
@@ -150,6 +155,10 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
 
         prefPanel.center()
         prefPanel.makeKeyAndOrderFront(self)
+
+        // reopening the panel does not always reselect the tab, and without a tab change nothing
+        // else recomputes the geometry
+        resize()
     }
 
     // This method is called when the Preference panel is implemented as NSWindowController
@@ -184,39 +193,34 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
 
     // MARK: - Position and size
 
-    func contentRect() -> NSRect {
-        var contentRect = NSRect.zero
-
-        if let selectedTabView = tabView.selectedTabViewItem?.view {
-            for view in selectedTabView.subviews {
-                // the result of Swift's GCRect.union is different from NSUnionRect
-                // so we stay on it
-                // swiftlint:disable:next legacy_nsgeometry_functions
-                contentRect = NSUnionRect(contentRect, view.frame)
-            }
-        }
-
-        return contentRect
-    }
-
     func toolbarHeight(_: NSWindow) -> CGFloat {
+        // both terms are derived from the window frame, the content view height cannot be used
+        // because it is already laid out for the new panel while the frame is still the old one
         let windowFrame = NSWindow.contentRect(forFrameRect: prefPanel.frame, styleMask: prefPanel.styleMask)
-        return windowFrame.size.height - (prefPanel.contentView?.frame.size.height ?? 0)
+
+        return windowFrame.size.height - prefPanel.contentLayoutRect.size.height
     }
 
     func minWindowHeight() -> CGFloat {
-        let contentRect = contentRect()
-        // Border top + toolbar
-        return contentRect.size.height + 40 + toolbarHeight(prefPanel)
+        guard let selectedView = tabView.selectedTabViewItem?.view else {
+            return 0
+        }
+
+        // the panel fittingSize is the only quantity already updated when the tab changes, both
+        // the tab view frames and its own fittingSize still describe the previous panel
+        return selectedView.fittingSize.height + Self.tabViewVerticalBorder + toolbarHeight(prefPanel)
     }
 
     func resize() {
         let windowFrame = NSWindow.contentRect(forFrameRect: prefPanel.frame, styleMask: prefPanel.styleMask)
         let height = minWindowHeight()
+        // the width comes from the panel constraints, a wider panel enlarges the window and the
+        // width the user chose by dragging is never reduced
+        let width = max(windowFrame.size.width, minWindowWidth())
         let frameRect = NSRect(
             x: windowFrame.origin.x,
             y: windowFrame.origin.y + windowFrame.size.height - height,
-            width: windowFrame.size.width,
+            width: width,
             height: height
         )
         prefPanel.setFrame(
@@ -227,10 +231,6 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
     }
 
     func tabView(_: NSTabView, didSelect _: NSTabViewItem?) {
-        resize()
-    }
-
-    func windowDidBecomeKey(_: Notification) {
         resize()
     }
 
@@ -245,5 +245,17 @@ class BasePreferences: NSWindowController, NSToolbarDelegate, NSTabViewDelegate,
      */
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         sender.makeFirstResponder(nil) // validate editing
+    }
+
+    func minWindowWidth() -> CGFloat {
+        guard let selectedView = tabView.selectedTabViewItem?.view else {
+            return 0
+        }
+
+        // the frames union used for the height reports the current layout, already squeezed when
+        // the panel is too narrow, fittingSize is the width the constraints actually require
+        let tabViewBorder = tabView.frame.size.width - tabView.contentRect.size.width
+
+        return selectedView.fittingSize.width + tabViewBorder
     }
 }

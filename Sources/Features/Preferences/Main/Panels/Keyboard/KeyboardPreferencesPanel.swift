@@ -17,9 +17,9 @@ class KeyboardPreferencesPanel: NSView, PreferencesPanelDataSource {
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     private func setupViews() {
@@ -33,6 +33,7 @@ class KeyboardPreferencesPanel: NSView, PreferencesPanelDataSource {
             documentBox.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             documentBox.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             documentBox.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            panelBottomConstraint(documentBox, constant: -5),
         ])
     }
 

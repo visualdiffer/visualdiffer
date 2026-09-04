@@ -137,11 +137,12 @@ class Preferences: BasePreferences {
     }
 
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
-        super.tabView(tabView, didSelect: tabViewItem)
-
+        // super resizes the panel by measuring it, so the data must be loaded first
         if let dataSource = tabViewItem?.view as? PreferencesPanelDataSource {
             dataSource.reloadData()
         }
+
+        super.tabView(tabView, didSelect: tabViewItem)
     }
 }
 
