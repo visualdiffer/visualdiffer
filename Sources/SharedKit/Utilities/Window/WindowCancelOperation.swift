@@ -7,6 +7,12 @@
 //
 
 class WindowCancelOperation: NSWindow {
+    private static let maxContentSize = NSSize(width: 1100, height: 600)
+    private static let minWindowSize = NSSize(width: 480, height: 400)
+    private static let minContentSize = NSSize(width: 300, height: 200)
+    // a window opened for the first time never covers more than this fraction of the visible screen
+    private static let maxScreenFillRatio = 0.75
+
     override func cancelOperation(_ sender: Any?) {
         // override NSWindow.cancelOperation() instead of NSWindowController.cancelOperation()
         // because on NSWindowController the standard beep is played
@@ -34,7 +40,7 @@ class WindowCancelOperation: NSWindow {
         let styleMask: NSWindow.StyleMask = [.titled, .closable, .miniaturizable, .resizable]
 
         let window = WindowCancelOperation(
-            contentRect: NSRect(x: 500, y: 600, width: 1100, height: 600),
+            contentRect: NSRect(origin: .zero, size: defaultContentSize()),
             styleMask: styleMask,
             backing: .buffered,
             defer: false
@@ -44,10 +50,25 @@ class WindowCancelOperation: NSWindow {
         window.allowsToolTipsWhenApplicationIsInactive = true
         window.autorecalculatesKeyViewLoop = false
         window.setIsVisible(false)
-        window.minSize = NSSize(width: 480, height: 400)
-        window.contentMinSize = NSSize(width: 300, height: 200)
+        window.minSize = minWindowSize
+        window.contentMinSize = minContentSize
         window.contentView?.autoresizingMask = [.width, .height]
 
+        // a fixed origin lands on a different screen spot depending on the screen size,
+        // center() keeps the window above the visual center as the fixed origin used to do
+        window.center()
+
         return window
+    }
+
+    private static func defaultContentSize() -> NSSize {
+        guard let visibleFrame = NSScreen.main?.visibleFrame else {
+            return maxContentSize
+        }
+
+        return NSSize(
+            width: min(maxContentSize.width, visibleFrame.width * maxScreenFillRatio),
+            height: min(maxContentSize.height, visibleFrame.height * maxScreenFillRatio)
+        )
     }
 }
