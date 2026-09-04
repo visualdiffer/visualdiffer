@@ -7,21 +7,21 @@
 //
 
 class DualPaneSplitViewDelegate: NSObject, NSSplitViewDelegate {
-    var minSize: CGFloat = 0
-    var maxSize: CGFloat = 0
+    var minFirstPaneSize: CGFloat = 0
+    var minSecondPaneSize: CGFloat = 0
     var collapsableSubviewIndex = 0
 
     @objc
     init(
         collapsableSubViewIndex index: Int,
-        minSize: CGFloat,
-        maxSize: CGFloat
+        minFirstPaneSize: CGFloat,
+        minSecondPaneSize: CGFloat
     ) {
         super.init()
 
         collapsableSubviewIndex = index
-        self.minSize = minSize
-        self.maxSize = maxSize
+        self.minFirstPaneSize = minFirstPaneSize
+        self.minSecondPaneSize = minSecondPaneSize
     }
 
     func splitView(_: NSSplitView, shouldHideDividerAt _: Int) -> Bool {
@@ -29,11 +29,11 @@ class DualPaneSplitViewDelegate: NSObject, NSSplitViewDelegate {
     }
 
     func splitView(_: NSSplitView, constrainMinCoordinate proposedMinimumPosition: CGFloat, ofSubviewAt _: Int) -> CGFloat {
-        proposedMinimumPosition + minSize
+        proposedMinimumPosition + minFirstPaneSize
     }
 
     func splitView(_: NSSplitView, constrainMaxCoordinate proposedMaximumPosition: CGFloat, ofSubviewAt _: Int) -> CGFloat {
-        proposedMaximumPosition - maxSize
+        proposedMaximumPosition - minSecondPaneSize
     }
 
     func splitView(_ splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {

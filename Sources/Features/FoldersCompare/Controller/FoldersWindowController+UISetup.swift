@@ -123,6 +123,7 @@ extension FoldersWindowController {
         updateScopeBar()
         setupSortDescriptors()
         setupConsoleSplitter()
+        setupPreviewSplitters()
 
         leftPanelView.bindControls()
         rightPanelView.bindControls()
@@ -144,7 +145,17 @@ extension FoldersWindowController {
 
     func setupConsoleSplitter() {
         consoleSplitter.delegate = consoleDelegate
-        consoleSplitter.collapseSubview(at: 1)
+        consoleSplitter.collapseSubview()
+    }
+
+    func setupPreviewSplitters() {
+        leftPreviewSplitter.delegate = previewDelegate
+        rightPreviewSplitter.delegate = previewDelegate
+
+        // paired, so collapsing, expanding and resizing one panel drives the other
+        leftPreviewSplitter.setSynchronized(splitView: rightPreviewSplitter)
+
+        leftPreviewSplitter.collapseSubview()
     }
 
     func updateBottomBar(_ view: FoldersOutlineView) {

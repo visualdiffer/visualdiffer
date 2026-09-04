@@ -351,6 +351,40 @@ extension FoldersWindowController {
         return menu
     }
 
+    private static func addPreviewModeItems(_ menu: NSMenu) {
+        menu.addItem(
+            withTitle: NSLocalizedString("Selected Files", comment: ""),
+            action: #selector(showPreviewSelectedFiles),
+            keyEquivalent: ""
+        )
+        menu.addItem(
+            withTitle: NSLocalizedString("Same Row", comment: ""),
+            action: #selector(showPreviewSameRow),
+            keyEquivalent: ""
+        )
+    }
+
+    private static func addFilePreviewItems(_ menu: NSMenu) {
+        let previewItem = NSMenuItem(
+            title: NSLocalizedString("Preview", comment: ""),
+            action: nil,
+            keyEquivalent: ""
+        )
+        let previewSub = NSMenu(title: NSLocalizedString("Preview", comment: ""))
+        let showPreview = previewSub.addItem(
+            withTitle: NSLocalizedString("Show Preview", comment: ""),
+            action: #selector(toggleFilePreview),
+            keyEquivalent: "p"
+        )
+        showPreview.keyEquivalentModifierMask = [.option, .command]
+
+        previewSub.addItem(NSMenuItem.separator())
+        addPreviewModeItems(previewSub)
+
+        menu.setSubmenu(previewSub, for: previewItem)
+        menu.addItem(previewItem)
+    }
+
     private static func viewMenu() -> NSMenu {
         let menu = NSMenu(title: NSLocalizedString("View", comment: ""))
 
@@ -435,6 +469,8 @@ extension FoldersWindowController {
         menu.setSubmenu(fontSub, for: fontItem)
         menu.addItem(fontItem)
 
+        addFilePreviewItems(menu)
+
         let logConsole = NSMenuItem(
             title: NSLocalizedString("Show Log Console", comment: ""),
             action: #selector(toggleLogConsole),
@@ -473,6 +509,25 @@ extension FoldersWindowController {
         mainMenu.item(withTag: MainMenu.edit.rawValue)?.submenu = StaticMenus.edit
         mainMenu.item(withTag: MainMenu.actions.rawValue)?.submenu = StaticMenus.actions
         mainMenu.item(withTag: MainMenu.view.rawValue)?.submenu = StaticMenus.view
+    }
+
+    // a right click doesn't make its window key, so target-less items would be dispatched
+    // through the responder chain of the front window, acting on another comparison
+    func createFilePreviewMenu() -> NSMenu {
+        let menu = NSMenu(title: NSLocalizedString("Contextual Menu", comment: ""))
+
+        Self.addPreviewModeItems(menu)
+
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(
+            withTitle: NSLocalizedString("Hide", comment: ""),
+            action: #selector(hideFilePreview),
+            keyEquivalent: ""
+        )
+
+        menu.items.forEach { $0.target = self }
+
+        return menu
     }
 }
 

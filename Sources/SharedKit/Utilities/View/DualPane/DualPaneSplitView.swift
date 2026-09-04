@@ -14,9 +14,12 @@ private let userResizeKey = "NSSplitViewUserResizeKey"
 class DualPaneSplitView: NSSplitView {
     var collapsablePaneSize: CGFloat = defaultCollapsablePaneSize
 
+    // the paired split view is not retained, the view hierarchy keeps it alive
+    private weak var synchronizedSplitView: DualPaneSplitView?
+
     // the collapsed state is owned by the app through isHidden because
     // NSSplitView.isSubviewCollapsed(_:) reports true also for a pane not laid out yet
-    @objc var hasSubviewCollapsed: Bool {
+    var hasSubviewCollapsed: Bool {
         subviews.isEmpty || subviews.contains { $0.isHidden }
     }
 
@@ -61,21 +64,35 @@ class DualPaneSplitView: NSSplitView {
         let currentSize = paneSize(of: subviews[index])
         if currentSize > 0 {
             collapsablePaneSize = currentSize
+            synchronizedSplitView?.matchCollapsablePaneSize(currentSize)
         }
     }
 
-    @objc
-    func toggleSubview(at index: Int) {
+    /**
+     Pair the split view with another one so they collapse, expand and resize together
+     self is paired with other and other is paired with self, too
+     */
+    func setSynchronized(splitView: DualPaneSplitView) {
+        synchronizedSplitView = splitView
+        splitView.synchronizedSplitView = self
+    }
+
+    func toggleSubview() {
         if hasSubviewCollapsed {
-            expandSubview(at: index)
+            expandSubview()
         } else {
-            collapseSubview(at: index)
+            collapseSubview()
         }
     }
 
-    @objc
-    func collapseSubview(at index: Int) {
+    func collapseSubview() {
+        guard let index = collapsablePaneIndex else {
+            return
+        }
+
         let collapseView = subviews[index]
+
+        // returning when already collapsed also stops the pair from calling back
         if collapseView.isHidden {
             return
         }
@@ -83,19 +100,44 @@ class DualPaneSplitView: NSSplitView {
         adjustSubviews()
         // force a layout pass so AppKit removes the collapsed divider layer
         needsLayout = true
+        synchronizedSplitView?.collapseSubview()
     }
 
-    @objc
-    func expandSubview(at index: Int) {
+    func expandSubview() {
+        guard let index = collapsablePaneIndex else {
+            return
+        }
+
         let expandView = subviews[index]
+
+        // returning when already expanded also stops the pair from calling back
         if !expandView.isHidden {
             return
         }
         expandView.isHidden = false
-        // the position is derived from the current size and kept inside the
-        // range allowed by the delegate, otherwise NSSplitView collapses the pane again
+        moveDivider(collapsableIndex: index)
+        synchronizedSplitView?.expandSubview()
+    }
+
+    // applies the size the paired split view got from the user, the comparison
+    // stops the pair from bouncing the change back
+    private func matchCollapsablePaneSize(_ size: CGFloat) {
+        guard !hasSubviewCollapsed,
+              let index = collapsablePaneIndex,
+              paneSize(of: subviews[index]) != size else {
+            return
+        }
+
+        collapsablePaneSize = size
+        moveDivider(collapsableIndex: index)
+    }
+
+    // the position is derived from the current size and kept inside the
+    // range allowed by the delegate, otherwise NSSplitView collapses the pane again
+    private func moveDivider(collapsableIndex index: Int) {
         let available = paneSize(of: self)
         let position = index == 0 ? collapsablePaneSize : available - collapsablePaneSize - dividerThickness
+
         setPosition(constrain(position: position, available: available), ofDividerAt: 0)
         adjustSubviews()
     }

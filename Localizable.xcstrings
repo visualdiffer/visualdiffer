@@ -1288,6 +1288,9 @@
     "Hide Log Console" : {
 
     },
+    "Hide Preview" : {
+
+    },
     "Hide Whitespace" : {
 
     },
@@ -1616,6 +1619,9 @@
     "Prev Difference" : {
 
     },
+    "Preview" : {
+
+    },
     "Previous File" : {
 
     },
@@ -1732,6 +1738,9 @@
 
     },
     "Run" : {
+
+    },
+    "Same Row" : {
 
     },
     "Save" : {
@@ -1857,6 +1866,9 @@
         }
       }
     },
+    "Selected Files" : {
+
+    },
     "Selection already contains Filtered Files" : {
 
     },
@@ -1930,6 +1942,9 @@
 
     },
     "Show Log Console" : {
+
+    },
+    "Show Preview" : {
 
     },
     "Show Toolbar" : {

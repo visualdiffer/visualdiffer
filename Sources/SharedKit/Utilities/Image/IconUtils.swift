@@ -15,8 +15,15 @@ import UniformTypeIdentifiers
 public class IconUtils: @unchecked Sendable {
     static let shared = IconUtils()
 
+    // the cached image is resized to the requested size, so the size belongs to the key,
+    // otherwise the first caller decides the size for every other one
+    private struct IconKey: Hashable {
+        let name: String
+        let size: CGFloat
+    }
+
     private let lock = NSLock()
-    private var icons = [String: NSImage]()
+    private var icons = [IconKey: NSImage]()
 
     private init() {}
 
@@ -60,11 +67,8 @@ public class IconUtils: @unchecked Sendable {
     }
 
     public func icon(forEmptyPath size: CGFloat) -> NSImage {
-        cachedIcon(for: "emptyPath", size: size) {
-            let icon = VDSymbol.Asset.emptyPath.image()
-            icon.size = NSSize(width: size, height: size)
-
-            return icon
+        cachedIcon(for: VDSymbol.Asset.emptyPath.rawValue, size: size) {
+            VDSymbol.Asset.emptyPath.image()
         }
     }
 
@@ -86,9 +90,7 @@ public class IconUtils: @unchecked Sendable {
         lock.lock()
         defer { lock.unlock() }
 
-        // the cached image is resized to the requested size, so the size belongs to the key,
-        // otherwise the first caller decides the size for every other one
-        let key = "\(name)@\(size)"
+        let key = IconKey(name: name, size: size)
 
         if let icon = icons[key] {
             return icon

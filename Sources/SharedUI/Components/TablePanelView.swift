@@ -32,9 +32,9 @@ class TablePanelView<T: NSTableView & DisplayPositionable & ViewLinkable<T>, Bot
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init(frame:)")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     func setupViews() {

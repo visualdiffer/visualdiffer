@@ -10,9 +10,13 @@ import Quartz
 import UserNotifications
 import os.log
 
-// the heights are in flipped coordinates
-private let splitViewMinHeight: CGFloat = 160.0
-private let splitViewMaxHeight: CGFloat = 80.0
+// minimum heights of the two panes of the console splitter
+private let foldersMinHeight: CGFloat = 160.0
+private let consoleMinHeight: CGFloat = 80.0
+
+// minimum heights of the two panes of a preview splitter
+private let previewPanelMinHeight: CGFloat = 120.0
+private let previewPaneMinHeight: CGFloat = 60.0
 
 public class FoldersWindowController: NSWindowController,
     UNUserNotificationCenterDelegate {
@@ -75,14 +79,33 @@ public class FoldersWindowController: NSWindowController,
         let view = createConsoleSplitter()
 
         let folderPanels = createFolderPanelsSplitView()
-        folderPanels.addArrangedSubview(leftPanelView)
-        folderPanels.addArrangedSubview(rightPanelView)
+        folderPanels.addArrangedSubview(leftPreviewSplitter)
+        folderPanels.addArrangedSubview(rightPreviewSplitter)
 
         view.addArrangedSubview(folderPanels)
         view.addArrangedSubview(consoleView)
 
         return view
     }()
+
+    // each panel keeps its preview below its own bottom bar
+    lazy var leftPreviewSplitter: DualPaneSplitView = createPreviewSplitter(
+        panel: leftPanelView,
+        preview: leftPreviewView
+    )
+
+    lazy var rightPreviewSplitter: DualPaneSplitView = createPreviewSplitter(
+        panel: rightPanelView,
+        preview: rightPreviewView
+    )
+
+    lazy var filePreviewMenu = createFilePreviewMenu()
+
+    lazy var leftPreviewView = FilePreviewView(menu: filePreviewMenu)
+
+    lazy var rightPreviewView = FilePreviewView(menu: filePreviewMenu)
+
+    var filePreviewMode: FilePreviewMode = .sameRow
 
     lazy var consoleView: ConsoleView = createConsoleView()
 
@@ -92,8 +115,15 @@ public class FoldersWindowController: NSWindowController,
 
     var consoleDelegate = DualPaneSplitViewDelegate(
         collapsableSubViewIndex: 1,
-        minSize: splitViewMinHeight,
-        maxSize: splitViewMaxHeight
+        minFirstPaneSize: foldersMinHeight,
+        minSecondPaneSize: consoleMinHeight
+    )
+
+    // the delegate keeps no per split view state so a single one serves both panels
+    var previewDelegate = DualPaneSplitViewDelegate(
+        collapsableSubViewIndex: 1,
+        minFirstPaneSize: previewPanelMinHeight,
+        minSecondPaneSize: previewPaneMinHeight
     )
 
     lazy var leftPanelView: FolderPanelView = .createFolderPanel(

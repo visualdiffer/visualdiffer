@@ -328,6 +328,7 @@ extension FoldersWindowController: NSOutlineViewDelegate,
         updateBottomBar(view)
         updateStatusBar()
         previewPanel?.reloadData()
+        updateFilePreview(from: view)
     }
 
     public func setLastUsedViewResponder(_ view: FoldersOutlineView) {

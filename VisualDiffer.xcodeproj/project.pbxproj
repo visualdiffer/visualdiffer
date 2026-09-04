@@ -98,7 +98,6 @@
 		553741CC2E9372DF00AB56D0 /* FilesWindowController+UICreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FD82E9372DF00AB56D0 /* FilesWindowController+UICreation.swift */; };
 		553741CD2E9372DF00AB56D0 /* NSTableView+Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537410A2E9372DF00AB56D0 /* NSTableView+Row.swift */; };
 		553741CE2E9372DF00AB56D0 /* FindText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537416E2E9372DF00AB56D0 /* FindText.swift */; };
-		55A1B2C12F0A100100AB56D0 /* FindOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A1B2C02F0A100100AB56D0 /* FindOptions.swift */; };
 		553741CF2E9372DF00AB56D0 /* FoldersTraversalBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740902E9372DF00AB56D0 /* FoldersTraversalBox.swift */; };
 		553741D02E9372DF00AB56D0 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741342E9372DF00AB56D0 /* FileError.swift */; };
 		553741D12E9372DF00AB56D0 /* OpenEditorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537413B2E9372DF00AB56D0 /* OpenEditorError.swift */; };
@@ -402,6 +401,7 @@
 		5595902B2EABB15F00B5AB0B /* MockItemComparatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5595902A2EABB15F00B5AB0B /* MockItemComparatorDelegate.swift */; };
 		559614B114B0471E0075ED34 /* aliasbadge.png in Resources */ = {isa = PBXBuildFile; fileRef = 559614B014B0471E0075ED34 /* aliasbadge.png */; };
 		55A027D4158242310004583F /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A027D3158242310004583F /* Quartz.framework */; };
+		55A1B2C12F0A100100AB56D0 /* FindOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A1B2C02F0A100100AB56D0 /* FindOptions.swift */; };
 		55A4DF322E9A49B000ED11BB /* EndOfLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4DF312E9A49A700ED11BB /* EndOfLineTests.swift */; };
 		55A4DF342FFD200100ED11BB /* DiffSideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4DF332FFD1FFF00ED11BB /* DiffSideTests.swift */; };
 		55A585772F52BD8A006DD544 /* FileOperationDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A585762F52BD88006DD544 /* FileOperationDestination.swift */; };
@@ -471,6 +471,8 @@
 		55FE894A2F054B260003864A /* FlagSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE89492F054B260003864A /* FlagSet.swift */; };
 		775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
+		D05A9DC834615AEE7F87AAFC /* FoldersWindowController+FilePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E1F737F89EBCFACF1C382 /* FoldersWindowController+FilePreview.swift */; };
+		D12721B63E26C2B5A91EC4DA /* FilePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B0F2223AEF03ADAFC7EEE3 /* FilePreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -524,6 +526,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		035E1F737F89EBCFACF1C382 /* FoldersWindowController+FilePreview.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FoldersWindowController+FilePreview.swift"; sourceTree = "<group>"; };
+		07B0F2223AEF03ADAFC7EEE3 /* FilePreviewView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilePreviewView.swift; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -867,7 +871,6 @@
 		5537416A2E9372DF00AB56D0 /* DiffCountersTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffCountersTextFieldCell.swift; sourceTree = "<group>"; };
 		5537416B2E9372DF00AB56D0 /* DifferenceCounters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceCounters.swift; sourceTree = "<group>"; };
 		5537416D2E9372DF00AB56D0 /* FilePathTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePathTextField.swift; sourceTree = "<group>"; };
-		55A1B2C02F0A100100AB56D0 /* FindOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindOptions.swift; sourceTree = "<group>"; };
 		5537416E2E9372DF00AB56D0 /* FindText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindText.swift; sourceTree = "<group>"; };
 		5537416F2E9372DF00AB56D0 /* NSTextField+CenterVertically.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+CenterVertically.swift"; sourceTree = "<group>"; };
 		553741702E9372DF00AB56D0 /* PathControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathControl.swift; sourceTree = "<group>"; };
@@ -940,6 +943,7 @@
 		5595902A2EABB15F00B5AB0B /* MockItemComparatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockItemComparatorDelegate.swift; sourceTree = "<group>"; };
 		559614B014B0471E0075ED34 /* aliasbadge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aliasbadge.png; sourceTree = "<group>"; };
 		55A027D3158242310004583F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		55A1B2C02F0A100100AB56D0 /* FindOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindOptions.swift; sourceTree = "<group>"; };
 		55A4DF312E9A49A700ED11BB /* EndOfLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfLineTests.swift; sourceTree = "<group>"; };
 		55A4DF332FFD1FFF00ED11BB /* DiffSideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffSideTests.swift; sourceTree = "<group>"; };
 		55A585762F52BD88006DD544 /* FileOperationDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileOperationDestination.swift; sourceTree = "<group>"; };
@@ -1425,6 +1429,7 @@
 				55373FF52E9372DF00AB56D0 /* FolderPanelView.swift */,
 				55373FF62E9372DF00AB56D0 /* CompareItemTableCellView.swift */,
 				55373FF72E9372DF00AB56D0 /* CompareItemTableRowView.swift */,
+				07B0F2223AEF03ADAFC7EEE3 /* FilePreviewView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1557,6 +1562,7 @@
 				553740322E9372DF00AB56D0 /* FoldersWindowController+UICreation.swift */,
 				553740332E9372DF00AB56D0 /* FoldersWindowController+UISetup.swift */,
 				553740342E9372DF00AB56D0 /* OutlineViewItemDelegate.swift */,
+				035E1F737F89EBCFACF1C382 /* FoldersWindowController+FilePreview.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3406,6 +3412,8 @@
 				553742D22E9372DF00AB56D0 /* FiltersPredicateEditor.swift in Sources */,
 				553742D32E9372DF00AB56D0 /* HistoryEntityTableCellView.swift in Sources */,
 				55916A112E8A814200ED6629 /* History.xcdatamodeld in Sources */,
+				D12721B63E26C2B5A91EC4DA /* FilePreviewView.swift in Sources */,
+				D05A9DC834615AEE7F87AAFC /* FoldersWindowController+FilePreview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

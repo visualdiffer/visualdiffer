@@ -25,12 +25,12 @@ extension FoldersWindowController: @preconcurrency ConsoleViewDelegate {
     }
 
     func showConsoleView() {
-        consoleSplitter.expandSubview(at: 1)
+        consoleSplitter.expandSubview()
         consoleView.focus()
     }
 
     func hideConsoleView() {
-        consoleSplitter.collapseSubview(at: 1)
+        consoleSplitter.collapseSubview()
         // focus lost on console hide, AppKit leaves the first responder on the
         // hidden text view and the window moves it to the toolbar
         window?.makeFirstResponder(lastUsedView)

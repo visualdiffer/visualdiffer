@@ -136,6 +136,19 @@ extension FoldersWindowController: NSMenuDelegate,
                 menuItem.title = NSLocalizedString("Hide Log Console", comment: "")
             }
             return true
+        } else if action == #selector(toggleFilePreview) {
+            if isFilePreviewHidden {
+                menuItem.title = NSLocalizedString("Show Preview", comment: "")
+            } else {
+                menuItem.title = NSLocalizedString("Hide Preview", comment: "")
+            }
+            return true
+        } else if action == #selector(showPreviewSelectedFiles) {
+            menuItem.state = filePreviewMode == .selectedFiles ? .on : .off
+            return !isFilePreviewHidden
+        } else if action == #selector(showPreviewSameRow) {
+            menuItem.state = filePreviewMode == .sameRow ? .on : .off
+            return !isFilePreviewHidden
         } else if action == #selector(togglePreviewPanel) {
             if QLPreviewPanel.sharedPreviewPanelExists(), QLPreviewPanel.shared().isVisible {
                 menuItem.title = NSLocalizedString("Close Quick Look", comment: "")
