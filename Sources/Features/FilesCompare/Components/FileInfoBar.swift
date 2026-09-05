@@ -15,9 +15,9 @@ protocol FileInfoBarDelegate: AnyObject {
 }
 
 class FileInfoBar: NSView {
-    private lazy var labelText: NSTextField = createLabelText()
-    private lazy var encodingPopup: NSPopUpButton = createEncodingPopup()
-    private lazy var eolText: NSTextField = createEolText()
+    private lazy var labelText = createClippedText()
+    private lazy var encodingPopup = createEncodingPopup()
+    private lazy var eolText = createClippedText()
 
     weak var delegate: FileInfoBarDelegate?
 
@@ -86,22 +86,10 @@ class FileInfoBar: NSView {
         ])
     }
 
-    private func createLabelText() -> NSTextField {
-        let view = NSTextField(frame: .zero)
+    private func createClippedText() -> NSTextField {
+        let view = NSTextField.hintWithTitle("")
 
-        view.isEditable = false
-        view.isBordered = false
-        view.drawsBackground = false
-        view.alignment = .right
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        let cell = TextFieldVerticalCentered()
-        cell.lineBreakMode = .byClipping
-
-        view.cell = cell
-
-        // set the font after the cell otherwise it is lost
-        view.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+        view.lineBreakMode = .byClipping
 
         return view
     }
@@ -116,25 +104,6 @@ class FileInfoBar: NSView {
 
         view.target = self
         view.action = #selector(encodingAction)
-
-        return view
-    }
-
-    private func createEolText() -> NSTextField {
-        let view = NSTextField(frame: .zero)
-
-        view.isEditable = false
-        view.isBordered = false
-        view.drawsBackground = false
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        let cell = TextFieldVerticalCentered()
-        cell.lineBreakMode = .byClipping
-
-        view.cell = cell
-
-        // set the font after the cell otherwise it is lost
-        view.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
 
         return view
     }

@@ -7,25 +7,7 @@
 //
 
 class SelectEncodingsPanel: NSWindow, NSTableViewDataSource, NSTableViewDelegate {
-    private lazy var titleText: NSTextField = {
-        let view = NSTextField(frame: .zero)
-
-        view.isEditable = false
-        view.isBordered = false
-        view.drawsBackground = false
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        let cell = TextFieldVerticalCentered()
-        cell.lineBreakMode = .byClipping
-        cell.title = NSLocalizedString("Select encodings to show on the main list", comment: "")
-
-        view.cell = cell
-
-        // set the font after the cell otherwise it is lost
-        view.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
-
-        return view
-    }()
+    private let titleText = NSTextField.hintWithTitle(NSLocalizedString("Select encodings to show on the main list", comment: ""))
 
     private lazy var scrollView: NSScrollView = {
         let view = NSScrollView(frame: .zero)

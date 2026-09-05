@@ -138,7 +138,6 @@
 		553741F72E9372DF00AB56D0 /* FilesWindowController+FileInfoBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FC92E9372DF00AB56D0 /* FilesWindowController+FileInfoBarDelegate.swift */; };
 		553741F82E9372DF00AB56D0 /* KeyboardPreferencesPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537409C2E9372DF00AB56D0 /* KeyboardPreferencesPanel.swift */; };
 		553741F92E9372DF00AB56D0 /* CompareItem+Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740402E9372DF00AB56D0 /* CompareItem+Metadata.swift */; };
-		553741FA2E9372DF00AB56D0 /* TextFieldVerticalCentered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FC32E9372DF00AB56D0 /* TextFieldVerticalCentered.swift */; };
 		553741FB2E9372DF00AB56D0 /* KeyEquivalent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373F932E9372DF00AB56D0 /* KeyEquivalent.swift */; };
 		553741FC2E9372DF00AB56D0 /* CompareItem+VisibleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740572E9372DF00AB56D0 /* CompareItem+VisibleItem.swift */; };
 		553741FD2E9372DF00AB56D0 /* FoldersWindowController+SessionPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740312E9372DF00AB56D0 /* FoldersWindowController+SessionPreferences.swift */; };
@@ -588,7 +587,6 @@
 		55373FC02E9372DF00AB56D0 /* LineNumberTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineNumberTableRowView.swift; sourceTree = "<group>"; };
 		55373FC12E9372DF00AB56D0 /* NSAlert+DirtyFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+DirtyFiles.swift"; sourceTree = "<group>"; };
 		55373FC22E9372DF00AB56D0 /* SaveFileAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileAccessoryView.swift; sourceTree = "<group>"; };
-		55373FC32E9372DF00AB56D0 /* TextFieldVerticalCentered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldVerticalCentered.swift; sourceTree = "<group>"; };
 		55373FC52E9372DF00AB56D0 /* FilesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesWindowController.swift; sourceTree = "<group>"; };
 		55373FC62E9372DF00AB56D0 /* FilesWindowController+Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesWindowController+Clipboard.swift"; sourceTree = "<group>"; };
 		55373FC72E9372DF00AB56D0 /* FilesWindowController+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesWindowController+Common.swift"; sourceTree = "<group>"; };
@@ -1324,7 +1322,6 @@
 				55373FC12E9372DF00AB56D0 /* NSAlert+DirtyFiles.swift */,
 				55BC333D2EDAC69C004035A0 /* RowHeightCalculator.swift */,
 				55373FC22E9372DF00AB56D0 /* SaveFileAccessoryView.swift */,
-				55373FC32E9372DF00AB56D0 /* TextFieldVerticalCentered.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3175,7 +3172,6 @@
 				553741F82E9372DF00AB56D0 /* KeyboardPreferencesPanel.swift in Sources */,
 				553741F92E9372DF00AB56D0 /* CompareItem+Metadata.swift in Sources */,
 				55858306300DE12E00EDC56C /* ScopeBarView.swift in Sources */,
-				553741FA2E9372DF00AB56D0 /* TextFieldVerticalCentered.swift in Sources */,
 				553741FB2E9372DF00AB56D0 /* KeyEquivalent.swift in Sources */,
 				553741FC2E9372DF00AB56D0 /* CompareItem+VisibleItem.swift in Sources */,
 				553741FD2E9372DF00AB56D0 /* FoldersWindowController+SessionPreferences.swift in Sources */,
