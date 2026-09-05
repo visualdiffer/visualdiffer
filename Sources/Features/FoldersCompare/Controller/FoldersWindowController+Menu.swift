@@ -431,12 +431,6 @@ extension FoldersWindowController {
         collapseAllItem.keyEquivalentModifierMask = .control
 
         menu.addItem(
-            withTitle: NSLocalizedString("Swap Sides", comment: ""),
-            action: #selector(swapSides),
-            keyEquivalent: ""
-        )
-
-        menu.addItem(
             withTitle: NSLocalizedString("Refresh", comment: ""),
             action: #selector(refresh),
             keyEquivalent: "r"

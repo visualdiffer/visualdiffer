@@ -48,20 +48,6 @@ public class VisibleItem: NSObject {
         children.removeAll()
     }
 
-    func swap() {
-        guard let linkedItem else {
-            return
-        }
-
-        let tempItem = item
-        item = linkedItem.item
-        linkedItem.item = tempItem
-
-        for vi in children {
-            vi.swap()
-        }
-    }
-
     var childrenAllFiltered: Bool {
         if item.isFolder {
             for vi in children where !vi.item.isFiltered {

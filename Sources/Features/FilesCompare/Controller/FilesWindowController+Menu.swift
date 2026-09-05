@@ -173,11 +173,6 @@ extension FilesWindowController {
         viewMenu.addItem(NSMenuItem.separator())
 
         viewMenu.addItem(
-            withTitle: NSLocalizedString("Swap Sides", comment: ""),
-            action: #selector(swapSides),
-            keyEquivalent: ""
-        )
-        viewMenu.addItem(
             withTitle: NSLocalizedString("Word Wrap", comment: ""),
             action: #selector(toggleWordWrap),
             keyEquivalent: "W"

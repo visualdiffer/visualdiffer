@@ -6,13 +6,6 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-func swap<T>(_ lhs: inout T, _ rhs: inout T) {
-    let tmp = lhs
-
-    lhs = rhs
-    rhs = tmp
-}
-
 extension FilesWindowController {
     // MARK: - Refresh after edit
 
@@ -182,18 +175,6 @@ extension FilesWindowController {
 
         lastUsedView.scrollTo(row: row, center: true)
         lastUsedView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: true)
-    }
-
-    @objc
-    func swapSides(_: AnyObject) {
-        swap(&sessionDiff.leftPath, &sessionDiff.rightPath)
-        swap(&leftView.diffSide, &rightView.diffSide)
-        swap(&leftPanelView.fileInfoBar.fileAttrs, &rightPanelView.fileInfoBar.fileAttrs)
-        swap(&leftPanelView.fileInfoBar.encoding, &rightPanelView.fileInfoBar.encoding)
-        swap(&leftPanelView.fileInfoBar.eol, &rightPanelView.fileInfoBar.eol)
-
-        reloadRowHeights()
-        fileThumbnail.needsDisplay = true
     }
 
     @objc

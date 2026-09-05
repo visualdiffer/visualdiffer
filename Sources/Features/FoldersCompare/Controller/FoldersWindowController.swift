@@ -205,22 +205,6 @@ public class FoldersWindowController: NSWindowController,
     }
 
     @objc
-    func swapSides(_: AnyObject) {
-        leftVisibleItems?.swap()
-
-        let path = sessionDiff.leftPath
-        sessionDiff.leftPath = sessionDiff.rightPath
-        sessionDiff.rightPath = path
-
-        let readOnly = sessionDiff.leftReadOnly
-        sessionDiff.leftReadOnly = sessionDiff.rightReadOnly
-        sessionDiff.rightReadOnly = readOnly
-
-        leftView.reloadData()
-        rightView.reloadData()
-    }
-
-    @objc
     func compareInfo(_: AnyObject) {
         guard let window else {
             return
