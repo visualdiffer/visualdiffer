@@ -11,6 +11,7 @@ extension FilePanelView {
         treeView.isDirty = false
         fileInfoBar.encoding = CommonPrefs.shared.defaultEncoding
         fileInfoBar.fileAttrs = nil
+        fileInfoBar.eol = .missing
 
         let secureURL = SecureBookmark.shared.secure(fromBookmark: path, startSecured: true)
         defer {
