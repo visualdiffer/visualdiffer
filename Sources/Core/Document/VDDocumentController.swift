@@ -149,8 +149,8 @@ class VDDocumentController: NSDocumentController {
             return nil
         }
 
-        moc.rollback()
-        moc.updateWithoutRecordingModifications {
+        doc.updateWithoutMarkingEdited {
+            moc.rollback()
             doc.sessionDiff = SessionDiff.newObject(moc)
             block(doc)
         }

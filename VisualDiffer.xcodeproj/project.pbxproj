@@ -302,7 +302,6 @@
 		553742A62E9372DF00AB56D0 /* NSAlert+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740FB2E9372DF00AB56D0 /* NSAlert+Helper.swift */; };
 		553742A72E9372DF00AB56D0 /* FoldersWindowController+NSWindowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537402D2E9372DF00AB56D0 /* FoldersWindowController+NSWindowDelegate.swift */; };
 		553742A82E9372DF00AB56D0 /* FilesWindowController+FilesScopeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FCA2E9372DF00AB56D0 /* FilesWindowController+FilesScopeBar.swift */; };
-		553742A92E9372DF00AB56D0 /* NSManagedObjectContext+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740EB2E9372DF00AB56D0 /* NSManagedObjectContext+Helpers.swift */; };
 		553742AA2E9372DF00AB56D0 /* String+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741062E9372DF00AB56D0 /* String+Path.swift */; };
 		553742AB2E9372DF00AB56D0 /* TimeInterval+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740ED2E9372DF00AB56D0 /* TimeInterval+Helper.swift */; };
 		553742AC2E9372DF00AB56D0 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373F902E9372DF00AB56D0 /* ColorScheme.swift */; };
@@ -788,7 +787,6 @@
 		553740E52E9372DF00AB56D0 /* NSAppearance+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAppearance+DarkMode.swift"; sourceTree = "<group>"; };
 		553740E72E9372DF00AB56D0 /* Array+MoveIndexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+MoveIndexes.swift"; sourceTree = "<group>"; };
 		553740E92E9372DF00AB56D0 /* NSColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Hex.swift"; sourceTree = "<group>"; };
-		553740EB2E9372DF00AB56D0 /* NSManagedObjectContext+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Helpers.swift"; sourceTree = "<group>"; };
 		553740ED2E9372DF00AB56D0 /* TimeInterval+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Helper.swift"; sourceTree = "<group>"; };
 		553740EF2E9372DF00AB56D0 /* NSError+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError+Format.swift"; sourceTree = "<group>"; };
 		553740F12E9372DF00AB56D0 /* FileManager+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Attributes.swift"; sourceTree = "<group>"; };
@@ -2008,14 +2006,6 @@
 			path = Color;
 			sourceTree = "<group>";
 		};
-		553740EC2E9372DF00AB56D0 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				553740EB2E9372DF00AB56D0 /* NSManagedObjectContext+Helpers.swift */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		553740EE2E9372DF00AB56D0 /* Date */ = {
 			isa = PBXGroup;
 			children = (
@@ -2210,7 +2200,6 @@
 				553740E62E9372DF00AB56D0 /* Appearance */,
 				553740E82E9372DF00AB56D0 /* Collections */,
 				553740EA2E9372DF00AB56D0 /* Color */,
-				553740EC2E9372DF00AB56D0 /* CoreData */,
 				553740EE2E9372DF00AB56D0 /* Date */,
 				558DEAC52EA263DE00F05A10 /* Encoding */,
 				553740F02E9372DF00AB56D0 /* Error */,
@@ -3355,7 +3344,6 @@
 				553742A62E9372DF00AB56D0 /* NSAlert+Helper.swift in Sources */,
 				553742A72E9372DF00AB56D0 /* FoldersWindowController+NSWindowDelegate.swift in Sources */,
 				553742A82E9372DF00AB56D0 /* FilesWindowController+FilesScopeBar.swift in Sources */,
-				553742A92E9372DF00AB56D0 /* NSManagedObjectContext+Helpers.swift in Sources */,
 				553742AA2E9372DF00AB56D0 /* String+Path.swift in Sources */,
 				553742AB2E9372DF00AB56D0 /* TimeInterval+Helper.swift in Sources */,
 				553742AC2E9372DF00AB56D0 /* ColorScheme.swift in Sources */,

@@ -105,9 +105,8 @@ extension FilesWindowController {
             if !self.alertSaveDirtyFiles() {
                 return false
             }
-            // the document is marked as dirty when we set the sessionDiff properties
-            // so we update leftPath and rightPath without recording modifications
-            document.managedObjectContext?.updateWithoutRecordingModifications {
+            // moving to another file of the parent session is navigation, not a session edit
+            document.updateWithoutMarkingEdited {
                 self.sessionDiff.leftPath = leftPath
                 self.sessionDiff.rightPath = rightPath
                 self.reloadAllMove(toFirstDifference: true)
