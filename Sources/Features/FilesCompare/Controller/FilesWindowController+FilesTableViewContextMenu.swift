@@ -146,7 +146,7 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
         } else {
             lastUsedView
         }
-        saveViewAndRefreshUI(view)
+        saveViewShowingErrors(view)
     }
 
     // MARK: - Open with external applications

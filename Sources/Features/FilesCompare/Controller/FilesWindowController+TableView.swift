@@ -126,6 +126,11 @@ extension FilesWindowController: NSTableViewDataSource,
             return false
         }
 
+        // the dropped files replace the displayed ones, so the pending changes must be saved first
+        guard alertSaveDirtyFiles() else {
+            return false
+        }
+
         if arr.count < 2 {
             guard let path = arr.last?.osPath else {
                 return false

@@ -61,4 +61,8 @@ extension FilesWindowController: PathControlDelegate {
         }
         return nil
     }
+
+    public func pathControlCanChoosePath(_: PathControl) -> Bool {
+        alertSaveDirtyFiles()
+    }
 }
