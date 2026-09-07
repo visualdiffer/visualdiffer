@@ -279,7 +279,10 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
 
     // MARK: - History Controller
 
-    func history(controller _: HistoryController, doubleClickedEntity _: HistoryEntity?) {
+    func history(controller: HistoryController, doubleClickedEntity entity: HistoryEntity?) {
+        if let entity {
+            history(controller: controller, selectedEntities: [entity])
+        }
         showDiffs(nil)
     }
 
