@@ -22,6 +22,8 @@ public class VDDocument: NSPersistentDocument {
     // see http://lists.apple.com/archives/cocoa-dev/2012/Sep/msg00428.html
     private var isClosed = false
 
+    private var isMarkingEdited = true
+
     let uuid = ProcessInfo.processInfo.globallyUniqueString
 
     var parentSession: DiffOpenerDelegate?
@@ -58,6 +60,23 @@ public class VDDocument: NSPersistentDocument {
 
     // MARK: - init
 
+    override public init() {
+        super.init()
+
+        // the app has no undo/redo, the Core Data undo manager would only feed the document change
+        // tracking and its snapshots can roll back the model while the document is closing
+        if let moc = managedObjectContext {
+            moc.undoManager = nil
+
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(sessionObjectsDidChange),
+                name: NSManagedObjectContext.didChangeObjectsNotification,
+                object: moc
+            )
+        }
+    }
+
     // —initWithType:error:—that is called only when a new document is created, not when it is subsequently reopened.
     @MainActor
     convenience init(type _: String) throws {
@@ -67,9 +86,8 @@ public class VDDocument: NSPersistentDocument {
             return
         }
 
-        moc.rollback()
-
-        moc.updateWithoutRecordingModifications {
+        updateWithoutMarkingEdited {
+            moc.rollback()
             _sessionDiff = SessionDiff.newObject(moc)
             if let sessionDiff {
                 VDDocumentController.shared.fillSessionDiff(sessionDiff)
@@ -81,7 +99,10 @@ public class VDDocument: NSPersistentDocument {
         try super.read(from: absoluteURL, ofType: typeName)
 
         try MainActor.assumeIsolated {
-            try isReadSessionDiffValid()
+            // the sessionDiff is fetched here and awakeFromFetch can rewrite migrated values
+            try updateWithoutMarkingEdited {
+                try isReadSessionDiffValid()
+            }
         }
     }
 
@@ -245,10 +266,16 @@ public class VDDocument: NSPersistentDocument {
     }
 
     override public var isDocumentEdited: Bool {
+        // the change notification is posted only when the context processes its pending changes,
+        // so flush them or a change made during this same event is not counted yet
+        // it must run before the pref check because close() reads super.isDocumentEdited to update the history
+        managedObjectContext?.processPendingChanges()
+
         // If pref is set to true then consider the document without modifications so the save dialog will never shown
         if CommonPrefs.shared.bool(forKey: .dontAskSave) {
             return false
         }
+
         return super.isDocumentEdited
     }
 
@@ -320,6 +347,38 @@ public class VDDocument: NSPersistentDocument {
             modelConfiguration: configuration,
             storeOptions: options
         )
+    }
+
+    // update the sessionDiff without considering it a change made by the user
+    func updateWithoutMarkingEdited(_ block: () throws -> Void) rethrows {
+        // changes made before the block are the user's, mark them before turning the flag off
+        managedObjectContext?.processPendingChanges()
+
+        isMarkingEdited = false
+        defer {
+            // flush the changes so the notification is delivered while the flag is still off
+            managedObjectContext?.processPendingChanges()
+            isMarkingEdited = true
+        }
+
+        try block()
+    }
+
+    @objc
+    private func sessionObjectsDidChange(_ notification: Notification) {
+        guard isMarkingEdited else {
+            return
+        }
+
+        // a refreshed or invalidated object is not a modification
+        let changeKeys = [NSInsertedObjectsKey, NSUpdatedObjectsKey, NSDeletedObjectsKey]
+        let isChanged = changeKeys.contains {
+            !((notification.userInfo?[$0] as? Set<NSManagedObject>)?.isEmpty ?? true)
+        }
+
+        if isChanged {
+            updateChangeCount(.changeDone)
+        }
     }
 }
 
