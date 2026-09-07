@@ -22,15 +22,17 @@ extension FilesWindowController {
             case .cancel:
                 return false
             case .saveBoth:
+                // a blank compare has no destination yet, so saveView returns without
+                // writing anything when its save panel is cancelled
                 try saveView(leftView)
                 try saveView(rightView)
-                return true
+                return !leftView.isDirty && !rightView.isDirty
             case .saveOnlyLeft:
                 try saveView(leftView)
-                return true
+                return !leftView.isDirty
             case .saveOnlyRight:
                 try saveView(rightView)
-                return true
+                return !rightView.isDirty
             default:
                 return true
             }
@@ -41,23 +43,20 @@ extension FilesWindowController {
     }
 
     @IBAction func saveLeftFile(_: Any) {
-        saveViewAndRefreshUI(leftView)
+        saveViewShowingErrors(leftView)
     }
 
     @IBAction func saveRightFile(_: Any) {
-        saveViewAndRefreshUI(rightView)
+        saveViewShowingErrors(rightView)
     }
 
-    func saveViewAndRefreshUI(_ view: FilesTableView) {
+    func saveViewShowingErrors(_ view: FilesTableView) {
         guard view.isDirty else {
             return
         }
 
         do {
             try saveView(view)
-            view.diffSide?.resetLineModes()
-            view.reloadData()
-            updateDetailLines(lastUsedView.selectedRow)
         } catch {
             NSAlert(error: error).runModal()
         }
@@ -114,9 +113,9 @@ extension FilesWindowController {
         fileInfoBar.fileAttrs = try FileManager.default.attributesOfItem(atPath: path.osPath)
         view.isDirty = false
 
-        setSliderMaxValue()
-        fileThumbnail.needsDisplay = true
-        window?.toolbar?.validateVisibleItems()
+        // refresh here so a failure while saving the other pane cannot leave
+        // an already written pane rendered as modified
+        refreshAfterSave(view)
 
         NotificationCenter.default.postFileUpdated(
             leftPath: sessionDiff.leftPath,
@@ -170,5 +169,15 @@ extension FilesWindowController {
             return
         }
         throw FileError.fileNotExists(path: path, side: side)
+    }
+
+    private func refreshAfterSave(_ view: FilesTableView) {
+        view.diffSide?.resetLineModes()
+        view.reloadData()
+        updateDetailLines(lastUsedView.selectedRow)
+
+        setSliderMaxValue()
+        fileThumbnail.needsDisplay = true
+        window?.toolbar?.validateVisibleItems()
     }
 }
