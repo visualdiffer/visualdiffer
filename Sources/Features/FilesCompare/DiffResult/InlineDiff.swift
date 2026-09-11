@@ -16,6 +16,16 @@ struct InlineDiff {
     /// generated or minified lines would otherwise make the comparison too slow
     private static let maxDiffableLength = 2000
 
+    /// above this many character pairs left once the common prefix and suffix are gone
+    /// the two lines share almost nothing, the exact comparison would cost far more than
+    /// the single range per side it refines
+    private static let maxDiffablePairs = 16384
+
+    /// two differences separated by an equal run no longer than this are reported as a
+    /// single one, a lone equal character in the middle of a rewritten field would
+    /// otherwise scatter the highlight over it
+    private static let maxAggregatedRunLength = 1
+
     static let empty = InlineDiff(leftRanges: [], rightRanges: [])
 
     let leftRanges: [Range<Int>]
@@ -39,23 +49,45 @@ struct InlineDiff {
         if leftKeys == rightKeys {
             return empty
         }
+        // the common prefix and the common suffix cannot hold a difference, dropping them
+        // keeps the comparison exact and leaves the engine a fraction of the characters
+        let prefix = commonPrefixLength(leftKeys, rightKeys)
+        let suffix = commonSuffixLength(leftKeys, rightKeys, skipping: prefix)
+        let leftRange = prefix ..< leftKeys.count - suffix
+        let rightRange = prefix ..< rightKeys.count - suffix
+
+        // with one side left empty the other one is a pure insertion or deletion, and
+        // past the pair limit the exact ranges are not worth their cost, both degrade
+        // to the single range already delimited by the prefix and the suffix
+        if leftRange.isEmpty
+            || rightRange.isEmpty
+            || leftRange.count * rightRange.count > maxDiffablePairs {
+            return InlineDiff(
+                leftRanges: ranges(from: leftRange.lowerBound, to: leftRange.upperBound),
+                rightRanges: ranges(from: rightRange.lowerBound, to: rightRange.upperBound)
+            )
+        }
         // the discard heuristic must be skipped here, on a single line it would report
         // every frequent character as changed
         let changes = SequenceDiff.changes(
-            left: leftKeys,
-            right: rightKeys,
+            left: Array(leftKeys[leftRange]),
+            right: Array(rightKeys[rightRange]),
             ignoresDiscards: true
         )
         var leftRanges = [Range<Int>]()
         var rightRanges = [Range<Int>]()
 
-        for change in changes {
+        // the engine compared the characters left between the prefix and the suffix, its
+        // offsets are relative to them
+        for change in aggregated(changes) {
             if change.deleted > 0 {
-                leftRanges.append(change.line0 ..< change.line0 + change.deleted)
+                let start = prefix + change.line0
+                leftRanges.append(start ..< start + change.deleted)
             }
 
             if change.inserted > 0 {
-                rightRanges.append(change.line1 ..< change.line1 + change.inserted)
+                let start = prefix + change.line1
+                rightRanges.append(start ..< start + change.inserted)
             }
         }
 
@@ -131,5 +163,64 @@ struct InlineDiff {
 
         firstLine.inlineRanges = inlineDiff.leftRanges
         secondLine.inlineRanges = inlineDiff.rightRanges
+    }
+
+    private static func commonPrefixLength(
+        _ leftKeys: [SequenceDiff.TextKey],
+        _ rightKeys: [SequenceDiff.TextKey]
+    ) -> Int {
+        let shortest = min(leftKeys.count, rightKeys.count)
+        var length = 0
+
+        while length < shortest, leftKeys[length] == rightKeys[length] {
+            length += 1
+        }
+
+        return length
+    }
+
+    // the prefix is skipped so the two runs cannot overlap on the shorter line
+    private static func commonSuffixLength(
+        _ leftKeys: [SequenceDiff.TextKey],
+        _ rightKeys: [SequenceDiff.TextKey],
+        skipping prefix: Int
+    ) -> Int {
+        let available = min(leftKeys.count, rightKeys.count) - prefix
+        var length = 0
+
+        while length < available,
+              leftKeys[leftKeys.count - 1 - length] == rightKeys[rightKeys.count - 1 - length] {
+            length += 1
+        }
+
+        return length
+    }
+
+    /// joins the differences a short run of equal characters keeps apart, so a field
+    /// rewritten as a whole is reported as a whole
+    ///
+    /// The run is merged into the difference that swallows it, the two sides keep the
+    /// same ranges they would have with the run reported as changed.
+    private static func aggregated(_ changes: [DiffChange]) -> [DiffChange] {
+        var aggregated = [DiffChange]()
+
+        for change in changes {
+            // the equal characters between two differences are the same on both sides,
+            // so the left run measures the right one too
+            guard let previous = aggregated.last,
+                  change.line0 - (previous.line0 + previous.deleted) <= maxAggregatedRunLength
+            else {
+                aggregated.append(change)
+                continue
+            }
+            aggregated[aggregated.count - 1] = DiffChange(
+                line0: previous.line0,
+                line1: previous.line1,
+                deleted: change.line0 + change.deleted - previous.line0,
+                inserted: change.line1 + change.inserted - previous.line1
+            )
+        }
+
+        return aggregated
     }
 }
