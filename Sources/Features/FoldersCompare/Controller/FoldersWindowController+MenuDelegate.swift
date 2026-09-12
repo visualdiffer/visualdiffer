@@ -186,6 +186,7 @@ extension FoldersWindowController: NSMenuDelegate,
 
     func tableView(_ tableView: NSTableView, menuItem: NSMenuItem, hideMenuItem hide: inout Bool) -> Bool {
         if running {
+            hide = true
             return false
         }
         guard let folderView = tableView as? FoldersOutlineView else {
