@@ -28,6 +28,9 @@ private let verticalPadding: CGFloat = 4.0
 class RowHeightCalculator {
     private var heightCache: [Int: CGFloat] = [:]
 
+    // the column widths the cached heights were computed for
+    private var cachedWidths = (left: CGFloat.zero, right: CGFloat.zero)
+
     weak var dataSource: RowHeightDataSource?
 
     var isWordWrapEnabled: Bool = false {
@@ -38,6 +41,7 @@ class RowHeightCalculator {
 
     func clearCache() {
         heightCache.removeAll(keepingCapacity: true)
+        cachedWidths = (0, 0)
     }
 
     func height(for row: Int) -> CGFloat {
@@ -103,5 +107,24 @@ class RowHeightCalculator {
     func reloadData() {
         clearCache()
         dataSource?.reloadTableData()
+    }
+
+    // the caller doesn't know what the heights depend on: without word wrap they are the
+    // font line height, so any resize leaves them alone, and with word wrap only a change
+    // of the column width makes them stale
+    func reloadDataIfWidthChanged() {
+        guard isWordWrapEnabled,
+              let dataSource else {
+            return
+        }
+
+        let widths = (left: dataSource.columnWidth(at: .left), right: dataSource.columnWidth(at: .right))
+
+        if widths == cachedWidths {
+            return
+        }
+
+        reloadData()
+        cachedWidths = widths
     }
 }
