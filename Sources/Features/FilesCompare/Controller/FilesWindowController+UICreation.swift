@@ -6,6 +6,11 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+// the stack view is a pane of the console splitter, so its frame is still the seed one when
+// the constraints are first evaluated and it must already clear the height its content needs,
+// or that first pass is unsatisfiable and causes AppKit to log a conflict
+private let detailsStackSeedHeight: CGFloat = 400.0
+
 extension FilesWindowController {
     func createDifferenceCounters() -> DifferenceCounters {
         let view = DifferenceCounters(frame: .zero)
@@ -73,7 +78,7 @@ extension FilesWindowController {
     }
 
     func createLineDetailTextView() -> LineDetailTextView {
-        let view = LineDetailTextView(frame: .zero)
+        let view = LineDetailTextView()
 
         view.isSelectable = true
         view.isEditable = false
@@ -107,10 +112,10 @@ extension FilesWindowController {
     func createLineDetailsStackWithViews(_ views: [NSView]) -> NSStackView {
         let view = NSStackView(views: views)
 
+        view.frame = NSRect(x: 0, y: 0, width: 1, height: detailsStackSeedHeight)
         view.orientation = .vertical
         view.alignment = .width
         view.distribution = .fill
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
     }
@@ -161,5 +166,13 @@ extension FilesWindowController {
         ])
 
         return topView
+    }
+
+    func createProgressView() -> ProgressBarView {
+        let view = ProgressBarView(frame: .zero)
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
     }
 }

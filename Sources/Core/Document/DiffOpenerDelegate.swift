@@ -27,9 +27,6 @@ public protocol DiffOpenerDelegate: AnyObject {
 
     func openPreviousDifference(from leftPath: String?, rightPath: String?, block: DiffOpenerDelegateBlock)
 
-    func hasNextDifference(from leftPath: String?, rightPath: String?) -> Bool
-    func hasPreviousDifference(from leftPath: String?, rightPath: String?) -> Bool
-
     ///
     /// returns the parent paths of the two compared items
     /// if one of the passed paths is nil, the other is used to infer the missing parent.

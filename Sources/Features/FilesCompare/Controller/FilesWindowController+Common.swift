@@ -146,16 +146,18 @@ extension FilesWindowController {
             return
         }
 
+        reloadRestoringPosition()
+    }
+
+    func reloadRestoringPosition(statusMessage: String? = nil) {
         let index = leftView.selectedRowIndexes
         let row = leftView.firstVisibleRow
 
-        reloadAllMove(toFirstDifference: false)
-
-        if row <= leftView.numberOfRows {
-            leftView.scrollTo(row: row, center: false)
-            leftView.selectRowIndexes(index, byExtendingSelection: false)
-        } else {
-            moveToDifference(true, showAnim: true, moveToFile: false)
+        // the restore travels with the comparison, a refused or queued request leaves the
+        // views untouched and restoring a position over them would fight the run that
+        // eventually happens
+        startReload(toFirstDifference: false, statusMessage: statusMessage) { [self] in
+            restoreSelectionAndScrollPosition(index, firstVisibleRow: row)
         }
     }
 
@@ -165,16 +167,21 @@ extension FilesWindowController {
             return
         }
 
-        let row = lastUsedView.selectedRow
+        // the focused panel can change while the comparison runs, the restore
+        // belongs to the one the row was taken from
+        let view = lastUsedView
+        let row = view.selectedRow
 
         compare(
             leftLines: diffResult.leftSide.nonMissingLineComponents(),
             rightLines: diffResult.rightSide.nonMissingLineComponents(),
             moveToFirstDifference: false
-        )
-
-        lastUsedView.scrollTo(row: row, center: true)
-        lastUsedView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: true)
+        ) {
+            if (0 ..< view.numberOfRows).contains(row) {
+                view.scrollTo(row: row, center: true)
+                view.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: true)
+            }
+        }
     }
 
     @objc
@@ -224,5 +231,23 @@ extension FilesWindowController {
     @objc
     func setRightReadOnly(_: AnyObject) {
         sessionDiff.rightReadOnly.toggle()
+    }
+
+    private func restoreSelectionAndScrollPosition(
+        _ selectedRows: IndexSet,
+        firstVisibleRow: Int
+    ) {
+        // the comparison can return fewer rows than the restored ones
+        let rowCount = leftView.numberOfRows
+
+        if (0 ..< rowCount).contains(firstVisibleRow) {
+            leftView.scrollTo(row: firstVisibleRow, center: false)
+            leftView.selectRowIndexes(
+                selectedRows.filteredIndexSet { $0 < rowCount },
+                byExtendingSelection: false
+            )
+        } else {
+            moveToDifference(true, showAnim: true, moveToFile: false)
+        }
     }
 }

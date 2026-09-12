@@ -29,7 +29,7 @@ extension FilesWindowController: PathControlDelegate {
     func pathControl(_: PathControl, chosenURL _: URL) {
         // no need to check which path is changed (left or right) because
         // the binding value has already set sessionDiff.<left|right>Path
-        reloadAllMove(toFirstDifference: false)
+        startReload(toFirstDifference: false)
     }
 
     public func pathControl(_: NSPathControl, willDisplay openPanel: NSOpenPanel) {

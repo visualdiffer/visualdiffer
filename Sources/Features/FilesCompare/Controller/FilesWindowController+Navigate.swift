@@ -44,24 +44,20 @@ extension FilesWindowController {
             currentDiffResult?.findPrevSection(by: currentPos, didWrap: &didWrap)
         }
         guard let section else {
-            if moveToFile,
-               canNavigateToFile(gotoNext: gotoNext) {
-                navigateToFile(gotoNext, showAnim: showAnim)
+            if moveToFile {
+                navigateToFile(gotoNext, showAnim: showAnim, showsNoFileOSD: showAnim)
             }
             return
         }
 
         if didWrap {
-            if moveToFile {
-                if canNavigateToFile(gotoNext: gotoNext) {
-                    navigateToFile(gotoNext, showAnim: showAnim)
-                    return
-                }
-                if showAnim,
-                   !CommonPrefs.shared.fileWrapsAroundDifferences,
-                   (document as? VDDocument)?.parentSession != nil {
-                    showNoFileOSD(gotoNext)
-                }
+            if moveToFile,
+               navigateToFile(
+                   gotoNext,
+                   showAnim: showAnim,
+                   showsNoFileOSD: showAnim && !CommonPrefs.shared.fileWrapsAroundDifferences
+               ) {
+                return
             }
             guard CommonPrefs.shared.fileWrapsAroundDifferences else {
                 return
@@ -79,28 +75,35 @@ extension FilesWindowController {
         }
     }
 
-    private func canNavigateToFile(gotoNext: Bool) -> Bool {
+    // returns whether the parent session holds a file in that direction, the search it
+    // costs is the same one the move needs so the two cannot be asked separately
+    @discardableResult
+    func navigateToFile(
+        _ navigateToNext: Bool,
+        showAnim: Bool = false,
+        showsNoFileOSD: Bool = true
+    ) -> Bool {
         guard let document = document as? VDDocument,
               let parentSession = document.parentSession else {
             return false
         }
 
-        if gotoNext {
-            return parentSession.hasNextDifference(from: sessionDiff.leftPath, rightPath: sessionDiff.rightPath)
-        }
-        return parentSession.hasPreviousDifference(from: sessionDiff.leftPath, rightPath: sessionDiff.rightPath)
-    }
-
-    func navigateToFile(_ navigateToNext: Bool, showAnim: Bool = false) {
-        guard let document = document as? VDDocument,
-              let parentSession = document.parentSession else {
-            return
-        }
+        var hasFile = false
 
         let block: DiffOpenerDelegateBlock = { leftPath, rightPath in
             if leftPath == nil, rightPath == nil {
-                self.showNoFileOSD(navigateToNext)
+                // the controls stay enabled as long as a folder session is behind the
+                // file, so this direction can have no file at all and the press would
+                // otherwise do nothing
+                if showsNoFileOSD {
+                    self.showNoFileOSD(navigateToNext)
+                }
                 return false
+            }
+            hasFile = true
+
+            if showAnim {
+                self.showMoveToFileOSD(!navigateToNext)
             }
             if !self.alertSaveDirtyFiles() {
                 return false
@@ -109,15 +112,12 @@ extension FilesWindowController {
             document.updateWithoutMarkingEdited {
                 self.sessionDiff.leftPath = leftPath
                 self.sessionDiff.rightPath = rightPath
-                self.reloadAllMove(toFirstDifference: true)
             }
+            self.startReload(toFirstDifference: true)
 
             return true
         }
 
-        if showAnim {
-            showMoveToFileOSD(!navigateToNext)
-        }
         if navigateToNext {
             parentSession.openNextDifference(
                 from: sessionDiff.leftPath,
@@ -131,6 +131,8 @@ extension FilesWindowController {
                 block: block
             )
         }
+
+        return hasFile
     }
 
     func showNoFileOSD(_ noNextFile: Bool) {
@@ -157,15 +159,15 @@ extension FilesWindowController {
         topBottomView.animateInside(window.frame)
     }
 
-    func canMoveToDifference(gotoNext: Bool, moveToFile: Bool) -> Bool {
+    func canMoveToDifference() -> Bool {
         if let sections = currentDiffResult?.sections, !sections.isEmpty {
             return true
         }
 
-        guard moveToFile else {
-            return false
-        }
-
-        return canNavigateToFile(gotoNext: gotoNext)
+        // asking the parent session for the next differing file walks its whole tree and
+        // the answer is asked again at every validation, on a large folder session that
+        // is half a second each time; the action itself shows the OSD when there is no
+        // file to move to
+        return CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences && parentSession != nil
     }
 }

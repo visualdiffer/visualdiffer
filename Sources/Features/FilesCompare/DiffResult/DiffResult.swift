@@ -59,7 +59,8 @@ class DiffResult {
 
     func diff(
         leftLines: [DiffLineComponent],
-        rightLines: [DiffLineComponent]
+        rightLines: [DiffLineComponent],
+        progress: DiffProgress? = nil
     ) {
         let changes = SequenceDiff.changes(
             left: leftLines.map { options.key(for: $0) },
@@ -71,7 +72,7 @@ class DiffResult {
             rightLines: rightLines,
             options: options
         )
-        processor.process(changes: changes)
+        processor.process(changes: changes, progress: progress)
 
         leftSide = processor.leftSide
         rightSide = processor.rightSide

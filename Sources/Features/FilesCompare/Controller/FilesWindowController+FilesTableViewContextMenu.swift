@@ -99,8 +99,14 @@ extension FilesWindowController: @preconcurrency FilesTableViewContextMenu {
     @objc
     func deleteLines(_: AnyObject?) {
         let selectedRows = lastUsedView.selectedRowIndexes
+        let isReadOnly = lastUsedView.side == .left ? sessionDiff.leftReadOnly : sessionDiff.rightReadOnly
 
-        guard !selectedRows.isEmpty,
+        // the delete key reaches this action without going through
+        // any validation, so the checks the menu makes have to be repeated here
+        guard !isComparing,
+              !isReadOnly,
+              lastUsedView.isEditAllowed,
+              !selectedRows.isEmpty,
               let diffResult,
               let currentDiffResult else {
             return

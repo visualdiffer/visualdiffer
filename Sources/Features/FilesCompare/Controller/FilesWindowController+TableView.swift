@@ -146,12 +146,16 @@ extension FilesWindowController: NSTableViewDataSource,
             sessionDiff.rightPath = arr[1].osPath
         }
 
-        reloadAllMove(toFirstDifference: false)
+        startReload(toFirstDifference: false)
 
         return true
     }
 
     func tableView(_: NSTableView, menuItem: NSMenuItem, hideMenuItem hide: inout Bool) -> Bool {
+        if isComparing {
+            hide = true
+            return false
+        }
         let action = menuItem.action
 
         hide = true

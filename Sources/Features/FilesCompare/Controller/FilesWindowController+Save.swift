@@ -124,7 +124,7 @@ extension FilesWindowController {
     }
 
     private func suggestedDestination() -> (directoryPath: String?, fileName: String)? {
-        let parents = (document as? VDDocument)?.parentSession?.parentPaths(
+        let parents = parentSession?.parentPaths(
             from: resolvedLeftPath?.osPath,
             rightPath: resolvedRightPath?.osPath
         )

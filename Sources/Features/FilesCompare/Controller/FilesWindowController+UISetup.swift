@@ -6,7 +6,15 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-extension FilesWindowController {
+extension FilesWindowController: ComparisonActivityDisplayable {
+    var lockedScopeBar: ScopeBarView {
+        scopeBar
+    }
+
+    var lockedPathViews: [PathView] {
+        [leftPanelView.pathView, rightPanelView.pathView]
+    }
+
     func initAllViews() {
         setupWindowLayout()
 
@@ -15,20 +23,16 @@ extension FilesWindowController {
     }
 
     func setupWindowLayout() {
-        let detailsStackView = createLineDetailsStackWithViews([
-            createTopView(fileThumbnail, rightView: filePanels),
-            linesDetailView,
-        ])
-
         if let contentView = window?.contentView {
             contentView.addSubview(differenceCounters)
             contentView.addSubview(statusbarText)
+            contentView.addSubview(progressView)
             contentView.addSubview(scopeBar)
-            contentView.addSubview(detailsStackView)
+            contentView.addSubview(consoleSplitter)
         }
 
-        setupDetailsStackConstraints(detailsStackView)
         setupConstraints()
+        setProgressHidden(true)
 
         updateUI()
 
@@ -62,21 +66,19 @@ extension FilesWindowController {
             statusbarText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -trailingMargin),
             statusbarText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             statusbarText.widthAnchor.constraint(greaterThanOrEqualToConstant: 120),
-        ])
-    }
 
-    func setupDetailsStackConstraints(_ stackView: NSStackView) {
-        guard let contentView = window?.contentView else {
-            return
-        }
+            progressView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadingMargin),
+            progressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -trailingMargin),
+            progressView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
 
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: scopeBar.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: differenceCounters.topAnchor, constant: -2),
+            consoleSplitter.topAnchor.constraint(equalTo: scopeBar.bottomAnchor),
+            consoleSplitter.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            consoleSplitter.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            consoleSplitter.bottomAnchor.constraint(equalTo: differenceCounters.topAnchor, constant: -2),
 
-            fileThumbnail.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            // the stack view is laid out by the splitter, pinning the thumbnail to it joins
+            // the panels it contains to the constraint system
+            fileThumbnail.leadingAnchor.constraint(equalTo: detailsStackView.leadingAnchor),
             fileThumbnail.widthAnchor.constraint(equalToConstant: 15),
 
             // linesDetailView has a fixed height
@@ -163,6 +165,7 @@ extension FilesWindowController {
 
         scopeBar.findView.delegate = FilesTableViewFindTextDelegate(view: leftView)
         updateScopeBar()
+        setupConsoleSplitter()
 
         leftPanelView.bindControls()
         rightPanelView.bindControls()

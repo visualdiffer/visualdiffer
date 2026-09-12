@@ -368,6 +368,11 @@
 		554B4A4E2E9B7B8F0023AAF0 /* DiffLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4A432E9B7B8F0023AAF0 /* DiffLine.swift */; };
 		5550B5931A21CD1F009BC4A4 /* aliasbadge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5550B5921A21CD1F009BC4A4 /* aliasbadge@2x.png */; };
 		5550B5951A21D2F3009BC4A4 /* empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5550B5941A21D2F3009BC4A4 /* empty@2x.png */; };
+		555452D53053B4F1008DD253 /* DiffProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555452D33053B4F1008DD253 /* DiffProgress.swift */; };
+		555452D63053B4F1008DD253 /* DiffResult+Detached.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555452D43053B4F1008DD253 /* DiffResult+Detached.swift */; };
+		555452D83053B53C008DD253 /* ComparisonActivityDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555452D73053B53C008DD253 /* ComparisonActivityDisplayable.swift */; };
+		55649F3B30550B56009ED85B /* ConsoleDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55649F3A30550B56009ED85B /* ConsoleDisplayable.swift */; };
+		55649F3D30550BAF009ED85B /* FilesWindowController+ConsoleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55649F3C30550BAF009ED85B /* FilesWindowController+ConsoleViewDelegate.swift */; };
 		557315B12551307800CF4372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 557315B02551307800CF4372 /* Images.xcassets */; };
 		55740BF512D710EC004BF6CC /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55740BF412D710EC004BF6CC /* IOKit.framework */; };
 		55740BF912D71103004BF6CC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55740BF812D71103004BF6CC /* Security.framework */; };
@@ -898,7 +903,12 @@
 		554B4A432E9B7B8F0023AAF0 /* DiffLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffLine.swift; sourceTree = "<group>"; };
 		5550B5921A21CD1F009BC4A4 /* aliasbadge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aliasbadge@2x.png"; sourceTree = "<group>"; };
 		5550B5941A21D2F3009BC4A4 /* empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty@2x.png"; sourceTree = "<group>"; };
+		555452D33053B4F1008DD253 /* DiffProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffProgress.swift; sourceTree = "<group>"; };
+		555452D43053B4F1008DD253 /* DiffResult+Detached.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiffResult+Detached.swift"; sourceTree = "<group>"; };
+		555452D73053B53C008DD253 /* ComparisonActivityDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonActivityDisplayable.swift; sourceTree = "<group>"; };
 		555CAD9B1C2710D000371E4D /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
+		55649F3A30550B56009ED85B /* ConsoleDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleDisplayable.swift; sourceTree = "<group>"; };
+		55649F3C30550BAF009ED85B /* FilesWindowController+ConsoleViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesWindowController+ConsoleViewDelegate.swift"; sourceTree = "<group>"; };
 		55656A852DD34C5100DD5835 /* VisualDiffer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VisualDiffer-Bridging-Header.h"; sourceTree = "<group>"; };
 		557315B02551307800CF4372 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = assets/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		55740BF412D710EC004BF6CC /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -1330,6 +1340,7 @@
 				55373FC52E9372DF00AB56D0 /* FilesWindowController.swift */,
 				55373FC62E9372DF00AB56D0 /* FilesWindowController+Clipboard.swift */,
 				55373FC72E9372DF00AB56D0 /* FilesWindowController+Common.swift */,
+				55649F3C30550BAF009ED85B /* FilesWindowController+ConsoleViewDelegate.swift */,
 				55373FC82E9372DF00AB56D0 /* FilesWindowController+Document.swift */,
 				55373FC92E9372DF00AB56D0 /* FilesWindowController+FileInfoBarDelegate.swift */,
 				55373FCA2E9372DF00AB56D0 /* FilesWindowController+FilesScopeBar.swift */,
@@ -2486,6 +2497,8 @@
 		553741752E9372DF00AB56D0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				555452D73053B53C008DD253 /* ComparisonActivityDisplayable.swift */,
+				55649F3A30550B56009ED85B /* ConsoleDisplayable.swift */,
 				5537416C2E9372DF00AB56D0 /* DiffCounters */,
 				5537416D2E9372DF00AB56D0 /* FilePathTextField.swift */,
 				55A1B2C02F0A100100AB56D0 /* FindOptions.swift */,
@@ -2539,14 +2552,15 @@
 		554B4A442E9B7B8F0023AAF0 /* DiffResult */ = {
 			isa = PBXGroup;
 			children = (
-				55B5338F302D9C52008A065B /* Engine */,
 				55373FDE2E9372DF00AB56D0 /* DiffChangeType.swift */,
 				554B4A432E9B7B8F0023AAF0 /* DiffLine.swift */,
 				557BBB0D2ED1BBB00016CBD4 /* DiffLineComponent.swift */,
 				55B93A442FAC42910024AEC0 /* DiffProcessor.swift */,
+				555452D33053B4F1008DD253 /* DiffProgress.swift */,
 				554B4A3B2E9B7B8F0023AAF0 /* DiffResult.swift */,
 				55F9E7992EDD5DAD001218C7 /* DiffResult.Options.swift */,
 				55858303300DD8B100EDC56C /* DiffResult.Options+Description.swift */,
+				555452D43053B4F1008DD253 /* DiffResult+Detached.swift */,
 				554B4A3D2E9B7B8F0023AAF0 /* DiffResult+Dump.swift */,
 				554B4A3E2E9B7B8F0023AAF0 /* DiffResult+Lines.swift */,
 				554B4A3F2E9B7B8F0023AAF0 /* DiffResult+Section.swift */,
@@ -2554,6 +2568,7 @@
 				554B4A402E9B7B8F0023AAF0 /* DiffSide.swift */,
 				559186402E9B821B00A30620 /* DiffSummary.swift */,
 				554B4A3A2E9B7B8F0023AAF0 /* EndOfLine.swift */,
+				55B5338F302D9C52008A065B /* Engine */,
 				55B53389302D9C3F008A065B /* InlineDiff.swift */,
 			);
 			path = DiffResult;
@@ -3093,6 +3108,7 @@
 				553741C42E9372DF00AB56D0 /* JumpToLineWindow.swift in Sources */,
 				553741C52E9372DF00AB56D0 /* EncodingError.swift in Sources */,
 				553741C62E9372DF00AB56D0 /* FileExtraOptions.swift in Sources */,
+				55649F3B30550B56009ED85B /* ConsoleDisplayable.swift in Sources */,
 				553741C72E9372DF00AB56D0 /* Array+MoveIndexes.swift in Sources */,
 				553741C82E9372DF00AB56D0 /* BigFileFileOperationManager.m in Sources */,
 				553741C92E9372DF00AB56D0 /* FoldersWindowController+BaseFolder.swift in Sources */,
@@ -3133,6 +3149,7 @@
 				553741E72E9372DF00AB56D0 /* HistoryEntity.swift in Sources */,
 				553741E82E9372DF00AB56D0 /* CompareItem+Clone.swift in Sources */,
 				553741E92E9372DF00AB56D0 /* URL+Path.swift in Sources */,
+				555452D83053B53C008DD253 /* ComparisonActivityDisplayable.swift in Sources */,
 				55BC33432EDACB09004035A0 /* FilesWindowController+RowHeightDataSource.swift in Sources */,
 				55BC33442EDACB09004035A0 /* FilesWindowController+SplitViewDelegate.swift in Sources */,
 				55BC333E2EDAC69C004035A0 /* RowHeightCalculator.swift in Sources */,
@@ -3241,6 +3258,8 @@
 				559590282EABB06100B5AB0B /* ItemComparator+Compare.swift in Sources */,
 				559590292EABB06100B5AB0B /* ItemComparator.swift in Sources */,
 				55858304300DD8B100EDC56C /* DiffResult.Options+Description.swift in Sources */,
+				555452D53053B4F1008DD253 /* DiffProgress.swift in Sources */,
+				555452D63053B4F1008DD253 /* DiffResult+Detached.swift in Sources */,
 				553742432E9372DF00AB56D0 /* ExpressionBox+Menu.swift in Sources */,
 				553742442E9372DF00AB56D0 /* FilesWindowController+PathControlDelegate.swift in Sources */,
 				553742452E9372DF00AB56D0 /* VisibleItem.swift in Sources */,
@@ -3384,6 +3403,7 @@
 				553742C92E9372DF00AB56D0 /* NSEvent+VirtualKeys.swift in Sources */,
 				553742CA2E9372DF00AB56D0 /* DescriptionOutlineNode+FolderCompareInfo.swift in Sources */,
 				553742CB2E9372DF00AB56D0 /* WindowOSD.swift in Sources */,
+				55649F3D30550BAF009ED85B /* FilesWindowController+ConsoleViewDelegate.swift in Sources */,
 				553742CC2E9372DF00AB56D0 /* NSPasteboard+Helper.swift in Sources */,
 				553742CD2E9372DF00AB56D0 /* ConfirmationsPreferencesPanel.swift in Sources */,
 				558DEACB2EA263F500F05A10 /* EncodingManager.swift in Sources */,

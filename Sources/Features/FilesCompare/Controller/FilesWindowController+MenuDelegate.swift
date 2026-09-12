@@ -29,6 +29,14 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
 
     // called for menu bar items
     public func validateMenuItem(_ item: NSMenuItem) -> Bool {
+        // the titles, the hidden flags and the submenus are refreshed even while a
+        // comparison runs, only the action is refused
+        let isValid = validateMenuItemState(item)
+
+        return isComparing ? false : isValid
+    }
+
+    private func validateMenuItemState(_ item: NSMenuItem) -> Bool {
         let action = item.action
         let isLeftView = lastUsedView.side == .left
 
@@ -55,16 +63,8 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
             return leftView.isDirty
         } else if action == #selector(saveRightFile) {
             return rightView.isDirty
-        } else if action == #selector(previousDifference) {
-            return canMoveToDifference(
-                gotoNext: false,
-                moveToFile: CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
-            )
-        } else if action == #selector(nextDifference) {
-            return canMoveToDifference(
-                gotoNext: true,
-                moveToFile: CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
-            )
+        } else if action == #selector(previousDifference) || action == #selector(nextDifference) {
+            return canMoveToDifference()
         } else if action == #selector(copyLinesToLeft) {
             if lastUsedView.side == .right {
                 item.isHidden = false
@@ -113,9 +113,14 @@ extension FilesWindowController: NSMenuDelegate, NSMenuItemValidation {
                 ? NSLocalizedString("Show Details", comment: "")
                 : NSLocalizedString("Hide Details", comment: "")
             return true
+        } else if action == #selector(toggleLogConsole) {
+            item.title = consoleSplitter.hasSubviewCollapsed
+                ? NSLocalizedString("Show Log Console", comment: "")
+                : NSLocalizedString("Hide Log Console", comment: "")
+            return true
         } else if action == #selector(previousDifferenceFiles)
             || action == #selector(nextDifferenceFiles) {
-            return (document as? VDDocument)?.parentSession != nil
+            return parentSession != nil
         } else if action == #selector(toggleWordWrap) {
             item.state = rowHeightCalculator.isWordWrapEnabled ? .on : .off
             return true
