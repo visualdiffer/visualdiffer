@@ -21,13 +21,33 @@ extension FilesWindowController {
             return
         }
 
-        leftPanelView.setSliderMaxValue(
-            diffResult.leftSide.lines,
-            right: diffResult.rightSide.lines
+        // both panels share the same value, computing it once per panel used to be the
+        // longest blocking step of a comparison
+        let maxColumn = widestColumn(
+            leftLines: diffResult.leftSide.lines,
+            rightLines: diffResult.rightSide.lines
         )
-        rightPanelView.setSliderMaxValue(
-            diffResult.leftSide.lines,
-            right: diffResult.rightSide.lines
-        )
+
+        leftPanelView.setSliderMaxValue(maxColumn)
+        rightPanelView.setSliderMaxValue(maxColumn)
+    }
+
+    private func widestColumn(
+        leftLines: [DiffLine],
+        rightLines: [DiffLine]
+    ) -> Int {
+        var widest = 0
+
+        // walking each side on its own does not depend on the two being aligned,
+        // an edit can leave them with a different number of lines
+        for line in leftLines {
+            widest = max(widest, line.text.count)
+        }
+
+        for line in rightLines {
+            widest = max(widest, line.text.count)
+        }
+
+        return widest
     }
 }
