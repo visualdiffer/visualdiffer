@@ -10,6 +10,16 @@ import UserNotifications
 
 extension CompareItem: @unchecked Sendable {}
 
+extension FoldersWindowController: ComparisonActivityDisplayable {
+    var lockedScopeBar: ScopeBarView {
+        scopeBar
+    }
+
+    var lockedPathViews: [PathView] {
+        [leftPanelView.pathView, rightPanelView.pathView]
+    }
+}
+
 public extension FoldersWindowController {
     // MARK: - Reload folders
 
@@ -173,12 +183,8 @@ public extension FoldersWindowController {
         PowerAssertion.shared.setDisableSystemSleep(true, with: NSLocalizedString("Reading and comparing folders", comment: ""))
         running = true
 
-        setProgressHidden(false)
+        setComparisonRunning(true)
         progressView.updateMessage(sessionDiff.leftPath ?? "")
-        leftPanelView.pathView.isEnabled = false
-        rightPanelView.pathView.isEnabled = false
-
-        scopeBar.setEnabledAllGroups(false)
     }
 
     func did(endAt: Date, startedAt: Date) {
@@ -251,17 +257,9 @@ public extension FoldersWindowController {
         updateBottomBar(rightView)
         updateStatusBar()
 
-        scopeBar.setEnabledAllGroups(true)
+        setComparisonRunning(false)
 
-        setProgressHidden(true)
-
-        leftPanelView.pathView.isEnabled = true
-        rightPanelView.pathView.isEnabled = true
-
-        // force toolbar to enable items
-        window?.toolbar?.validateVisibleItems()
-
-        consoleView.log(info: String(format: NSLocalizedString("Comparison completed in %@", comment: ""), elapsedTimeText))
+        logComparisonCompleted(elapsedTimeText: elapsedTimeText)
         showCompareCompleteNotification(elapsedTimeText)
     }
 
