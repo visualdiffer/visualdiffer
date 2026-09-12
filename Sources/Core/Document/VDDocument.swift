@@ -233,6 +233,10 @@ public class VDDocument: NSPersistentDocument {
         }
         isClosed = true
 
+        // the change notification is posted only when the context processes its pending changes,
+        // so flush them or a change made during this same event is not counted yet
+        managedObjectContext?.processPendingChanges()
+
         // TODO: update only if document is edited but do not call self.isDocumentEdited because is overridden
         if super.isDocumentEdited {
             HistorySessionManager.shared.update(document: self, closeDocument: true)
@@ -266,11 +270,6 @@ public class VDDocument: NSPersistentDocument {
     }
 
     override public var isDocumentEdited: Bool {
-        // the change notification is posted only when the context processes its pending changes,
-        // so flush them or a change made during this same event is not counted yet
-        // it must run before the pref check because close() reads super.isDocumentEdited to update the history
-        managedObjectContext?.processPendingChanges()
-
         // If pref is set to true then consider the document without modifications so the save dialog will never shown
         if CommonPrefs.shared.bool(forKey: .dontAskSave) {
             return false

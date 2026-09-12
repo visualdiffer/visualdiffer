@@ -33,6 +33,11 @@ extension FilesWindowController: @preconcurrency DocumentWindowControllerDelegat
 
                 leftView.isDirty = false
                 rightView.isDirty = false
+
+                // the change notification is posted only when the context processes its
+                // pending changes, the answer below must not miss an edit of this event
+                document.managedObjectContext?.processPendingChanges()
+
                 if document.isDocumentEdited {
                     leftView.isDirty = tmpLeftDirty
                     rightView.isDirty = tmpRightDirty
