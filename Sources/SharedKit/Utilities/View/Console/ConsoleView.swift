@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 visualdiffer.com
 //
 
+@MainActor
 protocol ConsoleViewDelegate: AnyObject {
     func hide(console: ConsoleView)
 }
