@@ -58,6 +58,11 @@ public class VDDocument: NSPersistentDocument {
         }
     }
 
+    // preserves the current opt-out and suppresses the Xcode console warning
+    override public class var autosavesInPlace: Bool {
+        false
+    }
+
     // MARK: - init
 
     override public init() {
