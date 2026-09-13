@@ -6,11 +6,6 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-// the stack view is a pane of the console splitter, so its frame is still the seed one when
-// the constraints are first evaluated and it must already clear the height its content needs,
-// or that first pass is unsatisfiable and causes AppKit to log a conflict
-private let detailsStackSeedHeight: CGFloat = 400.0
-
 extension FilesWindowController {
     func createDifferenceCounters() -> DifferenceCounters {
         let view = DifferenceCounters(frame: .zero)
@@ -112,10 +107,17 @@ extension FilesWindowController {
     func createLineDetailsStackWithViews(_ views: [NSView]) -> NSStackView {
         let view = NSStackView(views: views)
 
-        view.frame = NSRect(x: 0, y: 0, width: 1, height: detailsStackSeedHeight)
         view.orientation = .vertical
         view.alignment = .width
         view.distribution = .fill
+
+        // the arranged views are pinned directly to the stack to avoid cross-hierarchy constraints
+        for arrangedView in views {
+            NSLayoutConstraint.activate([
+                arrangedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                arrangedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ])
+        }
 
         return view
     }
@@ -153,6 +155,7 @@ extension FilesWindowController {
         topView.addSubview(leftView)
         topView.addSubview(rightView)
 
+        // the thumbnail is sized and positioned by the top view that owns it
         NSLayoutConstraint.activate([
             leftView.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
             leftView.topAnchor.constraint(equalTo: topView.topAnchor, constant: 18),

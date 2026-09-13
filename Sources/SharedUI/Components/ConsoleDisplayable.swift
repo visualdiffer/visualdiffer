@@ -6,6 +6,11 @@
 //  Copyright (c) 2026 visualdiffer.com
 //
 
+// the console pane is laid out by the splitter, so its frame is still the seed one when the
+// constraints are first evaluated and it must already clear the height its own content needs,
+// or that first pass is unsatisfiable and causes AppKit to log a conflict
+private let consoleSeedHeight: CGFloat = 120.0
+
 // the log console pane, shared by the file and the folder window so the two cannot drift apart
 @MainActor
 protocol ConsoleDisplayable: ConsoleViewDelegate {
@@ -20,7 +25,7 @@ protocol ConsoleDisplayable: ConsoleViewDelegate {
 
 extension ConsoleDisplayable {
     func createConsoleView() -> ConsoleView {
-        let view = ConsoleView(frame: NSRect(x: 0, y: 0, width: 1, height: 0))
+        let view = ConsoleView(frame: NSRect(x: 0, y: 0, width: 1, height: consoleSeedHeight))
         view.delegate = self
 
         return view

@@ -76,11 +76,6 @@ extension FilesWindowController: ComparisonActivityDisplayable {
             consoleSplitter.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             consoleSplitter.bottomAnchor.constraint(equalTo: differenceCounters.topAnchor, constant: -2),
 
-            // the stack view is laid out by the splitter, pinning the thumbnail to it joins
-            // the panels it contains to the constraint system
-            fileThumbnail.leadingAnchor.constraint(equalTo: detailsStackView.leadingAnchor),
-            fileThumbnail.widthAnchor.constraint(equalToConstant: 15),
-
             // linesDetailView has a fixed height
             linesDetailView.heightAnchor.constraint(equalToConstant: 46),
         ])
