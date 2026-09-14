@@ -108,6 +108,7 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
         minSize = NSSize(width: 600, height: 330)
 
         setupViews()
+        setupKeyViewLoop()
     }
 
     private func setupViews() {
@@ -360,5 +361,25 @@ class DocumentWindow: NSWindow, FileDropImageViewDelegate, HistoryControllerDele
 
         center()
         makeKeyAndOrderFront(self)
+    }
+
+    private func setupKeyViewLoop() {
+        autorecalculatesKeyViewLoop = false
+
+        let keyViews: [NSView] = [
+            leftPathChooser.comboBox,
+            rightPathChooser.comboBox,
+            leftPathChooser.chooseButton,
+            rightPathChooser.chooseButton,
+            sessionButton,
+            recentPopup,
+            compareButton,
+            searchHistory,
+            historyController.tableView,
+        ]
+
+        zip(keyViews, keyViews.dropFirst()).forEach { $0.nextKeyView = $1 }
+        keyViews.last?.nextKeyView = keyViews.first
+        initialFirstResponder = keyViews.first
     }
 }

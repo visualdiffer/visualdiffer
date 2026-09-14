@@ -63,7 +63,7 @@ class PathChooser: NSObject, NSComboBoxDelegate {
         return view
     }()
 
-    private lazy var comboBox: NSComboBox = {
+    private(set) lazy var comboBox: NSComboBox = {
         let view = NSComboBox(frame: .zero)
 
         view.completes = true
@@ -78,7 +78,7 @@ class PathChooser: NSObject, NSComboBoxDelegate {
         return view
     }()
 
-    private var chooseButton: NSButton
+    private(set) var chooseButton: NSButton
     private var comboBoxPaths: NSArrayController
 
     init(
