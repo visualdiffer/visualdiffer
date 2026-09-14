@@ -20,15 +20,18 @@ class ConfirmationsFoldersBox: PreferencesBox {
         let stackView = NSStackView.preferences(with: [
             createCheckBox(
                 title: NSLocalizedString("Confirm opening a large number of windows in Finder", comment: ""),
-                prefName: .confirmShowInFinder
+                prefName: .confirmShowInFinder,
+                isNegated: true
             ),
             createCheckBox(
                 title: NSLocalizedString("Confirm stopping the operation in progress", comment: ""),
-                prefName: .confirmStopLongOperation
+                prefName: .confirmStopLongOperation,
+                isNegated: true
             ),
             createCheckBox(
                 title: NSLocalizedString("Warn that opened files may not be visible in Finder", comment: ""),
-                prefName: .confirmShowInFinderNotVisibleFiles
+                prefName: .confirmShowInFinderNotVisibleFiles,
+                isNegated: true
             ),
             separator,
             createCheckBox(
