@@ -13,14 +13,9 @@ class FileOperationManagerDelegateImpl: FileOperationManagerDelegate {
         self.progressIndicatorController = progressIndicatorController
     }
 
+    // waitPause must block the worker thread, not the main thread
     func waitPause(for _: FileOperationManager) {
-        guard let pic = progressIndicatorController else {
-            return
-        }
-
-        DispatchQueue.main.sync {
-            pic.waitPause()
-        }
+        progressIndicatorController?.waitPause()
     }
 
     func isRunning(_: FileOperationManager) -> Bool {

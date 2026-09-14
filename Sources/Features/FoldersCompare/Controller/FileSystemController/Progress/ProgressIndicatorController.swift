@@ -38,11 +38,12 @@ class ProgressIndicatorController: NSWindowController {
     }
 
     private var running = false
-    private var isPaused = false
     private var yesToAll = false
     private var noToAll = false
 
-    private let pauseCondition = NSCondition()
+    // waitPause must block the worker thread, not the main thread
+    private nonisolated(unsafe) var isPaused = false
+    private nonisolated let pauseCondition = NSCondition()
 
     // MARK: - Views
 
@@ -110,9 +111,9 @@ class ProgressIndicatorController: NSWindowController {
         setupViews()
     }
 
-    @available(*, unavailable)
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @available(*, unavailable, message: "use init()")
+    required init?(coder _: NSCoder) {
+        nil
     }
 
     private func setupViews() {
@@ -207,28 +208,32 @@ class ProgressIndicatorController: NSWindowController {
             closeSheet(sender)
             return
         }
+        // the lock must not be held across the alert, otherwise the worker
+        // blocks the main thread while the modal run loop drains the main queue
         pauseCondition.lock()
         isPaused = true
+        pauseCondition.unlock()
 
-        let retVal = NSAlert.showModalConfirm(
-            messageText: NSLocalizedString("Are you sure to stop the operation?", comment: ""),
-            informativeText: NSLocalizedString("If the operation takes a long time to run, you can stop it, but the results could be inaccurate", comment: ""),
-            suppressPropertyName: CommonPrefs.Name.confirmStopLongOperation.rawValue
-        )
+        // the worker must be resumed on every exit path
+        defer {
+            pauseCondition.lock()
+            isPaused = false
+            pauseCondition.broadcast()
+            pauseCondition.unlock()
+        }
+
+        let retVal = NSAlert.showModalStopLongRunningOperation()
+
+        // the operation can complete while the alert is on screen, the
+        // completion path has already chosen whether to keep the sheet open
+        guard running else {
+            return
+        }
 
         if retVal {
             sender.isEnabled = false
             stopRun()
-        } else {
-            // The operation has been completed while
-            // the alert was on screen so dismiss the panel
-            if !running {
-                closeSheet(sender)
-            }
         }
-        isPaused = false
-        pauseCondition.signal()
-        pauseCondition.unlock()
     }
 
     private func closeSheet(_ sender: AnyObject) {
@@ -251,7 +256,7 @@ class ProgressIndicatorController: NSWindowController {
         running
     }
 
-    func waitPause() {
+    nonisolated func waitPause() {
         pauseCondition.lock()
         while isPaused {
             pauseCondition.wait()

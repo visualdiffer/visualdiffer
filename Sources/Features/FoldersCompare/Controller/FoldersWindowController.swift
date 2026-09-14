@@ -269,12 +269,14 @@ public class FoldersWindowController: NSWindowController,
 
     @objc
     func stopRefresh(_: AnyObject) {
-        let retVal = NSAlert.showModalConfirm(
-            messageText: NSLocalizedString("Are you sure to stop the operation?", comment: ""),
-            informativeText: NSLocalizedString("If the operation takes a long time to run, you can stop it, but the results could be inaccurate", comment: ""),
-            suppressPropertyName: CommonPrefs.Name.confirmStopLongOperation.rawValue
-        )
-        if retVal {
+        guard running else {
+            return
+        }
+
+        let retVal = NSAlert.showModalStopLongRunningOperation()
+
+        // the comparison can complete while the alert is on screen
+        if retVal, running {
             showConsoleView()
             consoleView.log(warning: NSLocalizedString("Stopped comparison", comment: ""))
             running = false
