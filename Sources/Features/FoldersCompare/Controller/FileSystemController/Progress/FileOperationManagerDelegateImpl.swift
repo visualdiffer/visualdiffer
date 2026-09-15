@@ -18,14 +18,9 @@ class FileOperationManagerDelegateImpl: FileOperationManagerDelegate {
         progressIndicatorController?.waitPause()
     }
 
+    // isRunning is polled once per item, it must not hop to the main thread
     func isRunning(_: FileOperationManager) -> Bool {
-        guard let pic = progressIndicatorController else {
-            return false
-        }
-
-        return DispatchQueue.main.sync {
-            pic.isRunning()
-        }
+        progressIndicatorController?.isRunning() ?? false
     }
 
     func fileManager(

@@ -37,13 +37,16 @@ class ProgressIndicatorController: NSWindowController {
         errorView.errors
     }
 
-    private var running = false
     private var yesToAll = false
     private var noToAll = false
 
     // waitPause must block the worker thread, not the main thread
     private nonisolated(unsafe) var isPaused = false
     private nonisolated let pauseCondition = NSCondition()
+
+    // isRunning is polled once per item, it must not hop to the main thread
+    private nonisolated(unsafe) var running = false
+    private nonisolated let runningLock = NSLock()
 
     // MARK: - Views
 
@@ -200,11 +203,7 @@ class ProgressIndicatorController: NSWindowController {
 
     @objc
     func stop(_ sender: AnyObject) {
-        guard let sender = sender as? NSButton else {
-            return
-        }
-
-        if !running {
+        if !isRunning() {
             closeSheet(sender)
             return
         }
@@ -226,34 +225,31 @@ class ProgressIndicatorController: NSWindowController {
 
         // the operation can complete while the alert is on screen, the
         // completion path has already chosen whether to keep the sheet open
-        guard running else {
+        guard isRunning() else {
             return
         }
 
         if retVal {
-            sender.isEnabled = false
+            stopButton.isEnabled = false
             stopRun()
         }
     }
 
     private func closeSheet(_ sender: AnyObject) {
-        if let window {
-            window.endSheet(window)
-            window.orderOut(sender)
-        }
+        window?.orderOut(sender)
     }
 
     func startRun() {
-        running = true
+        runningLock.withLock { running = true }
     }
 
     func stopRun() {
-        running = false
+        runningLock.withLock { running = false }
         fileOpCancelled = true
     }
 
-    func isRunning() -> Bool {
-        running
+    nonisolated func isRunning() -> Bool {
+        runningLock.withLock { running }
     }
 
     nonisolated func waitPause() {
