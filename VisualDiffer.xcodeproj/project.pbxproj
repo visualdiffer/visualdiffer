@@ -114,6 +114,7 @@
 		553741DD2E9372DF00AB56D0 /* CompareItem+Accessors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740502E9372DF00AB56D0 /* CompareItem+Accessors.swift */; };
 		553741DE2E9372DF00AB56D0 /* FilesWindowController+JumpLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FCC2E9372DF00AB56D0 /* FilesWindowController+JumpLine.swift */; };
 		553741DF2E9372DF00AB56D0 /* CommonPrefs+ConsoleLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553740362E9372DF00AB56D0 /* CommonPrefs+ConsoleLog.swift */; };
+		55A17A012F000001000000A1 /* NSAlert+StopLongRunningOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A17A022F000001000000A2 /* NSAlert+StopLongRunningOperation.swift */; };
 		553741E02E9372DF00AB56D0 /* NSToolbar+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537410C2E9372DF00AB56D0 /* NSToolbar+Create.swift */; };
 		553741E12E9372DF00AB56D0 /* String+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553741032E9372DF00AB56D0 /* String+Helper.swift */; };
 		553741E32E9372DF00AB56D0 /* LineNumberTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55373FC02E9372DF00AB56D0 /* LineNumberTableRowView.swift */; };
@@ -686,6 +687,7 @@
 		553740342E9372DF00AB56D0 /* OutlineViewItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineViewItemDelegate.swift; sourceTree = "<group>"; };
 		553740362E9372DF00AB56D0 /* CommonPrefs+ConsoleLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonPrefs+ConsoleLog.swift"; sourceTree = "<group>"; };
 		553740372E9372DF00AB56D0 /* DiffCountersItem+CompareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiffCountersItem+CompareItem.swift"; sourceTree = "<group>"; };
+		55A17A022F000001000000A2 /* NSAlert+StopLongRunningOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+StopLongRunningOperation.swift"; sourceTree = "<group>"; };
 		553740392E9372DF00AB56D0 /* CopyCompareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCompareItem.swift; sourceTree = "<group>"; };
 		5537403A2E9372DF00AB56D0 /* DeleteCompareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCompareItem.swift; sourceTree = "<group>"; };
 		5537403B2E9372DF00AB56D0 /* FileAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAttributes.swift; sourceTree = "<group>"; };
@@ -1578,6 +1580,7 @@
 			children = (
 				553740362E9372DF00AB56D0 /* CommonPrefs+ConsoleLog.swift */,
 				553740372E9372DF00AB56D0 /* DiffCountersItem+CompareItem.swift */,
+				55A17A022F000001000000A2 /* NSAlert+StopLongRunningOperation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3139,6 +3142,7 @@
 				553741DE2E9372DF00AB56D0 /* FilesWindowController+JumpLine.swift in Sources */,
 				5595901F2EABA8A100B5AB0B /* CompareChangeType.swift in Sources */,
 				553741DF2E9372DF00AB56D0 /* CommonPrefs+ConsoleLog.swift in Sources */,
+				55A17A012F000001000000A1 /* NSAlert+StopLongRunningOperation.swift in Sources */,
 				553741E02E9372DF00AB56D0 /* NSToolbar+Create.swift in Sources */,
 				553741E12E9372DF00AB56D0 /* String+Helper.swift in Sources */,
 				553741E32E9372DF00AB56D0 /* LineNumberTableRowView.swift in Sources */,
