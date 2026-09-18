@@ -10,7 +10,11 @@ cd visualdiffer
 
 ```
 
-Open in Xcode
+Open `VisualDiffer.xcworkspace` in Xcode, not `VisualDiffer.xcodeproj`.
+
+The workspace is the container that pins the Swift Package Manager dependencies, and it is the one
+the release is built from. Opening the project instead resolves the package versions freely, so you
+may end up building against a different Sparkle version than the one that ships.
 
 ## 👥 Contributing  
 
