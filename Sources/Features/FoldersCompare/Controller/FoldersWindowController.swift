@@ -31,7 +31,10 @@ public class FoldersWindowController: NSWindowController,
     // swiftlint:disable:next implicitly_unwrapped_optional
     @objc dynamic var sessionDiff: SessionDiff!
     var dontResizeColumns = false
-    var running = false
+
+    private nonisolated(unsafe) var runningFlag = false
+    private nonisolated let runningLock = NSLock()
+
     var previewPanel: QLPreviewPanel?
 
     var hideEmptyFolders = false
@@ -145,6 +148,11 @@ public class FoldersWindowController: NSWindowController,
     lazy var statusbar: NSStackView = createStatusbar()
 
     lazy var statusbarText: NSTextField = createStatusbarText()
+
+    nonisolated var running: Bool {
+        get { runningLock.withLock { runningFlag } }
+        set { runningLock.withLock { runningFlag = newValue } }
+    }
 
     init() {
         sessionChildren = []

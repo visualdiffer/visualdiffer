@@ -312,11 +312,8 @@ public extension FoldersWindowController {
 }
 
 extension FoldersWindowController: ItemComparatorDelegate {
+    // the flag is lock-based so the poll no longer hops to the main thread
     public nonisolated func isRunning(_: ItemComparator) -> Bool {
-        DispatchQueue.main.sync { [weak self] in
-            MainActor.assumeIsolated {
-                self?.running ?? false
-            }
-        }
+        running
     }
 }
