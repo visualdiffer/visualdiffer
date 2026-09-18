@@ -75,9 +75,17 @@ class DocumentWaiter: NSObject, SBApplicationDelegate {
         app.delegate = self
         app.activate()
 
+        let openDiffSelector = NSSelectorFromString("openDiffLeftPath:rightPath:")
+
+        guard app.responds(to: openDiffSelector) else {
+            throw ComparisonLaunchError.launch(
+                description: "VisualDiffer is not scriptable, unable to read its scripting definition"
+            )
+        }
+
         // in Swift is more simple to use the dynamic approach
         uuid = app.perform(
-            NSSelectorFromString("openDiffLeftPath:rightPath:"),
+            openDiffSelector,
             with: leftPath.path(percentEncoded: false),
             with: rightPath.path(percentEncoded: false)
         )?.takeRetainedValue() as? String // swiftlint:disable:this multiline_function_chains
