@@ -6,7 +6,7 @@
 //  Copyright (c) 2022 visualdiffer.com
 //
 
-// Copy this file to Versions.xcconfig and edit the values
+// scripts/setup-local-env.sh copies this file to Versions.local.xcconfig, edit the values there
 
 APP_VERSION = 1.0.0
 APP_BUNDLE_VERSION = $(APP_VERSION)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-// cast needed in Swift 6.2
+// cast needed in Swift 6 language mode
 let version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "n/a"
 
 enum Flags: String {

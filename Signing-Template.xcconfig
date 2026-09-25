@@ -6,15 +6,11 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
-// Copy this file to Signing-local.xcconfig and edit the values
-// The `*-local*` file will not be committed
+// scripts/setup-local-env.sh copies this file to Signing.local.xcconfig, edit the values there
+// the `*.local*` files are never committed
 
 DEVELOPMENT_TEAM = 
 
 PROVISIONING_PROFILE_SPECIFIER =
 
 CODE_SIGN_STYLE = Automatic
-
-CODE_SIGN_ENTITLEMENTS[config=Debug] = VisualDiffer.entitlements
-CODE_SIGN_ENTITLEMENTS[config=Release] = VisualDiffer.entitlements
-CODE_SIGN_ENTITLEMENTS[config=DebugNoSandbox] = ./VisualDifferTests/NoSandbox.entitlements
