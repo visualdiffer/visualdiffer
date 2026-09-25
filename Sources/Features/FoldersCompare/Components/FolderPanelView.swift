@@ -6,6 +6,8 @@
 //  Copyright (c) 2025 visualdiffer.com
 //
 
+private let bottomBarInset: CGFloat = 3
+
 class FolderPanelView: TablePanelView<FoldersOutlineView, NSTextField> {
     override var pathViewDelegate: PathControlDelegate? {
         willSet {
@@ -14,26 +16,23 @@ class FolderPanelView: TablePanelView<FoldersOutlineView, NSTextField> {
     }
 
     init() {
-        super.init(treeView: FoldersOutlineView(frame: .zero), bottomBar: NSTextField(frame: .zero))
+        super.init(treeView: FoldersOutlineView(frame: .zero), bottomBar: NSTextField.hintWithTitle(""))
         treeView.addColumns()
     }
 
     override func setupBottomBarConstraints() {
-        super.setupBottomBarConstraints()
-
+        // no super: it pins the scroll view straight to bottomBar.top, leaving no room for the inset
         NSLayoutConstraint.activate([
-            bottomBar.bottomAnchor.constraint(equalTo: bottomAnchor),
-            bottomBar.heightAnchor.constraint(equalToConstant: 22),
-            bottomBar.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor, constant: -bottomBarInset),
+            bottomBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottomBarInset),
+            bottomBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -bottomBarInset),
+            bottomBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bottomBarInset),
         ])
     }
 
     override func setupBottomBar() {
-        bottomBar.centerVertically()
-        bottomBar.translatesAutoresizingMaskIntoConstraints = false
-
-        bottomBar.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+        bottomBar.alignment = .center
+        bottomBar.lineBreakMode = .byClipping
     }
 
     override func updateBottomBar() {
