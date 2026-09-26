@@ -5,33 +5,27 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.2.0</title>
+            <title>Version 2.2.1</title>
             <description>
                 <![CDATA[
-                <h1 id="v220">v2.2.0</h1>
+                <h1 id="v221">v2.2.1</h1>
 
 <h3 id="features">🚀 Features</h3>
 
 <ul>
-  <li>Folder Compare: add Quick Look file preview panels (<a href="https://github.com/visualdiffer/visualdiffer/commit/488be96585329e0b8bf0d1f35d54d5b955e1b533">488be96</a>)</li>
-</ul>
-
-<h3 id="bug-fixes">🐛 Bug Fixes</h3>
-
-<ul>
-  <li>size and center new windows based on the screen (<a href="https://github.com/visualdiffer/visualdiffer/commit/d0c5a9072e4a95e1c0f0ddff4ca5e5b09fd8c7fc">d0c5a90</a>)</li>
+  <li>File Compare: compare files in the background with progress and a log console (#67) (<a href="https://github.com/visualdiffer/visualdiffer/commit/0582ba8fbaf679c7bee23d1398c3072a83e3c71f">0582ba8</a>)</li>
 </ul>
 
                 ]]>
             </description>
-            <pubDate>Sat, 5 September 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.2.0</sparkle:version>
-            <sparkle:shortVersionString>2.2.0</sparkle:shortVersionString>
+            <pubDate>Sat, 26 September 2026 00:00:00 +0200</pubDate>
+            <sparkle:version>2.2.1</sparkle:version>
+            <sparkle:shortVersionString>2.2.1</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.2.0/VisualDiffer-2.2.0.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.2.1/VisualDiffer-2.2.1.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="0VJdQ7XmuRartfHRQmeUcf6mt/C4QdxclZ3tgsE+SHc9rTeCohicLCwbHnKJ9+j7chug/mX6HeLLP0xeFLJiAw==" length="5155442"
+                sparkle:edSignature="Hhd1Jq0G9/JMYPrqJ3RH150id01qL37P4G1MYAXte4E38giiOq4STR5w13Rr5QFDlvmT2PfvG+H5iP6CYsgaAA==" length="5150521"
 
             />
         </item>
