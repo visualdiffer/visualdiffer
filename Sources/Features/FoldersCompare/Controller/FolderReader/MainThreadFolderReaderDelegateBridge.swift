@@ -16,14 +16,9 @@ class MainThreadFolderReaderDelegateBridge: FolderReaderDelegate {
         self.controller = controller
     }
 
+    // the flag is lock-based so the poll no longer hops to the main thread
     func isRunning(_: FolderReader) -> Bool {
-        guard let controller else {
-            return false
-        }
-
-        return DispatchQueue.main.sync {
-            controller.running
-        }
+        controller?.running ?? false
     }
 
     func progress(_ folderReader: FolderReader, status: FolderReaderStatus) {
@@ -40,10 +35,12 @@ class MainThreadFolderReaderDelegateBridge: FolderReaderDelegate {
             DispatchQueue.main.sync {
                 controller.rootFoldersDidRead(folderReader: folderReader, foldersOnRoot: folderCount)
             }
+        // the item callbacks are the barrier that keeps the
+        // reader from mutating the item while the main thread reads it
         case let .willTraverse(item):
-            DispatchQueue.main.async { controller.willTraverse(item) }
+            DispatchQueue.main.sync { controller.willTraverse(item) }
         case let .didTraverse(item):
-            DispatchQueue.main.async { controller.didTraverse(folderReader: folderReader, item) }
+            DispatchQueue.main.sync { controller.didTraverse(folderReader: folderReader, item) }
         }
     }
 

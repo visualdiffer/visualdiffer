@@ -8,6 +8,6 @@
 
 extension FilesWindowController: NSSplitViewDelegate {
     func splitViewDidResizeSubviews(_: Notification) {
-        rowHeightCalculator.reloadData()
+        rowHeightCalculator.reloadDataIfWidthChanged()
     }
 }

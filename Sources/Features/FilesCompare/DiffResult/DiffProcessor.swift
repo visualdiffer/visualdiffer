@@ -18,6 +18,7 @@ struct DiffProcessor {
 
     private var leftIndex = 0
     private var rightIndex = 0
+    private var progress: DiffProgress?
 
     init(
         leftLines: [DiffLineComponent],
@@ -29,7 +30,10 @@ struct DiffProcessor {
         self.options = options
     }
 
-    mutating func process(changes: [DiffChange]) {
+    mutating func process(changes: [DiffChange], progress: DiffProgress? = nil) {
+        self.progress = progress
+        progress?.begin(total: leftLines.count + rightLines.count)
+
         sections.removeAll(keepingCapacity: true)
         summary.reset()
 
@@ -101,6 +105,7 @@ struct DiffProcessor {
             )
             leftSide.add(line: line)
             leftIndex += 1
+            progress?.report(processed: leftIndex + rightIndex)
         }
 
         while rightIndex < rightCount {
@@ -111,6 +116,7 @@ struct DiffProcessor {
             )
             rightSide.add(line: line)
             rightIndex += 1
+            progress?.report(processed: leftIndex + rightIndex)
         }
 
         updateIgnored(from: startIndex)
@@ -157,6 +163,7 @@ struct DiffProcessor {
 
             leftIndex += 1
             rightIndex += 1
+            progress?.report(processed: leftIndex + rightIndex)
         }
     }
 
@@ -173,6 +180,7 @@ struct DiffProcessor {
             )
             leftSide.add(line: line)
             leftIndex += 1
+            progress?.report(processed: leftIndex + rightIndex)
         }
         for _ in 0 ..< lineCount {
             let line = DiffLine.missingLine()
@@ -198,6 +206,7 @@ struct DiffProcessor {
             )
             rightSide.add(line: line)
             rightIndex += 1
+            progress?.report(processed: leftIndex + rightIndex)
         }
     }
 }

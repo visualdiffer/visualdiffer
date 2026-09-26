@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 visualdiffer.com
 //
 
-let suppressShowInFinder = "suppressShowInFinder"
 let maxFoldersToShowWithoutAlert = 8
 
 extension NSWorkspace {
@@ -21,7 +20,7 @@ extension NSWorkspace {
             let confirmOpen = NSAlert.showModalConfirm(
                 messageText: String(format: NSLocalizedString("Are you sure you want to open %lu Finder windows?", comment: ""), paths.count),
                 informativeText: NSLocalizedString("You have chosen to open a large number of windows. This can take a long time", comment: ""),
-                suppressPropertyName: suppressShowInFinder,
+                suppressPropertyName: CommonPrefs.Name.confirmShowInFinder.rawValue,
                 yesText: nil,
                 noText: nil
             )

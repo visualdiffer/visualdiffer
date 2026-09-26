@@ -24,6 +24,12 @@ extension FilesWindowController {
 
     private func updateSessionPreferences(_ returnCode: NSApplication.ModalResponse) {
         if returnCode == .OK {
+            // session preferences discard, the new options are applied by a fresh comparison,
+            // which re-reads the files over the unsaved edits the panels hold
+            guard alertSaveDirtyFiles() else {
+                return
+            }
+
             preferences = sessionPreferencesSheet.preferences
             sessionDiff.extraData.diffResultOptions = preferences.diffResultOptions
             startComparison()

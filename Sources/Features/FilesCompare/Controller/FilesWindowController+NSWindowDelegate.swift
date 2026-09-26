@@ -11,6 +11,8 @@ let statusBarShowMessageTimeoutPrefName = "filesStatusBarShowMessageTimeout"
 
 extension FilesWindowController: NSWindowDelegate {
     public func windowWillClose(_: Notification) {
+        isClosed = true
+        statusMessageTask?.cancel()
         removeObservers()
         if let document = document as? VDDocument {
             document.parentSession?.removeChildDocument(document)
@@ -30,8 +32,7 @@ extension FilesWindowController: NSWindowDelegate {
         [proposedOptions, .autoHideToolbar]
     }
 
-    @objc
-    func resetStatusBarMessage(_: AnyObject?) {
+    func resetStatusBarMessage() {
         guard let diffResult else {
             return
         }
@@ -50,26 +51,46 @@ extension FilesWindowController: NSWindowDelegate {
 
         if leftChanged || rightChanged {
             if askReload() {
+                // silent reload discard, the confirm above can be suppressed and the
+                // reload would then throw the unsaved edits away without a word
+                guard alertSaveDirtyFiles() else {
+                    return
+                }
+
                 leftView.isDirty = false
                 rightView.isDirty = false
-                reload(nil)
                 NotificationCenter.default.postFileUpdated(
                     leftPath: sessionDiff.leftPath,
                     rightPath: sessionDiff.rightPath
                 )
-                if leftChanged, rightChanged {
-                    differenceCounters.stringValue = NSLocalizedString("Reloaded left and right files", comment: "")
+                let message = if leftChanged, rightChanged {
+                    NSLocalizedString("Reloaded left and right files", comment: "")
                 } else if leftChanged {
-                    differenceCounters.stringValue = NSLocalizedString("Reloaded left file", comment: "")
-                } else if rightChanged {
-                    differenceCounters.stringValue = NSLocalizedString("Reloaded right file", comment: "")
+                    NSLocalizedString("Reloaded left file", comment: "")
+                } else {
+                    NSLocalizedString("Reloaded right file", comment: "")
                 }
-                perform(
-                    #selector(resetStatusBarMessage),
-                    with: nil,
-                    afterDelay: UserDefaults.standard.double(forKey: statusBarShowMessageTimeoutPrefName)
-                )
+
+                // the comparison refreshes the counters, the confirmation travels
+                // with the request so it is shown by whichever run re-reads the file
+                reloadRestoringPosition(statusMessage: message)
             }
+        }
+    }
+
+    func showStatusMessage(_ message: String) {
+        differenceCounters.stringValue = message
+
+        statusMessageTask?.cancel()
+        statusMessageTask = Task {
+            let timeout = UserDefaults.standard.double(forKey: statusBarShowMessageTimeoutPrefName)
+
+            // a cancelled wait means a newer message took over, the counters must stay away
+            guard await (try? Task.sleep(for: .seconds(timeout))) != nil else {
+                return
+            }
+
+            resetStatusBarMessage()
         }
     }
 }

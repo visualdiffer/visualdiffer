@@ -10,5 +10,14 @@ PRODUCT_BUNDLE_IDENTIFIER = com.visualdiffer.tests
 
 ENABLE_APP_SANDBOX = NO
 
+// see the note in AppConfig.xcconfig: the entitlements belong to the target, not to the machine
+CODE_SIGN_ENTITLEMENTS = ./Tests/NoSandbox.entitlements
+
+// the XCTest, Testing and libXCTestSwiftSupport libraries shipped with Xcode are built for macOS 14.0,
+// so linking the test bundle at the app deployment target of 13.5 emits "built for newer version" warnings
+// the test bundle is never shipped, it runs only on the developer machine and on CI, so it can require a
+// newer minimum than the app, which stays on 13.5 for its users
+MACOSX_DEPLOYMENT_TARGET = 14.0
+
 #include "Signing.local.xcconfig"
 #include "Versions.local.xcconfig"

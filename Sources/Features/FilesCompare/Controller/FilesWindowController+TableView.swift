@@ -126,6 +126,11 @@ extension FilesWindowController: NSTableViewDataSource,
             return false
         }
 
+        // the dropped files replace the displayed ones, so the pending changes must be saved first
+        guard alertSaveDirtyFiles() else {
+            return false
+        }
+
         if arr.count < 2 {
             guard let path = arr.last?.osPath else {
                 return false
@@ -141,12 +146,16 @@ extension FilesWindowController: NSTableViewDataSource,
             sessionDiff.rightPath = arr[1].osPath
         }
 
-        reloadAllMove(toFirstDifference: false)
+        startReload(toFirstDifference: false)
 
         return true
     }
 
     func tableView(_: NSTableView, menuItem: NSMenuItem, hideMenuItem hide: inout Bool) -> Bool {
+        if isComparing {
+            hide = true
+            return false
+        }
         let action = menuItem.action
 
         hide = true

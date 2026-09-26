@@ -22,6 +22,8 @@ public class VDDocument: NSPersistentDocument {
     // see http://lists.apple.com/archives/cocoa-dev/2012/Sep/msg00428.html
     private var isClosed = false
 
+    private var isMarkingEdited = true
+
     let uuid = ProcessInfo.processInfo.globallyUniqueString
 
     var parentSession: DiffOpenerDelegate?
@@ -56,7 +58,29 @@ public class VDDocument: NSPersistentDocument {
         }
     }
 
+    // preserves the current opt-out and suppresses the Xcode console warning
+    override public class var autosavesInPlace: Bool {
+        false
+    }
+
     // MARK: - init
+
+    override public init() {
+        super.init()
+
+        // the app has no undo/redo, the Core Data undo manager would only feed the document change
+        // tracking and its snapshots can roll back the model while the document is closing
+        if let moc = managedObjectContext {
+            moc.undoManager = nil
+
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(sessionObjectsDidChange),
+                name: NSManagedObjectContext.didChangeObjectsNotification,
+                object: moc
+            )
+        }
+    }
 
     // —initWithType:error:—that is called only when a new document is created, not when it is subsequently reopened.
     @MainActor
@@ -67,9 +91,8 @@ public class VDDocument: NSPersistentDocument {
             return
         }
 
-        moc.rollback()
-
-        moc.updateWithoutRecordingModifications {
+        updateWithoutMarkingEdited {
+            moc.rollback()
             _sessionDiff = SessionDiff.newObject(moc)
             if let sessionDiff {
                 VDDocumentController.shared.fillSessionDiff(sessionDiff)
@@ -81,7 +104,10 @@ public class VDDocument: NSPersistentDocument {
         try super.read(from: absoluteURL, ofType: typeName)
 
         try MainActor.assumeIsolated {
-            try isReadSessionDiffValid()
+            // the sessionDiff is fetched here and awakeFromFetch can rewrite migrated values
+            try updateWithoutMarkingEdited {
+                try isReadSessionDiffValid()
+            }
         }
     }
 
@@ -212,6 +238,10 @@ public class VDDocument: NSPersistentDocument {
         }
         isClosed = true
 
+        // the change notification is posted only when the context processes its pending changes,
+        // so flush them or a change made during this same event is not counted yet
+        managedObjectContext?.processPendingChanges()
+
         // TODO: update only if document is edited but do not call self.isDocumentEdited because is overridden
         if super.isDocumentEdited {
             HistorySessionManager.shared.update(document: self, closeDocument: true)
@@ -249,6 +279,7 @@ public class VDDocument: NSPersistentDocument {
         if CommonPrefs.shared.bool(forKey: .dontAskSave) {
             return false
         }
+
         return super.isDocumentEdited
     }
 
@@ -320,6 +351,38 @@ public class VDDocument: NSPersistentDocument {
             modelConfiguration: configuration,
             storeOptions: options
         )
+    }
+
+    // update the sessionDiff without considering it a change made by the user
+    func updateWithoutMarkingEdited(_ block: () throws -> Void) rethrows {
+        // changes made before the block are the user's, mark them before turning the flag off
+        managedObjectContext?.processPendingChanges()
+
+        isMarkingEdited = false
+        defer {
+            // flush the changes so the notification is delivered while the flag is still off
+            managedObjectContext?.processPendingChanges()
+            isMarkingEdited = true
+        }
+
+        try block()
+    }
+
+    @objc
+    private func sessionObjectsDidChange(_ notification: Notification) {
+        guard isMarkingEdited else {
+            return
+        }
+
+        // a refreshed or invalidated object is not a modification
+        let changeKeys = [NSInsertedObjectsKey, NSUpdatedObjectsKey, NSDeletedObjectsKey]
+        let isChanged = changeKeys.contains {
+            !((notification.userInfo?[$0] as? Set<NSManagedObject>)?.isEmpty ?? true)
+        }
+
+        if isChanged {
+            updateChangeCount(.changeDone)
+        }
     }
 }
 

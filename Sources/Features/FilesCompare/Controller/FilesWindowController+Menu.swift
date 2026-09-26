@@ -220,6 +220,14 @@ extension FilesWindowController {
             keyEquivalent: ""
         )
 
+        let logConsole = NSMenuItem(
+            title: NSLocalizedString("Show Log Console", comment: ""),
+            action: #selector(toggleLogConsole),
+            keyEquivalent: "l"
+        )
+        logConsole.keyEquivalentModifierMask = [.option, .command]
+        viewMenu.addItem(logConsole)
+
         let toolbarItem = NSMenuItem(
             title: NSLocalizedString("Show Toolbar", comment: ""),
             action: #selector(NSWindow.toggleToolbarShown),

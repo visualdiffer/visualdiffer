@@ -3,12 +3,12 @@
 # Bootstrap script for local xcconfig files.
 # Combines the local and maintainer setups in a single entry point.
 #
-# Default mode copies the template xcconfig files (same as setup-local-env.sh),
-# it is safe to run multiple times and will NOT overwrite existing .local files.
+# Default mode copies the template xcconfig files, it is safe to run multiple
+# times and will NOT overwrite existing .local files.
 #
 # Maintainer mode (-m admin) installs the maintainer configurations as symbolic
-# links (same as setup-maintainer-env.sh) and must be run only on maintainer
-# machines because it requires access to sensible informations.
+# links and must be run only on maintainer machines because it requires access
+# to sensible informations.
 
 set -euo pipefail
 

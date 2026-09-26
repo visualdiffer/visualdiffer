@@ -8,7 +8,6 @@
 
 extension FilePanelView {
     func readFile(_ path: URL) throws -> String {
-        treeView.isDirty = false
         fileInfoBar.encoding = CommonPrefs.shared.defaultEncoding
         fileInfoBar.fileAttrs = nil
         fileInfoBar.eol = .missing
@@ -22,7 +21,13 @@ extension FilePanelView {
 
         fileInfoBar.fileAttrs = try FileManager.default.attributesOfItem(atPath: path.osPath)
 
-        return try readContent(path)
+        let content = try readContent(path)
+
+        // the panel is showing this file only now, a read that threw earlier must leave
+        // the flag alone or unsaved edits are discarded without asking
+        treeView.isDirty = false
+
+        return content
     }
 
     private func readContent(_ path: URL) throws -> String {

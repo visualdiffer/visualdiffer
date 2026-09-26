@@ -1,12 +1,12 @@
 //
-//  FoldersWindowController+ConsoleViewDelegate.swift
+//  FilesWindowController+ConsoleViewDelegate.swift
 //  VisualDiffer
 //
-//  Created by davide ficano on 08/07/25.
-//  Copyright (c) 2025 visualdiffer.com
+//  Created by davide ficano on 11/09/26
+//  Copyright (c) 2026 visualdiffer.com
 //
 
-extension FoldersWindowController: ConsoleDisplayable {
+extension FilesWindowController: ConsoleDisplayable {
     var consoleFocusView: NSView {
         lastUsedView
     }

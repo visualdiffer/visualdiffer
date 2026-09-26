@@ -10,7 +10,10 @@ class PathView: NSView {
     var isEnabled = false {
         didSet {
             for view in stackView.views {
-                if let control = view as? NSControl {
+                // the save button is driven by its .enabled binding to isDirty, forcing it
+                // here would leave it lit on a file that has nothing to save
+                if let control = view as? NSControl,
+                   control !== saveButton {
                     control.isEnabled = isEnabled
                 }
             }

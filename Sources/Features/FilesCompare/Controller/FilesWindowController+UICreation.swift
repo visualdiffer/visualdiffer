@@ -73,7 +73,7 @@ extension FilesWindowController {
     }
 
     func createLineDetailTextView() -> LineDetailTextView {
-        let view = LineDetailTextView(frame: .zero)
+        let view = LineDetailTextView()
 
         view.isSelectable = true
         view.isEditable = false
@@ -110,7 +110,14 @@ extension FilesWindowController {
         view.orientation = .vertical
         view.alignment = .width
         view.distribution = .fill
-        view.translatesAutoresizingMaskIntoConstraints = false
+
+        // the arranged views are pinned directly to the stack to avoid cross-hierarchy constraints
+        for arrangedView in views {
+            NSLayoutConstraint.activate([
+                arrangedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                arrangedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ])
+        }
 
         return view
     }
@@ -148,6 +155,7 @@ extension FilesWindowController {
         topView.addSubview(leftView)
         topView.addSubview(rightView)
 
+        // the thumbnail is sized and positioned by the top view that owns it
         NSLayoutConstraint.activate([
             leftView.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
             leftView.topAnchor.constraint(equalTo: topView.topAnchor, constant: 18),
@@ -161,5 +169,13 @@ extension FilesWindowController {
         ])
 
         return topView
+    }
+
+    func createProgressView() -> ProgressBarView {
+        let view = ProgressBarView(frame: .zero)
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
     }
 }

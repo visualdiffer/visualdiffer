@@ -38,6 +38,13 @@ final class LineDetailTextView: NSTextView {
         return NSRange(location: selectableLength, length: clampedSuffixLength)
     }
 
+    // the TextKit 2 layout engine sizes the view by laying out the entire line, and this
+    // view can render lines of any length: laying out a single-line minified file takes
+    // about a second, so the view uses the TextKit 1 stack, which measures text lazily
+    convenience init() {
+        self.init(usingTextLayoutManager: false)
+    }
+
     override func selectionRange(
         forProposedRange proposedCharRange: NSRange,
         granularity: NSSelectionGranularity

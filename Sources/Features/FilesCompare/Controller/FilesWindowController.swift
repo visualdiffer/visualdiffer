@@ -6,6 +6,10 @@
 //  Copyright (c) 2010 visualdiffer.com
 //
 
+// minimum heights of the two panes of the console splitter
+private let filePanelsMinHeight: CGFloat = 160.0
+private let consoleMinHeight: CGFloat = 80.0
+
 class FilesWindowController: NSWindowController {
     var lineNumberWidth: CGFloat = 0
 
@@ -29,6 +33,7 @@ class FilesWindowController: NSWindowController {
 
     lazy var differenceCounters: DifferenceCounters = createDifferenceCounters()
     lazy var statusbarText: NSTextField = createStatusbarText()
+    lazy var progressView: ProgressBarView = createProgressView()
 
     lazy var fileThumbnail: FileThumbnailView = createThumbnailView()
 
@@ -41,6 +46,27 @@ class FilesWindowController: NSWindowController {
     var filteredDiffResult: DiffResult?
     var currentDiffResult: DiffResult?
 
+    // the comparison runs detached, a new one is refused until it completes
+    var isComparing = false
+
+    // set when a comparison starts, the console reports how long it took
+    var comparisonStartedAt = Date()
+
+    // a reload asked while a comparison runs, it carries what that request still owes
+    struct PendingReload {
+        var toFirstDifference = false
+        var statusMessage: String?
+    }
+
+    var pendingReload: PendingReload?
+
+    // a detached comparison outlives the window, the session it reads does not
+    var isClosed = false
+
+    // restores the counters once a status bar message has been read, a newer message
+    // replaces the pending one
+    var statusMessageTask: Task<Void, Never>?
+
     var resolvedLeftPath: URL?
     var resolvedRightPath: URL?
 
@@ -51,6 +77,30 @@ class FilesWindowController: NSWindowController {
     lazy var topBottomView: WindowOSD = .init(
         image: VDSymbol.Asset.bottom.image(),
         parent: window
+    )
+
+    // the console is the bottom pane of the window, collapsed until an error is logged
+    // or the user asks for it
+    lazy var consoleSplitter: DualPaneSplitView = {
+        let view = createConsoleSplitter()
+
+        view.addArrangedSubview(detailsStackView)
+        view.addArrangedSubview(consoleView)
+
+        return view
+    }()
+
+    lazy var consoleView: ConsoleView = createConsoleView()
+
+    lazy var detailsStackView: NSStackView = createLineDetailsStackWithViews([
+        createTopView(fileThumbnail, rightView: filePanels),
+        linesDetailView,
+    ])
+
+    var consoleDelegate = DualPaneSplitViewDelegate(
+        collapsableSubViewIndex: 1,
+        minFirstPaneSize: filePanelsMinHeight,
+        minSecondPaneSize: consoleMinHeight
     )
 
     let filePanels: NSSplitView
@@ -68,6 +118,11 @@ class FilesWindowController: NSWindowController {
     var preferences = FilePreferences()
 
     lazy var sessionPreferencesSheet: FileSessionPreferencesWindow = .init()
+
+    // the folder session the compared files were opened from, nil for a standalone window
+    var parentSession: DiffOpenerDelegate? {
+        (document as? VDDocument)?.parentSession
+    }
 
     init() {
         let window = WindowCancelOperation.createWindow()

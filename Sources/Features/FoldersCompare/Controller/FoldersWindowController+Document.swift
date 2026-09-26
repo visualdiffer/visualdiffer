@@ -54,14 +54,6 @@ extension FoldersWindowController: DiffOpenerDelegate {
         findDifference(from: leftPath, rightPath: rightPath, direction: .previous, block: block)
     }
 
-    public func hasNextDifference(from leftPath: String?, rightPath: String?) -> Bool {
-        findNearestDifferenceItem(from: leftPath, rightPath: rightPath, direction: .next) != nil
-    }
-
-    public func hasPreviousDifference(from leftPath: String?, rightPath: String?) -> Bool {
-        findNearestDifferenceItem(from: leftPath, rightPath: rightPath, direction: .previous) != nil
-    }
-
     public func parentPaths(from leftPath: String?, rightPath: String?) -> (leftParentPath: String, rightParentPath: String)? {
         guard let item = resolveCompareItem(fromLeftPath: leftPath, rightPath: rightPath),
               let leftParent = item.parent?.path,
@@ -139,7 +131,14 @@ extension FoldersWindowController: DiffOpenerDelegate {
             direction: direction
         )
 
-        if let (item, row) = foundItem, block(item.path, item.linkedItem?.path) {
+        // the block answers for the missing file too, the caller would otherwise have to
+        // search the tree a second time to know there is none
+        guard let (item, row) = foundItem else {
+            _ = block(nil, nil)
+            return
+        }
+
+        if block(item.path, item.linkedItem?.path) {
             leftView.select(
                 rows: IndexSet(integer: row),
                 scrollToFirst: true,

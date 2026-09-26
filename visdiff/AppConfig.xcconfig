@@ -6,8 +6,7 @@
 //  Copyright (c) 2022 visualdiffer.com
 //
 
-// The directory containing the project
-// must be used to prefix the value for CODE_SIGN_ENTITLEMENTS in Signing.local.xcconfig
+// the directory containing the visdiff target, used to prefix the paths below
 VISDIFF_ROOT = visdiff
 
 PRODUCT_BUNDLE_IDENTIFIER = com.visualdiffer.visdiff
@@ -18,9 +17,13 @@ REGISTER_APP_GROUPS = NO
 
 INFOPLIST_FILE = $(VISDIFF_ROOT)/visdiff-Info.plist
 
-ENABLE_APP_SANDBOX[config=Debug] = YES
-ENABLE_APP_SANDBOX[config=Release] = YES
-ENABLE_APP_SANDBOX[config=DebugNoSandbox] = YES
+// every binary shipped in a release must be sandboxed, the Sparkle configuration included, so this is
+// set unconditionally instead of one line per configuration, which silently left Sparkle out
+ENABLE_APP_SANDBOX = YES
+
+// the sandbox above is useless without entitlements, so the two are kept together here
+// unlike the values in Signing.local.xcconfig this path is neither secret nor machine specific
+CODE_SIGN_ENTITLEMENTS = $(VISDIFF_ROOT)/visdiff.entitlements
 
 AUTOMATION_APPLE_EVENTS = YES
 

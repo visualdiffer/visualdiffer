@@ -24,6 +24,10 @@ protocol PathControlDelegate: NSPathControlDelegate {
     @objc
     @MainActor
     optional func saveFile(_ sender: AnyObject?)
+
+    @objc
+    @MainActor
+    optional func pathControlCanChoosePath(_ pathControl: PathControl) -> Bool
 }
 
 public class PathControl: NSPathControl, NSMenuItemValidation {
@@ -180,6 +184,10 @@ public class PathControl: NSPathControl, NSMenuItemValidation {
     @objc
     func choosePath(_: AnyObject) {
         guard let delegate = delegate as? PathControlDelegate else {
+            return
+        }
+
+        if delegate.pathControlCanChoosePath?(self) == false {
             return
         }
 

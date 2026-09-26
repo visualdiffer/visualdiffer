@@ -8,6 +8,7 @@
 
 private let separatorWidth: CGFloat = 1.0
 private let itemSpacing: CGFloat = 6.0
+private let eolTrailingMargin: CGFloat = 6.0
 private let separatorColor = NSColor(calibratedWhite: 0.52, alpha: 1.0)
 
 protocol FileInfoBarDelegate: AnyObject {
@@ -81,7 +82,7 @@ class FileInfoBar: NSView {
 
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -eolTrailingMargin),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }

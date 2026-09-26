@@ -31,7 +31,10 @@ public class FoldersWindowController: NSWindowController,
     // swiftlint:disable:next implicitly_unwrapped_optional
     @objc dynamic var sessionDiff: SessionDiff!
     var dontResizeColumns = false
-    var running = false
+
+    private nonisolated(unsafe) var runningFlag = false
+    private nonisolated let runningLock = NSLock()
+
     var previewPanel: QLPreviewPanel?
 
     var hideEmptyFolders = false
@@ -145,6 +148,11 @@ public class FoldersWindowController: NSWindowController,
     lazy var statusbar: NSStackView = createStatusbar()
 
     lazy var statusbarText: NSTextField = createStatusbarText()
+
+    nonisolated var running: Bool {
+        get { runningLock.withLock { runningFlag } }
+        set { runningLock.withLock { runningFlag = newValue } }
+    }
 
     init() {
         sessionChildren = []
@@ -269,12 +277,14 @@ public class FoldersWindowController: NSWindowController,
 
     @objc
     func stopRefresh(_: AnyObject) {
-        let retVal = NSAlert.showModalConfirm(
-            messageText: NSLocalizedString("Are you sure to stop the operation?", comment: ""),
-            informativeText: NSLocalizedString("If the operation takes a long time to run, you can stop it, but the results could be inaccurate", comment: ""),
-            suppressPropertyName: CommonPrefs.Name.confirmStopLongOperation.rawValue
-        )
-        if retVal {
+        guard running else {
+            return
+        }
+
+        let retVal = NSAlert.showModalStopLongRunningOperation()
+
+        // the comparison can complete while the alert is on screen
+        if retVal, running {
             showConsoleView()
             consoleView.log(warning: NSLocalizedString("Stopped comparison", comment: ""))
             running = false

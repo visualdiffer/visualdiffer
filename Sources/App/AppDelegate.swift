@@ -75,4 +75,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             UserDefaults.standard.register(defaults: defaultsDict)
         }
     }
+
+    // explicitly enables secure restorable state to suppress the Xcode console warning
+    func applicationSupportsSecureRestorableState(_: NSApplication) -> Bool {
+        true
+    }
 }

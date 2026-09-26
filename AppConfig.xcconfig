@@ -20,6 +20,12 @@ REGISTER_APP_GROUPS = YES
 ENABLE_APP_SANDBOX = YES
 ENABLE_APP_SANDBOX[config=DebugNoSandbox] = NO
 
+// the entitlements are a property of the target, not of the machine, so they live here and not
+// in Signing.local.xcconfig, which every contributor generates from Signing-Template.xcconfig
+// the Sparkle configuration overrides this in AppConfig-Sparkle.xcconfig
+CODE_SIGN_ENTITLEMENTS = VisualDiffer.entitlements
+CODE_SIGN_ENTITLEMENTS[config=DebugNoSandbox] = ./Tests/NoSandbox.entitlements
+
 LD_RUNPATH_SEARCH_PATHS=@executable_path/../Frameworks
 
 INFOPLIST_FILE = ./VisualDiffer-Info.plist

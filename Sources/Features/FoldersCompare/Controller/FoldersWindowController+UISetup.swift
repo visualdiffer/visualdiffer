@@ -143,11 +143,6 @@ extension FoldersWindowController {
         view.sortDescriptors = [sessionDiff.columnSortDescriptor()]
     }
 
-    func setupConsoleSplitter() {
-        consoleSplitter.delegate = consoleDelegate
-        consoleSplitter.collapseSubview()
-    }
-
     func setupPreviewSplitters() {
         leftPreviewSplitter.delegate = previewDelegate
         rightPreviewSplitter.delegate = previewDelegate
@@ -184,17 +179,5 @@ extension FoldersWindowController {
             options: sessionDiff.comparatorOptions
         )
         differenceCounters.update(counters: items)
-    }
-
-    func setProgressHidden(_ hidden: Bool) {
-        if hidden {
-            differenceCounters.isHidden = false
-            statusbarText.isHidden = false
-            progressView.isHidden = true
-        } else {
-            differenceCounters.isHidden = true
-            statusbarText.isHidden = true
-            progressView.isHidden = false
-        }
     }
 }

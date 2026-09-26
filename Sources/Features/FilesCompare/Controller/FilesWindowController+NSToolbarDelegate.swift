@@ -171,22 +171,18 @@ extension FilesWindowController: NSToolbarDelegate, NSToolbarItemValidation {
     }
 
     open func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+        if isComparing {
+            return false
+        }
         var enabled = true
         let side = lastUsedView.side
 
-        if item.itemIdentifier == .Files.prevDifference {
-            return canMoveToDifference(
-                gotoNext: false,
-                moveToFile: CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
-            )
-        } else if item.itemIdentifier == .Files.nextDifference {
-            return canMoveToDifference(
-                gotoNext: true, moveToFile:
-                CommonPrefs.shared.fileAutoAdvanceWhenNoMoreDifferences
-            )
+        if item.itemIdentifier == .Files.prevDifference
+            || item.itemIdentifier == .Files.nextDifference {
+            return canMoveToDifference()
         } else if item.itemIdentifier == .Files.prevDifferenceFiles
             || item.itemIdentifier == .Files.nextDifferenceFiles {
-            return (document as? VDDocument)?.parentSession != nil
+            return parentSession != nil
         }
 
         if side == .left {

@@ -85,20 +85,6 @@ extension FoldersWindowController {
         return view
     }
 
-    func createConsoleView() -> ConsoleView {
-        let view = ConsoleView(frame: NSRect(x: 0, y: 0, width: 1, height: 0))
-        view.delegate = self
-
-        return view
-    }
-
-    func createConsoleSplitter() -> DualPaneSplitView {
-        let view = DualPaneSplitView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        return view
-    }
-
     func createPreviewSplitter(panel: FolderPanelView, preview: FilePreviewView) -> DualPaneSplitView {
         // the two splitters are laid out side by side, a zero width makes the parent
         // split view divide by zero and give the whole width to the first one

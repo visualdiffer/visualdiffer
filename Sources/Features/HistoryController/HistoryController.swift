@@ -222,6 +222,7 @@ class HistoryController: NSObject,
         }
 
         if let delegate,
+           tableView.selectedRow >= 0,
            let entity = results.fetchedObjects?[tableView.selectedRow],
            let str = event.charactersIgnoringModifiers,
            !str.isEmpty,

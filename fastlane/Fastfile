@@ -55,7 +55,7 @@ platform :mac do
     UI.header("🧱 Build & Archive")
     clean_build_artifacts
     gym(
-      project: ENV["PROJECT_PATH"],
+      workspace: find_workspace,
       scheme: find_scheme,
       silent: true,
       archive_path: ENV["ARCHIVE_PATH"],
@@ -70,7 +70,7 @@ platform :mac do
   end
 
   lane :tests do
-    run_tests(scheme: ENV["SCHEME"])
+    run_tests(workspace: find_workspace, scheme: ENV["SCHEME"])
   end  
 
   private_lane :release_precondition do
@@ -145,6 +145,13 @@ platform :mac do
     sh('git fetch --tags')
 
     UI.success("✅ GitHub release completed")
+  end
+
+  def find_workspace
+    workspace = ENV["WORKSPACE_PATH"]
+    UI.user_error!("Workspace not defined") if workspace.nil? || workspace.empty?
+
+    return workspace
   end
 
   def find_scheme

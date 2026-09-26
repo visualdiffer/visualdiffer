@@ -70,15 +70,7 @@ class FilePanelView: TablePanelView<FilesTableView, FileInfoBar> {
         ])
     }
 
-    func setSliderMaxValue(_ left: [DiffLine], right: [DiffLine]) {
-        var maxColumn = 0
-
-        for (index, line) in left.enumerated() {
-            let tempMax = max(line.text.count, right[index].text.count)
-            if tempMax > maxColumn {
-                maxColumn = tempMax
-            }
-        }
+    func setSliderMaxValue(_ maxColumn: Int) {
         columnSlider.maxValue = Double(maxColumn)
     }
 
