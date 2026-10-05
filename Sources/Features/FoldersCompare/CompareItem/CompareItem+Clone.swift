@@ -10,15 +10,14 @@ extension CompareItem {
     func duplicate() -> CompareItem {
         let dup = CompareItem(
             path: path,
-            attrs: nil,
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(
+                rawAttributes: [:],
+                flags: fileFlags,
+                fileSize: fileSize,
+                modificationDate: fileModificationDate
+            ),
             parent: parent
         )
-
-        dup.fileOptions = fileOptions
-
-        dup.fileSize = fileSize
-        dup.fileModificationDate = fileModificationDate
 
         dup.addOlderFiles(olderFiles)
         dup.addChangedFiles(changedFiles)
@@ -66,14 +65,12 @@ extension CompareItem {
     ) -> CompareItem {
         let dupItem = CompareItem(
             path: path,
-            attrs: try? FileManager.default.attributesOfItem(atPath: path),
-            fileExtraOptions: fileExtraOptions,
+            attributes: try? FileManager.default.resolvedAttributes(atPath: path, options: fileExtraOptions),
             parent: parent
         )
         let dupLinkedItem = CompareItem(
             path: nil,
-            attrs: nil,
-            fileExtraOptions: [],
+            attributes: nil,
             parent: parent?.linkedItem
         )
         dupItem.linkedItem = dupLinkedItem
@@ -121,7 +118,7 @@ extension CompareItem {
             setSummary(summary)
 
             linkedItem.path = nil
-            linkedItem.setAttributes(nil, fileExtraOptions: [])
+            linkedItem.setAttributes(nil)
 
             linkedItem.linkedItemIsFolder(isFolder)
             linkedItem.addSubfoldersSize(-linkedItem.subfoldersSize)

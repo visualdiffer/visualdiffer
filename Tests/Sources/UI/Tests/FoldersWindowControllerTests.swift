@@ -209,14 +209,12 @@ final class FoldersWindowControllerTests: BaseTests {
     ) -> VisibleItem {
         let leftItem = CompareItem(
             path: leftPath,
-            attrs: nil,
-            fileExtraOptions: [],
+            attributes: nil,
             parent: nil
         )
         let rightItem = CompareItem(
             path: rightPath,
-            attrs: nil,
-            fileExtraOptions: [],
+            attributes: nil,
             parent: nil
         )
         leftItem.linkedItem = rightItem

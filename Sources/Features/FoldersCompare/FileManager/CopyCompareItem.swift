@@ -99,9 +99,12 @@ class CopyCompareItem {
             item.addMismatchingLabels(-srcCount.mismatchingLabels)
 
             if let destItem = item.linkedItem,
-               let attrs = try? fm.attributesOfItem(atPath: destFullPath.osPath) {
+               let attrs = try? fm.resolvedAttributes(
+                   atPath: destFullPath.osPath,
+                   options: operationManager.filterConfig.fileExtraOptions
+               ) {
                 destItem.path = destFullPath.osPath
-                destItem.setAttributes(attrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+                destItem.setAttributes(attrs)
                 destItem.addOlderFiles(-destCount.olderFiles)
                 destItem.addChangedFiles(-destCount.changedFiles)
                 destItem.addOrphanFiles(-destCount.orphanFiles)
@@ -244,7 +247,7 @@ class CopyCompareItem {
         let delegate = operationManager.delegate
         var srcCount = srcRoot.summary
         var destCount = destRoot?.summary ?? .init()
-        var fileSize: Int64 = 0
+        let destSize = destRoot?.fileSize ?? 0
         let destBaseDir = context.baseDir
         do {
             let srcAttrs = try fm.attributesOfItem(atPath: srcRootPath)
@@ -254,12 +257,14 @@ class CopyCompareItem {
                 srcBaseDir: srcBaseDir,
                 srcURL: srcURL
             )
-            var destAttrs: [FileAttributeKey: Any]?
+            var destAttrs: ResolvedFileAttributes?
             var destError: NSError?
             do {
-                let pathAttrs = try fm.attributesOfItem(atPath: destFullPath.osPath)
+                let pathAttrs = try fm.resolvedAttributes(
+                    atPath: destFullPath.osPath,
+                    options: operationManager.filterConfig.fileExtraOptions
+                )
                 destAttrs = pathAttrs
-                fileSize = pathAttrs[.size] as? Int64 ?? 0
             } catch let error as NSError {
                 if error.code != NSFileReadNoSuchFileError {
                     destError = error
@@ -270,7 +275,7 @@ class CopyCompareItem {
                 canReplaceFromPath: srcRootPath,
                 fromAttrs: srcAttrs,
                 toPath: destFullPath.osPath,
-                toAttrs: destAttrs
+                toAttrs: destAttrs?.rawAttributes
             ) {
                 skipFile = true
                 return
@@ -288,7 +293,7 @@ class CopyCompareItem {
             if let destAttrs {
                 if context.isLinkedSide, let destRoot {
                     destRoot.path = destFullPath.osPath
-                    destRoot.setAttributes(destAttrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+                    destRoot.setAttributes(destAttrs)
                     deleteCompareItem.doDelete(
                         destRoot,
                         baseDir: destBaseDir,
@@ -344,7 +349,7 @@ class CopyCompareItem {
             parentSrcCount.matchedFiles += 1
             parentDestCount.matchedFiles += 1
         }
-        parentDestCount.subfoldersSize += srcRoot.fileSize - fileSize
+        parentDestCount.subfoldersSize += srcRoot.fileSize - destSize
         delegate.fileManager(operationManager, updateForItem: srcRoot)
     }
 
@@ -491,11 +496,14 @@ class CopyCompareItem {
         )
         // the delete above reset path and file to nil
         // here we assign again the copied values
-        let destAttrs = try fm.attributesOfItem(atPath: destFullPath.osPath)
+        let destAttrs = try fm.resolvedAttributes(
+            atPath: destFullPath.osPath,
+            options: operationManager.filterConfig.fileExtraOptions
+        )
 
         if context.isLinkedSide, let destRoot {
             destRoot.path = destFullPath.osPath
-            destRoot.setAttributes(destAttrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+            destRoot.setAttributes(destAttrs)
             srcRoot.removeVisibleItems(filterConfig: operationManager.filterConfig)
         }
     }

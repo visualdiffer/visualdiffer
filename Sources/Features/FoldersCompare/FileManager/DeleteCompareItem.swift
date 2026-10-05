@@ -145,8 +145,11 @@ class DeleteCompareItem {
         // The parent's modification time changes after a delete so refresh attributes
         if let parent = result.srcRoot?.parent,
            let path = parent.path,
-           let attrs = try? fm.attributesOfItem(atPath: path) {
-            parent.setAttributes(attrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+           let attrs = try? fm.resolvedAttributes(
+               atPath: path,
+               options: operationManager.filterConfig.fileExtraOptions
+           ) {
+            parent.setAttributes(attrs)
         }
     }
 
@@ -261,7 +264,7 @@ class DeleteCompareItem {
             srcRoot.linkedItem?.addOrphanFolders(1)
         }
         srcRoot.path = nil
-        srcRoot.setAttributes(nil, fileExtraOptions: [])
+        srcRoot.setAttributes(nil)
 
         // refresh isFolder
         srcRoot.linkedItemIsFolder(true)
@@ -374,7 +377,7 @@ class DeleteCompareItem {
         parentDestCount: inout CompareSummary
     ) {
         srcRoot.path = nil
-        srcRoot.setAttributes(nil, fileExtraOptions: [])
+        srcRoot.setAttributes(nil)
         srcRoot.linkedItem = destRoot
         srcRoot.linkedItemIsFolder(false)
 

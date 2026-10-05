@@ -121,8 +121,11 @@ class TouchCompareItem {
             #if DEBUG && __VD_SLOW_OP__
                 simulateSlowOperation("touch")
             #endif
-            let attrs = try fm.attributesOfItem(atPath: srcRootPath)
-            srcRoot.setAttributes(attrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+            let attrs = try fm.resolvedAttributes(
+                atPath: srcRootPath,
+                options: operationManager.filterConfig.fileExtraOptions
+            )
+            srcRoot.setAttributes(attrs)
             updateFileCounters(srcRoot, comparator, &parentSrcCount, &parentDestCount)
         } catch {
             delegate.fileManager(operationManager, addError: error, forItem: srcRoot)

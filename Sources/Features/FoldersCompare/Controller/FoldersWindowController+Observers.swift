@@ -104,9 +104,12 @@ extension FoldersWindowController {
         if let orphan = item.path == nil ? item : item.linkedItem?.path == nil ? item.linkedItem : nil,
            let path = userInfo[itemSide == .left ? .rightPath : .leftPath],
            orphan.linkedItem?.fileName == URL(filePath: path).lastPathComponent,
-           let attrs = try? FileManager.default.attributesOfItem(atPath: path) {
+           let attrs = try? FileManager.default.resolvedAttributes(
+               atPath: path,
+               options: filterConfig.fileExtraOptions
+           ) {
             orphan.path = path
-            orphan.setAttributes(attrs, fileExtraOptions: filterConfig.fileExtraOptions)
+            orphan.setAttributes(attrs)
         }
 
         // capture before refresh - may be filtered out after type changes to .same

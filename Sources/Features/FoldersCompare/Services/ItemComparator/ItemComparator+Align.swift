@@ -164,8 +164,7 @@ public extension ItemComparator {
     ) {
         let newItem = CompareItem(
             path: nil,
-            attrs: nil,
-            fileExtraOptions: [],
+            attributes: nil,
             parent: otherSide
         )
 

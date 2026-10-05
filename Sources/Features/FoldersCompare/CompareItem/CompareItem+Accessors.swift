@@ -7,26 +7,26 @@
 //
 
 extension CompareItem {
-    // MARK: - FileOptions Accessors
+    // MARK: - FileFlags Accessors
 
     var isValidFile: Bool {
-        fileOptions[.isValidFile]
+        fileFlags[.isValidFile]
     }
 
     var isSymbolicLink: Bool {
-        fileOptions[.isSymbolicLink]
+        fileFlags[.isSymbolicLink]
     }
 
     var isFile: Bool {
-        fileOptions[.isFile]
+        fileFlags[.isFile]
     }
 
     var isFolder: Bool {
-        fileOptions[.isFolder]
+        fileFlags[.isFolder]
     }
 
     var isPackage: Bool {
-        fileOptions[.isPackage]
+        fileFlags[.isPackage]
     }
 
     var isOrphanFile: Bool {
@@ -34,11 +34,11 @@ extension CompareItem {
     }
 
     var isResourceFork: Bool {
-        fileOptions[.isResourceFork]
+        fileFlags[.isResourceFork]
     }
 
     var isLocked: Bool {
-        fileOptions[.isLocked]
+        fileFlags[.isLocked]
     }
 
     var isOrphanFolder: Bool {

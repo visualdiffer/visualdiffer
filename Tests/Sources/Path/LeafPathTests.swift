@@ -14,8 +14,7 @@ final class LeafPathTests: BaseTests {
     func findLeafPaths(_ paths: [String]) -> [CompareItem] {
         let arr = paths.map { CompareItem(
             path: $0,
-            attrs: nil,
-            fileExtraOptions: [],
+            attributes: nil,
             parent: nil
         )
         }

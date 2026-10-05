@@ -9,18 +9,6 @@
 typealias CompareItemComparison = (CompareItem, CompareItem) -> ComparisonResult
 
 public class CompareItem: NSObject {
-    struct FileOptions: FlagSet {
-        var rawValue: Int
-
-        static let isFile = FileOptions(rawValue: 1 << 0)
-        static let isFolder = FileOptions(rawValue: 1 << 1)
-        static let isSymbolicLink = FileOptions(rawValue: 1 << 2)
-        static let isPackage = FileOptions(rawValue: 1 << 3)
-        static let isResourceFork = FileOptions(rawValue: 1 << 4)
-        static let isLocked = FileOptions(rawValue: 1 << 5)
-        static let isValidFile = FileOptions(rawValue: 1 << 6)
-    }
-
     var linkedItem: CompareItem?
     var visibleItem: VisibleItem?
     var parent: CompareItem?
@@ -51,7 +39,7 @@ public class CompareItem: NSObject {
         return cachedFileName
     }
 
-    var fileOptions: FileOptions = []
+    private(set) var fileFlags: FileFlags = []
 
     var isFiltered: Bool = false
     var isDisplayed: Bool = false
@@ -67,8 +55,7 @@ public class CompareItem: NSObject {
 
     init(
         path: String?,
-        attrs: [FileAttributeKey: Any]?,
-        fileExtraOptions: FileExtraOptions,
+        attributes: ResolvedFileAttributes?,
         parent: CompareItem?
     ) {
         self.path = path
@@ -77,16 +64,15 @@ public class CompareItem: NSObject {
 
         super.init()
 
-        setAttributes(attrs, fileExtraOptions: fileExtraOptions)
+        setAttributes(attributes)
         summary = CompareSummary()
     }
 
     func setAttributes(
-        _ input: [FileAttributeKey: Any]?,
-        fileExtraOptions: FileExtraOptions
+        _ attributes: ResolvedFileAttributes?
     ) {
-        guard let input else {
-            fileOptions = []
+        guard let attributes else {
+            fileFlags = []
 
             summary = CompareSummary()
             type = .orphan
@@ -97,70 +83,17 @@ public class CompareItem: NSObject {
             return
         }
 
-        let fileType = input.fileAttributeType
-
-        // if the object is a symlink then we use the destination file attributes
-        // so we refer to destFileAttrs instead of the original input
-        var destFileAttrs = input
-        fileOptions[.isLocked] = (input[.immutable] as? NSNumber)?.boolValue ?? false
-        fileOptions[.isSymbolicLink] = fileType == .typeSymbolicLink
-
-        let url: URL? = if let path {
-            // at this time we don't know if path is a directory or file, so force .notDirectory
-            URL(filePath: path, directoryHint: .notDirectory)
-        } else {
-            nil
-        }
-
-        if fileOptions[.isSymbolicLink] {
-            let fileManager = FileManager.default
-            if let symLinkDest = url?.resolvingSymlinksInPath().osPath,
-               let symLinkAttrs = try? fileManager.attributesOfItem(atPath: symLinkDest) {
-                let symLinkFileType = symLinkAttrs.fileAttributeType
-                fileOptions[.isFolder] = symLinkFileType == .typeDirectory
-                destFileAttrs = symLinkAttrs
-            }
-        } else {
-            fileOptions[.isFolder] = fileType == .typeDirectory
-        }
-        fileOptions[.isFile] = !fileOptions[.isFolder]
-        fileModificationDate = destFileAttrs[.modificationDate] as? Date
-        if fileOptions[.isFolder] {
-            // this is necessary because the returned value can be > 0 also for directories
-            // but we don't care about its real internal size
-            fileSize = 0
-
-            if let path {
-                fileOptions[.isPackage] = NSWorkspace.shared.isFilePackage(atPath: path)
-            } else {
-                fileOptions[.isPackage] = false
-            }
-            fileOptions[.isResourceFork] = false
-        } else {
-            fileOptions[.isResourceFork] = false
-            var forkSize: Int64 = 0
-            if fileExtraOptions.contains(.resourceFork),
-               let size = try? url?.resourceForkSize() {
-                forkSize = Int64(size)
-                fileOptions[.isResourceFork] = true
-            }
-            if fileOptions[.isResourceFork] {
-                fileSize = forkSize
-            } else {
-                fileSize = destFileAttrs[.size] as? Int64 ?? 0
-            }
-
-            fileOptions[.isPackage] = false
-        }
-        fileOptions[.isValidFile] = true
+        fileFlags = attributes.flags
+        fileSize = attributes.fileSize
+        fileModificationDate = attributes.modificationDate
     }
 
     // The linked item on other side represent a folder
     // this allows to treat this object as a folder when necessary for example when items are expanded
     // If set to YES isFolderObject will return YES
     func linkedItemIsFolder(_ isFolder: Bool) {
-        fileOptions[.isFolder] = isFolder
-        fileOptions[.isFile] = !isFolder
+        fileFlags[.isFolder] = isFolder
+        fileFlags[.isFile] = !isFolder
     }
 
     // MARK: - Children access methods
@@ -380,7 +313,7 @@ public class CompareItem: NSObject {
 
     func invalidate() {
         path = nil
-        setAttributes(nil, fileExtraOptions: [])
+        setAttributes(nil)
         type = .orphan
         isFiltered = false
     }

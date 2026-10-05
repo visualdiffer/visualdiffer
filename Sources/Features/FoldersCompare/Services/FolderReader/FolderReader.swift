@@ -265,12 +265,14 @@ public class FolderReader: @unchecked Sendable {
     private func addEntryFile(entry: String, root: CompareItem, parentPath: URL, recursive: Bool) {
         do {
             let fullPath = parentPath.appending(path: entry)
-            let attrs = try FileManager.default.attributesOfItem(atPath: fullPath.osPath)
+            let attributes = try FileManager.default.resolvedAttributes(
+                atPath: fullPath.osPath,
+                options: filterConfig.fileExtraOptions
+            )
 
             let newItem = CompareItem(
                 path: fullPath.osPath,
-                attrs: attrs,
-                fileExtraOptions: filterConfig.fileExtraOptions,
+                attributes: attributes,
                 parent: root
             )
 
@@ -279,7 +281,7 @@ public class FolderReader: @unchecked Sendable {
                     newItem.isFiltered = true
                 } else {
                     // protect against recursive loops due to symbolic links to folders
-                    if try symbolicLinkToParent(newItem, attributes: attrs) != nil {
+                    if try symbolicLinkToParent(newItem, attributes: attributes.rawAttributes) != nil {
                         throw FileError.symlinkLoop(path: root.path ?? "Unknown")
                     }
                 }
@@ -329,11 +331,13 @@ public class FolderReader: @unchecked Sendable {
             return parent
         }
         let osPath = path.osPath
-        let attrs = try FileManager.default.attributesOfItem(atPath: osPath)
+        let attributes = try FileManager.default.resolvedAttributes(
+            atPath: osPath,
+            options: filterConfig.fileExtraOptions
+        )
         return CompareItem(
             path: osPath,
-            attrs: attrs,
-            fileExtraOptions: filterConfig.fileExtraOptions,
+            attributes: attributes,
             parent: nil
         )
     }

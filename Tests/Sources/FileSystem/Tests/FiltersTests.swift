@@ -14,14 +14,12 @@ final class FiltersTests: BaseTests {
     func filterFileNameIgnoreCase() {
         let root = CompareItem(
             path: "/fakePath",
-            attrs: [.type: FileAttributeType.typeDirectory],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeDirectory]),
             parent: nil
         )
         let item = CompareItem(
             path: "/fakePath/all_lower_case.txt",
-            attrs: [.type: FileAttributeType.typeRegular],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeRegular]),
             parent: root
         )
 
@@ -33,14 +31,12 @@ final class FiltersTests: BaseTests {
     func filterFileNameCaseSensitive() {
         let root = CompareItem(
             path: "/fakePath",
-            attrs: [.type: FileAttributeType.typeDirectory],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeDirectory]),
             parent: nil
         )
         let item = CompareItem(
             path: "/fakePath/all_lower_case.txt",
-            attrs: [.type: FileAttributeType.typeRegular],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeRegular]),
             parent: root
         )
 
@@ -52,20 +48,17 @@ final class FiltersTests: BaseTests {
     func filterPathIgnoreCase() {
         let root = CompareItem(
             path: "/fakePath",
-            attrs: [.type: FileAttributeType.typeDirectory],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeDirectory]),
             parent: nil
         )
         let dirName1 = CompareItem(
             path: "/fakePath/dirName1",
-            attrs: [.type: FileAttributeType.typeDirectory],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeDirectory]),
             parent: root
         )
         let item = CompareItem(
             path: "/fakePath/dirName1/all_lower_case.txt",
-            attrs: [.type: FileAttributeType.typeRegular],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeRegular]),
             parent: dirName1
         )
 
@@ -77,20 +70,17 @@ final class FiltersTests: BaseTests {
     func filterPathCaseSensitive() {
         let root = CompareItem(
             path: "/fakePath",
-            attrs: [.type: FileAttributeType.typeDirectory],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeDirectory]),
             parent: nil
         )
         let dirName1 = CompareItem(
             path: "/fakePath/dirName1",
-            attrs: [.type: FileAttributeType.typeDirectory],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeDirectory]),
             parent: root
         )
         let item = CompareItem(
             path: "/fakePath/dirName1/all_lower_case.txt",
-            attrs: [.type: FileAttributeType.typeRegular],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeRegular]),
             parent: dirName1
         )
 
@@ -105,8 +95,7 @@ final class FiltersTests: BaseTests {
         ]
         let item = CompareItem(
             path: nil,
-            attrs: attributes,
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: attributes),
             parent: nil
         )
 
@@ -121,8 +110,7 @@ final class FiltersTests: BaseTests {
         ]
         let item = CompareItem(
             path: nil,
-            attrs: attributes,
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: attributes),
             parent: nil
         )
 

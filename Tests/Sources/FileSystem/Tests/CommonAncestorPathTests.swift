@@ -94,7 +94,7 @@ final class CommonAncestorPathTests: BaseTests {
     func itemWithNilParentReturnsNil() {
         let root = makeTree()
         let file1 = root.child(at: 1)
-        let noParent = CompareItem(path: "/some/path", attrs: nil, fileExtraOptions: [], parent: nil)
+        let noParent = CompareItem(path: "/some/path", attributes: nil, parent: nil)
         #expect(CompareItem.commonAncestorPath([file1, noParent]) == nil)
     }
 

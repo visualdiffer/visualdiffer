@@ -13,8 +13,7 @@ public extension BaseTests {
     func folder(_ path: String, parent: CompareItem?) -> CompareItem {
         CompareItem(
             path: path,
-            attrs: [.type: FileAttributeType.typeDirectory],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeDirectory]),
             parent: parent
         )
     }
@@ -22,9 +21,20 @@ public extension BaseTests {
     func file(_ path: String, parent: CompareItem?) -> CompareItem {
         CompareItem(
             path: path,
-            attrs: [.type: FileAttributeType.typeRegular],
-            fileExtraOptions: [],
+            attributes: ResolvedFileAttributes(rawAttributes: [.type: FileAttributeType.typeRegular]),
             parent: parent
+        )
+    }
+}
+
+extension ResolvedFileAttributes {
+    init(rawAttributes: [FileAttributeKey: Any]) {
+        let isFolder = rawAttributes.fileAttributeType == .typeDirectory
+        self.init(
+            rawAttributes: rawAttributes,
+            flags: [.isValidFile, isFolder ? .isFolder : .isFile],
+            fileSize: rawAttributes[.size] as? Int64 ?? 0,
+            modificationDate: rawAttributes[.modificationDate] as? Date
         )
     }
 }

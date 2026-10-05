@@ -111,9 +111,12 @@ public class MoveCompareItem: NSObject {
             item.addMismatchingLabels(-srcCount.mismatchingLabels)
 
             if let destItem = item.linkedItem,
-               let attrs = try? fm.attributesOfItem(atPath: destFullPath) {
+               let attrs = try? fm.resolvedAttributes(
+                   atPath: destFullPath,
+                   options: operationManager.filterConfig.fileExtraOptions
+               ) {
                 destItem.path = destFullPath
-                destItem.setAttributes(attrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+                destItem.setAttributes(attrs)
                 destItem.addOlderFiles(-destCount.olderFiles)
                 destItem.addChangedFiles(-destCount.changedFiles)
                 destItem.addOrphanFiles(-destCount.orphanFiles)
@@ -303,7 +306,7 @@ public class MoveCompareItem: NSObject {
             throw FolderManagerError.nilPath
         }
 
-        var destAttrs: [FileAttributeKey: Any]?
+        var destAttrs: ResolvedFileAttributes?
 
         do {
             let srcAttrs = try fm.attributesOfItem(atPath: srcRootPath)
@@ -314,14 +317,17 @@ public class MoveCompareItem: NSObject {
 
             if srcRoot.isFile {
                 do {
-                    destAttrs = try fm.attributesOfItem(atPath: destFullPath.osPath)
+                    destAttrs = try fm.resolvedAttributes(
+                        atPath: destFullPath.osPath,
+                        options: operationManager.filterConfig.fileExtraOptions
+                    )
                 } catch {}
                 if !delegate.fileManager(
                     operationManager,
                     canReplaceFromPath: srcRootPath,
                     fromAttrs: srcAttrs,
                     toPath: destFullPath.osPath,
-                    toAttrs: destAttrs
+                    toAttrs: destAttrs?.rawAttributes
                 ) {
                     // skip this file
                     return true
@@ -379,7 +385,7 @@ public class MoveCompareItem: NSObject {
         _ srcRoot: CompareItem,
         destRoot: CompareItem,
         srcAttrs _: [FileAttributeKey: Any],
-        destAttrs: [FileAttributeKey: Any]?,
+        destAttrs: ResolvedFileAttributes?,
         destFullPath: URL,
         directoryBase: DirectoryBase,
         destBaseDir: URL,
@@ -389,6 +395,7 @@ public class MoveCompareItem: NSObject {
     ) throws {
         var srcCount = srcRoot.summary
         var destCount = destRoot.summary
+        let destSize = destRoot.fileSize
 
         do {
             let lastPathTimestamps = try createDirectory(
@@ -399,7 +406,7 @@ public class MoveCompareItem: NSObject {
             )
             if let destAttrs {
                 destRoot.path = destFullPath.osPath
-                destRoot.setAttributes(destAttrs, fileExtraOptions: operationManager.filterConfig.fileExtraOptions)
+                destRoot.setAttributes(destAttrs)
                 deleteCompareItem.doDelete(
                     destRoot,
                     baseDir: destBaseDir,
@@ -421,7 +428,7 @@ public class MoveCompareItem: NSObject {
             updateParentCountersAfterMoveFile(
                 srcRoot,
                 destRoot: destRoot,
-                destAttrs: destAttrs,
+                destSize: destSize,
                 parentSrcCount: &parentSrcCount,
                 parentDestCount: &parentDestCount,
                 srcCount: &srcCount,
@@ -436,18 +443,13 @@ public class MoveCompareItem: NSObject {
     func updateParentCountersAfterMoveFile(
         _ srcRoot: CompareItem,
         destRoot: CompareItem,
-        destAttrs: [FileAttributeKey: Any]?,
+        destSize: Int64,
         parentSrcCount: inout CompareSummary,
         parentDestCount: inout CompareSummary,
         srcCount: inout CompareSummary,
         destCount: inout CompareSummary
     ) {
         let srcSize = srcRoot.fileSize
-        let destSize: Int64 = if let destAttrs, let size = (destAttrs[.size] as? NSNumber) {
-            size.int64Value
-        } else {
-            0
-        }
 
         parentDestCount.olderFiles += destCount.olderFiles
         parentDestCount.changedFiles += destCount.changedFiles
@@ -625,8 +627,10 @@ public class MoveCompareItem: NSObject {
         // update file information after move
         destRoot.path = destFullPath.osPath
         destRoot.setAttributes(
-            try? FileManager.default.attributesOfItem(atPath: destFullPath.osPath),
-            fileExtraOptions: operationManager.filterConfig.fileExtraOptions
+            try? FileManager.default.resolvedAttributes(
+                atPath: destFullPath.osPath,
+                options: operationManager.filterConfig.fileExtraOptions
+            )
         )
 
         if destRoot.isFiltered,

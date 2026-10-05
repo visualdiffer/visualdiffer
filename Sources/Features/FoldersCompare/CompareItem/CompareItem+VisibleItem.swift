@@ -118,12 +118,19 @@ extension CompareItem {
         let fm = FileManager.default
 
         if let path {
-            setAttributes(try? fm.attributesOfItem(atPath: path), fileExtraOptions: filterConfig.fileExtraOptions)
+            setAttributes(
+                try? fm.resolvedAttributes(
+                    atPath: path,
+                    options: filterConfig.fileExtraOptions
+                )
+            )
         }
         if let path = destRoot.path {
             destRoot.setAttributes(
-                try? fm.attributesOfItem(atPath: path),
-                fileExtraOptions: filterConfig.fileExtraOptions
+                try? fm.resolvedAttributes(
+                    atPath: path,
+                    options: filterConfig.fileExtraOptions
+                )
             )
         }
 
@@ -154,14 +161,14 @@ extension CompareItem {
             item.addOlderFiles(-srcCount.olderFiles)
             item.addChangedFiles(-srcCount.changedFiles)
             item.addOrphanFiles(-srcCount.orphanFiles)
-            item.addMatchedFiles(srcCount.matchedFiles)
+            item.addMatchedFiles(-srcCount.matchedFiles)
             item.addSubfoldersSize(srcDiffSize)
 
             if let destItem = item.linkedItem {
                 destItem.addOlderFiles(-destCount.olderFiles)
                 destItem.addChangedFiles(-destCount.changedFiles)
                 destItem.addOrphanFiles(-destCount.orphanFiles)
-                destItem.addMatchedFiles(destCount.matchedFiles)
+                destItem.addMatchedFiles(-destCount.matchedFiles)
                 destItem.addSubfoldersSize(destDiffSize)
             }
 
