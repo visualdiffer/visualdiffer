@@ -12,6 +12,11 @@ struct LineNumberCellData {
     let rightWidth: CGFloat = 10.0
     let sectionSeparatorHeight: CGFloat = 2.0
     let leadingTextPadding: CGFloat = 2.0
+
+    // the space before the content text field, line number width excluded
+    var contentLeadingSpace: CGFloat {
+        leftWidth + rightWidth + separatorWidth + leadingTextPadding
+    }
 }
 
 class LineNumberTableCellView: NSTableCellView {

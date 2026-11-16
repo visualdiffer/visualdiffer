@@ -37,8 +37,10 @@ extension FilesWindowController: RowHeightDataSource {
     }
 
     func reloadTableData() {
-        leftView.reloadData(restoreSelection: true)
-        rightView.reloadData(restoreSelection: true)
+        // reloadData clears the selection and the last restored one
+        // drives the detail lines, so the panel in use must be reloaded last
+        lastUsedView.linkedView?.reloadData(restoreSelection: true)
+        lastUsedView.reloadData(restoreSelection: true)
     }
 
     func reloadRowHeights() {

@@ -161,7 +161,7 @@ class FilesWindowController: NSWindowController {
 
         initAllViews()
 
-        filePanels.delegate = self
+        // row heights now follow tableViewColumnDidResize, the split view delegate is gone
 
         setupHeightSynchronizer()
         setWordWrap(enabled: false)

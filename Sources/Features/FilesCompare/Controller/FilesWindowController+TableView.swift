@@ -243,4 +243,10 @@ extension FilesWindowController: NSTableViewDataSource,
 
         return line
     }
+
+    // the split view posts didResizeSubviews before Auto Layout
+    // rebalances the panes, only the column resize sees the final width
+    public func tableViewColumnDidResize(_: Notification) {
+        rowHeightCalculator.scheduleReloadIfWidthChanged()
+    }
 }
