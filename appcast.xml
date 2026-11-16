@@ -5,27 +5,27 @@
         <description>VisualDiffer</description>
         <language>en</language>
         <item>
-            <title>Version 2.2.1</title>
+            <title>Version 2.2.2</title>
             <description>
                 <![CDATA[
-                <h1 id="v221">v2.2.1</h1>
+                <h1 id="v222">v2.2.2</h1>
 
-<h3 id="features">🚀 Features</h3>
+<h3 id="bug-fixes">🐛 Bug Fixes</h3>
 
 <ul>
-  <li>File Compare: compare files in the background with progress and a log console (#67) (<a href="https://github.com/visualdiffer/visualdiffer/commit/0582ba8fbaf679c7bee23d1398c3072a83e3c71f">0582ba8</a>)</li>
+  <li>File Compare: avoid clipped wrapped text at some widths (<a href="https://github.com/visualdiffer/visualdiffer/commit/9f40887bdf208e241c24b4725f0c9bdb7af8cf4b">9f40887</a>)</li>
 </ul>
 
                 ]]>
             </description>
-            <pubDate>Sat, 26 September 2026 00:00:00 +0200</pubDate>
-            <sparkle:version>2.2.1</sparkle:version>
-            <sparkle:shortVersionString>2.2.1</sparkle:shortVersionString>
+            <pubDate>Mon, 16 November 2026 00:00:00 +0100</pubDate>
+            <sparkle:version>2.2.2</sparkle:version>
+            <sparkle:shortVersionString>2.2.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
             <enclosure 
-                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.2.1/VisualDiffer-2.2.1.zip"
+                url="https://github.com/visualdiffer/visualdiffer/releases/download/v2.2.2/VisualDiffer-2.2.2.zip"
                 type="application/octet-stream"
-                sparkle:edSignature="Hhd1Jq0G9/JMYPrqJ3RH150id01qL37P4G1MYAXte4E38giiOq4STR5w13Rr5QFDlvmT2PfvG+H5iP6CYsgaAA==" length="5150521"
+                sparkle:edSignature="++hBondcJ1O1sly/zz4tJdvHR7AwG7wIKcpIaFsDDerQw1CIkCEajNXwn6JgWG5hHZYYz+fTBYWvMWaqbbqMDg==" length="5153478"
 
             />
         </item>
