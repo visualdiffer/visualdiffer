@@ -131,7 +131,7 @@ public extension URL {
         chooseDirectories: Bool
     ) -> URL? {
         let url = promptURL(
-            at: findNearestExistingDirectory(),
+            at: findNearestExistingURL(),
             title: panelTitle,
             chooseDirectories: chooseDirectories,
             chooseFiles: chooseFiles
@@ -176,16 +176,15 @@ public extension URL {
         return result && isFileTypeAllowed
     }
 
-    func findNearestExistingDirectory() -> URL {
+    func findNearestExistingURL() -> URL {
         let fileManager = FileManager.default
-        var isDir = ObjCBool(false)
-        var currDir = self
+        var currURL = self
 
-        while !fileManager.fileExists(atPath: currDir.osPath, isDirectory: &isDir) || !isDir.boolValue {
-            currDir.deleteLastPathComponent()
+        while !fileManager.fileExists(atPath: currURL.osPath) {
+            currURL.deleteLastPathComponent()
         }
 
-        return currDir
+        return currURL
     }
 
     @MainActor
